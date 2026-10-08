@@ -9,11 +9,11 @@
 - Evidence: `docs/evidence/` (record new runs with `scripts/record_evidence.py`; never overwrite old files).
 
 ## State at 0.2.0 (2026-10-08)
-- Pins XAX `f38cbee` (upstream ADR-221 to ADR-224: memoized component verification, `linux.startup.*` carrier
+- Pins XAX `f38cbee` (upstream ADR-222 to ADR-225: memoized component verification, `linux.startup.*` carrier
   entities, `linux-x86_64-process-v1`, `xax-host-contract-v1`). Adds the `argv` input mode and the
   host-contract startup check. 38 tests in about 35 s.
-- `f38cbee` is on XAX branch `claude/brave-carson-al75yn`; after it merges to XAX `main`, nothing changes here
-  unless the merge rewrites the commit (squash/rebase). In that case, repin per COMPATIBILITY.md.
+- `f38cbee` is merged into XAX `main` (merge commit `5c9ba68`). The decisions it records are numbered ADR-222
+  to ADR-225 on `main`; the commit message itself says 221 to 224.
 
 ## Next steps, in order of leverage
 1. Upstream P4 (wide checked loads) is a semantic decision for the XAX maintainers; see UPSTREAM_PROPOSALS.md.

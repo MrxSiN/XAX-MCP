@@ -1,7 +1,7 @@
 # The XAX interfaces this adapter consumes
 
 Since commit `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183`, XAX publishes a versioned integration surface: `xax_contract`
-(`xax-host-contract-v1`, ADR-224). XAX-MCP 0.2.0 requires that contract at revision ≥ 1, checks
+(`xax-host-contract-v1`, ADR-225). XAX-MCP 0.2.0 requires that contract at revision ≥ 1, checks
 `xax_contract.missing()` at startup, and uses only names from it (`compat.REQUIRED_API`). XAX-MCP 0.1.0 pinned
 `01ad841`, which predates the contract; the table below was its consumed surface, found by inspecting code and
 tests.
@@ -22,14 +22,14 @@ non-authoritative function view.
 
 ## Process and I/O contract
 
-Since `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183`, this is upstream's `linux-x86_64-process-v1` (`xax_linux.process_contract()`, ADR-223), which
+Since `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183`, this is upstream's `linux-x86_64-process-v1` (`xax_linux.process_contract()`, ADR-224), which
 `xax_capabilities` reports verbatim. The facts below are what 0.1.0 relied on before the contract existed.
 
 - Linux x86-64 `x86_64-linux-elf-exec-v1` builds a static ELF whose entry is the XAX entry function. It takes
   no machine parameters, returns at most one integer, and must end with `linux.exit_group`
   (`xax_linux.validate_process_entry`).
 - Runtime data reaches a constructed program through `linux.read`/`linux.write`, the exit status, and (since
-  `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183`, ADR-222) `linux.startup.*` argv/env/auxv reads in the entry function.
+  `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183`, ADR-223) `linux.startup.*` argv/env/auxv reads in the entry function.
 - `xax_linux.run_linux_executable` is marked "test harness only" upstream, so XAX-MCP runs artifacts with its
   own sandbox instead.
 

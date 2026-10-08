@@ -2,9 +2,9 @@
 
 **Status:** accepted (0.2.0)
 
-**Context.** Upstream XAX now publishes `xax-host-contract-v1` (`xax_contract`, ADR-224), the process contract
-`linux-x86_64-process-v1` (ADR-223), and `linux.startup.*` carrier entities (ADR-222). It also memoizes
-component-store verification (ADR-221). These were proposals P1, P2, P3 and P5 from this repository.
+**Context.** Upstream XAX now publishes `xax-host-contract-v1` (`xax_contract`, ADR-225), the process contract
+`linux-x86_64-process-v1` (ADR-224), and `linux.startup.*` carrier entities (ADR-223). It also memoizes
+component-store verification (ADR-222). These were proposals P1, P2, P3 and P5 from this repository.
 
 **Decision.** Pin the commit that contains them. Require `xax-host-contract-v1` r≥1 and an empty
 `xax_contract.missing()` at startup, so a build without the contract is `incompatible`. Report the contract and

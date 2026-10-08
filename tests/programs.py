@@ -162,7 +162,7 @@ def flood() -> dict:
 
 
 def echo_argument() -> dict:
-    """Writes argv[1] (at most 64 bytes) to stdout and exits with argc (linux.startup.* entities, XAX ADR-222)."""
+    """Writes argv[1] (at most 64 bytes) to stdout and exits with argc (linux.startup.* entities, XAX ADR-223)."""
     return _package("echo1", [{"name": "main", "params": ["proc", "fs", "mem"], "returns": ["b32", "proc", "fs", "mem"], "blocks": [
         {"params": ["proc", "fs", "mem"], "nodes": [
             ["call.foreign", [["b64", 64], "p2"], ["ptr", "linux.heap_owner", "mem"], {"entity": "linux.mmap_anonymous"}],

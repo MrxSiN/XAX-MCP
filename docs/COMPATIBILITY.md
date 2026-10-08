@@ -6,8 +6,8 @@
 | 0.1.0 | `01ad841c76416fc741dd1386b12124904924c10d` (2026-10-08) | `2d5b1f3be0c6c40f394a1e6a109239d38e2b9abc2634b02fbb21cffae172392f` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 36/36 tests pass on both, sandbox required |
 
 Declared support for 0.2.0: exactly `f38cbee`, and XAX must provide `xax-host-contract-v1` at revision ≥ 1
-(earlier commits, including 0.1.0's `01ad841`, are `incompatible`). `f38cbee` is on XAX branch
-`claude/brave-carson-al75yn` until it is merged to XAX `main`; pip fetches it by commit either way.
+(earlier commits, including 0.1.0's `01ad841`, are `incompatible`). `f38cbee` is reachable from XAX
+`main` through merge commit `5c9ba68`.
 
 Declared support for 0.1.0 (historical): exactly the `01ad841` commit above (the `xax-compiler` version string is `0.1.0` at every
 upstream commit, so it identifies nothing). `mcp>=2.3.0,<2.4`. Python ≥ 3.11 is declared; 3.11 and 3.13 were tested,

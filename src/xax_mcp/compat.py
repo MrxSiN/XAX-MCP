@@ -36,7 +36,7 @@ REQUIRED_API = {
     "xax_artifact": ("BOOTSTRAP_COMPILER_IDENTITY_V1",),
     "xax_contract": ("HOST_CONTRACT", "HOST_CONTRACT_MINOR", "describe", "missing"),
 }
-# The upstream host contract this release consumes (xax_contract, ADR-224) and the oldest minor revision it needs.
+# The upstream host contract this release consumes (xax_contract, ADR-225) and the oldest minor revision it needs.
 HOST_CONTRACT = "xax-host-contract-v1"
 HOST_CONTRACT_MINOR = 1
 ALLOW_UNPINNED_ENV = "XAX_MCP_ALLOW_UNTESTED_XAX"
