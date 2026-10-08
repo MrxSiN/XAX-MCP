@@ -1,0 +1,8 @@
+# Append to ~/.codex/config.toml (or $CODEX_HOME/config.toml).  Verified with codex-cli 0.161.0.
+[mcp_servers.xax]
+command = "xax-mcp"
+args = ["--allow-execute"]
+# The first XAX call in a fresh server waits for the one-time XAX component warm-up (about 20 s with a warm
+# XAX_NATIVE_CACHE, about 50 s with an empty one on the reference host), so raise the default tool timeout.
+startup_timeout_sec = 30
+tool_timeout_sec = 180

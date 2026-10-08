@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "xax": {
+      "command": "/ABSOLUTE/PATH/TO/venv/bin/xax-mcp",
+      "args": ["--allow-execute"]
+    }
+  }
+}

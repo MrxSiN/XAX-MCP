@@ -1,0 +1,64 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+env:
+  XAX_COMMIT: 01ad841c76416fc741dd1386b12124904924c10d
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Allow unprivileged user namespaces (Ubuntu 24.04 AppArmor restriction)
+        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+      - name: Isolated checkout of the pinned upstream XAX (test data only; never imported from here)
+        uses: actions/checkout@v4
+        with:
+          repository: MrxSiN/XAX
+          ref: ${{ env.XAX_COMMIT }}
+          path: upstream-xax
+      - name: Install xax-mcp (pulls XAX from its git pin)
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install -e '.[test]'
+      - name: Compatibility and sandbox check
+        run: .venv/bin/xax-mcp --check --allow-execute
+      - name: Tests
+        env:
+          XAX_MCP_REQUIRE_SANDBOX: "1"
+          XAX_SOURCE_DIR: ${{ github.workspace }}/upstream-xax
+        run: .venv/bin/python -m pytest -q -rs
+      - name: Record evidence (artifact only; committed evidence is curated by hand)
+        run: .venv/bin/python scripts/record_evidence.py --cold-cache --out evidence.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: evidence-py${{ matrix.python }}
+          path: evidence.json
+
+  clean-install:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install from the repository URL into a clean venv
+        run: |
+          python -m venv /tmp/v
+          /tmp/v/bin/pip install "xax-mcp @ git+https://github.com/${{ github.repository }}@${{ github.sha }}"
+          /tmp/v/bin/xax-mcp --version
+          /tmp/v/bin/xax-mcp --check | tee check.json || true
+          /tmp/v/bin/python -c "import json; d=json.load(open('check.json')); assert d['xax']['status']=='tested', d"

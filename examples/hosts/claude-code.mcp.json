@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "xax": {
+      "type": "stdio",
+      "command": "xax-mcp",
+      "args": ["--allow-execute"],
+      "env": {}
+    }
+  }
+}
