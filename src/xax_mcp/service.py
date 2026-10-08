@@ -614,7 +614,7 @@ class Service:
         if outcome.output_limit_exceeded:
             raise ToolError("resource_limit", f"stdout exceeded {limits.max_stdout_bytes} bytes; the process was killed",
                             details={"evidence": evidence})
-        if outcome.signal == "SIGXCPU" or (outcome.signal == "SIGKILL" and outcome.wall_ms >= limits.cpu_seconds * 1000):
+        if outcome.signal == "SIGXCPU":  # soft CPU limit; the program cannot ignore it (rt_sigaction is not allowed)
             raise ToolError("resource_limit", f"CPU limit of {limits.cpu_seconds} s exceeded", details={"evidence": evidence})
         result = {"ok": outcome.exit_status == 0, "exit_status": outcome.exit_status, "signal": outcome.signal,
                   "stdout": decode_output(output_spec, outcome.stdout, self.policy.inline_output_bytes),
