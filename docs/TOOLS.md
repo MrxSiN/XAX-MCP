@@ -30,6 +30,18 @@ granted rights, limits, the sandbox probe, and a maturity label per feature.
  "package": {"name": "polyreduce", "entries": {"app": "main"}, "release": "app"}}
 ```
 
+Multi-byte integers in byte views (heap views of `linux.bytes_rw`): one checked access moves 1, 2, 4 or 8
+bytes at a dynamic `b32` byte offset (`checked_byte_view_widths`, XAX ADR-231). The bounds check is
+`offset + size <= extent`, and alignment stays 1:
+
+```json
+["checked.load.bits.le",  ["p0", "p3", "p2"],       ["b64", "mem"], {"attrs": [8, 1]}]
+["checked.store.bits.le", ["p0", "p3", "p4", "p2"], ["mem"],        {"attrs": [8, 1]}]
+```
+
+The operands are view pointer, byte offset, (value,) memory effect. Other sizes fail verification with
+`MEMORY-ACCESS-SIZE`.
+
 List callees before their callers. The process entry takes only effect/proof parameters, ends with
 `linux.exit_group`, and returns at most one integer (upstream `linux-x86_64-process-v1`). Available runtime
 channels: `linux.read` on fd 0, `linux.write` on fds 1/2, `linux.startup.*` reads of argv/env/auxv (entry function

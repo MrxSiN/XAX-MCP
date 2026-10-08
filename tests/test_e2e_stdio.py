@@ -54,8 +54,13 @@ async def test_initialize_discover_construct_build_execute_novel_program():
             assert tool.input_schema["type"] == "object" and tool.input_schema.get("additionalProperties") is False
         caps = await call(client, "xax_capabilities")
         assert caps["xax"]["status"] == "tested" and caps["targets"][0]["execute"]["available"]
+        assert caps["targets"][0]["checked_byte_view_widths"] == [1, 2, 4, 8]
+        request = programs.poly_reduce(a, b, c)
+        # Each u64 is read from stdin by one 8-byte checked load on the byte view (XAX ADR-231).
+        assert request["functions"][0]["blocks"][0]["nodes"] == [
+            ["checked.load.bits.le", ["p0", "p3", "p2"], ["b64", "mem"], {"attrs": [8, 1]}]]
         started = time.perf_counter()
-        built = await call(client, "xax_construct", {"request": programs.poly_reduce(a, b, c)})
+        built = await call(client, "xax_construct", {"request": request})
         artifact = await call(client, "xax_build", {"workspace": built["workspace"]})
         run = await call(client, "xax_execute", {"artifact": artifact["artifact"],
                                                  "input": {"ints": [{"type": "b64", "value": x} for x in xs]},

@@ -2,10 +2,14 @@
 
 | xax-mcp | XAX commit | XAX toolchain fingerprint (sha256) | mcp SDK | Python | OS / arch | Result |
 |---|---|---|---|---|---|---|
+| 0.3.0 | `b0ec772a954a6b7932c6e3c1d44794c036a9b7ab` (2026-10-08; host contract `xax-host-contract-v1` r2) | `636b268c755e16e5cba71022ac1847f5dc0c96471e4a81b49853f035f13224ee` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 41/41 tests pass on both, sandbox required |
 | 0.2.0 | `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183` (2026-10-08; host contract `xax-host-contract-v1` r1) | `cdf3e5868810fb47884391cbe60fe7c79589ca8c0d14979644223f1dce012a7b` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 38/38 tests pass on both, sandbox required |
 | 0.1.0 | `01ad841c76416fc741dd1386b12124904924c10d` (2026-10-08) | `2d5b1f3be0c6c40f394a1e6a109239d38e2b9abc2634b02fbb21cffae172392f` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 36/36 tests pass on both, sandbox required |
 
-Declared support for 0.2.0: exactly `f38cbee`, and XAX must provide `xax-host-contract-v1` at revision ≥ 1
+Declared support for 0.3.0: exactly `b0ec772` (XAX `main`), and XAX must provide `xax-host-contract-v1` at
+revision ≥ 2, because carriers now use byte-view widening (ADR-231). Earlier XAX commits are `incompatible`.
+
+Declared support for 0.2.0 (historical): exactly `f38cbee`, and XAX must provide `xax-host-contract-v1` at revision ≥ 1
 (earlier commits, including 0.1.0's `01ad841`, are `incompatible`). `f38cbee` is reachable from XAX
 `main` through merge commit `5c9ba68`.
 

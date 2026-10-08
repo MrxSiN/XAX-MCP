@@ -8,7 +8,14 @@
   3–4 minutes on the reference host, mostly XAX warm-up per launched server.
 - Evidence: `docs/evidence/` (record new runs with `scripts/record_evidence.py`; never overwrite old files).
 
-## State at 0.2.0 (2026-10-08)
+## State at 0.3.0 (2026-10-08)
+- Pins XAX `b0ec772` (`main`; host contract r2, ADR-231 byte-view widening). Test carriers read and write u64s
+  with one checked access. `xax_capabilities` reports `checked_byte_view_widths`. 41 tests in about 53 s on
+  Python 3.11 and 3.13.
+- Warm-cache first call is about 3.5 s, up from 0.84 s at 0.2.0, because upstream's typing store grew (S8c.9–13).
+  A further upstream cold-start reduction would target the native verifier setup and BLAKE3 CID checks.
+
+## State at 0.2.0 (2026-10-08, historical)
 - Pins XAX `f38cbee` (upstream ADR-222 to ADR-225: memoized component verification, `linux.startup.*` carrier
   entities, `linux-x86_64-process-v1`, `xax-host-contract-v1`). Adds the `argv` input mode and the
   host-contract startup check. 38 tests in about 35 s.

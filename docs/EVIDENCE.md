@@ -15,7 +15,9 @@ end to end), **PROTOTYPE** (works for a narrow case), **UNIMPLEMENTED**.
 | Fails closed without isolation | EXECUTED | `test_execution_fails_closed_without_sandbox`; also observed for real when a launcher bug made the probe fail during development |
 | Network denial | STRUCTURAL | empty network namespace and seccomp deny `socket`; no carrier entity can express a socket call, so there is no end-to-end test |
 | argv reaches XAX startup reads in the sandbox | EXECUTED | `test_argv_reaches_startup_reads` (argv[1] echoed, argc as exit status) |
-| Cold and warm tool latency (0.2.0) | MEASURED | `docs/evidence/e2e-linux-x86_64-{cold,warm}-0.2.0.json`: warm cache first construct+build+execute 0.84 s after launch, cold cache 38 s; cached execute median ≈ 32 ms |
+| One 8-byte checked load/store on a byte view equals eight 1-byte accesses, with a smaller artifact | EXECUTED | `test_wide_byte_view_access_matches_byte_composition_and_is_smaller` (randomized; 647 vs 1,668 artifact bytes for `poly_reduce`) |
+| Cold and warm tool latency (0.3.0) | MEASURED | `docs/evidence/e2e-linux-x86_64-{cold,warm}-0.3.0.json`: warm cache first construct+build+execute about 3.7 s after launch (server warm-up 6.9 s, overlapping initialize), cold cache about 47 s; cached execute median ≈ 35 ms. The warm-start increase over 0.2.0 comes from the larger upstream typing store (S8c.9–S8c.13) |
+| Cold and warm tool latency (0.2.0, historical) | MEASURED | `docs/evidence/e2e-linux-x86_64-{cold,warm}-0.2.0.json`: warm cache first construct+build+execute 0.84 s after launch, cold cache 38 s; cached execute median ≈ 32 ms |
 | Cold and warm tool latency (0.1.0, historical) | MEASURED | `docs/evidence/e2e-linux-x86_64-{cold,warm}.json` (cached execute median ≈ 34–39 ms; build miss ≈ 56–60 ms; construct ≈ 26 ms; first call waits 20–50 s for XAX warm-up) |
 | Codex / Claude Code registration | STRUCTURAL | CLI registration verified; Claude Code health check connected; no model-driven session |
 | Strings, JSON/CSV, files, network, other targets | UNIMPLEMENTED | not reachable through `xax-construct-v1` at the pinned XAX; reported by `xax_capabilities` |

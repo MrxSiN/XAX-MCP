@@ -1,0 +1,148 @@
+{
+  "format": "xax-mcp-evidence-v1",
+  "label": "EXECUTED",
+  "recorded_utc": "2026-10-08T15:48:23Z",
+  "versions": {
+    "xax-mcp": "0.3.0",
+    "mcp_sdk": "2.3.0",
+    "xax": {
+      "status": "tested",
+      "distribution": "xax-compiler",
+      "distribution_version": "0.1.0",
+      "toolchain_fingerprint": "636b268c755e16e5cba71022ac1847f5dc0c96471e4a81b49853f035f13224ee",
+      "matched_commit": "b0ec772a954a6b7932c6e3c1d44794c036a9b7ab",
+      "pinned_commit": "b0ec772a954a6b7932c6e3c1d44794c036a9b7ab",
+      "repository": "https://github.com/MrxSiN/XAX",
+      "reason": null,
+      "compiler_identity": "13dbd0cf3458d70b1e2f817928fa7248dabd7c6dade5ca52624ace6d6c296c78",
+      "host_contract": {
+        "contract": "xax-host-contract-v1",
+        "minor": 2,
+        "formats": {
+          "construct_carrier": "xax-construct-v1",
+          "linux_process": "linux-x86_64-process-v1",
+          "linux_startup_abi": "linux-x86_64-startup-v1",
+          "local_edit_grammar": "ADR-200",
+          "checked_byte_view_widths": [
+            1,
+            2,
+            4,
+            8
+          ]
+        }
+      },
+      "compiler_implementation": "XAX bootstrap compiler (Python, with XAX-hosted components where native)"
+    },
+    "python": "3.13.16",
+    "os": "Linux 6.18.44-fc-v80",
+    "machine": "x86_64"
+  },
+  "sandbox": {
+    "mechanism": "linux-userns+chroot+seccomp+rlimit",
+    "available": true,
+    "reason": null,
+    "namespaces": [
+      "cgroup",
+      "ipc",
+      "mnt",
+      "net",
+      "user",
+      "uts"
+    ],
+    "inner_uid": 65534,
+    "root_entries": [
+      "prog"
+    ],
+    "openat_denied": true
+  },
+  "limits": {
+    "wall_ms": 5000,
+    "cpu_seconds": 5,
+    "memory_bytes": 268435456,
+    "max_stdout_bytes": 1048576,
+    "max_stderr_bytes": 65536,
+    "max_stdin_bytes": 1048576,
+    "file_size_bytes": 0,
+    "file_descriptors": 3,
+    "processes": 1
+  },
+  "workload": {
+    "kind": "novel randomized polynomial reduction (tests/programs.py:poly_reduce), coefficients drawn at run time",
+    "coefficients": [
+      4019399314,
+      3035824585,
+      479986297
+    ],
+    "inputs": 64,
+    "result": [
+      5838389220751635916,
+      18332754327611721917
+    ],
+    "oracle": [
+      5838389220751635916,
+      18332754327611721917
+    ],
+    "matches": true
+  },
+  "identities": {
+    "workspace_root": "52e09ed20f2bb9a93ece742d044d5e9e460c559eef2556921bfb85f71aa3da6a",
+    "store_sha256": "576d07526e396bf6c1682a37e5e7ab45e429664ddd224415c70029f88a2ec4ec",
+    "artifact_blake3": "9b349e4c8878665b33d11dcbb1d61c2cfb0b5d96cf7bbfdb4f7c155996df148b",
+    "artifact_sha256": "7318abe3b86d9029c1fab1272a1e63756d7cae22d2b24d564f9a73b4f3a22fa7",
+    "artifact_bytes": 681,
+    "build_key": "8d0acc77a61aa7a202194832b55a1e275c803310b1a19430927d7d90e1925563",
+    "provenance_cid": "55d1802f05121365f03a09bd4e1662d851d179477a2950f895dcb8dfa5ffb893",
+    "target_profile": "x86_64-linux-elf-exec-v1",
+    "xax_native_components": {
+      "blake3-compress": "xax",
+      "blake3-hash": "xax",
+      "cfg": "xax",
+      "graph-decoder": "xax",
+      "store-decoder": "xax",
+      "store-verifier": "xax",
+      "typing": "xax",
+      "verification:cfg": null,
+      "verification:graph-decoder": null,
+      "verification:hash": null,
+      "verification:store-decoder": null,
+      "verification:store-verifier": null,
+      "verification:typing": null
+    }
+  },
+  "measured_ms": {
+    "native_cache": "warm (existing XAX_NATIVE_CACHE)",
+    "launch_and_initialize": 3515.3,
+    "server_warmup_reported": 6908,
+    "first_construct_including_warmup_wait": 3640.7,
+    "cold_construct_build_execute": 3698.8,
+    "warm_construct": 19.49,
+    "warm_build_miss": 27.27,
+    "build_cache_hit": 3.14,
+    "cached_execute_median": 35.35,
+    "cached_execute_samples": [
+      34.5,
+      32.59,
+      31.54,
+      35.39,
+      32.13,
+      34.06,
+      34.02,
+      35.55,
+      34.26,
+      32.33,
+      31.71,
+      47.15,
+      38.17,
+      41.09,
+      43.09,
+      37.71,
+      35.31,
+      39.45,
+      37.2,
+      37.45
+    ],
+    "server_reported_sandbox_wall_ms": 26.84,
+    "build_cache": "hit"
+  },
+  "not_measured_here": "R4 generated-code performance and the AI-token efficiency milestone are separate upstream XAX evidence"
+}

@@ -10,8 +10,16 @@ LOOP = ["proc", "fs", "ptr", "in", "mem", "b32", "b64", "b64", "b32"]
 ALL = [f"p{i}" for i in range(9)]
 
 
-def load64(view: str) -> dict:
-    """XAX function load64(ptr, VIEW, mem, b32 offset) -> (b64, ptr, VIEW, mem): little-endian u64 from 8 byte loads."""
+def load64(view: str, wide: bool = True) -> dict:
+    """XAX function load64(ptr, VIEW, mem, b32 offset) -> (b64, ptr, VIEW, mem): the little-endian u64 at a byte offset.
+
+    ``wide``: one checked 8-byte load on the byte view (XAX ADR-231, host contract r2).  Otherwise the pre-r2 form:
+    eight 1-byte checked loads combined with multiplies and adds (kept to show both forms compute the same value)."""
+    if wide:
+        return {"name": f"load64_{view}", "params": ["ptr", view, "mem", "b32"], "returns": ["b64", "ptr", view, "mem"],
+                "blocks": [{"params": ["ptr", view, "mem", "b32"],
+                            "nodes": [["checked.load.bits.le", ["p0", "p3", "p2"], ["b64", "mem"], {"attrs": [8, 1]}]],
+                            "end": ["ret", ["n0", "p0", "p1", "n0.r1"]]}]}
     nodes, mem = [], "p2"
     for k in range(8):
         base = len(nodes)
@@ -29,8 +37,15 @@ def load64(view: str) -> dict:
             "blocks": [{"params": ["ptr", view, "mem", "b32"], "nodes": nodes, "end": ["ret", [acc, "p0", "p1", mem]]}]}
 
 
-def store64(view: str) -> dict:
-    """XAX function store64(ptr, VIEW, mem, b32 offset, b64 x) -> (ptr, VIEW, mem): x as 8 little-endian bytes."""
+def store64(view: str, wide: bool = True) -> dict:
+    """XAX function store64(ptr, VIEW, mem, b32 offset, b64 x) -> (ptr, VIEW, mem): x as 8 little-endian bytes.
+
+    ``wide``: one checked 8-byte store (ADR-231); otherwise eight 1-byte stores of x / 256^k."""
+    if wide:
+        return {"name": f"store64_{view}", "params": ["ptr", view, "mem", "b32", "b64"], "returns": ["ptr", view, "mem"],
+                "blocks": [{"params": ["ptr", view, "mem", "b32", "b64"],
+                            "nodes": [["checked.store.bits.le", ["p0", "p3", "p4", "p2"], ["mem"], {"attrs": [8, 1]}]],
+                            "end": ["ret", ["p0", "p1", "n0"]]}]}
     nodes, mem = [], "p2"
     for k in range(8):
         base = len(nodes)
@@ -43,12 +58,12 @@ def store64(view: str) -> dict:
             "blocks": [{"params": ["ptr", view, "mem", "b32", "b64"], "nodes": nodes, "end": ["ret", ["p0", "p1", mem]]}]}
 
 
-def poly_reduce(a: int, b: int, c: int, name: str = "polyreduce") -> dict:
+def poly_reduce(a: int, b: int, c: int, name: str = "polyreduce", wide: bool = True) -> dict:
     """Reads n little-endian u64 x_i from stdin; writes (sum_i a*x_i^2 + b*x_i + c mod 2^64, max_i x_i) as two u64."""
     return {
         "format": "xax-construct-v1", "platform": "linux-x86_64", "types": dict(TYPES),
         "functions": [
-            load64("in"), store64("out"),
+            load64("in", wide), store64("out", wide),
             {"name": "term", "params": ["b64"], "returns": ["b64"], "blocks": [{"params": ["b64"], "nodes": [
                 ["mul.wrap", ["p0", "p0"], ["b64"]],
                 ["mul.wrap", ["n0", ["b64", a]], ["b64"]],

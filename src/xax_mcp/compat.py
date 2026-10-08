@@ -18,11 +18,12 @@ XAX_REPOSITORY = "https://github.com/MrxSiN/XAX"
 XAX_DISTRIBUTION = "xax-compiler"
 XAX_DISTRIBUTION_VERSION = "0.1.0"
 # Tested pins: commit -> sha256 fingerprint of the installed toolchain files (see ``toolchain_fingerprint``).
-# 0.1.0 tested 01ad841c76416fc741dd1386b12124904924c10d (fingerprint 2d5b1f3b...), which predates xax_contract.
+# 0.1.0 tested 01ad841c76416fc741dd1386b12124904924c10d (fingerprint 2d5b1f3b...), which predates xax_contract;
+# 0.2.0 tested f38cbeea2b90e9b6a580417ce7efaa7d3d75a183 (fingerprint cdf3e586...), host contract r1.
 TESTED_XAX = {
-    "f38cbeea2b90e9b6a580417ce7efaa7d3d75a183": "cdf3e5868810fb47884391cbe60fe7c79589ca8c0d14979644223f1dce012a7b",
+    "b0ec772a954a6b7932c6e3c1d44794c036a9b7ab": "636b268c755e16e5cba71022ac1847f5dc0c96471e4a81b49853f035f13224ee",
 }
-PINNED_XAX_COMMIT = "f38cbeea2b90e9b6a580417ce7efaa7d3d75a183"
+PINNED_XAX_COMMIT = "b0ec772a954a6b7932c6e3c1d44794c036a9b7ab"
 # Upstream interfaces this adapter consumes (within xax-host-contract-v1; see docs/XAX_CONTRACT.md).
 REQUIRED_API = {
     "xax_construct": ("construct", "FORMAT"),
@@ -36,9 +37,10 @@ REQUIRED_API = {
     "xax_artifact": ("BOOTSTRAP_COMPILER_IDENTITY_V1",),
     "xax_contract": ("HOST_CONTRACT", "HOST_CONTRACT_MINOR", "describe", "missing"),
 }
-# The upstream host contract this release consumes (xax_contract, ADR-225) and the oldest minor revision it needs.
+# The upstream host contract this release consumes (xax_contract, ADR-225) and the oldest minor revision it needs:
+# r2 (ADR-231) adds checked accesses of 1/2/4/8 bytes on bits<8> views, which carriers may now rely on.
 HOST_CONTRACT = "xax-host-contract-v1"
-HOST_CONTRACT_MINOR = 1
+HOST_CONTRACT_MINOR = 2
 ALLOW_UNPINNED_ENV = "XAX_MCP_ALLOW_UNTESTED_XAX"
 
 

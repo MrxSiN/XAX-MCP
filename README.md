@@ -15,7 +15,7 @@ XAX's invariant holds: **meaning is source.** Tool arguments are transport. A co
 verified canonical store, and after that the store changes only through verified XAX transactions. The adapter
 never computes a workload: results come from XAX-generated machine code.
 
-## Status (0.2.0)
+## Status (0.3.0)
 
 | Capability | Status |
 |---|---|
@@ -23,6 +23,7 @@ never computes a workload: results come from XAX-generated machine code.
 | Construct a new program (`xax-construct-v1`), build, run, typed result | EXECUTED: randomized novel computation each test run |
 | Query, verify/commit/rollback edits, stale-root rejection | EXECUTED: delegates to `xax_workspace` |
 | `argv` input read by XAX `linux.startup.*` entities | EXECUTED (`test_argv_reaches_startup_reads`) |
+| One-node 2/4/8-byte checked loads/stores on byte views (XAX ADR-231) | EXECUTED (`test_wide_byte_view_access_matches_byte_composition_and_is_smaller`, e2e over STDIO) |
 | Reopen and run previously verified stores (path A) | EXECUTED: exported stores and upstream `xb64` |
 | Sandbox (user/mount/net namespaces, empty read-only root, seccomp, rlimits) | EXECUTED on Linux x86-64; fails closed elsewhere |
 | Codex 0.161.0 / Claude Code 2.1.294 registration | STRUCTURAL: registered; Claude Code health check connected; no model-driven run recorded |
@@ -31,8 +32,8 @@ never computes a workload: results come from XAX-generated machine code.
 | Streamable HTTP transport | UNIMPLEMENTED (STDIO only) |
 
 Labels follow [docs/EVIDENCE.md](docs/EVIDENCE.md). Measured latencies are in [docs/evidence](docs/evidence). With a warm
-XAX image cache, a new server answers its first construct+build+execute in under 1 s (0.1.0: about 20 s), after
-upstream XAX implemented this project's proposals ([docs/UPSTREAM_PROPOSALS.md](docs/UPSTREAM_PROPOSALS.md)).
+XAX image cache, a new server answers its first construct+build+execute in about 1–4 s (0.1.0: about 20 s), after
+upstream XAX implemented this project's proposals P1–P5 ([docs/UPSTREAM_PROPOSALS.md](docs/UPSTREAM_PROPOSALS.md)).
 
 ## Install
 
@@ -47,8 +48,8 @@ python3 -m venv ~/.venvs/xax-mcp
 ```
 
 This installs the official `mcp` SDK (2.3.x) and the XAX toolchain **pinned to commit
-[`f38cbee`](https://github.com/MrxSiN/XAX/commit/f38cbeea2b90e9b6a580417ce7efaa7d3d75a183)**, which provides the versioned host contract
-`xax-host-contract-v1`. The server refuses
+[`b0ec772`](https://github.com/MrxSiN/XAX/commit/b0ec772a954a6b7932c6e3c1d44794c036a9b7ab)**, which provides the versioned host contract
+`xax-host-contract-v1` at revision 2. The server refuses
 to start against any other XAX build unless you set `XAX_MCP_ALLOW_UNTESTED_XAX=1`
 ([docs/COMPATIBILITY.md](docs/COMPATIBILITY.md)). XAX itself never depends on MCP.
 

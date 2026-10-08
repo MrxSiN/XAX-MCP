@@ -222,6 +222,9 @@ class Service:
                 "process_entry": "fn(proof...) -> (bits<N>?, proof...); ends with linux.exit_group; no machine parameters; "
                                  "linux.startup.* only in the entry function",
                 "process_contract": process_contract(),
+                # Checked load/store sizes allowed on a bits<8> (byte) view at a dynamic byte offset (XAX ADR-231): one
+                # node reads or writes a little-endian bits<8*size> value, bounds-checked as offset + size <= extent.
+                "checked_byte_view_widths": list(describe()["formats"]["checked_byte_view_widths"]),
             }],
             "io": {"format": "xax-mcp-io-v1", "input": ["ints (b8|b16|b32|b64, little-endian on stdin)", "bytes_base64", "text",
                                                         "argv (strings, read with linux.startup.*)"],

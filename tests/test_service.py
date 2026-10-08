@@ -138,7 +138,8 @@ def test_build_is_cached_and_reproducible(service, session):
 
 
 def test_query_kinds_are_bounded(service, session):
-    built = service.construct(session, {"request": programs.poly_reduce(1, 2, 3)})
+    # The byte-composed load64 has 39 nodes, enough to exercise pagination.
+    built = service.construct(session, {"request": programs.poly_reduce(1, 2, 3, wide=False)})
     ws = built["workspace"]
     page = service.query(session, {"workspace": ws, "kind": "function_nodes", "handle": built["function_handles"]["load64_in"], "limit": 5})
     assert len(page["result"]["entities"]) == 5 and page["result"]["truncated"] and page["result"]["continuation"] == 5
@@ -164,3 +165,31 @@ def test_capabilities_report_host_contract(service, session):
     assert caps["xax"]["host_contract"]["contract"] == "xax-host-contract-v1"
     assert caps["targets"][0]["process_contract"]["identity"] == "linux-x86_64-process-v1"
     assert "linux.startup.arg_copy" in caps["targets"][0]["carrier_entities"] and caps["io"]["argv"] is True
+
+
+@needs_sandbox
+def test_wide_byte_view_access_matches_byte_composition_and_is_smaller(service, session):
+    """XAX ADR-231: one 8-byte checked load/store on a byte view computes what eight 1-byte accesses compute."""
+    a, b, c = (secrets.randbelow(1 << 32) for _ in range(3))
+    xs = [secrets.randbelow(1 << 64) for _ in range(9)]
+    results, sizes = {}, {}
+    for wide in (True, False):
+        built = service.construct(session, {"request": programs.poly_reduce(a, b, c, wide=wide)})
+        artifact = service.build(session, {"workspace": built["workspace"]})
+        run = service.execute(session, {"artifact": artifact["artifact"], "input": _ints(xs), "output": {"ints": ["b64", "b64"]}})
+        results[wide] = [v["value"] for v in run["stdout"]["values"]]
+        sizes[wide] = artifact["bytes"]
+    assert results[True] == results[False] == list(programs.poly_reduce_oracle(a, b, c, xs))
+    assert sizes[True] < sizes[False]
+
+
+def test_capabilities_report_checked_byte_view_widths(service, session):
+    assert service.capabilities(session)["targets"][0]["checked_byte_view_widths"] == [1, 2, 4, 8]
+
+
+def test_non_contract_byte_view_width_is_rejected_by_xax(service, session):
+    request = programs.poly_reduce(1, 1, 1)
+    load = request["functions"][0]["blocks"][0]["nodes"][0]
+    load[2][0], load[3]["attrs"] = "b32", [3, 1]  # a 3-byte access: not in checked_byte_view_widths
+    error = _code(service.construct, session, {"request": request})
+    assert error.code == "verification_failed" and error.diagnostic["rule"] == "MEMORY-ACCESS-SIZE"
