@@ -2,9 +2,14 @@
 
 | xax-mcp | XAX commit | XAX toolchain fingerprint (sha256) | mcp SDK | Python | OS / arch | Result |
 |---|---|---|---|---|---|---|
+| 0.2.0 | `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183` (2026-10-08; host contract `xax-host-contract-v1` r1) | `cdf3e5868810fb47884391cbe60fe7c79589ca8c0d14979644223f1dce012a7b` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 38/38 tests pass on both, sandbox required |
 | 0.1.0 | `01ad841c76416fc741dd1386b12124904924c10d` (2026-10-08) | `2d5b1f3be0c6c40f394a1e6a109239d38e2b9abc2634b02fbb21cffae172392f` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 36/36 tests pass on both, sandbox required |
 
-Declared support for 0.1.0: exactly the commit above (the `xax-compiler` version string is `0.1.0` at every
+Declared support for 0.2.0: exactly `f38cbee`, and XAX must provide `xax-host-contract-v1` at revision ≥ 1
+(earlier commits, including 0.1.0's `01ad841`, are `incompatible`). `f38cbee` is on XAX branch
+`claude/brave-carson-al75yn` until it is merged to XAX `main`; pip fetches it by commit either way.
+
+Declared support for 0.1.0 (historical): exactly the `01ad841` commit above (the `xax-compiler` version string is `0.1.0` at every
 upstream commit, so it identifies nothing). `mcp>=2.3.0,<2.4`. Python ≥ 3.11 is declared; 3.11 and 3.13 were tested,
 and CI runs both.
 

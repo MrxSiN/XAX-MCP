@@ -18,11 +18,12 @@ XAX_REPOSITORY = "https://github.com/MrxSiN/XAX"
 XAX_DISTRIBUTION = "xax-compiler"
 XAX_DISTRIBUTION_VERSION = "0.1.0"
 # Tested pins: commit -> sha256 fingerprint of the installed toolchain files (see ``toolchain_fingerprint``).
+# 0.1.0 tested 01ad841c76416fc741dd1386b12124904924c10d (fingerprint 2d5b1f3b...), which predates xax_contract.
 TESTED_XAX = {
-    "01ad841c76416fc741dd1386b12124904924c10d": "2d5b1f3be0c6c40f394a1e6a109239d38e2b9abc2634b02fbb21cffae172392f",
+    "f38cbeea2b90e9b6a580417ce7efaa7d3d75a183": "cdf3e5868810fb47884391cbe60fe7c79589ca8c0d14979644223f1dce012a7b",
 }
-PINNED_XAX_COMMIT = "01ad841c76416fc741dd1386b12124904924c10d"
-# Upstream interfaces this adapter consumes (the de-facto XAX execution contract, see docs/XAX_CONTRACT.md).
+PINNED_XAX_COMMIT = "f38cbeea2b90e9b6a580417ce7efaa7d3d75a183"
+# Upstream interfaces this adapter consumes (within xax-host-contract-v1; see docs/XAX_CONTRACT.md).
 REQUIRED_API = {
     "xax_construct": ("construct", "FORMAT"),
     "xax_build": ("build", "build_request", "resolve_packages", "snapshot_store", "decode_snapshot", "decode_request",
@@ -33,7 +34,11 @@ REQUIRED_API = {
                      "X86_64_LINUX_ELF_EXEC_FORMAT", "X86_64_LINUX_ABI", "verify_store"),
     "xax_linux": ("linux_api",),
     "xax_artifact": ("BOOTSTRAP_COMPILER_IDENTITY_V1",),
+    "xax_contract": ("HOST_CONTRACT", "HOST_CONTRACT_MINOR", "describe", "missing"),
 }
+# The upstream host contract this release consumes (xax_contract, ADR-224) and the oldest minor revision it needs.
+HOST_CONTRACT = "xax-host-contract-v1"
+HOST_CONTRACT_MINOR = 1
 ALLOW_UNPINNED_ENV = "XAX_MCP_ALLOW_UNTESTED_XAX"
 
 
@@ -95,6 +100,13 @@ def check() -> Compatibility:
         missing += [f"{module}.{name}" for name in names if not hasattr(loaded, name)]
     if missing:
         return Compatibility("incompatible", version, None, None, f"missing XAX interfaces: {', '.join(missing)}")
+    contract = importlib.import_module("xax_contract")
+    if contract.HOST_CONTRACT != HOST_CONTRACT or contract.HOST_CONTRACT_MINOR < HOST_CONTRACT_MINOR:
+        return Compatibility("incompatible", version, None, None,
+                             f"XAX host contract {contract.HOST_CONTRACT} r{contract.HOST_CONTRACT_MINOR}; "
+                             f"this release needs {HOST_CONTRACT} r{HOST_CONTRACT_MINOR} or later")
+    if contract.missing():
+        return Compatibility("incompatible", version, None, None, f"XAX host contract names missing: {', '.join(contract.missing())}")
     if importlib.import_module("xax_construct").FORMAT != "xax-construct-v1":
         return Compatibility("incompatible", version, None, None, "xax_construct.FORMAT is not xax-construct-v1")
     fingerprint = toolchain_fingerprint()

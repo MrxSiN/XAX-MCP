@@ -61,10 +61,13 @@ class ProbeResult:
     details: dict = field(default_factory=dict)
 
 
-def _helper_argv(directory: str, status_fd: int, limits: Limits, probe: bool) -> list[str]:
+def _helper_argv(directory: str, status_fd: int, limits: Limits, probe: bool, arguments: tuple[str, ...] = ()) -> list[str]:
     argv = [sys.executable, "-I", "-S", str(HELPER), "--status", str(status_fd), "--dir", directory,
             "--memory", str(limits.memory_bytes), "--cpu", str(limits.cpu_seconds), "--parent", str(os.getpid())]
-    return argv + ["--probe"] if probe else argv
+    if probe:
+        argv.append("--probe")
+    # Program arguments follow "--" as separate argv entries (never a shell string); they become argv[1:].
+    return argv + ["--", *arguments]
 
 
 class Sandbox:
@@ -118,7 +121,8 @@ class Sandbox:
             os.chmod(directory, 0o700)
             shutil.rmtree(directory, ignore_errors=True)
 
-    def run(self, artifact: bytes, stdin: bytes, limits: Limits, cancel: threading.Event | None = None) -> RunOutcome:
+    def run(self, artifact: bytes, stdin: bytes, limits: Limits, cancel: threading.Event | None = None,
+            arguments: tuple[str, ...] = ()) -> RunOutcome:
         probe = self.probe()
         if not probe.available:
             raise SandboxUnavailable(probe.reason or "sandbox unavailable")
@@ -131,16 +135,17 @@ class Sandbox:
                 handle.write(artifact)
             os.chmod(path, 0o500)
             os.chmod(directory, 0o500)
-            return self._launch(directory, stdin, limits, cancel or threading.Event())
+            return self._launch(directory, stdin, limits, cancel or threading.Event(), arguments)
         finally:
             os.chmod(directory, 0o700)
             shutil.rmtree(directory, ignore_errors=True)
 
-    def _launch(self, directory: str, stdin: bytes, limits: Limits, cancel: threading.Event) -> RunOutcome:
+    def _launch(self, directory: str, stdin: bytes, limits: Limits, cancel: threading.Event,
+                arguments: tuple[str, ...] = ()) -> RunOutcome:
         read_fd, write_fd = os.pipe()
         started = time.perf_counter()
         try:
-            process = subprocess.Popen(_helper_argv(directory, write_fd, limits, False), stdin=subprocess.PIPE,
+            process = subprocess.Popen(_helper_argv(directory, write_fd, limits, False, arguments), stdin=subprocess.PIPE,
                                        stdout=subprocess.PIPE, stderr=subprocess.PIPE, env={}, pass_fds=(write_fd,),
                                        start_new_session=True)
         finally:

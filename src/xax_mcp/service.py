@@ -186,12 +186,12 @@ class Service:
 
         from xax_artifact import BOOTSTRAP_COMPILER_IDENTITY_V1
         from xax_compiler import Operation, decode_native_target, x86_64_linux_exec_target
-        from xax_linux import linux_api
+        from xax_contract import describe
+        from xax_linux import process_contract
         from xax_local_protocol import edit_grammar_id
 
         target = decode_native_target(x86_64_linux_exec_target())
         probe = self.sandbox.probe()
-        api = linux_api()
         execute = "execute" in self.policy.rights and probe.available
         try:
             sdk = importlib.metadata.version("mcp")
@@ -203,6 +203,7 @@ class Service:
                        "xax_components_loaded": self._ready.is_set(),
                        "warmup_ms": None if self.warmup_ms is None else round(self.warmup_ms)},
             "xax": {**self.compatibility.as_dict(), "compiler_identity": BOOTSTRAP_COMPILER_IDENTITY_V1.hex(),
+                    "host_contract": {key: describe()[key] for key in ("contract", "minor", "formats")},
                     "compiler_implementation": "XAX bootstrap compiler (Python, with XAX-hosted components where native)"},
             "authority": self.policy.as_dict(),
             "targets": [{
@@ -216,12 +217,16 @@ class Service:
                                   *sorted(f"linux.{n}" for n in ("b8", "b32", "b64", "bytes_rw", "bytes_read", "memory_effect",
                                                                  "filesystem_effect", "process_effect", "heap_owner"))],
                 "carrier_entities": sorted(f"linux.{n}" for n in ("read", "write", "openat", "close", "mmap_anonymous", "exit_group"))
+                + sorted(f"linux.startup.{n}" for n in ("argc", "arg_length", "arg_copy", "envc", "env_length", "env_copy", "auxv_value"))
                 + ["{linux.munmap_view: [TYPE, EXTENT]}", "{fn: NAME}"],
-                "process_entry": "fn(proof...) -> (bits<N>?, proof...); ends with linux.exit_group; no machine parameters",
+                "process_entry": "fn(proof...) -> (bits<N>?, proof...); ends with linux.exit_group; no machine parameters; "
+                                 "linux.startup.* only in the entry function",
+                "process_contract": process_contract(),
             }],
-            "io": {"format": "xax-mcp-io-v1", "input": ["ints (b8|b16|b32|b64, little-endian on stdin)", "bytes_base64", "text"],
+            "io": {"format": "xax-mcp-io-v1", "input": ["ints (b8|b16|b32|b64, little-endian on stdin)", "bytes_base64", "text",
+                                                        "argv (strings, read with linux.startup.*)"],
                    "output": ["ints (declared layout decoded from stdout)", "bytes", "text"], "exit_status": True,
-                   "argv": False, "environment": False, "files": False},
+                   "argv": True, "environment": False, "files": False},
             "effects": {"supported": list(SUPPORTED_EFFECTS), "denied_by_default": [e for e in KNOWN_EFFECTS if e not in SUPPORTED_EFFECTS]},
             "edits": {"transport": "typed mutations rendered to the upstream local edit grammar", "grammar_id": edit_grammar_id(),
                       "ops": ["set_constant", "set_operation", "replace_operand", "delete", "prune_dead", "move",
@@ -595,9 +600,12 @@ class Service:
                         max_stdout_bytes=min(requested.get("max_output_bytes", base.max_stdout_bytes), base.max_stdout_bytes),
                         max_stderr_bytes=base.max_stderr_bytes, max_stdin_bytes=base.max_stdin_bytes)
         stdin = encode_input(args.get("input"), limits.max_stdin_bytes)
+        arguments = tuple(args.get("argv", ()))
+        if any("\0" in item for item in arguments) or sum(len(item.encode()) + 1 for item in arguments) > 65536:
+            raise ToolError("invalid_request", "argv strings must not contain NUL and must total at most 64 KiB")
         output_spec = args.get("output", "bytes")
         try:
-            outcome = self.sandbox.run(artifact.data, stdin, limits, cancel)
+            outcome = self.sandbox.run(artifact.data, stdin, limits, cancel, arguments)
         except SandboxUnavailable as error:
             raise ToolError("sandbox_unavailable", str(error),
                             repair=["run on Linux x86-64 with unprivileged user namespaces and seccomp enabled"]) from None

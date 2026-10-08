@@ -45,7 +45,8 @@ codex mcp remove xax
 
 Then add the timeouts from [`examples/hosts/codex-config.toml`](../examples/hosts/codex-config.toml) to the
 `[mcp_servers.xax]` table in `~/.codex/config.toml`. The first XAX call after a server start waits for the XAX
-component warm-up (20–50 s), which is longer than Codex's default tool timeout.
+component warm-up (about 3 s with a warm `XAX_NATIVE_CACHE`, about 50 s with an empty one). The cold case is
+longer than Codex's default tool timeout.
 
 ## Generic clients
 

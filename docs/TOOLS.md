@@ -31,8 +31,9 @@ granted rights, limits, the sandbox probe, and a maturity label per feature.
 ```
 
 List callees before their callers. The process entry takes only effect/proof parameters, ends with
-`linux.exit_group`, and returns at most one integer. Available runtime channels: `linux.read` on fd 0,
-`linux.write` on fds 1/2, and the exit status. Bounds: 256 functions, 4096 blocks per function, 100 000 nodes,
+`linux.exit_group`, and returns at most one integer (upstream `linux-x86_64-process-v1`). Available runtime
+channels: `linux.read` on fd 0, `linux.write` on fds 1/2, `linux.startup.*` reads of argv/env/auxv (entry function
+only), and the exit status. Bounds: 256 functions, 4096 blocks per function, 100 000 nodes,
 nesting depth 12, integers within ±2^64, view extents up to 1 GiB, 1 MiB of arguments.
 
 Returns `workspace`, `root` (canonical CID), `generation` 0, `entries`, `store` (bytes, sha256), and
@@ -73,9 +74,12 @@ object (snapshot root, request root, target, profile, artifact digest, compiler 
 `target_profile`, `xax_toolchain_fingerprint`, `xax_commit`, `xax_native_components`, `snapshot_root`,
 `workspace_root`, and `generation`.
 
-## `xax_execute` `{artifact, input?, output?, effects?, limits?, require_current?}`
+## `xax_execute` `{artifact, input?, argv?, output?, effects?, limits?, require_current?}`
 - `input`: one of `{"ints": [{"type": "b8|b16|b32|b64", "value": N}]}` (little-endian, concatenated),
   `{"bytes_base64": "..."}`, or `{"text": "..."}`. At most 1 MiB.
+- `argv`: up to 64 strings (no NUL, at most 64 KiB in total) that become `argv[1:]`. Programs read them with
+  `linux.startup.argc`/`arg_length`/`arg_copy` in the entry function. They are passed as separate execve
+  arguments, never through a shell.
 - `output`: `"bytes"` (default), `"text"`, or `{"ints": ["b64", ...]}`. A length mismatch is reported
   (`layout_matched: false`) and never padded.
 - `effects`: only `stdio`. Anything else is `denied_capability`.

@@ -1,6 +1,6 @@
 # Handoff
 
-## State at 0.1.0 (2026-10-08)
+## State at 0.1.0 (2026-10-08, historical)
 - STDIO MCP server with 8 tools over the pinned XAX `01ad841`. Construct, query, transact, build, and
   sandboxed execute all run end to end.
 - Tests: `tests/test_service.py`, `tests/test_security.py`, `tests/test_e2e_stdio.py`,
@@ -8,9 +8,16 @@
   3–4 minutes on the reference host, mostly XAX warm-up per launched server.
 - Evidence: `docs/evidence/` (record new runs with `scripts/record_evidence.py`; never overwrite old files).
 
+## State at 0.2.0 (2026-10-08)
+- Pins XAX `f38cbee` (upstream ADR-221 to ADR-224: memoized component verification, `linux.startup.*` carrier
+  entities, `linux-x86_64-process-v1`, `xax-host-contract-v1`). Adds the `argv` input mode and the
+  host-contract startup check. 38 tests in about 35 s.
+- `f38cbee` is on XAX branch `claude/brave-carson-al75yn`; after it merges to XAX `main`, nothing changes here
+  unless the merge rewrites the commit (squash/rebase). In that case, repin per COMPATIBILITY.md.
+
 ## Next steps, in order of leverage
-1. Upstream P3 (persist verified component images) would remove the 20–50 s first-call delay.
-2. Upstream P1 (startup entities in the carrier) would allow argv input; then add an `argv` input mode here.
+1. Upstream P4 (wide checked loads) is a semantic decision for the XAX maintainers; see UPSTREAM_PROPOSALS.md.
+2. Cold image-cache start is still about 40 s (every component image is lowered once).
 3. Record a model-driven Codex or Claude Code session with authenticated accounts and add it to
    COMPATIBILITY.md.
 4. When XAX exposes libraries (strings, JSON) through the carrier, add a capability and a gap test that fails

@@ -159,3 +159,19 @@ def flood() -> dict:
             ["call.foreign", ["p2", "p3", "p4"], ["b64", "mem"], {"entity": {"linux.munmap_view": ["ptr", 4096]}}],
             ["call.foreign", [["b32", 0], "p0"], ["proc"], {"entity": "linux.exit_group"}]],
          "end": ["ret", [["b32", 0], "n1", "p1", "n0.r1"]]}]}])
+
+
+def echo_argument() -> dict:
+    """Writes argv[1] (at most 64 bytes) to stdout and exits with argc (linux.startup.* entities, XAX ADR-222)."""
+    return _package("echo1", [{"name": "main", "params": ["proc", "fs", "mem"], "returns": ["b32", "proc", "fs", "mem"], "blocks": [
+        {"params": ["proc", "fs", "mem"], "nodes": [
+            ["call.foreign", [["b64", 64], "p2"], ["ptr", "linux.heap_owner", "mem"], {"entity": "linux.mmap_anonymous"}],
+            ["heap.view", ["n0", "n0.r1", "n0.r2"], ["ptr", "out64", "mem"], {"attrs": [64, 1]}],
+            ["call.foreign", [["b64", 1], "n1", "n1.r2"], ["b64", "mem"], {"entity": "linux.startup.arg_copy"}],
+            ["pointer.cast", ["n1"], ["linux.bytes_read"]],
+            ["call.foreign", [["b32", 1], "n3", "n2", "p1", "n2.r1"], ["b64", "fs", "mem"], {"entity": "linux.write"}],
+            ["call.foreign", ["n1", "n1.r1", "n4.r2"], ["b64", "mem"], {"entity": {"linux.munmap_view": ["ptr", 64]}}],
+            ["call.foreign", [], ["b64"], {"entity": "linux.startup.argc"}],
+            ["int.truncate", ["n6"], ["b32"]],
+            ["call.foreign", ["n7", "p0"], ["proc"], {"entity": "linux.exit_group"}]],
+         "end": ["ret", ["n7", "n8", "n4.r1", "n5.r1"]]}]}], {"out64": {"view": 64}})

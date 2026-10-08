@@ -64,7 +64,8 @@ Tables are bounded (16 workspaces, 64 artifacts, 64 results, oldest evicted firs
 ## Startup and warm-up
 
 On the first verification in a process, XAX loads its XAX-hosted compiler components (typing program, store
-verifier, ...). On the reference host this took about 25 s with a populated `XAX_NATIVE_CACHE` and about 50 s
-with an empty one. The server starts this warm-up in a background thread at launch, and tool calls that reach
-XAX wait for it. Later calls take tens of milliseconds ([evidence](evidence)). This cost belongs to upstream
-([UPSTREAM_PROPOSALS.md](UPSTREAM_PROPOSALS.md#p3-persist-verified-component-images)).
+verifier, ...). With XAX `01ad841` this took about 25 s with a populated `XAX_NATIVE_CACHE`. Since `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183`
+(upstream ADR-221) the components' stores are verified once per store and compiler version, so it takes about
+3 s. With an empty cache, every component image is still lowered once (about 50 s). The server starts this
+warm-up in a background thread at launch, and tool calls that reach XAX wait for it. Later calls take tens of
+milliseconds ([evidence](evidence)).

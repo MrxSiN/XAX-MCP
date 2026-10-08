@@ -105,7 +105,9 @@ def install_seccomp():
 
 
 def main(argv):
-    # argv: --status FD --dir DIR --memory BYTES --cpu SECONDS [--probe]
+    # argv: --status FD --dir DIR --memory BYTES --cpu SECONDS --parent PID [--probe] [-- PROGRAM_ARGUMENT...]
+    program_arguments = argv[argv.index("--") + 1:] if "--" in argv else []
+    argv = argv[:argv.index("--")] if "--" in argv else argv
     probe = "--probe" in argv
     pairs = [item for item in argv if item != "--probe"]
     options = dict(zip(pairs[0::2], pairs[1::2]))
@@ -123,8 +125,8 @@ def main(argv):
             os.write(status, json.dumps(report).encode())
             os._exit(0)
         install_seccomp()
-        argv0 = ctypes.c_char_p(b"/prog")
-        args = (ctypes.c_char_p * 2)(argv0, None)
+        vector = [b"/prog", *(os.fsencode(item) for item in program_arguments)]
+        args = (ctypes.c_char_p * (len(vector) + 1))(*vector, None)
         envp = (ctypes.c_char_p * 1)(None)
         _libc.execve(b"/prog", args, envp)
         raise OSError(ctypes.get_errno(), "execve: " + os.strerror(ctypes.get_errno()))

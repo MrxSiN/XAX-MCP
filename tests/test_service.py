@@ -27,7 +27,7 @@ def test_capabilities_report_real_compiler_and_target(service, session):
     target = caps["targets"][0]
     assert target["id"] == "linux-x86_64" and target["profile"] == "x86_64-linux-elf-exec-v1"
     assert "add.wrap" in target["operations"] and "checked.load.bits.le" in target["operations"]
-    assert caps["io"]["argv"] is False and caps["effects"]["supported"] == ["stdio"]
+    assert caps["io"]["argv"] is True and caps["effects"]["supported"] == ["stdio"]
 
 
 @needs_sandbox
@@ -148,3 +148,19 @@ def test_query_kinds_are_bounded(service, session):
     assert any(f.get("entries") == ["app"] for f in functions)
     exported = service.result(session, {"handle": ws, "length": 64})
     assert exported["kind"] == "canonical_store" and exported["continuation"] == 64
+
+
+@needs_sandbox
+def test_argv_reaches_startup_reads(service, session):
+    built = service.construct(session, {"request": programs.echo_argument()})
+    artifact = service.build(session, {"workspace": built["workspace"]})["artifact"]
+    run = service.execute(session, {"artifact": artifact, "argv": ["meaning is source", "--probe", "--", "x"], "output": "text"})
+    assert (run["exit_status"], run["stdout"]["text"]) == (5, "meaning is source")
+    assert _code(service.execute, session, {"artifact": artifact, "argv": ["a\0b"]}).code == "invalid_request"
+
+
+def test_capabilities_report_host_contract(service, session):
+    caps = service.capabilities(session)
+    assert caps["xax"]["host_contract"]["contract"] == "xax-host-contract-v1"
+    assert caps["targets"][0]["process_contract"]["identity"] == "linux-x86_64-process-v1"
+    assert "linux.startup.arg_copy" in caps["targets"][0]["carrier_entities"] and caps["io"]["argv"] is True

@@ -14,7 +14,9 @@ end to end), **PROTOTYPE** (works for a narrow case), **UNIMPLEMENTED**.
 | Sandbox denies filesystem access, enforces wall, CPU, and output limits, cancels, and dies with the server | EXECUTED | `tests/test_security.py`, `test_server_crash_kills_running_artifact` |
 | Fails closed without isolation | EXECUTED | `test_execution_fails_closed_without_sandbox`; also observed for real when a launcher bug made the probe fail during development |
 | Network denial | STRUCTURAL | empty network namespace and seccomp deny `socket`; no carrier entity can express a socket call, so there is no end-to-end test |
-| Cold and warm tool latency | MEASURED | `docs/evidence/e2e-linux-x86_64-{cold,warm}.json` (cached execute median ≈ 34–39 ms; build miss ≈ 56–60 ms; construct ≈ 26 ms; first call waits 20–50 s for XAX warm-up) |
+| argv reaches XAX startup reads in the sandbox | EXECUTED | `test_argv_reaches_startup_reads` (argv[1] echoed, argc as exit status) |
+| Cold and warm tool latency (0.2.0) | MEASURED | `docs/evidence/e2e-linux-x86_64-{cold,warm}-0.2.0.json`: warm cache first construct+build+execute 0.84 s after launch, cold cache 38 s; cached execute median ≈ 32 ms |
+| Cold and warm tool latency (0.1.0, historical) | MEASURED | `docs/evidence/e2e-linux-x86_64-{cold,warm}.json` (cached execute median ≈ 34–39 ms; build miss ≈ 56–60 ms; construct ≈ 26 ms; first call waits 20–50 s for XAX warm-up) |
 | Codex / Claude Code registration | STRUCTURAL | CLI registration verified; Claude Code health check connected; no model-driven session |
 | Strings, JSON/CSV, files, network, other targets | UNIMPLEMENTED | not reachable through `xax-construct-v1` at the pinned XAX; reported by `xax_capabilities` |
 

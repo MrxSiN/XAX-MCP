@@ -107,7 +107,8 @@ TOOLS: dict[str, dict] = {
     "xax_execute": {
         "title": "XAX execute",
         "description": "Run a built artifact in the OS sandbox (new user/mount/net namespaces, empty read-only root, seccomp "
-                       "allowlist, rlimits, wall timeout). Input is framed onto stdin (xax-mcp-io-v1); stdout is decoded by the "
+                       "allowlist, rlimits, wall timeout). Input is framed onto stdin (xax-mcp-io-v1) and optional argv strings reach "
+                       "linux.startup.* reads; stdout is decoded by the "
                        "declared layout. Only the 'stdio' effect exists. Requires the host-granted execute right.",
         "annotations": {"readOnlyHint": False, "destructiveHint": False, "openWorldHint": False},
         "inputSchema": {"type": "object", "additionalProperties": False, "required": ["artifact"], "properties": {
@@ -122,6 +123,7 @@ TOOLS: dict[str, dict] = {
             "output": {"anyOf": [{"enum": ["bytes", "text"]},
                                  {"type": "object", "additionalProperties": False, "required": ["ints"],
                                   "properties": {"ints": {"type": "array", "maxItems": 4096, "items": _INT_TYPE}}}]},
+            "argv": {"type": "array", "maxItems": 64, "items": {"type": "string", "maxLength": 4096}},
             "effects": {"type": "array", "maxItems": 8, "items": {"enum": ["stdio", "filesystem.read", "filesystem.write",
                                                                            "network", "process", "environment", "clock"]}},
             "limits": {"type": "object", "additionalProperties": False, "properties": {

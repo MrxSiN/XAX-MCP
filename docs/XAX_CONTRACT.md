@@ -1,9 +1,10 @@
-# The XAX interfaces this adapter consumes (contract `xax-mcp/xax-contract-v1`)
+# The XAX interfaces this adapter consumes
 
-XAX has no separately versioned execution-service API. XAX-MCP consumes these library interfaces of the pinned
-commit `01ad841c76416fc741dd1386b12124904924c10d`. They were found by inspecting the code and the tests
-(`tests/test_xax_construct.py` and `benchmarks/bench_r6_xb64.py` upstream), and `compat.REQUIRED_API` checks
-them at startup.
+Since commit `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183`, XAX publishes a versioned integration surface: `xax_contract`
+(`xax-host-contract-v1`, ADR-224). XAX-MCP 0.2.0 requires that contract at revision ≥ 1, checks
+`xax_contract.missing()` at startup, and uses only names from it (`compat.REQUIRED_API`). XAX-MCP 0.1.0 pinned
+`01ad841`, which predates the contract; the table below was its consumed surface, found by inspecting code and
+tests.
 
 | Interface | Used for | Upstream evidence |
 |---|---|---|
@@ -19,14 +20,16 @@ Two uses depend on implementation details, and the pinned tests exercise both: t
 read from `function_nodes` handles (`F<i>.B<b>.N<n>`), and `LocalMutationSession.for_function` is used for the
 non-authoritative function view.
 
-## Process and I/O contract (as implemented upstream)
+## Process and I/O contract
+
+Since `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183`, this is upstream's `linux-x86_64-process-v1` (`xax_linux.process_contract()`, ADR-223), which
+`xax_capabilities` reports verbatim. The facts below are what 0.1.0 relied on before the contract existed.
 
 - Linux x86-64 `x86_64-linux-elf-exec-v1` builds a static ELF whose entry is the XAX entry function. It takes
   no machine parameters, returns at most one integer, and must end with `linux.exit_group`
   (`xax_linux.validate_process_entry`).
-- Runtime data reaches a constructed program only through the `linux.read`/`linux.write` system calls and the
-  exit status. `xax_linux.linux_startup_api` (argv/env) exists upstream but is not reachable from the
-  `xax-construct-v1` carrier.
+- Runtime data reaches a constructed program through `linux.read`/`linux.write`, the exit status, and (since
+  `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183`, ADR-222) `linux.startup.*` argv/env/auxv reads in the entry function.
 - `xax_linux.run_linux_executable` is marked "test harness only" upstream, so XAX-MCP runs artifacts with its
   own sandbox instead.
 
