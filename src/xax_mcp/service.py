@@ -151,16 +151,43 @@ class Session:
         return value
 
 
+@dataclass(frozen=True)
+class WarmState:
+    """What a warm server (``warm.py``) computed once before forking: no rights and no client data."""
+    compatibility: Any
+    sandbox: Sandbox
+    warmup_ms: float
+
+
+def warm_state() -> WarmState:
+    """Check compatibility, probe the sandbox, and load the XAX components in this process."""
+    compatibility = compat.check()
+    if compatibility.status == "incompatible" or (compatibility.status == "untested" and not compat.allow_untested()):
+        raise RuntimeError(f"incompatible XAX toolchain: {compatibility.reason}")
+    sandbox = Sandbox()
+    sandbox.probe()
+    started = time.perf_counter()
+    from xax_construct import construct
+
+    construct(_WARMUP_PROGRAM)
+    return WarmState(compatibility, sandbox, (time.perf_counter() - started) * 1000)
+
+
 class Service:
-    def __init__(self, policy: Policy, sandbox: Sandbox | None = None):
+    def __init__(self, policy: Policy, sandbox: Sandbox | None = None, warm: WarmState | None = None):
         self.policy = policy
-        self.sandbox = sandbox or Sandbox()
-        self.compatibility = compat.check()
+        self.sandbox = sandbox or (warm.sandbox if warm else Sandbox())
+        self.compatibility = warm.compatibility if warm else compat.check()
         if self.compatibility.status == "incompatible" or (
                 self.compatibility.status == "untested" and not compat.allow_untested()):
             raise RuntimeError(f"incompatible XAX toolchain: {self.compatibility.reason}")
         self._ready = threading.Event()
         self.warmup_ms: float | None = None
+        # "warm-server": components were loaded before this process forked from the warm server.
+        self.started_from = "warm-server" if warm else "cold"
+        if warm:
+            self.warmup_ms = warm.warmup_ms
+            self._ready.set()
 
     def warm_up(self) -> None:
         """Load the XAX-hosted compiler components once (about 20 s cold on the reference host) by constructing the
@@ -201,6 +228,7 @@ class Service:
             "server": {"name": "xax-mcp", "version": __version__, "mcp_sdk": sdk, "transport": "stdio",
                        "adapter_language": "Python (bootstrap adapter; holds no workload logic)",
                        "xax_components_loaded": self._ready.is_set(),
+                       "started_from": self.started_from,
                        "warmup_ms": None if self.warmup_ms is None else round(self.warmup_ms)},
             "xax": {**self.compatibility.as_dict(), "compiler_identity": BOOTSTRAP_COMPILER_IDENTITY_V1.hex(),
                     "host_contract": {key: describe()[key] for key in ("contract", "minor", "formats")},

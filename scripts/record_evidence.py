@@ -1,6 +1,6 @@
 """Record end-to-end evidence for docs/evidence: versions, identities, results, limits and measured latencies.
 
-Usage: python scripts/record_evidence.py [--cold-cache] [--out docs/evidence/FILE.json]
+Usage: python scripts/record_evidence.py [--cold-cache] [--mode in-process|warm-server] [--out docs/evidence/FILE.json]
 
 Everything is measured through a real MCP STDIO client (the official SDK) against a freshly launched server.  The
 latencies are MCP tool round trips on one host: they are NOT XAX generated-code (R4) benchmarks and NOT the AI-token
@@ -16,6 +16,7 @@ import os
 import platform
 import secrets
 import statistics
+import subprocess
 import sys
 import tempfile
 import time
@@ -27,13 +28,22 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tests"))
 import programs  # noqa: E402
 
 
-async def record(cold_cache: bool) -> dict:
+async def record(cold_cache: bool, mode: str) -> dict:
     from mcp import Client
     from mcp.client.stdio import StdioServerParameters
 
-    env = {"XAX_MCP_LOG": "WARNING"}
+    env = {"XAX_MCP_LOG": "WARNING", "XAX_MCP_WARM_SERVER": "0"}
     if cold_cache:
         env["XAX_NATIVE_CACHE"] = tempfile.mkdtemp(prefix="xax-native-cold-")
+    prepare_ms = None
+    if mode == "warm-server":
+        # A private warm server, prepared first (as `xax-mcp --prepare` after install), then one measured launch.
+        warm_dir = tempfile.mkdtemp(prefix="xw-")
+        env.update({"XAX_MCP_WARM_SERVER": "1", "XAX_MCP_WARM_DIR": warm_dir, "XAX_MCP_WARM_IDLE_SECONDS": "30"})
+        started = time.perf_counter()
+        subprocess.run([sys.executable, "-m", "xax_mcp", "--prepare"], env={**os.environ, **env}, check=True,
+                       stdout=subprocess.DEVNULL)
+        prepare_ms = (time.perf_counter() - started) * 1000
     params = StdioServerParameters(command=sys.executable, args=["-m", "xax_mcp", "--allow-execute"], env=env)
     timings = {}
 
@@ -59,6 +69,7 @@ async def record(cold_cache: bool) -> dict:
                      "output": {"ints": ["b64", "b64"]}}
         run = await call(client, "xax_execute", arguments)
         cold_total_ms = (time.perf_counter() - first) * 1000
+        launch_to_first_result_ms = (time.perf_counter() - launched) * 1000
         for _ in range(20):
             await call(client, "xax_execute", arguments)
         warm_construct = await call(client, "xax_construct", {"request": programs.poly_reduce(a + 1, b, c)})
@@ -84,6 +95,9 @@ async def record(cold_cache: bool) -> dict:
                        "xax_native_components": art["provenance"]["xax_native_components"]},
         "measured_ms": {
             "native_cache": "cold (empty XAX_NATIVE_CACHE)" if cold_cache else "warm (existing XAX_NATIVE_CACHE)",
+            "server_mode": mode, "started_from": caps["server"].get("started_from"),
+            "warm_server_prepare": None if prepare_ms is None else round(prepare_ms, 1),
+            "launch_to_first_construct_build_execute": round(launch_to_first_result_ms, 1),
             "launch_and_initialize": round(initialize_ms, 1),
             "server_warmup_reported": caps_after["server"]["warmup_ms"],
             "first_construct_including_warmup_wait": round(first_construct_ms, 1),
@@ -100,9 +114,10 @@ async def record(cold_cache: bool) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--cold-cache", action="store_true")
+    parser.add_argument("--mode", choices=("in-process", "warm-server"), default="in-process")
     parser.add_argument("--out")
     args = parser.parse_args()
-    evidence = anyio.run(record, args.cold_cache)
+    evidence = anyio.run(record, args.cold_cache, args.mode)
     text = json.dumps(evidence, indent=2) + "\n"
     if args.out:
         Path(args.out).write_text(text)

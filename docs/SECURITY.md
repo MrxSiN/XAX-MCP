@@ -39,7 +39,7 @@ removes the temporary directory. At startup the server probes the sandbox and ch
 differ from its own, that the root holds only `prog`, and that `openat` is denied. If the probe fails, execution
 is refused with `sandbox_unavailable` and nothing runs unconfined.
 
-## Regression tests (`tests/test_security.py`, `tests/test_e2e_stdio.py`)
+## Regression tests (`tests/test_security.py`, `tests/test_e2e_stdio.py`, `tests/test_warm.py`)
 
 | Threat | Test |
 |---|---|
@@ -57,6 +57,22 @@ is refused with `sandbox_unavailable` and nothing runs unconfined.
 | arbitrary shell/Python | no such tool or code path; `test_construct_rejects_semantic_errors_with_diagnostics` rejects non-XAX operations |
 | STDOUT corruption | `test_stdout_carries_only_json_rpc` (fd 1 is redirected to stderr at startup) |
 
+## Warm server (`warm.py`, ADR-0008)
+
+- The socket lives in a directory that must be owned by the user and mode 0700 (`$XDG_RUNTIME_DIR/xax-mcp`, else
+  `~/.cache/xax-mcp/run`, or `XAX_MCP_WARM_DIR`); otherwise the launcher serves in-process and starts nothing. The
+  socket file is 0600 and the server also checks the peer uid with `SO_PEERCRED`.
+- Authority is unchanged: the forked child parses the launcher's own command line, exactly as an in-process
+  server would. The warm server itself holds no rights, no sessions, and no client data, and children do not share
+  memory with each other after the fork.
+- The warm server runs with a reduced environment (`PATH`, `HOME`, locale, temporary and XDG directories, and
+  `XAX_*`). Only `XAX_MCP_LOG` and `XAX_MCP_REQUIRE_SANDBOX` are forwarded per launch.
+- It forks only while single-threaded, accepts at most a 64 KiB launch header, and exactly three descriptors.
+- A child exits on STDIN EOF or when the launcher's connection closes, including when the launcher is killed
+  (`tests/test_warm.py::test_child_exits_when_its_launcher_dies`). Sandboxed programs still die with the child that
+  launched them (`PR_SET_PDEATHSIG`).
+- `--no-warm-server` or `XAX_MCP_WARM_SERVER=0` disables it.
+
 ## Audit
 
 Each tool call writes one JSON line to stderr: the tool, whether it succeeded, the error code, and the request
@@ -71,5 +87,7 @@ size. Payloads, inputs, outputs, and file contents are never logged.
   rlimits.
 - `execve` stays in the allowlist because the launcher needs it. Inside the chroot the only executable is the
   artifact itself.
+- The warm server stays resident until idle for `XAX_MCP_WARM_IDLE_SECONDS` (default 900), with about 800 MB
+  RSS at XAX `6c2df90`.
 - No HTTP transport is shipped. An HTTP deployment would need authentication, origin/host validation, TLS, and
   per-session isolation before it could be offered.

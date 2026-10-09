@@ -8,7 +8,16 @@
   3–4 minutes on the reference host, mostly XAX warm-up per launched server.
 - Evidence: `docs/evidence/` (record new runs with `scripts/record_evidence.py`; never overwrite old files).
 
-## State at 0.3.1 (2026-10-09)
+## State at 0.4.0 (2026-10-09)
+- Per-user warm server (ADR-0008, `src/xax_mcp/warm.py`): launches fork from a process with XAX loaded. Launch to
+  first construct+build+execute: 0.2 s (0.3.1: 6.7 s). `xax-mcp --prepare` pays the XAX load at install time.
+- In-process path: imports finish before the warm-up thread starts, so `initialize` takes 1.0 s (was 5.3 s).
+- 49 tests on Python 3.11 and 3.13 (`tests/test_warm.py` adds 8). Evidence: `docs/evidence/*-0.4.0.json`;
+  summary in `docs/PERFORMANCE.md`.
+- The rest of the first-start cost is upstream (P6–P8 in UPSTREAM_PROPOSALS.md). This session could not change
+  `MrxSiN/XAX` (no write access), so they are proposals with measurements, not patches.
+
+## State at 0.3.1 (2026-10-09, historical)
 - Pins XAX `6c2df90` (`main`; host contract r2 unchanged). Pin bump only: no adapter code changed. 41/41 tests on
   Python 3.11 and 3.13; the fingerprint from a git install matches a local checkout.
 - One warm-cache sample: first construct+build+execute 1.4 s (0.3.0: 3.7 s); one cold sample: 41.7 s (0.3.0: 47.6 s).
@@ -29,7 +38,8 @@
   to ADR-225 on `main`; the commit message itself says 221 to 224.
 
 ## Next steps, in order of leverage
-1. Cold image-cache start is still about 40 s (every component image is lowered once).
+1. Upstream P6–P8 (UPSTREAM_PROPOSALS.md): lazily zeroed buffers, one-call hashing over 1 MiB, parallel or
+   prebuilt component images. They shorten `--prepare`, the in-process path, and the warm server's memory.
 2. Record a model-driven Codex or Claude Code session with authenticated accounts and add it to
    COMPATIBILITY.md.
 3. When XAX exposes libraries (strings, JSON) through the carrier, add a capability and a gap test that fails

@@ -43,11 +43,13 @@ jobs:
           XAX_SOURCE_DIR: ${{ github.workspace }}/upstream-xax
         run: .venv/bin/python -m pytest -q -rs
       - name: Record evidence (artifact only; committed evidence is curated by hand)
-        run: .venv/bin/python scripts/record_evidence.py --cold-cache --out evidence.json
+        run: |
+          .venv/bin/python scripts/record_evidence.py --cold-cache --out evidence.json
+          .venv/bin/python scripts/record_evidence.py --mode warm-server --out evidence-warm-server.json
       - uses: actions/upload-artifact@v4
         with:
           name: evidence-py${{ matrix.python }}
-          path: evidence.json
+          path: evidence*.json
 
   clean-install:
     runs-on: ubuntu-24.04

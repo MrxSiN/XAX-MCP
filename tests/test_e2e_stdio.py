@@ -29,7 +29,7 @@ def server_params(*extra: str):
     from mcp.client.stdio import StdioServerParameters
 
     return StdioServerParameters(command=sys.executable, args=["-m", "xax_mcp", "--allow-execute", *extra],
-                                 env={"XAX_MCP_LOG": "WARNING"})
+                                 env={"XAX_MCP_LOG": "WARNING", "XAX_MCP_WARM_SERVER": "0"})
 
 
 async def call(client, name, arguments=None):

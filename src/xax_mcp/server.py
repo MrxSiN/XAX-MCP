@@ -144,7 +144,34 @@ def build_server(app: App):
                   on_list_tools=list_tools, on_call_tool=call_tool)
 
 
-def main(argv: list[str] | None = None) -> int:
+def preload() -> None:
+    """Import everything a server needs before its first message (used by the warm server before it forks)."""
+    import anyio  # noqa: F401
+    import jsonschema  # noqa: F401
+    import mcp_types  # noqa: F401
+    from mcp.server.lowlevel import Server  # noqa: F401
+    from mcp.server.stdio import stdio_server  # noqa: F401
+
+    from . import schemas  # noqa: F401
+
+
+def _via_warm_server(argv: list[str]) -> int | None:
+    """Hand this launch to the per-user warm server when one is ready (see warm.py); None: serve in-process."""
+    if any(flag in argv for flag in ("--check", "--version", "--prepare", "-h", "--help", "--no-warm-server")):
+        return None
+    from . import warm
+
+    if not warm.enabled():
+        return None
+    return warm.launch(argv)
+
+
+def main(argv: list[str] | None = None, warm=None) -> int:
+    """Entry point.  ``warm`` is set only inside a child forked by the warm server (``warm.py``)."""
+    if warm is None:
+        launched = _via_warm_server(sys.argv[1:] if argv is None else list(argv))
+        if launched is not None:
+            return launched
     from .policy import from_args, parser
 
     args = parser().parse_args(argv)
@@ -154,6 +181,18 @@ def main(argv: list[str] | None = None) -> int:
         from . import compat
 
         print(json.dumps({"xax-mcp": __version__, "pinned_xax_commit": compat.PINNED_XAX_COMMIT}))
+        return 0
+    if args.prepare:
+        from . import warm
+
+        if not warm.enabled():
+            print(json.dumps({"warm_server": "disabled"}))
+            return 1
+        try:
+            print(json.dumps(warm.prepare()))
+        except (OSError, TimeoutError) as error:
+            log.error("%s", error)
+            return 1
         return 0
     policy = from_args(args)
     from .service import Service
@@ -170,11 +209,13 @@ def main(argv: list[str] | None = None) -> int:
         return 0 if report["xax"]["status"] == "tested" and probe.available else 1
     protocol_out = _isolate_stdout()
     try:
-        service = Service(policy)
+        service = Service(policy, warm=warm)
     except RuntimeError as error:
         log.error("%s", error)
         return 2
-    threading.Thread(target=service.warm_up, name="xax-warmup", daemon=True).start()
+    if warm is None:
+        preload()  # finish the server's own imports first, so initialize never waits behind the warm-up's imports
+        threading.Thread(target=service.warm_up, name="xax-warmup", daemon=True).start()
     probe = service.sandbox.probe()
     log.info("starting: rights=%s sandbox=%s%s", sorted(policy.rights), probe.available,
              "" if probe.available else f" ({probe.reason})")

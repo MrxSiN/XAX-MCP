@@ -8,6 +8,9 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+# Servers launched by tests run in-process unless a test opts into the warm server (tests/test_warm.py).
+os.environ["XAX_MCP_WARM_SERVER"] = "0"
+
 ALL_RIGHTS = frozenset({"read", "mutate", "build", "execute"})
 
 

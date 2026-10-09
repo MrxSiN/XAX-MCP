@@ -55,6 +55,10 @@ def parser() -> argparse.ArgumentParser:
     p.add_argument("--max-request-bytes", type=int, default=1024 * 1024)
     p.add_argument("--check", action="store_true", help="print compatibility and sandbox status as JSON and exit")
     p.add_argument("--version", action="store_true", help="print version information and exit")
+    p.add_argument("--prepare", action="store_true",
+                   help="start the per-user warm server, wait until the XAX components are loaded, and exit")
+    p.add_argument("--no-warm-server", action="store_true",
+                   help="serve in this process instead of forking from the per-user warm server (see docs/PERFORMANCE.md)")
     return p
 
 

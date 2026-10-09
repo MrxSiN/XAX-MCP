@@ -69,3 +69,8 @@ verifier, ...). With XAX `01ad841` this took about 25 s with a populated `XAX_NA
 3 s. With an empty cache, every component image is still lowered once (about 50 s). The server starts this
 warm-up in a background thread at launch, and tool calls that reach XAX wait for it. Later calls take tens of
 milliseconds ([evidence](evidence)).
+
+Since 0.4.0 a launch normally skips all of this: `xax-mcp` hands its STDIO descriptors to a per-user warm server
+that has already loaded the components, and a forked child serves the client
+([ADR-0008](adr/0008-per-user-warm-server.md), [PERFORMANCE.md](PERFORMANCE.md)). Without a ready warm server the
+launch serves in-process as described above and starts one for later launches.
