@@ -27,8 +27,8 @@ acknowledgement keeps its descriptors and serves in-process.
 
 **Consequences.** With a prepared warm server, launch-to-initialize is about 0.1 s and launch to the first
 construct+build+execute result about 0.2 s (was about 6.7 s at 0.3.1), independent of the XAX image cache.
-The warm server stays resident (about 800 MB RSS at XAX `6c2df90`, most of it XAX's eagerly zeroed buffers; see
-P6) until it has been idle for the timeout. Children share its pages copy-on-write. The children are not
+The warm server stays resident (about 800 MB RSS at XAX `6c2df90`, most of it XAX's eagerly zeroed buffers; about
+100 MB at `13a6843`, after XAX ADR-248) until it has been idle for the timeout. Children share its pages copy-on-write. The children are not
 descendants of the host process; their lifetime is tied to the launcher through the socket instead.
 Considered and rejected: snapshotting XAX's in-memory state (it holds executable mappings and is not
 serializable), and a long-lived shared server that multiplexes clients (it would share memory between clients).

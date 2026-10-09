@@ -12,7 +12,7 @@ Launch flags (the host owner's policy):
 | `--store-root DIR` | allow opening `.xax` stores under DIR by relative name (repeatable) |
 | `--wall-ms`, `--cpu-seconds`, `--memory-mb`, `--max-output-bytes`, `--max-request-bytes` | limits (tools can only lower them) |
 | `--check` | print compatibility and sandbox status, then exit |
-| `--prepare` | start the per-user warm server and wait until XAX is loaded (run once after installing) |
+| `--prepare` | ready XAX's component images (`xax_native.prepare`, in parallel), then start the per-user warm server and wait until XAX is loaded (run once after installing) |
 | `--no-warm-server` | serve in this process instead of forking from the warm server |
 
 Environment variables: `XAX_MCP_LOG` (log level on stderr), `XAX_NATIVE_CACHE` (XAX's component image cache;
@@ -54,7 +54,7 @@ codex mcp remove xax
 Then add the timeouts from [`examples/hosts/codex-config.toml`](../examples/hosts/codex-config.toml) to the
 `[mcp_servers.xax]` table in `~/.codex/config.toml`. Run `"$XAX" --prepare` once after installing: launches then
 fork from the warm server and answer in about 0.2 s. Without it, the first launch waits for the XAX component
-warm-up (about 3 s with a warm `XAX_NATIVE_CACHE`, about 43 s with an empty one), which can exceed Codex's default
+warm-up (about 0.4 s with a warm `XAX_NATIVE_CACHE`, about 42 s with an empty one), which can exceed Codex's default
 tool timeout.
 
 ## Generic clients

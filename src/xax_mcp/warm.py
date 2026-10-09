@@ -186,7 +186,7 @@ def _spawn(directory: Path, server_key: str) -> None:
 
 
 def prepare(timeout: float = 900.0) -> dict:
-    """Start the warm server (loading, and on first use lowering, every XAX component) and wait until it is ready."""
+    """Start the warm server (it loads every XAX component through ``xax_native.prepare``) and wait until it is ready."""
     directory = _state_dir()
     server_key = key()
     path = socket_path(directory, server_key)

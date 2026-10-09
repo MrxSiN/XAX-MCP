@@ -4,4 +4,4 @@ The adapter is Python (bootstrap); XAX (https://github.com/MrxSiN/XAX, pinned in
 authority for semantics, verification, compilation and targets.
 """
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"

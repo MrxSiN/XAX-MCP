@@ -155,6 +155,38 @@ def preload() -> None:
     from . import schemas  # noqa: F401
 
 
+def _prepare() -> int:
+    """``--prepare``: lower every missing XAX component image into XAX's image cache (``xax_native.prepare``, in
+    parallel child processes), then start the per-user warm server and wait until it has loaded them."""
+    import time
+
+    from . import compat, warm
+
+    compatibility = compat.check()
+    if compatibility.status == "incompatible" or (compatibility.status == "untested" and not compat.allow_untested()):
+        log.error("incompatible XAX toolchain: %s", compatibility.reason)
+        return 2
+    from xax_native import prepare
+
+    started = time.perf_counter()
+    prepared = prepare(parallel=True)
+    report = {"xax_components": {name: result["status"] for name, result in prepared.items()},
+              "prepare_ms": round((time.perf_counter() - started) * 1000)}
+    failed = sorted(name for name, result in prepared.items() if result["status"] == "failed")
+    if failed:
+        log.error("XAX could not prepare %s: %s", ", ".join(failed), "; ".join(prepared[name].get("reason", "") for name in failed))
+    if not warm.enabled():
+        print(json.dumps({**report, "warm_server": "disabled"}))
+        return 1 if failed else 0
+    try:
+        report.update(warm.prepare())
+    except (OSError, TimeoutError) as error:
+        log.error("%s", error)
+        return 1
+    print(json.dumps(report))
+    return 1 if failed else 0
+
+
 def _via_warm_server(argv: list[str]) -> int | None:
     """Hand this launch to the per-user warm server when one is ready (see warm.py); None: serve in-process."""
     if any(flag in argv for flag in ("--check", "--version", "--prepare", "-h", "--help", "--no-warm-server")):
@@ -183,17 +215,7 @@ def main(argv: list[str] | None = None, warm=None) -> int:
         print(json.dumps({"xax-mcp": __version__, "pinned_xax_commit": compat.PINNED_XAX_COMMIT}))
         return 0
     if args.prepare:
-        from . import warm
-
-        if not warm.enabled():
-            print(json.dumps({"warm_server": "disabled"}))
-            return 1
-        try:
-            print(json.dumps(warm.prepare()))
-        except (OSError, TimeoutError) as error:
-            log.error("%s", error)
-            return 1
-        return 0
+        return _prepare()
     policy = from_args(args)
     from .service import Service
 

@@ -8,7 +8,16 @@
   3–4 minutes on the reference host, mostly XAX warm-up per launched server.
 - Evidence: `docs/evidence/` (record new runs with `scripts/record_evidence.py`; never overwrite old files).
 
-## State at 0.4.0 (2026-10-09)
+## State at 0.5.0 (2026-10-09)
+- Pins XAX `13a6843` (`main`; host contract r3, ADR-250). The warm server, `--prepare` and the in-process warm-up
+  call `xax_native.prepare` instead of constructing a warm-up carrier; `xax_capabilities` reports each component's
+  status under `server.xax_components`.
+- Upstream did P6–P8 (ADR-248 to ADR-250). Launch to first result: in-process 1.3 s with a populated image cache
+  (0.4.0: 3.1 s); warm server 0.18 s. Empty-cache `--prepare`: 24.4 s (0.4.0: 43.5 s). Warm server RSS about
+  100 MB (0.4.0: about 800 MB). 49/49 tests on Python 3.11 and 3.13. Evidence: `docs/evidence/*-0.5.0.json`.
+- Remaining: the in-process path with an empty cache is still sequential (about 42 s); see PERFORMANCE.md.
+
+## State at 0.4.0 (2026-10-09, historical)
 - Per-user warm server (ADR-0008, `src/xax_mcp/warm.py`): launches fork from a process with XAX loaded. Launch to
   first construct+build+execute: 0.2 s (0.3.1: 6.7 s). `xax-mcp --prepare` pays the XAX load at install time.
 - In-process path: imports finish before the warm-up thread starts, so `initialize` takes 1.0 s (was 5.3 s).

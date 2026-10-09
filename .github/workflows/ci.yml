@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  XAX_COMMIT: 6c2df90b5972dcf6f44ae6d32f828f355d30d2de
+  XAX_COMMIT: 13a6843200c42f319ede02968773031fe6bca55f
 
 jobs:
   test:

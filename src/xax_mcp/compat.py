@@ -20,11 +20,12 @@ XAX_DISTRIBUTION_VERSION = "0.1.0"
 # Tested pins: commit -> sha256 fingerprint of the installed toolchain files (see ``toolchain_fingerprint``).
 # 0.1.0 tested 01ad841c76416fc741dd1386b12124904924c10d (fingerprint 2d5b1f3b...), which predates xax_contract;
 # 0.2.0 tested f38cbeea2b90e9b6a580417ce7efaa7d3d75a183 (fingerprint cdf3e586...), host contract r1;
-# 0.3.0 tested b0ec772a954a6b7932c6e3c1d44794c036a9b7ab (fingerprint 636b268c...), host contract r2.
+# 0.3.0 tested b0ec772a954a6b7932c6e3c1d44794c036a9b7ab (fingerprint 636b268c...), host contract r2;
+# 0.3.1 and 0.4.0 tested 6c2df90b5972dcf6f44ae6d32f828f355d30d2de (fingerprint 41d0f5d6...), host contract r2.
 TESTED_XAX = {
-    "6c2df90b5972dcf6f44ae6d32f828f355d30d2de": "41d0f5d652756096522a7dfa8e1b04908a9849203daab50be5db3f650199eb96",
+    "13a6843200c42f319ede02968773031fe6bca55f": "bd0c1ef65d041924e4d524ff8f98c8c0afc2434ebd8dc758f6cf2021d7433c19",
 }
-PINNED_XAX_COMMIT = "6c2df90b5972dcf6f44ae6d32f828f355d30d2de"
+PINNED_XAX_COMMIT = "13a6843200c42f319ede02968773031fe6bca55f"
 # Upstream interfaces this adapter consumes (within xax-host-contract-v1; see docs/XAX_CONTRACT.md).
 REQUIRED_API = {
     "xax_construct": ("construct", "FORMAT"),
@@ -37,11 +38,13 @@ REQUIRED_API = {
     "xax_linux": ("linux_api",),
     "xax_artifact": ("BOOTSTRAP_COMPILER_IDENTITY_V1",),
     "xax_contract": ("HOST_CONTRACT", "HOST_CONTRACT_MINOR", "describe", "missing"),
+    "xax_native": ("prepare", "PREPARE_COMPONENTS"),
 }
 # The upstream host contract this release consumes (xax_contract, ADR-225) and the oldest minor revision it needs:
-# r2 (ADR-231) adds checked accesses of 1/2/4/8 bytes on bits<8> views, which carriers may now rely on.
+# r2 (ADR-231) adds checked accesses of 1/2/4/8 bytes on bits<8> views, which carriers may now rely on;
+# r3 (ADR-250) adds xax_native.prepare, which the warm server and --prepare use to ready the XAX components.
 HOST_CONTRACT = "xax-host-contract-v1"
-HOST_CONTRACT_MINOR = 2
+HOST_CONTRACT_MINOR = 3
 ALLOW_UNPINNED_ENV = "XAX_MCP_ALLOW_UNTESTED_XAX"
 
 

@@ -2,13 +2,22 @@
 
 | xax-mcp | XAX commit | XAX toolchain fingerprint (sha256) | mcp SDK | Python | OS / arch | Result |
 |---|---|---|---|---|---|---|
+| 0.5.0 | `13a6843200c42f319ede02968773031fe6bca55f` (2026-10-09; host contract `xax-host-contract-v1` r3) | `bd0c1ef65d041924e4d524ff8f98c8c0afc2434ebd8dc758f6cf2021d7433c19` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 49/49 tests pass on both, sandbox required |
 | 0.4.0 | `6c2df90b5972dcf6f44ae6d32f828f355d30d2de` (2026-10-09; host contract `xax-host-contract-v1` r2) | `41d0f5d652756096522a7dfa8e1b04908a9849203daab50be5db3f650199eb96` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 49/49 tests pass on both, sandbox required |
 | 0.3.1 | `6c2df90b5972dcf6f44ae6d32f828f355d30d2de` (2026-10-09; host contract `xax-host-contract-v1` r2) | `41d0f5d652756096522a7dfa8e1b04908a9849203daab50be5db3f650199eb96` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 41/41 tests pass on both, sandbox required |
 | 0.3.0 | `b0ec772a954a6b7932c6e3c1d44794c036a9b7ab` (2026-10-08; host contract `xax-host-contract-v1` r2) | `636b268c755e16e5cba71022ac1847f5dc0c96471e4a81b49853f035f13224ee` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 41/41 tests pass on both, sandbox required |
 | 0.2.0 | `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183` (2026-10-08; host contract `xax-host-contract-v1` r1) | `cdf3e5868810fb47884391cbe60fe7c79589ca8c0d14979644223f1dce012a7b` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 38/38 tests pass on both, sandbox required |
 | 0.1.0 | `01ad841c76416fc741dd1386b12124904924c10d` (2026-10-08) | `2d5b1f3be0c6c40f394a1e6a109239d38e2b9abc2634b02fbb21cffae172392f` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 36/36 tests pass on both, sandbox required |
 
-Declared support for 0.4.0: the same as 0.3.1 (no upstream change; the warm server uses only the existing
+Declared support for 0.5.0: exactly `13a6843` (XAX `main`), with `xax-host-contract-v1` at revision ≥ 3, because the
+warm server, `--prepare` and the in-process warm-up call `xax_native.prepare` (ADR-250) instead of constructing a
+warm-up carrier. The 5 upstream commits since `6c2df90` are S8c.28 and S8c.29 (ADR-246, ADR-247: more typing
+rejections decided by XAX-hosted programs) and P6–P8 (ADR-248 to ADR-250: lazily zeroed views, one-call BLAKE3 up to
+16 MiB, `xax_native.prepare`). The BLAKE3 hash store changed (ADR-249), so the first start after upgrading re-lowers
+that image and re-verifies the component stores once. XAX commits before r3, including 0.4.0's `6c2df90`, are now
+`incompatible` (install xax-mcp 0.4.0 to use them).
+
+Declared support for 0.4.0 (historical): the same as 0.3.1 (no upstream change; the warm server uses only the existing
 interfaces).
 
 Declared support for 0.3.1: exactly `6c2df90` (XAX `main`), with `xax-host-contract-v1` at revision ≥ 2. The 14 upstream

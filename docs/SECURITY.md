@@ -87,7 +87,7 @@ size. Payloads, inputs, outputs, and file contents are never logged.
   rlimits.
 - `execve` stays in the allowlist because the launcher needs it. Inside the chroot the only executable is the
   artifact itself.
-- The warm server stays resident until idle for `XAX_MCP_WARM_IDLE_SECONDS` (default 900), with about 800 MB
-  RSS at XAX `6c2df90`.
+- The warm server stays resident until idle for `XAX_MCP_WARM_IDLE_SECONDS` (default 900), with about 100 MB
+  RSS at XAX `13a6843` (about 800 MB at `6c2df90`, before XAX ADR-248).
 - No HTTP transport is shipped. An HTTP deployment would need authentication, origin/host validation, TLS, and
   per-session isolation before it could be offered.

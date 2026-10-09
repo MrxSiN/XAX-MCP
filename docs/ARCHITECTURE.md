@@ -66,8 +66,11 @@ Tables are bounded (16 workspaces, 64 artifacts, 64 results, oldest evicted firs
 On the first verification in a process, XAX loads its XAX-hosted compiler components (typing program, store
 verifier, ...). With XAX `01ad841` this took about 25 s with a populated `XAX_NATIVE_CACHE`. Since `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183`
 (upstream ADR-222) the components' stores are verified once per store and compiler version, so it takes about
-3 s. With an empty cache, every component image is still lowered once (about 50 s). The server starts this
-warm-up in a background thread at launch, and tool calls that reach XAX wait for it. Later calls take tens of
+3 s, and since `13a6843` (ADR-248 to ADR-250) about 0.4 s. With an empty cache, every component image is still
+lowered once (about 42 s in sequence). Since 0.5.0 the server loads the components through the host contract,
+`xax_native.prepare()` (r3), in a background thread at launch, and tool calls that reach XAX wait for it. The warm
+server and `--prepare` first call `xax_native.prepare(parallel=True)`, which lowers missing images in child
+processes (about 24 s with an empty cache). Later calls take tens of
 milliseconds ([evidence](evidence)).
 
 Since 0.4.0 a launch normally skips all of this: `xax-mcp` hands its STDIO descriptors to a per-user warm server

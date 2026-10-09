@@ -30,12 +30,6 @@ SUPPORTED_EFFECTS = ("stdio",)
 KNOWN_EFFECTS = ("stdio", "filesystem.read", "filesystem.write", "network", "process", "environment", "clock")
 _MUTATION_TOKEN = r"[A-Za-z@][A-Za-z0-9.@_-]{0,63}"
 _BUILD_SLOTS = threading.BoundedSemaphore(2)
-# Warm-up carrier: a process entry that only exits.  Not a workload; its result is discarded.
-_WARMUP_PROGRAM = {
-    "format": "xax-construct-v1", "platform": "linux-x86_64", "types": {"proc": "linux.process_effect"},
-    "functions": [{"name": "main", "params": ["proc"], "returns": ["b32", "proc"], "blocks": [{"params": ["proc"], "nodes": [
-        ["call.foreign", [["b32", 0], "p0"], ["proc"], {"entity": "linux.exit_group"}]], "end": ["ret", [["b32", 0], "n0"]]}]}],
-    "package": {"name": "warmup", "entries": {"app": "main"}, "release": "app"}}
 
 
 def to_json(value: Any) -> Any:
@@ -151,12 +145,27 @@ class Session:
         return value
 
 
+def prepare_components(parallel: bool) -> dict[str, str]:
+    """Ready the XAX-hosted compiler components through the host contract (``xax_native.prepare``, ADR-250).
+
+    ``parallel``: first lower every image missing from XAX's image cache in child processes (about 25 s instead of
+    about 45 s with an empty cache; about 1 s when every image is cached).  Then load every component into this
+    process, from the cache.  Returns ``{component: status}`` of the in-process load; a component XAX cannot load
+    natively is reported, not raised (XAX then decides with its Python bootstrap)."""
+    from xax_native import prepare
+
+    if parallel:
+        prepare(parallel=True)
+    return {name: result["status"] for name, result in prepare().items()}
+
+
 @dataclass(frozen=True)
 class WarmState:
     """What a warm server (``warm.py``) computed once before forking: no rights and no client data."""
     compatibility: Any
     sandbox: Sandbox
     warmup_ms: float
+    components: dict[str, str]
 
 
 def warm_state() -> WarmState:
@@ -167,10 +176,8 @@ def warm_state() -> WarmState:
     sandbox = Sandbox()
     sandbox.probe()
     started = time.perf_counter()
-    from xax_construct import construct
-
-    construct(_WARMUP_PROGRAM)
-    return WarmState(compatibility, sandbox, (time.perf_counter() - started) * 1000)
+    components = prepare_components(parallel=True)
+    return WarmState(compatibility, sandbox, (time.perf_counter() - started) * 1000, components)
 
 
 class Service:
@@ -183,21 +190,21 @@ class Service:
             raise RuntimeError(f"incompatible XAX toolchain: {self.compatibility.reason}")
         self._ready = threading.Event()
         self.warmup_ms: float | None = None
+        self.components: dict[str, str] | None = None
         # "warm-server": components were loaded before this process forked from the warm server.
         self.started_from = "warm-server" if warm else "cold"
         if warm:
             self.warmup_ms = warm.warmup_ms
+            self.components = warm.components
             self._ready.set()
 
     def warm_up(self) -> None:
-        """Load the XAX-hosted compiler components once (about 20 s cold on the reference host) by constructing the
-        smallest valid process (it only calls exit_group).  Tool calls that reach XAX wait for this to finish, so the
-        native component loaders never race."""
+        """Load the XAX-hosted compiler components once (``xax_native.prepare``; about 0.4 s from a populated XAX
+        image cache, about 45 s from an empty one).  Tool calls that reach XAX wait for this to finish, so the native
+        component loaders never race."""
         started = time.perf_counter()
         try:
-            from xax_construct import construct
-
-            construct(_WARMUP_PROGRAM)
+            self.components = prepare_components(parallel=False)
         finally:
             self.warmup_ms = (time.perf_counter() - started) * 1000
             self._ready.set()
@@ -229,7 +236,8 @@ class Service:
                        "adapter_language": "Python (bootstrap adapter; holds no workload logic)",
                        "xax_components_loaded": self._ready.is_set(),
                        "started_from": self.started_from,
-                       "warmup_ms": None if self.warmup_ms is None else round(self.warmup_ms)},
+                       "warmup_ms": None if self.warmup_ms is None else round(self.warmup_ms),
+                       "xax_components": self.components},
             "xax": {**self.compatibility.as_dict(), "compiler_identity": BOOTSTRAP_COMPILER_IDENTITY_V1.hex(),
                     "host_contract": {key: describe()[key] for key in ("contract", "minor", "formats")},
                     "compiler_implementation": "XAX bootstrap compiler (Python, with XAX-hosted components where native)"},

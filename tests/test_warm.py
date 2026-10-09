@@ -65,7 +65,13 @@ def warm_dir():
     prepared = subprocess.run([sys.executable, "-m", "xax_mcp", "--prepare"], env=_env(directory), capture_output=True,
                               timeout=900)
     assert prepared.returncode == 0, prepared.stderr.decode()[-2000:]
-    assert json.loads(prepared.stdout)["warm_server"] == "ready"
+    report = json.loads(prepared.stdout)
+    assert report["warm_server"] == "ready"
+    # Through the host contract (xax_native.prepare, ADR-250): every component XAX names, each readied or reported.
+    from xax_native import PREPARE_COMPONENTS
+
+    assert set(report["xax_components"]) == set(PREPARE_COMPONENTS)
+    assert set(report["xax_components"].values()) <= {"cached", "lowered", "unavailable"}
     yield directory
     for pid in _warm_pids(directory):
         os.kill(pid, signal.SIGTERM)
@@ -94,6 +100,7 @@ def test_launches_fork_from_the_warm_server_with_isolated_sessions_and_their_own
         async with Client(_params(warm_dir, "--allow-execute"), read_timeout_seconds=600) as first:
             caps = await _call(first, "xax_capabilities")
             assert caps["server"]["started_from"] == "warm-server" and caps["server"]["xax_components_loaded"]
+            assert set(caps["server"]["xax_components"].values()) <= {"cached", "loaded", "unavailable"}
             assert caps["xax"]["status"] == "tested" and "execute" in caps["authority"]["rights"]
             built = await _call(first, "xax_construct", {"request": programs.poly_reduce(a, b, c)})
             artifact = await _call(first, "xax_build", {"workspace": built["workspace"]})
