@@ -24,6 +24,7 @@ and the executable from 1,668 to 647 bytes. Results are identical
 
 ## Remaining upstream cold-start cost
 With an empty `XAX_NATIVE_CACHE`, every component image is still lowered once (about 50 s on the reference
-host). With a warm cache, first construct took 2.7 s at `f38cbee` and about 3.5 s at `b0ec772`. The time goes
+host; one 0.3.1 sample at `6c2df90` took 41.7 s). With a warm cache, first construct took 2.7 s at `f38cbee`, about 3.5 s at
+`b0ec772`, and 1.3 s in one sample at `6c2df90`. The time goes
 to the native store verifier's table setup and BLAKE3 CID checks over the typing store, which grew with upstream
 S8c.9–S8c.13. P4 did not cause it.

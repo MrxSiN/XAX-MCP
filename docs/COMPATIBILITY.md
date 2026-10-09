@@ -2,11 +2,17 @@
 
 | xax-mcp | XAX commit | XAX toolchain fingerprint (sha256) | mcp SDK | Python | OS / arch | Result |
 |---|---|---|---|---|---|---|
+| 0.3.1 | `6c2df90b5972dcf6f44ae6d32f828f355d30d2de` (2026-10-09; host contract `xax-host-contract-v1` r2) | `41d0f5d652756096522a7dfa8e1b04908a9849203daab50be5db3f650199eb96` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 41/41 tests pass on both, sandbox required |
 | 0.3.0 | `b0ec772a954a6b7932c6e3c1d44794c036a9b7ab` (2026-10-08; host contract `xax-host-contract-v1` r2) | `636b268c755e16e5cba71022ac1847f5dc0c96471e4a81b49853f035f13224ee` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 41/41 tests pass on both, sandbox required |
 | 0.2.0 | `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183` (2026-10-08; host contract `xax-host-contract-v1` r1) | `cdf3e5868810fb47884391cbe60fe7c79589ca8c0d14979644223f1dce012a7b` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 38/38 tests pass on both, sandbox required |
 | 0.1.0 | `01ad841c76416fc741dd1386b12124904924c10d` (2026-10-08) | `2d5b1f3be0c6c40f394a1e6a109239d38e2b9abc2634b02fbb21cffae172392f` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 36/36 tests pass on both, sandbox required |
 
-Declared support for 0.3.0: exactly `b0ec772` (XAX `main`), and XAX must provide `xax-host-contract-v1` at
+Declared support for 0.3.1: exactly `6c2df90` (XAX `main`), with `xax-host-contract-v1` at revision ≥ 2. The 14 upstream
+commits since `b0ec772` (S8c.14 to S8c.27, ADR-232 to ADR-245) move verifier and typing rejections into XAX-hosted
+programs; they change no host-contract name or format, and no XAX-MCP code changed. 0.3.0's pin `b0ec772` now reports
+`untested` under 0.3.1 (set `XAX_MCP_ALLOW_UNTESTED_XAX=1` or install xax-mcp 0.3.0 to use it).
+
+Declared support for 0.3.0 (historical): exactly `b0ec772` (XAX `main`), and XAX must provide `xax-host-contract-v1` at
 revision ≥ 2, because carriers now use byte-view widening (ADR-231). Earlier XAX commits are `incompatible`.
 
 Declared support for 0.2.0 (historical): exactly `f38cbee`, and XAX must provide `xax-host-contract-v1` at revision ≥ 1

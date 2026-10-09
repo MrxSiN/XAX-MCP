@@ -19,11 +19,12 @@ XAX_DISTRIBUTION = "xax-compiler"
 XAX_DISTRIBUTION_VERSION = "0.1.0"
 # Tested pins: commit -> sha256 fingerprint of the installed toolchain files (see ``toolchain_fingerprint``).
 # 0.1.0 tested 01ad841c76416fc741dd1386b12124904924c10d (fingerprint 2d5b1f3b...), which predates xax_contract;
-# 0.2.0 tested f38cbeea2b90e9b6a580417ce7efaa7d3d75a183 (fingerprint cdf3e586...), host contract r1.
+# 0.2.0 tested f38cbeea2b90e9b6a580417ce7efaa7d3d75a183 (fingerprint cdf3e586...), host contract r1;
+# 0.3.0 tested b0ec772a954a6b7932c6e3c1d44794c036a9b7ab (fingerprint 636b268c...), host contract r2.
 TESTED_XAX = {
-    "b0ec772a954a6b7932c6e3c1d44794c036a9b7ab": "636b268c755e16e5cba71022ac1847f5dc0c96471e4a81b49853f035f13224ee",
+    "6c2df90b5972dcf6f44ae6d32f828f355d30d2de": "41d0f5d652756096522a7dfa8e1b04908a9849203daab50be5db3f650199eb96",
 }
-PINNED_XAX_COMMIT = "b0ec772a954a6b7932c6e3c1d44794c036a9b7ab"
+PINNED_XAX_COMMIT = "6c2df90b5972dcf6f44ae6d32f828f355d30d2de"
 # Upstream interfaces this adapter consumes (within xax-host-contract-v1; see docs/XAX_CONTRACT.md).
 REQUIRED_API = {
     "xax_construct": ("construct", "FORMAT"),

@@ -1,7 +1,7 @@
 # The XAX interfaces this adapter consumes
 
 Since commit `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183`, XAX publishes a versioned integration surface: `xax_contract`
-(`xax-host-contract-v1`, ADR-225). XAX-MCP 0.3.0 requires that contract at revision ≥ 2 (r2, ADR-231:
+(`xax-host-contract-v1`, ADR-225). XAX-MCP 0.3.0 and 0.3.1 require that contract at revision ≥ 2 (r2, ADR-231:
 `FORMATS["checked_byte_view_widths"] = [1, 2, 4, 8]`, which `xax_capabilities` reports as
 `targets[0].checked_byte_view_widths`); 0.2.0 required revision ≥ 1, checks
 `xax_contract.missing()` at startup, and uses only names from it (`compat.REQUIRED_API`). XAX-MCP 0.1.0 pinned

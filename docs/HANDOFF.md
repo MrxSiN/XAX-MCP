@@ -8,7 +8,13 @@
   3–4 minutes on the reference host, mostly XAX warm-up per launched server.
 - Evidence: `docs/evidence/` (record new runs with `scripts/record_evidence.py`; never overwrite old files).
 
-## State at 0.3.0 (2026-10-08)
+## State at 0.3.1 (2026-10-09)
+- Pins XAX `6c2df90` (`main`; host contract r2 unchanged). Pin bump only: no adapter code changed. 41/41 tests on
+  Python 3.11 and 3.13; the fingerprint from a git install matches a local checkout.
+- One warm-cache sample: first construct+build+execute 1.4 s (0.3.0: 3.7 s); one cold sample: 41.7 s (0.3.0: 47.6 s).
+  Single runs on one host; `docs/evidence/*-0.3.1.json`.
+
+## State at 0.3.0 (2026-10-08, historical)
 - Pins XAX `b0ec772` (`main`; host contract r2, ADR-231 byte-view widening). Test carriers read and write u64s
   with one checked access. `xax_capabilities` reports `checked_byte_view_widths`. 41 tests in about 53 s on
   Python 3.11 and 3.13.
@@ -23,13 +29,12 @@
   to ADR-225 on `main`; the commit message itself says 221 to 224.
 
 ## Next steps, in order of leverage
-1. Upstream P4 (wide checked loads) is a semantic decision for the XAX maintainers; see UPSTREAM_PROPOSALS.md.
-2. Cold image-cache start is still about 40 s (every component image is lowered once).
-3. Record a model-driven Codex or Claude Code session with authenticated accounts and add it to
+1. Cold image-cache start is still about 40 s (every component image is lowered once).
+2. Record a model-driven Codex or Claude Code session with authenticated accounts and add it to
    COMPATIBILITY.md.
-4. When XAX exposes libraries (strings, JSON) through the carrier, add a capability and a gap test that fails
+3. When XAX exposes libraries (strings, JSON) through the carrier, add a capability and a gap test that fails
    until the semantics run end to end. Until then, keep them UNIMPLEMENTED.
-5. Optional cgroup v2 limits when a delegated cgroup is available.
+4. Optional cgroup v2 limits when a delegated cgroup is available.
 
 ## Rules
 - No workload logic in the adapter: no per-operation tools and no Python fallbacks.

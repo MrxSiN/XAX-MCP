@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "xax-mcp"
-version = "0.3.0"
+version = "0.3.1"
 description = "Optional MCP server exposing XAX semantic construction, transactions, builds, and sandboxed execution"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -13,7 +13,7 @@ dependencies = [
     # Official MCP Python SDK, tested at 2.3.0 (protocol 2026-07-28 and handshake-era 2025-11-25).
     "mcp>=2.3.0,<2.4",
     # Upstream XAX toolchain, pinned to an immutable commit (see src/xax_mcp/compat.py and docs/COMPATIBILITY.md).
-    "xax-compiler @ git+https://github.com/MrxSiN/XAX@b0ec772a954a6b7932c6e3c1d44794c036a9b7ab#subdirectory=compiler",
+    "xax-compiler @ git+https://github.com/MrxSiN/XAX@6c2df90b5972dcf6f44ae6d32f828f355d30d2de#subdirectory=compiler",
 ]
 
 [project.optional-dependencies]
