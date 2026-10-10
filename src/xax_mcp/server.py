@@ -163,7 +163,7 @@ def _prepare() -> int:
     from . import compat, warm
 
     compatibility = compat.check()
-    if compatibility.status == "incompatible" or (compatibility.status == "untested" and not compat.allow_untested()):
+    if not compatibility.usable:
         log.error("incompatible XAX toolchain: %s", compatibility.reason)
         return 2
     from xax_native import prepare

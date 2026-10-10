@@ -46,12 +46,10 @@ def encode_input(spec: dict | None, limit: int) -> bytes:
 
 def decode_output(spec, data: bytes, inline: int) -> dict:
     """Project stdout bytes through the caller's declared layout.  A length mismatch is reported, not repaired."""
-    if spec is None or spec == "bytes":
+    if spec in (None, "bytes", "text"):
         shown = data[:inline]
-        return {"mode": "bytes", "base64": base64.b64encode(shown).decode(), "length": len(data), "inline_truncated": len(data) > inline}
-    if spec == "text":
-        shown = data[:inline]
-        return {"mode": "text", "text": shown.decode("utf-8", errors="replace"), "length": len(data), "inline_truncated": len(data) > inline}
+        view = {"text": shown.decode("utf-8", errors="replace")} if spec == "text" else {"base64": base64.b64encode(shown).decode()}
+        return {"mode": spec or "bytes", **view, "length": len(data), "inline_truncated": len(data) > inline}
     types = spec["ints"]
     expected = sum(INT_TYPES[t] // 8 for t in types)
     if len(data) != expected:

@@ -8,6 +8,7 @@ import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from .errors import ToolError
 from .sandbox import Limits
 
 RIGHTS = ("read", "mutate", "build", "execute")
@@ -28,8 +29,6 @@ class Policy:
     query_byte_budget: int = 16 * 1024
 
     def require(self, right: str) -> None:
-        from .errors import ToolError
-
         if right not in self.rights:
             flag = "--allow-execute" if right == "execute" else f"--grant {right}"
             raise ToolError("denied_capability", f"this server was not granted the '{right}' right by its host configuration",
@@ -89,8 +88,6 @@ def from_args(args: argparse.Namespace) -> Policy:
 
 def resolve_store(policy: Policy, name: str) -> Path:
     """Resolve a relative ``.xax`` name inside a granted root: no absolute paths, traversal, or symlink escape."""
-    from .errors import ToolError
-
     if not policy.store_roots:
         raise ToolError("denied_capability", "no --store-root is granted to this server",
                         repair=["construct a program with xax_construct instead, or ask the host owner to grant a store root"])

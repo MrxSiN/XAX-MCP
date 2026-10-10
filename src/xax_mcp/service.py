@@ -24,10 +24,10 @@ from . import __version__, compat
 from .errors import ToolError
 from .io_codec import decode_output, encode_input
 from .policy import Policy, resolve_store
+from .schemas import EFFECTS, MUTATION_OPS
 from .sandbox import Limits, Sandbox, SandboxUnavailable
 
 SUPPORTED_EFFECTS = ("stdio",)
-KNOWN_EFFECTS = ("stdio", "filesystem.read", "filesystem.write", "network", "process", "environment", "clock")
 _MUTATION_TOKEN = r"[A-Za-z@][A-Za-z0-9.@_-]{0,63}"
 _BUILD_SLOTS = threading.BoundedSemaphore(2)
 
@@ -48,10 +48,6 @@ def to_json(value: Any) -> Any:
     return value
 
 
-def _diagnostic(error) -> dict:
-    return to_json(error.diagnostic)
-
-
 def _classify(code: str, default: str) -> str:
     if code in ("XAX.WORKSPACE.STALE_ROOT", "XAX.WORKSPACE.STALE_QUERY"):
         return "stale_root"
@@ -68,7 +64,7 @@ def _classify(code: str, default: str) -> str:
 
 def _xax_error(error, default: str, message: str) -> ToolError:
     code = error.diagnostic.code
-    diagnostic = _diagnostic(error)
+    diagnostic = to_json(error.diagnostic)
     return ToolError(_classify(code, default), f"{message}: {code}", diagnostic=diagnostic,
                      repair=list(diagnostic.get("repair_neighborhood") or []))
 
@@ -77,8 +73,14 @@ def _handle(kind: str) -> str:
     return f"{kind}_{secrets.token_hex(12)}"
 
 
-def _sha256(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
+def _decode(reader):
+    """The build snapshot, release request and package views of a verified store."""
+    from xax_build import decode_package, decode_request, decode_snapshot
+
+    resolve = reader.get
+    snapshot = decode_snapshot(resolve(reader.root_cid), resolve)
+    request = decode_request(resolve(snapshot.request_root), resolve)
+    return snapshot, request, decode_package(resolve(request.package_root), resolve)
 
 
 @dataclass
@@ -171,7 +173,7 @@ class WarmState:
 def warm_state() -> WarmState:
     """Check compatibility, probe the sandbox, and load the XAX components in this process."""
     compatibility = compat.check()
-    if compatibility.status == "incompatible" or (compatibility.status == "untested" and not compat.allow_untested()):
+    if not compatibility.usable:
         raise RuntimeError(f"incompatible XAX toolchain: {compatibility.reason}")
     sandbox = Sandbox()
     sandbox.probe()
@@ -185,8 +187,7 @@ class Service:
         self.policy = policy
         self.sandbox = sandbox or (warm.sandbox if warm else Sandbox())
         self.compatibility = warm.compatibility if warm else compat.check()
-        if self.compatibility.status == "incompatible" or (
-                self.compatibility.status == "untested" and not compat.allow_untested()):
+        if not self.compatibility.usable:
             raise RuntimeError(f"incompatible XAX toolchain: {self.compatibility.reason}")
         self._ready = threading.Event()
         self.warmup_ms: float | None = None
@@ -210,8 +211,7 @@ class Service:
             self._ready.set()
 
     def ready(self) -> None:
-        if not self._ready.is_set():
-            self._ready.wait()
+        self._ready.wait()
 
     # -- capabilities -----------------------------------------------------------------------------------------
     def capabilities(self, session: Session) -> dict:
@@ -266,10 +266,9 @@ class Service:
                                                         "argv (strings, read with linux.startup.*)"],
                    "output": ["ints (declared layout decoded from stdout)", "bytes", "text"], "exit_status": True,
                    "argv": True, "environment": False, "files": False},
-            "effects": {"supported": list(SUPPORTED_EFFECTS), "denied_by_default": [e for e in KNOWN_EFFECTS if e not in SUPPORTED_EFFECTS]},
+            "effects": {"supported": list(SUPPORTED_EFFECTS), "denied_by_default": [e for e in EFFECTS if e not in SUPPORTED_EFFECTS]},
             "edits": {"transport": "typed mutations rendered to the upstream local edit grammar", "grammar_id": edit_grammar_id(),
-                      "ops": ["set_constant", "set_operation", "replace_operand", "delete", "prune_dead", "move",
-                              "insert_constant", "set_edge", "set_type", "set_signature"],
+                      "ops": MUTATION_OPS,
                       "modes": ["verify", "commit", "rollback"]},
             "maturity": {
                 "construct_build_execute linux-x86_64": "EXECUTED (tests/test_e2e_stdio.py)",
@@ -284,14 +283,11 @@ class Service:
 
     # -- workspaces -------------------------------------------------------------------------------------------
     def _functions(self, entry: WorkspaceEntry) -> list[dict]:
-        from xax_build import decode_package, decode_request, decode_snapshot
         from xax_compiler import Kind
 
         workspace = entry.workspace
         reader = workspace.reader
-        resolve = reader.get
-        snapshot = decode_snapshot(resolve(reader.root_cid), resolve)
-        package = decode_package(resolve(decode_request(resolve(snapshot.request_root), resolve).package_root), resolve)
+        _snapshot, _request, package = _decode(reader)
         entries = {}
         for name, cid in package.build_entries:
             entries.setdefault(cid, []).append(name.decode())
@@ -306,20 +302,15 @@ class Service:
         return out
 
     def _workspace_summary(self, entry: WorkspaceEntry) -> dict:
-        from xax_build import decode_package, decode_request, decode_snapshot
-
         workspace = entry.workspace
         reader = workspace.reader
-        resolve = reader.get
-        snapshot = decode_snapshot(resolve(reader.root_cid), resolve)
-        request = decode_request(resolve(snapshot.request_root), resolve)
-        package = decode_package(resolve(request.package_root), resolve)
+        _snapshot, request, package = _decode(reader)
         canonical = reader.canonical_bytes()
         return {"workspace": entry.handle, "root": reader.root_cid.hex(), "generation": workspace.generation,
                 "origin": entry.origin, "target": entry.target.cid.hex(),
                 "entries": sorted(name.decode() for name, _cid in package.build_entries),
                 "release_entry": request.build_entry.decode(),
-                "store": {"bytes": len(canonical), "sha256": _sha256(canonical)}}
+                "store": {"bytes": len(canonical), "sha256": hashlib.sha256(canonical).hexdigest()}}
 
     def _open(self, session: Session, reader, target, origin: str, names: dict | None = None) -> WorkspaceEntry:
         from xax_workspace import Workspace
@@ -355,14 +346,11 @@ class Service:
             if not isinstance(store, str):
                 raise ToolError("invalid_request", "open needs 'store': a relative .xax name in a granted store root")
             path = resolve_store(self.policy, store)
-            from xax_build import decode_request, decode_snapshot
             from xax_compiler import StoreReader, XaxError
 
             try:
                 reader = StoreReader(path.read_bytes())
-                resolve = reader.get
-                snapshot = decode_snapshot(resolve(reader.root_cid), resolve)
-                target = resolve(decode_request(resolve(snapshot.request_root), resolve).target_root)
+                target = reader.get(_decode(reader)[1].target_root)
                 entry = self._open(session, reader, target, f"store:{store}")
             except XaxError as error:
                 raise _xax_error(error, "verification_failed", "store failed XAX verification") from None
@@ -446,26 +434,14 @@ class Service:
                                     repair=["use function_nodes / operands / neighborhood with pagination"])
                 result = {"classification": "tooling view (diagnostic notation, not XAX source)", "view": text,
                           "aliases": local.aliases}
-            elif kind == "callers":
-                result = workspace.callers(function_cid(need_handle()), limit, continuation, byte_budget=budget)
-            elif kind == "callees":
-                result = workspace.callees(function_cid(need_handle()), limit, continuation, byte_budget=budget)
-            elif kind == "effect_summary":
-                result = workspace.effect_summary(need_handle(), byte_budget=budget)
-            elif kind == "operands":
-                result = workspace.operands(need_handle(), limit, continuation, byte_budget=budget)
-            elif kind == "neighborhood":
-                result = workspace.neighborhood(need_handle(), limit, continuation, byte_budget=budget)
+            elif kind in ("callers", "callees"):
+                result = getattr(workspace, kind)(function_cid(need_handle()), limit, continuation, byte_budget=budget)
+            elif kind in ("operands", "neighborhood"):
+                result = getattr(workspace, kind)(need_handle(), limit, continuation, byte_budget=budget)
+            elif kind in ("effect_summary", "type", "effects", "entity", "proof"):
+                result = getattr(workspace, kind)(need_handle(), byte_budget=budget)
             elif kind in ("uses", "users_of_value"):
                 result = workspace.expand(need_handle(), "uses", limit, continuation, byte_budget=budget)
-            elif kind == "type":
-                result = workspace.type(need_handle(), byte_budget=budget)
-            elif kind == "effects":
-                result = workspace.effects(need_handle(), byte_budget=budget)
-            elif kind == "entity":
-                result = workspace.entity(need_handle(), byte_budget=budget)
-            elif kind == "proof":
-                result = workspace.proof(need_handle(), byte_budget=budget)
             elif kind == "diff":
                 result = workspace.diff(int(args.get("from_generation", 0)), limit, continuation, byte_budget=budget)
             elif kind == "repair":
@@ -546,8 +522,7 @@ class Service:
         self.policy.require("build")
         entry = session.get("workspaces", args["workspace"], "workspace")
         from xax_artifact import BOOTSTRAP_COMPILER_IDENTITY_V1
-        from xax_build import (ArtifactKind, build, build_request, decode_package, decode_provenance, decode_request,
-                               decode_snapshot, resolve_packages, snapshot_store)
+        from xax_build import ArtifactKind, build, build_request, decode_provenance, resolve_packages, snapshot_store
         from xax_compiler import X86_64_LINUX_ABI, X86_64_LINUX_ELF_EXEC_FORMAT, XaxError, decode_native_target
 
         with entry.lock:
@@ -557,10 +532,8 @@ class Service:
             raise ToolError("stale_root", "the workspace has moved past the expected generation",
                             details={"current_generation": generation, "current_root": reader.root_cid.hex()})
         resolve = reader.get
-        snapshot = decode_snapshot(resolve(reader.root_cid), resolve)
+        snapshot, view, package = _decode(reader)
         release = resolve(snapshot.request_root)
-        view = decode_request(release, resolve)
-        package = decode_package(resolve(view.package_root), resolve)
         entry_name = args.get("entry") or view.build_entry.decode()
         if entry_name.encode() not in dict(package.build_entries):
             raise ToolError("invalid_request", f"package has no entry {entry_name!r}",
@@ -594,7 +567,7 @@ class Service:
         provenance = to_json(decode_provenance(result.provenance, prov_resolve))
         artifact = ArtifactEntry(
             _handle("art"), entry.handle, generation, reader.root_cid.hex(), entry_name, result.artifact,
-            result.artifact_digest.hex(), _sha256(result.artifact), executable,
+            result.artifact_digest.hex(), hashlib.sha256(result.artifact).hexdigest(), executable,
             {"build_key": result.key.hex(), "provenance_cid": result.provenance.cid.hex(), "provenance": provenance,
              "target_profile": description.identity.decode(errors="replace"), "compiler_identity": BOOTSTRAP_COMPILER_IDENTITY_V1.hex(),
              "xax_toolchain_fingerprint": self.compatibility.fingerprint, "xax_commit": self.compatibility.commit,
@@ -722,7 +695,7 @@ def _check_carrier_bounds(request: Any) -> None:
                         repair=["set format to 'xax-construct-v1' and platform to 'linux-x86_64'"])
     if request.get("platform") != "linux-x86_64":
         raise ToolError("unsupported", "xax-construct-v1 supports only platform 'linux-x86_64' in the pinned XAX")
-    totals = {"nodes": 0}
+    nodes_total = 0
 
     def walk(value, depth):
         if depth > 12:
@@ -751,8 +724,8 @@ def _check_carrier_bounds(request: Any) -> None:
             raise ToolError("invalid_request", "at most 4096 blocks per function")
         for block in blocks:
             nodes = block.get("nodes", []) if isinstance(block, dict) else []
-            totals["nodes"] += len(nodes) if isinstance(nodes, list) else 0
-    if totals["nodes"] > 100_000:
+            nodes_total += len(nodes) if isinstance(nodes, list) else 0
+    if nodes_total > 100_000:
         raise ToolError("resource_limit", "at most 100000 nodes per construction request")
     for alias, spec in (request.get("types") or {}).items():
         if isinstance(spec, dict) and isinstance(spec.get("view"), int) and spec["view"] > (1 << 30):

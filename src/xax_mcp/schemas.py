@@ -13,14 +13,16 @@ _INT_TYPE = {"enum": ["b8", "b16", "b32", "b64"]}
 _SMALL = {"type": "integer", "minimum": 0, "maximum": 4096}
 _INT64 = {"type": "integer", "minimum": -(2 ** 64) + 1, "maximum": 2 ** 64 - 1}
 _TOKEN = {"type": "string", "maxLength": 64, "pattern": "^[A-Za-z@][A-Za-z0-9.@_-]*$"}
+EFFECTS = ["stdio", "filesystem.read", "filesystem.write", "network", "process", "environment", "clock"]
+MUTATION_OPS = ["set_constant", "set_operation", "replace_operand", "delete", "prune_dead", "move", "insert_constant",
+                "set_edge", "set_type", "set_signature"]
 
 _MUTATION = {
     "type": "object",
     "required": ["op"],
     "additionalProperties": False,
     "properties": {
-        "op": {"enum": ["set_constant", "set_operation", "replace_operand", "delete", "prune_dead", "move",
-                        "insert_constant", "set_edge", "set_type", "set_signature"]},
+        "op": {"enum": MUTATION_OPS},
         "node": _TOKEN, "anchor": _TOKEN, "before": _TOKEN, "function": _TOKEN, "target": _TOKEN, "type": _TOKEN,
         "value": {"anyOf": [_INT64, _TOKEN]},
         "index": _SMALL, "id": _SMALL, "edge": _SMALL, "argument": _SMALL, "result": _SMALL,
@@ -124,8 +126,7 @@ TOOLS: dict[str, dict] = {
                                  {"type": "object", "additionalProperties": False, "required": ["ints"],
                                   "properties": {"ints": {"type": "array", "maxItems": 4096, "items": _INT_TYPE}}}]},
             "argv": {"type": "array", "maxItems": 64, "items": {"type": "string", "maxLength": 4096}},
-            "effects": {"type": "array", "maxItems": 8, "items": {"enum": ["stdio", "filesystem.read", "filesystem.write",
-                                                                           "network", "process", "environment", "clock"]}},
+            "effects": {"type": "array", "maxItems": 8, "items": {"enum": EFFECTS}},
             "limits": {"type": "object", "additionalProperties": False, "properties": {
                 "wall_ms": {"type": "integer", "minimum": 10, "maximum": 600000},
                 "cpu_seconds": {"type": "integer", "minimum": 1, "maximum": 600},

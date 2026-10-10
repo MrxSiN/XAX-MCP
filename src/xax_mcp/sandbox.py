@@ -17,11 +17,10 @@ import sys
 import tempfile
 import threading
 import time
-from dataclasses import dataclass, field
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 HELPER = Path(__file__).with_name("_sandbox_exec.py")
-SETUP_FAILURE_STATUS = 125
 
 
 @dataclass(frozen=True)
@@ -34,9 +33,7 @@ class Limits:
     max_stdin_bytes: int = 1024 * 1024
 
     def as_dict(self) -> dict:
-        return {"wall_ms": self.wall_ms, "cpu_seconds": self.cpu_seconds, "memory_bytes": self.memory_bytes,
-                "max_stdout_bytes": self.max_stdout_bytes, "max_stderr_bytes": self.max_stderr_bytes,
-                "max_stdin_bytes": self.max_stdin_bytes, "file_size_bytes": 0, "file_descriptors": 3, "processes": 1}
+        return {**asdict(self), "file_size_bytes": 0, "file_descriptors": 3, "processes": 1}
 
 
 @dataclass
@@ -45,7 +42,6 @@ class RunOutcome:
     signal: str | None
     stdout: bytes
     stderr: bytes
-    stdout_truncated: bool
     stderr_truncated: bool
     timed_out: bool
     cancelled: bool
@@ -232,7 +228,7 @@ class Sandbox:
         exit_status = returncode if returncode >= 0 else None
         signal_name = signal.Signals(-returncode).name if returncode < 0 else None
         return RunOutcome(exit_status, signal_name, bytes(buffers[process.stdout]), bytes(buffers[process.stderr]),
-                          truncated[process.stdout], truncated[process.stderr], timed_out, cancelled, output_exceeded,
+                          truncated[process.stderr], timed_out, cancelled, output_exceeded,
                           wall_ms, setup_error)
 
 

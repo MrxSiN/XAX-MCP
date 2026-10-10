@@ -16,7 +16,6 @@ from pathlib import Path
 
 XAX_REPOSITORY = "https://github.com/MrxSiN/XAX"
 XAX_DISTRIBUTION = "xax-compiler"
-XAX_DISTRIBUTION_VERSION = "0.1.0"
 # Tested pins: commit -> sha256 fingerprint of the installed toolchain files (see ``toolchain_fingerprint``).
 # 0.1.0 tested 01ad841c76416fc741dd1386b12124904924c10d (fingerprint 2d5b1f3b...), which predates xax_contract;
 # 0.2.0 tested f38cbeea2b90e9b6a580417ce7efaa7d3d75a183 (fingerprint cdf3e586...), host contract r1;
@@ -56,6 +55,10 @@ class Compatibility:
     fingerprint: str | None
     commit: str | None
     reason: str | None
+
+    @property
+    def usable(self) -> bool:
+        return self.status == "tested" or (self.status == "untested" and allow_untested())
 
     def as_dict(self) -> dict:
         return {"status": self.status, "distribution": XAX_DISTRIBUTION, "distribution_version": self.distribution_version,
