@@ -8,7 +8,14 @@
   3–4 minutes on the reference host, mostly XAX warm-up per launched server.
 - Evidence: `docs/evidence/` (record new runs with `scripts/record_evidence.py`; never overwrite old files).
 
-## State at 0.5.0 (2026-10-09)
+## State at 0.5.1 (2026-10-10)
+- Pins XAX `f0aa191` (`main`; S8 verifier totality, ADR-251; host contract r3 unchanged). Pin bump only: no adapter
+  code changed. 49/49 tests on Python 3.11 and 3.13; the fingerprint from a git install matches a local checkout.
+- One run per mode on one host (`docs/evidence/*-0.5.1.json`): warm server, launch to first result 0.17 s; in-process
+  with a populated cache 1.1 s; empty-cache `--prepare` 20.1 s; empty-cache in-process 35.7 s. The host kernel build
+  differs from the 0.5.0 runs, so the differences are not attributed to upstream.
+
+## State at 0.5.0 (2026-10-09, historical)
 - Pins XAX `13a6843` (`main`; host contract r3, ADR-250). The warm server, `--prepare` and the in-process warm-up
   call `xax_native.prepare` instead of constructing a warm-up carrier; `xax_capabilities` reports each component's
   status under `server.xax_components`.
@@ -47,8 +54,8 @@
   to ADR-225 on `main`; the commit message itself says 221 to 224.
 
 ## Next steps, in order of leverage
-1. Upstream P6–P8 (UPSTREAM_PROPOSALS.md): lazily zeroed buffers, one-call hashing over 1 MiB, parallel or
-   prebuilt component images. They shorten `--prepare`, the in-process path, and the warm server's memory.
+1. The remaining empty-cache cost is upstream: the typing store is verified by the Python bootstrap and then
+   lowered (PERFORMANCE.md). P6–P8 are done (ADR-248 to ADR-250); XAX decided against prebuilt images.
 2. Record a model-driven Codex or Claude Code session with authenticated accounts and add it to
    COMPATIBILITY.md.
 3. When XAX exposes libraries (strings, JSON) through the carrier, add a capability and a gap test that fails

@@ -21,11 +21,12 @@ XAX_DISTRIBUTION_VERSION = "0.1.0"
 # 0.1.0 tested 01ad841c76416fc741dd1386b12124904924c10d (fingerprint 2d5b1f3b...), which predates xax_contract;
 # 0.2.0 tested f38cbeea2b90e9b6a580417ce7efaa7d3d75a183 (fingerprint cdf3e586...), host contract r1;
 # 0.3.0 tested b0ec772a954a6b7932c6e3c1d44794c036a9b7ab (fingerprint 636b268c...), host contract r2;
-# 0.3.1 and 0.4.0 tested 6c2df90b5972dcf6f44ae6d32f828f355d30d2de (fingerprint 41d0f5d6...), host contract r2.
+# 0.3.1 and 0.4.0 tested 6c2df90b5972dcf6f44ae6d32f828f355d30d2de (fingerprint 41d0f5d6...), host contract r2;
+# 0.5.0 tested 13a6843200c42f319ede02968773031fe6bca55f (fingerprint bd0c1ef6...), host contract r3.
 TESTED_XAX = {
-    "13a6843200c42f319ede02968773031fe6bca55f": "bd0c1ef65d041924e4d524ff8f98c8c0afc2434ebd8dc758f6cf2021d7433c19",
+    "f0aa191424f6e404004f96422eb8a032ef8a1bb2": "80d8966ec3d78cb7f40ecb05f09dff5f871260fbbccb8ef18068072a242ba659",
 }
-PINNED_XAX_COMMIT = "13a6843200c42f319ede02968773031fe6bca55f"
+PINNED_XAX_COMMIT = "f0aa191424f6e404004f96422eb8a032ef8a1bb2"
 # Upstream interfaces this adapter consumes (within xax-host-contract-v1; see docs/XAX_CONTRACT.md).
 REQUIRED_API = {
     "xax_construct": ("construct", "FORMAT"),

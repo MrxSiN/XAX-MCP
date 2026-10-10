@@ -48,13 +48,20 @@ The warm-up construct (a minimal process XAX-MCP constructed only to trigger the
 | 0.5.0, in-process | `13a6843` | empty | 1.11 s | 41.8 s | — |
 | **0.5.0, warm server** | `13a6843` | populated | **0.09 s** | **0.18 s** | 3.6 s |
 | **0.5.0, warm server** | `13a6843` | empty | **0.09 s** | **0.19 s** | **24.4 s** |
+| 0.5.1, in-process (`--no-warm-server`) | `f0aa191` | populated | 0.86 s | 1.08 s | — |
+| 0.5.1, in-process | `f0aa191` | empty | 0.88 s | 35.7 s | — |
+| 0.5.1, warm server | `f0aa191` | populated | 0.08 s | 0.17 s | 3.2 s |
+| 0.5.1, warm server | `f0aa191` | empty | 0.08 s | 0.15 s | 20.1 s |
 
-Raw records: `docs/evidence/e2e-linux-x86_64-{warm,cold}-{in-process,warm-server}-0.5.0.json` (and `-0.4.0.json`),
+Raw records: `docs/evidence/e2e-linux-x86_64-{warm,cold}-{in-process,warm-server}-0.5.0.json` (and `-0.4.0.json`,
+`-0.5.1.json`),
 recorded with `python scripts/record_evidence.py [--cold-cache] --mode {in-process,warm-server}`. The warm server
 reported loading its components in 1.4 s, about 1.0 s of it in the parallel pass that found every image cached.
 With a populated cache, `--prepare` runs that pass twice (once itself, once in the warm server), which is why it
-takes 3.6 s rather than 3.2 s. After the first result, calls cost the same in every mode (construct ≈ 16–19 ms,
-build ≈ 17–18 ms, execute ≈ 32–36 ms including the sandbox).
+takes 3.6 s rather than 3.2 s. After the first result, calls cost the same in every mode (0.5.0: construct ≈ 16–19 ms,
+build ≈ 17–18 ms, execute ≈ 32–36 ms including the sandbox; 0.5.1: construct ≈ 14–20 ms, build ≈ 15–23 ms, execute
+≈ 25 ms). The 0.5.1 rows (XAX S8, ADR-251, no host-contract change) ran on a later kernel build of the same host
+type, so differences of this size between single runs are not attributed to upstream.
 
 ## What remains, and where
 

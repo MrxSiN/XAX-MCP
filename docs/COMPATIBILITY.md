@@ -2,6 +2,7 @@
 
 | xax-mcp | XAX commit | XAX toolchain fingerprint (sha256) | mcp SDK | Python | OS / arch | Result |
 |---|---|---|---|---|---|---|
+| 0.5.1 | `f0aa191424f6e404004f96422eb8a032ef8a1bb2` (2026-10-09; host contract `xax-host-contract-v1` r3) | `80d8966ec3d78cb7f40ecb05f09dff5f871260fbbccb8ef18068072a242ba659` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 49/49 tests pass on both, sandbox required |
 | 0.5.0 | `13a6843200c42f319ede02968773031fe6bca55f` (2026-10-09; host contract `xax-host-contract-v1` r3) | `bd0c1ef65d041924e4d524ff8f98c8c0afc2434ebd8dc758f6cf2021d7433c19` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 49/49 tests pass on both, sandbox required |
 | 0.4.0 | `6c2df90b5972dcf6f44ae6d32f828f355d30d2de` (2026-10-09; host contract `xax-host-contract-v1` r2) | `41d0f5d652756096522a7dfa8e1b04908a9849203daab50be5db3f650199eb96` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 49/49 tests pass on both, sandbox required |
 | 0.3.1 | `6c2df90b5972dcf6f44ae6d32f828f355d30d2de` (2026-10-09; host contract `xax-host-contract-v1` r2) | `41d0f5d652756096522a7dfa8e1b04908a9849203daab50be5db3f650199eb96` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 41/41 tests pass on both, sandbox required |
@@ -9,7 +10,15 @@
 | 0.2.0 | `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183` (2026-10-08; host contract `xax-host-contract-v1` r1) | `cdf3e5868810fb47884391cbe60fe7c79589ca8c0d14979644223f1dce012a7b` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 38/38 tests pass on both, sandbox required |
 | 0.1.0 | `01ad841c76416fc741dd1386b12124904924c10d` (2026-10-08) | `2d5b1f3be0c6c40f394a1e6a109239d38e2b9abc2634b02fbb21cffae172392f` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 36/36 tests pass on both, sandbox required |
 
-Declared support for 0.5.0: exactly `13a6843` (XAX `main`), with `xax-host-contract-v1` at revision ≥ 3, because the
+Declared support for 0.5.1: exactly `f0aa191` (XAX `main`), with `xax-host-contract-v1` at revision ≥ 3. The 21
+upstream commits since `13a6843` are S8 (ADR-251, verifier totality): every verifier rejection on the Linux x86-64
+production path is now decided by an XAX-hosted component with the bootstrap's exact diagnostic. They change no
+host-contract name, format, or revision (`xax_contract.py` is unchanged), and no XAX-MCP code changed. The typing and
+store-verifier component stores changed, so the first start after upgrading re-lowers those images and re-verifies
+the component stores once (run `xax-mcp --prepare`). 0.5.0's pin `13a6843` now reports `untested` under 0.5.1 (set
+`XAX_MCP_ALLOW_UNTESTED_XAX=1` or install xax-mcp 0.5.0 to use it).
+
+Declared support for 0.5.0 (historical): exactly `13a6843` (XAX `main`), with `xax-host-contract-v1` at revision ≥ 3, because the
 warm server, `--prepare` and the in-process warm-up call `xax_native.prepare` (ADR-250) instead of constructing a
 warm-up carrier. The 5 upstream commits since `6c2df90` are S8c.28 and S8c.29 (ADR-246, ADR-247: more typing
 rejections decided by XAX-hosted programs) and P6–P8 (ADR-248 to ADR-250: lazily zeroed views, one-call BLAKE3 up to

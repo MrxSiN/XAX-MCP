@@ -15,7 +15,7 @@ XAX's invariant holds: **meaning is source.** Tool arguments are transport. A co
 verified canonical store, and after that the store changes only through verified XAX transactions. The adapter
 never computes a workload: results come from XAX-generated machine code.
 
-## Status (0.5.0)
+## Status (0.5.1)
 
 | Capability | Status |
 |---|---|
@@ -52,7 +52,7 @@ python3 -m venv ~/.venvs/xax-mcp
 ```
 
 This installs the official `mcp` SDK (2.3.x) and the XAX toolchain **pinned to commit
-[`13a6843`](https://github.com/MrxSiN/XAX/commit/13a6843200c42f319ede02968773031fe6bca55f)** (XAX `main`, 2026-10-09), which provides the versioned host contract
+[`f0aa191`](https://github.com/MrxSiN/XAX/commit/f0aa191424f6e404004f96422eb8a032ef8a1bb2)** (XAX `main`, 2026-10-09), which provides the versioned host contract
 `xax-host-contract-v1` at revision 3. The server refuses
 to start against any other XAX build unless you set `XAX_MCP_ALLOW_UNTESTED_XAX=1`
 ([docs/COMPATIBILITY.md](docs/COMPATIBILITY.md)). XAX itself never depends on MCP.

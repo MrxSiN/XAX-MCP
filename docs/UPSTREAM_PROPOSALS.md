@@ -4,7 +4,8 @@ These were the smallest general upstream interfaces that would remove limitation
 upstream decisions in `MrxSiN/XAX`, committed as `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183` and merged into XAX `main`
 by `5c9ba68` (2026-10-08; renumbered ADR-222 to ADR-225 in the merge). XAX-MCP 0.2.0 pinned `f38cbee`.
 P4 followed as ADR-231 in `b0ec772`, which XAX-MCP 0.3.0 pins. P6–P8 followed as ADR-248 to ADR-250 in `a6f0eb6`,
-`6d1de1c` and `13a6843` (host contract r3), which XAX-MCP 0.5.0 pins.
+`6d1de1c` and `13a6843` (host contract r3), which XAX-MCP 0.5.0 pins. XAX-MCP 0.5.1 pins `f0aa191` (S8, ADR-251;
+host contract r3 unchanged).
 
 | # | Proposal | Status | Upstream record |
 |---|---|---|---|
