@@ -13,7 +13,7 @@ dependencies = [
     # Official MCP Python SDK, tested at 2.3.0 (protocol 2026-07-28 and handshake-era 2025-11-25).
     "mcp>=2.3.0,<2.4",
     # Upstream XAX toolchain, pinned to an immutable commit (see src/xax_mcp/compat.py and docs/COMPATIBILITY.md).
-    "xax-compiler @ git+https://github.com/MrxSiN/XAX@f0aa191424f6e404004f96422eb8a032ef8a1bb2#subdirectory=compiler",
+    "xax-compiler @ git+https://github.com/MrxSiN/XAX@b895f3703316842c8552e99bb1d382fd45364848#subdirectory=compiler",
 ]
 
 [project.optional-dependencies]

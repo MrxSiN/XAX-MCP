@@ -21,11 +21,12 @@ XAX_DISTRIBUTION = "xax-compiler"
 # 0.2.0 tested f38cbeea2b90e9b6a580417ce7efaa7d3d75a183 (fingerprint cdf3e586...), host contract r1;
 # 0.3.0 tested b0ec772a954a6b7932c6e3c1d44794c036a9b7ab (fingerprint 636b268c...), host contract r2;
 # 0.3.1 and 0.4.0 tested 6c2df90b5972dcf6f44ae6d32f828f355d30d2de (fingerprint 41d0f5d6...), host contract r2;
-# 0.5.0 tested 13a6843200c42f319ede02968773031fe6bca55f (fingerprint bd0c1ef6...), host contract r3.
+# 0.5.0 tested 13a6843200c42f319ede02968773031fe6bca55f (fingerprint bd0c1ef6...), host contract r3;
+# 0.5.1 tested f0aa191424f6e404004f96422eb8a032ef8a1bb2 (fingerprint 80d8966e...), host contract r3.
 TESTED_XAX = {
-    "f0aa191424f6e404004f96422eb8a032ef8a1bb2": "80d8966ec3d78cb7f40ecb05f09dff5f871260fbbccb8ef18068072a242ba659",
+    "b895f3703316842c8552e99bb1d382fd45364848": "01ca91d62dd032f2f425e4487062ff0320b68a6334671b05eae2954fd8d1a3fa",
 }
-PINNED_XAX_COMMIT = "f0aa191424f6e404004f96422eb8a032ef8a1bb2"
+PINNED_XAX_COMMIT = "b895f3703316842c8552e99bb1d382fd45364848"
 # Upstream interfaces this adapter consumes (within xax-host-contract-v1; see docs/XAX_CONTRACT.md).
 REQUIRED_API = {
     "xax_construct": ("construct", "FORMAT"),
@@ -34,17 +35,19 @@ REQUIRED_API = {
     "xax_workspace": ("Workspace", "RootRef", "Transaction"),
     "xax_local_protocol": ("LocalMutationSession", "edit_grammar_id"),
     "xax_compiler": ("StoreReader", "XaxError", "Diagnostic", "Kind", "Operation", "IntCompare", "decode_native_target",
-                     "X86_64_LINUX_ELF_EXEC_FORMAT", "X86_64_LINUX_ABI", "verify_store"),
+                     "X86_64_LINUX_ELF_EXEC_FORMAT", "X86_64_LINUX_ABI", "verify_store", "x86_64_windows_pe_target"),
     "xax_linux": ("linux_api",),
+    "xax_platform": ("win32_kernel32_api", "win32_stdio_api"),
     "xax_artifact": ("BOOTSTRAP_COMPILER_IDENTITY_V1",),
     "xax_contract": ("HOST_CONTRACT", "HOST_CONTRACT_MINOR", "describe", "missing"),
     "xax_native": ("prepare", "PREPARE_COMPONENTS"),
 }
 # The upstream host contract this release consumes (xax_contract, ADR-225) and the oldest minor revision it needs:
 # r2 (ADR-231) adds checked accesses of 1/2/4/8 bytes on bits<8> views, which carriers may now rely on;
-# r3 (ADR-250) adds xax_native.prepare, which the warm server and --prepare use to ready the XAX components.
+# r3 (ADR-250) adds xax_native.prepare, which the warm server and --prepare use to ready the XAX components;
+# r4 (ADR-252) adds the windows-x86_64 construct platform, which Windows hosts build and run.
 HOST_CONTRACT = "xax-host-contract-v1"
-HOST_CONTRACT_MINOR = 3
+HOST_CONTRACT_MINOR = 4
 ALLOW_UNPINNED_ENV = "XAX_MCP_ALLOW_UNTESTED_XAX"
 
 
@@ -88,10 +91,16 @@ def _toolchain_files() -> list[Path]:
 
 
 def toolchain_fingerprint() -> str:
-    """sha256 over (relative name, sha256(content)) of every toolchain module and bootstrap store, name-sorted."""
+    """sha256 over (relative name, sha256(content)) of every toolchain module and bootstrap store, name-sorted.
+
+    Python modules are hashed with LF line endings: a git checkout with ``core.autocrlf`` (the Windows default) rewrites
+    them to CRLF, which changes no code.  ``.xax`` stores are binary and hashed as they are."""
     digest = hashlib.sha256()
     for path in sorted(_toolchain_files(), key=lambda p: (p.suffix, p.name)):
-        digest.update(path.name.encode() + b"\0" + hashlib.sha256(path.read_bytes()).digest())
+        content = path.read_bytes()
+        if path.suffix == ".py":
+            content = content.replace(b"\r\n", b"\n")
+        digest.update(path.name.encode() + b"\0" + hashlib.sha256(content).digest())
     return digest.hexdigest()
 
 

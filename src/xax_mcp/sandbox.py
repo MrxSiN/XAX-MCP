@@ -1,7 +1,8 @@
 """Parent side of the sandbox: probe, launch the fixed executor, enforce wall time and output quotas.
 
-The artifact bytes are written to a fresh private directory as ``prog`` (mode 0500) and launched by
-``_sandbox_exec.py`` through a constrained argument vector.  Nothing here interprets the artifact.
+On Linux the artifact bytes are written to a fresh private directory as ``prog`` (mode 0500) and launched by
+``_sandbox_exec.py`` through a constrained argument vector.  On Windows ``_sandbox_win.py`` is the executor.
+``Sandbox`` is the host's implementation.  Nothing here interprets the artifact.
 """
 
 from __future__ import annotations
@@ -48,6 +49,7 @@ class RunOutcome:
     output_limit_exceeded: bool
     wall_ms: float
     setup_error: str | None = None
+    cpu_limit_exceeded: bool = False
 
 
 @dataclass
@@ -66,10 +68,16 @@ def _helper_argv(directory: str, status_fd: int, limits: Limits, probe: bool, ar
     return argv + ["--", *arguments]
 
 
-class Sandbox:
+class SandboxUnavailable(RuntimeError):
+    pass
+
+
+class LinuxSandbox:
     """OS-enforced confinement for Linux x86-64; fails closed when it cannot be established."""
 
     mechanism = "linux-userns+chroot+seccomp+rlimit"
+    platform = "linux-x86_64"
+    argv_supported = True
 
     def __init__(self) -> None:
         self._probe: ProbeResult | None = None
@@ -229,8 +237,10 @@ class Sandbox:
         signal_name = signal.Signals(-returncode).name if returncode < 0 else None
         return RunOutcome(exit_status, signal_name, bytes(buffers[process.stdout]), bytes(buffers[process.stderr]),
                           truncated[process.stderr], timed_out, cancelled, output_exceeded,
-                          wall_ms, setup_error)
+                          wall_ms, setup_error, cpu_limit_exceeded=signal_name == "SIGXCPU")
 
 
-class SandboxUnavailable(RuntimeError):
-    pass
+if sys.platform == "win32":
+    from ._sandbox_win import WindowsSandbox as Sandbox
+else:
+    Sandbox = LinuxSandbox
