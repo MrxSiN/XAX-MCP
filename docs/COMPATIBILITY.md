@@ -2,7 +2,7 @@
 
 | xax-mcp | XAX commit | XAX toolchain fingerprint (sha256) | mcp SDK | Python | OS / arch | Result |
 |---|---|---|---|---|---|---|
-| unreleased (Windows WIP) | `44b5f3c476e94095af8185aa37cf0e00dc368267` (2026-10-10; host contract `xax-host-contract-v1` r7) | `f58a316a3a4bad23010af87066632b5694c1aace766caf62bdd06ac543ea8509` | 2.3.0 | 3.12.10 | Windows 11 x86-64 | not a release: 9 pass, 31 fail, `test_warm.py` does not collect (adapter service is still Linux-only); Linux suite not run on this host |
+| unreleased (Windows WIP) | `44b5f3c476e94095af8185aa37cf0e00dc368267` (2026-10-10; host contract `xax-host-contract-v1` r7) | `f58a316a3a4bad23010af87066632b5694c1aace766caf62bdd06ac543ea8509` | 2.3.0 | 3.12.10 | Windows 11 x86-64 | not a release: 39 pass, 12 skipped (Linux-only warm server, `argv`, file-open and xb64 tests), sandbox required; Linux suite not run on this host |
 | 0.5.1 | `f0aa191424f6e404004f96422eb8a032ef8a1bb2` (2026-10-09; host contract `xax-host-contract-v1` r3) | `80d8966ec3d78cb7f40ecb05f09dff5f871260fbbccb8ef18068072a242ba659` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 49/49 tests pass on both, sandbox required |
 | 0.5.0 | `13a6843200c42f319ede02968773031fe6bca55f` (2026-10-09; host contract `xax-host-contract-v1` r3) | `bd0c1ef65d041924e4d524ff8f98c8c0afc2434ebd8dc758f6cf2021d7433c19` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 49/49 tests pass on both, sandbox required |
 | 0.4.0 | `6c2df90b5972dcf6f44ae6d32f828f355d30d2de` (2026-10-09; host contract `xax-host-contract-v1` r2) | `41d0f5d652756096522a7dfa8e1b04908a9849203daab50be5db3f650199eb96` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 49/49 tests pass on both, sandbox required |

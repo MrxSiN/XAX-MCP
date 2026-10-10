@@ -195,7 +195,7 @@ def test_shared_or_foreign_directory_is_refused(tmp_path):
             os.environ[warm.DIR_ENV] = old
 
 
-@pytest.mark.skipif(os.geteuid() != 0, reason="needs root to connect as another user")
+@pytest.mark.skipif(getattr(os, "geteuid", lambda: -1)() != 0, reason="needs root to connect as another user")
 def test_another_user_cannot_connect(warm_dir):
     from xax_mcp import warm
 

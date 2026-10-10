@@ -39,7 +39,7 @@ Claude Code asks you to approve project-scoped servers on first use.
 
 Add [`examples/hosts/claude_desktop_config.json`](../examples/hosts/claude_desktop_config.json) to
 `claude_desktop_config.json` (Settings → Developer → Edit Config) with an absolute command path, then restart.
-To remove it, delete the `xax` entry. Execution needs Linux x86-64, so on macOS and Windows the server
+To remove it, delete the `xax` entry. Execution needs Linux x86-64 or Windows x86-64, so on macOS the server
 constructs and builds but reports `sandbox_unavailable` for execution. This host was not run in this
 verification.
 
@@ -95,7 +95,9 @@ rm -rf ~/.venvs/xax-mcp "${XDG_RUNTIME_DIR:-$HOME/.cache/xax-mcp/run}/xax-mcp" ~
 | Symptom | Cause and fix |
 |---|---|
 | `sandbox_unavailable: … unshare: Operation not permitted` | unprivileged user namespaces are disabled. Ubuntu 23.10+: `sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0` (or an AppArmor profile for the Python binary); others: `sysctl kernel.unprivileged_userns_clone=1` |
-| `sandbox_unavailable` on macOS/Windows | execution is Linux x86-64 only; construct/build still work |
+| `sandbox_unavailable` on macOS | execution is Linux or Windows x86-64 only; construct/build still work |
+| `sandbox_unavailable … AppContainer profile` on Windows | the user profile cannot hold AppContainer profiles (for example a service account); run as an interactive user |
+| `unsupported … not executable by this server` | the program was constructed for the other platform; use the `platform` of `xax_capabilities` `targets[0]` |
 | `denied_capability … execute` | add `--allow-execute` to the host config |
 | server exits: `incompatible XAX toolchain` | install the pinned XAX (reinstall xax-mcp in a fresh venv) or see [COMPATIBILITY.md](COMPATIBILITY.md) |
 | first call times out | run `xax-mcp --prepare` once (it waits until XAX is loaded); keep `XAX_NATIVE_CACHE` writable |

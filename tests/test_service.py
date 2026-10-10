@@ -24,10 +24,13 @@ def test_capabilities_report_real_compiler_and_target(service, session):
     caps = service.capabilities(session)
     assert caps["xax"]["status"] == "tested"
     assert caps["xax"]["matched_commit"] == caps["xax"]["pinned_commit"]
-    target = caps["targets"][0]
-    assert target["id"] == "linux-x86_64" and target["profile"] == "x86_64-linux-elf-exec-v1"
+    target = caps["targets"][0]  # the host's platform comes first
+    profile = "x86_64-windows-pe-v1" if programs.WINDOWS else "x86_64-linux-elf-exec-v1"
+    assert target["id"] == programs.PLATFORM and target["profile"] == profile
     assert "add.wrap" in target["operations"] and "checked.load.bits.le" in target["operations"]
-    assert caps["io"]["argv"] is True and caps["effects"]["supported"] == ["stdio"]
+    assert {t["id"] for t in caps["targets"]} == {"linux-x86_64", "windows-x86_64"}
+    assert not any(t["execute"]["available"] for t in caps["targets"][1:])
+    assert caps["io"]["argv"] is not programs.WINDOWS and caps["effects"]["supported"] == ["stdio"]
 
 
 @needs_sandbox
@@ -152,6 +155,7 @@ def test_query_kinds_are_bounded(service, session):
 
 
 @needs_sandbox
+@pytest.mark.skipif(programs.WINDOWS, reason="the windows-x86_64 carrier has no startup reads (XAX ADR-252)")
 def test_argv_reaches_startup_reads(service, session):
     built = service.construct(session, {"request": programs.echo_argument()})
     artifact = service.build(session, {"workspace": built["workspace"]})["artifact"]
@@ -163,8 +167,32 @@ def test_argv_reaches_startup_reads(service, session):
 def test_capabilities_report_host_contract(service, session):
     caps = service.capabilities(session)
     assert caps["xax"]["host_contract"]["contract"] == "xax-host-contract-v1"
-    assert caps["targets"][0]["process_contract"]["identity"] == "linux-x86_64-process-v1"
-    assert "linux.startup.arg_copy" in caps["targets"][0]["carrier_entities"] and caps["io"]["argv"] is True
+    linux = next(t for t in caps["targets"] if t["id"] == "linux-x86_64")
+    assert linux["process_contract"]["identity"] == "linux-x86_64-process-v1"
+    assert "linux.startup.arg_copy" in linux["carrier_entities"]
+    windows = next(t for t in caps["targets"] if t["id"] == "windows-x86_64")
+    assert "win32.read_file" in windows["carrier_entities"] and "win32.exit_process" in windows["carrier_entities"]
+
+
+def test_windows_argv_is_refused_not_dropped(service, session):
+    if not programs.WINDOWS:
+        pytest.skip("Windows only")
+    built = service.construct(session, {"request": programs.echo_stdin()})
+    artifact = service.build(session, {"workspace": built["workspace"]})["artifact"]
+    assert _code(service.execute, session, {"artifact": artifact, "argv": ["x"]}).code == "unsupported"
+
+
+def test_other_platform_builds_but_does_not_run_here(service, session):
+    other, prefix, exit_ = ("linux-x86_64", "linux.", "exit_group") if programs.WINDOWS else ("windows-x86_64", "win32.", "exit_process")
+    request = {"format": "xax-construct-v1", "platform": other, "types": {"proc": prefix + "process_effect"},
+               "functions": [{"name": "main", "params": ["proc"], "returns": ["b32", "proc"], "blocks": [
+                   {"params": ["proc"], "nodes": [["call.foreign", [["b32", 7], "p0"], ["proc"], {"entity": prefix + exit_}]],
+                    "end": ["ret", [["b32", 7], "n0"]]}]}],
+               "package": {"name": "other", "entries": {"app": "main"}, "release": "app"}}
+    built = service.construct(session, {"request": request})
+    artifact = service.build(session, {"workspace": built["workspace"]})
+    assert artifact["executable_here"] is False
+    assert _code(service.execute, session, {"artifact": artifact["artifact"]}).code == "unsupported"
 
 
 @needs_sandbox

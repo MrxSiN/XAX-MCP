@@ -12,10 +12,13 @@
 - Pins XAX `44b5f3c` (`main`, host contract r7); requires r5 (ADR-256, PE integer-completion operations), which
   unblocked poly_reduce on Windows: it constructs, builds as a PE image and matches the oracle. r6 (jvm) and r7
   (linux-aarch64) add construct platforms not consumed yet.
-- `_sandbox_win.py` (AppContainer, job object) probes available on Windows 11.
-- Not done: `service.py` and `schemas.py` accept only `linux-x86_64` and only treat ELF artifacts as executable, so
-  31 tests fail on Windows; `tests/test_warm.py` uses `os.geteuid` and does not collect. The Linux suite was not run
-  for this pin (no Linux host in this session); CI covers it. No evidence file recorded yet.
+- The service constructs and builds both `linux-x86_64` and `windows-x86_64`; an artifact is executable when its
+  target identity is the host sandbox's platform. `xax_capabilities` lists the host's target first.
+- Windows 11, Python 3.12: 39 pass, 12 skipped (warm server, `argv`, file-open, xb64: all Linux-only by carrier or
+  design). Evidence: `docs/evidence/e2e-windows-x86_64-warm-in-process-unreleased-44b5f3c.json` (first
+  construct+build+execute 2.7 s from launch; every XAX component ran through the Python bootstrap on Windows).
+- Not done: the Linux suite was not run for these changes (no Linux host in this session); CI covers it. No
+  Windows CI job, no warm server on Windows, no model-driven Windows host run. Not released (version still 0.5.1).
 
 ## State at 0.5.1 (2026-10-10)
 - Pins XAX `f0aa191` (`main`; S8 verifier totality, ADR-251; host contract r3 unchanged). Pin bump only: no adapter

@@ -76,6 +76,7 @@ def test_execution_fails_closed_without_sandbox(service, session):
 
 
 @needs_sandbox
+@pytest.mark.skipif(programs.WINDOWS, reason="the windows-x86_64 carrier has no file-open entity; the probe checks the LPAC token")
 def test_filesystem_is_unreachable_from_artifacts(service, session, built):
     art = built(programs.open_file(b"/etc/passwd"))
     run = service.execute(session, {"artifact": art, "output": {"ints": ["b64"]}})
@@ -169,9 +170,13 @@ def test_store_roots_block_traversal_and_symlinks(service, tmp_path):
     root.mkdir()
     secret = tmp_path / "secret.xax"
     secret.write_bytes(b"x")
-    (root / "link.xax").symlink_to(secret)
+    try:
+        (root / "link.xax").symlink_to(secret)
+    except OSError:  # Windows without Developer Mode cannot create symbolic links; the other names still apply
+        pass
     policy = Policy(rights=ALL_RIGHTS, store_roots=(root.resolve(),))
-    for name in ("../secret.xax", "/etc/passwd", str(secret), "link.xax", "a/../../secret.xax", "x.txt"):
+    for name in ("../secret.xax", "/etc/passwd", r"C:\Windows\win.ini", r"..\secret.xax", "C:secret.xax", str(secret), "link.xax",
+                 "a/../../secret.xax", "x.txt"):
         with pytest.raises(ToolError) as caught:
             resolve_store(policy, name)
         assert caught.value.code in ("invalid_request", "denied_capability", "not_found")

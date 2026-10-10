@@ -67,12 +67,13 @@ TOOLS: dict[str, dict] = {
         "title": "XAX construct",
         "description": "Construct and verify a NEW XAX program from one xax-construct-v1 carrier (typed semantic graph: types, "
                        "functions of blocks of [operation, operands, result types, extra] nodes, package entries). The carrier is "
-                       "transport; the verified canonical store becomes a workspace. Platform: linux-x86_64.",
+                       "transport; the verified canonical store becomes a workspace. Platforms: linux-x86_64, windows-x86_64 "
+                       "(executable on a host of the same platform; see xax_capabilities targets).",
         "annotations": {"readOnlyHint": False, "destructiveHint": False, "idempotentHint": True, "openWorldHint": False},
         "inputSchema": {"type": "object", "additionalProperties": False, "required": ["request"], "properties": {
             "request": {"type": "object", "required": ["format", "platform", "functions", "package"], "properties": {
                 "format": {"const": "xax-construct-v1"},
-                "platform": {"enum": ["linux-x86_64"]},
+                "platform": {"enum": ["linux-x86_64", "windows-x86_64"]},
                 "types": {"type": "object", "maxProperties": 256},
                 "functions": {"type": "array", "minItems": 1, "maxItems": 256, "items": {"type": "object"}},
                 "package": {"type": "object"},
@@ -108,8 +109,9 @@ TOOLS: dict[str, dict] = {
     },
     "xax_execute": {
         "title": "XAX execute",
-        "description": "Run a built artifact in the OS sandbox (new user/mount/net namespaces, empty read-only root, seccomp "
-                       "allowlist, rlimits, wall timeout). Input is framed onto stdin (xax-mcp-io-v1) and optional argv strings reach "
+        "description": "Run a built artifact in the OS sandbox (Linux: new user/mount/net namespaces, empty read-only root, seccomp "
+                       "allowlist, rlimits; Windows: capability-less LPAC AppContainer in a job object; both: wall timeout). "
+                       "Input is framed onto stdin (xax-mcp-io-v1) and optional argv strings (Linux only) reach "
                        "linux.startup.* reads; stdout is decoded by the "
                        "declared layout. Only the 'stdio' effect exists. Requires the host-granted execute right.",
         "annotations": {"readOnlyHint": False, "destructiveHint": False, "openWorldHint": False},

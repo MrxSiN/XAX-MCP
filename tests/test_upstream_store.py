@@ -5,6 +5,7 @@ Needs an XAX source checkout at the pinned commit: set XAX_SOURCE_DIR (CI does).
 from __future__ import annotations
 
 import os
+import sys
 from pathlib import Path
 
 import pytest
@@ -13,7 +14,8 @@ from conftest import ALL_RIGHTS, needs_sandbox
 
 SOURCE = os.environ.get("XAX_SOURCE_DIR")
 STORES = Path(SOURCE, "compiler", "benchmarks", "r6_xb64") if SOURCE else None
-pytestmark = pytest.mark.skipif(not (STORES and (STORES / "xb64-gen0.xax").is_file()), reason="set XAX_SOURCE_DIR to an XAX checkout")
+pytestmark = [pytest.mark.skipif(not (STORES and (STORES / "xb64-gen0.xax").is_file()), reason="set XAX_SOURCE_DIR to an XAX checkout"),
+              pytest.mark.skipif(sys.platform == "win32", reason="the committed xb64 stores target linux-x86_64")]
 
 
 @needs_sandbox

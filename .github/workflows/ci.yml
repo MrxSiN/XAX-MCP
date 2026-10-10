@@ -51,6 +51,24 @@ jobs:
           name: evidence-py${{ matrix.python }}
           path: evidence*.json
 
+  test-windows:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install xax-mcp (pulls XAX from its git pin)
+        run: |
+          python -m venv .venv
+          .venv\Scripts\pip install -e ".[test]"
+      - name: Compatibility and sandbox check
+        run: .venv\Scripts\xax-mcp --check --allow-execute
+      - name: Tests
+        env:
+          XAX_MCP_REQUIRE_SANDBOX: "1"
+        run: .venv\Scripts\python -m pytest -q -rs
+
   clean-install:
     runs-on: ubuntu-24.04
     steps:

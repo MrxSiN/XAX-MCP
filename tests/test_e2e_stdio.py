@@ -164,7 +164,8 @@ def test_stdout_carries_only_json_rpc():
 
 @needs_sandbox
 def test_server_crash_kills_running_artifact():
-    """SIGKILL the server mid-execution: the sandboxed process dies with it (PR_SET_PDEATHSIG)."""
+    """Kill the server mid-execution: the sandboxed process dies with it (Linux: PR_SET_PDEATHSIG; Windows: the job
+    object is killed when the server's handle to it closes)."""
     process = subprocess.Popen([sys.executable, "-m", "xax_mcp", "--allow-execute", "--wall-ms", "60000", "--cpu-seconds", "60"],
                                stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
 
@@ -202,6 +203,9 @@ def test_server_crash_kills_running_artifact():
 
 
 def _sandboxed_programs() -> set[int]:
+    if sys.platform == "win32":  # the Windows sandbox runs every artifact as prog.exe
+        listing = subprocess.run(["tasklist", "/FI", "IMAGENAME eq prog.exe", "/FO", "CSV", "/NH"], capture_output=True, text=True)
+        return {int(row.split('","')[1]) for row in listing.stdout.splitlines() if row.startswith('"prog.exe"')}
     found = set()
     for entry in Path("/proc").iterdir():
         if entry.name.isdigit():

@@ -3,12 +3,13 @@
 An optional [Model Context Protocol](https://modelcontextprotocol.io) server that lets Codex, Claude Code/Desktop,
 and other MCP clients **construct, verify, edit, build, and run real XAX programs**: an agent sends a typed
 semantic-graph request, the [XAX](https://github.com/MrxSiN/XAX) toolchain verifies and compiles it to a native
-Linux x86-64 executable, and the server runs that executable in an OS sandbox and returns a typed result with
-provenance.
+Linux x86-64 or Windows x86-64 executable, and the server runs that executable in an OS sandbox and returns a typed
+result with provenance.
 
 ```text
 MCP client ─► xax-mcp (thin adapter) ─► XAX construct / workspace / build (pinned upstream)
-                                           └► static ELF ─► sandbox (namespaces + seccomp + rlimits) ─► result + provenance
+                                           ├► static ELF ─► Linux sandbox (namespaces + seccomp + rlimits) ─► result + provenance
+                                           └► PE32+ ─► Windows sandbox (LPAC AppContainer + job object) ─► result + provenance
 ```
 
 XAX's invariant holds: **meaning is source.** Tool arguments are transport. A construction request becomes a
@@ -27,9 +28,10 @@ never computes a workload: results come from XAX-generated machine code.
 | One-node 2/4/8-byte checked loads/stores on byte views (XAX ADR-231) | EXECUTED (`test_wide_byte_view_access_matches_byte_composition_and_is_smaller`, e2e over STDIO) |
 | Reopen and run previously verified stores (path A) | EXECUTED: exported stores and upstream `xb64` |
 | Sandbox (user/mount/net namespaces, empty read-only root, seccomp, rlimits) | EXECUTED on Linux x86-64; fails closed elsewhere |
+| Windows x86-64 hosts (unreleased, `main`): `windows-x86_64` construct/build/run in a capability-less LPAC AppContainer and job object | EXECUTED on Windows 11 (39 pass, 12 platform skips); no `argv`, no warm server ([docs/SECURITY.md](docs/SECURITY.md#sandbox-windows-x86-64)) |
 | Codex 0.161.0 / Claude Code 2.1.294 registration | STRUCTURAL: registered; Claude Code health check connected; no model-driven run recorded |
 | MCP Inspector 2.10.1 CLI | EXECUTED: `tools/list`, `xax_capabilities` |
-| Targets other than Linux x86-64, strings/JSON/CSV, files, network | UNIMPLEMENTED (reported by `xax_capabilities`) |
+| Targets other than Linux/Windows x86-64, strings/JSON/CSV, files, network | UNIMPLEMENTED (reported by `xax_capabilities`) |
 | Streamable HTTP transport | UNIMPLEMENTED (STDIO only) |
 
 Labels follow [docs/EVIDENCE.md](docs/EVIDENCE.md). Measured latencies are in [docs/evidence](docs/evidence). A launch
@@ -40,9 +42,11 @@ one for the next launch. See [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
 
 ## Install
 
-Requires Linux x86-64 for execution (construction and builds work wherever the XAX toolchain does), Python 3.11+,
-and unprivileged user namespaces with seccomp (most distributions; Ubuntu 24.04 needs the AppArmor sysctl shown
-in [docs/HOSTS.md](docs/HOSTS.md#troubleshooting)).
+Requires Linux x86-64 or Windows x86-64 for execution (construction and builds work wherever the XAX toolchain
+does) and Python 3.11+. Linux needs unprivileged user namespaces with seccomp (most distributions; Ubuntu 24.04 needs
+the AppArmor sysctl shown in [docs/HOSTS.md](docs/HOSTS.md#troubleshooting)); Windows needs Windows 10 1703+ for
+less privileged AppContainers. On Windows the commands are `py -m venv %USERPROFILE%\.venvs\xax-mcp` and
+`%USERPROFILE%\.venvs\xax-mcp\Scripts\xax-mcp.exe`.
 
 ```bash
 python3 -m venv ~/.venvs/xax-mcp
@@ -52,8 +56,8 @@ python3 -m venv ~/.venvs/xax-mcp
 ```
 
 This installs the official `mcp` SDK (2.3.x) and the XAX toolchain **pinned to commit
-[`f0aa191`](https://github.com/MrxSiN/XAX/commit/f0aa191424f6e404004f96422eb8a032ef8a1bb2)** (XAX `main`, 2026-10-09), which provides the versioned host contract
-`xax-host-contract-v1` at revision 3. The server refuses
+[`44b5f3c`](https://github.com/MrxSiN/XAX/commit/44b5f3c476e94095af8185aa37cf0e00dc368267)** (XAX `main`, 2026-10-10), which provides the versioned host contract
+`xax-host-contract-v1` at revision 7 (this adapter needs revision 5 or later). The server refuses
 to start against any other XAX build unless you set `XAX_MCP_ALLOW_UNTESTED_XAX=1`
 ([docs/COMPATIBILITY.md](docs/COMPATIBILITY.md)). XAX itself never depends on MCP.
 

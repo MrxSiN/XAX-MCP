@@ -28,6 +28,9 @@ from .schemas import EFFECTS, MUTATION_OPS
 from .sandbox import Limits, Sandbox, SandboxUnavailable
 
 SUPPORTED_EFFECTS = ("stdio",)
+# Construct platforms this adapter builds; each is executable only on a host whose sandbox runs it.
+PLATFORMS = ("linux-x86_64", "windows-x86_64")
+_TRAPS = ("SIGILL", "SIGTRAP", "STATUS_ILLEGAL_INSTRUCTION", "STATUS_BREAKPOINT")  # a failed XAX check (ud2/int3)
 _MUTATION_TOKEN = r"[A-Za-z@][A-Za-z0-9.@_-]{0,63}"
 _BUILD_SLOTS = threading.BoundedSemaphore(2)
 
@@ -71,6 +74,46 @@ def _xax_error(error, default: str, message: str) -> ToolError:
 
 def _handle(kind: str) -> str:
     return f"{kind}_{secrets.token_hex(12)}"
+
+
+def _target(platform: str):
+    from xax_compiler import x86_64_linux_exec_target, x86_64_windows_pe_target
+
+    return x86_64_windows_pe_target() if platform == "windows-x86_64" else x86_64_linux_exec_target()
+
+
+def _platform_target(platform: str, target, execute: dict) -> dict:
+    """The capability record of one construct platform."""
+    from xax_compiler import Operation
+    from xax_contract import describe
+
+    common = {"id": platform, "profile": target.identity.decode(), "construct": "xax-construct-v1", "build": True, "execute": execute,
+              "operations": sorted(Operation(o).name.lower().replace("_", ".") for o in target.supported_operations),
+              # Checked load/store sizes allowed on a bits<8> (byte) view at a dynamic byte offset (XAX ADR-231): one
+              # node reads or writes a little-endian bits<8*size> value, bounds-checked as offset + size <= extent.
+              "checked_byte_view_widths": list(describe()["formats"]["checked_byte_view_widths"])}
+    if platform == "windows-x86_64":
+        return {**common, "artifact": "PE32+ executable importing kernel32.dll only (no CRT or runtime)",
+                "carrier_types": ["b<N>", "{view: EXTENT}", "{ptr: [ELEMENT, r|rw, ALIGN, SPACE]}",
+                                  *sorted(f"win32.{n}" for n in ("b8", "b32", "b64", "byte_ptr_read", "u32_ptr_rw", "heap_ptr_rw",
+                                                                 "memory_effect", "filesystem_effect", "process_effect",
+                                                                 "heap_resource", "bytes_rw", "bytes_read", "u32_rw"))],
+                "carrier_entities": sorted(f"win32.{n}" for n in ("get_std_handle", "read_file", "write_file", "get_process_heap",
+                                                                   "heap_alloc", "heap_free", "virtual_alloc", "exit_process"))
+                + ["{win32.virtual_free_view: [TYPE, EXTENT]}", "{fn: NAME}"],
+                "process_entry": "fn(proof...) -> (bits<N>?, proof...); ends with win32.exit_process; no startup reads (XAX ADR-252)"}
+    from xax_linux import process_contract
+
+    return {**common, "artifact": "static ELF64 ET_EXEC (no libc, loader or runtime)",
+            "carrier_types": ["b<N>", "{view: EXTENT}", "{ptr: [ELEMENT, r|rw, ALIGN, SPACE]}",
+                              *sorted(f"linux.{n}" for n in ("b8", "b32", "b64", "bytes_rw", "bytes_read", "memory_effect",
+                                                             "filesystem_effect", "process_effect", "heap_owner"))],
+            "carrier_entities": sorted(f"linux.{n}" for n in ("read", "write", "openat", "close", "mmap_anonymous", "exit_group"))
+            + sorted(f"linux.startup.{n}" for n in ("argc", "arg_length", "arg_copy", "envc", "env_length", "env_copy", "auxv_value"))
+            + ["{linux.munmap_view: [TYPE, EXTENT]}", "{fn: NAME}"],
+            "process_entry": "fn(proof...) -> (bits<N>?, proof...); ends with linux.exit_group; no machine parameters; "
+                             "linux.startup.* only in the entry function",
+            "process_contract": process_contract()}
 
 
 def _decode(reader):
@@ -219,14 +262,14 @@ class Service:
         import importlib.metadata
 
         from xax_artifact import BOOTSTRAP_COMPILER_IDENTITY_V1
-        from xax_compiler import Operation, decode_native_target, x86_64_linux_exec_target
+        from xax_compiler import decode_native_target
         from xax_contract import describe
-        from xax_linux import process_contract
         from xax_local_protocol import edit_grammar_id
 
-        target = decode_native_target(x86_64_linux_exec_target())
+        host = self.sandbox.platform
         probe = self.sandbox.probe()
         execute = "execute" in self.policy.rights and probe.available
+        sandbox_view = {"mechanism": self.sandbox.mechanism, "available": probe.available, "reason": probe.reason, **probe.details}
         try:
             sdk = importlib.metadata.version("mcp")
         except importlib.metadata.PackageNotFoundError:
@@ -242,39 +285,27 @@ class Service:
                     "host_contract": {key: describe()[key] for key in ("contract", "minor", "formats")},
                     "compiler_implementation": "XAX bootstrap compiler (Python, with XAX-hosted components where native)"},
             "authority": self.policy.as_dict(),
-            "targets": [{
-                "id": "linux-x86_64", "profile": target.identity.decode(), "artifact": "static ELF64 ET_EXEC (no libc, loader or runtime)",
-                "construct": "xax-construct-v1", "build": True,
-                "execute": {"available": execute, "granted": "execute" in self.policy.rights,
-                            "sandbox": {"mechanism": self.sandbox.mechanism, "available": probe.available,
-                                        "reason": probe.reason, **probe.details}},
-                "operations": sorted(Operation(o).name.lower().replace("_", ".") for o in target.supported_operations),
-                "carrier_types": ["b<N>", "{view: EXTENT}", "{ptr: [ELEMENT, r|rw, ALIGN, SPACE]}",
-                                  *sorted(f"linux.{n}" for n in ("b8", "b32", "b64", "bytes_rw", "bytes_read", "memory_effect",
-                                                                 "filesystem_effect", "process_effect", "heap_owner"))],
-                "carrier_entities": sorted(f"linux.{n}" for n in ("read", "write", "openat", "close", "mmap_anonymous", "exit_group"))
-                + sorted(f"linux.startup.{n}" for n in ("argc", "arg_length", "arg_copy", "envc", "env_length", "env_copy", "auxv_value"))
-                + ["{linux.munmap_view: [TYPE, EXTENT]}", "{fn: NAME}"],
-                "process_entry": "fn(proof...) -> (bits<N>?, proof...); ends with linux.exit_group; no machine parameters; "
-                                 "linux.startup.* only in the entry function",
-                "process_contract": process_contract(),
-                # Checked load/store sizes allowed on a bits<8> (byte) view at a dynamic byte offset (XAX ADR-231): one
-                # node reads or writes a little-endian bits<8*size> value, bounds-checked as offset + size <= extent.
-                "checked_byte_view_widths": list(describe()["formats"]["checked_byte_view_widths"]),
-            }],
+            # The host's platform first: it is the one this server can execute.
+            "targets": [_platform_target(platform, decode_native_target(_target(platform)),
+                                         {"available": execute and platform == host, "granted": "execute" in self.policy.rights,
+                                          "sandbox": sandbox_view if platform == host else
+                                          {"available": False, "reason": f"artifacts run only on a {platform} host"}})
+                        for platform in sorted(PLATFORMS, key=lambda p: p != host)],
             "io": {"format": "xax-mcp-io-v1", "input": ["ints (b8|b16|b32|b64, little-endian on stdin)", "bytes_base64", "text",
-                                                        "argv (strings, read with linux.startup.*)"],
+                                                        *(["argv (strings, read with linux.startup.*)"] if self.sandbox.argv_supported else [])],
                    "output": ["ints (declared layout decoded from stdout)", "bytes", "text"], "exit_status": True,
-                   "argv": True, "environment": False, "files": False},
+                   "argv": self.sandbox.argv_supported, "environment": False, "files": False},
             "effects": {"supported": list(SUPPORTED_EFFECTS), "denied_by_default": [e for e in EFFECTS if e not in SUPPORTED_EFFECTS]},
             "edits": {"transport": "typed mutations rendered to the upstream local edit grammar", "grammar_id": edit_grammar_id(),
                       "ops": MUTATION_OPS,
                       "modes": ["verify", "commit", "rollback"]},
             "maturity": {
-                "construct_build_execute linux-x86_64": "EXECUTED (tests/test_e2e_stdio.py)",
+                "construct_build_execute linux-x86_64": "EXECUTED on Linux x86-64 hosts (tests/test_e2e_stdio.py)",
+                "construct_build_execute windows-x86_64": "EXECUTED on Windows x86-64 hosts (tests/test_e2e_stdio.py)",
                 "workspace query/transaction": "EXECUTED (delegates to xax_workspace)",
-                "sandbox": "EXECUTED on Linux x86-64 with unprivileged user namespaces; fails closed elsewhere",
-                "other XAX targets (jvm, android, wasm, aarch64, riscv64, windows)": "UNIMPLEMENTED in this adapter",
+                "sandbox": "EXECUTED on Linux x86-64 (user namespaces, seccomp) and Windows x86-64 (LPAC AppContainer, job "
+                           "object); fails closed elsewhere",
+                "other XAX targets (jvm, android, wasm, aarch64, riscv64)": "UNIMPLEMENTED in this adapter",
                 "json/csv/strings/collections libraries": "UNIMPLEMENTED (no XAX library exposed through the carrier)",
                 "filesystem/network/process effects": "UNIMPLEMENTED (denied)",
                 "streamable HTTP transport": "UNIMPLEMENTED",
@@ -523,7 +554,7 @@ class Service:
         entry = session.get("workspaces", args["workspace"], "workspace")
         from xax_artifact import BOOTSTRAP_COMPILER_IDENTITY_V1
         from xax_build import ArtifactKind, build, build_request, decode_provenance, resolve_packages, snapshot_store
-        from xax_compiler import X86_64_LINUX_ABI, X86_64_LINUX_ELF_EXEC_FORMAT, XaxError, decode_native_target
+        from xax_compiler import XaxError, decode_native_target
 
         with entry.lock:
             workspace = entry.workspace
@@ -562,7 +593,7 @@ class Service:
         build_ms = (time.perf_counter() - started) * 1000
         target_object = resolve(view.target_root)
         description = decode_native_target(target_object)
-        executable = description.abi == X86_64_LINUX_ABI and description.image_format == X86_64_LINUX_ELF_EXEC_FORMAT
+        executable = description.identity == decode_native_target(_target(self.sandbox.platform)).identity
         prov_resolve = {o.cid: o for o in (*build_reader.objects(), result.provenance)}.__getitem__
         provenance = to_json(decode_provenance(result.provenance, prov_resolve))
         artifact = ArtifactEntry(
@@ -594,7 +625,7 @@ class Service:
             raise ToolError("denied_capability", f"effects not granted: {', '.join(denied)}",
                             repair=["only 'stdio' (stdin/stdout/stderr, exit status) is available to executed artifacts"])
         if not artifact.executable:
-            raise ToolError("unsupported", "this artifact's target is not executable by this server")
+            raise ToolError("unsupported", f"this artifact's target is not executable by this server (host: {self.sandbox.platform})")
         if args.get("require_current", True):
             with session.lock:
                 entry = session.workspaces.get(artifact.workspace)
@@ -615,12 +646,15 @@ class Service:
         arguments = tuple(args.get("argv", ()))
         if any("\0" in item for item in arguments) or sum(len(item.encode()) + 1 for item in arguments) > 65536:
             raise ToolError("invalid_request", "argv strings must not contain NUL and must total at most 64 KiB")
+        if arguments and not self.sandbox.argv_supported:
+            raise ToolError("unsupported", f"{self.sandbox.platform} artifacts have no command-line reads; omit argv")
         output_spec = args.get("output", "bytes")
         try:
             outcome = self.sandbox.run(artifact.data, stdin, limits, cancel, arguments)
         except SandboxUnavailable as error:
             raise ToolError("sandbox_unavailable", str(error),
-                            repair=["run on Linux x86-64 with unprivileged user namespaces and seccomp enabled"]) from None
+                            repair=["run on Linux x86-64 with unprivileged user namespaces and seccomp enabled, or on "
+                                    "Windows x86-64 with AppContainer support"]) from None
         if outcome.setup_error:
             raise ToolError("sandbox_unavailable", f"sandbox setup failed; artifact not run: {outcome.setup_error}")
         evidence = {"label": "EXECUTED", "sandbox": self.sandbox.mechanism, "limits": limits.as_dict(), "effects": ["stdio"],
@@ -634,13 +668,13 @@ class Service:
         if outcome.output_limit_exceeded:
             raise ToolError("resource_limit", f"stdout exceeded {limits.max_stdout_bytes} bytes; the process was killed",
                             details={"evidence": evidence})
-        if outcome.signal == "SIGXCPU":  # soft CPU limit; the program cannot ignore it (rt_sigaction is not allowed)
+        if outcome.cpu_limit_exceeded:  # Linux: SIGXCPU, which the program cannot ignore; Windows: the CPU-time watch
             raise ToolError("resource_limit", f"CPU limit of {limits.cpu_seconds} s exceeded", details={"evidence": evidence})
         result = {"ok": outcome.exit_status == 0, "exit_status": outcome.exit_status, "signal": outcome.signal,
                   "stdout": decode_output(output_spec, outcome.stdout, self.policy.inline_output_bytes),
                   "evidence": evidence}
         if outcome.signal is not None:
-            result["status"] = "trap" if outcome.signal in ("SIGILL", "SIGTRAP") else "crashed"
+            result["status"] = "trap" if outcome.signal in _TRAPS else "crashed"
         else:
             result["status"] = "exited"
         if outcome.stderr:
@@ -692,9 +726,9 @@ def _check_carrier_bounds(request: Any) -> None:
     """Bound the carrier before the compiler sees it: nesting, node counts, and integer magnitude."""
     if not isinstance(request, dict) or request.get("format") != "xax-construct-v1":
         raise ToolError("invalid_request", "request must be an xax-construct-v1 object",
-                        repair=["set format to 'xax-construct-v1' and platform to 'linux-x86_64'"])
-    if request.get("platform") != "linux-x86_64":
-        raise ToolError("unsupported", "xax-construct-v1 supports only platform 'linux-x86_64' in the pinned XAX")
+                        repair=["set format to 'xax-construct-v1' and platform to one of " + ", ".join(PLATFORMS)])
+    if request.get("platform") not in PLATFORMS:
+        raise ToolError("unsupported", f"this adapter constructs only platforms {', '.join(PLATFORMS)}")
     nodes_total = 0
 
     def walk(value, depth):

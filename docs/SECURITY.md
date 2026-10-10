@@ -73,6 +73,29 @@ is refused with `sandbox_unavailable` and nothing runs unconfined.
   launched them (`PR_SET_PDEATHSIG`).
 - `--no-warm-server` or `XAX_MCP_WARM_SERVER=0` disables it.
 
+## Sandbox (Windows x86-64)
+
+`_sandbox_win.py` is the entire executor boundary on Windows (ctypes, no helper process). It writes the artifact as
+`prog.exe` into a fresh private directory whose ACL adds read/execute for the sandbox's AppContainer SID, and calls
+`CreateProcessW` with a fixed command line, no shell, `LOCALAPPDATA` and `SystemRoot` as the only environment, and
+exactly three inherited handles (stdin/stdout/stderr pipes). The process starts suspended with:
+
+1. a less privileged AppContainer (LPAC) token with no capabilities: no network, no access to other processes'
+   named objects, and file access only where an ACL names the container (its run directory) or all restricted
+   application packages (system DLLs);
+2. a job object: committed memory (256 MiB by default), CPU time, one active process, kill on job close (the
+   program dies with the server), die on unhandled exception, and every UI restriction;
+3. mitigation policies: no child processes, no dynamic code, no win32k system calls, no extension points, no
+   remote or low-label images; `DETACHED_PROCESS`, so no console host.
+
+Before resuming it, the server checks the token is an AppContainer carrying `WIN://NOALLAPPPKG` (less privileged)
+and that the process is in the job; otherwise it kills the process and refuses. The parent enforces wall time, CPU
+time (polled every 50 ms; the job limit is the backstop), stdout/stderr quotas, and cancellation by terminating the
+job. The startup probe runs the same path with `whoami.exe`, suspended and never resumed.
+
+The `windows-x86_64` carrier has no file-open or command-line entities (XAX ADR-252), so an artifact can reach
+only its standard handles, memory, and process exit. `argv` is refused with `unsupported`.
+
 ## Audit
 
 Each tool call writes one JSON line to stderr: the tool, whether it succeeded, the error code, and the request
@@ -80,7 +103,9 @@ size. Payloads, inputs, outputs, and file contents are never logged.
 
 ## Known limits
 
-- Only Linux x86-64 is supported. Elsewhere the probe fails and execution is refused.
+- Only Linux x86-64 and Windows x86-64 are supported. Elsewhere the probe fails and execution is refused.
+- On Windows there is no test that an artifact's file open is denied, because the carrier cannot express one; the
+  LPAC token and its ACL scope are checked by the probe instead.
 - The sandbox needs unprivileged user namespaces. Ubuntu 23.10+ restricts them through AppArmor (see
   [HOSTS.md](HOSTS.md#troubleshooting)).
 - The cgroup namespace is created but no cgroup controller limits are applied. Memory and CPU are bounded by
