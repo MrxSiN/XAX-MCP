@@ -8,6 +8,15 @@
   3–4 minutes on the reference host, mostly XAX warm-up per launched server.
 - Evidence: `docs/evidence/` (record new runs with `scripts/record_evidence.py`; never overwrite old files).
 
+## Work in progress after 0.5.1 (2026-10-10): Windows x86-64 hosts
+- Pins XAX `44b5f3c` (`main`, host contract r7); requires r5 (ADR-256, PE integer-completion operations), which
+  unblocked poly_reduce on Windows: it constructs, builds as a PE image and matches the oracle. r6 (jvm) and r7
+  (linux-aarch64) add construct platforms not consumed yet.
+- `_sandbox_win.py` (AppContainer, job object) probes available on Windows 11.
+- Not done: `service.py` and `schemas.py` accept only `linux-x86_64` and only treat ELF artifacts as executable, so
+  31 tests fail on Windows; `tests/test_warm.py` uses `os.geteuid` and does not collect. The Linux suite was not run
+  for this pin (no Linux host in this session); CI covers it. No evidence file recorded yet.
+
 ## State at 0.5.1 (2026-10-10)
 - Pins XAX `f0aa191` (`main`; S8 verifier totality, ADR-251; host contract r3 unchanged). Pin bump only: no adapter
   code changed. 49/49 tests on Python 3.11 and 3.13; the fingerprint from a git install matches a local checkout.

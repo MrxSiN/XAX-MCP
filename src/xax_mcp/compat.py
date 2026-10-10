@@ -22,11 +22,12 @@ XAX_DISTRIBUTION = "xax-compiler"
 # 0.3.0 tested b0ec772a954a6b7932c6e3c1d44794c036a9b7ab (fingerprint 636b268c...), host contract r2;
 # 0.3.1 and 0.4.0 tested 6c2df90b5972dcf6f44ae6d32f828f355d30d2de (fingerprint 41d0f5d6...), host contract r2;
 # 0.5.0 tested 13a6843200c42f319ede02968773031fe6bca55f (fingerprint bd0c1ef6...), host contract r3;
-# 0.5.1 tested f0aa191424f6e404004f96422eb8a032ef8a1bb2 (fingerprint 80d8966e...), host contract r3.
+# 0.5.1 tested f0aa191424f6e404004f96422eb8a032ef8a1bb2 (fingerprint 80d8966e...), host contract r3;
+# the Windows work in progress pinned b895f3703316842c8552e99bb1d382fd45364848 (fingerprint 01ca91d6...), host contract r4.
 TESTED_XAX = {
-    "b895f3703316842c8552e99bb1d382fd45364848": "01ca91d62dd032f2f425e4487062ff0320b68a6334671b05eae2954fd8d1a3fa",
+    "44b5f3c476e94095af8185aa37cf0e00dc368267": "f58a316a3a4bad23010af87066632b5694c1aace766caf62bdd06ac543ea8509",
 }
-PINNED_XAX_COMMIT = "b895f3703316842c8552e99bb1d382fd45364848"
+PINNED_XAX_COMMIT = "44b5f3c476e94095af8185aa37cf0e00dc368267"
 # Upstream interfaces this adapter consumes (within xax-host-contract-v1; see docs/XAX_CONTRACT.md).
 REQUIRED_API = {
     "xax_construct": ("construct", "FORMAT"),
@@ -45,9 +46,11 @@ REQUIRED_API = {
 # The upstream host contract this release consumes (xax_contract, ADR-225) and the oldest minor revision it needs:
 # r2 (ADR-231) adds checked accesses of 1/2/4/8 bytes on bits<8> views, which carriers may now rely on;
 # r3 (ADR-250) adds xax_native.prepare, which the warm server and --prepare use to ready the XAX components;
-# r4 (ADR-252) adds the windows-x86_64 construct platform, which Windows hosts build and run.
+# r4 (ADR-252) adds the windows-x86_64 construct platform, which Windows hosts build and run;
+# r5 (ADR-256) adds integer-completion operations on windows-x86_64, which the Windows test carriers use.
+# r6 (ADR-257, jvm) and r7 (ADR-258, linux-aarch64) add construct platforms this adapter does not consume yet.
 HOST_CONTRACT = "xax-host-contract-v1"
-HOST_CONTRACT_MINOR = 4
+HOST_CONTRACT_MINOR = 5
 ALLOW_UNPINNED_ENV = "XAX_MCP_ALLOW_UNTESTED_XAX"
 
 
