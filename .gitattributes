@@ -1,0 +1,4 @@
+# Native server: canonical store and construction request bytes are digested in evidence.
+native/*.xax binary
+native/construction_request.json -text
+docs/evidence/native-*.json -text

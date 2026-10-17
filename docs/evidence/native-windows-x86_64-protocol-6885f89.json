@@ -1,0 +1,299 @@
+{
+ "format": "xax-mcp-native-evidence-v1",
+ "label": "EXECUTED, INTEGRATION-TESTED, BENCHMARKED (protocol layer only; see not_implemented)",
+ "recorded_utc": "2026-10-17T18:56:59Z",
+ "xax_commit": "6885f89f2d2e9ae4771271157013c29bf35e2ccf",
+ "also_byte_identical_under_xax_commit": "0876b59",
+ "program": {
+  "carrier_format": "xax-construct-v1",
+  "platform": "windows-x86_64",
+  "target_profile": "x86_64-windows-pe-v1",
+  "functions": 117,
+  "construction_request_sha256": "f54dd8aba0f01f9676cb358ae20a64e6ce475b4c17e939f8025e087b055d46de",
+  "store": "native/xax-mcp-native-gen0.xax",
+  "store_bytes": 879141,
+  "store_sha256": "28c2da6c87048f864131b03b47b069230f424f9109f4286680c75d731f2c8c37",
+  "root": "6a3d37ca24916a1ab3cdf0d21a5616a2e02bd7f09f48a0c2b4d9ea2763e4bebc",
+  "release_request": "d9df6f50bf0a3fcc60a11910e96f3cdf079c9fcf66db0d26cb56a6e8ac6a3001",
+  "artifact_bytes": 224256,
+  "artifact_sha256": "39e5d9f48460c297c5c3c0f210087d1c5ebfd94bb6b9637f7ee83bb6e412df8c",
+  "imports": [
+   "kernel32.dll: GetStdHandle ReadFile WriteFile VirtualAlloc VirtualFree ExitProcess GetCommandLineA lstrcpynA"
+  ]
+ },
+ "tests": {
+  "command": "XAX_NATIVE_FUZZ_SEED=20261018 XAX_NATIVE_SRC=<XAX 6885f89>/compiler/src XAX_MCP_REFERENCE_PYTHON=<python with mcp 2.3.0> python -m pytest tests/test_native_stdio.py",
+  "result": "43 passed",
+  "fuzz_seed": 20261018,
+  "fuzz_cases": 1500,
+  "real_clients": {
+   "mcp Python SDK mcp.Client": "2.3.0"
+  },
+  "differential_reference": "this tree's Python server (xax_mcp 0.5.1, working tree) with XAX 6885f89 sources"
+ },
+ "benchmark": {
+  "python_arm": [
+   "C:\\Users\\SiN\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+   "-m",
+   "xax_mcp",
+   "--no-warm-server"
+  ],
+  "host": {
+   "platform": "Windows-11-10.0.26300-SP0",
+   "machine": "AMD64",
+   "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+   "cpu_count": 16
+  },
+  "method": "15 interleaved launches per arm; per launch 50 round trips per call; initialize_s is process creation to initialize response",
+  "summary_medians": {
+   "native": {
+    "initialize_s": 0.01267829999960668,
+    "ping_median_s": 1.8400000044493936e-05,
+    "tools_list_median_s": 8.985000022221357e-05,
+    "capabilities_median_s": 3.4499999856052455e-05,
+    "peak_working_set_bytes": 8597504
+   },
+   "python": {
+    "initialize_s": 1.3286557999999786,
+    "ping_median_s": 0.0005534000001716777,
+    "tools_list_median_s": 0.0009350999994239828,
+    "capabilities_median_s": 0.0024367500000153086,
+    "peak_working_set_bytes": 107909120
+   }
+  },
+  "samples": {
+   "native": [
+    {
+     "initialize_s": 0.01207070000054955,
+     "ping_median_s": 2.680000034160912e-05,
+     "tools_list_median_s": 9.54499996623781e-05,
+     "capabilities_median_s": 3.429999969739583e-05,
+     "peak_working_set_bytes": 8597504
+    },
+    {
+     "initialize_s": 0.013209699999606528,
+     "ping_median_s": 2.170000016121776e-05,
+     "tools_list_median_s": 0.0001015000002553279,
+     "capabilities_median_s": 4.020000005766633e-05,
+     "peak_working_set_bytes": 8593408
+    },
+    {
+     "initialize_s": 0.012249099999280588,
+     "ping_median_s": 1.9999999949504854e-05,
+     "tools_list_median_s": 0.00010899999961111462,
+     "capabilities_median_s": 3.4499999856052455e-05,
+     "peak_working_set_bytes": 8601600
+    },
+    {
+     "initialize_s": 0.012837299999773677,
+     "ping_median_s": 1.9049999991693767e-05,
+     "tools_list_median_s": 9.655000030761585e-05,
+     "capabilities_median_s": 3.8050000057410216e-05,
+     "peak_working_set_bytes": 8597504
+    },
+    {
+     "initialize_s": 0.01289600000018254,
+     "ping_median_s": 1.6649999906803714e-05,
+     "tools_list_median_s": 8.595000008426723e-05,
+     "capabilities_median_s": 3.330000026835478e-05,
+     "peak_working_set_bytes": 8630272
+    },
+    {
+     "initialize_s": 0.01241680000021006,
+     "ping_median_s": 1.9249999695603037e-05,
+     "tools_list_median_s": 8.360000038010185e-05,
+     "capabilities_median_s": 3.394999976080726e-05,
+     "peak_working_set_bytes": 8597504
+    },
+    {
+     "initialize_s": 0.01267829999960668,
+     "ping_median_s": 2.480000057403231e-05,
+     "tools_list_median_s": 9.739999995872495e-05,
+     "capabilities_median_s": 3.2699999792384915e-05,
+     "peak_working_set_bytes": 8597504
+    },
+    {
+     "initialize_s": 0.012271700000383134,
+     "ping_median_s": 1.6400000276917126e-05,
+     "tools_list_median_s": 8.155000023180037e-05,
+     "capabilities_median_s": 5.225000040809391e-05,
+     "peak_working_set_bytes": 8593408
+    },
+    {
+     "initialize_s": 0.01381779999974242,
+     "ping_median_s": 1.8000000181928044e-05,
+     "tools_list_median_s": 8.985000022221357e-05,
+     "capabilities_median_s": 3.349999997226405e-05,
+     "peak_working_set_bytes": 8597504
+    },
+    {
+     "initialize_s": 0.014163100000587292,
+     "ping_median_s": 2.190000031987438e-05,
+     "tools_list_median_s": 9.900000031848322e-05,
+     "capabilities_median_s": 4.57500000266009e-05,
+     "peak_working_set_bytes": 8593408
+    },
+    {
+     "initialize_s": 0.012988899999982095,
+     "ping_median_s": 1.5499999790336005e-05,
+     "tools_list_median_s": 8.654999965074239e-05,
+     "capabilities_median_s": 3.390000074432464e-05,
+     "peak_working_set_bytes": 8597504
+    },
+    {
+     "initialize_s": 0.0121181999993496,
+     "ping_median_s": 1.765000024533947e-05,
+     "tools_list_median_s": 7.950000008349889e-05,
+     "capabilities_median_s": 4.160000025876798e-05,
+     "peak_working_set_bytes": 8597504
+    },
+    {
+     "initialize_s": 0.012106399999538553,
+     "ping_median_s": 1.8400000044493936e-05,
+     "tools_list_median_s": 8.440000010523363e-05,
+     "capabilities_median_s": 3.704999971887446e-05,
+     "peak_working_set_bytes": 8597504
+    },
+    {
+     "initialize_s": 0.012218100000609411,
+     "ping_median_s": 1.629999951546779e-05,
+     "tools_list_median_s": 7.750000031592208e-05,
+     "capabilities_median_s": 3.33500001943321e-05,
+     "peak_working_set_bytes": 8630272
+    },
+    {
+     "initialize_s": 0.012844700000641751,
+     "ping_median_s": 1.5800000255694613e-05,
+     "tools_list_median_s": 0.00010180000026593916,
+     "capabilities_median_s": 3.57499998244748e-05,
+     "peak_working_set_bytes": 8597504
+    }
+   ],
+   "python": [
+    {
+     "initialize_s": 1.3374134999994567,
+     "ping_median_s": 0.0005308999998305808,
+     "tools_list_median_s": 0.0009346999995614169,
+     "capabilities_median_s": 0.0024367500000153086,
+     "peak_working_set_bytes": 107954176
+    },
+    {
+     "initialize_s": 1.3328903999999966,
+     "ping_median_s": 0.0005558499997277977,
+     "tools_list_median_s": 0.0009330499997304287,
+     "capabilities_median_s": 0.0024521999998796673,
+     "peak_working_set_bytes": 107761664
+    },
+    {
+     "initialize_s": 1.3779654999998456,
+     "ping_median_s": 0.0005362499996408587,
+     "tools_list_median_s": 0.0009777499999472639,
+     "capabilities_median_s": 0.0024016000002120563,
+     "peak_working_set_bytes": 108142592
+    },
+    {
+     "initialize_s": 1.3869059999997262,
+     "ping_median_s": 0.000588650000281632,
+     "tools_list_median_s": 0.0010387999996055441,
+     "capabilities_median_s": 0.0025625000002946763,
+     "peak_working_set_bytes": 108015616
+    },
+    {
+     "initialize_s": 1.322465999999622,
+     "ping_median_s": 0.0005206500004533154,
+     "tools_list_median_s": 0.0008992499997475534,
+     "capabilities_median_s": 0.002397150000433612,
+     "peak_working_set_bytes": 107790336
+    },
+    {
+     "initialize_s": 1.3040495999994164,
+     "ping_median_s": 0.0005354500003704743,
+     "tools_list_median_s": 0.0008964500002548448,
+     "capabilities_median_s": 0.002437249999729829,
+     "peak_working_set_bytes": 107859968
+    },
+    {
+     "initialize_s": 1.3027459000004455,
+     "ping_median_s": 0.000554900000224734,
+     "tools_list_median_s": 0.0009503999999651569,
+     "capabilities_median_s": 0.002423200000066572,
+     "peak_working_set_bytes": 107909120
+    },
+    {
+     "initialize_s": 1.3104003999997076,
+     "ping_median_s": 0.0005752500001108274,
+     "tools_list_median_s": 0.0009399499995197402,
+     "capabilities_median_s": 0.0025214500001311535,
+     "peak_working_set_bytes": 107900928
+    },
+    {
+     "initialize_s": 1.3808810999998968,
+     "ping_median_s": 0.0006235999999262276,
+     "tools_list_median_s": 0.0010253499995087623,
+     "capabilities_median_s": 0.0030502499998874555,
+     "peak_working_set_bytes": 108023808
+    },
+    {
+     "initialize_s": 1.3890738999998575,
+     "ping_median_s": 0.000527550000242627,
+     "tools_list_median_s": 0.0008882500005711336,
+     "capabilities_median_s": 0.002736450000156765,
+     "peak_working_set_bytes": 108515328
+    },
+    {
+     "initialize_s": 1.3401398999994854,
+     "ping_median_s": 0.0005356500000743836,
+     "tools_list_median_s": 0.0009081499993044417,
+     "capabilities_median_s": 0.0024101999997583334,
+     "peak_working_set_bytes": 107118592
+    },
+    {
+     "initialize_s": 1.316055199999937,
+     "ping_median_s": 0.0005566999998336541,
+     "tools_list_median_s": 0.0009078500006580725,
+     "capabilities_median_s": 0.0023679999999330903,
+     "peak_working_set_bytes": 107335680
+    },
+    {
+     "initialize_s": 1.3085923999997249,
+     "ping_median_s": 0.0005433999999695516,
+     "tools_list_median_s": 0.0009350999994239828,
+     "capabilities_median_s": 0.0024235500000031607,
+     "peak_working_set_bytes": 107978752
+    },
+    {
+     "initialize_s": 1.3157396000005974,
+     "ping_median_s": 0.0005638499997075996,
+     "tools_list_median_s": 0.0009493000002294139,
+     "capabilities_median_s": 0.0024264000003313413,
+     "peak_working_set_bytes": 107667456
+    },
+    {
+     "initialize_s": 1.3286557999999786,
+     "ping_median_s": 0.0005534000001716777,
+     "tools_list_median_s": 0.0009671499997239152,
+     "capabilities_median_s": 0.0024764999998296844,
+     "peak_working_set_bytes": 107974656
+    }
+   ]
+  }
+ },
+ "not_implemented": [
+  "xax_workspace",
+  "xax_query",
+  "xax_construct",
+  "xax_transaction",
+  "xax_build",
+  "xax_execute",
+  "xax_result (each returns a structured 'unsupported' after the host-rights check)",
+  "native sandbox",
+  "protocol 2026-07-28",
+  "Linux build of the native server"
+ ],
+ "not_tested_here": [
+  "MCP Inspector",
+  "Claude Code",
+  "Codex",
+  "Linux hosts"
+ ]
+}
