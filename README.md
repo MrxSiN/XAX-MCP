@@ -1,119 +1,122 @@
 # XAX-MCP
 
-An optional [Model Context Protocol](https://modelcontextprotocol.io) server that lets Codex, Claude Code/Desktop,
-and other MCP clients **construct, verify, edit, build, and run real XAX programs**: an agent sends a typed
-semantic-graph request, the [XAX](https://github.com/MrxSiN/XAX) toolchain verifies and compiles it to a native
-Linux x86-64 or Windows x86-64 executable, and the server runs that executable in an OS sandbox and returns a typed
-result with provenance.
+An optional [Model Context Protocol](https://modelcontextprotocol.io) server for
+[XAX](https://github.com/MrxSiN/XAX), implemented as a **native XAX program**: a verified canonical
+`xax-construct-v1` store that XAX builds into a Windows x86-64 PE32+ executable. The deployed server does not start
+Python, an MCP SDK, a shell wrapper, or another language.
 
 ```text
-MCP client ─► xax-mcp (thin adapter) ─► XAX construct / workspace / build (pinned upstream)
-                                           ├► static ELF ─► Linux sandbox (namespaces + seccomp + rlimits) ─► result + provenance
-                                           └► PE32+ ─► Windows sandbox (LPAC AppContainer + job object) ─► result + provenance
+MCP client ──newline-delimited JSON-RPC over STDIO──► xax-mcp-native.exe  (XAX-generated native code)
+                                                      ├─ STDIO framing, 4 MiB line limit, resync
+                                                      ├─ RFC 8259 JSON validation, UTF-8, depth 64
+                                                      ├─ JSON-RPC 2.0, MCP initialize/ping/tools
+                                                      ├─ tool dispatch and host-granted rights
+                                                      └─ kernel32 only
 ```
 
-XAX's invariant holds: **meaning is source.** Tool arguments are transport. A construction request becomes a
-verified canonical store, and after that the store changes only through verified XAX transactions. The adapter
-never computes a workload: results come from XAX-generated machine code.
+XAX's invariant holds: **meaning is source.** The canonical store is the authoritative program. Tool schemas and
+capability text are transport, embedded at construction time; they are never XAX source.
 
-## Status (0.5.1)
+## Status (0.6.0)
 
 | Capability | Status |
 |---|---|
-| STDIO server, 8 tools, structured errors | EXECUTED: real SDK client and raw JSON-RPC tests |
-| Per-user warm server: launch → first construct+build+execute in about 0.2 s | MEASURED ([docs/PERFORMANCE.md](docs/PERFORMANCE.md)); EXECUTED (`tests/test_warm.py`) |
-| Construct a new program (`xax-construct-v1`), build, run, typed result | EXECUTED: randomized novel computation each test run |
-| Query, verify/commit/rollback edits, stale-root rejection | EXECUTED: delegates to `xax_workspace` |
-| `argv` input read by XAX `linux.startup.*` entities | EXECUTED (`test_argv_reaches_startup_reads`) |
-| One-node 2/4/8-byte checked loads/stores on byte views (XAX ADR-231) | EXECUTED (`test_wide_byte_view_access_matches_byte_composition_and_is_smaller`, e2e over STDIO) |
-| Reopen and run previously verified stores (path A) | EXECUTED: exported stores and upstream `xb64` |
-| Sandbox (user/mount/net namespaces, empty read-only root, seccomp, rlimits) | EXECUTED on Linux x86-64; fails closed elsewhere |
-| Windows x86-64 hosts (unreleased, `main`): `windows-x86_64` construct/build/run in a capability-less LPAC AppContainer and job object | EXECUTED on Windows 11 (39 pass, 12 platform skips); no `argv`, no warm server ([docs/SECURITY.md](docs/SECURITY.md#sandbox-windows-x86-64)) |
-| Codex 0.161.0 / Claude Code 2.1.294 registration | STRUCTURAL: registered; Claude Code health check connected; no model-driven run recorded |
-| MCP Inspector 2.10.1 CLI | EXECUTED: `tools/list`, `xax_capabilities` |
-| Targets other than Linux/Windows x86-64, strings/JSON/CSV, files, network | UNIMPLEMENTED (reported by `xax_capabilities`) |
-| Streamable HTTP transport | UNIMPLEMENTED (STDIO only) |
+| STDIO transport, framing, JSON validation, JSON-RPC, MCP lifecycle, tool dispatch, host rights | **EXECUTED**: `tests/test_native_stdio.py` over the real PE32+ (42 tests) |
+| Official MCP Python SDK client (`mcp.Client`) interoperability | **EXECUTED**: handshake, `tools/list`, `tools/call` |
+| `xax_capabilities` | **EXECUTED** (native, reports the exact blockers below) |
+| `xax_workspace`, `xax_query`, `xax_transaction`, `xax_build`, `xax_result` | **UNIMPLEMENTED natively**: no native XAX compiler service (blocker B1/B2) |
+| `xax_construct` (new canonical program from a typed carrier) | **UNIMPLEMENTED natively**: no native carrier decoder (blocker B2) |
+| `xax_execute` in an OS sandbox | **UNIMPLEMENTED natively**: no native sandbox (blocker B4); fails closed |
+| Streamable HTTP transport | **UNIMPLEMENTED** (STDIO only) |
 
-Labels follow [docs/EVIDENCE.md](docs/EVIDENCE.md). Measured latencies are in [docs/evidence](docs/evidence). A launch
-forks from a per-user warm server that already loaded XAX, so it answers `initialize` in about 0.1 s and returns its
-first construct+build+execute result in about 0.2 s (0.3.1: about 6.7 s; 0.1.0: about 20 s). Without a ready warm
-server, a launch serves in-process (first result about 1.3 s, or about 42 s with an empty XAX image cache) and starts
-one for the next launch. See [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
+The protocol layer is real and measured. The compiler-backed tools are not: they answer with a structured
+`unsupported` error (or `denied_capability` before the host grants the right). No result is fabricated, and no Python
+server is used as a fallback. See [docs/NATIVE.md](docs/NATIVE.md) for the exact upstream gaps and the proposed
+native compiler service.
 
-## Install
+## Build
 
-Requires Linux x86-64 or Windows x86-64 for execution (construction and builds work wherever the XAX toolchain
-does) and Python 3.11+. Linux needs unprivileged user namespaces with seccomp (most distributions; Ubuntu 24.04 needs
-the AppArmor sysctl shown in [docs/HOSTS.md](docs/HOSTS.md#troubleshooting)); Windows needs Windows 10 1703+ for
-less privileged AppContainers. On Windows the commands are `py -m venv %USERPROFILE%\.venvs\xax-mcp` and
-`%USERPROFILE%\.venvs\xax-mcp\Scripts\xax-mcp.exe`.
+The build is development tooling and is not on the server's runtime path. It requires a checkout of XAX at the pinned
+commit and Python 3.11+ only to emit the construction carrier and invoke `xax_construct`/`xax_build`.
 
 ```bash
-python3 -m venv ~/.venvs/xax-mcp
-~/.venvs/xax-mcp/bin/pip install "xax-mcp @ git+https://github.com/MrxSiN/XAX-MCP@main"
-~/.venvs/xax-mcp/bin/xax-mcp --check --allow-execute   # prints XAX pin, toolchain fingerprint, sandbox probe
-~/.venvs/xax-mcp/bin/xax-mcp --prepare                  # readies XAX's component images, starts the warm server (optional)
+git clone https://github.com/MrxSiN/XAX ../XAX
+git -C ../XAX checkout f79b532fd4651ba808676d02f4b038e2cc271e6a
+python native/server.py ../XAX/compiler/src native
 ```
 
-This installs the official `mcp` SDK (2.3.x) and the XAX toolchain **pinned to commit
-[`44b5f3c`](https://github.com/MrxSiN/XAX/commit/44b5f3c476e94095af8185aa37cf0e00dc368267)** (XAX `main`, 2026-10-10), which provides the versioned host contract
-`xax-host-contract-v1` at revision 7 (this adapter needs revision 5 or later). The server refuses
-to start against any other XAX build unless you set `XAX_MCP_ALLOW_UNTESTED_XAX=1`
-([docs/COMPATIBILITY.md](docs/COMPATIBILITY.md)). XAX itself never depends on MCP.
+This writes `native/construction_request.json` (transport), `native/xax-mcp-native-gen0.xax` (the authoritative
+store), and `native/xax-mcp-native.exe` (the build product). The store and request are reproducible; the PE depends
+on the pinned XAX lowering. The script reads the tool schemas from [`native/schemas.py`](native/schemas.py), which is
+build tooling, not part of the server.
 
-## Register with an agent
+The pinned XAX revision is `f79b532fd4651ba808676d02f4b038e2cc271e6a` (XAX `main`, 2026-10-19; host contract
+`xax-host-contract-v1` r10; toolchain fingerprint
+`0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9`). See
+[docs/COMPATIBILITY.md](docs/COMPATIBILITY.md).
+
+## Run
 
 ```bash
-claude mcp add --scope user xax -- ~/.venvs/xax-mcp/bin/xax-mcp --allow-execute    # Claude Code
-codex mcp add xax -- ~/.venvs/xax-mcp/bin/xax-mcp --allow-execute                  # Codex
+./native/xax-mcp-native.exe --read-only
 ```
 
-Claude Desktop, Codex timeouts, removal, MCP Inspector, and troubleshooting: [docs/HOSTS.md](docs/HOSTS.md).
-A complete generic-client walkthrough: `python examples/generic_client.py`.
+The executable speaks newline-delimited JSON-RPC 2.0 on stdin/stdout. STDOUT is protocol-only; diagnostics, if any,
+go to stderr. Accepted flags: `--allow-execute`, `--read-only`, `--deny RIGHT`, `--deny=RIGHT`, and
+`--no-warm-server` (a no-op). Any other argument makes the server exit with status 2 before reading stdin.
 
-`--allow-execute` is the host owner's grant to run sandboxed native code. Without it the server can construct,
-edit and build, but not execute. Tool arguments cannot grant rights.
+Register the executable with an MCP client:
+
+```json
+{"mcpServers": {"xax": {"type": "stdio", "command": "C:/path/to/xax-mcp-native.exe", "args": ["--read-only"]}}}
+```
+
+`--allow-execute` is the host owner's grant for `xax_execute`. Tool arguments can never grant a right. With the
+current native build the grant changes only the error: execution remains refused because no native sandbox exists.
 
 ## Tools
 
-| Tool | Purpose |
-|---|---|
-| `xax_capabilities` | compiler identity and pin, target, operations, carrier types, I/O modes, rights, sandbox, maturity |
-| `xax_workspace` | open a verified `.xax` store from a host-granted root; list, describe, close workspaces |
-| `xax_query` | bounded, paginated queries: functions, nodes, operands, uses, types, effects, proofs, diff, repair |
-| `xax_construct` | verify a new program from an `xax-construct-v1` carrier; returns a workspace |
-| `xax_transaction` | verify, commit, or roll back typed edits against an exact generation and root |
-| `xax_build` | build one package entry of the current root; returns an artifact handle, digests, and provenance |
-| `xax_execute` | run an artifact in the sandbox with typed stdin, a declared stdout layout, and limits |
-| `xax_result` | fetch bounded chunks of large outputs, stored diagnostics, or canonical store bytes |
+The schemas are versioned as `xax-mcp-tools-v1` and are identical to the interface the project has exposed since
+0.5.x. The native dispatch accepts all eight names; only `xax_capabilities` has a native implementation.
 
-The reference with a worked example is in [docs/TOOLS.md](docs/TOOLS.md). There are no per-operation tools
-(`sum`, `sort`, ...): computations are XAX programs.
+| Tool | Intended capability | Current native status |
+|---|---|---|
+| `xax_capabilities` | identity, pin, rights, targets, sandbox, maturity | EXECUTED |
+| `xax_workspace` | open/identify/close a bounded store | UNIMPLEMENTED |
+| `xax_query` | bounded graph queries | UNIMPLEMENTED |
+| `xax_construct` | carrier → verified canonical root | UNIMPLEMENTED |
+| `xax_transaction` | verify/commit/rollback exact-root edits | UNIMPLEMENTED |
+| `xax_build` | build an exact root/entry/target | UNIMPLEMENTED |
+| `xax_execute` | run an artifact in an OS sandbox | UNIMPLEMENTED (fails closed) |
+| `xax_result` | bounded result/artifact retrieval | UNIMPLEMENTED |
 
 ## What this is not
 
-- It does not change how a hosted model works internally, and it cannot make a host choose XAX over the host's
-  own Python or shell tools. A host must expose this server, the model must choose it, and the host owner can
-  disable competing tools where the host allows it ([docs/HOSTS.md](docs/HOSTS.md#steering-agents-to-xax)). The
-  optional [`agent-guidance/`](agent-guidance) files suggest that behaviour to agents but do not enforce it.
-- It is not XAX-hosted. The adapter is Python, and the XAX compiler is the upstream bootstrap compiler (Python
-  with XAX-hosted components). The sandbox executor is a short audited Python launcher. None of them contains
-  workload logic ([docs/ARCHITECTURE.md](docs/ARCHITECTURE.md#what-is-and-is-not-xax)).
-- It is not a general code runner. There is no shell, no Python execution, and no fallback interpreter.
-- The warm server is a background process per user and configuration. It holds no rights and exits after 15 idle
-  minutes. `--no-warm-server` turns it off ([docs/SECURITY.md](docs/SECURITY.md#warm-server-warmpy-adr-0008)).
+- It is not a working XAX execution plugin yet. The native server can negotiate MCP and report capabilities, but it
+  cannot construct, build, query, or run a program. That is stated in every capability response, not hidden.
+- It is not a Python server. The 0.5.x Python adapter is retired; it remains in git history and in the historical
+  documents marked "Python prototype". No Python is packaged or launched by the server.
+- It does not contain workload logic. `native/server.py` only emits the construction carrier; the server's logic is
+  the canonical store.
+- It does not claim sandboxing. Execution is refused until an OS-enforced sandbox is implemented in XAX.
 
 ## Documentation
 
-[Architecture](docs/ARCHITECTURE.md) · [Tools](docs/TOOLS.md) · [Security](docs/SECURITY.md) · [Performance](docs/PERFORMANCE.md) ·
-[XAX contract](docs/XAX_CONTRACT.md) · [Compatibility](docs/COMPATIBILITY.md) · [Hosts](docs/HOSTS.md) ·
-[Evidence](docs/EVIDENCE.md) · [Upstream proposals](docs/UPSTREAM_PROPOSALS.md) · [Decisions](docs/adr) ·
-[Handoff](docs/HANDOFF.md)
+[Native server](docs/NATIVE.md) · [Compatibility](docs/COMPATIBILITY.md) · [Handoff](docs/HANDOFF.md) ·
+[Evidence](docs/EVIDENCE.md) · [XAX contract](docs/XAX_CONTRACT.md) ·
+[Upstream proposals](docs/UPSTREAM_PROPOSALS.md) · [Architecture (historical)](docs/ARCHITECTURE.md) ·
+[Tools (historical)](docs/TOOLS.md) · [Security (historical)](docs/SECURITY.md) ·
+[Performance (historical)](docs/PERFORMANCE.md) · [Hosts (historical)](docs/HOSTS.md)
+
+Documents marked historical describe the retired 0.5.x Python adapter. They are kept for provenance and for the
+porting work that remains; they are not descriptions of the deployed 0.6.0 server.
 
 ## Development
 
 ```bash
-pip install -e '.[test]'
-XAX_SOURCE_DIR=/path/to/XAX python -m pytest -q        # XAX_SOURCE_DIR enables the upstream-store test
-python scripts/record_evidence.py --out docs/evidence/new.json
+pip install pytest anyio "mcp>=2.3.0,<2.4"
+XAX_NATIVE_SRC=/path/to/XAX/compiler/src pytest -q -rs
 ```
+
+The tests are external MCP clients. They rebuild the committed store, check it byte for byte, build the PE, and drive
+it over STDIO. Python is not imported by the server.

@@ -6,11 +6,14 @@
   "Generated with" lines in commit messages, PR descriptions, or code.
 
 ## Project rules
-- No workload logic in the adapter: no per-operation tools and no Python fallbacks. Results come from
-  XAX-generated code.
+- The deployed server and every runtime component are XAX. No Python server, sidecar, wrapper, or fallback,
+  including during development. Python is allowed only as build tooling and as external test clients.
+- No workload logic in the server or build tooling: no per-operation tools, no adapter-side computation, and no
+  hard-coded results. Results must come from XAX-generated code.
 - XAX changes belong in `MrxSiN/XAX`; the dependency direction is one-way (`XAX-MCP -> XAX`).
-- When the XAX pin changes, update `compat.TESTED_XAX`, `PINNED_XAX_COMMIT`, `pyproject.toml`, the CI checkout ref,
-  and `docs/COMPATIBILITY.md` together.
+- When the XAX pin changes, update `native/server.py` (`NATIVE_XAX_COMMIT`), `pyproject.toml`, the CI checkout ref,
+  `README.md`, `docs/NATIVE.md`, and `docs/COMPATIBILITY.md` together.
 - Record new evidence in new files under `docs/evidence/`; never overwrite old evidence.
+- Do not claim a capability that is not executable natively. Use the labels in `docs/EVIDENCE.md`.
 
 `agent-guidance/` holds optional guidance for agents that *use* the server; this file is for agents that develop it.

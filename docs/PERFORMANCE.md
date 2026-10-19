@@ -1,5 +1,8 @@
 # Start-up performance
 
+> **Historical (0.5.x Python prototype).** The deployed 0.6.0 server is native and has different (protocol-only)
+> measurements in [NATIVE.md](NATIVE.md).
+
 These are MCP tool round trips on one host. They are not XAX generated-code (R4) benchmarks, and they are not the
 AI-token efficiency milestone.
 

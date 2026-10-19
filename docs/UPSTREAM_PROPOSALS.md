@@ -1,5 +1,8 @@
 # Upstream XAX proposals and their status
 
+> **Historical (0.5.x Python prototype).** The central proposal is still current: a native, versioned XAX compiler
+> service is the blocker for the native 0.6.0 server's compiler-backed tools ([NATIVE.md](NATIVE.md)).
+
 These were the smallest general upstream interfaces that would remove limitations of this adapter. They are now
 upstream decisions in `MrxSiN/XAX`, committed as `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183` and merged into XAX `main`
 by `5c9ba68` (2026-10-08; renumbered ADR-222 to ADR-225 in the merge). XAX-MCP 0.2.0 pinned `f38cbee`.

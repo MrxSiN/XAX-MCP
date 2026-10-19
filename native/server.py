@@ -11,23 +11,22 @@ is the XAX program; Python is not on its request path.
 from __future__ import annotations
 
 import json
-import re
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from dsl import Program  # noqa: E402
 
-ROOT = Path(__file__).resolve().parents[1]
-VERSION = re.search(r'__version__ = "([^"]+)"', (ROOT / "src/xax_mcp/__init__.py").read_text()).group(1) + "+native"
-NATIVE_XAX_COMMIT = "6885f89f2d2e9ae4771271157013c29bf35e2ccf"  # XAX main; the store and PE are byte-identical under 0876b59 too (docs/NATIVE.md)
+VERSION = "0.6.0+native"
+NATIVE_XAX_COMMIT = "f79b532fd4651ba808676d02f4b038e2cc271e6a"  # XAX main, 2026-10-19; host contract xax-host-contract-v1 r10
 LMAX = 4 * 1024 * 1024  # largest accepted message line
 MAX_ARGUMENTS = 1024 * 1024  # policy.max_request_bytes default
 MAX_DEPTH = 64
 HANDSHAKE_VERSIONS = ("2024-11-05", "2025-03-26", "2025-06-18", "2025-11-25")
-INSTRUCTIONS = ("Use XAX for supported computation: xax_capabilities -> xax_construct (xax-construct-v1) -> xax_build -> "
-                "xax_execute. Report unsupported functionality instead of silently using another language. Carrier JSON "
-                "is transport, never XAX source.")
+INSTRUCTIONS = ("Call xax_capabilities first; it reports the exact XAX pin and which tools this build implements. The "
+                "current native build implements the MCP protocol and capabilities only: compiler-backed tools answer "
+                "unsupported. Never silently substitute Python or another language. Carrier JSON is transport, never "
+                "XAX source.")
 RIGHTS = ("build", "execute", "mutate", "read")  # sorted; bit k is RIGHTS[k]
 DEFAULT_RIGHTS = 0b1101  # read, mutate, build
 TOOL_RIGHTS = {"xax_workspace": "read", "xax_query": "read", "xax_construct": "mutate", "xax_transaction": "mutate",
@@ -53,8 +52,7 @@ def escape(raw: bytes) -> bytes:
 
 
 def tools_json() -> bytes:
-    sys.path.insert(0, str(ROOT / "src"))
-    from xax_mcp.schemas import SCHEMA_VERSION, TOOLS
+    from schemas import SCHEMA_VERSION, TOOLS
 
     return compact({"tools": [{"name": name, "title": spec["title"], "description": spec["description"],
                                "inputSchema": spec["inputSchema"], "annotations": spec["annotations"],
@@ -71,12 +69,15 @@ def error_payload(code: str, message: str, repair=None, details=None) -> dict:
 
 
 def capabilities_payload() -> dict:
-    tools = {name: ("UNIMPLEMENTED natively: needs a native XAX compiler service, which XAX does not provide for "
-                    "windows-x86_64 hosts (docs/NATIVE.md)") for name in TOOL_RIGHTS}
+    tools = {name: ("UNIMPLEMENTED natively: XAX publishes no native construct/carrier decoder and no committed native "
+                    "compiler service for windows-x86_64 hosts; the local xaxc-windows.exe prototype is not part of the "
+                    "pinned XAX tree (docs/NATIVE.md)") for name in TOOL_RIGHTS}
     return {"ok": True,
             "server": {"name": "xax-mcp", "version": VERSION, "transport": "stdio",
                        "implementation": "native XAX program (windows-x86_64 PE32+ built from a canonical .xax store)",
                        "python_on_request_path": False},
+            "xax": {"pinned_commit": NATIVE_XAX_COMMIT, "host_contract": "xax-host-contract-v1 r10",
+                    "role": "build-time compiler; the deployed server starts no XAX compiler service"},
             "protocol": {"framing": "newline-delimited JSON-RPC 2.0", "versions": list(HANDSHAKE_VERSIONS),
                          "max_message_bytes": LMAX, "max_json_depth": MAX_DEPTH},
             "authority": {"rights": "__RIGHTS__", "max_request_bytes": MAX_ARGUMENTS, "store_roots": 0,
@@ -765,8 +766,9 @@ def build_program() -> Program:  # noqa: C901 - one straight-line description of
         flag_ = "--allow-execute" if right == "execute" else f"--grant {right}"
         denied = error_payload("denied_capability", f"this server was not granted the '{right}' right by its host configuration",
                                repair=[f"the host owner may add {flag_} to the server launch command"])
-        unsupported = error_payload("unsupported", f"{tool} is not implemented by the native XAX server: it needs a native "
-                                    "XAX compiler service, which XAX does not provide for windows-x86_64 hosts (docs/NATIVE.md)")
+        unsupported = error_payload("unsupported", f"{tool} is not implemented by the native XAX server: XAX publishes "
+                                    "no native construct/carrier decoder and no committed native compiler service for "
+                                    "windows-x86_64 hosts (docs/NATIVE.md)")
         allowed, refused = blk.if_(blk.cmp("ne", blk.band("rights", b32(1 << RIGHTS.index(right))), b32(0)))
         respond(refused, tool_result(compact(denied), True))
         respond(allowed, tool_result(compact(unsupported), True))

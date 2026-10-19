@@ -2,8 +2,8 @@
 
 The executable is the PE32+ that XAX builds from the committed canonical store.  Set XAX_NATIVE_SRC to a checkout's
 ``compiler/src`` at ``NATIVE_XAX_COMMIT`` (the test rebuilds the store, checks it byte for byte against the committed
-one, and builds the PE), or XAX_MCP_NATIVE_EXE to an already built executable.  XAX_MCP_REFERENCE_PYTHON (an
-interpreter with this repository's dependencies) adds the differential run against this tree's Python server.
+one, and builds the PE), or XAX_MCP_NATIVE_EXE to an already built executable.  ``native/schemas.py`` is build tooling:
+it defines the tool schemas that the carrier embeds.  Python is a test client here, never a server.
 """
 from __future__ import annotations
 
@@ -34,7 +34,7 @@ LMAX = 4 * 1024 * 1024
 
 
 def _schemas():
-    spec = importlib.util.spec_from_file_location("native_test_schemas", ROOT / "src/xax_mcp/schemas.py")
+    spec = importlib.util.spec_from_file_location("native_test_schemas", ROOT / "native/schemas.py")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -122,7 +122,7 @@ def test_initialize_negotiates_handshake_versions(server):
         assert result["protocolVersion"] == "2025-11-25", params
     assert result["capabilities"] == {"tools": {"listChanged": False}}
     assert result["serverInfo"]["name"] == "xax-mcp" and result["serverInfo"]["version"].endswith("+native")
-    assert "xax_capabilities -> xax_construct" in result["instructions"]
+    assert "Call xax_capabilities first" in result["instructions"]
     assert server.close()[0] == 0
 
 
@@ -335,40 +335,6 @@ def test_concurrent_servers_are_independent(exe):
     finally:
         for s in servers:
             s.process.kill()
-
-
-@pytest.mark.skipif(not os.environ.get("XAX_MCP_REFERENCE_PYTHON"), reason="set XAX_MCP_REFERENCE_PYTHON")
-def test_differential_against_python_server(exe):
-    """Same requests to both servers; only documented differences are normalized (docs/NATIVE.md)."""
-    requests = [
-        {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2025-06-18", "capabilities": {},
-                                                                        "clientInfo": {"name": "t", "version": "0"}}},
-        {"jsonrpc": "2.0", "id": 2, "method": "initialize", "params": {"protocolVersion": "1999-01-01", "capabilities": {},
-                                                                        "clientInfo": {"name": "t", "version": "0"}}},
-        {"jsonrpc": "2.0", "id": 3, "method": "ping"},
-        {"jsonrpc": "2.0", "id": "s4", "method": "tools/list"},
-        {"jsonrpc": "2.0", "id": 5, "method": "nope"},
-        {"jsonrpc": "2.0", "id": 6, "method": "tools/call", "params": {"name": "bogus", "arguments": {}}},
-        {"jsonrpc": "2.0", "id": 7, "method": "tools/call", "params": {"name": "xax_capabilities", "arguments": {"x": 1}}},
-        {"jsonrpc": "2.0", "id": 8, "method": "tools/call", "params": {"name": "xax_execute", "arguments": {"artifact": "art_x"}}},
-    ]
-    env = {**os.environ, "XAX_MCP_ALLOW_UNTESTED_XAX": "1", "XAX_MCP_WARM_SERVER": "0", "XAX_MCP_LOG": "WARNING",
-           "PYTHONPATH": os.pathsep.join([str(ROOT / "src"), *filter(None, [os.environ.get("XAX_NATIVE_SRC")])])}
-    reference = subprocess.Popen([os.environ["XAX_MCP_REFERENCE_PYTHON"], "-m", "xax_mcp", "--no-warm-server"], stdin=subprocess.PIPE,
-                                 stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, env=env)
-    native = Server(exe)
-    try:
-        for message in requests:
-            reference.stdin.write(json.dumps(message).encode() + b"\n")
-            reference.stdin.flush()
-            expected, actual = json.loads(reference.stdout.readline()), native.exchange(message)
-            if message["method"] == "initialize":  # documented: the version string carries "+native"
-                expected["result"]["serverInfo"].pop("version")
-                actual["result"]["serverInfo"].pop("version")
-            assert actual == expected, message
-    finally:
-        reference.kill()
-        native.process.kill()
 
 
 def test_standard_sdk_client(exe):

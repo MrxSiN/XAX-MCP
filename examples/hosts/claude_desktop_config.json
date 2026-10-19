@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "xax": {
-      "command": "/ABSOLUTE/PATH/TO/venv/bin/xax-mcp",
-      "args": ["--allow-execute"]
+      "command": "C:/ABSOLUTE/PATH/TO/xax-mcp-native.exe",
+      "args": ["--read-only"]
     }
   }
 }

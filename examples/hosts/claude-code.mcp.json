@@ -2,8 +2,8 @@
   "mcpServers": {
     "xax": {
       "type": "stdio",
-      "command": "xax-mcp",
-      "args": ["--allow-execute"],
+      "command": "C:/ABSOLUTE/PATH/TO/xax-mcp-native.exe",
+      "args": ["--read-only"],
       "env": {}
     }
   }

@@ -1,5 +1,9 @@
 # Agent hosts: register, use, remove, troubleshoot
 
+> **Historical (0.5.x Python prototype).** The registration syntax is still useful, but replace the Python
+> `xax-mcp` command with `native/xax-mcp-native.exe`. The deployed server's compiler-backed tools are
+> UNIMPLEMENTED; see [NATIVE.md](NATIVE.md).
+
 Install first ([README](../README.md#install)). In the examples, `XAX=~/.venvs/xax-mcp/bin/xax-mcp`. Use an
 absolute path when the host does not inherit your shell `PATH`.
 

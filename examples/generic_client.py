@@ -1,54 +1,38 @@
-"""Generic MCP client walkthrough (official `mcp` SDK, STDIO): discover -> construct -> build -> execute.
+"""Generic MCP client walkthrough (official `mcp` SDK, STDIO) against the native XAX server.
 
-    python examples/generic_client.py [--server xax-mcp] [CARRIER.json] [x1 x2 ...]
+    python examples/generic_client.py [--server PATH/TO/xax-mcp-native.exe]
 
-The default carrier (examples/carriers/poly_reduce.json) reads n little-endian u64 values from stdin and writes
-(sum 3x^2+5x+7 mod 2^64, max x).  The carrier is a typed semantic-graph request (transport), not source code.
+This is an external test client, not part of the server.  It lists the tools, reads the native capability report,
+and demonstrates the honest `unsupported` result for a compiler-backed tool.  The current native build does not
+construct, build, or execute programs; see docs/NATIVE.md.
 """
 from __future__ import annotations
 
 import argparse
 import json
-import shutil
 import sys
-from pathlib import Path
 
 import anyio
 from mcp import Client
 from mcp.client.stdio import StdioServerParameters
 
-HERE = Path(__file__).resolve().parent
-
 
 async def main(args) -> int:
-    server = StdioServerParameters(command=args.server, args=["--allow-execute"])
-    async with Client(server, read_timeout_seconds=600) as client:
-        async def call(name, arguments=None):
-            payload = (await client.call_tool(name, arguments or {})).structured_content
-            print(f"-> {name}: ok={payload.get('ok')}", file=sys.stderr)
-            if not payload.get("ok"):
-                print(json.dumps(payload["error"], indent=1), file=sys.stderr)
-                raise SystemExit(1)
-            return payload
-
-        print("tools:", [t.name for t in (await client.list_tools()).tools], file=sys.stderr)
-        caps = await call("xax_capabilities")
-        print("xax:", caps["xax"]["status"], caps["xax"]["pinned_commit"][:12], "sandbox:",
-              caps["targets"][0]["execute"]["available"], file=sys.stderr)
-        built = await call("xax_construct", {"request": json.loads(Path(args.carrier).read_text())})
-        artifact = await call("xax_build", {"workspace": built["workspace"]})
-        run = await call("xax_execute", {"artifact": artifact["artifact"],
-                                         "input": {"ints": [{"type": "b64", "value": int(x)} for x in args.values]},
-                                         "output": {"ints": ["b64", "b64"]}})
-        print(json.dumps({"root": built["root"], "artifact_blake3": artifact["artifact_digest_blake3"],
-                          "exit_status": run["exit_status"], "values": run["stdout"]["values"],
-                          "evidence": run["evidence"]["label"]}, indent=1))
+    server = StdioServerParameters(command=args.server, args=["--read-only"])
+    async with Client(server, read_timeout_seconds=60) as client:
+        tools = await client.list_tools()
+        print("tools:", [tool.name for tool in tools.tools], file=sys.stderr)
+        capabilities = (await client.call_tool("xax_capabilities", {})).structured_content
+        print(json.dumps({"server": capabilities["server"],
+                          "xax": capabilities["xax"],
+                          "rights": capabilities["authority"]["rights"],
+                          "maturity": capabilities["maturity"]}, indent=1))
+        denied = (await client.call_tool("xax_construct", {"request": {}})).structured_content
+        print("xax_construct:", json.dumps(denied, indent=1), file=sys.stderr)
     return 0
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--server", default=shutil.which("xax-mcp") or "xax-mcp")
-    parser.add_argument("carrier", nargs="?", default=str(HERE / "carriers" / "poly_reduce.json"))
-    parser.add_argument("values", nargs="*", default=["1", "2", "3"])
+    parser.add_argument("--server", required=True)
     raise SystemExit(anyio.run(main, parser.parse_args()))

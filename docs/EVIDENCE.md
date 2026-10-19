@@ -1,27 +1,45 @@
 # Evidence and claim labels
 
 Labels: **PROVEN** (formal or exhaustive argument), **EXECUTED** (ran end to end and checked against an
-independent oracle), **MEASURED** (raw samples recorded), **STRUCTURAL** (present and wired, but not exercised
-end to end), **PROTOTYPE** (works for a narrow case), **UNIMPLEMENTED**.
+independent oracle), **MEASURED** (raw samples recorded), **STRUCTURAL** (present and wired, but not exercised end
+to end), **PROTOTYPE** (works for a narrow case), **UNIMPLEMENTED**.
+
+Evidence files are append-only. A new pin or build writes a new file; older files are never edited. Raw samples for
+the current build are in `docs/evidence/native-windows-x86_64-protocol-f79b532.json` and
+`docs/evidence/native-windows-x86_64-build-f79b532.json`. The 6885f89 native evidence file and every Python-era
+file remain unchanged.
+
+## Current native server (0.6.0)
 
 | Claim | Label | Evidence |
 |---|---|---|
-| An MCP client initializes the STDIO server, discovers 8 tool schemas, and gets real compiler/target capabilities | EXECUTED | `test_initialize_discover_construct_build_execute_novel_program`, `test_stdout_carries_only_json_rpc` |
-| A novel computation (coefficients and inputs drawn at run time) is constructed, verified, built, and executed, and the result matches an independent oracle | EXECUTED | same test; `test_novel_random_computation_runs_as_xax_generated_code`; `docs/evidence/*.json` |
-| The result comes from XAX-generated code, not the adapter | EXECUTED | committing one constant-node edit changes the artifact digest and the native result (`test_semantic_edit_changes_the_executed_result`); the adapter has no arithmetic over inputs (`io_codec` only reframes bytes) |
-| Edit/verify/commit/rollback and stale-root rejection through MCP | EXECUTED | `test_transaction_and_stale_root_through_mcp`, `test_stale_root_is_rejected_not_refreshed`, `test_verify_then_rollback_leaves_root_unchanged` |
-| Previously verified stores reopen and run (path A) | EXECUTED | `test_two_clients_are_isolated_and_stores_reopen`; upstream xb64 gen0/gen1 (`test_upstream_store.py`, RFC 4648 vector and both wrap widths) |
-| Sandbox denies filesystem access, enforces wall, CPU, and output limits, cancels, and dies with the server | EXECUTED | `tests/test_security.py`, `test_server_crash_kills_running_artifact` |
-| Fails closed without isolation | EXECUTED | `test_execution_fails_closed_without_sandbox`; also observed for real when a launcher bug made the probe fail during development |
-| Network denial | STRUCTURAL | empty network namespace and seccomp deny `socket`; no carrier entity can express a socket call, so there is no end-to-end test |
-| argv reaches XAX startup reads in the sandbox | EXECUTED | `test_argv_reaches_startup_reads` (argv[1] echoed, argc as exit status) |
-| One 8-byte checked load/store on a byte view equals eight 1-byte accesses, with a smaller artifact | EXECUTED | `test_wide_byte_view_access_matches_byte_composition_and_is_smaller` (randomized; 647 vs 1,668 artifact bytes for `poly_reduce`) |
-| Cold and warm tool latency (0.5.0) | MEASURED | `docs/evidence/e2e-linux-x86_64-{cold,warm}-{in-process,warm-server}-0.5.0.json`: warm server first construct+build+execute 0.18–0.19 s after launch, `--prepare` 3.6 s (populated cache) / 24.4 s (empty); in-process 1.3 s / 41.8 s; cached execute median ≈ 32–36 ms. Summary in PERFORMANCE.md |
-| Cold and warm tool latency (0.3.0) | MEASURED | `docs/evidence/e2e-linux-x86_64-{cold,warm}-0.3.0.json`: warm cache first construct+build+execute about 3.7 s after launch (server warm-up 6.9 s, overlapping initialize), cold cache about 47 s; cached execute median ≈ 35 ms. The warm-start increase over 0.2.0 comes from the larger upstream typing store (S8c.9–S8c.13) |
-| Cold and warm tool latency (0.2.0, historical) | MEASURED | `docs/evidence/e2e-linux-x86_64-{cold,warm}-0.2.0.json`: warm cache first construct+build+execute 0.84 s after launch, cold cache 38 s; cached execute median ≈ 32 ms |
-| Cold and warm tool latency (0.1.0, historical) | MEASURED | `docs/evidence/e2e-linux-x86_64-{cold,warm}.json` (cached execute median ≈ 34–39 ms; build miss ≈ 56–60 ms; construct ≈ 26 ms; first call waits 20–50 s for XAX warm-up) |
-| Codex / Claude Code registration | STRUCTURAL | CLI registration verified; Claude Code health check connected; no model-driven session |
-| Strings, JSON/CSV, files, network, other targets | UNIMPLEMENTED | not reachable through `xax-construct-v1` at the pinned XAX; reported by `xax_capabilities` |
+| An MCP client initializes the native STDIO server, negotiates four handshake versions, discovers the eight tool schemas, and calls tools | EXECUTED | `tests/test_native_stdio.py`; 42 passed on Windows 11 x86-64 |
+| The server is an XAX-built PE32+ and the committed canonical store is reproducible | EXECUTED | store root `2a87c9e5…a238`; store SHA-256 `c367233a…917e`; artifact SHA-256 `b98ea071…23d6`; `test_build_is_deterministic` |
+| No Python, MCP SDK, shell wrapper, or other non-XAX service is on the request path | EXECUTED | the executable's imports are kernel32 only; the test client is external; `xax_capabilities.server.python_on_request_path` is false |
+| The native JSON validator matches Python's strict RFC 8259/UTF-8 parser | EXECUTED | 1500 randomized cases in `test_json_validation_matches_python_strict_parser` |
+| Host rights come only from launch configuration, never from tool arguments | EXECUTED | 7 flag sets and 8 rejected forms in `test_host_rights_come_from_launch_flags` / `test_unknown_flags_fail_closed` |
+| The official MCP Python SDK client interoperates (STDIO) | EXECUTED | `test_standard_sdk_client` (`mcp.Client`, mcp 2.3.0) |
+| Protocol latency and memory (native, protocol layer only) | MEASURED | `native-windows-x86_64-protocol-f79b532.json`: initialize 11.5 ms, ping 17.5 µs, tools/list 97.1 µs, capabilities 43.0 µs, peak working set 8.16 MB |
+| `xax_capabilities` reports the exact pin, rights, and blockers | EXECUTED | every test calls it; the payload names B1/B2/B4 |
+| `xax_workspace`, `xax_query`, `xax_construct`, `xax_transaction`, `xax_build`, `xax_result` | UNIMPLEMENTED | structured `unsupported`; docs/NATIVE.md B1/B2 |
+| `xax_execute` | UNIMPLEMENTED | `denied_capability` without the host grant; `unsupported` with it; no native sandbox (B4) |
+| A novel computation is constructed, built, and executed through MCP | UNIMPLEMENTED | not claimable until the native compiler service and sandbox exist |
+| Sandbox isolation and resource limits | UNIMPLEMENTED | execution is refused, not sandboxed |
+| Streamable HTTP transport | UNIMPLEMENTED | STDIO only |
 
-The MCP latencies are tool round trips on one shared host. They are not XAX R4 generated-code benchmarks, and
-they are not the deferred AI-token efficiency milestone.
+The MCP latencies are tool round trips on one shared host. They are not XAX R4 generated-code benchmarks, and they
+are not the deferred AI-token efficiency milestone.
+
+## Historical Python adapter (0.1.0 - 0.5.1)
+
+These claims were executed by the retired Python server and are kept for provenance and for the porting work. They
+are not claims about the 0.6.0 native server.
+
+| Claim | Label | Evidence |
+|---|---|---|
+| Python adapter constructed, built, and executed novel computations on Linux and Windows | EXECUTED | `docs/evidence/e2e-*-0.5.1.json`, `e2e-windows-x86_64-warm-in-process-unreleased-44b5f3c.json`, and the historical tests in git history |
+| Python sandbox denied filesystem/network access and enforced limits | EXECUTED | `tests/test_security.py` in git history |
+| Warm-server start-up: first construct+build+execute about 0.2 s | MEASURED | `docs/evidence/*-0.5.1.json`; `docs/PERFORMANCE.md` (historical) |
+| Codex/Claude registration and MCP Inspector | STRUCTURAL | `docs/HOSTS.md` (historical); no model-driven session |
+
+Do not reinterpret those runs as evidence for the native server. The native server has no compiler-backed tools yet.

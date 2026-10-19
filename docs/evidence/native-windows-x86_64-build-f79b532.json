@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-19",
+  "status": "EXECUTED",
+  "scope": "Native XAX MCP server: canonical store construction, PE32+ build, and protocol conformance on Windows x86-64. No compiler-backed tool is implemented and no sandbox is claimed.",
+  "xax_mcp_version": "0.6.0",
+  "xax": {
+    "repository": "https://github.com/MrxSiN/XAX",
+    "commit": "f79b532fd4651ba808676d02f4b038e2cc271e6a",
+    "commit_date": "2026-10-19",
+    "host_contract": "xax-host-contract-v1",
+    "host_contract_revision": 10,
+    "toolchain_fingerprint_sha256": "0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9"
+  },
+  "build": {
+    "tool": "native/server.py (build tooling, not on the request path)",
+    "construction_carrier": "native/construction_request.json",
+    "construction_carrier_bytes": 765770,
+    "store": "native/xax-mcp-native-gen0.xax",
+    "store_root": "2a87c9e5b92b9ee2acd5db04e9889bcb5b1feebc3c5717b9f33f244ed015a238",
+    "release_request": "88cf99ae9ac9fac6b79b73bc1c45b6bfdfadf1421754193fe21a4eb9a1c57fa3",
+    "store_bytes": 923675,
+    "store_sha256": "c367233a7b05e517e4e4d8829f2f57a904826392a5f75b08abe3b175b294917e",
+    "artifact": "native/xax-mcp-native.exe",
+    "artifact_bytes": 234496,
+    "artifact_sha256": "b98ea0715498eca82d3ebee521176c5cf2e2013e8d1836d1ef47f3269ea323d6",
+    "functions": 117
+  },
+  "test_client": {
+    "python": "3.12.10",
+    "mcp_sdk": "2.3.0",
+    "pytest": "installed in .venv",
+    "command": "XAX_NATIVE_SRC=D:\\GitHub\\XAX\\compiler\\src python -m pytest tests/test_native_stdio.py -q -rs",
+    "result": "42 passed in 29.85s",
+    "coverage": [
+      "four MCP handshake versions; unknown offers",
+      "ping, tools/list, tools/call",
+      "1500-case randomized JSON validation differential against Python's strict parser",
+      "JSON-RPC error taxonomy; exact id echo",
+      "framing: CRLF, 500 sequential requests, 4 MiB limit and resync, EOF without newline",
+      "host rights from launch flags; rejected flags exit 2 before stdin",
+      "concurrent independent servers",
+      "official mcp.Client SDK interoperability",
+      "committed store/request equality and deterministic PE rebuild"
+    ]
+  },
+  "measurements": {
+    "evidence": "docs/evidence/native-windows-x86_64-protocol-f79b532.json",
+    "initialize_median_s": 0.011450599999989208,
+    "ping_median_s": 0.00001745000008668285,
+    "tools_list_median_s": 0.00009705000024951005,
+    "capabilities_median_s": 0.000043000000005122274,
+    "peak_working_set_bytes": 8556544
+  },
+  "unimplemented": {
+    "xax_workspace": "no native compiler service (docs/NATIVE.md B1/B2)",
+    "xax_query": "no native compiler service (B1/B2)",
+    "xax_construct": "no native construct/carrier decoder (B2)",
+    "xax_transaction": "no native compiler service (B1/B2)",
+    "xax_build": "no committed native compiler for the pinned Windows tree (B1)",
+    "xax_execute": "no native sandbox (B4); fails closed",
+    "xax_result": "no session handles yet"
+  },
+  "host": {
+    "os": "Windows-11-10.0.26300-SP0",
+    "architecture": "AMD64",
+    "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+    "logical_cpus": 16
+  },
+  "notes": [
+    "The 6885f89 evidence file is unchanged; this is a new build at a new pin.",
+    "The local D:\\GitHub\\XAX\\build\\windows_helpers\\xaxc-windows.exe prototype is not part of the pinned XAX tree and is not used by the server.",
+    "No Python, MCP SDK, shell wrapper, or other non-XAX service is started by the deployed executable."
+  ]
+}

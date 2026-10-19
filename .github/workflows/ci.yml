@@ -9,76 +9,42 @@ permissions:
   contents: read
 
 env:
-  XAX_COMMIT: 44b5f3c476e94095af8185aa37cf0e00dc368267
+  XAX_COMMIT: f79b532fd4651ba808676d02f4b038e2cc271e6a
 
 jobs:
-  test:
-    runs-on: ubuntu-24.04
-    strategy:
-      fail-fast: false
-      matrix:
-        python: ["3.11", "3.13"]
+  native-windows:
+    runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python }}
-      - name: Allow unprivileged user namespaces (Ubuntu 24.04 AppArmor restriction)
-        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
-      - name: Isolated checkout of the pinned upstream XAX (test data only; never imported from here)
+
+      - name: Isolated checkout of the pinned upstream XAX (build toolchain only)
         uses: actions/checkout@v4
         with:
           repository: MrxSiN/XAX
           ref: ${{ env.XAX_COMMIT }}
           path: upstream-xax
-      - name: Install xax-mcp (pulls XAX from its git pin)
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install external test client and the pinned XAX build toolchain
         run: |
-          python -m venv .venv
-          .venv/bin/pip install -e '.[test]'
-      - name: Compatibility and sandbox check
-        run: .venv/bin/xax-mcp --check --allow-execute
-      - name: Tests
+          python -m pip install --upgrade pip
+          python -m pip install pytest anyio "mcp>=2.3.0,<2.4" -e upstream-xax/compiler
+
+      - name: Build the native XAX server from the pinned compiler
+        run: python native/server.py upstream-xax/compiler/src native
+
+      - name: Verify the committed store and drive the PE32+ over STDIO
         env:
-          XAX_MCP_REQUIRE_SANDBOX: "1"
-          XAX_SOURCE_DIR: ${{ github.workspace }}/upstream-xax
-        run: .venv/bin/python -m pytest -q -rs
-      - name: Record evidence (artifact only; committed evidence is curated by hand)
-        run: |
-          .venv/bin/python scripts/record_evidence.py --cold-cache --out evidence.json
-          .venv/bin/python scripts/record_evidence.py --mode warm-server --out evidence-warm-server.json
+          XAX_NATIVE_SRC: ${{ github.workspace }}\upstream-xax\compiler\src
+        run: python -m pytest -q -rs
+
+      - name: Record protocol measurements (artifact only; committed evidence is curated by hand)
+        run: python native/bench.py native/xax-mcp-native.exe > evidence-native.json
+
       - uses: actions/upload-artifact@v4
         with:
-          name: evidence-py${{ matrix.python }}
-          path: evidence*.json
-
-  test-windows:
-    runs-on: windows-2022
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-      - name: Install xax-mcp (pulls XAX from its git pin)
-        run: |
-          python -m venv .venv
-          .venv\Scripts\pip install -e ".[test]"
-      - name: Compatibility and sandbox check
-        run: .venv\Scripts\xax-mcp --check --allow-execute
-      - name: Tests
-        env:
-          XAX_MCP_REQUIRE_SANDBOX: "1"
-        run: .venv\Scripts\python -m pytest -q -rs
-
-  clean-install:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-      - name: Install from the repository URL into a clean venv
-        run: |
-          python -m venv /tmp/v
-          /tmp/v/bin/pip install "xax-mcp @ git+https://github.com/${{ github.repository }}@${{ github.sha }}"
-          /tmp/v/bin/xax-mcp --version
-          /tmp/v/bin/xax-mcp --check | tee check.json || true
-          /tmp/v/bin/python -c "import json; d=json.load(open('check.json')); assert d['xax']['status']=='tested', d"
+          name: native-evidence
+          path: evidence-native.json
