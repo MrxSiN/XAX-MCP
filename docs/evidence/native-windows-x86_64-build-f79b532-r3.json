@@ -1,0 +1,81 @@
+{
+  "schema": "xax-mcp-evidence-v1",
+  "claim": "The native server store and PE are reproducible from native/server.py at the pinned XAX commit, and the PE is the deployed program (now including the sandboxed-execution path).",
+  "label": "EXECUTED",
+  "recorded": "2026-10-20",
+  "server_version": "0.7.0+native",
+  "xax_commit": "f79b532fd4651ba808676d02f4b038e2cc271e6a",
+  "xax_revision": "main, 2026-10-19",
+  "host_contract": "xax-host-contract-v1 r10",
+  "toolchain_fingerprint": "0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9",
+  "platform": "windows-x86_64",
+  "host": {
+    "cpu": "AMD Ryzen 9 5900HS with Radeon Graphics",
+    "logical_cpus": 16,
+    "os": "Microsoft Windows 11 Pro 10.0.26300",
+    "python": "3.12.10 (build-time tooling and test client only)"
+  },
+  "store": {
+    "path": "native/xax-mcp-native-gen0.xax",
+    "root": "baec162e4bfb177fff18c3d36efdbd6e2ad0a0dec6cb412874fcbd18c12dd442",
+    "bytes": 1020614,
+    "sha256": "bbe28c1e5568abf40cb2d38a354f4dcbaae09b231abeb04f87674d5f1a70e25f"
+  },
+  "release_request": "9c3d4d22496286e8ff7c8ea0255ad404227509c5af58e662015b395a8d2c2e05",
+  "artifact": {
+    "bytes": 318464,
+    "sha256": "0493e7964deacf47c257850cdbd513aceae09bd9211776caf2b810ff01fd0521",
+    "imports": {
+      "kernel32.dll": [
+        "CreateDirectoryA",
+        "ExitProcess",
+        "GetCommandLineA",
+        "GetEnvironmentVariableA",
+        "GetFileAttributesA",
+        "GetModuleFileNameA",
+        "GetStdHandle",
+        "MoveFileExA",
+        "ReadFile",
+        "VirtualAlloc",
+        "VirtualFree",
+        "WriteFile",
+        "lstrcpynA"
+      ],
+      "msvcrt.dll": [
+        "_close",
+        "_lseek",
+        "_open",
+        "_read",
+        "_spawnv",
+        "_write"
+      ]
+    },
+    "note": "kernel32 is the protocol/OS surface; msvcrt opens/reads/writes files and spawns both the host-granted native compiler and the sandbox launcher. GetModuleFileNameA and CreateDirectoryA were added for xax_execute (locate the executor beside the server, create <work>\\exec). No Python DLL, MCP SDK, or shell is imported."
+  },
+  "functions": 171,
+  "determinism": {
+    "test": "tests/test_native_stdio.py::test_build_is_deterministic",
+    "result": "repeated rebuilds from native/server.py (and native/sandbox.py for the executor store) produce the committed stores byte for byte and the same PE SHA-256 values"
+  },
+  "companion_artifact": {
+    "path": "native/xax-mcp-sandbox-gen0.xax",
+    "root": "7ef7099d5358bf022715faff1ef26387c1486c554ed2f7d9145bd9d8953ef8b6",
+    "store_bytes": 74434,
+    "store_sha256": "588f57c0fa69eb175b6e06e88c73977292d42c06dfc5b814ec48cc5710bab2b8",
+    "artifact_bytes": 25600,
+    "artifact_sha256": "6d563e0f23e4f402d55c82b200d42bce91c41c98aab101267e67d3645a1d37e2",
+    "functions": 8,
+    "note": "the executor is a separate native XAX program built by native/sandbox.py; details in native-windows-x86_64-sandbox-f79b532.json"
+  },
+  "provenance": {
+    "old_evidence_unchanged": [
+      "docs/evidence/native-windows-x86_64-build-f79b532.json",
+      "docs/evidence/native-windows-x86_64-build-f79b532-r2.json",
+      "docs/evidence/native-windows-x86_64-chain-f79b532.json",
+      "docs/evidence/native-windows-x86_64-protocol-f79b532.json",
+      "docs/evidence/native-*.json (6885f89)"
+    ],
+    "supersedes_for_build_identity": "docs/evidence/native-windows-x86_64-build-f79b532-r2.json",
+    "why_it_changed": "xax_execute was wired to a new native executor: the server gained sandbox_path, tool_execute, the <work>\\exec paths and the executor argv; the store, requests and both PEs were rebuilt and re-tested"
+  }
+}

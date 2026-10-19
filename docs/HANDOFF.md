@@ -12,19 +12,22 @@
 - `native/server.py`, `native/dsl.py`, and `native/schemas.py` are build tooling. They are not on the request path.
 - `native/xax-mcp-seed.xax` is a committed form-2 build-request seed; `native/chain.py` authors `XAXEDIT1` carriers
   and drives the native compiler for tests.
-- Four tools are a **PROTOTYPE** over a host-granted native compiler: `xax_workspace` and `xax_query` describe the
-  current store's root and byte size, `xax_build` runs `resolve` + `build`, and `xax_transaction` applies one
-  `XAXEDIT1` record with `edit`. Without `XAX_MCP_COMPILER`/`XAX_MCP_WORK`/`XAX_MCP_STORE` they fail closed with
-  `denied_capability`.
-- `xax_construct`, `xax_execute` and `xax_result` are **UNIMPLEMENTED natively** and return structured `unsupported`
-  errors. `xax_execute` also fails closed because no native sandbox exists.
-- Tests: `tests/test_native_stdio.py`, 43 passed and 1 skipped (the Linux build) in 56 s on Windows 11, Python
-  3.12.10 (test client only), mcp 2.3.0, with `XAX_MCP_TEST_COMPILER` set. Without the compiler grant, 42 passed and
-  2 skipped. The suite rebuilds the committed store, checks it byte for byte, builds the PE, drives it over STDIO,
-  and (when granted) runs the seed -> build -> transaction chain.
-- Evidence: new files `docs/evidence/native-windows-x86_64-build-f79b532-r2.json` (build identity) and
-  `docs/evidence/native-windows-x86_64-chain-f79b532.json` (chain results and measurements). The earlier `f79b532`
-  and 6885f89 evidence files are unchanged.
+- Five tools are a **PROTOTYPE** over a host-granted native compiler: `xax_workspace` and `xax_query` describe the
+  current store's root and byte size, `xax_build` runs `resolve` + `build`, `xax_transaction` applies one
+  `XAXEDIT1` record with `edit`, and `xax_execute` runs the built artifact under Windows OS confinement. Without
+  `XAX_MCP_COMPILER`/`XAX_MCP_WORK`/`XAX_MCP_STORE` they fail closed with `denied_capability`; `xax_execute` also
+  needs `--allow-execute` and `xax-mcp-sandbox.exe` beside the server.
+- `native/sandbox.py` builds `xax-mcp-sandbox.exe`, a **separate** native XAX program: a capability-less AppContainer
+  inside a job object (5 s CPU, 256 MiB, one process, 10 s wall, 1 MiB per stream). The server spawns it with a fixed
+  three-word argv and reads back stdout, stderr and a 16-byte result record.
+- `xax_construct` and `xax_result` are **UNIMPLEMENTED natively** and return structured `unsupported` errors.
+- Tests: `tests/test_native_stdio.py`, 44 passed and 1 skipped (the Linux build) in 76 s on Windows 11, Python
+  3.12.10 (test client only), mcp 2.3.0, with `XAX_MCP_TEST_COMPILER` set. The suite rebuilds both committed stores,
+  checks them byte for byte, builds both PEs, drives the server over STDIO, and (when granted) runs the seed -> build
+  -> transaction -> confined execute chain.
+- Evidence: new files `docs/evidence/native-windows-x86_64-build-f79b532-r3.json` (build identity) and
+  `docs/evidence/native-windows-x86_64-sandbox-f79b532.json` (confinement results and measurements), alongside the
+  earlier `native-windows-x86_64-chain-f79b532.json`. The earlier `f79b532` and 6885f89 evidence files are unchanged.
 - The retired 0.5.1 Python adapter (`src/xax_mcp`) is removed. Its docs are marked historical; git history retains
   the implementation for the porting work.
 
@@ -37,7 +40,8 @@
 - **B2**: the native compiler's command set is files and exit status, not a versioned service. There is no native
   carrier decoder (`construct`), no bounded query, and no generation/root-checked transaction interface.
 - **B3**: no Linux build/run of the native server was tested here.
-- **B4**: no native Windows sandbox (LPAC AppContainer + job object) yet; execution fails closed.
+- **B4**: the Windows sandbox is a prototype (LPAC AppContainer + job object in `native/sandbox.py`), measured but not
+  reviewed as a security boundary; Linux confinement and the typed I/O contract are missing.
 
 ### Next steps, in order of leverage
 
@@ -45,7 +49,8 @@
    interface (construct/open/verify/query/edit/build, length-prefixed typed requests, structured diagnostics).
 2. Here: grow the prototype behind the same tool names - bounded queries, expected-generation/root transactions,
    artifact handles and `xax_result` - without reimplementing graph construction or the compiler in the server.
-3. Port the Windows LPAC/job-object sandbox to XAX for `xax_execute`; port the Linux sandbox after a Linux build.
+3. Sandbox: harden the Windows executor (typed I/O, argv, per-call limits, independent review), and port the Linux
+   sandbox after a Linux build.
 4. Record a model-driven Codex/Claude session only after a novel construct -> build -> execute loop actually works.
 
 ## Historical: 0.5.1 and earlier (Python adapter)

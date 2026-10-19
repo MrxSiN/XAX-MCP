@@ -26,9 +26,11 @@ HANDSHAKE_VERSIONS = ("2024-11-05", "2025-03-26", "2025-06-18", "2025-11-25")
 INSTRUCTIONS = ("Call xax_capabilities first; it reports the exact XAX pin and which tools this build implements. The "
                 "native server implements the MCP protocol, capabilities, and (when the host grants a native XAX "
                 "compiler, work directory and seed store through XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE) "
-                "workspace/query, transaction and build. Construct needs a native carrier decoder XAX does not "
-                "publish; execute needs a sandbox the native server does not yet have; both fail closed. Never "
-                "silently substitute Python or another language. Carrier JSON is transport, never XAX source.")
+                "workspace/query, transaction and build. Execute additionally needs --allow-execute and a "
+                "xax-mcp-sandbox.exe beside the server: it resolves and builds the current store, runs the artifact "
+                "as a capability-less Windows AppContainer inside a job object, and reports its exit code, wall time "
+                "and captured output. Construct needs a native carrier decoder XAX does not publish; it fails closed. "
+                "Never silently substitute Python or another language. Carrier JSON is transport, never XAX source.")
 RIGHTS = ("build", "execute", "mutate", "read")  # sorted; bit k is RIGHTS[k]
 DEFAULT_RIGHTS = 0b1101  # read, mutate, build
 TOOL_RIGHTS = {"xax_workspace": "read", "xax_query": "read", "xax_construct": "mutate", "xax_transaction": "mutate",
@@ -88,7 +90,9 @@ def capabilities_payload() -> dict:
                 "fails closed with denied_capability when the host grants no compiler")
     tools = {"xax_workspace": compiler, "xax_query": compiler, "xax_transaction": compiler, "xax_build": compiler,
              "xax_construct": "UNIMPLEMENTED natively: XAX publishes no native carrier decoder (construct); fails closed",
-             "xax_execute": "UNIMPLEMENTED natively: the native server has no OS sandbox (execute); fails closed",
+             "xax_execute": ("PROTOTYPE (windows-x86_64): resolve+build the current store, then run the artifact in "
+                             "xax-mcp-sandbox.exe (a capability-less AppContainer inside a job object); needs "
+                             "--allow-execute and the launcher beside this server; Linux and typed I/O fail closed"),
              "xax_result": "UNIMPLEMENTED natively: result handles need session state, which the native server lacks"}
     return {"ok": True,
             "server": {"name": "xax-mcp", "version": VERSION, "transport": "stdio",
@@ -102,10 +106,15 @@ def capabilities_payload() -> dict:
                           "effects_granted": []},
             "tools": {"xax_capabilities": "EXECUTED (native)", **tools},
             "targets": [],
-            "sandbox": {"available": False, "reason": "the native server has no sandbox yet; execution is refused"},
+            "sandbox": {"available": "windows-x86_64 prototype only",
+                        "launcher": "xax-mcp-sandbox.exe (built from native/sandbox.py), installed beside this server",
+                        "reason": "without --allow-execute or the launcher, execution is refused; Linux confinement "
+                                  "(namespaces, seccomp, rlimits) and typed input/output layouts are not implemented"},
             "maturity": {"stdio transport, JSON validation, MCP lifecycle, tool dispatch, host rights": "EXECUTED (tests/test_native_stdio.py)",
                          "workspace/query/transaction/build over a host-granted native compiler": "PROTOTYPE (docs/NATIVE.md)",
-                         "construct (no native carrier decoder) and execute (no sandbox)": "UNIMPLEMENTED natively",
+                         "execute in a Windows AppContainer + job object": "PROTOTYPE (measured; docs/NATIVE.md)",
+                         "construct (no native carrier decoder)": "UNIMPLEMENTED natively",
+                         "execute on Linux (namespaces, seccomp, rlimits)": "UNIMPLEMENTED natively",
                          "result (serves artifacts over the wire)": "UNIMPLEMENTED natively",
                          "modern protocol 2026-07-28": "UNIMPLEMENTED natively"}}
 
@@ -601,7 +610,7 @@ def build_program() -> Program:  # noqa: C901 - one straight-line description of
     O_READ = 4 * 1024 * 1024          # store leading bytes and a provenance object
     O_REC = O_READ + 128 * 1024       # decoded transaction carrier
     O_PATHS = 6 * 1024 * 1024         # host paths built by pathbase/suffix
-    O_ARGV = O_PATHS + 8192           # child argv array
+    O_ARGV = O_PATHS + 16384          # child argv array
     O_CFG = 11 * 1024 * 1024          # configuration, above any possible response
     CFG_BASE = {"compiler": 0, "work": 1024, "store": 2048}
     CFG_SPAN = {"compiler": 3072, "work": 3080, "store": 3088}
@@ -609,6 +618,7 @@ def build_program() -> Program:  # noqa: C901 - one straight-line description of
     CFG_TABLE = 8192
     CFG_NAMES = {"compiler": 12288, "work": 12352, "store": 12416}
     P_COMPILER, P_STORE, P_CURRENT, P_EDIT, P_NEXT, P_SNAP, P_ART, P_PROV = (n * 1024 for n in range(8))
+    P_EXEC, P_SBOX, P_SOUT, P_SERR, P_SRES = (n * 1024 for n in range(8, 13))
 
     def addr(b, view, off):
         return b.op1("address.offset", [f"{view}p"], P.ptr_type(view), attrs=[off])
@@ -754,12 +764,42 @@ def build_program() -> Program:  # noqa: C901 - one straight-line description of
             suffixes[data] = f
         return suffixes[data]
 
+    # The executor ships beside this server: resolve "<server directory>\xax-mcp-sandbox.exe" from the module path.
+    f = fn("sandbox_path", ("O",), [], ["r"], [("n", "b32"), ("k", "b32"), ("c", "b32"), ("r", "b32")])
+    b = f.entry
+    b.set("k", b32(0))
+    b.set("c", b32(0))
+    b.set("r", b32(0))
+    done = f.block()
+    done.ret("r")
+    n, = icall(b, "kernel32.dll", "GetModuleFileNameA", ["b64", "ptr", "b32"], ["b32"],
+               ("b64", 0), addr(b, "O", O_PATHS + P_SBOX), b32(1024))
+    b.set("n", n)
+    b.set("k", b.sub("n", b32(1)))
+    seek = f.block()
+    b.jump(seek)
+    seek.set("c", seek.load("O", seek.add(b32(O_PATHS + P_SBOX), "k")))
+    found, back = seek.if_(seek.cmp("eq", "c", b32(92)))
+    stop, step = back.if_(back.cmp("ult", "k", b32(1)))
+    stop.jump(done)
+    step.set("k", step.sub("k", b32(1)))
+    step.jump(seek)
+    found.set("k", found.add("k", b32(1)))
+    for index, byte in enumerate(b"xax-mcp-sandbox.exe"):
+        found.store("O", found.add(b32(O_PATHS + P_SBOX), found.add("k", b32(index))), ("b8", byte), 1)
+    found.store("O", found.add(b32(O_PATHS + P_SBOX), found.add("k", b32(19))), ("b8", 0), 1)
+    found.set("r", b32(1))
+    found.jump(done)
+
     tool_views = ("L", "O", "W")
     tool_params = [("fs", "fs"), ("proc", "proc")]
     tool_locals = [(n, t) for n, t in (("pos", "b32"), ("n", "b32"), ("iserr", "b32"), ("i", "b32"), ("q", "b32"),
                                        ("rc", "b32"), ("attr", "b32"), ("size", "b32"), ("pn", "b32"), ("ok", "b32"),
                                        ("fd", "b32"), ("got", "b32"), ("written", "b32"), ("st", "b32"),
-                                       ("input", "ptr"), ("cur_ptr", "ptr"), ("store_ptr", "ptr"))]
+                                       ("ec", "b32"), ("fl", "b32"), ("wall", "b32"), ("on", "b32"), ("en", "b32"),
+                                       ("rn", "b32"),
+                                       ("input", "ptr"), ("cur_ptr", "ptr"), ("store_ptr", "ptr"),
+                                       ("sbox", "ptr"), ("artifact", "ptr"), ("exec", "ptr"))]
 
     def tool_fn(name):
         return fn(name, tool_views, tool_params, ["n", "fs", "proc"], tool_locals)
@@ -774,7 +814,9 @@ def build_program() -> Program:  # noqa: C901 - one straight-line description of
         b.call(fns["pathbase"], b32(O_CFG + CFG_SPAN["compiler"]), b32(O_PATHS + P_COMPILER), into=("i",))
         b.call(fns["pathbase"], b32(O_CFG + CFG_SPAN["store"]), b32(O_PATHS + P_STORE), into=("i",))
         for slot, tail in ((P_CURRENT, b"\\current.xax"), (P_EDIT, b"\\edit.rec"), (P_NEXT, b"\\next.xax"),
-                           (P_SNAP, b"\\snapshot.xax"), (P_ART, b"\\artifact.exe"), (P_PROV, b"\\artifact.prov")):
+                           (P_SNAP, b"\\snapshot.xax"), (P_ART, b"\\artifact.exe"), (P_PROV, b"\\artifact.prov"),
+                           (P_EXEC, b"\\exec"), (P_SOUT, b"\\exec\\sandbox-out.bin"),
+                           (P_SERR, b"\\exec\\sandbox-err.bin"), (P_SRES, b"\\exec\\sandbox-result.bin")):
             b.call(fns["pathbase"], b32(O_CFG + CFG_SPAN["work"]), b32(O_PATHS + slot), into=("i",))
             b.call(suffix(tail), "i", into=("i",))
 
@@ -906,6 +948,86 @@ def build_program() -> Program:  # noqa: C901 - one straight-line description of
     emit_l(b, b',"hex":"')
     b.call(fns["hexL"], span(b, b32(0), "pn"), "pos", into=("pos",))
     emit_l(b, b'"}}')
+    b.set("n", b.bor("pos", b.mul("iserr", b32(1 << 31))))
+    b.jump(done)
+    done.ret("n", "fs", "proc")
+
+    # xax_execute: resolve and build the current store, then run the artifact inside the native OS sandbox.
+    # The launcher (xax-mcp-sandbox.exe, built from native/sandbox.py) creates a capability-less AppContainer in a job
+    # object with fixed CPU/memory/process/wall limits, pipes the artifact's stdout/stderr back, and writes
+    # <work>\exec\sandbox-{out,err,result}.bin.  The prototype takes no arguments; anything else fails closed.
+    f = tool_fn("tool_execute")
+    done = f.block()
+    b = init_tool(f)
+    b.set("pos", b32(0))
+    b.set("iserr", b32(0))
+    b.set("size", b32(0))
+    b.set("pn", b32(0))
+    build_paths(b)
+    b.set("i", b.load("W", b32(RES + 96), 4))    # the dispatch parked the arguments span here
+    b.set("q", b.load("W", b32(RES + 100), 4))
+    b.call(fns["scan"], "i", "q", into=("st",))
+    bad, ready = b.if_(b.cmp("ne", b.load("W", b32(RES + 4 * SLOT_COUNT), 4), b32(0)))
+    finish_error(bad, "invalid_request",
+                 "xax_execute takes no arguments yet: it builds the current store and runs that artifact "
+                 "(input/output/argv/effects/limits are not implemented; docs/NATIVE.md)")
+    bad.jump(done)
+    b = ready
+    b = choose_input(b)
+    emit_spawn(b, "rc", paddr(b, P_COMPILER), addr(b, "O", O_CFG + CFG_CMD["resolve"]), "input", paddr(b, P_SNAP))
+    bad, good = b.if_(b.cmp("ne", "rc", b32(0)))
+    finish_error(bad, "compiler_rejected", "the native compiler rejected the request store while resolving")
+    bad.jump(done)
+    b = good
+    emit_spawn(b, "rc", paddr(b, P_COMPILER), addr(b, "O", O_CFG + CFG_CMD["build"]), paddr(b, P_SNAP),
+               paddr(b, P_ART), paddr(b, P_PROV))
+    bad, good = b.if_(b.cmp("ne", "rc", b32(0)))
+    finish_error(bad, "build_failed", "the native compiler could not build the current store")
+    bad.jump(done)
+    b = good
+    b.call(fns["sandbox_path"], into=("pn",))
+    bad, good = b.if_(b.cmp("eq", "pn", b32(0)))
+    finish_error(bad, "sandbox_unavailable",
+                 "no native sandbox launcher (xax-mcp-sandbox.exe) is installed beside this server")
+    bad.jump(done)
+    b = good
+    _, = icall(b, "kernel32.dll", "CreateDirectoryA", ["ptr", "b64"], ["b32"], paddr(b, P_EXEC), ("b64", 0))
+    b.set("artifact", paddr(b, P_ART))
+    b.set("exec", paddr(b, P_EXEC))
+    b.set("sbox", paddr(b, P_SBOX))
+    emit_spawn(b, "rc", "sbox", "artifact", "exec")
+    bad, good = b.if_(b.cmp("ne", "rc", b32(0)))
+    finish_error(bad, "sandbox_failed",
+                 "the native sandbox launcher refused to run the artifact (confinement or setup failure)")
+    bad.jump(done)
+    b = good
+    b = emit_read(b, paddr(b, P_SRES), b32(64), "rn")
+    bad, good = b.if_(b.cmp("ult", "rn", b32(16)))
+    finish_error(bad, "sandbox_failed", "the native sandbox launcher wrote no result record")
+    bad.jump(done)
+    b = good
+    b.set("ec", b.load("O", b32(O_READ), 4))
+    b.set("fl", b.load("O", b32(O_READ + 4), 4))
+    b.set("wall", b.trunc(b.load("O", b32(O_READ + 8), 8)))
+    b = emit_read(b, paddr(b, P_SOUT), b32(1 << 20), "on")
+    b.set("pos", b32(0))
+    emit_l(b, b'{"duration_ms":')
+    b.call(fns["decL"], "wall", "pos", into=("pos",))
+    emit_l(b, b',"exit_code":')
+    b.call(fns["decL"], "ec", "pos", into=("pos",))
+    emit_l(b, b',"flags":')
+    b.call(fns["decL"], "fl", "pos", into=("pos",))
+    emit_l(b, b',"ok":true,"stdout_bytes":')
+    b.call(fns["decL"], "on", "pos", into=("pos",))
+    emit_l(b, b',"stdout_hex":"')
+    b.call(fns["hexL"], span(b, b32(0), "on"), "pos", into=("pos",))
+    emit_l(b, b'","stderr_bytes":')
+    # the stderr read reuses the same buffer, so it happens after the stdout hex has been written out
+    b = emit_read(b, paddr(b, P_SERR), b32(1 << 20), "en")
+    b.call(fns["decL"], "en", "pos", into=("pos",))
+    emit_l(b, b',"stderr_hex":"')
+    b.call(fns["hexL"], span(b, b32(0), "en"), "pos", into=("pos",))
+    emit_l(b, b'"}')
     b.set("n", b.bor("pos", b.mul("iserr", b32(1 << 31))))
     b.jump(done)
     done.ret("n", "fs", "proc")
@@ -1195,10 +1317,9 @@ def build_program() -> Program:  # noqa: C901 - one straight-line description of
     unreachable.ret(b32(0), "fs", "proc")
     switch(gated, "tool", [(k + 1, blk) for k, blk in enumerate(targets)], unreachable)
     compiler_tools = {"xax_workspace": "tool_info", "xax_query": "tool_info", "xax_transaction": "tool_transaction",
-                      "xax_build": "tool_build"}
+                      "xax_build": "tool_build", "xax_execute": "tool_execute"}
     unsupported_reasons = {
         "xax_construct": "XAX publishes no native carrier decoder (construct)",
-        "xax_execute": "the native server has no OS sandbox (execute)",
         "xax_result": "result handles need session state, which the native server does not implement yet",
     }
     for (tool, right), blk in zip(TOOL_RIGHTS.items(), targets):

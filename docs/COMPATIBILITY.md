@@ -24,8 +24,9 @@ store at another XAX revision is not a supported configuration: the committed st
 - r10 (ADR-317): Windows PE32+ forwards and DllMain details; the Windows hosted profile.
 
 XAX-MCP consumes r8-r10: the native server declares `win32.import` entities (r9/ADR-260) for its kernel32 and msvcrt
-calls and is built with the Windows hosted profile (r10/ADR-317). The native sandbox (B4) is still missing; nothing
-here is evidence of it.
+calls and is built with the Windows hosted profile (r10/ADR-317). The same r9 mechanism lets the executor declare
+`userenv`/`advapi32` sandbox primitives, so a Windows-only sandbox prototype now exists (B4, see
+`docs/evidence/native-windows-x86_64-sandbox-f79b532.json`); Linux confinement does not.
 
 ## Historical Python adapter (0.1.0 - 0.5.1)
 

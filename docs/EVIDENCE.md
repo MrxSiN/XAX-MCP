@@ -5,17 +5,18 @@ independent oracle), **MEASURED** (raw samples recorded), **STRUCTURAL** (presen
 to end), **PROTOTYPE** (works for a narrow case), **UNIMPLEMENTED**.
 
 Evidence files are append-only. A new pin, build or capability writes a new file; older files are never edited.
-Raw samples for the current build are in `docs/evidence/native-windows-x86_64-build-f79b532-r2.json` and
-`docs/evidence/native-windows-x86_64-chain-f79b532.json`. The earlier `native-windows-x86_64-build-f79b532.json`
-and `native-windows-x86_64-protocol-f79b532.json`, the 6885f89 native files, and every Python-era file remain
-unchanged.
+Raw samples for the current build are in `docs/evidence/native-windows-x86_64-build-f79b532-r3.json`,
+`docs/evidence/native-windows-x86_64-chain-f79b532.json` and
+`docs/evidence/native-windows-x86_64-sandbox-f79b532.json`. The earlier `native-windows-x86_64-build-f79b532.json`,
+`native-windows-x86_64-build-f79b532-r2.json`, `native-windows-x86_64-protocol-f79b532.json`, the 6885f89 native
+files, and every Python-era file remain unchanged.
 
 ## Current native server (0.7.0)
 
 | Claim | Label | Evidence |
 |---|---|---|
-| An MCP client initializes the native STDIO server, negotiates four handshake versions, discovers the eight tool schemas, and calls tools | EXECUTED | `tests/test_native_stdio.py`; 43 passed, 1 skipped on Windows 11 x86-64 (the skip is the untestable Linux build) |
-| The server is an XAX-built PE32+ and the committed canonical store is reproducible | EXECUTED | store root `9a511d00...1f1a`; store SHA-256 `0bd08c0e...154b`; artifact SHA-256 `2c244f56...1dd8`; `test_build_is_deterministic` |
+| An MCP client initializes the native STDIO server, negotiates four handshake versions, discovers the eight tool schemas, and calls tools | EXECUTED | `tests/test_native_stdio.py`; 44 passed, 1 skipped on Windows 11 x86-64 (the skip is the untestable Linux build) |
+| The server is an XAX-built PE32+ and the committed canonical store is reproducible | EXECUTED | store root `baec162e...d442`; store SHA-256 `bbe28c1e...e25f`; artifact SHA-256 `0493e796...0521`; `test_build_is_deterministic` |
 | No Python, MCP SDK, shell wrapper, or other non-XAX service is on the request path | EXECUTED | the executable imports kernel32 and msvcrt only (no Python DLL); the test client is external; `xax_capabilities.server.python_on_request_path` is false |
 | The native JSON validator matches Python's strict RFC 8259/UTF-8 parser | EXECUTED | 1500 randomized cases in `test_json_validation_matches_python_strict_parser` |
 | Host rights come only from launch configuration, never from tool arguments | EXECUTED | 7 flag sets and 8 rejected forms in `test_host_rights_come_from_launch_flags` / `test_unknown_flags_fail_closed` |
@@ -26,10 +27,11 @@ unchanged.
 | `xax_capabilities` reports the exact pin, rights, grants, and blockers | EXECUTED | every test calls it; the payload names each tool's status and the compiler grant |
 | `xax_workspace`, `xax_query`, `xax_build`, `xax_transaction` | PROTOTYPE | implement root description, resolve+build, and one XAXEDIT1 edit over a host-granted native compiler; fail closed with `denied_capability` without the grant; docs/NATIVE.md B1/B2 |
 | `xax_construct` | UNIMPLEMENTED | no native carrier decoder; structured `unsupported` |
-| `xax_execute` | UNIMPLEMENTED | `denied_capability` without the host grant; `unsupported` with it; no native sandbox (B4) |
+| `xax_execute` | PROTOTYPE | rebuilds the current store and runs the artifact under Windows OS confinement (`native/sandbox.py` -> `xax-mcp-sandbox.exe`); `denied_capability` without `--allow-execute`, `sandbox_unavailable` without the executor, `invalid_request` if given arguments; `native-windows-x86_64-sandbox-f79b532.json` |
+| An artifact really runs confined (Windows) | MEASURED | `GetTokenInformation(TokenIsAppContainer)` = 1 inside / 0 outside; a host-writable path is refused inside / created outside; `Sleep(60000)` killed at 10 s with `FLAG_TIMEOUT`; a talker artifact's 14 stdout bytes, 5 stderr bytes and exit code 7 all captured; `native-windows-x86_64-sandbox-f79b532.json` |
 | `xax_result` | UNIMPLEMENTED | needs session state; structured `unsupported` |
-| A novel computation is constructed, built, and executed through MCP | UNIMPLEMENTED | the prototype edits and builds a fixed seed; no construct and no execution |
-| Sandbox isolation and resource limits | UNIMPLEMENTED | execution is refused, not sandboxed |
+| A novel computation is constructed, built, and executed through MCP | UNIMPLEMENTED | the prototype cannot construct: it edits and builds a fixed seed, then executes that; no parallel coverage |
+| Sandbox isolation and resource limits (Linux) | UNIMPLEMENTED | Windows AppContainer + job object only; no namespaces, seccomp or rlimits; docs/NATIVE.md B3 |
 | Streamable HTTP transport | UNIMPLEMENTED | STDIO only |
 
 The MCP latencies are tool round trips on one shared host. They are not XAX R4 generated-code benchmarks, and they
@@ -49,4 +51,5 @@ are not claims about the 0.7.0 native server.
 | Codex/Claude registration and MCP Inspector | STRUCTURAL | `docs/HOSTS.md` (historical); no model-driven session |
 
 Do not reinterpret those runs as evidence for the native server. The native server's compiler-backed tools are a
-narrow prototype, and it executes nothing.
+narrow prototype, only its Windows execution path runs anything, and that path has not been reviewed as a security
+boundary.

@@ -32,7 +32,7 @@ TOOLS = ("xax_capabilities", "xax_workspace", "xax_query", "xax_construct", "xax
 RIGHT_OF = {"xax_workspace": "read", "xax_query": "read", "xax_construct": "mutate", "xax_transaction": "mutate",
             "xax_build": "build", "xax_execute": "execute", "xax_result": "read"}
 # Tools that drive the host-granted native compiler: without XAX_MCP_COMPILER/WORK/STORE they report denied_capability.
-COMPILER_TOOLS = {"xax_workspace", "xax_query", "xax_transaction", "xax_build"}
+COMPILER_TOOLS = {"xax_workspace", "xax_query", "xax_transaction", "xax_build", "xax_execute"}
 LMAX = 4 * 1024 * 1024
 
 
@@ -394,7 +394,15 @@ def test_native_compiler_chain_over_stdio(exe, tmp_path):
     spec = importlib.util.spec_from_file_location("native_test_chain", NATIVE / "chain.py")
     chain = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(chain)
-    server = Server(exe, env={"XAX_MCP_COMPILER": compiler, "XAX_MCP_WORK": str(work), "XAX_MCP_STORE": str(seed)})
+    # The executor must be installed beside the server executable (the server derives its own directory).
+    launcher = Path(exe).parent / "xax-mcp-sandbox.exe"
+    if not launcher.is_file():
+        built = tmp_path / "sandbox-build"
+        subprocess.run([sys.executable, str(NATIVE / "sandbox.py"), source, str(built)],
+                       check=True, capture_output=True, timeout=900)
+        shutil.copy(built / "xax-mcp-sandbox.exe", launcher)
+    server = Server(exe, "--allow-execute",
+                    env={"XAX_MCP_COMPILER": compiler, "XAX_MCP_WORK": str(work), "XAX_MCP_STORE": str(seed)})
     try:
         assert server.call("xax_query", {}) == {"bytes": len(seed_bytes), "ok": True, "root": seed_root,
                                                "workspace": "ws_0"}
@@ -411,9 +419,56 @@ def test_native_compiler_chain_over_stdio(exe, tmp_path):
         assert server.call("xax_query", {})["root"] == applied["root"]
         # A later build reports the edited store: the transaction replaced the work directory's current store.
         assert server.call("xax_build", {})["root"] == applied["root"]
+        # xax_execute rebuilds the current store and runs the artifact in the native OS sandbox; the edit made it exit 41.
+        executed = server.call("xax_execute", {})
+        assert executed["ok"] and executed["exit_code"] == 41, executed
+        assert executed["flags"] == 0 and executed["stdout_bytes"] == 0 and executed["stderr_bytes"] == 0
+        assert executed["duration_ms"] >= 0
+        # The prototype takes no arguments: anything else fails closed instead of being ignored.
+        error = server.call("xax_execute", {"artifact": "current"})["error"]
+        assert error["code"] == "invalid_request" and "takes no arguments" in error["message"]
     finally:
         code, rest, err = server.close()
         assert code == 0 and not rest, (code, rest, err)
+
+
+def test_native_sandbox_launcher_runs_artifact_confined(tmp_path):
+    """The native executor runs the committed seed artifact and records its exit code.
+
+    Gated on XAX_NATIVE_SRC: it builds ``native/sandbox.py`` into a launcher with the pinned XAX compiler.  The
+    executor itself creates a capability-less AppContainer inside a job object (see docs/NATIVE.md); this test only
+    asserts that the artifact ran and its exit code was captured.  A host that cannot create or hold the container
+    makes the executor fail closed (exit 51 or 41), which skips this test with that reason.
+    """
+    source = os.environ.get("XAX_NATIVE_SRC")
+    if not source:
+        pytest.skip("set XAX_NATIVE_SRC (XAX compiler/src) to build the native sandbox launcher")
+    out = tmp_path / "build"
+    build = subprocess.run([sys.executable, str(NATIVE / "sandbox.py"), source, str(out)],
+                           capture_output=True, timeout=900)
+    assert build.returncode == 0, build.stderr.decode(errors="replace")
+    for name in ("sandbox_request.json", "xax-mcp-sandbox-gen0.xax"):  # the committed store is its builder's output
+        assert (out / name).read_bytes() == (NATIVE / name).read_bytes(), name
+    launcher = out / "xax-mcp-sandbox.exe"
+    seed = tmp_path / "seed"
+    seeded = subprocess.run([sys.executable, str(NATIVE / "seed.py"), source, str(seed)],
+                            capture_output=True, timeout=900)
+    assert seeded.returncode == 0, seeded.stderr.decode(errors="replace")
+    work = tmp_path / "work"
+    work.mkdir(exist_ok=True)
+    ran = subprocess.run([str(launcher), str(seed / "xax-mcp-seed.exe"), str(work)],
+                         capture_output=True, timeout=120)
+    if ran.returncode in (41, 51):
+        # the executor fails closed when this host cannot create or hold an AppContainer; say so instead of
+        # pretending the artifact ran confined
+        pytest.skip(f"this host cannot provide the AppContainer confinement (launcher exit {ran.returncode})")
+    assert ran.returncode == 0, ran.stderr.decode(errors="replace")
+    result = (work / "sandbox-result.bin").read_bytes()
+    assert len(result) == 16
+    exit_code = int.from_bytes(result[0:4], "little")
+    flags = int.from_bytes(result[4:8], "little")
+    assert (exit_code, flags) == (40, 0), (exit_code, flags, ran.returncode)  # the seed calls ExitProcess(40)
+    assert (work / "sandbox-out.bin").read_bytes() == b"" and (work / "sandbox-err.bin").read_bytes() == b""
 
 
 def test_overlong_compiler_grant_fails_closed(exe, tmp_path):

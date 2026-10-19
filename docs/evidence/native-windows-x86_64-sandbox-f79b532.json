@@ -1,0 +1,120 @@
+{
+  "schema": "xax-mcp-evidence-v1",
+  "claim": "The native XAX server executes a built artifact under real OS confinement on windows-x86_64: the artifact runs as a capability-less AppContainer token inside a job object with CPU, memory, process, wall-time and output limits, and its stdout, stderr, exit code and wall time come back over MCP.",
+  "label": "PROTOTYPE",
+  "measurement_label": "MEASURED",
+  "scope": "one host, one Windows build, four throwaway test artifacts and the committed seed; Linux confinement is not implemented",
+  "recorded": "2026-10-20",
+  "server_version": "0.7.0+native",
+  "xax_commit": "f79b532fd4651ba808676d02f4b038e2cc271e6a",
+  "host_contract": "xax-host-contract-v1 r10",
+  "platform": "windows-x86_64",
+  "host": {
+    "cpu": "AMD Ryzen 9 5900HS with Radeon Graphics",
+    "logical_cpus": 16,
+    "os": "Microsoft Windows 11 Pro 10.0.26300",
+    "python": "3.12.10 (carrier authoring and test client only)"
+  },
+  "server": {
+    "source": "native/server.py",
+    "bytes": 318464,
+    "sha256": "0493e7964deacf47c257850cdbd513aceae09bd9211776caf2b810ff01fd0521",
+    "store_root": "baec162e4bfb177fff18c3d36efdbd6e2ad0a0dec6cb412874fcbd18c12dd442",
+    "store_bytes": 1020614,
+    "store_sha256": "bbe28c1e5568abf40cb2d38a354f4dcbaae09b231abeb04f87674d5f1a70e25f",
+    "python_on_request_path": false
+  },
+  "executor": {
+    "source": "native/sandbox.py",
+    "contract": "xax-mcp-sandbox <artifact path> <work directory>",
+    "placement": "installed beside the server executable; the server derives its own directory with GetModuleFileNameA and spawns it with _spawnv (a constrained argv: program, artifact, work directory)",
+    "bytes": 25600,
+    "sha256": "6d563e0f23e4f402d55c82b200d42bce91c41c98aab101267e67d3645a1d37e2",
+    "store_root": "7ef7099d5358bf022715faff1ef26387c1486c554ed2f7d9145bd9d8953ef8b6",
+    "store_bytes": 74434,
+    "store_sha256": "588f57c0fa69eb175b6e06e88c73977292d42c06dfc5b814ec48cc5710bab2b8",
+    "functions": 8,
+    "confinement": [
+      "CreateAppContainerProfile + DeriveAppContainerSidFromAppContainerName (userenv.dll) produce a capability-less LPAC SID; a failure exits 51 instead of running unconfined",
+      "GetNamedSecurityInfoW + SetEntriesInAclW + SetNamedSecurityInfoW grant that SID read and execute (0xA0000000, never write, never full control) on the run directory before the artifact is copied in",
+      "CreateProcessW starts the artifact suspended with EXTENDED_STARTUPINFO_PRESENT, a SECURITY_CAPABILITIES attribute (0x20009), CHILD_PROCESS_RESTRICTED (0x2000D) and an explicit inheritable handle list (0x20002: NUL, stdout, stderr)",
+      "AssignProcessToJobObject + IsProcessInJob confirm the containment before ResumeThread; a process that is not in the job exits 41 instead of running",
+      "the job enforces 5 s of CPU (PerProcessUserTimeLimit), one active process, 256 MiB of process memory, kill-on-job-close and a UI restriction",
+      "the launcher waits 10 s, then TerminateJobObject and reports FLAG_TIMEOUT",
+      "stdout and stderr are drained through pipes into 1 MiB buffers; more than the cap sets FLAG_TRUNCATED"
+    ]
+  },
+  "result_record": {
+    "path": "<work>/sandbox-result.bin",
+    "bytes": 16,
+    "layout": "artifact exit code (b32) | flags (b32, bit 0 timeout, bit 2 output truncated) | wall milliseconds (b64)",
+    "launcher_exit": "0 when the sandbox completed a run (whatever the artifact did); 1 setup failure, 41 not confined, 51 no AppContainer SID, otherwise the Win32 error code"
+  },
+  "cases": [
+    {
+      "case": "committed seed",
+      "artifact": "native/xax-mcp-seed.exe (1536 bytes, sha256 8faaeb7e63e5d1a07bcd9c46e3ae3381af267b67e213cec6b992c628fb1843ca)",
+      "observed": {"launcher_exit": 0, "artifact_exit": 40, "flags": 0, "wall_ms": 31, "observed_ms": 79, "out_bytes": 0, "err_bytes": 0},
+      "evidence": "the artifact ran confined and its ExitProcess(40) was observed"
+    },
+    {
+      "case": "stdout/stderr capture",
+      "artifact": "a throwaway XAX program that writes 14 bytes to stdout, 5 bytes to stderr and exits 7",
+      "observed": {"launcher_exit": 0, "artifact_exit": 7, "flags": 0, "wall_ms": 15, "observed_ms": 67, "out_bytes": 14, "err_bytes": 5},
+      "evidence": "both pipes were captured exactly, with no truncation"
+    },
+    {
+      "case": "AppContainer token",
+      "artifact": "a throwaway XAX program that calls GetTokenInformation(TokenIsAppContainer)",
+      "observed": {"direct": "0", "inside_sandbox": "1"},
+      "evidence": "the sandboxed process token really is an AppContainer token; the control run is not"
+    },
+    {
+      "case": "filesystem escape",
+      "artifact": "a throwaway XAX program that tries to create C:\\Users\\SiN\\AppData\\Local\\Temp\\opencode\\escape.txt",
+      "observed": {"direct": "opened, file created", "inside_sandbox": "blocked, no file created"},
+      "evidence": "a path the host user can freely write is refused inside the container"
+    },
+    {
+      "case": "wall-time limit",
+      "artifact": "a throwaway XAX program that calls Sleep(60000)",
+      "observed": {"launcher_exit": 0, "artifact_exit": 1, "flags": 1, "wall_ms": 10000, "observed_ms": 10057},
+      "evidence": "the 10 s wall limit terminates the job and is reported as bit 0 rather than hanging the server"
+    },
+    {
+      "case": "MCP xax_execute",
+      "arguments": {},
+      "observed": {"server_process_ms": 148, "duration_ms": 16, "exit_code": 40, "flags": 0, "stdout_bytes": 0, "stderr_bytes": 0},
+      "evidence": "one JSON-RPC line produced resolve + build + confined run + a structured result; the 148 ms includes launching the server process itself"
+    },
+    {
+      "case": "MCP xax_execute with arguments",
+      "arguments": {"artifact": "current"},
+      "observed": {"error": "invalid_request", "message": "xax_execute takes no arguments yet: it builds the current store and runs that artifact (input/output/argv/effects/limits are not implemented; docs/NATIVE.md)"},
+      "evidence": "unsupported parts of the target contract fail closed instead of being silently ignored"
+    }
+  ],
+  "tool_result": {
+    "shape": {"duration_ms": "integer", "exit_code": "integer", "flags": "integer", "ok": true, "stdout_bytes": "integer", "stdout_hex": "string", "stderr_bytes": "integer", "stderr_hex": "string"},
+    "note": "bytes are hex-encoded because the prototype does not yet decode output by a declared layout; there is no text/binary mode selection"
+  },
+  "rights": {
+    "gate": "--allow-execute at launch",
+    "without_it": "denied_capability before any compiler or sandbox work",
+    "with_it": "resolve + build the current store, then one confined run"
+  },
+  "test": {
+    "name": "tests/test_native_stdio.py::test_native_sandbox_launcher_runs_artifact_confined and ::test_native_compiler_chain_over_stdio",
+    "gate": "XAX_NATIVE_SRC (and XAX_MCP_TEST_COMPILER for the chain); skipped otherwise. The launcher test also skips with that reason when this host cannot create or hold the AppContainer (launcher exit 51 or 41), instead of pretending the artifact ran confined.",
+    "result": "44 passed, 1 skipped on 2026-10-20"
+  },
+  "limits": [
+    "Windows only: Linux namespaces, seccomp, rlimits and an empty read-only root are not implemented, so xax_execute fails closed on other platforms by having no launcher installed.",
+    "The AppContainer is capability-less and is given no network capability; that is deliberate but it means the artifact cannot use the network at all.",
+    "xax-mcp-io-v1 stdin framing, input/output layouts, argv strings, per-call limits and artifact handles are not implemented; the tool takes no arguments and the limits are compiled in.",
+    "stdout and stderr are hex-encoded, capped at 1 MiB each, and bytes beyond the cap are dropped and flagged rather than streamed.",
+    "The compiler behind resolve/build is still the local XAX-built prototype outside the pinned tree; a reproducible committed native Windows compiler remains upstream work.",
+    "xax_construct is still refused: XAX publishes no native carrier decoder.",
+    "The executor is a prototype: it has not been fuzzed, its AppContainer DACL grant is per run directory, and it has not been reviewed as a security boundary by anyone else."
+  ]
+}

@@ -98,34 +98,16 @@ TOOLS: dict[str, dict] = {
     },
     "xax_execute": {
         "title": "XAX execute",
-        "description": "UNIMPLEMENTED natively; calls fail closed with 'unsupported' (no OS sandbox in the native server). "
-                       "Target contract: run a built artifact in the OS sandbox (Linux: new user/mount/net namespaces, empty "
-                       "read-only root, seccomp allowlist, rlimits; Windows: capability-less LPAC AppContainer in a job object; "
-                       "both: wall timeout). Input is framed onto stdin (xax-mcp-io-v1) and optional argv strings (Linux only) "
-                       "reach linux.startup.* reads; stdout is decoded by the declared layout. Only the 'stdio' effect exists. "
-                       "Requires the host-granted execute right.",
+        "description": "PROTOTYPE: resolves and builds the current store, then runs that artifact inside the native OS sandbox "
+                       "and returns exit_code, duration_ms, flags (bit 0 timeout, bit 2 output truncated) and the artifact's "
+                       "stdout/stderr as hex. The sandbox is a capability-less Windows AppContainer inside a job object "
+                       "(fixed limits: 5 s CPU, 256 MiB, one process, 10 s wall, 1 MiB per stream); it ships beside the server "
+                       "as xax-mcp-sandbox.exe and is built from native/sandbox.py. Takes NO arguments yet: the artifact "
+                       "handle, input/output layout, argv, effects and per-call limits fail closed rather than being ignored; "
+                       "Linux namespaces and the xax-mcp-io-v1 framing are not implemented. Requires the host-granted "
+                       "execute right.",
         "annotations": {"readOnlyHint": False, "destructiveHint": False, "openWorldHint": False},
-        "inputSchema": {"type": "object", "additionalProperties": False, "required": ["artifact"], "properties": {
-            "artifact": _HANDLE,
-            "input": {"type": "object", "maxProperties": 1, "additionalProperties": False, "properties": {
-                "ints": {"type": "array", "maxItems": 131072, "items": {"type": "object", "additionalProperties": False,
-                                                                       "required": ["type", "value"],
-                                                                       "properties": {"type": _INT_TYPE, "value": _INT64}}},
-                "bytes_base64": {"type": "string", "maxLength": 1398104},
-                "text": {"type": "string", "maxLength": 1048576},
-            }},
-            "output": {"anyOf": [{"enum": ["bytes", "text"]},
-                                 {"type": "object", "additionalProperties": False, "required": ["ints"],
-                                  "properties": {"ints": {"type": "array", "maxItems": 4096, "items": _INT_TYPE}}}]},
-            "argv": {"type": "array", "maxItems": 64, "items": {"type": "string", "maxLength": 4096}},
-            "effects": {"type": "array", "maxItems": 8, "items": {"enum": EFFECTS}},
-            "limits": {"type": "object", "additionalProperties": False, "properties": {
-                "wall_ms": {"type": "integer", "minimum": 10, "maximum": 600000},
-                "cpu_seconds": {"type": "integer", "minimum": 1, "maximum": 600},
-                "memory_mb": {"type": "integer", "minimum": 16, "maximum": 65536},
-                "max_output_bytes": {"type": "integer", "minimum": 1, "maximum": 67108864}}},
-            "require_current": {"type": "boolean"},
-        }},
+        "inputSchema": {"type": "object", "additionalProperties": False, "properties": {}},
     },
     "xax_result": {
         "title": "XAX result",
