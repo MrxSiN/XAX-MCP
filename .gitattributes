@@ -1,4 +1,6 @@
 # Native server: canonical store and construction request bytes are digested in evidence.
 native/*.xax binary
-native/construction_request.json -text
+# The builders write these with an exact trailing LF; a checkout must never rewrite them
+# (tests compare the committed bytes with a fresh build, and a CRLF checkout fails that).
+native/*.json -text
 docs/evidence/native-*.json -text
