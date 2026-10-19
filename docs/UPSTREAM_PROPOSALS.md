@@ -1,12 +1,12 @@
 # Upstream XAX proposals and their status
 
 > **Historical (0.5.x Python prototype).** The central proposal is still current: a native, versioned XAX compiler
-> service is the blocker for the native 0.6.0 server's compiler-backed tools ([NATIVE.md](NATIVE.md)).
+> service is the next step for the native 0.7.0 server's compiler-backed prototype ([NATIVE.md](NATIVE.md)).
 
 These were the smallest general upstream interfaces that would remove limitations of this adapter. They are now
 upstream decisions in `MrxSiN/XAX`, committed as `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183` and merged into XAX `main`
 by `5c9ba68` (2026-10-08; renumbered ADR-222 to ADR-225 in the merge). XAX-MCP 0.2.0 pinned `f38cbee`.
-P4 followed as ADR-231 in `b0ec772`, which XAX-MCP 0.3.0 pins. P6–P8 followed as ADR-248 to ADR-250 in `a6f0eb6`,
+P4 followed as ADR-231 in `b0ec772`, which XAX-MCP 0.3.0 pins. P6-P8 followed as ADR-248 to ADR-250 in `a6f0eb6`,
 `6d1de1c` and `13a6843` (host contract r3), which XAX-MCP 0.5.0 pins. XAX-MCP 0.5.1 pins `f0aa191` (S8, ADR-251;
 host contract r3 unchanged).
 
@@ -30,14 +30,14 @@ and the executable from 1,668 to 647 bytes. Results are identical
 (`test_wide_byte_view_access_matches_byte_composition_and_is_smaller`). The byte-composed form remains valid
 (`programs.poly_reduce(..., wide=False)`).
 
-## Remaining upstream cold-start cost (before P6–P8; see PERFORMANCE.md for the current numbers)
+## Remaining upstream cold-start cost (before P6-P8; see PERFORMANCE.md for the current numbers)
 With an empty `XAX_NATIVE_CACHE`, every component image is still lowered once (about 50 s on the reference
 host; one 0.3.1 sample at `6c2df90` took 41.7 s). With a warm cache, first construct took 2.7 s at `f38cbee`, about 3.5 s at
 `b0ec772`, and 1.3 s in one sample at `6c2df90`. The time goes
 to the native store verifier's table setup and BLAKE3 CID checks over the typing store, which grew with upstream
 S8c.9–S8c.13. P4 did not cause it.
 
-## P6–P8: first-start cost measured at `6c2df90` (proposed 2026-10-09; done in ADR-248 to ADR-250)
+## P6-P8: first-start cost measured at `6c2df90` (proposed 2026-10-09; done in ADR-248 to ADR-250)
 
 The proposal text below is kept as written. Upstream took option (a) for P7, the parallel option for P8, and declined
 prebuilt images: an image is a deterministic function of its key, so shipping one only moves trust to the release

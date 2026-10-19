@@ -17,29 +17,44 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from dsl import Program  # noqa: E402
 
-VERSION = "0.6.0+native"
+VERSION = "0.7.0+native"
 NATIVE_XAX_COMMIT = "f79b532fd4651ba808676d02f4b038e2cc271e6a"  # XAX main, 2026-10-19; host contract xax-host-contract-v1 r10
 LMAX = 4 * 1024 * 1024  # largest accepted message line
 MAX_ARGUMENTS = 1024 * 1024  # policy.max_request_bytes default
 MAX_DEPTH = 64
 HANDSHAKE_VERSIONS = ("2024-11-05", "2025-03-26", "2025-06-18", "2025-11-25")
 INSTRUCTIONS = ("Call xax_capabilities first; it reports the exact XAX pin and which tools this build implements. The "
-                "current native build implements the MCP protocol and capabilities only: compiler-backed tools answer "
-                "unsupported. Never silently substitute Python or another language. Carrier JSON is transport, never "
-                "XAX source.")
+                "native server implements the MCP protocol, capabilities, and (when the host grants a native XAX "
+                "compiler, work directory and seed store through XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE) "
+                "workspace/query, transaction and build. Construct needs a native carrier decoder XAX does not "
+                "publish; execute needs a sandbox the native server does not yet have; both fail closed. Never "
+                "silently substitute Python or another language. Carrier JSON is transport, never XAX source.")
 RIGHTS = ("build", "execute", "mutate", "read")  # sorted; bit k is RIGHTS[k]
 DEFAULT_RIGHTS = 0b1101  # read, mutate, build
 TOOL_RIGHTS = {"xax_workspace": "read", "xax_query": "read", "xax_construct": "mutate", "xax_transaction": "mutate",
                "xax_build": "build", "xax_execute": "execute", "xax_result": "read"}
-KEYS = ("jsonrpc", "id", "method", "params", "protocolVersion", "name", "arguments", "result", "error")
+KEYS = ("jsonrpc", "id", "method", "params", "protocolVersion", "name", "arguments", "result", "error", "record")
+RECORD_KEY = KEYS.index("record")
 NO_KEY = 99
 # RES slots (4 bytes each): 2k/2k+1 = value span of KEYS[k]; then status, member count, first key span, value start.
-SLOT_COUNT, SLOT_KEY_START, SLOT_KEY_END, SLOT_TOP = 19, 20, 21, 22
+SLOT_COUNT, SLOT_KEY_START, SLOT_KEY_END, SLOT_TOP = 20, 21, 22, 23
 
 RES = MAX_DEPTH  # W holds the depth stack at 0 and the RES slots at RES
-# Win64 passes four machine arguments in registers, the most the register-resident lowering takes, so every helper
-# keeps to four: the scanner's stack and slots share view W, and spans travel packed as start | end << 32.
+# Win64 passes four machine arguments in registers, the most the register-resident lowering takes, so every function
+# keeps to four machine arguments: the scanner's stack and slots share view W, spans travel packed as start | end << 32,
+# and the host compiler configuration and every file buffer share view O at fixed offsets.  O is the server's output
+# view: a response never exceeds two message lengths, so the configuration sits above that and file buffers sit below.
 VIEWS = {"C": 65536, "L": LMAX + 64, "O": 3 * LMAX + (1 << 20), "W": RES + 128, "N": 4, "A": 32768 + 64}
+
+# base64 of the ASCII hex digits, indexed by byte; 255 marks a non-hex byte (native/chain.py emits the carriers).
+_HEX_TABLE = bytearray(255 for _ in range(256))
+for _index, _byte in enumerate(b"0123456789"):
+    _HEX_TABLE[_byte] = _index
+for _index, _byte in enumerate(b"abcdef"):
+    _HEX_TABLE[_byte] = 10 + _index
+for _index, _byte in enumerate(b"ABCDEF"):
+    _HEX_TABLE[_byte] = 10 + _index
+HEX_TABLE = bytes(_HEX_TABLE)
 
 
 def compact(value) -> bytes:
@@ -69,15 +84,18 @@ def error_payload(code: str, message: str, repair=None, details=None) -> dict:
 
 
 def capabilities_payload() -> dict:
-    tools = {name: ("UNIMPLEMENTED natively: XAX publishes no native construct/carrier decoder and no committed native "
-                    "compiler service for windows-x86_64 hosts; the local xaxc-windows.exe prototype is not part of the "
-                    "pinned XAX tree (docs/NATIVE.md)") for name in TOOL_RIGHTS}
+    compiler = ("EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); "
+                "fails closed with denied_capability when the host grants no compiler")
+    tools = {"xax_workspace": compiler, "xax_query": compiler, "xax_transaction": compiler, "xax_build": compiler,
+             "xax_construct": "UNIMPLEMENTED natively: XAX publishes no native carrier decoder (construct); fails closed",
+             "xax_execute": "UNIMPLEMENTED natively: the native server has no OS sandbox (execute); fails closed",
+             "xax_result": "UNIMPLEMENTED natively: result handles need session state, which the native server lacks"}
     return {"ok": True,
             "server": {"name": "xax-mcp", "version": VERSION, "transport": "stdio",
                        "implementation": "native XAX program (windows-x86_64 PE32+ built from a canonical .xax store)",
                        "python_on_request_path": False},
             "xax": {"pinned_commit": NATIVE_XAX_COMMIT, "host_contract": "xax-host-contract-v1 r10",
-                    "role": "build-time compiler; the deployed server starts no XAX compiler service"},
+                    "role": "build-time compiler; the deployed server drives a host-granted native compiler but embeds no interpreter"},
             "protocol": {"framing": "newline-delimited JSON-RPC 2.0", "versions": list(HANDSHAKE_VERSIONS),
                          "max_message_bytes": LMAX, "max_json_depth": MAX_DEPTH},
             "authority": {"rights": "__RIGHTS__", "max_request_bytes": MAX_ARGUMENTS, "store_roots": 0,
@@ -86,7 +104,9 @@ def capabilities_payload() -> dict:
             "targets": [],
             "sandbox": {"available": False, "reason": "the native server has no sandbox yet; execution is refused"},
             "maturity": {"stdio transport, JSON validation, MCP lifecycle, tool dispatch, host rights": "EXECUTED (tests/test_native_stdio.py)",
-                         "construct/query/transaction/build/execute/result": "UNIMPLEMENTED natively (docs/NATIVE.md)",
+                         "workspace/query/transaction/build over a host-granted native compiler": "PROTOTYPE (docs/NATIVE.md)",
+                         "construct (no native carrier decoder) and execute (no sandbox)": "UNIMPLEMENTED natively",
+                         "result (serves artifacts over the wire)": "UNIMPLEMENTED natively",
                          "modern protocol 2026-07-28": "UNIMPLEMENTED natively"}}
 
 
@@ -573,6 +593,412 @@ def build_program() -> Program:  # noqa: C901 - one straight-line description of
         blk.set("deny", blk.bor("deny", b32(1 << k)))
         blk.jump(tokens)
 
+    # -- native compiler service (host-granted) -----------------------------------------------------------------
+    # XAX_MCP_COMPILER / XAX_MCP_WORK / XAX_MCP_STORE name a native XAX compiler, a writable work directory and a
+    # canonical build-request seed store.  All three are granted together; without them the compiler-backed tools fail
+    # closed.  The server drives the compiler's edit/resolve/build commands (native XAX processes); it never runs an
+    # interpreter and never substitutes another language.
+    O_READ = 4 * 1024 * 1024          # store leading bytes and a provenance object
+    O_REC = O_READ + 128 * 1024       # decoded transaction carrier
+    O_PATHS = 6 * 1024 * 1024         # host paths built by pathbase/suffix
+    O_ARGV = O_PATHS + 8192           # child argv array
+    O_CFG = 11 * 1024 * 1024          # configuration, above any possible response
+    CFG_BASE = {"compiler": 0, "work": 1024, "store": 2048}
+    CFG_SPAN = {"compiler": 3072, "work": 3080, "store": 3088}
+    CFG_CMD = {"resolve": 4096, "build": 4160, "edit": 4224}
+    CFG_TABLE = 8192
+    CFG_NAMES = {"compiler": 12288, "work": 12352, "store": 12416}
+    P_COMPILER, P_STORE, P_CURRENT, P_EDIT, P_NEXT, P_SNAP, P_ART, P_PROV = (n * 1024 for n in range(8))
+
+    def addr(b, view, off):
+        return b.op1("address.offset", [f"{view}p"], P.ptr_type(view), attrs=[off])
+
+    def paddr(b, slot):
+        return addr(b, "O", O_PATHS + slot)
+
+    def raw(b, ref):
+        return b.op1("pointer.address", [ref], "b64", attrs=[1])
+
+    def icall(b, dll, symbol, inputs, results, *args):
+        return b.op("call.foreign", list(args), results, entity={"win32.import": [dll, symbol, inputs, results]})
+
+    def place(b, view, off, data):
+        for k, byte in enumerate(data):
+            b.store(view, b.add(b32(off), b32(k)), ("b8", byte), 1)
+        b.store(view, b.add(b32(off), b32(len(data))), ("b8", 0), 1)
+
+    lit_l: dict[bytes, object] = {}
+
+    def literal_l(data):
+        if data not in lit_l:
+            f = fn(f"litL{len(lit_l)}", ("L",), [("pos", "b32")], ["pos"])
+            bb = f.entry
+            for k in range(0, len(data) - len(data) % 8, 8):
+                bb.store("L", bb.add("pos", b32(k)), ("b64", int.from_bytes(data[k:k + 8], "little")), 8)
+            for k in range(len(data) - len(data) % 8, len(data)):
+                bb.store("L", bb.add("pos", b32(k)), ("b8", data[k]), 1)
+            bb.ret(bb.add("pos", b32(len(data))))
+            lit_l[data] = f
+        return lit_l[data]
+
+    def emit_l(b, *parts):
+        for part in parts:
+            if isinstance(part, bytes):
+                if part:
+                    b.call(literal_l(part), "pos", into=("pos",))
+            else:
+                part(b)
+
+    f = fn("decL", ("L",), [("v", "b32"), ("pos", "b32")], ["pos"], [("p", "b32"), ("d", "b32")])
+    f.entry.set("p", b32(1))
+    f.entry.set("d", b32(0))
+    grow = f.block()
+    f.entry.jump(grow)
+    more, digits = grow.if_(grow.cmp("uge", grow.udiv("v", "p"), b32(10)))
+    more.set("p", more.mul("p", b32(10)))
+    more.jump(grow)
+    body, done = digits.if_(digits.cmp("ne", "p", b32(0)))
+    done.ret("pos")
+    body.set("d", body.udiv("v", "p"))
+    body.store("L", "pos", body.add("d", b32(48)))
+    body.set("pos", body.add("pos", b32(1)))
+    body.set("v", body.sub("v", body.mul("d", "p")))
+    body.set("p", body.udiv("p", b32(10)))
+    body.jump(digits)
+
+    def nibble(blk, val):
+        small, big, join = blk.fn.block(), blk.fn.block(), blk.fn.block()
+        blk.branch(blk.cmp("ult", val, b32(10)), small, big)
+        small.store("L", "pos", small.add(val, b32(48)))
+        small.set("pos", small.add("pos", b32(1)))
+        small.jump(join)
+        big.store("L", "pos", big.add(val, b32(87)))
+        big.set("pos", big.add("pos", b32(1)))
+        big.jump(join)
+        return join
+
+    f = fn("hexL", ("O", "L"), [("se", "b64"), ("pos", "b32")], ["pos"],
+           [("i", "b32"), ("v", "b32"), ("x", "b32"), ("d", "b32"), ("off", "b32"), ("len", "b32")])
+    unspan(f.entry, "se", "off", "len")
+    f.entry.set("i", b32(0))
+    f.entry.set("v", b32(0))
+    f.entry.set("x", b32(0))
+    f.entry.set("d", b32(0))
+    loop = f.block()
+    f.entry.jump(loop)
+    body, done = loop.if_(loop.cmp("ult", "i", "len"))
+    done.ret("pos")
+    body.set("v", body.load("O", body.add(b32(O_READ), body.add("off", "i"))))
+    body.set("x", body.udiv("v", b32(16)))
+    body.set("d", body.sub("v", body.mul("x", b32(16))))
+    after = nibble(body, "x")
+    after = nibble(after, "d")
+    after.set("i", after.add("i", b32(1)))
+    after.jump(loop)
+
+    f = fn("hexdec", ("L", "O"), [("se", "b64")], ["n"],
+           [("i", "b32"), ("q", "b32"), ("h", "b32"), ("l", "b32"), ("c", "b32"), ("n", "b32"),
+            ("s", "b32"), ("e", "b32")])
+    unspan(f.entry, "se", "s", "e")
+    f.entry.set("q", b32(0))
+    f.entry.set("n", b32(0))
+    f.entry.set("h", b32(0))
+    f.entry.set("l", b32(0))
+    f.entry.set("c", b32(0))
+    f.entry.set("i", "s")
+    fail = f.block()
+    fail.set("n", b32(0xFFFFFFFF))
+    fail.ret("n")
+    loop = f.block()
+    f.entry.jump(loop)
+    body, done = loop.if_(loop.cmp("ult", "i", "e"))
+    done.set("n", "q")
+    done.ret("n")
+    body.set("c", body.load("L", "i"))
+    body.set("h", body.load("O", body.add(b32(O_CFG + CFG_TABLE), "c")))
+    body.set("c", body.load("L", body.add("i", b32(1))))
+    body.set("l", body.load("O", body.add(b32(O_CFG + CFG_TABLE), "c")))
+    bad, good = body.if_(body.bor(body.cmp("eq", "h", b32(255)), body.cmp("eq", "l", b32(255)), "b1"))
+    bad.jump(fail)
+    good.store("O", good.add(b32(O_REC), "q"), good.bor(good.mul("h", b32(16)), "l"))
+    good.set("q", good.add("q", b32(1)))
+    good.set("i", good.add("i", b32(2)))
+    good.jump(loop)
+
+    f = fn("pathbase", ("O",), [("sp", "b32"), ("dst", "b32")], ["end"],
+           [("s", "b32"), ("e", "b32"), ("i", "b32"), ("end", "b32"), ("packed", "b64")])
+    f.entry.set("packed", f.entry.load("O", "sp", 8))
+    unspan(f.entry, "packed", "s", "e")
+    f.entry.set("end", b32(0))
+    f.entry.set("i", "dst")
+    loop = f.block()
+    f.entry.jump(loop)
+    body, done = loop.if_(loop.cmp("ult", "s", "e"))
+    done.store("O", "i", ("b8", 0))
+    done.ret("i")
+    body.store("O", "i", body.load("O", "s"))
+    body.set("i", body.add("i", b32(1)))
+    body.set("s", body.add("s", b32(1)))
+    body.jump(loop)
+
+    suffixes: dict[bytes, object] = {}
+
+    def suffix(data: bytes):
+        if data not in suffixes:
+            f = fn(f"suf{len(suffixes)}", ("O",), [("i", "b32")], ["end"], [("end", "b32")])
+            bb = f.entry
+            for k, byte in enumerate(data):
+                bb.store("O", bb.add("i", b32(k)), ("b8", byte), 1)
+            bb.store("O", bb.add("i", b32(len(data))), ("b8", 0), 1)
+            bb.ret(bb.add("i", b32(len(data))))
+            suffixes[data] = f
+        return suffixes[data]
+
+    tool_views = ("L", "O", "W")
+    tool_params = [("fs", "fs"), ("proc", "proc")]
+    tool_locals = [(n, t) for n, t in (("pos", "b32"), ("n", "b32"), ("iserr", "b32"), ("i", "b32"), ("q", "b32"),
+                                       ("rc", "b32"), ("attr", "b32"), ("size", "b32"), ("pn", "b32"), ("ok", "b32"),
+                                       ("fd", "b32"), ("got", "b32"), ("written", "b32"), ("st", "b32"),
+                                       ("input", "ptr"), ("cur_ptr", "ptr"), ("store_ptr", "ptr"))]
+
+    def tool_fn(name):
+        return fn(name, tool_views, tool_params, ["n", "fs", "proc"], tool_locals)
+
+    def init_tool(f):
+        b = f.entry
+        for name, typ in tool_locals:
+            b.set(name, addr(b, "O", 0) if typ == "ptr" else b32(0))
+        return b
+
+    def build_paths(b):
+        b.call(fns["pathbase"], b32(O_CFG + CFG_SPAN["compiler"]), b32(O_PATHS + P_COMPILER), into=("i",))
+        b.call(fns["pathbase"], b32(O_CFG + CFG_SPAN["store"]), b32(O_PATHS + P_STORE), into=("i",))
+        for slot, tail in ((P_CURRENT, b"\\current.xax"), (P_EDIT, b"\\edit.rec"), (P_NEXT, b"\\next.xax"),
+                           (P_SNAP, b"\\snapshot.xax"), (P_ART, b"\\artifact.exe"), (P_PROV, b"\\artifact.prov")):
+            b.call(fns["pathbase"], b32(O_CFG + CFG_SPAN["work"]), b32(O_PATHS + slot), into=("i",))
+            b.call(suffix(tail), "i", into=("i",))
+
+    def choose_input(b):
+        b.set("cur_ptr", paddr(b, P_CURRENT))
+        b.set("store_ptr", paddr(b, P_STORE))
+        attr, fs = icall(b, "kernel32.dll", "GetFileAttributesA", ["ptr", "fs"], ["b32", "fs"], "cur_ptr", "fs")
+        b.set("fs", fs)
+        use_cur, use_store, join = b.fn.block(), b.fn.block(), b.fn.block()
+        b.branch(b.cmp("ne", attr, b32(0xFFFFFFFF)), use_cur, use_store)
+        use_cur.set("input", "cur_ptr")
+        use_cur.jump(join)
+        use_store.set("input", "store_ptr")
+        use_store.jump(join)
+        return join
+
+    # File and process work is emitted inline in each tool: a helper that owns a heap view and performs a foreign call
+    # would return a borrowed view pointer as a second machine value, which the frame lowering cannot call, so these
+    # helpers splice nodes into the caller instead.
+    def emit_write(b, path_ref, length):
+        fd, fs = icall(b, "msvcrt.dll", "_open", ["ptr", "b32", "b32", "fs"], ["b32", "fs"],
+                       path_ref, b32(0x8301), b32(0x0180), "fs")
+        b.set("fs", fs)
+        b.set("fd", fd)
+        bad, ok, join = b.fn.block(), b.fn.block(), b.fn.block()
+        b.branch(b.cmp("slt", "fd", b32(0)), bad, ok)
+        bad.jump(join)
+        written, fs, mem = icall(ok, "msvcrt.dll", "_write", ["b32", "ptr", "b32", "fs", "mem"],
+                                 ["b32", "fs", "mem"], "fd", addr(ok, "O", O_REC), length, "fs", "Om")
+        ok.set("Om", mem)
+        ok.set("fs", fs)
+        ok.set("written", written)
+        _, fs = icall(ok, "msvcrt.dll", "_close", ["b32", "fs"], ["b32", "fs"], "fd", "fs")
+        ok.set("fs", fs)
+        ok.jump(join)
+        return join
+
+    def emit_read(b, path_ref, cap, out="got"):
+        fd, fs = icall(b, "msvcrt.dll", "_open", ["ptr", "b32", "b32", "fs"], ["b32", "fs"],
+                       path_ref, b32(0x8000), b32(0), "fs")
+        b.set("fs", fs)
+        b.set("fd", fd)
+        b.set(out, b32(0))
+        bad, ok, join = b.fn.block(), b.fn.block(), b.fn.block()
+        b.branch(b.cmp("slt", "fd", b32(0)), bad, ok)
+        bad.jump(join)
+        n, fs, mem = icall(ok, "msvcrt.dll", "_read", ["b32", "ptr", "b32", "fs", "mem"],
+                           ["b32", "fs", "mem"], "fd", addr(ok, "O", O_READ), cap, "fs", "Om")
+        ok.set("Om", mem)
+        ok.set("fs", fs)
+        ok.set(out, n)
+        _, fs = icall(ok, "msvcrt.dll", "_close", ["b32", "fs"], ["b32", "fs"], "fd", "fs")
+        ok.set("fs", fs)
+        ok.jump(join)
+        return join
+
+    def emit_size(b, path_ref, out="size"):
+        fd, fs = icall(b, "msvcrt.dll", "_open", ["ptr", "b32", "b32", "fs"], ["b32", "fs"],
+                       path_ref, b32(0x8000), b32(0), "fs")
+        b.set("fs", fs)
+        b.set("fd", fd)
+        b.set(out, b32(0))
+        bad, ok, join = b.fn.block(), b.fn.block(), b.fn.block()
+        b.branch(b.cmp("slt", "fd", b32(0)), bad, ok)
+        bad.jump(join)
+        size, fs = icall(ok, "msvcrt.dll", "_lseek", ["b32", "b32", "b32", "fs"], ["b32", "fs"],
+                         "fd", b32(0), b32(2), "fs")
+        ok.set("fs", fs)
+        ok.set(out, size)
+        _, fs = icall(ok, "msvcrt.dll", "_close", ["b32", "fs"], ["b32", "fs"], "fd", "fs")
+        ok.set("fs", fs)
+        ok.jump(join)
+        return join
+
+    def emit_spawn(b, out_rc, *names):
+        for k, name in enumerate(names):
+            b.store("O", b.add(b32(O_ARGV), b32(8 * k)), raw(b, name), 8)
+        b.store("O", b.add(b32(O_ARGV), b32(8 * len(names))), ("b64", 0), 8)
+        code, proc = icall(b, "msvcrt.dll", "_spawnv", ["b32", "ptr", "ptr", "proc"], ["b32", "proc"],
+                           b32(0), names[0], addr(b, "O", O_ARGV), "proc")
+        b.set("proc", proc)
+        b.set(out_rc, code)
+
+    def finish_error(b, code, message):
+        b.set("pos", b32(0))
+        b.set("iserr", b32(1))
+        emit_l(b, b'{"error":{"code":"' + code.encode() + b'","message":"' + message.encode() + b'"},"ok":false}')
+        b.set("n", b.bor("pos", b.mul("iserr", b32(1 << 31))))
+
+    # xax_build: resolve then build the current store; report root, artifact size and provenance.
+    f = tool_fn("tool_build")
+    done = f.block()
+    b = init_tool(f)
+    b.set("pos", b32(0))
+    b.set("iserr", b32(0))
+    b.set("size", b32(0))
+    b.set("pn", b32(0))
+    build_paths(b)
+    b = choose_input(b)
+    emit_spawn(b, "rc", paddr(b, P_COMPILER), addr(b, "O", O_CFG + CFG_CMD["resolve"]), "input", paddr(b, P_SNAP))
+    bad, good = b.if_(b.cmp("ne", "rc", b32(0)))
+    finish_error(bad, "compiler_rejected", "the native compiler rejected the request store while resolving")
+    bad.jump(done)
+    b = good
+    emit_spawn(b, "rc", paddr(b, P_COMPILER), addr(b, "O", O_CFG + CFG_CMD["build"]), paddr(b, P_SNAP),
+               paddr(b, P_ART), paddr(b, P_PROV))
+    bad, good = b.if_(b.cmp("ne", "rc", b32(0)))
+    finish_error(bad, "compiler_rejected", "the native compiler rejected the snapshot while building")
+    bad.jump(done)
+    b = good
+    b = emit_size(b, paddr(b, P_ART), "size")
+    b = emit_read(b, "input", b32(64))
+    bad, good = b.if_(b.bor(b.cmp("ult", "got", b32(39)), b.cmp("eq", "size", b32(0)), "b1"))
+    finish_error(bad, "build_failed", "the build produced no artifact or the store has no readable root")
+    bad.jump(done)
+    b = good
+    b.set("pos", b32(0))
+    emit_l(b, b'{"ok":true,"root":"')
+    b.call(fns["hexL"], span(b, b32(7), b32(32)), "pos", into=("pos",))
+    emit_l(b, b'","artifact":{"bytes":')
+    b.call(fns["decL"], "size", "pos", into=("pos",))
+    emit_l(b, b'},"provenance":{"bytes":')
+    b = emit_read(b, paddr(b, P_PROV), b32(65536), "pn")
+    bad, good = b.if_(b.cmp("eq", "pn", b32(0)))
+    finish_error(bad, "build_failed", "the build produced no provenance object")
+    bad.jump(done)
+    b = good
+    b.call(fns["decL"], "pn", "pos", into=("pos",))
+    emit_l(b, b',"hex":"')
+    b.call(fns["hexL"], span(b, b32(0), "pn"), "pos", into=("pos",))
+    emit_l(b, b'"}}')
+    b.set("n", b.bor("pos", b.mul("iserr", b32(1 << 31))))
+    b.jump(done)
+    done.ret("n", "fs", "proc")
+
+    # xax_workspace / xax_query: describe the current store (root and size).
+    f = tool_fn("tool_info")
+    done = f.block()
+    b = init_tool(f)
+    b.set("pos", b32(0))
+    b.set("iserr", b32(0))
+    b.set("size", b32(0))
+    build_paths(b)
+    b = choose_input(b)
+    b = emit_read(b, "input", b32(64))
+    b = emit_size(b, "input", "size")
+    bad, good = b.if_(b.cmp("ult", "got", b32(39)))
+    finish_error(bad, "workspace_unavailable", "the current store could not be read (need at least 39 bytes)")
+    bad.jump(done)
+    b = good
+    b.set("pos", b32(0))
+    emit_l(b, b'{"bytes":')
+    b.call(fns["decL"], "size", "pos", into=("pos",))
+    emit_l(b, b',"ok":true,"root":"')
+    b.call(fns["hexL"], span(b, b32(7), b32(32)), "pos", into=("pos",))
+    emit_l(b, b'","workspace":"ws_0"}')
+    b.set("n", b.bor("pos", b.mul("iserr", b32(1 << 31))))
+    b.jump(done)
+    done.ret("n", "fs", "proc")
+
+    # xax_transaction: decode the hex XAXEDIT1 record, apply it with edit, replace the current store.
+    f = tool_fn("tool_transaction")
+    done = f.block()
+    b = init_tool(f)
+    b.set("pos", b32(0))
+    b.set("iserr", b32(0))
+    b.set("pn", b32(0))
+    build_paths(b)
+    b.set("i", b.load("W", b32(RES + 96), 4))  # handle parked the arguments span here
+    b.set("q", b.load("W", b32(RES + 100), 4))
+    b.call(fns["scan"], "i", "q", into=("st",))
+    b.set("i", b.load("W", b32(RES + 8 * RECORD_KEY), 4))
+    no_record, have_record = b.if_(b.cmp("eq", "i", b32(0)))
+    finish_error(no_record, "invalid_request", "arguments must contain a hex 'record' string")
+    no_record.jump(done)
+    b = have_record
+    b.set("q", b.load("W", b32(RES + 8 * RECORD_KEY + 4), 4))
+    quoted, unquoted = b.if_(b.cmp("ne", b.load("L", "i"), b32(34)))
+    finish_error(quoted, "invalid_request", "the record must be a JSON string")
+    quoted.jump(done)
+    b = unquoted
+    b.call(fns["hexdec"], span(b, b.add("i", b32(1)), b.sub("q", b32(1))), into=("pn",))
+    bad, good = b.if_(b.cmp("eq", "pn", b32(0xFFFFFFFF)))
+    finish_error(bad, "invalid_request", "the record is not valid hex")
+    bad.jump(done)
+    b = good
+    (flag,) = b.call(eq("O", b"XAXEDIT1"), b32(O_REC), b32(O_REC + 8))
+    bad, good = b.if_(b.cmp("eq", flag, b32(0)))
+    finish_error(bad, "invalid_request", "the record is not an XAXEDIT1 transaction")
+    bad.jump(done)
+    b = good
+    b = choose_input(b)
+    b = emit_write(b, paddr(b, P_EDIT), "pn")
+    bad, good = b.if_(b.cmp("ne", "written", "pn"))
+    finish_error(bad, "io_error", "the transaction record was not written completely")
+    bad.jump(done)
+    b = good
+    emit_spawn(b, "rc", paddr(b, P_COMPILER), addr(b, "O", O_CFG + CFG_CMD["edit"]), "input",
+               paddr(b, P_EDIT), paddr(b, P_NEXT))
+    bad, good = b.if_(b.cmp("ne", "rc", b32(0)))
+    finish_error(bad, "transaction_rejected", "the native compiler rejected the transaction record")
+    bad.jump(done)
+    b = good
+    moved, fs = icall(b, "kernel32.dll", "MoveFileExA", ["ptr", "ptr", "b32", "fs"], ["b32", "fs"],
+                      paddr(b, P_NEXT), paddr(b, P_CURRENT), b32(1), "fs")
+    b.set("fs", fs)
+    b.set("ok", moved)
+    bad, good = b.if_(b.cmp("eq", "ok", b32(0)))
+    finish_error(bad, "io_error", "the edited store could not replace the current store")
+    bad.jump(done)
+    b = good
+    b = emit_read(b, paddr(b, P_CURRENT), b32(64))
+    bad, good = b.if_(b.cmp("ult", "got", b32(39)))
+    finish_error(bad, "transaction_rejected", "the edited store could not be read")
+    bad.jump(done)
+    b = good
+    b.set("pos", b32(0))
+    emit_l(b, b'{"generation":1,"ok":true,"root":"')
+    b.call(fns["hexL"], span(b, b32(7), b32(32)), "pos", into=("pos",))
+    emit_l(b, b'","workspace":"ws_0"}')
+    b.set("n", b.bor("pos", b.mul("iserr", b32(1 << 31))))
+    b.jump(done)
+    done.ret("n", "fs", "proc")
+
     # -- one message: L[0:len] -> response bytes in O[0:pos] (pos 0: no response) --------------------------------
     f = fn("head", ("L", "O"), [("se", "b64"), ("pos", "b32")], ["pos"], [("ids", "b32"), ("ide", "b32")])
     unspan(f.entry, "se", "ids", "ide")
@@ -583,19 +1009,25 @@ def build_program() -> Program:  # noqa: C901 - one straight-line description of
     null_id.ret("pos")
 
     names = ["len", "over", "rights", "pos", "st", "c", "hasid", "ids", "ide", "js", "je", "ms", "me", "ps", "pe",
-             "rs", "es", "ns", "ne", "as", "ae", "vs", "ve", "ver", "tool", "flag", "count", "ks", "ke", "xs", "xe"]
-    f = fn("handle", ("L", "O", "W"), [("packed", "b32")], ["pos"], [(n, "b32") for n in names])
+             "rs", "es", "ns", "ne", "as", "ae", "vs", "ve", "ver", "tool", "flag", "count", "ks", "ke", "xs", "xe",
+             "configured", "plen", "iserr", "packed_out", "cs", "ce", "ws", "we", "ss", "se"]
+    f = fn("handle", ("L", "O", "W"), [("packed", "b32"), ("fs", "fs"), ("proc", "proc")],
+           ["pos", "fs", "proc"], [(n, "b32") for n in names])
     b = f.entry
     for name in names[3:]:
         b.set(name, b32(0))
     b.set("len", b.band("packed", b32((1 << 23) - 1)))  # packed = len | over << 23 | rights << 24
     b.set("over", b.band(b.udiv("packed", b32(1 << 23)), b32(1)))
     b.set("rights", b.udiv("packed", b32(1 << 24)))
+    unspan(b, b.load("O", b32(O_CFG + CFG_SPAN["compiler"]), 8), "cs", "ce")
+    unspan(b, b.load("O", b32(O_CFG + CFG_SPAN["work"]), 8), "ws", "we")
+    unspan(b, b.load("O", b32(O_CFG + CFG_SPAN["store"]), 8), "ss", "se")
+    b.set("configured", b.band(b.band(b.flag("ne", "cs", "ce"), b.flag("ne", "ws", "we")), b.flag("ne", "ss", "se")))
 
     def respond(block, *parts):
         block.call(fns["head"], span(block, block.mul("ids", "hasid"), "ide"), "pos", into=("pos",))
         emit(block, *parts)
-        block.ret("pos")
+        block.ret("pos", "fs", "proc")
 
     def rpc_error(code, message):
         return b',"error":{"code":%d,"message":"%s"}}\n' % (code, message.encode())
@@ -615,7 +1047,7 @@ def build_program() -> Program:  # noqa: C901 - one straight-line description of
     respond(too_large, rpc_error(-32600, f"Invalid Request: the message exceeds {LMAX} bytes"))
     respond(parse_error, rpc_error(-32700, "Parse error"))
     respond(invalid, rpc_error(-32600, "Invalid Request"))
-    ignore.ret(b32(0))
+    ignore.ret(b32(0), "fs", "proc")
     respond(not_found, b',"error":{"code":-32601,"message":"Method not found","data":', ("copy", "ms", "me"), b"}}\n")
     fits = f.block()
     b.branch(b.cmp("ne", "over", b32(0)), too_large, fits)
@@ -698,7 +1130,7 @@ def build_program() -> Program:  # noqa: C901 - one straight-line description of
         emit(blk, version.encode())
         blk.jump(done)
     emit(done, b'","serverInfo":' + compact({"name": "xax-mcp", "title": "XAX MCP server", "version": VERSION}) + b"}}\n")
-    done.ret("pos")
+    done.ret("pos", "fs", "proc")
     # tools/call
     b = tools_call
     invalid_params = f.block()
@@ -757,21 +1189,50 @@ def build_program() -> Program:  # noqa: C901 - one straight-line description of
     rights_raw = lambda blk: blk.call(fns["rights_raw"], "rights", "pos", into=("pos",))  # noqa: E731
     rights_esc = lambda blk: blk.call(fns["rights_esc"], "rights", "pos", into=("pos",))  # noqa: E731
     respond(report, *tool_result_parts([head, (rights_raw, rights_esc), tail], False))
-    # every other tool: the host right first, then the honest "not implemented natively" report
+    # every other tool: the host right first, then the compiler-backed implementation or the honest report
     targets = [f.block() for _ in TOOL_RIGHTS]
     unreachable = f.block()
-    unreachable.ret(b32(0))
+    unreachable.ret(b32(0), "fs", "proc")
     switch(gated, "tool", [(k + 1, blk) for k, blk in enumerate(targets)], unreachable)
+    compiler_tools = {"xax_workspace": "tool_info", "xax_query": "tool_info", "xax_transaction": "tool_transaction",
+                      "xax_build": "tool_build"}
+    unsupported_reasons = {
+        "xax_construct": "XAX publishes no native carrier decoder (construct)",
+        "xax_execute": "the native server has no OS sandbox (execute)",
+        "xax_result": "result handles need session state, which the native server does not implement yet",
+    }
     for (tool, right), blk in zip(TOOL_RIGHTS.items(), targets):
         flag_ = "--allow-execute" if right == "execute" else f"--grant {right}"
         denied = error_payload("denied_capability", f"this server was not granted the '{right}' right by its host configuration",
                                repair=[f"the host owner may add {flag_} to the server launch command"])
-        unsupported = error_payload("unsupported", f"{tool} is not implemented by the native XAX server: XAX publishes "
-                                    "no native construct/carrier decoder and no committed native compiler service for "
-                                    "windows-x86_64 hosts (docs/NATIVE.md)")
+        unsupported = error_payload("unsupported", f"{tool} is not implemented by the native XAX server: "
+                                    f"{unsupported_reasons.get(tool, 'the tool has no native implementation')}; "
+                                    "it fails closed (docs/NATIVE.md)")
         allowed, refused = blk.if_(blk.cmp("ne", blk.band("rights", b32(1 << RIGHTS.index(right))), b32(0)))
         respond(refused, tool_result(compact(denied), True))
-        respond(allowed, tool_result(compact(unsupported), True))
+        if tool in compiler_tools:
+            ungranted = error_payload("denied_capability",
+                                      "the host granted no native XAX compiler; set XAX_MCP_COMPILER, XAX_MCP_WORK and "
+                                      "XAX_MCP_STORE in the server launch environment",
+                                      repair=["set XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE to a native XAX compiler, "
+                                              "a writable directory and a seed .xax store"])
+            ready, unconfigured = allowed.if_(allowed.cmp("ne", "configured", b32(0)))
+            respond(unconfigured, tool_result(compact(ungranted), True))
+            ready.call(fns["head"], span(ready, ready.mul("ids", "hasid"), "ide"), "pos", into=("pos",))
+            ready.store("W", b32(RES + 96), "as", 4)   # the tool reads the arguments span from here
+            ready.store("W", b32(RES + 100), "ae", 4)
+            ready.call(fns[compiler_tools[tool]], "fs", "proc", into=("packed_out", "fs", "proc"))
+            ready.set("iserr", ready.udiv("packed_out", b32(1 << 31)))
+            ready.set("plen", ready.band("packed_out", b32((1 << 31) - 1)))
+            failed, succeeded = ready.if_(ready.cmp("ne", "iserr", b32(0)))
+            emit(succeeded, b',"result":{"content":[{"text":"', ("esc", b32(0), "plen"),
+                 b'","type":"text"}],"isError":false,"structuredContent":', ("copy", b32(0), "plen"), b"}}\n")
+            succeeded.ret("pos", "fs", "proc")
+            emit(failed, b',"result":{"content":[{"text":"', ("esc", b32(0), "plen"),
+                 b'","type":"text"}],"isError":true,"structuredContent":', ("copy", b32(0), "plen"), b"}}\n")
+            failed.ret("pos", "fs", "proc")
+        else:
+            respond(allowed, tool_result(compact(unsupported), True))
 
     # -- process entry: STDIO loop ------------------------------------------------------------------------------
     views = tuple(VIEWS)
@@ -800,6 +1261,27 @@ def build_program() -> Program:  # noqa: C901 - one straight-line description of
     _, mem = b.op("call.foreign", ["Ap", command_line, b32(32768), "Am"], ["b64", "mem"],
                   entity={"win32.import": ["kernel32.dll", "lstrcpynA", ["ptr", "b64", "b32", "mem"], ["b64", "mem"]]})
     b.set("Am", mem)
+    # Host-granted native compiler configuration, the hex decode table and the environment variable names live in O,
+    # above any response, so every compiler-backed tool reads them from there.
+    place(b, "O", O_CFG + CFG_NAMES["compiler"], b"XAX_MCP_COMPILER")
+    place(b, "O", O_CFG + CFG_NAMES["work"], b"XAX_MCP_WORK")
+    place(b, "O", O_CFG + CFG_NAMES["store"], b"XAX_MCP_STORE")
+    place(b, "O", O_CFG + CFG_TABLE, HEX_TABLE)
+    for cmd in CFG_CMD:
+        place(b, "O", O_CFG + CFG_CMD[cmd], cmd.encode())
+    for key, buffer in CFG_BASE.items():
+        length, mem = b.op("call.foreign", [addr(b, "O", O_CFG + CFG_NAMES[key]),
+                                            addr(b, "O", O_CFG + buffer), b32(512), "Om"],
+                           ["b32", "mem"],
+                           entity={"win32.import": ["kernel32.dll", "GetEnvironmentVariableA",
+                                                    ["ptr", "ptr", "b32", "mem"], ["b32", "mem"]]})
+        b.set("Om", mem)
+        # A missing variable returns 0; an over-long value would be truncated, so clamp it to zero length and let the
+        # tool fail closed rather than read past the 512-byte buffer into the next configuration slot.
+        fits = b.cmp("ult", length, b32(512))
+        clamped = b.band(length, b.sub(b32(0), b.zext(fits, "b32")))
+        b.store("O", b32(O_CFG + CFG_SPAN[key]),
+                span(b, b32(O_CFG + buffer), b.add(b32(O_CFG + buffer), clamped)), 8)
     b.call(fns["parse_args"], into=("rights",))
     EXIT, READ, COPY, LINE, WRITE, EOF, refuse = (main.block() for _ in range(7))
     b.branch(b.cmp("eq", "rights", b32(0)), refuse, READ)
@@ -835,7 +1317,8 @@ def build_program() -> Program:  # noqa: C901 - one straight-line description of
     room.jump(COPY)
     full.set("over", b32(1))
     full.jump(COPY)
-    LINE.call(fns["handle"], LINE.bor(LINE.bor("len", LINE.mul("over", b32(1 << 23))), LINE.mul("rights", b32(1 << 24))), into=("out",))
+    LINE.call(fns["handle"], LINE.bor(LINE.bor("len", LINE.mul("over", b32(1 << 23))), LINE.mul("rights", b32(1 << 24))),
+              "fs", "proc", into=("out", "fs", "proc"))
     LINE.set("len", b32(0))
     LINE.set("over", b32(0))
     LINE.branch(LINE.cmp("eq", "out", b32(0)), COPY, WRITE)
@@ -848,7 +1331,8 @@ def build_program() -> Program:  # noqa: C901 - one straight-line description of
     # end of input: a final line without its newline is still a message
     last, quiet = EOF.if_(EOF.cmp("ne", EOF.bor("len", "over"), b32(0)))
     quiet.jump(EXIT)
-    last.call(fns["handle"], last.bor(last.bor("len", last.mul("over", b32(1 << 23))), last.mul("rights", b32(1 << 24))), into=("out",))
+    last.call(fns["handle"], last.bor(last.bor("len", last.mul("over", b32(1 << 23))), last.mul("rights", b32(1 << 24))),
+              "fs", "proc", into=("out", "fs", "proc"))
     flush = main.block()
     last.branch(last.cmp("eq", "out", b32(0)), EXIT, flush)
     rptr = flush.op1("pointer.cast", ["Op"], "rptr")

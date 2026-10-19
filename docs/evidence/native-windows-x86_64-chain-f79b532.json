@@ -1,0 +1,171 @@
+{
+  "schema": "xax-mcp-evidence-v1",
+  "claim": "The native XAX server drives a host-granted native XAX compiler over MCP STDIO: it describes the current store, resolves and builds it, and applies one XAXEDIT1 transaction with the compiler's native edit command.",
+  "label": "PROTOTYPE",
+  "measurement_label": "MEASURED",
+  "scope": "one seed program, one constant mutation, one host and one local compiler prototype; not a general construct/build/execute loop",
+  "recorded": "2026-10-19",
+  "server_version": "0.7.0+native",
+  "xax_commit": "f79b532fd4651ba808676d02f4b038e2cc271e6a",
+  "host_contract": "xax-host-contract-v1 r10",
+  "platform": "windows-x86_64",
+  "host": {
+    "cpu": "AMD Ryzen 9 5900HS with Radeon Graphics",
+    "logical_cpus": 16,
+    "os": "Microsoft Windows 11 Pro 10.0.26300",
+    "python": "3.12.10 (carrier authoring and test client only)"
+  },
+  "server": {
+    "bytes": 284672,
+    "sha256": "2c244f566fb0cbd7459cce5ddb79576c7e5505c531151b4a1e8a34001a4b1dd8",
+    "store_root": "9a511d007a27851f3a638bdff31e629068cf8faa4a50b98a2e14ed5d2d601f1a"
+  },
+  "grant": {
+    "XAX_MCP_COMPILER": "D:\\GitHub\\XAX\\build\\windows_helpers\\xaxc-windows.exe",
+    "XAX_MCP_WORK": "a fresh empty temporary directory",
+    "XAX_MCP_STORE": "D:\\GitHub\\XAX-MCP\\native\\xax-mcp-seed.xax"
+  },
+  "compiler": {
+    "path": "D:\\GitHub\\XAX\\build\\windows_helpers\\xaxc-windows.exe",
+    "bytes": 11857408,
+    "sha256": "e2b730647e5005321166513c68c51223b7e8b4ee78222197f99dcf2725016d43",
+    "commands_used": [
+      "resolve",
+      "build",
+      "edit"
+    ],
+    "status": "local XAX-built prototype outside the pinned XAX tree; not committed to XAX f79b532 and not shipped by this repository",
+    "construct": "not available; no native carrier decoder exists"
+  },
+  "seed": {
+    "path": "native/xax-mcp-seed.xax",
+    "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+    "bytes": 1852,
+    "description": "a form-2 windows-x86_64 build request for a tiny program whose first constant is 40"
+  },
+  "steps": [
+    {
+      "tool": "xax_query",
+      "arguments": {},
+      "result": {
+        "ok": true,
+        "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+        "bytes": 1852,
+        "workspace": "ws_0"
+      },
+      "evidence": "the server read the seed store from the host-granted path and reported its canonical root"
+    },
+    {
+      "tool": "xax_build",
+      "arguments": {},
+      "result": {
+        "ok": true,
+        "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+        "artifact": {
+          "bytes": 1536,
+          "sha256": "8faaeb7e63e5d1a07bcd9c46e3ae3381af267b67e213cec6b992c628fb1843ca"
+        },
+        "provenance": {
+          "bytes": 268,
+          "sha256": "98bb70987a8f5cfb508cec08f0722cf3ec46ab6b1a0c9ab383cd3d85e163773b",
+          "hex": "8a0257a86d8697fea33c25ff881d90e4fb77ccc98bc8fe1de800c95de1da9b6674db0a0104572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb6158799480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967ec76e96f761898ded961b1d8fa1bdfdc43d258b09a10d9420fb04daf7952e8c606605030001020d540ec6bf71fc39eee0d7baf7e896a3c6bf61df11877fa63837e40d6b595ed0bc351ca3286fa3ff21d2b39e3ea374c3b0f01fb45a5e601d29c2dc08105ce117c3edae156dc12219a764eaafcc5ada5648480107b6df728fb63cb4c2e881c0ff00"
+        }
+      },
+      "evidence": "the server spawned the compiler twice: resolve wrote snapshot.xax, build wrote artifact.exe and artifact.prov; the server read both files back"
+    },
+    {
+      "tool": "native/chain.py make_record",
+      "arguments": {
+        "store": "the work directory's current.xax",
+        "value": 41
+      },
+      "result": {
+        "bytes": 78,
+        "old_constant": 40,
+        "prefix": "XAXEDIT1",
+        "sha256": "8b85fd37634ac0ef44a0c92fe4cab54c17cc7104101619b772ddf30002a2f9c6"
+      },
+      "evidence": "the carrier names the seed's first constant node (function f70ba768..., block 0, node 0) and sets it from 40 to 41"
+    },
+    {
+      "tool": "xax_transaction",
+      "arguments": {
+        "record": "<156 hex characters>"
+      },
+      "result": {
+        "ok": true,
+        "generation": 1,
+        "workspace": "ws_0",
+        "root": "8c01664caa5254b17bc4dd1a407d70c922115f482729319791a8aa89c3531e97"
+      },
+      "store_after": {
+        "bytes": 1995,
+        "sha256": "474b1f9b342abf7996a4eb12c464de500b3d7e78eedefedd369a2709b229dc59"
+      },
+      "evidence": "the server decoded the hex carrier, wrote it to the work directory, ran the compiler's edit command, and replaced current.xax with the edit output"
+    },
+    {
+      "tool": "xax_query",
+      "arguments": {},
+      "result": {
+        "ok": true,
+        "root": "8c01664caa5254b17bc4dd1a407d70c922115f482729319791a8aa89c3531e97",
+        "bytes": 1995,
+        "workspace": "ws_0"
+      },
+      "evidence": "a later query reports the edited store"
+    }
+  ],
+  "measurements": {
+    "method": "one server process; 10 xax_query calls, 5 xax_build calls, then 5 xax_transaction calls on successive constants 41..45; each is a full JSON-RPC round trip over STDOUT/STDIN pipes; medians of the raw samples",
+    "startup_ms_to_initialize": 18.01,
+    "peak_working_set_mb": 9.18,
+    "xax_query_ms": 0.14,
+    "xax_build_ms": 44.13,
+    "xax_transaction_ms": 22.03,
+    "raw_ms": {
+      "xax_query": [
+        0.3109,
+        0.1637,
+        0.1428,
+        0.1349,
+        0.1269,
+        0.1223,
+        0.1221,
+        0.1685,
+        0.1375,
+        0.1439
+      ],
+      "xax_build": [
+        47.7893,
+        41.2022,
+        42.4175,
+        44.1338,
+        52.6973
+      ],
+      "xax_transaction": [
+        19.7451,
+        22.0935,
+        22.1724,
+        20.9632,
+        22.0284
+      ]
+    },
+    "interpretation": "build and transaction dominate because each spawns the native compiler as a child process; the server's own handling is sub-millisecond. These are not XAX code-generation benchmarks.",
+    "final_after_5_transactions": {
+      "root": "48302c63d2e7794a055ae6f63001065a8ccf2d1750538c35c323bcfb4a4401a9",
+      "bytes": 1995
+    }
+  },
+  "test": {
+    "name": "tests/test_native_stdio.py::test_native_compiler_chain_over_stdio",
+    "gate": "XAX_MCP_TEST_COMPILER and XAX_NATIVE_SRC; skipped otherwise",
+    "result": "passed on 2026-10-19 (the same server store and seed as this file)"
+  },
+  "limits": [
+    "The compiler is a local prototype outside the pinned XAX tree; a reproducible committed native compiler is still upstream work.",
+    "Only query(root), resolve+build of the current store, and one XAXEDIT1 edit are exercised; workspace handles, typed mutations, expected-generation checks, pagination and construct are not implemented.",
+    "xax_execute is refused; no OS sandbox exists, so no artifact was executed.",
+    "One program and one constant mutation; this is not evidence of a general construct/build/execute loop."
+  ]
+}

@@ -4,12 +4,14 @@
 
 | xax-mcp | XAX commit | XAX host contract | Toolchain fingerprint (sha256) | mcp SDK (test client) | Python (build/test only) | OS / arch | Result |
 |---|---|---|---|---|---|---|---|
-| 0.6.0 | `f79b532fd4651ba808676d02f4b038e2cc271e6a` (XAX `main`, 2026-10-19) | `xax-host-contract-v1` r10 | `0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9` | 2.3.0 | 3.12.10 | Windows 11 x86-64 | native protocol suite: 42 passed; compiler-backed tools UNIMPLEMENTED (docs/NATIVE.md) |
+| 0.7.0 | `f79b532fd4651ba808676d02f4b038e2cc271e6a` (XAX `main`, 2026-10-19) | `xax-host-contract-v1` r10 | `0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9` | 2.3.0 | 3.12.10 | Windows 11 x86-64 | native protocol suite: 43 passed, 1 skipped; compiler-backed tools PROTOTYPE over a host-granted native compiler (docs/NATIVE.md) |
 
-Declared support for 0.6.0: exactly `f79b532` (XAX `main`), with `xax-host-contract-v1` at revision 10. The
+Declared support for 0.7.0: exactly `f79b532` (XAX `main`), with `xax-host-contract-v1` at revision 10. The
 fingerprint covers every Python module and bootstrap `.xax` store of the `xax-compiler` distribution at that
 commit. It is used by the **build** to identify the compiler that produced the committed store; the deployed
-server has no compiler and no runtime Python, so it does not probe a toolchain at startup.
+server has no embedded compiler and no runtime Python, so it does not probe a toolchain at startup. The
+compiler-backed tools drive a compiler only when the host grants `XAX_MCP_COMPILER`, `XAX_MCP_WORK` and
+`XAX_MCP_STORE`; that compiler's own version is the host's responsibility.
 
 The native server embeds the pin it was built with (`xax.pinned_commit` in `xax_capabilities`). Rebuilding the
 store at another XAX revision is not a supported configuration: the committed store/request equality check in
@@ -21,12 +23,14 @@ store at another XAX revision is not a supported configuration: the committed st
 - r9 (ADR-260): arbitrary `win64-c` imports and COM method calls in carriers.
 - r10 (ADR-317): Windows PE32+ forwards and DllMain details; the Windows hosted profile.
 
-XAX-MCP does not consume r8-r10 yet. They are prerequisites for the native sandbox (B4), not evidence of it.
+XAX-MCP consumes r8-r10: the native server declares `win32.import` entities (r9/ADR-260) for its kernel32 and msvcrt
+calls and is built with the Windows hosted profile (r10/ADR-317). The native sandbox (B4) is still missing; nothing
+here is evidence of it.
 
 ## Historical Python adapter (0.1.0 - 0.5.1)
 
 These rows describe releases whose deployed server was Python. They are kept for provenance and for the porting
-work, not as descriptions of 0.6.0. The implementation remains in git history.
+work, not as descriptions of 0.7.0. The implementation remains in git history.
 
 | xax-mcp | XAX commit | XAX host contract | Toolchain fingerprint (sha256) | mcp SDK | Python | OS / arch | Result |
 |---|---|---|---|---|---|---|---|
@@ -45,22 +49,24 @@ work, not as descriptions of 0.6.0. The implementation remains in git history.
 |---|---|---|
 | Official MCP Python SDK client (`mcp.Client`, STDIO) | mcp 2.3.0 | initialize, `tools/list`, `xax_capabilities`, denied `xax_construct` (tests/test_native_stdio.py) |
 | Raw JSON-RPC (handshake 2025-11-25) | — | initialize, `tools/list`, `tools/call`, stdout purity, 1500-case JSON differential |
-| MCP Inspector CLI | 2.10.1 | not re-run against the native 0.6.0 build; the 0.5.1 result is historical |
+| MCP Inspector CLI | 2.10.1 | not re-run against the native 0.7.0 build; the 0.5.1 result is historical |
 | Claude Code | 2.1.294 | registration and `claude mcp list` health check only (0.5.1, historical); no model-driven run |
 | Codex CLI | 0.161.0 | `codex mcp add/list/get/remove` configuration syntax (0.5.1, historical) |
 | Claude Desktop | — | not run here |
 
-No model-driven host session (an agent choosing the tools) has been recorded. The compiler-backed tools are not
-implemented, so a model-driven full loop cannot be claimed.
+No model-driven host session (an agent choosing the tools) has been recorded. The compiler-backed tools work only
+for the narrow seed/edit case and execution is refused, so a model-driven construct/build/execute loop cannot be
+claimed.
 
 ## Upgrading XAX
 
 1. Check out the new immutable XAX commit and record its full hash.
 2. Verify the host contract (`xax_contract.HOST_CONTRACT`, `HOST_CONTRACT_MINOR`) and the interfaces the build
    consumes (`xax_construct`, `xax_build`, `xax_workspace`, `xax_local_protocol`, `xax_compiler`, `xax_contract`).
-3. Compute the toolchain fingerprint with the same file set and LF normalization as the 0.6.0 row.
+3. Compute the toolchain fingerprint with the same file set and LF normalization as the 0.7.0 row.
 4. Rebuild: `python native/server.py ../XAX/compiler/src native`.
 5. Run `XAX_NATIVE_SRC=../XAX/compiler/src pytest -q -rs`; the committed store/request equality check must pass.
+   Set `XAX_MCP_TEST_COMPILER` to a native `xaxc` to also run the compiler-backed chain test.
 6. Add a **new** evidence file under `docs/evidence/`; never edit an older one. Update this matrix, the README pin,
    `native/server.py`'s `NATIVE_XAX_COMMIT`, and the CI checkout ref in the same change.
 

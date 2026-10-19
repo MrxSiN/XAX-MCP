@@ -14,6 +14,7 @@ import os
 import platform
 import queue
 import random
+import shutil
 import subprocess
 import sys
 import threading
@@ -30,6 +31,8 @@ TOOLS = ("xax_capabilities", "xax_workspace", "xax_query", "xax_construct", "xax
          "xax_execute", "xax_result")
 RIGHT_OF = {"xax_workspace": "read", "xax_query": "read", "xax_construct": "mutate", "xax_transaction": "mutate",
             "xax_build": "build", "xax_execute": "execute", "xax_result": "read"}
+# Tools that drive the host-granted native compiler: without XAX_MCP_COMPILER/WORK/STORE they report denied_capability.
+COMPILER_TOOLS = {"xax_workspace", "xax_query", "xax_transaction", "xax_build"}
 LMAX = 4 * 1024 * 1024
 
 
@@ -57,8 +60,9 @@ def exe(tmp_path_factory) -> str:
 class Server:
     """One native server process; ``exchange`` sends a line and waits for exactly one response line."""
 
-    def __init__(self, exe: str, *args: str):
-        self.process = subprocess.Popen([exe, *args], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    def __init__(self, exe: str, *args: str, env: dict | None = None):
+        self.process = subprocess.Popen([exe, *args], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                        env=dict(os.environ, **env) if env else None)
         self.lines: queue.Queue = queue.Queue()
         threading.Thread(target=self._read, daemon=True).start()
 
@@ -193,6 +197,9 @@ def test_tool_dispatch_under_default_rights(server):
         if tool == "xax_execute":
             assert payload["error"]["code"] == "denied_capability"
             assert payload["error"]["repair"] == ["the host owner may add --allow-execute to the server launch command"]
+        elif tool in COMPILER_TOOLS:
+            assert payload["error"]["code"] == "denied_capability", (tool, payload)
+            assert "XAX_MCP_COMPILER" in payload["error"]["message"]
         else:
             assert payload["error"]["code"] == "unsupported" and tool in payload["error"]["message"]
     assert server.call("bogus", {})["error"] == {"code": "unsupported", "message": "unknown tool 'bogus'"}
@@ -222,7 +229,8 @@ def test_host_rights_come_from_launch_flags(exe, args, rights):
         for tool, right in RIGHT_OF.items():
             # a tool argument never grants a right
             error = server.call(tool, {"rights": ["execute"], "allow_execute": True})["error"]
-            assert error["code"] == ("unsupported" if right in rights else "denied_capability"), (tool, error)
+            expected = ("unsupported" if right in rights and tool not in COMPILER_TOOLS else "denied_capability")
+            assert error["code"] == expected, (tool, error)
     finally:
         server.process.kill()
 
@@ -365,3 +373,56 @@ def test_build_is_deterministic(exe, tmp_path):
         pytest.skip("needs XAX_NATIVE_SRC")
     subprocess.run([sys.executable, str(NATIVE / "server.py"), source, str(tmp_path)], check=True, capture_output=True, timeout=900)
     assert hashlib.sha256((tmp_path / "xax-mcp-native.exe").read_bytes()).digest() == hashlib.sha256(Path(exe).read_bytes()).digest()
+
+
+def test_native_compiler_chain_over_stdio(exe, tmp_path):
+    """End to end: the server drives the host-granted native compiler through query, build and one transaction.
+
+    Gated on XAX_MCP_TEST_COMPILER, the native xaxc executable, and XAX_NATIVE_SRC, the pinned XAX compiler/src used to
+    author the XAXEDIT1 carrier.  Nothing here runs inside the server: the server spawns the native compiler itself.
+    """
+    compiler = os.environ.get("XAX_MCP_TEST_COMPILER")
+    source = os.environ.get("XAX_NATIVE_SRC")
+    if not compiler or not source:
+        pytest.skip("set XAX_MCP_TEST_COMPILER (native xaxc) and XAX_NATIVE_SRC (XAX compiler/src) to drive the native chain")
+    seed = NATIVE / "xax-mcp-seed.xax"
+    work = tmp_path / "work"
+    work.mkdir()
+    shutil.copy(seed, work / "current.xax")
+    seed_bytes = seed.read_bytes()
+    seed_root = seed_bytes[7:39].hex()
+    spec = importlib.util.spec_from_file_location("native_test_chain", NATIVE / "chain.py")
+    chain = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(chain)
+    server = Server(exe, env={"XAX_MCP_COMPILER": compiler, "XAX_MCP_WORK": str(work), "XAX_MCP_STORE": str(seed)})
+    try:
+        assert server.call("xax_query", {}) == {"bytes": len(seed_bytes), "ok": True, "root": seed_root,
+                                               "workspace": "ws_0"}
+        built = server.call("xax_build", {})
+        provenance = bytes.fromhex(built["provenance"]["hex"])
+        assert built["ok"] and built["root"] == seed_root and built["artifact"]["bytes"] > 0
+        assert built["provenance"]["bytes"] == len(provenance) and seed_root in built["provenance"]["hex"]
+        record, old = chain.make_record(Path(source), work / "current.xax", 41)
+        assert old == 40 and record.startswith(b"XAXEDIT1")
+        applied = server.call("xax_transaction", {"record": record.hex()})
+        current = (work / "current.xax").read_bytes()
+        assert applied == {"generation": 1, "ok": True, "root": current[7:39].hex(), "workspace": "ws_0"}
+        assert applied["root"] != seed_root
+        assert server.call("xax_query", {})["root"] == applied["root"]
+        # A later build reports the edited store: the transaction replaced the work directory's current store.
+        assert server.call("xax_build", {})["root"] == applied["root"]
+    finally:
+        code, rest, err = server.close()
+        assert code == 0 and not rest, (code, rest, err)
+
+
+def test_overlong_compiler_grant_fails_closed(exe, tmp_path):
+    """A truncated compiler/work/store value is treated as no grant, never as a shorter path."""
+    overlong = "x" * 600
+    server = Server(exe, env={"XAX_MCP_COMPILER": overlong, "XAX_MCP_WORK": str(tmp_path), "XAX_MCP_STORE": overlong})
+    try:
+        error = server.call("xax_query", {})["error"]
+        assert error["code"] == "denied_capability" and "XAX_MCP_COMPILER" in error["message"]
+    finally:
+        code, rest, err = server.close()
+        assert code == 0 and not rest, (code, rest, err)

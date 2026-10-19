@@ -41,34 +41,30 @@ TOOLS: dict[str, dict] = {
     },
     "xax_workspace": {
         "title": "XAX workspace",
-        "description": "list | describe | close a session-scoped workspace handle, or open a verified .xax store by "
-                       "relative name inside a host-granted store root. Returns root identity and generation, not the program.",
+        "description": "PROTOTYPE: describes the current store (the root bytes recorded in its header and its byte size). The "
+                       "workspace handle lifecycle (open/list/describe/close) is not implemented by the native server yet; "
+                       "the store is the host-granted seed until a transaction replaces it in the work directory. The server "
+                       "does not re-verify the store; the compiler verifies it on build.",
         "annotations": {"readOnlyHint": True, "openWorldHint": False},
-        "inputSchema": {"type": "object", "additionalProperties": False, "required": ["action"], "properties": {
-            "action": {"enum": ["open", "list", "describe", "close"]},
-            "workspace": _HANDLE,
-            "store": {"type": "string", "minLength": 5, "maxLength": 255},
-        }},
+        "inputSchema": {"type": "object", "additionalProperties": False, "properties": {}},
     },
     "xax_query": {
         "title": "XAX bounded query",
-        "description": "Bounded, paginated queries of the current root via the XAX workspace: root, functions, function_nodes, "
-                       "function_view (tooling view, not source), operands, neighborhood, uses, callers, callees, type, effects, "
-                       "effect_summary, entity, proof, diff, repair (diagnostic handle).",
+        "description": "PROTOTYPE: implements the root query only: the root bytes recorded in the current store's header and "
+                       "its byte size. The server does not re-verify the store (xax_build resolves it first). The bounded "
+                       "graph queries (functions, function_nodes, function_view, operands, neighborhood, uses, callers, "
+                       "callees, type, effects, effect_summary, entity, proof, diff, repair) are not implemented by the "
+                       "native server yet.",
         "annotations": {"readOnlyHint": True, "openWorldHint": False},
-        "inputSchema": {"type": "object", "additionalProperties": False, "required": ["workspace", "kind"], "properties": {
-            "workspace": _HANDLE,
-            "kind": {"enum": ["root", "functions", "function_nodes", "function_view", "operands", "neighborhood", "uses",
-                              "callers", "callees", "type", "effects", "effect_summary", "entity", "proof", "diff", "repair"]},
-            "handle": _HANDLE, "limit": _LIMIT, "continuation": _CONT, "from_generation": _GEN,
-        }},
+        "inputSchema": {"type": "object", "additionalProperties": False, "properties": {}},
     },
     "xax_construct": {
         "title": "XAX construct",
-        "description": "Construct and verify a NEW XAX program from one xax-construct-v1 carrier (typed semantic graph: types, "
-                       "functions of blocks of [operation, operands, result types, extra] nodes, package entries). The carrier is "
-                       "transport; the verified canonical store becomes a workspace. Platforms: linux-x86_64, windows-x86_64 "
-                       "(executable on a host of the same platform; see xax_capabilities targets).",
+        "description": "UNIMPLEMENTED natively; calls fail closed with 'unsupported'. Target contract: construct and verify a "
+                       "NEW XAX program from one xax-construct-v1 carrier (typed semantic graph: types, functions of blocks of "
+                       "[operation, operands, result types, extra] nodes, package entries). The carrier is transport; the "
+                       "verified canonical store becomes a workspace. Platforms: linux-x86_64, windows-x86_64 (executable on "
+                       "a host of the same platform; see xax_capabilities targets).",
         "annotations": {"readOnlyHint": False, "destructiveHint": False, "idempotentHint": True, "openWorldHint": False},
         "inputSchema": {"type": "object", "additionalProperties": False, "required": ["request"], "properties": {
             "request": {"type": "object", "required": ["format", "platform", "functions", "package"], "properties": {
@@ -82,38 +78,32 @@ TOOLS: dict[str, dict] = {
     },
     "xax_transaction": {
         "title": "XAX transaction",
-        "description": "Verify (private candidate), commit, or rollback typed mutations against an exact expected generation and "
-                       "root. Handles must have been exposed by xax_query at that generation. Rejections return XAX diagnostics "
-                       "and a diagnostic handle for the repair neighborhood; stale roots are rejected, never refreshed.",
+        "description": "PROTOTYPE: applies one XAXEDIT1 transaction carrier to the current store by driving the host-granted "
+                       "native XAX compiler's 'edit' command. 'record' is the carrier as a lowercase/uppercase hex string; the "
+                       "edited store replaces the work directory's current store and the result reports its new canonical root. "
+                       "Typed mutations, expected generation/root, candidates and rollback are not implemented yet.",
         "annotations": {"readOnlyHint": False, "destructiveHint": False, "openWorldHint": False},
-        "inputSchema": {"type": "object", "additionalProperties": False, "required": ["workspace", "mode"], "properties": {
-            "workspace": _HANDLE,
-            "mode": {"enum": ["verify", "commit", "rollback"]},
-            "expected_generation": _GEN, "expected_root": _CID,
-            "mutations": {"type": "array", "minItems": 1, "maxItems": 256, "items": _MUTATION},
-            "read_set": {"type": "array", "maxItems": 256, "items": _HANDLE},
-            "candidate": _HANDLE,
-        }, "allOf": [{"if": {"properties": {"mode": {"enum": ["verify", "commit"]}}},
-                      "then": {"required": ["expected_generation", "expected_root", "mutations"]}},
-                     {"if": {"properties": {"mode": {"const": "rollback"}}}, "then": {"required": ["candidate"]}}]},
+        "inputSchema": {"type": "object", "additionalProperties": False, "required": ["record"], "properties": {
+            "record": {"type": "string", "pattern": "^[0-9A-Fa-f]+$", "minLength": 2, "maxLength": 2097152},
+        }},
     },
     "xax_build": {
         "title": "XAX build",
-        "description": "Verify and compile the workspace's exact current root for one package entry with the canonical XAX build "
-                       "service. Returns an opaque artifact handle, BLAKE3/SHA-256 digests and provenance. Cached per session by "
-                       "(root, entry, toolchain fingerprint).",
+        "description": "PROTOTYPE: resolves and builds the current store with the host-granted native XAX compiler ('resolve' "
+                       "then 'build'), writing snapshot/artifact/provenance into the host-granted work directory. Returns the "
+                       "canonical root, artifact byte count and the provenance object (byte count and hex). Artifact handles, "
+                       "entry/package selection, digest reports and toolchain caching are not implemented yet.",
         "annotations": {"readOnlyHint": False, "destructiveHint": False, "idempotentHint": True, "openWorldHint": False},
-        "inputSchema": {"type": "object", "additionalProperties": False, "required": ["workspace"], "properties": {
-            "workspace": _HANDLE, "entry": {"type": "string", "pattern": "^[A-Za-z0-9_.-]{1,64}$"}, "expected_generation": _GEN,
-        }},
+        "inputSchema": {"type": "object", "additionalProperties": False, "properties": {}},
     },
     "xax_execute": {
         "title": "XAX execute",
-        "description": "Run a built artifact in the OS sandbox (Linux: new user/mount/net namespaces, empty read-only root, seccomp "
-                       "allowlist, rlimits; Windows: capability-less LPAC AppContainer in a job object; both: wall timeout). "
-                       "Input is framed onto stdin (xax-mcp-io-v1) and optional argv strings (Linux only) reach "
-                       "linux.startup.* reads; stdout is decoded by the "
-                       "declared layout. Only the 'stdio' effect exists. Requires the host-granted execute right.",
+        "description": "UNIMPLEMENTED natively; calls fail closed with 'unsupported' (no OS sandbox in the native server). "
+                       "Target contract: run a built artifact in the OS sandbox (Linux: new user/mount/net namespaces, empty "
+                       "read-only root, seccomp allowlist, rlimits; Windows: capability-less LPAC AppContainer in a job object; "
+                       "both: wall timeout). Input is framed onto stdin (xax-mcp-io-v1) and optional argv strings (Linux only) "
+                       "reach linux.startup.* reads; stdout is decoded by the declared layout. Only the 'stdio' effect exists. "
+                       "Requires the host-granted execute right.",
         "annotations": {"readOnlyHint": False, "destructiveHint": False, "openWorldHint": False},
         "inputSchema": {"type": "object", "additionalProperties": False, "required": ["artifact"], "properties": {
             "artifact": _HANDLE,
@@ -139,8 +129,9 @@ TOOLS: dict[str, dict] = {
     },
     "xax_result": {
         "title": "XAX result",
-        "description": "Fetch a bounded chunk of a large result by opaque handle: execution stdout (res_), a workspace's canonical "
-                       "store bytes (ws_), or a stored diagnostic (diag_). Never returns unbounded data.",
+        "description": "UNIMPLEMENTED natively; calls fail closed with 'unsupported'. Target contract: fetch a bounded chunk of "
+                       "a large result by opaque handle: execution stdout (res_), a workspace's canonical store bytes (ws_), or "
+                       "a stored diagnostic (diag_). Never returns unbounded data.",
         "annotations": {"readOnlyHint": True, "idempotentHint": True, "openWorldHint": False},
         "inputSchema": {"type": "object", "additionalProperties": False, "required": ["handle"], "properties": {
             "handle": _HANDLE, "offset": _CONT, "length": {"type": "integer", "minimum": 1, "maximum": 65536},

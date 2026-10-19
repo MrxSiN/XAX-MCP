@@ -1,0 +1,66 @@
+{
+  "schema": "xax-mcp-evidence-v1",
+  "claim": "The native server store and PE are reproducible from native/server.py at the pinned XAX commit, and the PE is the deployed program.",
+  "label": "EXECUTED",
+  "recorded": "2026-10-19",
+  "server_version": "0.7.0+native",
+  "xax_commit": "f79b532fd4651ba808676d02f4b038e2cc271e6a",
+  "xax_revision": "main, 2026-10-19",
+  "host_contract": "xax-host-contract-v1 r10",
+  "toolchain_fingerprint": "0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9",
+  "platform": "windows-x86_64",
+  "host": {
+    "cpu": "AMD Ryzen 9 5900HS with Radeon Graphics",
+    "logical_cpus": 16,
+    "os": "Microsoft Windows 11 Pro 10.0.26300",
+    "python": "3.12.10 (build-time tooling and test client only)"
+  },
+  "store": {
+    "path": "native/xax-mcp-native-gen0.xax",
+    "root": "9a511d007a27851f3a638bdff31e629068cf8faa4a50b98a2e14ed5d2d601f1a",
+    "bytes": 978518,
+    "sha256": "0bd08c0ed56fb30861cb1c525a9736a4ea0b52f509bdfc149e16b51a5132154b"
+  },
+  "release_request": "5b816185eee02d91a5712b3350f881b07030a5bac97873da1e611fbfd242adbc",
+  "artifact": {
+    "bytes": 284672,
+    "sha256": "2c244f566fb0cbd7459cce5ddb79576c7e5505c531151b4a1e8a34001a4b1dd8",
+    "imports": {
+      "kernel32.dll": [
+        "ExitProcess",
+        "GetCommandLineA",
+        "GetEnvironmentVariableA",
+        "GetFileAttributesA",
+        "GetStdHandle",
+        "MoveFileExA",
+        "ReadFile",
+        "VirtualAlloc",
+        "VirtualFree",
+        "WriteFile",
+        "lstrcpynA"
+      ],
+      "msvcrt.dll": [
+        "_close",
+        "_lseek",
+        "_open",
+        "_read",
+        "_spawnv",
+        "_write"
+      ]
+    },
+    "note": "kernel32 is the protocol/OS surface; msvcrt is the C runtime used to open/read/write files and spawn the host-granted native compiler. No Python DLL, MCP SDK, or shell is imported."
+  },
+  "functions": 153,
+  "determinism": {
+    "test": "tests/test_native_stdio.py::test_build_is_deterministic",
+    "result": "two independent rebuilds from native/construction_request.json produce the committed store byte for byte and the same PE SHA-256"
+  },
+  "provenance": {
+    "old_evidence_unchanged": [
+      "docs/evidence/native-windows-x86_64-build-f79b532.json",
+      "docs/evidence/native-windows-x86_64-protocol-f79b532.json",
+      "docs/evidence/native-*.json (6885f89)"
+    ],
+    "supersedes_for_build_identity": "docs/evidence/native-windows-x86_64-build-f79b532.json"
+  }
+}
