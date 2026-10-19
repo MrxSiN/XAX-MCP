@@ -128,7 +128,12 @@ Measured on 2026-10-20 (details and controls in `docs/evidence/native-windows-x8
 `GetTokenInformation(TokenIsAppContainer)` probe answers `1` inside and `0` outside; a write to a path the host user
 can freely create is refused inside and succeeds outside; `Sleep(60000)` is killed at the 10 s wall limit with
 `FLAG_TIMEOUT`; a talker artifact's 14 stdout bytes and 5 stderr bytes come back intact with exit code 7. The seed
-artifact run through MCP answered `exit_code 40, flags 0, duration_ms 32`.
+artifact run through MCP answered `exit_code 40, flags 0, duration_ms 16`.
+
+The same confinement was then reproduced on a clean GitHub-hosted `windows-2022` runner (ci run 39291600926): both
+committed stores matched byte for byte and the seed artifact exited 40 with flags 0
+(`docs/evidence/native-windows-ci-sandbox-0137179.json`). That run also found that a CRLF-normalizing checkout had
+rewritten `native/sandbox_request.json`; `.gitattributes` now keeps every `native/*.json` byte exact.
 
 ## Client setup
 

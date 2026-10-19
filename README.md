@@ -27,7 +27,7 @@ capability text are transport, embedded at construction time; they are never XAX
 | `xax_capabilities` | **EXECUTED** (native, reports the exact blockers below) |
 | `xax_workspace`, `xax_query`, `xax_build`, `xax_transaction` | **PROTOTYPE** over a host-granted native XAX compiler: describe the current store, `resolve`+`build`, one `XAXEDIT1` edit |
 | `xax_construct` (new canonical program from a typed carrier) | **UNIMPLEMENTED natively**: no native carrier decoder (blocker B2) |
-| `xax_execute` in an OS sandbox | **PROTOTYPE, MEASURED on windows-x86_64**: a second XAX program (`native/sandbox.py`) runs the built artifact as a capability-less AppContainer in a job object; Linux and typed I/O are open (B3, B4) |
+| `xax_execute` in an OS sandbox | **PROTOTYPE, MEASURED on windows-x86_64** (also reproduced on a clean windows-2022 CI runner): a second XAX program (`native/sandbox.py`) runs the built artifact as a capability-less AppContainer in a job object; Linux and typed I/O are open (B3, B4) |
 | `xax_result` (bounded result retrieval) | **UNIMPLEMENTED natively**: needs session state |
 | Streamable HTTP transport | **UNIMPLEMENTED** (STDIO only) |
 

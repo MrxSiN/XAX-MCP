@@ -7,9 +7,10 @@ to end), **PROTOTYPE** (works for a narrow case), **UNIMPLEMENTED**.
 Evidence files are append-only. A new pin, build or capability writes a new file; older files are never edited.
 Raw samples for the current build are in `docs/evidence/native-windows-x86_64-build-f79b532-r3.json`,
 `docs/evidence/native-windows-x86_64-chain-f79b532.json` and
-`docs/evidence/native-windows-x86_64-sandbox-f79b532.json`. The earlier `native-windows-x86_64-build-f79b532.json`,
-`native-windows-x86_64-build-f79b532-r2.json`, `native-windows-x86_64-protocol-f79b532.json`, the 6885f89 native
-files, and every Python-era file remain unchanged.
+`docs/evidence/native-windows-x86_64-sandbox-f79b532.json` and
+`docs/evidence/native-windows-ci-sandbox-0137179.json` (the clean Windows CI host). The earlier
+`native-windows-x86_64-build-f79b532.json`, `native-windows-x86_64-build-f79b532-r2.json`,
+`native-windows-x86_64-protocol-f79b532.json`, the 6885f89 native files, and every Python-era file remain unchanged.
 
 ## Current native server (0.7.0)
 
@@ -29,6 +30,7 @@ files, and every Python-era file remain unchanged.
 | `xax_construct` | UNIMPLEMENTED | no native carrier decoder; structured `unsupported` |
 | `xax_execute` | PROTOTYPE | rebuilds the current store and runs the artifact under Windows OS confinement (`native/sandbox.py` -> `xax-mcp-sandbox.exe`); `denied_capability` without `--allow-execute`, `sandbox_unavailable` without the executor, `invalid_request` if given arguments; `native-windows-x86_64-sandbox-f79b532.json` |
 | An artifact really runs confined (Windows) | MEASURED | `GetTokenInformation(TokenIsAppContainer)` = 1 inside / 0 outside; a host-writable path is refused inside / created outside; `Sleep(60000)` killed at 10 s with `FLAG_TIMEOUT`; a talker artifact's 14 stdout bytes, 5 stderr bytes and exit code 7 all captured; `native-windows-x86_64-sandbox-f79b532.json` |
+| The committed stores reproduce and the executor confines on a foreign clean host | EXECUTED | GitHub-hosted windows-2022, run 39291600926 at `0137179`: both stores matched byte for byte, the seed artifact exited 40 with flags 0; `native-windows-ci-sandbox-0137179.json` |
 | `xax_result` | UNIMPLEMENTED | needs session state; structured `unsupported` |
 | A novel computation is constructed, built, and executed through MCP | UNIMPLEMENTED | the prototype cannot construct: it edits and builds a fixed seed, then executes that; no parallel coverage |
 | Sandbox isolation and resource limits (Linux) | UNIMPLEMENTED | Windows AppContainer + job object only; no namespaces, seccomp or rlimits; docs/NATIVE.md B3 |
