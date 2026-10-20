@@ -2,26 +2,30 @@
 
 ## State at 0.7.0 (2026-10-19): native-only server, compiler-backed prototype
 
-- XAX pin: `f79b532fd4651ba808676d02f4b038e2cc271e6a` (XAX `main`, 2026-10-19), host contract
-  `xax-host-contract-v1` r10, toolchain fingerprint
+- XAX pin: `4c3e60bef96c56162003838b36d6756295b1de41`, the first commit that carries the authoring tooling
+  (`compiler/integration/mcp`). Its `compiler/src` is byte-identical to `f79b532fd4651ba808676d02f4b038e2cc271e6a`
+  (XAX `main`, 2026-10-19), host contract `xax-host-contract-v1` r10, toolchain fingerprint
   `0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9`.
 - The deployed server is `native/xax-mcp-native.exe`: a canonical XAX store (`native/xax-mcp-native-gen0.xax`)
   built from `native/construction_request.json`. It implements STDIO framing, strict JSON validation, JSON-RPC 2.0,
   MCP initialize/ping/tools/list/tools/call, tool dispatch, and host rights. It imports kernel32 and msvcrt and
   starts no Python.
-- `native/server.py`, `native/dsl.py`, and `native/schemas.py` are build tooling. They are not on the request path.
-- `native/xax-mcp-seed.xax` is a committed form-2 build-request seed; `native/chain.py` authors `XAXEDIT1` carriers
-  and drives the native compiler for tests.
+- This repository holds no source code: carriers, canonical stores, executables, evidence and docs only. The build
+  tooling (`server.py`, `sandbox.py`, `dsl.py`, `schemas.py`, `seed.py`, `chain.py`, `bench.py`,
+  `fingerprint.py`) is in XAX under `compiler/integration/mcp`. It is not on the request path.
+- `native/xax-mcp-seed.xax` is a committed form-2 build-request seed; `compiler/integration/mcp/chain.py` in XAX
+  authors `XAXEDIT1` carriers and drives the native compiler for tests.
 - Five tools are a **PROTOTYPE** over a host-granted native compiler: `xax_workspace` and `xax_query` describe the
   current store's root and byte size, `xax_build` runs `resolve` + `build`, `xax_transaction` applies one
   `XAXEDIT1` record with `edit`, and `xax_execute` runs the built artifact under Windows OS confinement. Without
   `XAX_MCP_COMPILER`/`XAX_MCP_WORK`/`XAX_MCP_STORE` they fail closed with `denied_capability`; `xax_execute` also
   needs `--allow-execute` and `xax-mcp-sandbox.exe` beside the server.
-- `native/sandbox.py` builds `xax-mcp-sandbox.exe`, a **separate** native XAX program: a capability-less AppContainer
+- `compiler/integration/mcp/sandbox.py` in XAX builds `xax-mcp-sandbox.exe`, a **separate** native XAX program: a capability-less AppContainer
   inside a job object (5 s CPU, 256 MiB, one process, 10 s wall, 1 MiB per stream). The server spawns it with a fixed
   three-word argv and reads back stdout, stderr and a 16-byte result record.
 - `xax_construct` and `xax_result` are **UNIMPLEMENTED natively** and return structured `unsupported` errors.
-- Tests: `tests/test_native_stdio.py`, 44 passed and 1 skipped (the Linux build) in 76 s on Windows 11, Python
+- Tests: `compiler/integration/mcp/tests/test_native_stdio.py` in XAX, 44 passed and 1 skipped (the Linux build)
+  in 68 s on Windows 11, Python
   3.12.10 (test client only), mcp 2.3.0, with `XAX_MCP_TEST_COMPILER` set. The suite rebuilds both committed stores,
   checks them byte for byte, builds both PEs, drives the server over STDIO, and (when granted) runs the seed -> build
   -> transaction -> confined execute chain.
@@ -42,7 +46,7 @@
 - **B2**: the native compiler's command set is files and exit status, not a versioned service. There is no native
   carrier decoder (`construct`), no bounded query, and no generation/root-checked transaction interface.
 - **B3**: no Linux build/run of the native server was tested here.
-- **B4**: the Windows sandbox is a prototype (LPAC AppContainer + job object in `native/sandbox.py`), measured but not
+- **B4**: the Windows sandbox is a prototype (LPAC AppContainer + job object in `compiler/integration/mcp/sandbox.py` in XAX), measured but not
   reviewed as a security boundary; Linux confinement and the typed I/O contract are missing.
 
 ### Next steps, in order of leverage
@@ -70,11 +74,10 @@ current server.
 
 ## Rules
 
-- The deployed server and every runtime component are XAX. No Python server, sidecar, wrapper, or fallback,
-  including during development.
-- Build tooling may be Python only outside the deployed runtime path; disclose it.
+- The deployed server and every runtime component are XAX, and this repository contains no Python and no source
+  code. Build tooling lives in `MrxSiN/XAX` (`compiler/integration/mcp`).
 - No workload logic in the server or build tooling: no per-operation tools, no adapter-side computation.
 - Keep XAX changes in `MrxSiN/XAX`; dependency direction is one-way (`XAX-MCP -> XAX`).
-- When the pin changes, update `native/server.py` (`NATIVE_XAX_COMMIT`), `pyproject.toml`, the CI checkout ref,
-  `README.md`, `docs/NATIVE.md`, `docs/COMPATIBILITY.md`, and this file together. Add new evidence; never overwrite
-  old evidence files.
+- When the pin changes, update `NATIVE_XAX_COMMIT` in `compiler/integration/mcp/{server,sandbox}.py` upstream, and
+  the CI checkout ref, `README.md`, `docs/NATIVE.md`, `docs/COMPATIBILITY.md`, and this file together. Add new
+  evidence; never overwrite old evidence files.

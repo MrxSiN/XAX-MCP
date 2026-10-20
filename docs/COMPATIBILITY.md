@@ -4,9 +4,10 @@
 
 | xax-mcp | XAX commit | XAX host contract | Toolchain fingerprint (sha256) | mcp SDK (test client) | Python (build/test only) | OS / arch | Result |
 |---|---|---|---|---|---|---|---|
-| 0.7.0 | `f79b532fd4651ba808676d02f4b038e2cc271e6a` (XAX `main`, 2026-10-19) | `xax-host-contract-v1` r10 | `0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9` | 2.3.0 | 3.12.10 | Windows 11 x86-64 | native protocol suite: 43 passed, 1 skipped; compiler-backed tools PROTOTYPE over a host-granted native compiler (docs/NATIVE.md) |
+| 0.7.0 | `4c3e60bef96c56162003838b36d6756295b1de41` (first commit carrying `compiler/integration/mcp`; its `compiler/src` is byte-identical to `f79b532fd4651ba808676d02f4b038e2cc271e6a`, XAX `main`, 2026-10-19) | `xax-host-contract-v1` r10 | `0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9` | 2.3.0 | 3.12.10 | Windows 11 x86-64 | native protocol suite: 43 passed, 1 skipped; compiler-backed tools PROTOTYPE over a host-granted native compiler (docs/NATIVE.md) |
 
-Declared support for 0.7.0: exactly `f79b532` (XAX `main`), with `xax-host-contract-v1` at revision 10. The
+Declared support for 0.7.0: exactly `bc4f342`, whose compiler tree is exactly `f79b532` (XAX `main`), with
+`xax-host-contract-v1` at revision 10. The
 fingerprint covers every Python module and bootstrap `.xax` store of the `xax-compiler` distribution at that
 commit. It is used by the **build** to identify the compiler that produced the committed store; the deployed
 server has no embedded compiler and no runtime Python, so it does not probe a toolchain at startup. The
@@ -15,7 +16,7 @@ compiler-backed tools drive a compiler only when the host grants `XAX_MCP_COMPIL
 
 The native server embeds the pin it was built with (`xax.pinned_commit` in `xax_capabilities`). Rebuilding the
 store at another XAX revision is not a supported configuration: the committed store/request equality check in
-`tests/test_native_stdio.py` fails with an informative mismatch.
+`compiler/integration/mcp/tests/test_native_stdio.py` fails with an informative mismatch.
 
 ### What r8-r10 add upstream
 
@@ -61,15 +62,18 @@ claimed.
 
 ## Upgrading XAX
 
-1. Check out the new immutable XAX commit and record its full hash.
+1. Check out the new immutable XAX commit (it must carry `compiler/integration/mcp`) and record its full hash.
 2. Verify the host contract (`xax_contract.HOST_CONTRACT`, `HOST_CONTRACT_MINOR`) and the interfaces the build
    consumes (`xax_construct`, `xax_build`, `xax_workspace`, `xax_local_protocol`, `xax_compiler`, `xax_contract`).
-3. Compute the toolchain fingerprint with the same file set and LF normalization as the 0.7.0 row.
-4. Rebuild: `python native/server.py ../XAX/compiler/src native`.
-5. Run `XAX_NATIVE_SRC=../XAX/compiler/src pytest -q -rs`; the committed store/request equality check must pass.
-   Set `XAX_MCP_TEST_COMPILER` to a native `xaxc` to also run the compiler-backed chain test.
+3. Compute the toolchain fingerprint with the same file set and LF normalization as the 0.7.0 row
+   (`fingerprint.py` in `compiler/integration/mcp` recomputes it from a checkout).
+4. Rebuild: `python ../XAX/compiler/integration/mcp/server.py ../XAX/compiler/src native` (and `sandbox.py`, `seed.py`).
+5. Run `XAX_MCP_HOME=$PWD XAX_NATIVE_SRC=../XAX/compiler/src pytest -q ../XAX/compiler/integration/mcp/tests`; the
+   committed store/request equality check must pass. Set `XAX_MCP_TEST_COMPILER` to a native `xaxc` to also run the
+   compiler-backed chain test.
 6. Add a **new** evidence file under `docs/evidence/`; never edit an older one. Update this matrix, the README pin,
-   `native/server.py`'s `NATIVE_XAX_COMMIT`, and the CI checkout ref in the same change.
+   `NATIVE_XAX_COMMIT` in `compiler/integration/mcp/{server,sandbox}.py` upstream, and the CI checkout ref, in the same
+   change.
 
 If the new revision changes the store bytes, that is expected; record the new root, store SHA-256, and artifact
 SHA-256. If it removes an interface the build needs, the build fails with an import or attribute error and no store

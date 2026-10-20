@@ -6,13 +6,14 @@
   "Generated with" lines in commit messages, PR descriptions, or code.
 
 ## Project rules
-- The deployed server and every runtime component are XAX. No Python server, sidecar, wrapper, or fallback,
-  including during development. Python is allowed only as build tooling and as external test clients.
+- The deployed server and every runtime component are XAX. This repository contains **no Python and no source code
+  at all**: carriers, canonical stores, executables, evidence and documents. Build tooling and test clients live in
+  `MrxSiN/XAX` (`compiler/integration/mcp`), never here.
 - No workload logic in the server or build tooling: no per-operation tools, no adapter-side computation, and no
   hard-coded results. Results must come from XAX-generated code.
 - XAX changes belong in `MrxSiN/XAX`; the dependency direction is one-way (`XAX-MCP -> XAX`).
-- When the XAX pin changes, update `native/server.py` (`NATIVE_XAX_COMMIT`), `pyproject.toml`, the CI checkout ref,
-  `README.md`, `docs/NATIVE.md`, and `docs/COMPATIBILITY.md` together.
+- When the XAX pin changes, update the CI checkout ref, `README.md`, `docs/NATIVE.md`, and `docs/COMPATIBILITY.md`
+  here together with `NATIVE_XAX_COMMIT` in `compiler/integration/mcp/{server,sandbox}.py` upstream.
 - Record new evidence in new files under `docs/evidence/`; never overwrite old evidence.
 - Do not claim a capability that is not executable natively. Use the labels in `docs/EVIDENCE.md`.
 

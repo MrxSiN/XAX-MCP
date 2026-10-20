@@ -43,29 +43,33 @@ MCP client ──newline-delimited JSON-RPC over STDIO──► xax-mcp-native.e
 | Part | Form | Authority |
 |---|---|---|
 | Server program | `native/xax-mcp-native-gen0.xax`, a verified canonical XAX store (171 functions) | authoritative program |
-| Sandbox program | `native/xax-mcp-sandbox-gen0.xax`, a second verified canonical store (8 functions) built by `native/sandbox.py` | authoritative executor |
+| Sandbox program | `native/xax-mcp-sandbox-gen0.xax`, a second verified canonical store (8 functions) built by `compiler/integration/mcp/sandbox.py` in XAX | authoritative executor |
 | Construction carrier | `native/construction_request.json` (`xax-construct-v1`) | transport, decoded once by `xax_construct` |
-| `native/dsl.py`, `native/server.py`, `native/schemas.py` | Python development tooling that writes the carrier | not source, not on the request path |
+| `compiler/integration/mcp/{dsl,server,schemas}.py` (in XAX) | Python build tooling that writes the carrier | not source, not on the request path, not in this repository |
 | `xax-mcp-native.exe` | PE32+ built from the store by `xax_build` (not committed; rebuilt from the store) | build product |
 
-There is no textual XAX: `server.py` emits typed graph nodes through the carrier, the same way upstream's R6
-applications (`xb64`, `xwc`, `xcksum`) were constructed. Upstream's own compiler stores are built by Python builders
-in the same way.
+There is no textual XAX: the emitter in XAX (`compiler/integration/mcp/server.py`) writes typed graph nodes through
+the carrier, the same way upstream's R6 applications (`xb64`, `xwc`, `xcksum`) were constructed. Upstream's own
+compiler stores are built by Python builders in the same way. None of that tooling ships here: this repository holds
+the carriers, the canonical stores, the evidence and the docs.
 
 ## Build
 
+The build tooling lives in XAX at `compiler/integration/mcp`; nothing is built from this repository's contents.
+
 ```bash
-git -C ../XAX checkout f79b532fd4651ba808676d02f4b038e2cc271e6a
-python native/server.py ../XAX/compiler/src native   # server store + xax-mcp-native.exe
-python native/sandbox.py ../XAX/compiler/src native  # executor store + xax-mcp-sandbox.exe
+git -C ../XAX checkout 4c3e60bef96c56162003838b36d6756295b1de41
+python ../XAX/compiler/integration/mcp/server.py  ../XAX/compiler/src native   # server store + xax-mcp-native.exe
+python ../XAX/compiler/integration/mcp/sandbox.py ../XAX/compiler/src native  # executor store + xax-mcp-sandbox.exe
 ```
 
 This writes `construction_request.json`, `sandbox_request.json`, both stores and both executables. The stores and
-requests are checked byte for byte by `tests/test_native_stdio.py`; each PE is rebuilt deterministically from its
-committed store. `xax-mcp-sandbox.exe` must end up in the same directory as `xax-mcp-native.exe` (the server derives
-its own directory with `GetModuleFileNameA`); without it `xax_execute` answers `sandbox_unavailable`. The pinned
-XAX revision is `f79b532fd4651ba808676d02f4b038e2cc271e6a` (XAX `main`, 2026-10-19; host contract
-`xax-host-contract-v1` r10; toolchain fingerprint
+requests are committed and checked byte for byte by `compiler/integration/mcp/tests/test_native_stdio.py` in XAX;
+each PE is rebuilt deterministically from its committed store. `xax-mcp-sandbox.exe` must end up in the same
+directory as `xax-mcp-native.exe` (the server derives its own directory with `GetModuleFileNameA`); without it
+`xax_execute` answers `sandbox_unavailable`. The XAX pin is `4c3e60bef96c56162003838b36d6756295b1de41`, the first
+commit that carries the tooling; its `compiler/src` is byte-identical to `f79b532fd4651ba808676d02f4b038e2cc271e6a`
+(XAX `main`, 2026-10-19; host contract `xax-host-contract-v1` r10; toolchain fingerprint
 `0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9`).
 
 Build identity for this revision (new evidence, not a rewrite of older files):
@@ -100,7 +104,7 @@ they answer `denied_capability` and do nothing:
 
 The server only spawns that executable (`_spawnv`) and reads the files it writes. It does not import, embed, or start
 Python. `native/xax-mcp-seed.xax` is a committed form-2 build-request seed (root
-`572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587`, 1852 bytes); `native/chain.py` is build/test
+`572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587`, 1852 bytes); `compiler/integration/mcp/chain.py` in XAX is build/test
 tooling that authors an `XAXEDIT1` carrier with the pinned XAX Python tooling.
 
 ### Sandboxed execution (`xax_execute`)
@@ -109,7 +113,7 @@ tooling that authors an `XAXEDIT1` carrier with the pinned XAX Python tooling.
 that artifact and returns `exit_code`, `duration_ms`, `flags` (bit 0 timeout, bit 2 output truncated) and the artifact's
 stdout/stderr as hex. Any argument is refused with `invalid_request` rather than silently ignored.
 
-The run happens in `xax-mcp-sandbox.exe`, a **separate XAX program** built from `native/sandbox.py` with the same
+The run happens in `xax-mcp-sandbox.exe`, a **separate XAX program** built from `compiler/integration/mcp/sandbox.py` in XAX with the same
 compiler. The server spawns it with a fixed three-word argv (`<artifact> <work>\exec`) through `_spawnv`, so no shell
 parse and no caller-controlled argument reaches the executor. The executor:
 
@@ -147,8 +151,8 @@ Any other argument, or any quote inside an argument, makes the server write one 
 
 ## Protocol behaviour
 
-`tests/test_native_stdio.py` drives the real executable. It covers the four handshake versions, unknown offers,
-ping, `tools/list` (identical to `native/schemas.py`), unknown methods and tools, malformed and oversized lines,
+`compiler/integration/mcp/tests/test_native_stdio.py` in XAX drives the real executable. It covers the four handshake versions, unknown offers,
+ping, `tools/list` (identical to `compiler/integration/mcp/schemas.py`), unknown methods and tools, malformed and oversized lines,
 exact id echo, strict JSON UTF-8 validation against Python's parser (1500 randomized cases), CRLF framing, 500
 sequential requests, EOF without a final newline, host-right combinations, rejected launch flags, concurrent
 servers, and the official `mcp.Client` SDK.
@@ -217,13 +221,13 @@ Classification: **N** supported natively (in the store, executed), **P** prototy
 | JSON parse/serialize | `scan`, `scan_string`, `scan_number`, `skip_ws`; literal writers | none | 1500-case randomized differential vs strict `json.loads` | **N** (validation and extraction; no general DOM) |
 | JSON-RPC envelope | `handle` | none | 15 error cases | **N** |
 | initialize / version negotiation | `handle` | none | all handshake versions, unknown offers | **N** (no 2026-07-28) |
-| tools/list, schemas | literal from `native/schemas.py` at construction time | none | identical to the schema module | **N** |
+| tools/list, schemas | literal from `compiler/integration/mcp/schemas.py` at construction time | none | identical to the schema module | **N** |
 | tool dispatch, error taxonomy | `handle` | none | every tool | **N** |
 | argument schema validation | `xax_capabilities` only | none | extra-property cases | **M** for 7 tools |
 | host rights, launch flags | `parse_args`, fail closed | none | 7 flag sets, 8 rejected forms, tool arguments never grant | **N** |
 | session handles | none yet | a randomness source (`BCryptGenRandom` through ADR-260 imports) | — | **M** |
 | `xax_workspace`/`xax_query` | same store description (root + byte size) on both tool names | query kinds beyond `root` need a native query service | `test_native_compiler_chain_over_stdio` | **P** (B1, B2) |
-| `xax_transaction` | hex `XAXEDIT1` record -> native `edit` -> replace `current.xax` | typed mutations, expected generation/root, verify/rollback | same test; record authored by `native/chain.py` | **P** (B1, B2) |
+| `xax_transaction` | hex `XAXEDIT1` record -> native `edit` -> replace `current.xax` | typed mutations, expected generation/root, verify/rollback | same test; record authored by `chain.py` in XAX | **P** (B1, B2) |
 | `xax_construct` | — | native carrier decoding: no native `construct` command exists | — | **M** (B1, B2) |
 | `xax_build` | native `resolve` then `build` of the current store; reports root, artifact bytes, provenance | artifact handles, entry selection, digest report, cache | same test | **P** (B1, B2) |
 | `xax_execute`, sandboxed run | resolve+build, then `xax-mcp-sandbox.exe`: LPAC AppContainer + job object, pipes, wall/output limits | typed input/output layouts, argv, per-call limits, artifact handles; Linux clone/unshare/seccomp | `test_native_compiler_chain_over_stdio`, `test_native_sandbox_launcher_runs_artifact_confined` | **P** on Windows (B1, B3) |
@@ -246,7 +250,7 @@ Classification: **N** supported natively (in the store, executed), **P** prototy
   `linux-x86_64` by swapping the kernel32/msvcrt file and process calls for `linux.read`/`linux.write`/`mmap`/
   `exit_group` and argv for `linux.startup.*`. That work is not done, because nothing could execute it on this host.
 - **B4. Windows sandbox: prototype, not a hardened boundary.** ADR-260 lets a carrier declare any `win64-c` import, so
-  `CreateProcessW`, `CreateAppContainerProfile`, job objects and `SetNamedSecurityInfoW` are reachable; `native/sandbox.py`
+  `CreateProcessW`, `CreateAppContainerProfile`, job objects and `SetNamedSecurityInfoW` are reachable; `compiler/integration/mcp/sandbox.py`
   lays out `SECURITY_CAPABILITIES`, `STARTUPINFOEX` attribute lists, `JOBOBJECT_EXTENDED_LIMIT_INFORMATION` and
   `EXPLICIT_ACCESS_W` by hand in heap views. Measured on this host (AppContainer token `1` inside / `0` outside, an
   outside write refused, a 60 s sleep killed at 10 s, exact pipe capture), so this is no longer "not started". It is

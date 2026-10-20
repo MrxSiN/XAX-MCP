@@ -1,0 +1,65 @@
+{
+  "kind": "xax-mcp-build-identity",
+  "label": "EXECUTED",
+  "recorded": "2026-10-21",
+  "host": {
+    "os": "Windows 11 x86-64",
+    "python": "3.12",
+    "note": "external test client and build tooling only; no Python is on the server's request path"
+  },
+  "change": {
+    "summary": "The XAX-MCP repository holds no source code. The authoring tooling (carriers, seed/chain drivers, schema module, STDIO suite, bench, fingerprint) moved to XAX in compiler/integration/mcp.",
+    "xax_pin": "4c3e60bef96c56162003838b36d6756295b1de41",
+    "xax_pin_note": "first commit carrying compiler/integration/mcp; its compiler/src is byte-identical to f79b532fd4651ba808676d02f4b038e2cc271e6a",
+    "toolchain_fingerprint": "0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9",
+    "removed_from_xax_mcp": [
+      "native/server.py",
+      "native/sandbox.py",
+      "native/dsl.py",
+      "native/schemas.py",
+      "native/seed.py",
+      "native/chain.py",
+      "native/bench.py",
+      "tests/test_native_stdio.py",
+      "examples/generic_client.py",
+      "pyproject.toml"
+    ]
+  },
+  "regeneration": {
+    "command": [
+      "python -B compiler/integration/mcp/server.py  compiler/src <out>",
+      "python -B compiler/integration/mcp/sandbox.py compiler/src <out>",
+      "python -B compiler/integration/mcp/seed.py    compiler/src <out>"
+    ],
+    "worktree": "D:\\GitHub\\XAX-mcp-tooling at 4c3e60b (clean checkout of the pin)",
+    "committed_files_matched": 6,
+    "executables_rebuilt": 3,
+    "sha256": {
+      "construction_request.json": "a66eb60ad8759cb28d01b1f47e9d0e0647417221fa11cfdb617d6cd845442da5",
+      "sandbox_request.json": "360d2ed65a7557dd1b892906cdd2deb210cd9d80b1665b2e21f1a0550555bddb",
+      "xax-mcp-native-gen0.xax": "bbe28c1e5568abf40cb2d38a354f4dcbaae09b231abeb04f87674d5f1a70e25f",
+      "xax-mcp-native.exe": "0493e7964deacf47c257850cdbd513aceae09bd9211776caf2b810ff01fd0521",
+      "xax-mcp-sandbox-gen0.xax": "588f57c0fa69eb175b6e06e88c73977292d42c06dfc5b814ec48cc5710bab2b8",
+      "xax-mcp-sandbox.exe": "6d563e0f23e4f402d55c82b200d42bce91c41c98aab101267e67d3645a1d37e2",
+      "xax-mcp-seed.xax": "25db5e19257e81e99a79e1b0311b65c8f534507ced0607ad4c5e2f0a81821532",
+      "xax-mcp-seed-snapshot.xax": "8624c042a35600de3b4d5e04a6ef61b067b2c7780833bee911ee194596997286",
+      "xax-mcp-seed.exe": "8faaeb7e63e5d1a07bcd9c46e3ae3381af267b67e213cec6b992c628fb1843ca"
+    },
+    "roots": {
+      "xax-mcp-native": "baec162e4bfb177fff18c3d36efdbd6e2ad0a0dec6cb412874fcbd18c12dd442",
+      "xax-mcp-sandbox": "7ef7099d5358bf022715faff1ef26387c1486c554ed2f7d9145bd9d8953ef8b6",
+      "xax-mcp-seed": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587"
+    },
+    "result": "all nine files equal the committed artifacts byte for byte"
+  },
+  "suite": {
+    "command": "XAX_MCP_HOME=D:\\GitHub\\XAX-MCP XAX_NATIVE_SRC=<pin>/compiler/src python -m pytest -q compiler/integration/mcp/tests",
+    "result": "44 passed, 1 skipped in 67.90 s",
+    "skip": "the Linux build (this host is Windows)"
+  },
+  "claims_not_made": [
+    "This does not change the server: store roots and artifact bytes are identical to the f79b532 build.",
+    "The moved tooling is still Python. It is build-time only in XAX; the native construct decoder (compiler/integration/construct) is the work that removes it.",
+    "One upstream worktree (feat/native-construct) carries additional compiler/src changes (xax_selfhost_blake3.py), so its fingerprint differs; the pin used here does not carry them."
+  ]
+}

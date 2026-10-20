@@ -5,6 +5,10 @@ An optional [Model Context Protocol](https://modelcontextprotocol.io) server for
 `xax-construct-v1` store that XAX builds into a Windows x86-64 PE32+ executable. The deployed server does not start
 Python, an MCP SDK, a shell wrapper, or another language.
 
+This repository contains no source code: only carriers, canonical stores, executables, evidence and documents. The
+tooling that produces them lives in XAX (`compiler/integration/mcp`), so nothing here has to be maintained or built
+separately.
+
 ```text
 MCP client ──newline-delimited JSON-RPC over STDIO──► xax-mcp-native.exe  (XAX-generated native code)
                                                       ├─ STDIO framing, 4 MiB line limit, resync
@@ -22,12 +26,12 @@ capability text are transport, embedded at construction time; they are never XAX
 
 | Capability | Status |
 |---|---|
-| STDIO transport, framing, JSON validation, JSON-RPC, MCP lifecycle, tool dispatch, host rights | **EXECUTED**: `tests/test_native_stdio.py` over the real PE32+ (44 passed, 1 skipped) |
+| STDIO transport, framing, JSON validation, JSON-RPC, MCP lifecycle, tool dispatch, host rights | **EXECUTED**: `compiler/integration/mcp/tests/test_native_stdio.py` in XAX over the real PE32+ (44 passed, 1 skipped) |
 | Official MCP Python SDK client (`mcp.Client`) interoperability | **EXECUTED**: handshake, `tools/list`, `tools/call` |
 | `xax_capabilities` | **EXECUTED** (native, reports the exact blockers below) |
 | `xax_workspace`, `xax_query`, `xax_build`, `xax_transaction` | **PROTOTYPE** over a host-granted native XAX compiler: describe the current store, `resolve`+`build`, one `XAXEDIT1` edit |
 | `xax_construct` (new canonical program from a typed carrier) | **UNIMPLEMENTED natively**: no native carrier decoder (blocker B2) |
-| `xax_execute` in an OS sandbox | **PROTOTYPE, MEASURED on windows-x86_64** (also reproduced on a clean windows-2022 CI runner): a second XAX program (`native/sandbox.py`) runs the built artifact as a capability-less AppContainer in a job object; Linux and typed I/O are open (B3, B4) |
+| `xax_execute` in an OS sandbox | **PROTOTYPE, MEASURED on windows-x86_64** (also reproduced on a clean windows-2022 CI runner): a second XAX program (authored by `compiler/integration/mcp/sandbox.py` in XAX) runs the built artifact as a capability-less AppContainer in a job object; Linux and typed I/O are open (B3, B4) |
 | `xax_result` (bounded result retrieval) | **UNIMPLEMENTED natively**: needs session state |
 | Streamable HTTP transport | **UNIMPLEMENTED** (STDIO only) |
 
@@ -42,25 +46,29 @@ tools answer `unsupported`. No result is fabricated, and no Python server is use
 
 ## Build
 
-The build is development tooling and is not on the server's runtime path. It requires a checkout of XAX at the pinned
-commit and Python 3.11+ only to emit the construction carrier and invoke `xax_construct`/`xax_build`.
+This repository contains no source code. The carriers, canonical stores and executables under `native/` are the
+build products; the tooling that produces them lives in XAX at
+[`compiler/integration/mcp`](https://github.com/MrxSiN/XAX/tree/4c3e60bef96c56162003838b36d6756295b1de41/compiler/integration/mcp):
 
 ```bash
 git clone https://github.com/MrxSiN/XAX ../XAX
-git -C ../XAX checkout f79b532fd4651ba808676d02f4b038e2cc271e6a
-python native/server.py ../XAX/compiler/src native   # server store + xax-mcp-native.exe
-python native/sandbox.py ../XAX/compiler/src native  # executor store + xax-mcp-sandbox.exe
+git -C ../XAX checkout 4c3e60bef96c56162003838b36d6756295b1de41
+python ../XAX/compiler/integration/mcp/server.py  ../XAX/compiler/src native   # server store + xax-mcp-native.exe
+python ../XAX/compiler/integration/mcp/sandbox.py ../XAX/compiler/src native  # executor store + xax-mcp-sandbox.exe
+python ../XAX/compiler/integration/mcp/seed.py    ../XAX/compiler/src native  # editable seed, snapshot and exe
 ```
 
 This writes `native/construction_request.json` and `native/sandbox_request.json` (transport),
-`native/xax-mcp-native-gen0.xax` and `native/xax-mcp-sandbox-gen0.xax` (the authoritative stores), and the two
-executables (the build products). Put `xax-mcp-sandbox.exe` in the same directory as `xax-mcp-native.exe`. The stores
-and requests are reproducible; the PEs depend on the pinned XAX lowering. The scripts read the tool schemas from
-[`native/schemas.py`](native/schemas.py), which is build tooling, not part of the server.
+`native/xax-mcp-native-gen0.xax` and `native/xax-mcp-sandbox-gen0.xax` (the authoritative stores), and the
+executables (the build products). Put `xax-mcp-sandbox.exe` in the same directory as `xax-mcp-native.exe`. The six
+carriers, stores and snapshots are committed and deterministic: CI regenerates them from the pinned tooling and fails
+unless every one matches the committed bytes. The three executables are rebuilt from the committed stores on every
+run; they are not committed. The tool schemas the server embeds come from the same upstream tooling.
 
-The pinned XAX revision is `f79b532fd4651ba808676d02f4b038e2cc271e6a` (XAX `main`, 2026-10-19; host contract
-`xax-host-contract-v1` r10; toolchain fingerprint
-`0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9`). See
+The XAX pin is `4c3e60bef96c56162003838b36d6756295b1de41`, the first commit that carries that tooling. Its
+`compiler/src` is byte-identical to `f79b532fd4651ba808676d02f4b038e2cc271e6a` (XAX `main`, 2026-10-19), the
+compiler that lowered the committed stores: host contract `xax-host-contract-v1` r10, toolchain fingerprint
+`0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9`. See
 [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md).
 
 ## Run
@@ -117,11 +125,12 @@ tools are narrowed to the implemented prototype.
   confinement. It cannot construct a new program from a typed carrier, cannot query the graph beyond the root, and
   cannot feed typed input to an artifact or read typed output back. That is stated in every capability response, not
   hidden.
-- It is not a Python server. The 0.5.x Python adapter is retired; it remains in git history and in the historical
-  documents marked "Python prototype". No Python is packaged or launched by the server. The compiler it spawns is a
-  native executable granted by the host; `native/chain.py` is test/build tooling only.
-- It does not contain workload logic. `native/server.py` only emits the construction carrier; the server's logic is
-  the canonical store.
+- It is not a Python server, and this repository contains no Python. The 0.5.x Python adapter is retired; it remains
+  in git history and in the historical documents marked "Python prototype". No Python is packaged or launched by the
+  server, and the build tooling lives in XAX (`compiler/integration/mcp`), not here. The compiler the server spawns
+  is a native executable granted by the host.
+- It does not contain workload logic. The carrier emitter in XAX only writes the construction request; the server's
+  logic is the canonical store.
 - It does not claim sandboxing. Execution is refused until an OS-enforced sandbox is implemented in XAX.
 
 ## Documentation
@@ -137,11 +146,17 @@ porting work that remains; they are not descriptions of the deployed 0.7.0 serve
 
 ## Development
 
+There is nothing to install or run in this repository: it holds the carriers, stores and executables, and their
+checks live in XAX.
+
 ```bash
-pip install pytest anyio "mcp>=2.3.0,<2.4"
-XAX_NATIVE_SRC=/path/to/XAX/compiler/src pytest -q -rs
+git clone https://github.com/MrxSiN/XAX ../XAX
+git -C ../XAX checkout 4c3e60bef96c56162003838b36d6756295b1de41
+pip install pytest anyio "mcp>=2.3.0,<2.4" -e ../XAX/compiler
+XAX_MCP_HOME=$PWD XAX_NATIVE_SRC=../XAX/compiler/src \
+  pytest -q ../XAX/compiler/integration/mcp/tests
 ```
 
 Set `XAX_MCP_TEST_COMPILER=/path/to/native/xaxc` as well to run the gated end-to-end chain test (seed → build →
-transaction). The tests are external MCP clients. They rebuild the committed store, check it byte for byte, build
+transaction). The tests are external MCP clients. They regenerate the committed store, check it byte for byte, build
 the PE, and drive it over STDIO. Python is not imported by the server.

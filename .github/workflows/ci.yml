@@ -9,7 +9,10 @@ permissions:
   contents: read
 
 env:
-  XAX_COMMIT: f79b532fd4651ba808676d02f4b038e2cc271e6a
+  # First XAX commit that carries compiler/integration/mcp (the server's authoring tooling).  Its compiler/src is
+  # byte-identical to f79b532, the toolchain recorded in server.py as NATIVE_XAX_COMMIT (fingerprint 0ab800ba...).
+  XAX_COMMIT: 4c3e60bef96c56162003838b36d6756295b1de41
+  XAX_MCP_HOME: ${{ github.workspace }}
 
 jobs:
   native-windows:
@@ -17,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Isolated checkout of the pinned upstream XAX (build toolchain only)
+      - name: Isolated checkout of the pinned upstream XAX (build toolchain and authoring tooling)
         uses: actions/checkout@v4
         with:
           repository: MrxSiN/XAX
@@ -33,16 +36,36 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install pytest anyio "mcp>=2.3.0,<2.4" -e upstream-xax/compiler
 
-      - name: Build the native XAX server from the pinned compiler
-        run: python native/server.py upstream-xax/compiler/src native
+      - name: Regenerate all three artifacts from the pinned tooling
+        run: |
+          python -B upstream-xax/compiler/integration/mcp/server.py  upstream-xax/compiler/src build
+          python -B upstream-xax/compiler/integration/mcp/sandbox.py upstream-xax/compiler/src build
+          python -B upstream-xax/compiler/integration/mcp/seed.py    upstream-xax/compiler/src build
 
-      - name: Verify the committed store and drive the PE32+ over STDIO
+      - name: The regenerated carriers and stores must equal the committed ones byte for byte
+        shell: pwsh
+        run: |
+          # The executables are build products (not committed); the six carriers, stores and snapshots are.
+          git ls-files native | ForEach-Object {
+            $name = Split-Path $_ -Leaf
+            $built = Join-Path build $name
+            if (-not (Test-Path $built)) { throw "the build did not produce $name" }
+            $a = (Get-FileHash $built -Algorithm SHA256).Hash
+            $b = (Get-FileHash $_ -Algorithm SHA256).Hash
+            if ($a -ne $b) { throw "artifact differs from the committed one: $name" }
+            "ok $name $a"
+          }
+          foreach ($exe in "xax-mcp-native.exe", "xax-mcp-sandbox.exe", "xax-mcp-seed.exe") {
+            if (-not (Test-Path (Join-Path build $exe))) { throw "the build did not produce $exe" }
+          }
+
+      - name: Drive the PE32+ over STDIO (the suite lives in XAX; the artifacts under test are committed here)
         env:
           XAX_NATIVE_SRC: ${{ github.workspace }}\upstream-xax\compiler\src
-        run: python -m pytest -q -rs
+        run: python -m pytest -q -rs upstream-xax/compiler/integration/mcp/tests
 
       - name: Record protocol measurements (artifact only; committed evidence is curated by hand)
-        run: python native/bench.py native/xax-mcp-native.exe > evidence-native.json
+        run: python upstream-xax/compiler/integration/mcp/bench.py build/xax-mcp-native.exe > evidence-native.json
 
       - uses: actions/upload-artifact@v4
         with:
