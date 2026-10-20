@@ -1,0 +1,43 @@
+{
+  "kind": "ci-reproduction",
+  "label": "EXECUTED",
+  "recorded": "2026-10-21",
+  "host": {
+    "runner": "GitHub-hosted windows-2022",
+    "run_id": 39458593950,
+    "job_id": 118751869858,
+    "commit": "476b865",
+    "trigger": "push to main"
+  },
+  "pin": {
+    "xax_commit": "4c3e60bef96c56162003838b36d6756295b1de41",
+    "xax_mcp_home": "the checked-out XAX-MCP tree",
+    "note": "compiler/src at the pin is byte-identical to f79b532 (fingerprint 0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9)"
+  },
+  "steps": {
+    "regenerate": "python -B upstream-xax/compiler/integration/mcp/{server,sandbox,seed}.py upstream-xax/compiler/src build",
+    "byte_equality": {
+      "result": "ok",
+      "compared": {
+        "construction_request.json": "A66EB60AD8759CB28D01B1F47E9D0E0647417221FA11CFDB617D6CD845442DA5",
+        "sandbox_request.json": "360D2ED65A7557DD1B892906CDD2DEB210CD9D80B1665B2E21F1A0550555BDDB",
+        "xax-mcp-native-gen0.xax": "BBE28C1E5568ABF40CB2D38A354F4DCBAAE09B231ABEB04F87674D5F1A70E25F",
+        "xax-mcp-sandbox-gen0.xax": "588F57C0FA69EB175B6E06E88C73977292D42C06DFC5B814EC48CC5710BAB2B8",
+        "xax-mcp-seed-snapshot.xax": "8624C042A35600DE3B4D5E04A6EF61B067B2C7780833BEE911EE194596997286",
+        "xax-mcp-seed.xax": "25DB5E19257E81E99A79E1B0311B65C8F534507CED0607AD4C5E2F0A81821532"
+      },
+      "executables_rebuilt": ["xax-mcp-native.exe", "xax-mcp-sandbox.exe", "xax-mcp-seed.exe"]
+    },
+    "suite": {
+      "command": "XAX_MCP_HOME=<workspace> XAX_NATIVE_SRC=<workspace>\\upstream-xax\\compiler\\src python -m pytest -q -rs upstream-xax/compiler/integration/mcp/tests",
+      "result": "44 passed, 1 skipped in 54.48s",
+      "skip": "test_native_compiler_chain_over_stdio (XAX_MCP_TEST_COMPILER is not granted on the runner)"
+    },
+    "job": "success in 2m16s"
+  },
+  "claims_not_made": [
+    "This does not re-measure the compiler-backed chain: XAX_MCP_TEST_COMPILER is not granted on the runner, so that test still skips.",
+    "The three executables are rebuilt but not compared to committed bytes; they are build products and are not committed.",
+    "No model-driven host session was run."
+  ]
+}

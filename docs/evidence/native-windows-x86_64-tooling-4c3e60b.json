@@ -55,7 +55,7 @@
   "suite": {
     "command": "XAX_MCP_HOME=D:\\GitHub\\XAX-MCP XAX_NATIVE_SRC=<pin>/compiler/src python -m pytest -q compiler/integration/mcp/tests",
     "result": "44 passed, 1 skipped in 67.90 s",
-    "skip": "the Linux build (this host is Windows)"
+    "skip": "one platform-gated test; the run granted XAX_MCP_TEST_COMPILER, so the compiler-backed chain test executed"
   },
   "claims_not_made": [
     "This does not change the server: store roots and artifact bytes are identical to the f79b532 build.",
