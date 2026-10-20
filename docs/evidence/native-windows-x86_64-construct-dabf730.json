@@ -1,0 +1,114 @@
+{
+  "kind": "xax-mcp-construct-step",
+  "label": "EXECUTED",
+  "recorded": "2026-10-21",
+  "host": {
+    "os": "Windows 11 x86-64",
+    "python": "3.12",
+    "note": "Python is build tooling and the oracle only; the decoder that produced the listings is a native XAX program (windows-x86_64 PE32+)"
+  },
+  "change": {
+    "summary": "Native construct step 5a: the resolver encodes every carrier function as its constants, its GRAPH_FRAGMENT and its FUNCTION object. Both committed carriers now produce listings byte-identical to the Python reference, object by object.",
+    "xax_repository": "MrxSiN/XAX",
+    "xax_branch": "feat/native-construct",
+    "xax_commit": "dabf730eaaa62b7e87a75aa6f5123f6ae7e33743",
+    "xax_parent": "4d7ff55",
+    "xax_mcp_pin": "unchanged: 4c3e60bef96c56162003838b36d6756295b1de41",
+    "xax_mcp_pin_note": "the decoder lives on feat/native-construct, not on the pinned feat/mcp-tooling branch; the pin's compiler/src is still byte-identical to f79b532",
+    "semantic_base": "f79b532fd4651ba808676d02f4b038e2cc271e6a",
+    "report": "XAX compiler/integration/construct/README.md, 'Step 5a: graph and function objects'",
+    "files": [
+      "compiler/integration/construct/resolve.py",
+      "compiler/integration/construct/reader.py",
+      "compiler/integration/construct/README.md",
+      "compiler/src/xax_compiler.py",
+      "compiler/src/xax_inline.py",
+      "compiler/src/xax_prefetch.py"
+    ]
+  },
+  "regeneration": {
+    "command": [
+      "python -B compiler/integration/construct/resolve.py build/construct_resolve --check ../XAX-MCP/native/sandbox_request.json ../XAX-MCP/native/construction_request.json"
+    ],
+    "worktree": "D:\\GitHub\\XAX on feat/native-construct at dabf730 (uncommitted files present in the shared worktree; the six construct files above are the commit)",
+    "program_identity": {
+      "entry": "f5a0510dd0e2bc43909d218a65c7a18028d14fd909590176fb78980c22e63398",
+      "entry_function": "10f3a887f4d7ae9e4ee33ed4a11b5b2a65e36c7fc5f7f97dac7ccd942b58a504",
+      "store_bytes": 8461834,
+      "artifact_bytes": 1092608,
+      "namespace_bytes": 2880,
+      "namespace_entries": 21,
+      "store_reproduced": "two independent builds produced store 8461834 bytes, artifact 1092608 bytes and identical listings"
+    },
+    "cost_seconds": {
+      "resolve_packages": 34.9,
+      "snapshot_store": 6.2,
+      "build_without_verifier": 295.0,
+      "build_with_verifier_approx": 395.0
+    }
+  },
+  "oracle": {
+    "kind": "the produced listing line is decoded back into a SemanticObject and compared with the reference object for that occurrence; the comparison is byte equality, so names, ordering and every field are covered",
+    "carriers": [
+      {
+        "carrier": "native/sandbox_request.json",
+        "exit": 0,
+        "lines": 3059,
+        "resolved": 3046,
+        "deferred": 13,
+        "result": "MATCH",
+        "listing_sha256": "5adfcc7b5013808e38ad0de7c1b173d7bdcb27dc0497be8eaacb215f77f7f68b",
+        "reference_store_root_not_yet_produced": "7ef7099d5358bf022715faff1ef26387c1486c554ed2f7d9145bd9d8953ef8b6"
+      },
+      {
+        "carrier": "native/construction_request.json",
+        "exit": 0,
+        "lines": 41318,
+        "resolved": 40918,
+        "deferred": 400,
+        "result": "MATCH",
+        "listing_sha256": "d7f78fce045915e4bfb9e548075cc41d9aa3fbef39cd730195daa226a7c08a19",
+        "reference_store_root_not_yet_produced": "baec162e4bfb177fff18c3d36efdbd6e2ad0a0dec6cb412874fcbd18c12dd442"
+      }
+    ],
+    "deferred_note": "the '?' lines are the {\"fn\": ...} occurrences the Python reference also defers at that point in its own walk (13 and 400); the graph pass resolves them from the name table filled as each function is registered"
+  },
+  "measured_envelope": {
+    "max_graph_body_bytes": {"sandbox": 16141, "construction": 56123, "cap": 131072},
+    "max_references": {"sandbox": 231, "construction": 1391, "cap": 2048},
+    "max_canonical_object_bytes": {"sandbox": 23549, "construction": 100651, "region": 200704},
+    "other_caps": {
+      "parameters_or_returns_per_function": 16,
+      "nodes_per_function": 8192,
+      "blocks_per_function": 512,
+      "reference_occurrences": 16384,
+      "name_table_bytes": 721536
+    },
+    "enforcement": "a value beyond any cap is a refusal (BAD_GRAPH, exit 13); the layout invariants are asserted at authoring time"
+  },
+  "defects_found": [
+    "operation table stride: next entry is at 3 + the entry's length byte, not 3 + the lookup name's length",
+    "inline constant: the resolved type must be hashed before the value, and the value widens into the register the writer reads",
+    "a body called by an outer each reused that loop's cursor register, stalling the single-function walk",
+    "register_function read the name with a base-relative load although start() is input-relative, so every function name was zero",
+    "inline declarations emitted correct lines with wrong CIDs: the hash covered the length prefix at CANON while the identity was at DBODY",
+    "main's 16141-byte graph body overran an 8 KiB canonical gap into the hash's own scratch, so its CID was wrong while its printed line was right"
+  ],
+  "upstream_changes": [
+    "xax_prefetch: a block's cycle set is computed only after a load/scale candidate is worth it (semantics-preserving)",
+    "xax_compiler: pointer_extent_from_graph binary-searches the pointer_extents table, which xax_inline._lower now keeps sorted by value reference, instead of materialising a dict on every checked access (semantics-preserving)"
+  ],
+  "not_done": [
+    "step 5b: module, package, profile, policy, target and build-request objects plus the snapshot",
+    "step 5c: writing the store from the listing; the two reference store roots above are not produced yet",
+    "step 6 / M2: the driver command construct <carrier> <store>",
+    "M3: MCP xax_construct wiring; the tool still fails closed with unsupported",
+    "TRAP terminators and CALL_GROUP_MEMBER are not encoded by the walk (neither carrier uses them)",
+    "Linux: the resolver is a Windows PE; no Linux build or run was tested on this host",
+    "no committed reproducible native Windows compiler build for the pinned tree"
+  ],
+  "claim": {
+    "label": "EXECUTED",
+    "statement": "On this host, the native XAX resolver program decoded both committed xax-construct-v1 carriers and emitted the complete object listing byte-identically to the Python reference: 3059 and 41318 lines, every line's object CID equal to the reference's. The canonical store those listings describe is not written yet (step 5c), and the MCP construct tool remains unimplemented."
+  }
+}

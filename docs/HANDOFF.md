@@ -24,16 +24,20 @@
   inside a job object (5 s CPU, 256 MiB, one process, 10 s wall, 1 MiB per stream). The server spawns it with a fixed
   three-word argv and reads back stdout, stderr and a 16-byte result record.
 - `xax_construct` and `xax_result` are **UNIMPLEMENTED natively** and return structured `unsupported` errors.
+  Upstream, `compiler/integration/construct` (branch `feat/native-construct`) decodes both committed carriers
+  through step 5a: kinds 3, 5 and 7 are byte-identical. Packages, build requests, the store and the command are
+  still missing.
 - Tests: `compiler/integration/mcp/tests/test_native_stdio.py` in XAX, 44 passed and 1 skipped (the Linux build)
   in 68 s on Windows 11, Python
   3.12.10 (test client only), mcp 2.3.0, with `XAX_MCP_TEST_COMPILER` set. The suite rebuilds both committed stores,
   checks them byte for byte, builds both PEs, drives the server over STDIO, and (when granted) runs the seed -> build
   -> transaction -> confined execute chain.
 - Evidence: new files `docs/evidence/native-windows-x86_64-build-f79b532-r3.json` (build identity),
-  `docs/evidence/native-windows-x86_64-sandbox-f79b532.json` (confinement results and measurements) and
-  `docs/evidence/native-windows-ci-sandbox-0137179.json` (the same confinement reproduced on a clean GitHub
-  windows-2022 runner), alongside the earlier `native-windows-x86_64-chain-f79b532.json`. The earlier `f79b532` and
-  6885f89 evidence files are unchanged.
+  `docs/evidence/native-windows-x86_64-sandbox-f79b532.json` (confinement results and measurements),
+  `docs/evidence/native-windows-x86_64-construct-dabf730.json` (native construct step 5a: both carriers'
+  listings byte-identical) and `docs/evidence/native-windows-ci-sandbox-0137179.json` (the same confinement
+  reproduced on a clean GitHub windows-2022 runner), alongside the earlier
+  `native-windows-x86_64-chain-f79b532.json`. The earlier `f79b532` and 6885f89 evidence files are unchanged.
 - The retired 0.5.1 Python adapter (`src/xax_mcp`) is removed. Its docs are marked historical; git history retains
   the implementation for the porting work.
 

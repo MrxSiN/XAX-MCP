@@ -228,7 +228,7 @@ Classification: **N** supported natively (in the store, executed), **P** prototy
 | session handles | none yet | a randomness source (`BCryptGenRandom` through ADR-260 imports) | — | **M** |
 | `xax_workspace`/`xax_query` | same store description (root + byte size) on both tool names | query kinds beyond `root` need a native query service | `test_native_compiler_chain_over_stdio` | **P** (B1, B2) |
 | `xax_transaction` | hex `XAXEDIT1` record -> native `edit` -> replace `current.xax` | typed mutations, expected generation/root, verify/rollback | same test; record authored by `chain.py` in XAX | **P** (B1, B2) |
-| `xax_construct` | — | native carrier decoding: no native `construct` command exists | — | **M** (B1, B2) |
+| `xax_construct` | — | native carrier decoding exists in XAX through step 5a (`compiler/integration/construct`; both committed carriers' listings byte-identical), but there is no `construct` command or tool wiring | — | **M** (B1, B2) |
 | `xax_build` | native `resolve` then `build` of the current store; reports root, artifact bytes, provenance | artifact handles, entry selection, digest report, cache | same test | **P** (B1, B2) |
 | `xax_execute`, sandboxed run | resolve+build, then `xax-mcp-sandbox.exe`: LPAC AppContainer + job object, pipes, wall/output limits | typed input/output layouts, argv, per-call limits, artifact handles; Linux clone/unshare/seccomp | `test_native_compiler_chain_over_stdio`, `test_native_sandbox_launcher_runs_artifact_confined` | **P** on Windows (B1, B3) |
 | `xax_result` | — | needs session tables first | — | **M** |
