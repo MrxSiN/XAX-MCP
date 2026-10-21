@@ -1,0 +1,104 @@
+{
+  "kind": "xax-mcp-construct-step",
+  "label": "EXECUTED",
+  "recorded": "2026-10-22",
+  "host": {
+    "os": "Windows 11 x86-64",
+    "python": "3.12",
+    "note": "Python is build tooling and the oracle only; the command that produced the stores is a native XAX program (windows-x86_64 PE32+)"
+  },
+  "change": {
+    "summary": "Native construct step 6, command form: `construct <carrier> <store>` runs the same walk with the listing writer compiled out, takes the store path as argv[2] and writes the S9 writer's bytes there. Both committed carriers produce the committed stores byte for byte through the command (74 434 B / sha256 588f57c0..., 1 020 614 B / sha256 bbe28c1e...), with no Python and no listing path. The command is a separate native program: the general driver does not dispatch it yet and there is no DRIVER.md.",
+    "xax_repository": "MrxSiN/XAX",
+    "xax_branch": "feat/native-construct",
+    "xax_commit": "486fa9dc0b5e88a1e8e0809131b8654cf5845c57",
+    "xax_parent": "1e78168",
+    "xax_mcp_pin": "unchanged: 4c3e60bef96c56162003838b36d6756295b1de41",
+    "xax_mcp_pin_note": "the decoder lives on feat/native-construct, not on the pinned feat/mcp-tooling branch; the pin's compiler/src is still byte-identical to f79b532",
+    "semantic_base": "f79b532fd4651ba808676d02f4b038e2cc271e6a",
+    "report": "XAX compiler/integration/construct/README.md, 'Step 6: the construct command (done as a command; driver dispatch left)'",
+    "files": [
+      "compiler/integration/construct/resolve.py",
+      "compiler/integration/construct/reader.py",
+      "compiler/integration/construct/README.md"
+    ]
+  },
+  "regeneration": {
+    "command": [
+      "python -B compiler/integration/construct/resolve.py build/construct_cmd --command --check ../XAX-MCP/native/sandbox_request.json ../XAX-MCP/native/construction_request.json"
+    ],
+    "worktree": "D:\\GitHub\\XAX on feat/native-construct at 486fa9d (the shared worktree carries unrelated uncommitted files; the three construct files above are the commit)",
+    "program_identity": {
+      "entry": "096ef1b4a7b1233eed01679efce9e907cb42f6f7b2b41e3532eebf7a571d3cfa",
+      "entry_function": "3d3a391c22e1baf03a0a037e33ce7689df0aaceea0f5e65e1bbdf0677a2bf564",
+      "store_bytes": 19045135,
+      "artifact_bytes": 2852352,
+      "namespace_bytes": 2880,
+      "namespace_entries": 21,
+      "entry_function_note": "unchanged from the check build; the command build is smaller because the listing writer's blocks are never emitted (19 045 135 vs 19 085 525 store bytes, 2 852 352 vs 2 870 784 artifact bytes)"
+    },
+    "cost_seconds": {
+      "build_main": 42.5,
+      "verifier_pass": 311.2,
+      "note": "the verifier pass is the separate gate on the check build at this commit; the command build was not timed separately (about 25 minutes)"
+    }
+  },
+  "oracle": {
+    "kind": "the command writes the store to argv[2]; the bytes are compared with xax_construct.construct(carrier).reader.canonical_bytes(), which was confirmed at 1e78168 to equal the committed native/xax-mcp-*.xax files byte for byte, so the oracle is the committed store itself",
+    "carriers": [
+      {
+        "carrier": "native/sandbox_request.json",
+        "command": "construct.exe native/sandbox_request.json <store>",
+        "exit": 0,
+        "store_bytes": 74434,
+        "reference_bytes": 74434,
+        "store_sha256": "588f57c0fa69eb175b6e06e88c73977292d42c06dfc5b814ec48cc5710bab2b8",
+        "store_root": "7ef7099d5358bf022715faff1ef26387c1486c554ed2f7d9145bd9d8953ef8b6",
+        "result": "MATCH"
+      },
+      {
+        "carrier": "native/construction_request.json",
+        "command": "construct.exe native/construction_request.json <store>",
+        "exit": 0,
+        "store_bytes": 1020614,
+        "reference_bytes": 1020614,
+        "store_sha256": "bbe28c1e5568abf40cb2d38a354f4dcbaae09b231abeb04f87674d5f1a70e25f",
+        "store_root": "baec162e4bfb177fff18c3d36efdbd6e2ad0a0dec6cb412874fcbd18c12dd442",
+        "result": "MATCH"
+      }
+    ],
+    "refusals": [
+      {"invocation": "construct.exe <missing-carrier> <store>", "exit": 2, "meaning": "EXIT_BAD_OPEN_IN: the carrier cannot be read, and nothing is written"},
+      {"invocation": "construct.exe <carrier> <store> extra", "exit": 7, "meaning": "EXIT_TRAILING: an extra argument is refused and no store file is created"},
+      {"invocation": "construct.exe <store>", "exit": 2, "meaning": "one argument is read as the carrier and refused at open, so a missing store path cannot silently succeed"}
+    ],
+    "listing_build": "the check build (listing path) was verified at this commit by the separate gate: 42.5 s build_main, 311.2 s verifier, snapshot 19 085 806 bytes, the same size as the 1e78168 build, and its emitted walk is unchanged; its executed evidence remains docs/evidence/native-windows-x86_64-construct-1e78168.json, since only the command build was executed at this commit"
+  },
+  "measured_envelope": {
+    "batch_bytes": {"sandbox": 71881, "construction": 988967, "extent": 33554432},
+    "store_bytes": {"sandbox": 74434, "construction": 1020614},
+    "distinct_store_objects": {"sandbox": 271, "construction": 3412, "cap": 8192},
+    "enforcement": "the command keeps every refusal of the check build (BAD_GRAPH 13, BAD_SEEN 20, BAD_BATCH 21, BAD_MISS 23, the writer's 0x100 + status*0x40 + reason) and adds the argv refusals measured above; a refused run leaves no store file"
+  },
+  "defects_found": [
+    "none in the command form itself: it is the verified walk with the listing writer compiled out and the store path moved to argv[2]. The four defects behind the 5c store (batch header offset, sorted-position-as-object-index, store registers over the parser's node tables, and the three linked-call verifier findings) are recorded in the 1e78168 evidence"
+  ],
+  "upstream_changes": [
+    "none in this step: no compiler/src change, and the container remains the pinned S9 writer"
+  ],
+  "not_done": [
+    "the general driver (compiler/src/xax_selfhost_driver.py, COMMANDS) does not dispatch `construct`; the command is a separate native program",
+    "the driver has not been re-derived for Windows and there is no DRIVER.md for it (the remaining parts of plan step 6)",
+    "M3: MCP xax_construct wiring; the tool still fails closed with unsupported",
+    "only windows-x86_64 is supported: another platform is refused (BAD_GRAPH 13)",
+    "only one build entry is supported: a second entry is refused",
+    "packages with dependencies, signatures or external digests are not selected",
+    "TRAP terminators and CALL_GROUP_MEMBER are not encoded by the walk",
+    "Linux: the command is a Windows PE; no Linux build or run was tested on this host",
+    "no committed reproducible native Windows compiler build for the pinned tree"
+  ],
+  "claim": {
+    "label": "EXECUTED",
+    "statement": "On this host, `construct.exe <carrier> <store>` (a native XAX program built from 486fa9d) reproduced both committed canonical stores byte for byte: 74 434 B / sha256 588f57c0... / root 7ef7099d... and 1 020 614 B / sha256 bbe28c1e... / root baec162e..., with exit 0 and no listing path. Wrong argument counts fail closed (2 or 7) and write no file. The MCP construct tool remains unimplemented and the general driver does not dispatch the command yet."
+  }
+}
