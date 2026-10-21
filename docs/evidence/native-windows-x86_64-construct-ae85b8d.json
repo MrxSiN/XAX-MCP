@@ -1,0 +1,136 @@
+{
+  "kind": "xax-mcp-construct-step",
+  "label": "EXECUTED",
+  "recorded": "2026-10-21",
+  "host": {
+    "os": "Windows 11 x86-64",
+    "python": "3.12",
+    "note": "Python is build tooling and the oracle only; the decoder that produced the listings is a native XAX program (windows-x86_64 PE32+)"
+  },
+  "change": {
+    "summary": "Native construct step 5b: the resolver now also encodes the platform target, the module, the package, the hermetic profile, the trust policy and the build request. Both committed carriers produce listings byte-identical to the Python reference object by object, including the six new objects, so the complete object set a canonical store is made of is decoded natively; only the store write and the program root remain.",
+    "xax_repository": "MrxSiN/XAX",
+    "xax_branch": "feat/native-construct",
+    "xax_commit": "ae85b8d13d9a9ee7bb4d2f77cc4420f63ef2b1d1",
+    "xax_parent": "b0a1348",
+    "xax_mcp_pin": "unchanged: 4c3e60bef96c56162003838b36d6756295b1de41",
+    "xax_mcp_pin_note": "the decoder lives on feat/native-construct, not on the pinned feat/mcp-tooling branch; the pin's compiler/src is still byte-identical to f79b532",
+    "semantic_base": "f79b532fd4651ba808676d02f4b038e2cc271e6a",
+    "report": "XAX compiler/integration/construct/README.md, 'Step 5b: module, package and build request'",
+    "files": [
+      "compiler/integration/construct/resolve.py",
+      "compiler/integration/construct/README.md"
+    ]
+  },
+  "regeneration": {
+    "command": [
+      "python -B compiler/integration/construct/resolve.py build/construct_resolve --check ../XAX-MCP/native/sandbox_request.json ../XAX-MCP/native/construction_request.json"
+    ],
+    "worktree": "D:\\GitHub\\XAX on feat/native-construct at ae85b8d (uncommitted files present in the shared worktree; the two construct files above are the commit)",
+    "program_identity": {
+      "entry": "a26bf50993fd3d42e2cc95e083728eb1d02c3905f4379101d617d14daca04202",
+      "entry_function": "3d3a391c22e1baf03a0a037e33ce7689df0aaceea0f5e65e1bbdf0677a2bf564",
+      "store_bytes": 9200433,
+      "artifact_bytes": 1597952,
+      "namespace_bytes": 2880,
+      "namespace_entries": 21,
+      "verified_build": "this identity is from the verified build (the verifier accepted every object); the listing bytes were re-run with the same executable"
+    },
+    "cost_seconds": {
+      "resolve_packages": 139.5,
+      "snapshot_store": 7.7,
+      "build_without_verifier": 612.0,
+      "verifier_pass": 196.8,
+      "variance_note": "the host was shared during these runs; timings varied by nearly a factor of two between builds, the byte identities did not"
+    }
+  },
+  "oracle": {
+    "kind": "the produced listing line is decoded back into a SemanticObject and compared with the reference object for that occurrence; the comparison is byte equality, so names, ordering and every field are covered",
+    "carriers": [
+      {
+        "carrier": "native/sandbox_request.json",
+        "exit": 0,
+        "lines": 3065,
+        "resolved": 3052,
+        "deferred": 13,
+        "result": "MATCH",
+        "listing_sha256": "724bbe2579a66811c6e63e1d75444d6c1044350fe70ba0b0bc2113fb0970d795",
+        "reference_store_root_not_yet_produced": "7ef7099d5358bf022715faff1ef26387c1486c554ed2f7d9145bd9d8953ef8b6"
+      },
+      {
+        "carrier": "native/construction_request.json",
+        "exit": 0,
+        "lines": 41324,
+        "resolved": 40924,
+        "deferred": 400,
+        "result": "MATCH",
+        "listing_sha256": "4c09830f2949a04b852443284ee1068e177b1b6143905d18d399c68d85d8ced3",
+        "reference_store_root_not_yet_produced": "baec162e4bfb177fff18c3d36efdbd6e2ad0a0dec6cb412874fcbd18c12dd442"
+      }
+    ],
+    "step_5b_objects": {
+      "sandbox": {
+        "target": "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+        "module": "b363e1747653e7e73a55601e08c2e52d9b56e76545aa173e87308d7272612f25",
+        "package": "396e669749ff9bfeb9fe8ae3d55bd08a787abae55c557029b97ea4399a4ccf77",
+        "profile": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+        "policy": "15264515d69f8d9ed3287f17674e1d0e87809fd366832b905d9423121ec62540",
+        "request": "6fbb92a5c1d2902c9a7ba217c36942ddcc049523211b31911e7c3395522e7c1a"
+      },
+      "construction": {
+        "target": "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+        "module": "d54fc476b9aa1d7840f1858109f3f8177b0ad5c8e59709e2482312c385335c31",
+        "package": "61fbf9bd062f4da1fbcfb626eaaba4653223e534ce530b111609ec33812a6ab4",
+        "profile": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+        "policy": "15264515d69f8d9ed3287f17674e1d0e87809fd366832b905d9423121ec62540",
+        "request": "9c3d4d22496286e8ff7c8ea0255ad404227509c5af58e662015b395a8d2c2e05"
+      },
+      "note": "every other object CID is compared line by line; these are the six appended objects, and the target, profile and policy are carrier-independent"
+    },
+    "deferred_note": "the '?' lines are the {\"fn\": ...} occurrences the Python reference also defers at that point in its own walk (13 and 400); the graph pass resolves them from the name table filled as each function is registered"
+  },
+  "measured_envelope": {
+    "max_graph_body_bytes": {"sandbox": 16141, "construction": 56123, "cap": 131072},
+    "max_references": {"sandbox": 231, "construction": 1391, "cap": 2048},
+    "max_canonical_object_bytes": {"sandbox": 23549, "construction": 100651, "region": 200704},
+    "step_5b_bodies": {
+      "module_bytes": {"sandbox": 9, "construction": 216},
+      "package_bytes": {"sandbox": 28, "construction": 27},
+      "request_bytes": {"sandbox": 12, "construction": 12},
+      "profile_bytes": 5,
+      "policy_bytes": 5,
+      "target_bytes": 129
+    },
+    "other_caps": {
+      "parameters_or_returns_per_function": 16,
+      "nodes_per_function": 8192,
+      "blocks_per_function": 512,
+      "reference_occurrences": 16384,
+      "name_table_bytes": 721536,
+      "build_entries": 1
+    },
+    "enforcement": "a value beyond any cap is a refusal (BAD_GRAPH, exit 13); the layout invariants are asserted at authoring time"
+  },
+  "defects_found": [
+    "span_eq returns bits<1>; comparing it with a b32 zero breaks INT-COMPARE-CONTRACT, so the platform check has to widen the flag before comparing",
+    "INT_TRUNCATE must narrow: a b8 literal truncated to b8 is refused, so gb_put takes a b32 and the literal body bytes are authored as b32",
+    "emit_sorted_object printed 48 + kind, which is only correct for single-digit kinds; BUILD is 10, so exactly the profile, policy and request lines had kind 1 while target, module and package were already byte-correct"
+  ],
+  "upstream_changes": [
+    "none in this step; the two semantics-preserving 5a changes (xax_prefetch lazy cycle sets, pointer_extent_from_graph binary search) remain as described in the dabf730 evidence"
+  ],
+  "not_done": [
+    "step 5c: writing the store from the listing and the program root; the two reference store roots above are not produced yet",
+    "step 6 / M2: the driver command construct <carrier> <store>",
+    "M3: MCP xax_construct wiring; the tool still fails closed with unsupported",
+    "only windows-x86_64 is supported: the target is embedded authoring data, and another platform is refused (BAD_GRAPH, exit 13)",
+    "only one build entry is supported: the reference sorts variable-length entry names, a second entry is refused",
+    "TRAP terminators and CALL_GROUP_MEMBER are not encoded by the walk (neither carrier uses them)",
+    "Linux: the resolver is a Windows PE; no Linux build or run was tested on this host",
+    "no committed reproducible native Windows compiler build for the pinned tree"
+  ],
+  "claim": {
+    "label": "EXECUTED",
+    "statement": "On this host, the native XAX resolver program decoded both committed xax-construct-v1 carriers and emitted every object listing byte-identically to the Python reference: 3065 and 41324 lines, including the target, module, package, profile, trust policy and build request that step 5b added, and the verified build accepted every object of the program itself. The canonical store those listings describe is still not written (step 5c), and the MCP construct tool remains unimplemented."
+  }
+}
