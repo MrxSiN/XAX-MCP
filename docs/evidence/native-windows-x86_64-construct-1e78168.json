@@ -1,0 +1,140 @@
+{
+  "kind": "xax-mcp-construct-step",
+  "label": "EXECUTED",
+  "recorded": "2026-10-22",
+  "host": {
+    "os": "Windows 11 x86-64",
+    "python": "3.12",
+    "note": "Python is build tooling and the oracle only; the decoder and the container writer that produced the stores are native XAX programs (windows-x86_64 PE32+)"
+  },
+  "change": {
+    "summary": "Native construct step 5c, container half: the resolver stages every object it emits as an S9 writer batch record in append order, deduplicates by CID through an open-addressing index, closes the batch over the snapshot's references, compacts the marked records behind the 56-byte header and calls the linked container writer directly. Both committed stores are reproduced byte for byte, not only their roots: 74 434 B / sha256 588f57c0... and 1 020 614 B / sha256 bbe28c1e..., with roots 7ef7099d... and baec162e.... Step 5c is complete; the construct command (step 6) is not.",
+    "xax_repository": "MrxSiN/XAX",
+    "xax_branch": "feat/native-construct",
+    "xax_commit": "1e7816809ff3b82d63682fcd715db434e735b9a4",
+    "xax_parent": "f0fc9c9",
+    "xax_mcp_pin": "unchanged: 4c3e60bef96c56162003838b36d6756295b1de41",
+    "xax_mcp_pin_note": "the decoder lives on feat/native-construct, not on the pinned feat/mcp-tooling branch; the pin's compiler/src is still byte-identical to f79b532",
+    "semantic_base": "f79b532fd4651ba808676d02f4b038e2cc271e6a",
+    "report": "XAX compiler/integration/construct/README.md, 'Step 5c: the root and the store container (done)'",
+    "files": [
+      "compiler/integration/construct/resolve.py",
+      "compiler/integration/construct/reader.py",
+      "compiler/integration/construct/README.md"
+    ]
+  },
+  "regeneration": {
+    "command": [
+      "python -B compiler/integration/construct/resolve.py build/construct_resolve --check ../XAX-MCP/native/sandbox_request.json ../XAX-MCP/native/construction_request.json"
+    ],
+    "worktree": "D:\\GitHub\\XAX on feat/native-construct at 1e78168 (the shared worktree carries unrelated uncommitted files; the three construct files above are the commit)",
+    "program_identity": {
+      "entry": "4426818db95e2ad3997f4ec32b5f06d8b7998ba21eee698277f5228d1dc295b2",
+      "entry_function": "3d3a391c22e1baf03a0a037e33ce7689df0aaceea0f5e65e1bbdf0677a2bf564",
+      "store_bytes": 19085525,
+      "artifact_bytes": 2870784,
+      "namespace_bytes": 2880,
+      "namespace_entries": 21,
+      "verified_build": "the identity is from the verified build (the verifier accepted every object); both listings and both stores were then produced by that executable",
+      "entry_function_note": "the entry function is unchanged from the 5a/5b programs; only the store half grew (store 18.9 MB, artifact 2.87 MB)"
+    },
+    "cost_seconds": {
+      "build_main": 41.8,
+      "verifier_pass": 392.0,
+      "native_build_and_check": "about 25 minutes for the full build plus both carriers on this host; the phase split was not timed separately",
+      "variance_note": "the host was shared during these runs; timings varied, the byte identities did not"
+    }
+  },
+  "oracle": {
+    "kind": "the produced listing line is decoded back into a SemanticObject and compared with the reference object for that occurrence; the comparison is byte equality, so names, ordering and every field are covered",
+    "store_kind": "the bytes the native program writes to the third argv path are compared with xax_construct.construct(carrier).reader.canonical_bytes(); that value was confirmed independently on this host to equal the committed native/xax-mcp-sandbox-gen0.xax and native/xax-mcp-native-gen0.xax files byte for byte (1.1 s and 11.4 s), so the oracle is the committed store itself rather than a looser re-encoding of it",
+    "carriers": [
+      {
+        "carrier": "native/sandbox_request.json",
+        "exit": 0,
+        "lines": 3066,
+        "resolved": 3053,
+        "deferred": 13,
+        "result": "MATCH",
+        "listing_sha256": "35e23efae05cd00c768905c9207ad5bb9bbd573f39059a7062483df6c1a35857",
+        "store_bytes": 74434,
+        "store_sha256": "588f57c0fa69eb175b6e06e88c73977292d42c06dfc5b814ec48cc5710bab2b8",
+        "store_result": "MATCH",
+        "store_root": "7ef7099d5358bf022715faff1ef26387c1486c554ed2f7d9145bd9d8953ef8b6"
+      },
+      {
+        "carrier": "native/construction_request.json",
+        "exit": 0,
+        "lines": 41325,
+        "resolved": 40925,
+        "deferred": 400,
+        "result": "MATCH",
+        "listing_sha256": "fef6f4eacf89a25d64756abcbaf29062d3cc9a1ff5a7dc2f8b568af9b4edc845",
+        "store_bytes": 1020614,
+        "store_sha256": "bbe28c1e5568abf40cb2d38a354f4dcbaae09b231abeb04f87674d5f1a70e25f",
+        "store_result": "MATCH",
+        "store_root": "baec162e4bfb177fff18c3d36efdbd6e2ad0a0dec6cb412874fcbd18c12dd442"
+      }
+    ],
+    "root_proof": {
+      "encoding": "uleb(SNAPSHOT=3), uleb(rank(request)), uleb(len)+resolver identity, uleb(rank(policy)), uleb(#packages)+ranks, uleb(#signatures)+ranks, uleb(#digests)+digests",
+      "references": "sorted, deduplicated CIDs of the request, the trust policy and the selected packages",
+      "resolver_identity": "xax-construct-v1",
+      "selected_packages": "the request's package; neither carrier declares dependencies, signatures or external digests",
+      "checked": "the last listing line's decoded CID equals the root that xax_construct.construct returns as store.root_cid, and the native store the program writes carries the same CID in its header and passes StoreReader verification, confirmed separately for both carriers"
+    },
+    "deferred_note": "the '?' lines are the {\"fn\": ...} occurrences the Python reference also defers at that point in its own walk (13 and 400); the graph pass resolves them from the name table filled as each function is registered"
+  },
+  "measured_envelope": {
+    "max_graph_body_bytes": {"sandbox": 16141, "construction": 56123, "cap": 131072},
+    "max_references": {"sandbox": 231, "construction": 1391, "cap": 2048},
+    "max_canonical_object_bytes": {"sandbox": 23549, "construction": 100651, "region": 200704},
+    "snapshot_body_bytes": 27,
+    "store_bytes": {"sandbox": 74434, "construction": 1020614},
+    "batch_bytes": {
+      "sandbox": 71881,
+      "construction": 988967,
+      "extent": 33554432,
+      "note": "56-byte header (three words and the root CID) plus one record per closure object; the numbers are the S9 writer's own marshal() over the reference object set, which is the shape the program compacts to (4 805 B of sandbox bodies, 116 references; the 271 records fit the 32 MiB batch with room to spare)"
+    },
+    "closure": {
+      "sandbox": {"listing_distinct_cids": 272, "store_objects": 271, "store_objects_without_line": 1, "listing_cids_not_in_store": 2},
+      "construction": {"listing_distinct_cids": 3413, "store_objects": 3412, "store_objects_without_line": 0, "listing_cids_not_in_store": 1},
+      "note": "the store is the snapshot's reachability closure, not the listing; the sandbox's one object with no line is the inline b16 type (kind 4, body 0110), the two sandbox lines and one construction line that are not in the store are aliases nothing reaches"
+    },
+    "other_caps": {
+      "distinct_store_objects": 8192,
+      "parameters_or_returns_per_function": 16,
+      "nodes_per_function": 8192,
+      "blocks_per_function": 512,
+      "reference_occurrences": 16384,
+      "name_table_bytes": 721536,
+      "build_entries": 1
+    },
+    "enforcement": "a value beyond any cap is a refusal, never a silent overwrite: BAD_GRAPH (exit 13) for the walk, BAD_SEEN (20) past the 8 192-object index, BAD_BATCH (21) past the batch capacity, BAD_MISS (23) for a reference with no staged object; the layout invariants (including that the store registers sit between the parser's scratch end and the embedded namespace) are asserted at authoring time"
+  },
+  "defects_found": [
+    "the batch's first record was written at offset 0 and overwrote the 56-byte header the writer reads first: the sandbox listing matched while the writer refused the batch, and the first compaction pass resumed at offset 64",
+    "find_record returns a position in the sorted CID index, and that position was used as the object's own index: the 'closure' then marked and expanded whichever objects sat at those positions. The sandbox store held 54 objects at depths 0 and 2..5 and none at depth 1, which no walk from the root can produce; the fix reads SORT[position] once and carries it as the object index",
+    "the store registers were first placed at 0x960000, inside the parser's START array (0x910000..0xA10000): the construction carrier crashed with 0xC0000409 instead of refusing; they now live at 0xD20000..0xDA0000, between the parser's scratch end (0xD11000) and the embedded namespace (0xE00000), with an authoring-time assertion",
+    "three verifier-level defects in the linked call: a lent view rebound to the caller's pointer type (the callee returns the caller's view type), the lent views never released at return, and virtual_free_view needing one declaration per (pointer, view) pair rather than one per call site"
+  ],
+  "upstream_changes": [
+    "none in this step: the container reuses the S9 writer already in the pinned tree (compiler/src/xax_selfhost_writer.py) and its existing heap-view and foreign-call surface; the three verifier findings changed only the construct files"
+  ],
+  "not_done": [
+    "step 6 / M2: the driver command construct <carrier> <store>",
+    "M3: MCP xax_construct wiring; the tool still fails closed with unsupported",
+    "only windows-x86_64 is supported: the target is embedded authoring data, and another platform is refused (BAD_GRAPH, exit 13)",
+    "only one build entry is supported: the reference sorts variable-length entry names, a second entry is refused",
+    "packages with dependencies, signatures or external digests are not selected: the snapshot is emitted for the single-package, unsigned case both carriers use",
+    "TRAP terminators and CALL_GROUP_MEMBER are not encoded by the walk (neither carrier uses them)",
+    "Linux: the resolver is a Windows PE; no Linux build or run was tested on this host",
+    "no committed reproducible native Windows compiler build for the pinned tree",
+    "the writer's REJECT/DECLINE surface is only exercised through exit codes (0x100 + status*0x40 + reason); no committed carrier produces one in the green run"
+  ],
+  "claim": {
+    "label": "EXECUTED",
+    "statement": "On this host, the native XAX resolver emitted every object of both committed xax-construct-v1 carriers byte-identically to the Python reference (3 066 and 41 325 lines, same listing SHA-256 as step 5b) and then produced both canonical stores byte-identically to the committed files: 74 434 B / sha256 588f57c0... / root 7ef7099d... (sandbox) and 1 020 614 B / sha256 bbe28c1e... / root baec162e... (construction), compared against the reference's canonical_bytes(), which was itself confirmed equal to the committed stores. Step 5c is complete natively; the construct command and the MCP tool remain unimplemented."
+  }
+}
