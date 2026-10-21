@@ -30,7 +30,7 @@ capability text are transport, embedded at construction time; they are never XAX
 | Official MCP Python SDK client (`mcp.Client`) interoperability | **EXECUTED**: handshake, `tools/list`, `tools/call` |
 | `xax_capabilities` | **EXECUTED** (native, reports the exact blockers below) |
 | `xax_workspace`, `xax_query`, `xax_build`, `xax_transaction` | **PROTOTYPE** over a host-granted native XAX compiler: describe the current store, `resolve`+`build`, one `XAXEDIT1` edit |
-| `xax_construct` (new canonical program from a typed carrier) | **UNIMPLEMENTED natively**: XAX has the native decoder through step 5b (`compiler/integration/construct`; both committed carriers' listings are byte-identical for kinds 2, 3, 5, 6, 7, 9 and 10), but no `construct` command is served (blocker B2) |
+| `xax_construct` (new canonical program from a typed carrier) | **UNIMPLEMENTED natively**: XAX has the native decoder through step 5b and the 5c root (`compiler/integration/construct`; both committed carriers' listings are byte-identical for kinds 2, 3, 5, 6, 7, 9 and 10, ending with the snapshot whose CID is the reference store root), but no `construct` command is served (blocker B2) |
 | `xax_execute` in an OS sandbox | **PROTOTYPE, MEASURED on windows-x86_64** (also reproduced on a clean windows-2022 CI runner): a second XAX program (authored by `compiler/integration/mcp/sandbox.py` in XAX) runs the built artifact as a capability-less AppContainer in a job object; Linux and typed I/O are open (B3, B4) |
 | `xax_result` (bounded result retrieval) | **UNIMPLEMENTED natively**: needs session state |
 | Streamable HTTP transport | **UNIMPLEMENTED** (STDIO only) |
@@ -112,7 +112,7 @@ tools are narrowed to the implemented prototype.
 | `xax_capabilities` | identity, pin, rights, targets, sandbox, maturity | EXECUTED |
 | `xax_workspace` | open/identify/close a bounded store | PROTOTYPE: describes the current store's root and size |
 | `xax_query` | bounded graph queries | PROTOTYPE: `root` only (root + byte size) |
-| `xax_construct` | carrier → verified canonical root | UNIMPLEMENTED (decoder through step 5b in XAX; no command or tool wiring yet) |
+| `xax_construct` | carrier → verified canonical root | UNIMPLEMENTED (decoder through step 5b and the 5c root in XAX; no command or tool wiring yet) |
 | `xax_transaction` | verify/commit/rollback exact-root edits | PROTOTYPE: one `XAXEDIT1` hex record → native `edit` |
 | `xax_build` | build an exact root/entry/target | PROTOTYPE: native `resolve` + `build` of the current store |
 | `xax_execute` | run an artifact in an OS sandbox | PROTOTYPE (Windows): rebuilds the current store, runs the artifact in `xax-mcp-sandbox.exe`, returns exit code, wall time, flags, stdout/stderr hex |

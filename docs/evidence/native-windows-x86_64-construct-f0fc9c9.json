@@ -1,0 +1,118 @@
+{
+  "kind": "xax-mcp-construct-step",
+  "label": "EXECUTED",
+  "recorded": "2026-10-21",
+  "host": {
+    "os": "Windows 11 x86-64",
+    "python": "3.12",
+    "note": "Python is build tooling and the oracle only; the decoder that produced the listings is a native XAX program (windows-x86_64 PE32+)"
+  },
+  "change": {
+    "summary": "Native construct step 5c, root half: the resolver now emits the snapshot object that resolve_packages returns, which is the canonical store's root. Its CID equals the reference store root on both committed carriers, so the program-root identity is reproduced natively; the store container bytes are the remaining half of 5c.",
+    "xax_repository": "MrxSiN/XAX",
+    "xax_branch": "feat/native-construct",
+    "xax_commit": "f0fc9c97d6252f91e6e676d0eadd0b1913454443",
+    "xax_parent": "ae85b8d",
+    "xax_mcp_pin": "unchanged: 4c3e60bef96c56162003838b36d6756295b1de41",
+    "xax_mcp_pin_note": "the decoder lives on feat/native-construct, not on the pinned feat/mcp-tooling branch; the pin's compiler/src is still byte-identical to f79b532",
+    "semantic_base": "f79b532fd4651ba808676d02f4b038e2cc271e6a",
+    "report": "XAX compiler/integration/construct/README.md, 'Step 5c: the root (done), the store container (left)'",
+    "files": [
+      "compiler/integration/construct/resolve.py",
+      "compiler/integration/construct/README.md"
+    ]
+  },
+  "regeneration": {
+    "command": [
+      "python -B compiler/integration/construct/resolve.py build/construct_resolve --check ../XAX-MCP/native/sandbox_request.json ../XAX-MCP/native/construction_request.json"
+    ],
+    "worktree": "D:\\GitHub\\XAX on feat/native-construct at f0fc9c9 (uncommitted files present in the shared worktree; the two construct files above are the commit)",
+    "program_identity": {
+      "entry": "df94e035dd9fa84bf57175755b029e35b59f8c48a43055bc4fc6b579e9e2a3c8",
+      "entry_function": "3d3a391c22e1baf03a0a037e33ce7689df0aaceea0f5e65e1bbdf0677a2bf564",
+      "store_bytes": 9402941,
+      "artifact_bytes": 1738240,
+      "namespace_bytes": 2880,
+      "namespace_entries": 21,
+      "verified_build": "the identity is from the verified build (the verifier accepted every object); the listings were re-run with the same executable",
+      "entry_function_note": "the entry function is unchanged from the 5b program; only the appended object pass grew"
+    },
+    "cost_seconds": {
+      "resolve_packages": 185.1,
+      "snapshot_store": 22.8,
+      "build_without_verifier": 876.3,
+      "verifier_pass": 160.1,
+      "variance_note": "the host was shared during these runs; timings varied by nearly a factor of two between builds, the byte identities did not"
+    }
+  },
+  "oracle": {
+    "kind": "the produced listing line is decoded back into a SemanticObject and compared with the reference object for that occurrence; the comparison is byte equality, so names, ordering and every field are covered",
+    "carriers": [
+      {
+        "carrier": "native/sandbox_request.json",
+        "exit": 0,
+        "lines": 3066,
+        "resolved": 3053,
+        "deferred": 13,
+        "result": "MATCH",
+        "listing_sha256": "35e23efae05cd00c768905c9207ad5bb9bbd573f39059a7062483df6c1a35857",
+        "store_root": "7ef7099d5358bf022715faff1ef26387c1486c554ed2f7d9145bd9d8953ef8b6"
+      },
+      {
+        "carrier": "native/construction_request.json",
+        "exit": 0,
+        "lines": 41325,
+        "resolved": 40925,
+        "deferred": 400,
+        "result": "MATCH",
+        "listing_sha256": "fef6f4eacf89a25d64756abcbaf29062d3cc9a1ff5a7dc2f8b568af9b4edc845",
+        "store_root": "baec162e4bfb177fff18c3d36efdbd6e2ad0a0dec6cb412874fcbd18c12dd442"
+      }
+    ],
+    "root_proof": {
+      "encoding": "uleb(SNAPSHOT=3), uleb(rank(request)), uleb(len)+resolver identity, uleb(rank(policy)), uleb(#packages)+ranks, uleb(#signatures)+ranks, uleb(#digests)+digests",
+      "references": "sorted, deduplicated CIDs of the request, the trust policy and the selected packages",
+      "resolver_identity": "xax-construct-v1",
+      "selected_packages": "the request's package; neither carrier declares dependencies, signatures or external digests",
+      "checked": "the last listing line's decoded CID equals the root that xax_construct.construct returns as store.root_cid, confirmed separately for both carriers; the generic line-by-line comparison also covers it"
+    },
+    "deferred_note": "the '?' lines are the {\"fn\": ...} occurrences the Python reference also defers at that point in its own walk (13 and 400); the graph pass resolves them from the name table filled as each function is registered"
+  },
+  "measured_envelope": {
+    "max_graph_body_bytes": {"sandbox": 16141, "construction": 56123, "cap": 131072},
+    "max_references": {"sandbox": 231, "construction": 1391, "cap": 2048},
+    "max_canonical_object_bytes": {"sandbox": 23549, "construction": 100651, "region": 200704},
+    "snapshot_body_bytes": 27,
+    "other_caps": {
+      "parameters_or_returns_per_function": 16,
+      "nodes_per_function": 8192,
+      "blocks_per_function": 512,
+      "reference_occurrences": 16384,
+      "name_table_bytes": 721536,
+      "build_entries": 1
+    },
+    "enforcement": "a value beyond any cap is a refusal (BAD_GRAPH, exit 13); the layout invariants are asserted at authoring time"
+  },
+  "defects_found": [
+    "none in this slice: the snapshot is a 27-byte body with three references, and both carriers' last lines matched the reference roots on the first build"
+  ],
+  "upstream_changes": [
+    "none in this step; the two semantics-preserving 5a changes (xax_prefetch lazy cycle sets, pointer_extent_from_graph binary search) remain as described in the dabf730 evidence"
+  ],
+  "not_done": [
+    "step 5c, container half: header, record envelopes in ascending CID order, metadata records, index, digest and trailer; xax_selfhost_writer.write_store implements it, the hand-over (the writer's batch, its views) is not done",
+    "the two stores are therefore not produced yet; only their roots are proved",
+    "step 6 / M2: the driver command construct <carrier> <store>",
+    "M3: MCP xax_construct wiring; the tool still fails closed with unsupported",
+    "only windows-x86_64 is supported: the target is embedded authoring data, and another platform is refused (BAD_GRAPH, exit 13)",
+    "only one build entry is supported: the reference sorts variable-length entry names, a second entry is refused",
+    "packages with dependencies, signatures or external digests are not selected: the snapshot is emitted for the single-package, unsigned case both carriers use",
+    "TRAP terminators and CALL_GROUP_MEMBER are not encoded by the walk (neither carrier uses them)",
+    "Linux: the resolver is a Windows PE; no Linux build or run was tested on this host",
+    "no committed reproducible native Windows compiler build for the pinned tree"
+  ],
+  "claim": {
+    "label": "EXECUTED",
+    "statement": "On this host, the native XAX resolver program emitted every object of both committed xax-construct-v1 carriers byte-identically to the Python reference, 3066 and 41325 lines, and the last object is the snapshot whose CID is the reference canonical store's root (7ef7099d... and baec162e...). The store container that root would head is not written yet (the remaining half of step 5c), and the MCP construct tool remains unimplemented."
+  }
+}
