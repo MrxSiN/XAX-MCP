@@ -4,7 +4,7 @@
 
 | xax-mcp | XAX commit | XAX host contract | Toolchain fingerprint (sha256) | mcp SDK (test client) | Python (test client and offline authors only) | OS / arch | Result |
 |---|---|---|---|---|---|---|---|
-| 0.8.0 | `3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b` (XAX `main`, 2026-10-22) | `xax-host-contract-v1` r10 | `ba009daa933c33ba124f2dc2fcb7a09995553b867bc68289555871b2f47eb740` (125 files) | 2.3.0 | 3.12.10 | Windows 11 x86-64 | native protocol suite: 44 passed, 1 skipped without a compiler path, and 45 passed, 0 skipped with a native `xaxc` rebuilt at the pin (the full chain, execute exit 41); the native decoder reproduced both committed stores byte for byte; compiler- and decoder-backed tools PROTOTYPE over host-granted native programs (docs/NATIVE.md) |
+| 0.8.0 | `3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b` (XAX `main`, 2026-10-22) | `xax-host-contract-v1` r10 | `ba009daa933c33ba124f2dc2fcb7a09995553b867bc68289555871b2f47eb740` (125 files) | 2.3.0 | 3.12.10 | Windows 11 x86-64 | native protocol suite: 44 passed, 1 skipped without a compiler path, and 45 passed, 0 skipped with a native `xaxc` rebuilt at the pin (the full chain, execute exit 41); the native decoder reproduced both committed stores byte for byte; the native `build` reproduced the executor PE byte for byte and produced a same-size server PE that passes every test except the byte-identity assertion but omits the reference guard-page stack probe (native/self-hosted parity open); compiler- and decoder-backed tools PROTOTYPE over host-granted native programs (docs/NATIVE.md) |
 
 The 0.8.0 authoring tooling and tests are at `6b6c35939ff02c365a58c3534cf1b75a2281d393` on branch
 `integration/mcp-on-main-3e9b0c2`. That commit is `3e9b0c2` plus the MCP commits, and its `compiler/src` is
@@ -80,11 +80,13 @@ execution is a Windows prototype, so a model-driven construct/build/execute loop
    consumes (`xax_construct`, `xax_build`, `xax_workspace`, `xax_local_protocol`, `xax_compiler`, `xax_contract`).
 3. Compute the toolchain fingerprint with the same file set and LF normalization as the 0.8.0 row
    (`fingerprint.py` in `compiler/integration/mcp` recomputes it from a checkout).
-4. Rebuild with native programs, not an interpreter: decode each committed carrier with the native decoder, and build
-   the PEs with `xaxc resolve` and `xaxc build` from the author's build requests (the exact commands are in
-   [NATIVE.md](NATIVE.md#build)). The committed `.xax` files are decoded program stores, not build requests, so the
-   0.8.0 PEs were emitted from the pinned authors' requests (B1). Changing the carriers themselves means editing the
-   offline authors in `compiler/integration/mcp` (B5) and re-emitting them.
+4. Rebuild with native programs, not an interpreter: decode each committed carrier with the native decoder, then build
+   each PE with `xaxc build <store> <artifact> <prov>` directly on the decoded store (the store root is a resolved
+   snapshot, so no request needs to be committed). The exact commands are in [NATIVE.md](NATIVE.md#build). At 0.8.0 the
+   executor artifact rebuilt byte for byte this way; the server artifact is the same size and behaviorally equivalent
+   but not byte-identical because it omits the reference guard-page stack probe (that codegen parity is the narrowed
+   B1 item), so the committed server PE remains the reference `xax_build.build` output. Changing the carriers
+   themselves means editing the offline authors in `compiler/integration/mcp` (B5) and re-emitting them.
 5. Run the external suite: `XAX_MCP_HOME=$PWD XAX_NATIVE_SRC=../XAX/compiler/src python -m pytest -q
    ../XAX/compiler/integration/mcp/tests`; the committed store/request equality check must pass. Set
    `XAX_MCP_TEST_CONSTRUCT` to a native decoder to also run the carrier test, and `XAX_MCP_TEST_COMPILER` to a

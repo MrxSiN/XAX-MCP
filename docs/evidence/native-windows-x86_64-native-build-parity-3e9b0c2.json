@@ -1,0 +1,172 @@
+{
+  "kind": "xax-mcp-native-build-parity",
+  "label": "EXECUTED",
+  "parity_label": "MEASURED",
+  "recorded": "2026-10-22",
+  "host": {
+    "os": "Windows 11 x86-64",
+    "python": "3.12.10",
+    "note": "Python is the external MCP test client and the offline carrier author (B5). The compiler, the decoder, the server and the executor are native XAX PE32+ programs. Python was not used for any build in this file except the reference author build described under author_path."
+  },
+  "change": {
+    "summary": "Ran the PE stage of the build with the native Windows compiler rebuilt from the pinned tree, directly on the two committed snapshot stores. The 8-function executor artifact is byte-identical to the committed one. The 181-function server artifact has the same file size and passes the whole external suite, but is not byte-identical: the native backend omits the reference build's single Windows guard-page stack probe, which shifts the rest of the image by 16 bytes and changes 231 313 of 359 424 bytes. The reference author path (xax_build.build) still reproduces the committed 9f6e272b artifact exactly. The remaining B1 gap is therefore a specific native/self-hosted codegen omission, not the ability to run the stage natively.",
+    "xax_commit": "3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b",
+    "xax_tooling_commit": "6b6c35939ff02c365a58c3534cf1b75a2281d393",
+    "host_contract": "xax-host-contract-v1 r10",
+    "prior_evidence": [
+      "docs/evidence/native-windows-x86_64-build-3e9b0c2.json",
+      "docs/evidence/native-windows-x86_64-chain-3e9b0c2.json"
+    ],
+    "correction": "NATIVE.md previously said the native compiler cannot rebuild the committed program stores because they are decoder output, not build requests. The store root for both programs is a form-3 SNAPSHOT (the release request is a referenced object), so `xaxc build <store> <artifact> <prov>` consumes them directly. Only the seed store is a form-2 request and needs `resolve` first."
+  },
+  "compiler": {
+    "path": "build/windows_helpers/xaxc-windows.exe (XAX worktree rebuilt at the pin)",
+    "bytes": 11890688,
+    "sha256": "110a76a2578f5f55777e6b0438b05642013e9587cae902ef3729229af8e5420e",
+    "built_from": "compiler/integration/windows_helpers/driver.xax, 30655635 B, SHA-256 796c6bb9...",
+    "build_wall_seconds": 1201.9,
+    "committed": false,
+    "imports": ["kernel32.dll", "msvcrt.dll"],
+    "note": "matches the compiler PE hash documented in compiler/integration/windows_helpers/DRIVER.md at 3e9b0c2; the Windows bootstrap that produced it is still Python and is upstream B1"
+  },
+  "runs": [
+    {
+      "store": "native/xax-mcp-sandbox-gen0.xax",
+      "store_bytes": 74434,
+      "store_sha256": "588f57c0fa69eb175b6e06e88c73977292d42c06dfc5b814ec48cc5710bab2b8",
+      "store_form": "snapshot (form 3)",
+      "command": "xaxc build native/xax-mcp-sandbox-gen0.xax <out>.exe <out>.prov",
+      "exit": 0,
+      "artifact_bytes": 25600,
+      "artifact_sha256": "6d563e0f23e4f402d55c82b200d42bce91c41c98aab101267e67d3645a1d37e2",
+      "committed_artifact_sha256": "6d563e0f23e4f402d55c82b200d42bce91c41c98aab101267e67d3645a1d37e2",
+      "result": "BYTE-IDENTICAL",
+      "provenance_bytes": 268,
+      "provenance_sha256": "320f85f4f6ea4e9bd0e72923f5ea6df995f095e7d2086ac4144e422f21ee9f98",
+      "wall_ms": [64.6, 52.6, 55.9, 56.1],
+      "functions": 8
+    },
+    {
+      "store": "native/xax-mcp-native-gen0.xax",
+      "store_bytes": 1103602,
+      "store_sha256": "0a698799883375955a421c0f0f5526862e941cc01f6e2738749a6fc61f0bdcab",
+      "store_form": "snapshot (form 3); release request 06d1330bbe87630c815c568b14899cc98b2876e2ef40f25e1b4b8c2efc6d0110 is a referenced object",
+      "command": "xaxc build native/xax-mcp-native-gen0.xax <out>.exe <out>.prov",
+      "exit": 0,
+      "artifact_bytes": 359424,
+      "artifact_sha256": "a87fdd10042b6717d098af7e1014e612f460dabbe725320eeb781c388fd2a2b9",
+      "committed_artifact_sha256": "9f6e272bbbc938d3493a98b7c68409de31a09ffc4cc958bb41be7447b65c076a",
+      "result": "SAME SIZE, DIFFERENT BYTES",
+      "provenance_bytes": 268,
+      "provenance_sha256": "65438f04fbb029f746c6cf5347cb2367d34f8836195a85ee9c3d74093a3fc11c",
+      "wall_ms": [1070.1, 1132.8, 1155.5, 1146.2],
+      "functions": 181,
+      "deterministic": "the same SHA-256 on every run"
+    },
+    {
+      "store": "native/xax-mcp-seed.xax",
+      "store_form": "request (form 2)",
+      "command": "xaxc build native/xax-mcp-seed.xax <out>.exe <out>.prov",
+      "exit": 1,
+      "note": "expected: a request must be resolved first; the gated chain test does resolve then build, and it passed in the suite below"
+    }
+  ],
+  "parity": {
+    "artifact_bytes_each": 359424,
+    "differing_bytes": 231313,
+    "differing_ranges": 11403,
+    "first_differing_offset": "0x68",
+    "first_code_offset": "0x1532f",
+    "last_differing_offset": "0x577df",
+    "pe_headers": {
+      "differing_bytes": 2,
+      "address_of_entry_point": {
+        "native": "0x52960",
+        "committed": "0x52970"
+      },
+      "text_virtual_size": {
+        "native": "0x575d0",
+        "committed": "0x575e0"
+      },
+      "note": "the committed entry point and .text virtual size are 16 bytes larger; the file alignment and raw sizes are unchanged"
+    },
+    "sections": [
+      {
+        "name": ".text",
+        "virtual_size_native": "0x575d0",
+        "virtual_size_committed": "0x575e0",
+        "raw_bytes": 357888,
+        "differing_bytes": 231311
+      },
+      {
+        "name": ".idata",
+        "raw_bytes": 1024,
+        "differing_bytes": 0
+      }
+    ],
+    "interpretation": "the images have the same container geometry, identical import data and the same code, with one structural difference: the reference image emits a Windows stack-probe sequence for the large frame at the start of the function at code offset 86,304, and the native image replaces it with one flat `sub rsp, 0x1d38`. That insertion shifts the rest of the image by 16 bytes after alignment, so a position-wise comparison reports 231 313 differing bytes even though the tail is 99.5% equal when compared under the shift; the remaining differences are relocation fields whose displacements changed. The probe pattern (`sub rsp, 0x1000; test byte [rsp], 0; sub rsp, 0xd38; test byte [rsp], 0`) occurs once in the author image and zero times in the native image (14 vs 13 `sub rsp, imm32` instructions). It is not a header, timestamp or path artifact: the PE timestamp and checksum are zero in both, and the native build is deterministic.",
+    "example": {
+      "function_offset": 86304,
+      "author_prologue_hex": "5355565741544155415641574881ec00100000f60424004881ec380d0000",
+      "native_prologue_hex": "5355565741544155415641574881ec381d0000",
+      "author_sequence": "push rbx/rbp/rsi/rdi/r12-r15; sub rsp, 0x1000; test byte [rsp], 0; sub rsp, 0xd38; test byte [rsp], 0 (frame 0x1d38)",
+      "native_sequence": "push rbx/rbp/rsi/rdi/r12-r15; sub rsp, 0x1d38 (no guard-page probe)",
+      "probe_occurrences_author": 1,
+      "probe_occurrences_native": 0,
+      "sub_rsp_imm32_author": 14,
+      "sub_rsp_imm32_native": 13,
+      "tail_equality_under_16_byte_shift": "270268/271536 = 0.9953"
+    },
+    "not_claimed": "the two images are not proven instruction-for-instruction equivalent or semantically identical, and the native image is not claimed to be safe for stack frames over 4 KiB on Windows: it omits the probe. Behavior is verified only on the tests below."
+  },
+  "author_path": {
+    "what": "reference build used when the 0.8.0 artifacts were emitted",
+    "command": "xax_build.build(StoreReader(native/xax-mcp-native-gen0.xax), 06d1330b...) in the 6b6c359 tree",
+    "artifact_bytes": 359424,
+    "artifact_sha256": "9f6e272bbbc938d3493a98b7c68409de31a09ffc4cc958bb41be7447b65c076a",
+    "committed_artifact_sha256": "9f6e272bbbc938d3493a98b7c68409de31a09ffc4cc958bb41be7447b65c076a",
+    "result": "BYTE-IDENTICAL",
+    "note": "xax_build.build lowers with compile_native_bound_target and no inline views; the self-hosted backend produces a different same-length layout. This is the cause to align upstream, not a store or entry-selection difference: the request, package, entry and target are the same objects."
+  },
+  "behavior": {
+    "artifact_under_test": "the native-built server PE (a87fdd10...) with the committed executor PE beside it",
+    "identity_probe": {
+      "transport": "newline-delimited JSON-RPC over STDIO, initialize + tools/call xax_capabilities, --read-only",
+      "server_version": "0.8.0+native",
+      "pinned_commit": "3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b",
+      "host_contract": "xax-host-contract-v1 r10",
+      "python_on_request_path": false
+    },
+    "suite": {
+      "command": "XAX_MCP_NATIVE_EXE=<native-built server> python -m pytest -q -rs compiler/integration/mcp/tests",
+      "gates": {
+        "XAX_MCP_HOME": "D:\\GitHub\\XAX-MCP",
+        "XAX_NATIVE_SRC": "the 6b6c359 worktree compiler/src",
+        "XAX_MCP_TEST_COMPILER": "the 110a76a2 native compiler",
+        "XAX_MCP_TEST_CONSTRUCT": "construct.exe a6bd67fd..."
+      },
+      "result": "44 passed, 1 failed, 0 skipped in 26.12 s",
+      "failure": "test_build_is_deterministic only: it rebuilds with the Python author and compares the result (9f6e272b...) with the executable under test (a87fdd10...); every other test passed, including the gated compiler chain and the confined execute (exit_code 41)",
+      "sdk_client": "the official mcp.Client test ran and passed (mcp 2.3.0). Without that package the same run is 43 passed, 1 skipped, 1 failed in 27.09 s.",
+      "meaning": "the native-built server is a working 0.8.0 server; the single failure is the byte-identity assertion, not a behavior or protocol failure"
+    }
+  },
+  "diagnosis": {
+    "cause": "the self-hosted general image backend omits the Windows guard-page probe for a large stack frame. The reference image starts the function at code offset 86,304 with `sub rsp, 0x1000; test byte [rsp], 0; sub rsp, 0xd38; test byte [rsp], 0`; the native image emits one `sub rsp, 0x1d38` instead. The probe pattern occurs once in the reference image and not at all in the native image (14 vs 13 `sub rsp, imm32` instructions). The extra bytes shift the rest of the image by 16 bytes after alignment, which is why a position-wise byte comparison reports 231 313 differences while the tail matches 99.5% under a 16-byte shift. A store/request/entry/target mismatch is ruled out because the author path reproduces the committed bytes from the same store and request.",
+    "reference": "compiler/src/xax_x86_64.py `_reserve_stack` (line 184): for PE_HOSTED_IDENTITY and a frame over 4096 bytes it emits one `sub rsp, chunk; test byte [rsp], 0` per 4096-byte chunk; the self-hosted port does not implement that branch.",
+    "why_the_executor_matches": "the committed executor store has 8 functions and rebuilds byte for byte through the same command; no probe difference arises in that program.",
+    "risk": "the native-built server has not been shown to grow a > 4 KiB stack safely on Windows, because the guard-page touch is missing. It passed the test suite, but the two images are not equivalent in this respect.",
+    "upstream_fix": "emit the same guard-page probe in the self-hosted backend (or make both builds agree on the threshold) so the same snapshot yields the same bytes, then commit a reproducible native compiler. Re-emitting the artifacts through the native layout instead would change the committed artifact hash and provenance. Either is an upstream decision; this repository keeps the author-built artifact as canonical and records the native build as a verified parity experiment."
+  },
+  "not_done": [
+    "the native-built server PE is not adopted as the canonical artifact and the committed 9f6e272b PE is unchanged; provenance equivalence between the two builds was not claimed",
+    "byte parity was measured for the two program stores here, not for arbitrary stores or targets",
+    "no committed native Windows compiler (B1): the 110a76a2 compiler is a local rebuild; the Windows bootstrap is Python",
+    "the carrier authors remain Python (B5); they are offline and not on the request path",
+    "Linux build/execute and the versioned compiler service remain open (B2, B3)"
+  ],
+  "claim": {
+    "label": "EXECUTED",
+    "statement": "On this host the native Windows xaxc rebuilt at XAX 3e9b0c2 ran the PE stage of the build directly on both committed snapshot stores. It reproduced the 25 600 B executor PE byte for byte (6d563e0f...) in 53-65 ms, and produced a 359 424 B server PE (a87fdd10...) in 1.07-1.16 s that reports 0.8.0+native, pin 3e9b0c2b..., host contract r10 and python_on_request_path false, and passes every external test except the byte-identity assertion. The author path still reproduces the committed 9f6e272b... exactly from the same store. The two server images have the same size and identical imports; the only structural difference found is that the native build omits the reference build's Windows guard-page stack probe for a 0x1d38 stack frame, which shifts the rest of the image by 16 bytes and changes the relocated addresses. The open B1 item is fixing that omission and committing a native compiler, not the ability to build natively; the native-built artifact is not claimed safe for frames over 4 KiB on Windows."
+  }
+}

@@ -14,16 +14,22 @@
 - The executor store, its artifact, the seed store and its snapshot are byte-identical to 0.7.0 (root `7ef7099d...`,
   74 434 B; seed root `572f683e...`, 1 852 B). `sandbox.py` embeds neither the version nor the commit.
 - Nothing in this repository is Python. Decoding the committed carriers to their committed stores needs no interpreter:
-  a host-granted native decoder (`construct <carrier> <store>`) did exactly that, byte for byte. The PE stage needs a
-  native Windows `xaxc`, which is not committed (B1), so the 0.8.0 PEs were produced by the pinned XAX build tooling.
+  a host-granted native decoder (`construct <carrier> <store>`) did exactly that, byte for byte. The PE stage also
+  runs natively: `xaxc build` on the committed snapshot stores reproduced the executor artifact byte for byte and
+  produced a working server artifact (same 359 424 B) that is not byte-identical to the author-built one (it omits the
+  reference Windows guard-page stack probe, shifting the image and changing 231 313 bytes), so the committed server PE
+  remains the pinned author build and that omission is the narrowed B1 item. The compiler is not committed (B1).
   Python otherwise remains only as the offline carrier authors (B5) and the external MCP test client.
 - Tests: 45 passed, 0 skipped in 58 s on this host with both gates set (`XAX_MCP_TEST_CONSTRUCT` and
   `XAX_MCP_TEST_COMPILER`, the latter a native `xaxc` rebuilt from the pinned `driver.xax`). The official MCP SDK
   client test ran and passed; the chain executed its edited artifact with exit 41. Without the compiler gate the same
   suite is 44 passed, 1 skipped in 55 s. Chain evidence:
-  `docs/evidence/native-windows-x86_64-chain-3e9b0c2.json`.
-- Evidence: new file `docs/evidence/native-windows-x86_64-build-3e9b0c2.json` (pin move, new identities, the native
-  decoder's byte-identity check on both carriers, and the test counts). Every earlier evidence file is unchanged.
+  `docs/evidence/native-windows-x86_64-chain-3e9b0c2.json`. With the native-built server PE as `XAX_MCP_NATIVE_EXE`
+  the suite is 44 passed, 1 failed in 26 s, the single failure being `test_build_is_deterministic`'s byte comparison.
+- Evidence: new files `docs/evidence/native-windows-x86_64-build-3e9b0c2.json` (pin move, new identities, the native
+  decoder's byte-identity check on both carriers, and the test counts) and
+  `docs/evidence/native-windows-x86_64-native-build-parity-3e9b0c2.json` (the native PE stage and the measured
+  parity). Every earlier evidence file is unchanged.
 - The 0.5.1 Python adapter remains retired, and its documents remain marked historical.
 
 ### Exact blockers
@@ -34,8 +40,11 @@
   SHA-256 `a6bd67fddce407e348c23604434d536690f87e0cfe0e7a6c7c1f8a073dc4c94f`, `feat/native-construct` `486fa9d`).
   The compiler used for the 0.7.0 measurements was an untracked `build/windows_helpers/xaxc-windows.exe` that did not
   survive the move to `3e9b0c2`; on 2026-10-22 it was rebuilt locally from
-  `compiler/integration/windows_helpers/driver.xax` (11 890 688 B, SHA-256 `110a76...`) and ran the full chain. So the
-  gap is reproduction and commitment, not capability. Neither program is committed, shipped, or a dependency.
+  `compiler/integration/windows_helpers/driver.xax` (11 890 688 B, SHA-256 `110a76...`) and ran the full chain. It
+  also ran `build` on both committed snapshot stores: the executor artifact matched byte for byte, the server
+  artifact did not (same size; the native image omits the reference guard-page stack probe;
+  `native-windows-x86_64-native-build-parity-3e9b0c2.json`), so the build stage needs that codegen fix as well as
+  commitment. Neither program is committed, shipped, or a dependency.
 - **B2**: the native programs' contract is files and exit status, not a versioned service. Carrier decoding is a
   separate `construct <carrier> <store>` program, not a driver command; there is no bounded query and no
   generation/root-checked transaction interface.
@@ -50,9 +59,10 @@
 
 ### Next steps, in order of leverage
 
-1. Upstream: commit reproducible native Windows builds of the compiler and the decoder for the pinned tree, then a
-   versioned `xaxc serve` interface (construct/open/verify/query/edit/build, length-prefixed typed requests,
-   structured diagnostics).
+1. Upstream: commit reproducible native Windows builds of the compiler and the decoder for the pinned tree, and emit
+   the same guard-page stack probe as `xax_build.build` in the native backend (the executor already matches
+   byte-for-byte), then a versioned `xaxc serve` interface (construct/open/verify/query/edit/build, length-prefixed
+   typed requests, structured diagnostics).
 2. Upstream: a native XAX carrier author, so the authoring loop is XAX-only (B5).
 3. Here: grow the prototype behind the same tool names - bounded queries, expected-generation/root transactions,
    artifact handles and `xax_result` - without reimplementing graph construction or the compiler in the server.
@@ -161,7 +171,8 @@ current server.
 
 - The deployed server and every runtime component are XAX, and this repository contains no Python and no source
   code. Build tooling lives in `MrxSiN/XAX` (`compiler/integration/mcp`); the committed carriers can be decoded and
-  built with native XAX programs alone (B1), and the Python authors that write the carriers are offline (B5).
+  built with native XAX programs alone (B1: the compiler is not committed and large-store byte parity is open), and
+  the Python authors that write the carriers are offline (B5).
 - No workload logic in the server or build tooling: no per-operation tools, no adapter-side computation.
 - Keep XAX changes in `MrxSiN/XAX`; dependency direction is one-way (`XAX-MCP -> XAX`).
 - When the pin changes, update the CI checkout ref, `README.md`, `docs/NATIVE.md`, `docs/COMPATIBILITY.md`,

@@ -52,23 +52,26 @@ upstream gaps and the proposed native compiler service.
 This repository contains no source code and no Python. The carriers, canonical stores and executables under
 `native/` are the build products; the tooling that produces them lives in XAX at
 [`compiler/integration/mcp`](https://github.com/MrxSiN/XAX/tree/6b6c35939ff02c365a58c3534cf1b75a2281d393/compiler/integration/mcp).
-Rebuilding has two stages. The first runs on this host today with no interpreter; the second needs a native Windows
-compiler, which the pinned tree does not commit (B1), though one was rebuilt locally from the pinned tree and ran the
-whole chain on 2026-10-22:
+Rebuilding has two stages. Both can run with no interpreter when a native decoder and compiler are granted; the
+compiler is rebuilt locally from the pinned tree and is not committed (B1):
 
 ```text
 carrier --> store      native XAX decoder, host-granted as XAX_MCP_CONSTRUCT      [verified: byte-identical]
-store   --> PE + prov  XAX build (resolve, build); native `xaxc` on Windows is B1  [produced by the pinned author]
+store   --> PE + prov  native xaxc `build` on the committed snapshot store        [executor: byte-identical]
+                                                                                 [server: same size, probe omitted]
 ```
 
 The decoder is the `construct <carrier> <store>` program from `compiler/integration/construct` in XAX. The build
 stage is the same `resolve`, `build` and `edit` command set the server drives; the server only ever spawns a native
-`xaxc` granted as `XAX_MCP_COMPILER`, never Python. On this host the 0.8.0 executable was produced by the pinned XAX
-build tooling during carrier re-emission, because no reproducible native Windows compiler exists to run that stage
-(B1); the store it was built from is independently reproduced by the native decoder. The same `resolve`, `build` and
-`edit` chain was executed against a native compiler rebuilt from the pinned tree: 45 passed, 0 skipped, with the
-edited artifact executed under confinement (`exit_code 41`);
-`docs/evidence/native-windows-x86_64-chain-3e9b0c2.json`.
+`xaxc` granted as `XAX_MCP_COMPILER`, never Python. On this host the native compiler ran `build` directly on both
+committed snapshot stores: the 8-function executor artifact is byte-identical to the committed PE, and the
+181-function server artifact is the same 359 424 B and passes every external test except the byte-identity
+assertion, but it omits the reference build's Windows guard-page stack probe, shifting the rest of the image and
+changing 231 313 bytes. The committed server PE therefore remains the author-built one, which `xax_build.build`
+reproduces exactly; fixing that omission is the narrowed B1 item
+(`docs/evidence/native-windows-x86_64-native-build-parity-3e9b0c2.json`). The same `resolve`, `build` and `edit` chain
+was executed against the native compiler: 45 passed, 0 skipped, with the edited artifact executed under confinement
+(`exit_code 41`); `docs/evidence/native-windows-x86_64-chain-3e9b0c2.json`.
 The six carriers, stores and snapshots are committed and deterministic: the decoder reproduces both stores from the
 committed carriers byte for byte, and CI regenerates them from the pinned tooling and fails unless every one matches.
 The three executables are rebuilt from the committed stores; they are not committed. The tool schemas the server
@@ -142,8 +145,10 @@ tools are narrowed to the implemented prototype.
 - It is not a Python server, and this repository contains no Python. The 0.5.x Python adapter is retired; it remains
   in git history and in the historical documents marked "Python prototype". No Python is packaged, imported or
   launched by the server. The committed carriers decode to their committed stores with a native XAX decoder, and the
-  build stage is the XAX compiler's `resolve`/`build`, not an interpreter; a reproducible native Windows compiler to
-  run that stage is still missing upstream (B1), and the carrier authors that emit the carriers are offline (B5).
+  build stage is the XAX compiler's `resolve`/`build`, not an interpreter; a committed reproducible native Windows
+  compiler for that stage is still missing upstream (B1), and the native `build` omits the reference guard-page stack
+  probe in the large server store (same size and behavior, not byte-identical). The carrier
+  authors that emit the carriers are offline (B5).
 - It does not contain workload logic. The carrier emitter in XAX only writes the construction request; the server's
   logic is the canonical store.
 - It does not claim sandboxing. Execution is refused until an OS-enforced sandbox is implemented in XAX.

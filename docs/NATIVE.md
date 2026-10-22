@@ -75,25 +75,28 @@ the carriers, the canonical stores, the evidence and the docs.
 
 ## Build
 
-The build tooling lives in XAX at `compiler/integration/mcp`; nothing is built from this repository's contents. The
-first stage runs with no interpreter; the second needs a native Windows compiler, which the pinned tree does not
-commit (B1).
+The build tooling lives in XAX at `compiler/integration/mcp`; nothing is built from this repository's contents. Both
+stages run on this host with no interpreter when a native decoder and compiler are granted; the pinned tree does not
+commit the compiler (B1).
 
 ```text
 <decoder> <carrier> <store>                       # carrier -> verified store     (verified byte-identical here)
 <xaxc>    resolve <request-store> <snapshot>      # build request -> resolved snapshot
-<xaxc>    build <snapshot> <artifact> <prov>      # resolved request -> PE + provenance
+<xaxc>    build <snapshot> <artifact> <prov>      # resolved snapshot -> PE + provenance
 ```
 
 The decoder is `construct <carrier> <store>`, built from `compiler/integration/construct` in XAX; the compiler is a
 native `xaxc` that the server also drives (`resolve`, `build`, `edit`). On 2026-10-22 the native decoder reproduced
 both committed stores from the committed carriers byte for byte
-(`docs/evidence/native-windows-x86_64-build-3e9b0c2.json`). The 0.8.0 PEs were produced by the pinned XAX build
-tooling during carrier re-emission, because no reproducible native Windows compiler exists on this host to run the
-`resolve`/`build` stage (B1); the stores they were built from are the decoded, byte-verified ones above. A native
-compiler rebuilt at `3e9b0c2` does run `resolve`, `build` and `edit` on a build-request store, which is what the
-chain test drives; it cannot rebuild the committed *program* stores from this repository, because those are the
-decoder's output, not build requests, and the author's request stores are not committed.
+(`docs/evidence/native-windows-x86_64-build-3e9b0c2.json`), and a native compiler rebuilt at `3e9b0c2` ran `build`
+directly on those stores, because each store's root is a resolved snapshot (the release request is a referenced
+object inside it). The 8-function executor store rebuilt to the committed 25 600 B PE byte for byte; the 181-function
+server store produced a same-size PE that omits the reference build's single Windows guard-page stack probe for a
+0x1d38 frame, shifting the rest of the image and changing 231 313 of 359 424 bytes; it passes 44 of 45 external tests,
+the one failure being the assertion that compares the rebuilt bytes. The committed artifacts remain the author-built
+ones (`xax_build.build`, which reproduces them exactly), and that codegen omission (plus committing the compiler) is
+the narrowed B1 gap (`docs/evidence/native-windows-x86_64-native-build-parity-3e9b0c2.json`). The seed store is a
+form-2 build request and still needs `resolve` before `build`.
 
 The two requests, both stores and the seed are committed and checked byte for byte by
 `compiler/integration/mcp/tests/test_native_stdio.py` in XAX; each PE is rebuilt deterministically from its committed
@@ -127,7 +130,9 @@ version string became `0.8.0+native`. One byte and the whole root changed; the f
 The executor store, its artifact and the seed are byte-identical to 0.7.0: `sandbox.py`'s program does not embed
 either string. The native decoder reproduced both new stores from the committed carriers, so the same bytes are both
 the author's output and the decoder's output. The old evidence files are unchanged; the identities above are recorded
-in `native-windows-x86_64-build-3e9b0c2.json`.
+in `native-windows-x86_64-build-3e9b0c2.json`. The native compiler rebuilds the executor artifact byte for byte; its
+server artifact is `a87fdd10...a2b9` (same 359 424 B, but it omits the reference guard-page probe and is therefore not
+byte-identical) and is recorded, not adopted, in `native-windows-x86_64-native-build-parity-3e9b0c2.json`.
 
 ### Host-granted native compiler
 
@@ -316,7 +321,15 @@ Classification: **N** supported natively (in the store, executed), **P** prototy
   `build/windows_helpers` directory of the previous checkout and did not survive the move to `3e9b0c2`; that is the
   blocker, observed directly. A fresh native compiler rebuilt from the pinned `driver.xax` on 2026-10-22 ran the whole
   chain (45 passed, 0 skipped, execute exit 41), so what is missing is reproduction and commitment in XAX, not
-  capability. Committing reproducible native Windows builds of both programs is upstream work.
+  capability. It also ran `build` directly on both committed snapshot stores: the executor artifact is byte-identical,
+  while the 181-function server artifact has the same 359 424 B size and passes every external test except the
+  byte-identity assertion, but omits the reference build's Windows guard-page stack probe (`_reserve_stack` in
+  `xax_x86_64.py` emits one `sub rsp`+`test [rsp]` per 4 KiB over 4096; the self-hosted backend emits one flat
+  `sub rsp, 0x1d38`). That shifts the rest of the image by 16 bytes and changes 231 313 bytes, while `xax_build.build`
+  reproduces the committed server bytes exactly (`native-windows-x86_64-native-build-parity-3e9b0c2.json`). So the
+  build stage needs that codegen omission fixed (and the native server is unproven for frames over 4 KiB) as well as
+  commitment. Committing reproducible native Windows builds of both programs, and aligning the self-hosted lowering
+  with the reference backend, is upstream work.
 - **B2. The native compiler's command set is not a service.** `xaxc` offers `lower`, `build`, `verify`, `inspect`,
   `resolve`, `edit` and `resolve-trusted` (`xax_selfhost_driver.COMMANDS`), on files and with exit status only. The
   general driver has no `construct`: carrier decoding is a separate `construct <carrier> <store>` program with the
@@ -366,8 +379,9 @@ reproducible, versioned programs.
 ## Next steps
 
 1. Upstream (`MrxSiN/XAX`): commit reproducible native Windows builds of the compiler and the carrier decoder for the
-   pinned tree, then a versioned native compiler service (`xaxc serve`: length-prefixed typed requests for
-   construct/open/verify/query/edit/build on stdin/stdout, structured diagnostics).
+   pinned tree, and emit the reference guard-page stack probe in the self-hosted backend (the executor already
+   matches; the 181-function server store does not, B1). Then a versioned native compiler service (`xaxc serve`:
+   length-prefixed typed requests for construct/open/verify/query/edit/build on stdin/stdout, structured diagnostics).
 2. Upstream: replace the Python carrier authors with a native XAX carrier author so the authoring loop is XAX-only
    (B5). The carriers are already committed and verified, so this is authoring work, not a runtime dependency.
 3. Here: grow the prototype behind the same tool names - bounded graph queries, expected-generation/root-checked

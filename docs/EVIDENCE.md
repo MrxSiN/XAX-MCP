@@ -8,6 +8,8 @@ Evidence files are append-only. A new pin, build or capability writes a new file
 Raw samples for the current build are in `docs/evidence/native-windows-x86_64-build-3e9b0c2.json` (this pin: new
 identities, the native decoder's byte-identity check, test counts),
 `docs/evidence/native-windows-x86_64-chain-3e9b0c2.json` (the chain re-run with a native compiler rebuilt at the pin),
+`docs/evidence/native-windows-x86_64-native-build-parity-3e9b0c2.json` (the native compiler running the PE stage on
+both committed stores, and the measured byte-parity result),
 `docs/evidence/native-windows-x86_64-build-f79b532-r3.json`,
 `docs/evidence/native-windows-x86_64-chain-f79b532.json` and
 `docs/evidence/native-windows-x86_64-sandbox-f79b532.json` and
@@ -20,6 +22,8 @@ identities, the native decoder's byte-identity check, test counts),
 | Claim | Label | Evidence |
 |---|---|---|
 | The server is an XAX-built PE32+ and the committed canonical store is reproducible | EXECUTED | pin `3e9b0c2`; store root `18ceecd9...4b07`; store SHA-256 `0a698799...dcab`; artifact 359 424 B, SHA-256 `9f6e272b...076a`; 181 functions; `native-windows-x86_64-build-3e9b0c2.json` |
+| The native compiler runs the PE stage on the committed snapshot stores | EXECUTED | `xaxc build native/xax-mcp-sandbox-gen0.xax` → 25 600 B / `6d563e0f...`, byte-identical to the committed executor PE; `xaxc build native/xax-mcp-native-gen0.xax` → 359 424 B / `a87fdd10...`, which reports the 0.8.0 identity and passes the external suite; `native-windows-x86_64-native-build-parity-3e9b0c2.json` |
+| Native `build` byte parity with the reference author build | MEASURED | executor: identical; server: same 359 424 B size, identical `.idata`, 231 313 of 359 424 bytes differ while 99.5% of the tail matches under a 16-byte shift; the native image omits the reference image's single Windows guard-page probe (`sub rsp, 0x1000; test [rsp], 0; sub rsp, 0xd38` vs one `sub rsp, 0x1d38`), so it is not claimed safe for frames over 4 KiB; entry point `0x52970` author vs `0x52960` native; `xax_build.build` reproduces the committed `9f6e272b...` exactly; the only failing test on the native-built server is the byte-identity assertion; `native-windows-x86_64-native-build-parity-3e9b0c2.json` |
 | Both committed stores are reproducible from the committed carriers by a **native** XAX decoder, with no Python | EXECUTED | `construct.exe native/construction_request.json` → 1 103 602 B / `0a698799...` and `construct.exe native/sandbox_request.json` → 74 434 B / `588f57c0...`, both byte-identical to the committed stores, 0.38 s and 0.04 s; `native-windows-x86_64-build-3e9b0c2.json` |
 | The server reports its own identity and pin, and starts no Python | EXECUTED | over STDIO the 0.8.0 PE answered `server.version = 0.8.0+native`, `xax.pinned_commit = 3e9b0c2b...1995b`, `host_contract = xax-host-contract-v1 r10`, `python_on_request_path = false`; artifact imports kernel32 and msvcrt only |
 | An MCP client initializes the native STDIO server, negotiates the handshake versions, discovers the eight tool schemas, and calls tools | EXECUTED | `compiler/integration/mcp/tests/test_native_stdio.py` at `6b6c359`; 44 passed, 1 skipped on Windows 11 x86-64 without the compiler gate, and 45 passed, 0 skipped with a native `xaxc` rebuilt at the pin (`native-windows-x86_64-chain-3e9b0c2.json`) |
