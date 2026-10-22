@@ -50,7 +50,9 @@
   construct step 5c container: both stores byte-identical to the committed files),
   `docs/evidence/native-windows-x86_64-construct-486fa9d.json` (native construct step 6: the
   `construct <carrier> <store>` command reproduces both stores) and
-  `docs/evidence/native-windows-ci-sandbox-0137179.json` (the same confinement
+  `docs/evidence/native-windows-ci-tooling-9746e8d.json` (this revision on a clean windows-2022 runner: every
+  committed carrier and store reproduced, 43 passed / 2 skipped) plus
+  `docs/evidence/native-windows-ci-sandbox-0137179.json` (the confinement
   reproduced on a clean GitHub windows-2022 runner), alongside the earlier
   `native-windows-x86_64-chain-f79b532.json`. The earlier `f79b532` and 6885f89 evidence files are unchanged.
 - The retired 0.5.1 Python adapter (`src/xax_mcp`) is removed. Its docs are marked historical; git history retains

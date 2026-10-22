@@ -1,0 +1,50 @@
+{
+  "kind": "ci-reproduction",
+  "label": "EXECUTED",
+  "recorded": "2026-10-22",
+  "host": {
+    "runner": "GitHub-hosted windows-2022",
+    "run_id": 39769716520,
+    "job_id": 119793909329,
+    "commit": "9746e8de1932a43eacc73e8276e538792a8adfde",
+    "trigger": "push to main",
+    "url": "https://github.com/MrxSiN/XAX-MCP/actions/runs/39769716520"
+  },
+  "pin": {
+    "xax_commit": "0a0b1c4f1b217ce3a46917e93c1a1b7a66ee9bd8",
+    "xax_mcp_home": "the checked-out XAX-MCP tree",
+    "note": "compiler/src at the pin is byte-identical to f79b532 (fingerprint 0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9); the pin itself adds the xax_construct wiring to compiler/integration/mcp"
+  },
+  "steps": {
+    "regenerate": "python -B upstream-xax/compiler/integration/mcp/{server,sandbox,seed}.py upstream-xax/compiler/src build",
+    "byte_equality": {
+      "result": "ok",
+      "compared": {
+        "construction_request.json": "D540657215684CEDF4BFFDB83AC57728598FFBB9CAF3D81257C735F5FE537B39",
+        "sandbox_request.json": "360D2ED65A7557DD1B892906CDD2DEB210CD9D80B1665B2E21F1A0550555BDDB",
+        "xax-mcp-native-gen0.xax": "AFA5B600D73D0C437769EA95FF12618476A66455B914E041B95F87C27E8C9013",
+        "xax-mcp-sandbox-gen0.xax": "588F57C0FA69EB175B6E06E88C73977292D42C06DFC5B814EC48CC5710BAB2B8",
+        "xax-mcp-seed-snapshot.xax": "8624C042A35600DE3B4D5E04A6EF61B067B2C7780833BEE911EE194596997286",
+        "xax-mcp-seed.xax": "25DB5E19257E81E99A79E1B0311B65C8F534507CED0607AD4C5E2F0A81821532"
+      },
+      "executables_rebuilt": ["xax-mcp-native.exe", "xax-mcp-sandbox.exe", "xax-mcp-seed.exe"],
+      "note": "construction_request.json and xax-mcp-native-gen0.xax changed with the new server source; the sandbox and seed artifacts are unchanged from the previous CI evidence (native-windows-ci-tooling-476b865.json)"
+    },
+    "suite": {
+      "command": "XAX_MCP_HOME=<workspace> XAX_NATIVE_SRC=<workspace>\\upstream-xax\\compiler\\src python -m pytest -q -rs upstream-xax/compiler/integration/mcp/tests",
+      "result": "43 passed, 2 skipped in 56.91s",
+      "skips": [
+        "test_native_compiler_chain_over_stdio (no native Windows xaxc on the runner)",
+        "test_native_construct_over_stdio (no native carrier decoder on the runner)"
+      ],
+      "note": "the mcp 2.x SDK client is installed on the runner, so test_standard_sdk_client ran and passed; it calls xax_construct under --read-only and sees denied_capability"
+    },
+    "job": "success in 2m17s"
+  },
+  "claims_not_made": [
+    "This does not re-measure the compiler-backed chain: XAX_MCP_TEST_COMPILER is not granted on the runner, so that test skips.",
+    "This does not exercise a successful xax_construct call: the runner has no native carrier decoder, so only the denial path (read-only SDK client) and the gated skip are recorded here. The successful decoder path is local evidence in native-windows-x86_64-construct-0a0b1c4.json.",
+    "The three executables are rebuilt but not compared to committed bytes; they are build products and are not committed.",
+    "No model-driven host session was run."
+  ]
+}
