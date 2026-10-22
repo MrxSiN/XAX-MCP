@@ -1,7 +1,8 @@
 # Security model
 
 > **Historical (0.5.x Python prototype).** The retired Python server's sandbox and policy are not part of the
-> deployed 0.7.0 server. The native server has no sandbox and refuses execution; see [NATIVE.md](NATIVE.md).
+> deployed 0.8.0 server. The native server refuses execution unless the host grants it, and its Windows executor is a
+> measured prototype, not this policy; see [NATIVE.md](NATIVE.md).
 
 Agent-supplied programs and tool arguments are untrusted. Passing the XAX verifier proves semantic
 well-formedness, not that it is safe to run native code. Execution is therefore a separate host grant, and it

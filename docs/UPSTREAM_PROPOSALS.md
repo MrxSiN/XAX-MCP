@@ -1,7 +1,7 @@
 # Upstream XAX proposals and their status
 
 > **Historical (0.5.x Python prototype).** The central proposal is still current: a native, versioned XAX compiler
-> service is the next step for the native 0.7.0 server's compiler-backed prototype ([NATIVE.md](NATIVE.md)).
+> service is the next step for the native 0.8.0 server's compiler-backed prototype ([NATIVE.md](NATIVE.md)).
 
 These were the smallest general upstream interfaces that would remove limitations of this adapter. They are now
 upstream decisions in `MrxSiN/XAX`, committed as `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183` and merged into XAX `main`

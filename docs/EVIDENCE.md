@@ -5,14 +5,33 @@ independent oracle), **MEASURED** (raw samples recorded), **STRUCTURAL** (presen
 to end), **PROTOTYPE** (works for a narrow case), **UNIMPLEMENTED**.
 
 Evidence files are append-only. A new pin, build or capability writes a new file; older files are never edited.
-Raw samples for the current build are in `docs/evidence/native-windows-x86_64-build-f79b532-r3.json`,
+Raw samples for the current build are in `docs/evidence/native-windows-x86_64-build-3e9b0c2.json` (this pin: new
+identities, the native decoder's byte-identity check, test counts),
+`docs/evidence/native-windows-x86_64-chain-3e9b0c2.json` (the chain re-run with a native compiler rebuilt at the pin),
+`docs/evidence/native-windows-x86_64-build-f79b532-r3.json`,
 `docs/evidence/native-windows-x86_64-chain-f79b532.json` and
 `docs/evidence/native-windows-x86_64-sandbox-f79b532.json` and
 `docs/evidence/native-windows-ci-sandbox-0137179.json` (the clean Windows CI host). The earlier
 `native-windows-x86_64-build-f79b532.json`, `native-windows-x86_64-build-f79b532-r2.json`,
 `native-windows-x86_64-protocol-f79b532.json`, the 6885f89 native files, and every Python-era file remain unchanged.
 
-## Current native server (0.7.0)
+## Current native server (0.8.0)
+
+| Claim | Label | Evidence |
+|---|---|---|
+| The server is an XAX-built PE32+ and the committed canonical store is reproducible | EXECUTED | pin `3e9b0c2`; store root `18ceecd9...4b07`; store SHA-256 `0a698799...dcab`; artifact 359 424 B, SHA-256 `9f6e272b...076a`; 181 functions; `native-windows-x86_64-build-3e9b0c2.json` |
+| Both committed stores are reproducible from the committed carriers by a **native** XAX decoder, with no Python | EXECUTED | `construct.exe native/construction_request.json` → 1 103 602 B / `0a698799...` and `construct.exe native/sandbox_request.json` → 74 434 B / `588f57c0...`, both byte-identical to the committed stores, 0.38 s and 0.04 s; `native-windows-x86_64-build-3e9b0c2.json` |
+| The server reports its own identity and pin, and starts no Python | EXECUTED | over STDIO the 0.8.0 PE answered `server.version = 0.8.0+native`, `xax.pinned_commit = 3e9b0c2b...1995b`, `host_contract = xax-host-contract-v1 r10`, `python_on_request_path = false`; artifact imports kernel32 and msvcrt only |
+| An MCP client initializes the native STDIO server, negotiates the handshake versions, discovers the eight tool schemas, and calls tools | EXECUTED | `compiler/integration/mcp/tests/test_native_stdio.py` at `6b6c359`; 44 passed, 1 skipped on Windows 11 x86-64 without the compiler gate, and 45 passed, 0 skipped with a native `xaxc` rebuilt at the pin (`native-windows-x86_64-chain-3e9b0c2.json`) |
+| The full prototype chain runs against a **native** compiler rebuilt from the pinned tree | EXECUTED | query → resolve+build (1536-byte artifact, 268-byte provenance) → one `XAXEDIT1` edit 40→41 (root `8c01664c...`) → rebuild → `xax_execute` exit 41 with empty output; the chain test passed in 26.63 s, the suite 45 passed / 0 skipped in 58.47 s; `native-windows-x86_64-chain-3e9b0c2.json` |
+| The official MCP Python SDK client interoperates (STDIO) | EXECUTED | `test_standard_sdk_client` ran and passed at 0.8.0 (`mcp.Client`, mcp 2.3.0) |
+| Toolchain pin and fingerprint | EXECUTED | compiler revision `3e9b0c2` (byte-identical `compiler/src` in the tooling commit `6b6c359`), fingerprint `ba009daa...b740` over 125 files; `fingerprint.py` recomputed it from the checkout |
+
+The capability claims below were recorded at 0.7.0. They are unchanged and still current for 0.8.0: the protocol
+code, the tool bodies, the grants and the executor store are byte-identical, and only the embedded pin and version
+string moved.
+
+## Native capability evidence (0.7.0, still current for these rows)
 
 | Claim | Label | Evidence |
 |---|---|---|

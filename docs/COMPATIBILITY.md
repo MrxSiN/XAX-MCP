@@ -2,18 +2,30 @@
 
 ## Current release
 
-| xax-mcp | XAX commit | XAX host contract | Toolchain fingerprint (sha256) | mcp SDK (test client) | Python (build/test only) | OS / arch | Result |
+| xax-mcp | XAX commit | XAX host contract | Toolchain fingerprint (sha256) | mcp SDK (test client) | Python (test client and offline authors only) | OS / arch | Result |
 |---|---|---|---|---|---|---|---|
-| 0.7.0 | `0a0b1c4f1b217ce3a46917e93c1a1b7a66ee9bd8` (`feat/mcp-tooling`: its parent `4c3e60bef96c56162003838b36d6756295b1de41` moved `compiler/integration/mcp` into XAX; this tip wires `xax_construct`; its `compiler/src` is byte-identical to `f79b532fd4651ba808676d02f4b038e2cc271e6a`, XAX `main`, 2026-10-19) | `xax-host-contract-v1` r10 | `0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9` | 2.3.0 | 3.12.10 | Windows 11 x86-64 | native protocol suite: 43 passed, 2 skipped on this host (no `mcp` 2.x client, no native `xaxc`); compiler- and decoder-backed tools PROTOTYPE over host-granted native programs (docs/NATIVE.md) |
+| 0.8.0 | `3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b` (XAX `main`, 2026-10-22) | `xax-host-contract-v1` r10 | `ba009daa933c33ba124f2dc2fcb7a09995553b867bc68289555871b2f47eb740` (125 files) | 2.3.0 | 3.12.10 | Windows 11 x86-64 | native protocol suite: 44 passed, 1 skipped without a compiler path, and 45 passed, 0 skipped with a native `xaxc` rebuilt at the pin (the full chain, execute exit 41); the native decoder reproduced both committed stores byte for byte; compiler- and decoder-backed tools PROTOTYPE over host-granted native programs (docs/NATIVE.md) |
 
-Declared support for 0.7.0: exactly `0a0b1c4f1b217ce3a46917e93c1a1b7a66ee9bd8`, whose `compiler/src` is exactly
-`f79b532` (XAX `main`), with `xax-host-contract-v1` at revision 10. The
+The 0.8.0 authoring tooling and tests are at `6b6c35939ff02c365a58c3534cf1b75a2281d393` on branch
+`integration/mcp-on-main-3e9b0c2`. That commit is `3e9b0c2` plus the MCP commits, and its `compiler/src` is
+byte-identical to `3e9b0c2` (`git diff 3e9b0c2 6b6c359 -- compiler/src` is empty), so the store's embedded pin and
+the certified compiler revision are both `3e9b0c2`. Fetch the branch, or use `3e9b0c2` for the compiler and this
+commit for the tooling.
+
+Declared support for 0.8.0: exactly `3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b` as the compiler revision, with
+`xax-host-contract-v1` at revision 10. The
 fingerprint covers every Python module and bootstrap `.xax` store of the `xax-compiler` distribution at that
 commit. It is used by the **build** to identify the compiler that produced the committed store; the deployed
 server has no embedded compiler and no runtime Python, so it does not probe a toolchain at startup. The
 compiler-backed tools drive a compiler only when the host grants `XAX_MCP_COMPILER`, `XAX_MCP_WORK` and
 `XAX_MCP_STORE`; `xax_construct` drives a native carrier decoder only when the host grants `XAX_MCP_CONSTRUCT`
 and `XAX_MCP_WORK`. Those native programs' own versions are the host's responsibility.
+
+### Earlier native release (0.7.0)
+
+| xax-mcp | XAX commit | XAX host contract | Toolchain fingerprint (sha256) | mcp SDK (test client) | Python (test client only) | OS / arch | Result |
+|---|---|---|---|---|---|---|---|
+| 0.7.0 | `0a0b1c4f1b217ce3a46917e93c1a1b7a66ee9bd8` (`feat/mcp-tooling`: its parent `4c3e60bef96c56162003838b36d6756295b1de41` moved `compiler/integration/mcp` into XAX; this tip wires `xax_construct`; its `compiler/src` is byte-identical to `f79b532fd4651ba808676d02f4b038e2cc271e6a`, XAX `main`, 2026-10-19) | `xax-host-contract-v1` r10 | `0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9` | 2.3.0 | 3.12.10 | Windows 11 x86-64 | native protocol suite: 43 passed, 2 skipped on the host (no `mcp` 2.x client, no native `xaxc`); compiler- and decoder-backed tools PROTOTYPE over host-granted native programs |
 
 The native server embeds the pin it was built with (`xax.pinned_commit` in `xax_capabilities`). Rebuilding the
 store at another XAX revision is not a supported configuration: the committed store/request equality check in
@@ -50,9 +62,9 @@ work, not as descriptions of 0.7.0. The implementation remains in git history.
 
 | Host | Version | Verified |
 |---|---|---|
-| Official MCP Python SDK client (`mcp.Client`, STDIO) | mcp 2.3.0 | initialize, `tools/list`, `xax_capabilities`, `xax_construct` denied under `--read-only` (tests/test_native_stdio.py) |
+| Official MCP Python SDK client (`mcp.Client`, STDIO) | mcp 2.3.0 | initialize, `tools/list`, `xax_capabilities`, `xax_construct` denied under `--read-only` (`test_standard_sdk_client`, 0.8.0) |
 | Raw JSON-RPC (handshake 2025-11-25) | — | initialize, `tools/list`, `tools/call`, stdout purity, 1500-case JSON differential |
-| MCP Inspector CLI | 2.10.1 | not re-run against the native 0.7.0 build; the 0.5.1 result is historical |
+| MCP Inspector CLI | 2.10.1 | not re-run against the native 0.8.0 build; the 0.5.1 result is historical |
 | Claude Code | 2.1.294 | registration and `claude mcp list` health check only (0.5.1, historical); no model-driven run |
 | Codex CLI | 0.161.0 | `codex mcp add/list/get/remove` configuration syntax (0.5.1, historical) |
 | Claude Desktop | — | not run here |
@@ -66,12 +78,17 @@ execution is a Windows prototype, so a model-driven construct/build/execute loop
 1. Check out the new immutable XAX commit (it must carry `compiler/integration/mcp`) and record its full hash.
 2. Verify the host contract (`xax_contract.HOST_CONTRACT`, `HOST_CONTRACT_MINOR`) and the interfaces the build
    consumes (`xax_construct`, `xax_build`, `xax_workspace`, `xax_local_protocol`, `xax_compiler`, `xax_contract`).
-3. Compute the toolchain fingerprint with the same file set and LF normalization as the 0.7.0 row
+3. Compute the toolchain fingerprint with the same file set and LF normalization as the 0.8.0 row
    (`fingerprint.py` in `compiler/integration/mcp` recomputes it from a checkout).
-4. Rebuild: `python ../XAX/compiler/integration/mcp/server.py ../XAX/compiler/src native` (and `sandbox.py`, `seed.py`).
-5. Run `XAX_MCP_HOME=$PWD XAX_NATIVE_SRC=../XAX/compiler/src pytest -q ../XAX/compiler/integration/mcp/tests`; the
-   committed store/request equality check must pass. Set `XAX_MCP_TEST_COMPILER` to a native `xaxc` to also run the
-   compiler-backed chain test.
+4. Rebuild with native programs, not an interpreter: decode each committed carrier with the native decoder, and build
+   the PEs with `xaxc resolve` and `xaxc build` from the author's build requests (the exact commands are in
+   [NATIVE.md](NATIVE.md#build)). The committed `.xax` files are decoded program stores, not build requests, so the
+   0.8.0 PEs were emitted from the pinned authors' requests (B1). Changing the carriers themselves means editing the
+   offline authors in `compiler/integration/mcp` (B5) and re-emitting them.
+5. Run the external suite: `XAX_MCP_HOME=$PWD XAX_NATIVE_SRC=../XAX/compiler/src python -m pytest -q
+   ../XAX/compiler/integration/mcp/tests`; the committed store/request equality check must pass. Set
+   `XAX_MCP_TEST_CONSTRUCT` to a native decoder to also run the carrier test, and `XAX_MCP_TEST_COMPILER` to a
+   native `xaxc` to also run the compiler-backed chain.
 6. Add a **new** evidence file under `docs/evidence/`; never edit an older one. Update this matrix, the README pin,
    `NATIVE_XAX_COMMIT` in `compiler/integration/mcp/{server,sandbox}.py` upstream, and the CI checkout ref, in the same
    change.

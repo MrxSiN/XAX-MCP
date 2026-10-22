@@ -1,6 +1,6 @@
 # The XAX interfaces this adapter consumes
 
-> **Historical (0.5.x Python prototype).** The native 0.7.0 server consumes XAX at build time
+> **Historical (0.5.x Python prototype).** The native 0.8.0 server consumes XAX at build time
 > (`xax_construct`, `xax_build`) and, when the host grants it, spawns a native XAX compiler at runtime; it embeds no
 > compiler and no Python. See [NATIVE.md](NATIVE.md).
 

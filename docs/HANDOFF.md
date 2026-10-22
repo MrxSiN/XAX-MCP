@@ -1,6 +1,66 @@
 # Handoff
 
-## State at 0.7.0 (2026-10-22): native-only server, compiler- and decoder-backed prototype
+## State at 0.8.0 (2026-10-22): XAX `main` `3e9b0c2`, no Python in this repository or its build path
+
+- Certified XAX pin: `3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b` (XAX `main`, 2026-10-22), host contract
+  `xax-host-contract-v1` r10, toolchain fingerprint
+  `ba009daa933c33ba124f2dc2fcb7a09995553b867bc68289555871b2f47eb740` (125 files). The authoring tooling and tests
+  are at `6b6c35939ff02c365a58c3534cf1b75a2281d393` on branch `integration/mcp-on-main-3e9b0c2` (pushed to
+  `MrxSiN/XAX`); that commit is the pin plus the MCP commits and its `compiler/src` is byte-identical to `3e9b0c2`.
+- The deployed server is `native/xax-mcp-native.exe` built from `native/xax-mcp-native-gen0.xax`
+  (root `18ceecd9fe284e16919bb5f0f40bdf52cf5a90407ad007d218f30d3235024b07`, 1 103 602 B, 181 functions), which the
+  native decoder reproduces byte for byte from `native/construction_request.json`. Artifact: 359 424 B, SHA-256
+  `9f6e272bbbc938d3493a98b7c68409de31a09ffc4cc958bb41be7447b65c076a`. It reports `0.8.0+native` and pin `3e9b0c2`.
+- The executor store, its artifact, the seed store and its snapshot are byte-identical to 0.7.0 (root `7ef7099d...`,
+  74 434 B; seed root `572f683e...`, 1 852 B). `sandbox.py` embeds neither the version nor the commit.
+- Nothing in this repository is Python. Decoding the committed carriers to their committed stores needs no interpreter:
+  a host-granted native decoder (`construct <carrier> <store>`) did exactly that, byte for byte. The PE stage needs a
+  native Windows `xaxc`, which is not committed (B1), so the 0.8.0 PEs were produced by the pinned XAX build tooling.
+  Python otherwise remains only as the offline carrier authors (B5) and the external MCP test client.
+- Tests: 45 passed, 0 skipped in 58 s on this host with both gates set (`XAX_MCP_TEST_CONSTRUCT` and
+  `XAX_MCP_TEST_COMPILER`, the latter a native `xaxc` rebuilt from the pinned `driver.xax`). The official MCP SDK
+  client test ran and passed; the chain executed its edited artifact with exit 41. Without the compiler gate the same
+  suite is 44 passed, 1 skipped in 55 s. Chain evidence:
+  `docs/evidence/native-windows-x86_64-chain-3e9b0c2.json`.
+- Evidence: new file `docs/evidence/native-windows-x86_64-build-3e9b0c2.json` (pin move, new identities, the native
+  decoder's byte-identity check on both carriers, and the test counts). Every earlier evidence file is unchanged.
+- The 0.5.1 Python adapter remains retired, and its documents remain marked historical.
+
+### Exact blockers
+
+- **B1**: neither a reproducible native Windows compiler nor a reproducible native Windows carrier decoder is
+  committed in the pinned tree. The committed `xaxc-linux-x86_64` is a Linux ELF and this host has no Linux. The
+  decoder used here is the local prototype `D:\GitHub\XAX\build\construct_cmd\construct.exe` (2 852 352 B,
+  SHA-256 `a6bd67fddce407e348c23604434d536690f87e0cfe0e7a6c7c1f8a073dc4c94f`, `feat/native-construct` `486fa9d`).
+  The compiler used for the 0.7.0 measurements was an untracked `build/windows_helpers/xaxc-windows.exe` that did not
+  survive the move to `3e9b0c2`; on 2026-10-22 it was rebuilt locally from
+  `compiler/integration/windows_helpers/driver.xax` (11 890 688 B, SHA-256 `110a76...`) and ran the full chain. So the
+  gap is reproduction and commitment, not capability. Neither program is committed, shipped, or a dependency.
+- **B2**: the native programs' contract is files and exit status, not a versioned service. Carrier decoding is a
+  separate `construct <carrier> <store>` program, not a driver command; there is no bounded query and no
+  generation/root-checked transaction interface.
+- **B3**: no Linux build/run of the native server was tested here.
+- **B4**: the Windows sandbox is a prototype (LPAC AppContainer + job object in
+  `compiler/integration/mcp/sandbox.py` in XAX), measured but not reviewed as a security boundary; Linux confinement
+  and the typed I/O contract are missing.
+- **B5**: the carrier authors (`server.py`, `sandbox.py`, `seed.py`, `dsl.py`, `schemas.py` in
+  `compiler/integration/mcp`) are Python. They run offline, write a transport carrier, and never touch the request
+  path or the deployed runtime; the committed carriers make a rebuild Python-free. Replacing them with a native XAX
+  carrier author is upstream work.
+
+### Next steps, in order of leverage
+
+1. Upstream: commit reproducible native Windows builds of the compiler and the decoder for the pinned tree, then a
+   versioned `xaxc serve` interface (construct/open/verify/query/edit/build, length-prefixed typed requests,
+   structured diagnostics).
+2. Upstream: a native XAX carrier author, so the authoring loop is XAX-only (B5).
+3. Here: grow the prototype behind the same tool names - bounded queries, expected-generation/root transactions,
+   artifact handles and `xax_result` - without reimplementing graph construction or the compiler in the server.
+4. Sandbox: harden the Windows executor (typed I/O, argv, per-call limits, independent review), and port the Linux
+   sandbox after a Linux build.
+5. Record a model-driven Codex/Claude session only after a novel construct -> build -> execute loop actually works.
+
+## Historical: 0.7.0 (2026-10-22)
 
 - XAX pin: `0a0b1c4f1b217ce3a46917e93c1a1b7a66ee9bd8` (`feat/mcp-tooling`: its parent
   `4c3e60bef96c56162003838b36d6756295b1de41` moved the authoring tooling (`compiler/integration/mcp`) into XAX;
@@ -100,10 +160,12 @@ current server.
 ## Rules
 
 - The deployed server and every runtime component are XAX, and this repository contains no Python and no source
-  code. Build tooling lives in `MrxSiN/XAX` (`compiler/integration/mcp`).
+  code. Build tooling lives in `MrxSiN/XAX` (`compiler/integration/mcp`); the committed carriers can be decoded and
+  built with native XAX programs alone (B1), and the Python authors that write the carriers are offline (B5).
 - No workload logic in the server or build tooling: no per-operation tools, no adapter-side computation.
 - Keep XAX changes in `MrxSiN/XAX`; dependency direction is one-way (`XAX-MCP -> XAX`).
 - When the pin changes, update the CI checkout ref, `README.md`, `docs/NATIVE.md`, `docs/COMPATIBILITY.md`,
-  `CLAUDE.md` and this file together. Check that the new pin's `compiler/src` is still `f79b532`; if it is not,
-  update `NATIVE_XAX_COMMIT` in `compiler/integration/mcp/{server,sandbox}.py` and the fingerprint upstream too.
+  `CLAUDE.md` and this file together. Check that the new pin's `compiler/src` is byte-identical to the recorded
+  `NATIVE_XAX_COMMIT`; if it is not, update `NATIVE_XAX_COMMIT` in `compiler/integration/mcp/{server,sandbox}.py`,
+  regenerate both stores, and record the new fingerprint upstream too.
   Add new evidence; never overwrite old evidence files.

@@ -1,0 +1,148 @@
+{
+  "kind": "xax-mcp-build-identity",
+  "label": "EXECUTED",
+  "recorded": "2026-10-22",
+  "later_evidence": "docs/evidence/native-windows-x86_64-chain-3e9b0c2.json — the gated chain was run later the same day with a native xaxc rebuilt at this pin (45 passed, 0 skipped)",
+  "host": {
+    "os": "Windows 11 x86-64",
+    "python": "3.12.10",
+    "note": "Python is the external MCP test client and the offline carrier author only (B5). The server, the executor and the carrier decoder are native XAX PE32+ programs; the artifact-import audit below shows no Python DLL."
+  },
+  "change": {
+    "summary": "Moved the pin from XAX feat/mcp-tooling 0a0b1c4 (compiler f79b532, 2026-10-19) to XAX main 3e9b0c2 (2026-10-22), bumped the server to 0.8.0+native, and re-emitted every carrier, store, snapshot and executable. No capability, schema or grant changed: the executor store, its artifact, the seed store and the seed snapshot are byte-identical to 0.7.0.",
+    "xax_repository": "MrxSiN/XAX",
+    "xax_compiler_commit_before": "f79b532fd4651ba808676d02f4b038e2cc271e6a",
+    "xax_tooling_commit_before": "0a0b1c4f1b217ce3a46917e93c1a1b7a66ee9bd8",
+    "xax_compiler_commit_after": "3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b",
+    "xax_tooling_commit_after": "6b6c35939ff02c365a58c3534cf1b75a2281d393",
+    "xax_tooling_branch": "integration/mcp-on-main-3e9b0c2",
+    "tooling_note": "6b6c359 is 3e9b0c2 plus the two MCP commits (the xax_construct wiring and this pin/version bump); `git diff 3e9b0c2 6b6c359 -- compiler/src` is empty, so the compiler revision the store certifies is 3e9b0c2 itself.",
+    "host_contract": "xax-host-contract-v1 r10",
+    "toolchain_fingerprint": "ba009daa933c33ba124f2dc2fcb7a09995553b867bc68289555871b2f47eb740",
+    "toolchain_fingerprint_files": 125,
+    "toolchain_fingerprint_method": "compiler/integration/mcp/fingerprint.py over the 6b6c359 checkout: every xax_*.py and blake3.py in compiler/src plus every compiler/bootstrap/*.xax store, LF-normalized for Python sources",
+    "server_version_before": "0.7.0+native",
+    "server_version_after": "0.8.0+native",
+    "files_changed_upstream": [
+      "compiler/integration/mcp/server.py (VERSION, NATIVE_XAX_COMMIT)",
+      "compiler/integration/mcp/sandbox.py (NATIVE_XAX_COMMIT)"
+    ]
+  },
+  "build_identity": {
+    "command": "python compiler/integration/mcp/server.py compiler/src <out>; sandbox.py and seed.py likewise (offline authors, B5)",
+    "server_store_root": "18ceecd9fe284e16919bb5f0f40bdf52cf5a90407ad007d218f30d3235024b07",
+    "server_release_request": "06d1330bbe87630c815c568b14899cc98b2876e2ef40f25e1b4b8c2efc6d0110",
+    "server_store_bytes": 1103602,
+    "server_store_sha256": "0a698799883375955a421c0f0f5526862e941cc01f6e2738749a6fc61f0bdcab",
+    "server_artifact_bytes": 359424,
+    "server_artifact_sha256": "9f6e272bbbc938d3493a98b7c68409de31a09ffc4cc958bb41be7447b65c076a",
+    "server_functions": 181,
+    "server_store_objects": 3621,
+    "sandbox_store_root": "7ef7099d5358bf022715faff1ef26387c1486c554ed2f7d9145bd9d8953ef8b6",
+    "sandbox_store_bytes": 74434,
+    "sandbox_store_sha256": "588f57c0fa69eb175b6e06e88c73977292d42c06dfc5b814ec48cc5710bab2b8",
+    "sandbox_artifact_bytes": 25600,
+    "sandbox_artifact_sha256": "6d563e0f23e4f402d55c82b200d42bce91c41c98aab101267e67d3645a1d37e2",
+    "sandbox_functions": 8,
+    "sandbox_store_objects": 271,
+    "seed_store_root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+    "seed_store_bytes": 1852,
+    "seed_store_sha256": "25db5e19257e81e99a79e1b0311b65c8f534507ced0607ad4c5e2f0a81821532",
+    "seed_snapshot_sha256": "8624c042a35600de3b4d5e04a6ef61b067b2c7780833bee911ee194596997286",
+    "unchanged_from_0_7_0": [
+      "native/sandbox_request.json",
+      "native/xax-mcp-sandbox-gen0.xax",
+      "native/xax-mcp-sandbox.exe",
+      "native/xax-mcp-seed.xax",
+      "native/xax-mcp-seed-snapshot.xax",
+      "native/xax-mcp-seed.exe"
+    ],
+    "why_the_server_store_changed": "the compiler revision moved (f79b532 -> 3e9b0c2) and the embedded version string became 0.8.0+native; the store grew by one byte (1 103 601 -> 1 103 602) and the whole root changed, with the function count unchanged at 181",
+    "artifact_origin": "the 0.8.0 PEs were produced by the pinned XAX build tooling (xax_build resolve+build in-process) during carrier re-emission; a native Windows `xaxc` that could run that stage reproducibly is not committed (B1), so the PE stage is not an interpreter-free claim here",
+    "artifact_imports": ["kernel32.dll", "msvcrt.dll"],
+    "artifact_python_dll": false
+  },
+  "oracle": {
+    "kind": "the native carrier decoder writes each store from its committed carrier; that store is compared with the store the pinned authors emitted",
+    "decoder": {
+      "path": "D:\\GitHub\\XAX\\build\\construct_cmd\\construct.exe",
+      "bytes": 2852352,
+      "sha256": "a6bd67fddce407e348c23604434d536690f87e0cfe0e7a6c7c1f8a073dc4c94f",
+      "built_from": "feat/native-construct 486fa9d",
+      "committed": false,
+      "note": "a local prototype outside the pin (B1); it implements only `construct <carrier> <store>`"
+    },
+    "runs": [
+      {
+        "carrier": "native/construction_request.json",
+        "carrier_bytes": 1048188,
+        "exit": 0,
+        "wall_seconds": 0.38,
+        "store_bytes": 1103602,
+        "store_sha256": "0a698799883375955a421c0f0f5526862e941cc01f6e2738749a6fc61f0bdcab",
+        "reference": "native/xax-mcp-native-gen0.xax",
+        "result": "MATCH"
+      },
+      {
+        "carrier": "native/sandbox_request.json",
+        "carrier_bytes": 66322,
+        "exit": 0,
+        "wall_seconds": 0.04,
+        "store_bytes": 74434,
+        "store_sha256": "588f57c0fa69eb175b6e06e88c73977292d42c06dfc5b814ec48cc5710bab2b8",
+        "reference": "native/xax-mcp-sandbox-gen0.xax",
+        "result": "MATCH"
+      }
+    ],
+    "meaning": "the same bytes are both the pinned authors' output and the native decoder's output for this revision; no Python process was involved in either decode"
+  },
+  "capability_probe": {
+    "transport": "newline-delimited JSON-RPC over STDIO against native/xax-mcp-native.exe --read-only, two lines (initialize, tools/call xax_capabilities)",
+    "server_name": "xax-mcp",
+    "server_version": "0.8.0+native",
+    "server_implementation": "native XAX program (windows-x86_64 PE32+ built from a canonical .xax store)",
+    "pinned_commit": "3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b",
+    "host_contract": "xax-host-contract-v1 r10",
+    "python_on_request_path": false,
+    "rights_under_read_only": ["read"],
+    "maturity_reported": {
+      "stdio transport, JSON validation, MCP lifecycle, tool dispatch, host rights": "EXECUTED (tests/test_native_stdio.py)",
+      "workspace/query/transaction/build over a host-granted native compiler": "PROTOTYPE (docs/NATIVE.md)",
+      "construct over a host-granted native carrier decoder": "PROTOTYPE (windows-x86_64; docs/NATIVE.md)",
+      "execute in a Windows AppContainer + job object": "PROTOTYPE (measured; docs/NATIVE.md)",
+      "result (serves artifacts over the wire)": "UNIMPLEMENTED natively",
+      "modern protocol 2026-07-28": "UNIMPLEMENTED natively",
+      "construct on Linux": "UNIMPLEMENTED natively",
+      "execute on Linux (namespaces, seccomp, rlimits)": "UNIMPLEMENTED natively"
+    }
+  },
+  "tests": {
+    "command": "python -m pytest -q -rs compiler/integration/mcp/tests (6b6c359 checkout)",
+    "environment": {
+      "XAX_MCP_HOME": "D:\\GitHub\\XAX-MCP",
+      "XAX_NATIVE_SRC": "the 6b6c359 worktree compiler/src",
+      "XAX_MCP_TEST_CONSTRUCT": "the decoder above",
+      "XAX_MCP_TEST_COMPILER": "unset: no committed native Windows xaxc (B1)"
+    },
+    "result": "44 passed, 1 skipped in 55.05 s",
+    "skips": [
+      "set XAX_MCP_TEST_COMPILER (native xaxc) and XAX_NATIVE_SRC to drive the native chain"
+    ],
+    "sdk_client": "the official mcp.Client test ran and passed at 0.8.0 (mcp 2.3.0); at 0.7.0 it was skipped because that package was not installed on the recording host",
+    "regeneration": "server.py, sandbox.py and seed.py at 6b6c359 reproduce all six committed native/ files byte for byte; the PE rebuild is deterministic (test_build_is_deterministic)"
+  },
+  "not_done": [
+    "no reproducible committed native Windows compiler (B1); the PE stage was run by the pinned author tooling, not by a native xaxc",
+    "no reproducible committed native Windows carrier decoder (B1); construct.exe is the local 486fa9d prototype",
+    "the carrier authors in compiler/integration/mcp are still Python (B5); they are offline and are not on the request path",
+    "the gated compiler-chain test was not run for this recording because XAX_MCP_TEST_COMPILER was unset; it was run later the same day with a native xaxc rebuilt at the pin (native-windows-x86_64-chain-3e9b0c2.json)",
+    "Linux: no construct, no build and no run were tested on this host (B3)",
+    "the native command set is files and exit status, not a versioned service (B2)",
+    "typed I/O to artifacts and xax_result handles remain unimplemented",
+    "no model-driven session (an agent choosing construct -> build -> execute) has been recorded"
+  ],
+  "claim": {
+    "label": "EXECUTED",
+    "statement": "On this host, XAX 3e9b0c2 produced the committed 0.8.0 server store (1 103 602 B, SHA-256 0a698799..., root 18ceecd9...) and its 359 424 B PE; a host-granted native XAX decoder independently reproduced that store, and the unchanged 74 434 B executor store, from the committed carriers byte for byte with no Python process. The built PE reports 0.8.0+native, pin 3e9b0c2b..., host contract r10 and python_on_request_path false, and imports only kernel32.dll and msvcrt.dll. The external suite drove it over STDIO: 44 passed, 1 skipped (the native-compiler chain). The compiler, the decoder and the carrier authors are not committed upstream: the first two are B1, the last is B5."
+  }
+}

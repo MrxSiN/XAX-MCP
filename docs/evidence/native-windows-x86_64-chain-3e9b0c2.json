@@ -1,0 +1,203 @@
+{
+  "schema": "xax-mcp-evidence-v1",
+  "claim": "At 0.8.0 the native XAX server drives a native XAX compiler rebuilt from the pinned tree over MCP STDIO through the whole prototype chain: it describes the current store, resolves and builds it, applies one XAXEDIT1 transaction, rebuilds the edited store, and executes the artifact in the native Windows confinement, which exits 41.",
+  "label": "EXECUTED",
+  "scope": "one seed program, one constant mutation, one host and one locally rebuilt compiler; not a general construct/build/execute loop",
+  "recorded": "2026-10-22",
+  "supersedes_nothing": "This is a new file appended to the record. It does not edit docs/evidence/native-windows-x86_64-build-3e9b0c2.json, which recorded the earlier suite run with XAX_MCP_TEST_COMPILER unset.",
+  "server_version": "0.8.0+native",
+  "xax_commit": "3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b",
+  "xax_tooling_commit": "6b6c35939ff02c365a58c3534cf1b75a2281d393",
+  "host_contract": "xax-host-contract-v1 r10",
+  "platform": "windows-x86_64",
+  "host": {
+    "cpu": "AMD Ryzen 9 5900HS with Radeon Graphics",
+    "logical_cpus": 16,
+    "os": "Microsoft Windows 11 Pro 10.0.26300",
+    "python": "3.12.10 (external test client and offline carrier/build bootstrap only)"
+  },
+  "server": {
+    "bytes": 359424,
+    "sha256": "9f6e272bbbc938d3493a98b7c68409de31a09ffc4cc958bb41be7447b65c076a",
+    "store_root": "18ceecd9fe284e16919bb5f0f40bdf52cf5a90407ad007d218f30d3235024b07",
+    "store_bytes": 1103602,
+    "store_sha256": "0a698799883375955a421c0f0f5526862e941cc01f6e2738749a6fc61f0bdcab"
+  },
+  "grant": {
+    "XAX_MCP_COMPILER": "C:\\Users\\SiN\\AppData\\Local\\Temp\\opencode\\xax-update\\build\\windows_helpers\\xaxc-windows.exe",
+    "XAX_MCP_WORK": "a fresh empty temporary directory",
+    "XAX_MCP_STORE": "native/xax-mcp-seed.xax"
+  },
+  "compiler": {
+    "path": "C:\\Users\\SiN\\AppData\\Local\\Temp\\opencode\\xax-update\\build\\windows_helpers\\xaxc-windows.exe",
+    "bytes": 11890688,
+    "sha256": "110a76a2578f5f55777e6b0438b05642013e9587cae902ef3729229af8e5420e",
+    "imports": ["kernel32.dll", "msvcrt.dll"],
+    "built_from": "compiler/integration/windows_helpers/driver.xax at 6b6c359 (30 655 635 B, SHA-256 796c6bb9416c9e3c3c14319caeff6557ddaf9509cd3fd5559ac5998f4ae16e20)",
+    "build_method": "offline bootstrap: the XAX backend lowers the driver store to a PE (build script outside both repositories, Python bootstrap disclosed as B1/B5; the resulting program is native and imports no Python DLL)",
+    "build_wall_seconds": 1201.9,
+    "commands_used": ["resolve", "build", "edit"],
+    "status": "a local rebuild outside the pinned tree; not committed to XAX and not shipped by this repository (B1)",
+    "note": "This is a fresh build at the 3e9b0c2 pin, not the 0.7.0 executable (11 857 408 B, SHA-256 e2b73064...), which was lost when the previous checkout moved."
+  },
+  "seed": {
+    "path": "native/xax-mcp-seed.xax",
+    "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+    "bytes": 1852,
+    "sha256": "25db5e19257e81e99a79e1b0311b65c8f534507ced0607ad4c5e2f0a81821532",
+    "description": "a form-2 windows-x86_64 build request for a tiny program whose first constant is 40"
+  },
+  "steps": [
+    {
+      "tool": "xax_query",
+      "arguments": {},
+      "result": {
+        "bytes": 1852,
+        "ok": true,
+        "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+        "workspace": "ws_0"
+      },
+      "evidence": "the server read the seed store from the host-granted path and reported its canonical root"
+    },
+    {
+      "tool": "xax_build",
+      "arguments": {},
+      "result": {
+        "ok": true,
+        "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+        "artifact": {"bytes": 1536},
+        "provenance": {
+          "bytes": 268,
+          "hex_prefix": "8a0257a86d8697fea33c25ff881d90e4fb77ccc98bc8fe1de800c95de1da9b6674db0a0104572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+          "note": "byte-identical to the 0.7.0 chain provenance; the full hex is in the raw capture below"
+        }
+      },
+      "evidence": "the server spawned the rebuilt native compiler twice: resolve wrote the snapshot, build wrote the artifact and the provenance object; the server read both files back"
+    },
+    {
+      "tool": "native/chain.py make_record",
+      "arguments": {
+        "store": "the work directory's current.xax",
+        "value": 41
+      },
+      "result": {
+        "bytes": 78,
+        "old_constant": 40,
+        "prefix": "XAXEDIT1"
+      },
+      "evidence": "the carrier names the seed's first constant node and sets it from 40 to 41"
+    },
+    {
+      "tool": "xax_transaction",
+      "arguments": {"record": "<156 hex characters>"},
+      "result": {
+        "generation": 1,
+        "ok": true,
+        "root": "8c01664caa5254b17bc4dd1a407d70c922115f482729319791a8aa89c3531e97",
+        "workspace": "ws_0"
+      },
+      "evidence": "the server decoded the hex carrier, wrote it to the work directory, ran the compiler's edit command, and replaced current.xax with the edit output"
+    },
+    {
+      "tool": "xax_query",
+      "arguments": {},
+      "result": {
+        "bytes": 1995,
+        "ok": true,
+        "root": "8c01664caa5254b17bc4dd1a407d70c922115f482729319791a8aa89c3531e97",
+        "workspace": "ws_0"
+      },
+      "evidence": "a later query reports the edited store"
+    },
+    {
+      "tool": "xax_build",
+      "arguments": {},
+      "result": {
+        "ok": true,
+        "root": "8c01664caa5254b17bc4dd1a407d70c922115f482729319791a8aa89c3531e97",
+        "artifact": {"bytes": 1536},
+        "provenance": {
+          "bytes": 268,
+          "hex_prefix": "8a02aee5c589e3d30b597051275a37588e8dcda95dad5e097b381d7b0e55ee4d22ea0a01042976a3dded1704d9d30c83eb9de206816eff6dfefad54044c3c6b7353c1a9182"
+        }
+      },
+      "evidence": "the rebuild reports the edited root, so the edit reached the program and not only the workspace bookkeeping"
+    },
+    {
+      "tool": "xax_execute",
+      "arguments": {},
+      "result": {
+        "duration_ms": 16,
+        "exit_code": 41,
+        "flags": 0,
+        "ok": true,
+        "stderr_bytes": 0,
+        "stderr_hex": "",
+        "stdout_bytes": 0,
+        "stdout_hex": ""
+      },
+      "evidence": "the server rebuilt the edited store, ran the artifact in the Windows AppContainer + job object, and captured exit 41 with empty output; a 40 -> 41 constant edit is visible in the process exit status"
+    },
+    {
+      "tool": "xax_execute",
+      "arguments": {"artifact": "current"},
+      "result": {
+        "code": "invalid_request",
+        "message": "xax_execute takes no arguments yet: it builds the current store and runs that artifact (input/output/argv/effects/limits are not implemented; docs/NATIVE.md)"
+      },
+      "evidence": "the prototype fails closed instead of ignoring an argument it does not implement"
+    }
+  ],
+  "close": {
+    "code": 0,
+    "rest_lines": 0,
+    "stderr": ""
+  },
+  "test": {
+    "name": "tests/test_native_stdio.py::test_native_compiler_chain_over_stdio",
+    "gate": "XAX_MCP_TEST_COMPILER and XAX_NATIVE_SRC; skipped otherwise",
+    "result": "passed on 2026-10-22 in 26.63 s (1 passed, 44 deselected)",
+    "full_suite": "45 passed, 0 skipped in 58.47 s with XAX_MCP_TEST_CONSTRUCT and XAX_MCP_TEST_COMPILER set; the earlier run with the compiler gate unset was 44 passed, 1 skipped in 55.05 s (docs/evidence/native-windows-x86_64-build-3e9b0c2.json)",
+    "environment": {
+      "XAX_MCP_HOME": "D:\\GitHub\\XAX-MCP",
+      "XAX_NATIVE_SRC": "the 6b6c359 worktree compiler/src",
+      "XAX_MCP_TEST_CONSTRUCT": "D:\\GitHub\\XAX\\build\\construct_cmd\\construct.exe",
+      "XAX_MCP_TEST_COMPILER": "the rebuilt xaxc above"
+    }
+  },
+  "raw_capture": {
+    "note": "the probe's JSON output, produced by the external test client against native/xax-mcp-native.exe and native/xax-mcp-sandbox.exe in D:\\GitHub\\XAX-MCP\\native",
+    "query": {"bytes": 1852, "ok": true, "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587", "workspace": "ws_0"},
+    "build": {
+      "ok": true,
+      "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+      "artifact": {"bytes": 1536},
+      "provenance": {
+        "bytes": 268,
+        "hex": "8a0257a86d8697fea33c25ff881d90e4fb77ccc98bc8fe1de800c95de1da9b6674db0a0104572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb6158799480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967ec76e96f761898ded961b1d8fa1bdfdc43d258b09a10d9420fb04daf7952e8c606605030001020d540ec6bf71fc39eee0d7baf7e896a3c6bf61df11877fa63837e40d6b595ed0bc351ca3286fa3ff21d2b39e3ea374c3b0f01fb45a5e601d29c2dc08105ce117c3edae156dc12219a764eaafcc5ada5648480107b6df728fb63cb4c2e881c0ff00"
+      }
+    },
+    "record": {"old": 40, "bytes": 78, "prefix": "XAXEDIT1"},
+    "transaction": {"generation": 1, "ok": true, "root": "8c01664caa5254b17bc4dd1a407d70c922115f482729319791a8aa89c3531e97", "workspace": "ws_0"},
+    "query_after": {"bytes": 1995, "ok": true, "root": "8c01664caa5254b17bc4dd1a407d70c922115f482729319791a8aa89c3531e97", "workspace": "ws_0"},
+    "build_after": {
+      "ok": true,
+      "root": "8c01664caa5254b17bc4dd1a407d70c922115f482729319791a8aa89c3531e97",
+      "artifact": {"bytes": 1536},
+      "provenance": {
+        "bytes": 268,
+        "hex": "8a02aee5c589e3d30b597051275a37588e8dcda95dad5e097b381d7b0e55ee4d22ea0a01042976a3dded1704d9d30c83eb9de206816eff6dfefad54044c3c6b7353c1a91828c01664caa5254b17bc4dd1a407d70c922115f482729319791a8aa89c3531e9799480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e660500010203f318bad9cd4a7b5264f6d9a7098b743a7bfcdb90d220c659e28cb83753ac21c0bc351ca3286fa3ff21d2b39e3ea374c3b0f01fb45a5e601d29c2dc08105ce117c3edae156dc12219a764eaafcc5ada5648480107b6df728fb63cb4c2e881c0ff00"
+      }
+    },
+    "execute": {"duration_ms": 16, "exit_code": 41, "flags": 0, "ok": true, "stdout_bytes": 0, "stderr_bytes": 0},
+    "execute_invalid": {"code": "invalid_request", "message": "xax_execute takes no arguments yet: it builds the current store and runs that artifact (input/output/argv/effects/limits are not implemented; docs/NATIVE.md)"},
+    "close": {"code": 0, "rest_lines": 0, "stderr": ""}
+  },
+  "limits": [
+    "The compiler is a local rebuild outside the pinned XAX tree; a reproducible committed native compiler is still upstream work (B1). The build bootstrap that produced it is Python, disclosed and off the request path.",
+    "Only query(root), resolve+build of the current store, one XAXEDIT1 edit, a rebuild and execute are exercised; workspace handles, typed mutations, expected-generation checks, pagination and construct do not have a native chain test.",
+    "The artifact is the seed's tiny program; the edit changes one constant. This is not evidence of a general construct/build/execute loop and does not make the carrier authors (B5) native.",
+    "The Windows executor is the measured prototype described in docs/NATIVE.md; this run exercised it but is not a security review."
+  ],
+  "claim_text": "On 2026-10-22, the 0.8.0 native server (store root 18ceecd9..., artifact SHA-256 9f6e272b...) drove a native XAX compiler rebuilt from the 3e9b0c2 tree through query, resolve+build, one XAXEDIT1 transaction, a second build and xax_execute over STDIO on Windows 11 x86-64. The executed artifact exited 41 with empty stdout/stderr, matching the 40 -> 41 constant edit, and the server exited cleanly. The compiler is not committed (B1); neither the compiler nor the carrier decoder is shipped, and no Python is imported by or launched by the server."
+}

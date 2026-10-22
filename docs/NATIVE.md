@@ -1,8 +1,9 @@
 # Native XAX server (`xax-mcp-native`)
 
-Status: **0.7.0, native protocol layer complete; compiler- and decoder-backed tools a host-granted prototype; Windows
-execution a measured prototype** (2026-10-22). The MCP protocol layer is an XAX program: a verified canonical store that
-XAX builds into a Windows x86-64 PE32+ executable. The deployed server starts no Python, no MCP SDK, and no shell. Five
+Status: **0.8.0, native protocol layer complete; compiler- and decoder-backed tools a host-granted prototype; Windows
+execution a measured prototype** (2026-10-22, XAX `3e9b0c2`). The MCP protocol layer is an XAX program: a verified
+canonical store that XAX builds into a Windows x86-64 PE32+ executable. The deployed server starts no Python, no MCP
+SDK, and no shell. Five
 tools (`xax_workspace`, `xax_query`, `xax_transaction`, `xax_build`, `xax_execute`) are a **PROTOTYPE** over a
 host-granted native XAX compiler (`XAX_MCP_COMPILER`/`XAX_MCP_WORK`/`XAX_MCP_STORE`): they fail closed with
 `denied_capability` when the host grants no compiler. `xax_execute` also needs `--allow-execute` and a second native XAX
@@ -11,15 +12,27 @@ native carrier decoder (`XAX_MCP_CONSTRUCT`/`XAX_MCP_WORK`): the decoder is the 
 from `compiler/integration/construct` in XAX. `xax_result` is **UNIMPLEMENTED natively** and fails closed. The Python
 0.5.x server has been removed from the deployed path.
 
-The prototype was exercised end to end on 2026-10-19 and 2026-10-20: describe the seed store, resolve and build it (a
-1536-byte PE plus a 268-byte provenance object), apply a 78-byte `XAXEDIT1` constant mutation with the compiler's native
-`edit` command, observe the new root, then run the edited artifact under OS confinement and read back its exit code,
-wall time and captured output. Raw results: `docs/evidence/native-windows-x86_64-chain-f79b532.json` and
+The prototype was exercised end to end on 2026-10-19, 2026-10-20 and 2026-10-22: describe the seed store, resolve
+and build it (a 1536-byte PE plus a 268-byte provenance object), apply a 78-byte `XAXEDIT1` constant mutation with the
+compiler's native `edit` command, observe the new root, then run the edited artifact under OS confinement and read back
+its exit code, wall time and captured output. Raw results: `docs/evidence/native-windows-x86_64-chain-f79b532.json`,
+`docs/evidence/native-windows-x86_64-chain-3e9b0c2.json` (the 0.8.0 re-run) and
 `docs/evidence/native-windows-x86_64-sandbox-f79b532.json`. On 2026-10-22 the construct tool was executed over STDIO:
 `native/sandbox_request.json` produced the committed `native/xax-mcp-sandbox-gen0.xax` byte for byte (74 434 B, root
 `7ef7099d...`) through the native decoder, and became the work directory's current store; the compiler, sandbox and
 decoder used were local XAX-built prototypes outside the pinned tree, so committing reproducible native builds is
 still upstream work.
+
+On 2026-10-22 the pin moved from `0a0b1c4` (compiler `f79b532`) to XAX `main` `3e9b0c2`. Both committed stores were
+re-decoded from their carriers by the native decoder and matched byte for byte, and the server store was rebuilt
+(1 103 602 B, root `18ceecd9...`); the executor store is byte-identical to the 0.7.0 one. Python was not involved in
+either check; it is the external test client and the offline carrier author only, and the author is now blocker B5.
+
+On the same day the chain was re-run at 0.8.0 against a native compiler rebuilt from the pinned tree
+(`compiler/integration/windows_helpers/driver.xax`: 11 890 688 B, SHA-256 `110a76...`): 45 passed, 0 skipped, and the
+edited artifact executed with exit 41 and empty output. That closes the 0.7.0 gap in which the chain test was skipped
+for lack of a compiler; the compiler is still a local build, not a committed one (B1). Raw results:
+`docs/evidence/native-windows-x86_64-chain-3e9b0c2.json`.
 
 Evidence terms follow [EVIDENCE.md](EVIDENCE.md): *implemented* (in the store), *compiled* (XAX built it), *executed*
 (ran), *integration-tested* (a test drove it over STDIO), *benchmarked* (raw samples recorded). The Windows confinement
@@ -62,44 +75,59 @@ the carriers, the canonical stores, the evidence and the docs.
 
 ## Build
 
-The build tooling lives in XAX at `compiler/integration/mcp`; nothing is built from this repository's contents.
+The build tooling lives in XAX at `compiler/integration/mcp`; nothing is built from this repository's contents. The
+first stage runs with no interpreter; the second needs a native Windows compiler, which the pinned tree does not
+commit (B1).
 
-```bash
-git -C ../XAX checkout 0a0b1c4f1b217ce3a46917e93c1a1b7a66ee9bd8
-python ../XAX/compiler/integration/mcp/server.py  ../XAX/compiler/src native   # server store + xax-mcp-native.exe
-python ../XAX/compiler/integration/mcp/sandbox.py ../XAX/compiler/src native  # executor store + xax-mcp-sandbox.exe
+```text
+<decoder> <carrier> <store>                       # carrier -> verified store     (verified byte-identical here)
+<xaxc>    resolve <request-store> <snapshot>      # build request -> resolved snapshot
+<xaxc>    build <snapshot> <artifact> <prov>      # resolved request -> PE + provenance
 ```
 
-This writes `construction_request.json`, `sandbox_request.json`, both stores and both executables. The stores and
-requests are committed and checked byte for byte by `compiler/integration/mcp/tests/test_native_stdio.py` in XAX;
-each PE is rebuilt deterministically from its committed store. `xax-mcp-sandbox.exe` must end up in the same
-directory as `xax-mcp-native.exe` (the server derives its own directory with `GetModuleFileNameA`); without it
-`xax_execute` answers `sandbox_unavailable`. The XAX pin is `0a0b1c4f1b217ce3a46917e93c1a1b7a66ee9bd8`
-(`feat/mcp-tooling`: its parent `4c3e60bef96c56162003838b36d6756295b1de41` moved the tooling into XAX; the pin adds
-the `xax_construct` wiring). Its `compiler/src` is byte-identical to `f79b532fd4651ba808676d02f4b038e2cc271e6a`
-(XAX `main`, 2026-10-19; host contract `xax-host-contract-v1` r10; toolchain fingerprint
-`0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9`).
+The decoder is `construct <carrier> <store>`, built from `compiler/integration/construct` in XAX; the compiler is a
+native `xaxc` that the server also drives (`resolve`, `build`, `edit`). On 2026-10-22 the native decoder reproduced
+both committed stores from the committed carriers byte for byte
+(`docs/evidence/native-windows-x86_64-build-3e9b0c2.json`). The 0.8.0 PEs were produced by the pinned XAX build
+tooling during carrier re-emission, because no reproducible native Windows compiler exists on this host to run the
+`resolve`/`build` stage (B1); the stores they were built from are the decoded, byte-verified ones above. A native
+compiler rebuilt at `3e9b0c2` does run `resolve`, `build` and `edit` on a build-request store, which is what the
+chain test drives; it cannot rebuild the committed *program* stores from this repository, because those are the
+decoder's output, not build requests, and the author's request stores are not committed.
+
+The two requests, both stores and the seed are committed and checked byte for byte by
+`compiler/integration/mcp/tests/test_native_stdio.py` in XAX; each PE is rebuilt deterministically from its committed
+store. `xax-mcp-sandbox.exe` must end up in the same directory as `xax-mcp-native.exe` (the server derives its own
+directory with `GetModuleFileNameA`); without it `xax_execute` answers `sandbox_unavailable`.
+
+XAX pin: `3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b` (XAX `main`, 2026-10-22; host contract `xax-host-contract-v1` r10;
+toolchain fingerprint `ba009daa933c33ba124f2dc2fcb7a09995553b867bc68289555871b2f47eb740`, 125 files). The authoring
+tooling and the tests are at `6b6c35939ff02c365a58c3534cf1b75a2281d393` on `integration/mcp-on-main-3e9b0c2`, which is
+`3e9b0c2` plus the MCP commits; its `compiler/src` is byte-identical to `3e9b0c2` (`git diff 3e9b0c2 6b6c359 --
+compiler/src` is empty), which is why the store embeds `3e9b0c2` as its pin.
 
 Build identity for this revision (new evidence, not a rewrite of older files):
 
 | Field | Value |
 |---|---|
-| Server store root | `9493014f098495602948c08ed3688c75fe1bddd2ff362f965efbcd2620b81eb9` |
-| Server release request | `ffd93c4bf62afb855e975b704acdc33fdbf0fbbf16d91a6a3912040113a8b620` |
-| Server store bytes / SHA-256 | 1 103 601 / `afa5b600d73d0c437769ea95ff12618476a66455b914e041b95f87c27e8c9013` |
-| Server artifact bytes / SHA-256 | 359 424 / `2c72ea0f7c3769833f3c0dfbb5da047509c29bf683f16a8cab607db2ca8ccfc1` |
+| Server store root | `18ceecd9fe284e16919bb5f0f40bdf52cf5a90407ad007d218f30d3235024b07` |
+| Server release request | `06d1330bbe87630c815c568b14899cc98b2876e2ef40f25e1b4b8c2efc6d0110` |
+| Server store bytes / SHA-256 | 1 103 602 / `0a698799883375955a421c0f0f5526862e941cc01f6e2738749a6fc61f0bdcab` |
+| Server artifact bytes / SHA-256 | 359 424 / `9f6e272bbbc938d3493a98b7c68409de31a09ffc4cc958bb41be7447b65c076a` |
 | Server functions / store objects | 181 / 3 621 |
 | Sandbox store root | `7ef7099d5358bf022715faff1ef26387c1486c554ed2f7d9145bd9d8953ef8b6` |
 | Sandbox store bytes / SHA-256 | 74 434 / `588f57c0fa69eb175b6e06e88c73977292d42c06dfc5b814ec48cc5710bab2b8` |
 | Sandbox artifact bytes / SHA-256 | 25 600 / `6d563e0f23e4f402d55c82b200d42bce91c41c98aab101267e67d3645a1d37e2` |
-| Sandbox functions | 8 |
+| Sandbox functions / store objects | 8 / 271 |
+| Seed store root / bytes / SHA-256 | `572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587` / 1 852 / `25db5e19257e81e99a79e1b0311b65c8f534507ced0607ad4c5e2f0a81821532` |
 
-The server store changed relative to the `4c3e60b` build because `xax_construct` gained its implementation (the new
-tool function, the carrier region and the fourth host grant), which added ten functions and 83 000 store bytes. The
-native `construct <carrier> <store>` command reproduced the new store byte for byte from
-`native/construction_request.json`, so the same bytes are both the builder's output and the decoder's output. The old
-evidence files are unchanged; the identities above are recorded in
-`native-windows-x86_64-construct-0a0b1c4.json`.
+The server store changed relative to 0.7.0 (pin `0a0b1c4` / compiler `f79b532`: 1 103 601 B,
+root `9493014f...`, artifact SHA-256 `2c72ea0f...`) because the pin moved to compiler `3e9b0c2` and the embedded
+version string became `0.8.0+native`. One byte and the whole root changed; the function count is unchanged (181).
+The executor store, its artifact and the seed are byte-identical to 0.7.0: `sandbox.py`'s program does not embed
+either string. The native decoder reproduced both new stores from the committed carriers, so the same bytes are both
+the author's output and the decoder's output. The old evidence files are unchanged; the identities above are recorded
+in `native-windows-x86_64-build-3e9b0c2.json`.
 
 ### Host-granted native compiler
 
@@ -114,8 +142,9 @@ they answer `denied_capability` and do nothing:
 
 The server only spawns that executable (`_spawnv`) and reads the files it writes. It does not import, embed, or start
 Python. `native/xax-mcp-seed.xax` is a committed form-2 build-request seed (root
-`572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587`, 1852 bytes); `compiler/integration/mcp/chain.py` in XAX is build/test
-tooling that authors an `XAXEDIT1` carrier with the pinned XAX Python tooling.
+`572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587`, 1852 bytes);
+`compiler/integration/mcp/chain.py` in XAX authors the `XAXEDIT1` carrier used by the chain test. That author is
+offline Python test tooling (B5), never on the request path.
 
 ### Host-granted carrier decoder (`xax_construct`)
 
@@ -139,7 +168,9 @@ closed at open rather than being misread.
 Executed on 2026-10-22: `native/sandbox_request.json` (66 322 bytes) produced `native/xax-mcp-sandbox-gen0.xax` byte
 for byte (74 434 B, SHA-256 `588f57c0...`, root `7ef7099d...`) through a decoder built at XAX `feat/native-construct`
 `486fa9d`; a carrier with an unknown `format` answered `construct_rejected` and left the current store unchanged
-(`docs/evidence/native-windows-x86_64-construct-0a0b1c4.json`).
+(`docs/evidence/native-windows-x86_64-construct-0a0b1c4.json`). After the pin moved to `3e9b0c2`, the same decoder
+reproduced **both** carriers again — the 1 103 602 B server store (`0a698799...`) and the unchanged executor store
+(`588f57c0...`) — with no Python involved (`docs/evidence/native-windows-x86_64-build-3e9b0c2.json`).
 
 ### Sandboxed execution (`xax_execute`)
 
@@ -215,7 +246,7 @@ Deliberate differences from the retired Python server:
 Same host as the 6885f89 evidence: AMD Ryzen 9 5900HS, 16 logical CPUs, Windows 11 Pro 26300. 15 launches, 50
 round trips per call per launch; medians shown. Raw samples:
 `docs/evidence/native-windows-x86_64-protocol-f79b532.json`. These samples are from the 0.6.0 artifact; the protocol
-code is unchanged since then, and the current artifact is the one in the build table above.
+code is unchanged in 0.7.0 and 0.8.0, and the current artifact is the one in the build table above.
 
 | Measure | Native XAX 0.6.0 |
 |---|---|
@@ -227,9 +258,15 @@ code is unchanged since then, and the current artifact is the one in the build t
 
 ### Compiler-backed chain (0.7.0)
 
-One server process, 10 `xax_query` calls, 5 `xax_build` calls (each two compiler spawns), then 5 `xax_transaction`
-calls (each one compiler spawn) on successive constants 41..45. Medians of the raw samples; details in
-`docs/evidence/native-windows-x86_64-chain-f79b532.json`.
+Measured at 0.7.0; the 0.8.0 store differs only in its embedded pin and version string, and the chain code is
+unchanged. One server process, 10 `xax_query` calls, 5 `xax_build` calls (each two compiler spawns), then 5
+`xax_transaction` calls (each one compiler spawn) on successive constants 41..45. Medians of the raw samples; details
+in `docs/evidence/native-windows-x86_64-chain-f79b532.json`.
+
+Re-executed at 0.8.0 with the rebuilt native compiler on 2026-10-22: the same single chain produced byte-identical
+step values (the same 268-byte provenance object and transaction root `8c01664c...`), `xax_execute` exited 41 in
+16 ms, and the gated chain test passed in 26.63 s. That run is `docs/evidence/native-windows-x86_64-chain-3e9b0c2.json`;
+the medians below are still the 0.7.0 samples, not a new timing series.
 
 | Measure | 0.7.0 prototype |
 |---|---|
@@ -271,16 +308,20 @@ Classification: **N** supported natively (in the store, executed), **P** prototy
 
 ### Blockers (exact, verified on this host)
 
-- **B1. No reproducible native XAX compiler in the pinned Windows tree.** The only committed native compiler is
-  `compiler/bootstrap/seed/xaxc-linux-x86_64`, a static Linux ELF (ADR-286). This host has no Linux (no WSL, no
-  containers, no VM). On Windows, XAX itself is Python. The 0.7.0 prototype therefore takes a compiler path from the
-  host and fails closed when it is not granted; it does not embed an interpreter, and it cannot ship a compiler it
-  cannot reproduce. Committing a reproducible native Windows compiler is upstream work.
+- **B1. No reproducible native XAX compiler or carrier decoder in the pinned Windows tree.** The only committed native
+  compiler is `compiler/bootstrap/seed/xaxc-linux-x86_64`, a static Linux ELF (ADR-286). This host has no Linux (no
+  WSL, no containers, no VM). On Windows, XAX itself is Python. The prototype therefore takes a compiler path and a
+  decoder path from the host and fails closed when they are not granted; it does not embed an interpreter, and it
+  cannot ship a program it cannot reproduce. The compiler used for the 0.7.0 measurements lived in an untracked
+  `build/windows_helpers` directory of the previous checkout and did not survive the move to `3e9b0c2`; that is the
+  blocker, observed directly. A fresh native compiler rebuilt from the pinned `driver.xax` on 2026-10-22 ran the whole
+  chain (45 passed, 0 skipped, execute exit 41), so what is missing is reproduction and commitment in XAX, not
+  capability. Committing reproducible native Windows builds of both programs is upstream work.
 - **B2. The native compiler's command set is not a service.** `xaxc` offers `lower`, `build`, `verify`, `inspect`,
   `resolve`, `edit` and `resolve-trusted` (`xax_selfhost_driver.COMMANDS`), on files and with exit status only. The
   general driver has no `construct`: carrier decoding is a separate `construct <carrier> <store>` program with the
   same file/exit-status shape, not a driver command. There are no bounded workspace queries, no generation/root-checked
-  transactions, and no structured diagnostics on stdout. The 0.7.0 server consumes the file commands; a versioned
+  transactions, and no structured diagnostics on stdout. The server consumes the file commands; a versioned
   request/response protocol for construct/open/query remains upstream work (kept independent of MCP).
 - **B3. Linux sandbox and Linux build of this server are untested here.** The same program can target
   `linux-x86_64` by swapping the kernel32/msvcrt file and process calls for `linux.read`/`linux.write`/`mmap`/
@@ -292,34 +333,49 @@ Classification: **N** supported natively (in the store, executed), **P** prototy
   outside write refused, a 60 s sleep killed at 10 s, exact pipe capture), so this is no longer "not started". It is
   still a prototype: Windows only, no independent security review, no fuzzing, the run-directory ACL grant is repeated
   on every run, and artifacts cannot use the network at all. Linux (B3) and the typed I/O contract remain open.
+- **B5. The carrier authors are Python.** `compiler/integration/mcp/{server,sandbox,seed,dsl,schemas}.py` walk a typed
+  description and emit the `xax-construct-v1` carrier. They are offline build tooling: the carrier is committed, the
+  native decoder turns it into the verified store, and nothing on the request path imports them. Rebuilding this
+  repository therefore needs no Python, but *changing* what the server means still does. The smallest general
+  replacement is an upstream native XAX carrier author (a verified program that emits a carrier from a typed
+  description); until that exists, this is the one disclosed non-XAX dependency in the authoring loop. Decoding and
+  checking every committed store therefore needs no Python. Rebuilding the PEs needs a native Windows `xaxc`, and
+  producing that compiler reproducibly is B1 (the local bootstrap used on 2026-10-22 is disclosed). Changing the
+  semantics still needs the Python authors until a native one replaces them.
 
-### Local observation, now consumed as a host grant
+### Local native programs
 
-A local XAX-built prototype compiler exists outside the pinned tree at
-`D:\GitHub\XAX\build\windows_helpers\xaxc-windows.exe` (11 857 408 bytes, SHA-256
-`e2b730647e5005321166513c68c51223b7e8b4ee78222197f99dcf2725016d43`; 508 functions; imports kernel32/msvcrt). It
-runs `verify`, `inspect`, `build`, `resolve`, `lower` and `edit` on Windows, and it is **not** part of XAX
-`f79b532` and has no committed build script. It does not implement `construct`. The carrier decoder is a second local
-prototype, `D:\GitHub\XAX\build\construct_cmd\construct.exe` (2 852 352 bytes, SHA-256
+The carrier decoder is a local prototype outside the pinned tree,
+`D:\GitHub\XAX\build\construct_cmd\construct.exe` (2 852 352 bytes, SHA-256
 `a6bd67fddce407e348c23604434d536690f87e0cfe0e7a6c7c1f8a073dc4c94f`, built from XAX `feat/native-construct`
-`486fa9d`); it is not part of the pin either.
+`486fa9d`). It implements `construct <carrier> <store>` and nothing else. It reproduced both committed stores at the
+`3e9b0c2` pin in 0.38 s and 0.04 s, which is the byte-identity check recorded in
+`docs/evidence/native-windows-x86_64-build-3e9b0c2.json`.
 
-The 0.7.0 prototype was exercised against exactly this executable as `XAX_MCP_COMPILER` (see
-`docs/evidence/native-windows-x86_64-chain-f79b532.json`). It is not a dependency of the repository, not shipped,
-and not evidence of a general construct/build/execute loop: it is the narrow path that B1/B2 must replace with a
-reproducible, versioned service.
+The compiler is the other local prototype. At the 0.7.0 pin it was
+`D:\GitHub\XAX\build\windows_helpers\xaxc-windows.exe` (11 857 408 bytes, SHA-256 `e2b73064...`; 508 functions;
+kernel32/msvcrt), and the 0.7.0 chain measurements were taken against exactly that executable. That directory was
+never committed and is not in the `3e9b0c2` tree; on 2026-10-22 it was rebuilt from
+`compiler/integration/windows_helpers/driver.xax` at the pin (30 655 635 B, SHA-256 `796c6bb9...`) over 1 201.9 s:
+11 890 688 bytes, SHA-256 `110a76a2578f5f55777e6b0438b05642013e9587cae902ef3729229af8e5420e`, imports
+kernel32/msvcrt only, commands `resolve`, `build`, `edit` (plus `lower`, `verify`, `inspect`, `resolve-trusted`). It
+ran the full chain on 2026-10-22. It is likewise not committed. Neither program is a dependency of this repository, is
+shipped, or proves a general construct/build/execute loop: they are the narrow path that B1/B2 must replace with
+reproducible, versioned programs.
 
 ## Next steps
 
-1. Upstream (`MrxSiN/XAX`): commit a reproducible native Windows compiler build for the pinned tree, then a
-   versioned native compiler service (`xaxc serve`: length-prefixed typed requests for construct/open/verify/query/
-   edit/build on stdin/stdout, structured diagnostics).
-2. Here: grow the prototype behind the same tool names - bounded graph queries, expected-generation/root-checked
+1. Upstream (`MrxSiN/XAX`): commit reproducible native Windows builds of the compiler and the carrier decoder for the
+   pinned tree, then a versioned native compiler service (`xaxc serve`: length-prefixed typed requests for
+   construct/open/verify/query/edit/build on stdin/stdout, structured diagnostics).
+2. Upstream: replace the Python carrier authors with a native XAX carrier author so the authoring loop is XAX-only
+   (B5). The carriers are already committed and verified, so this is authoring work, not a runtime dependency.
+3. Here: grow the prototype behind the same tool names - bounded graph queries, expected-generation/root-checked
    transactions, artifact handles and `xax_result` - and add a `linux-x86_64` build of this program (B3).
-3. Native sandbox hardening: on Linux, clone with new namespaces and a seccomp filter matching the retired Python
+4. Native sandbox hardening: on Linux, clone with new namespaces and a seccomp filter matching the retired Python
    sandbox; on Windows, add the typed I/O contract (input/output layouts, argv, per-call limits) on top of the existing
    LPAC AppContainer and job object, and get the executor reviewed as a security boundary.
-4. Maintain the server's own store through workspace transactions from generation 0, as upstream's R6 applications
+5. Maintain the server's own store through workspace transactions from generation 0, as upstream's R6 applications
    are maintained.
 
 ## Retired Python server

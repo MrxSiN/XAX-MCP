@@ -1,6 +1,6 @@
 # Architecture
 
-> **Historical (0.5.x Python prototype).** This document describes the retired Python adapter. The deployed 0.7.0
+> **Historical (0.5.x Python prototype).** This document describes the retired Python adapter. The deployed 0.8.0
 > server is the native XAX program in [NATIVE.md](NATIVE.md); its compiler-backed tools are a narrow prototype.
 
 ```text

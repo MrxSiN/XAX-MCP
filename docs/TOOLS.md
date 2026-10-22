@@ -1,6 +1,6 @@
 # Tool reference (`xax-mcp-tools-v1`)
 
-> **Historical (0.5.x Python prototype).** The schemas still describe the transport interface, but `xax_capabilities` is implemented by the deployed 0.7.0 native server; the five compiler-backed tools and
+> **Historical (0.5.x Python prototype).** The schemas still describe the transport interface, but `xax_capabilities` is implemented by the deployed 0.8.0 native server; the five compiler-backed tools and
 > `xax_construct` are a narrow prototype (`xax_execute` and `xax_construct` only on Windows) and `xax_result` returns `unsupported`. See [NATIVE.md](NATIVE.md).
 
 Every tool returns one JSON object as `structuredContent`, mirrored as a compact text block. Success is

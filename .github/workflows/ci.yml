@@ -9,9 +9,10 @@ permissions:
   contents: read
 
 env:
-  # XAX tip that carries compiler/integration/mcp (the server's authoring tooling) and the xax_construct wiring.  Its
-  # compiler/src is byte-identical to f79b532, the toolchain recorded in server.py as NATIVE_XAX_COMMIT (0ab800ba...).
-  XAX_COMMIT: 0a0b1c4f1b217ce3a46917e93c1a1b7a66ee9bd8
+  # The MCP authoring tooling and tests. This is the certified compiler revision (3e9b0c2, XAX main) plus the MCP
+  # commits; its compiler/src is byte-identical to the pin, which is what the store embeds and what the server reports.
+  XAX_COMMIT: 6b6c35939ff02c365a58c3534cf1b75a2281d393
+  XAX_COMPILER_COMMIT: 3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b
   XAX_MCP_HOME: ${{ github.workspace }}
 
 jobs:
@@ -20,23 +21,39 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Isolated checkout of the pinned upstream XAX (build toolchain and authoring tooling)
+      - name: Isolated checkout of the pinned upstream XAX (authoring tooling and tests)
         uses: actions/checkout@v4
         with:
           repository: MrxSiN/XAX
           ref: ${{ env.XAX_COMMIT }}
           path: upstream-xax
+          fetch-depth: 0
+
+      - name: The tooling commit must carry exactly the certified compiler revision
+        shell: bash
+        run: |
+          git -C upstream-xax cat-file -e "$XAX_COMPILER_COMMIT^{commit}"
+          git -C upstream-xax diff --exit-code "$XAX_COMPILER_COMMIT" HEAD -- compiler/src
+          echo "compiler/src is byte-identical to $XAX_COMPILER_COMMIT"
+
+      - name: This repository contains no Python and no source code
+        shell: bash
+        run: |
+          test -z "$(git ls-files '*.py')"
+          test ! -d .venv
+          echo "no tracked Python; carriers, stores, executables, evidence, docs only"
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Install external test client and the pinned XAX build toolchain
+      # Python here is external test tooling and the offline carrier author (B5 in docs/NATIVE.md). It is never
+      # packaged with, imported by, or launched by the server, and the committed carriers rebuild without it.
+      - name: Install the external test client
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install pytest anyio "mcp>=2.3.0,<2.4" -e upstream-xax/compiler
+          python -m pip install pytest anyio "mcp>=2.3.0,<2.4"
 
-      - name: Regenerate all three artifacts from the pinned tooling
+      - name: Re-emit the carriers and stores with the pinned offline authors
         run: |
           python -B upstream-xax/compiler/integration/mcp/server.py  upstream-xax/compiler/src build
           python -B upstream-xax/compiler/integration/mcp/sandbox.py upstream-xax/compiler/src build
@@ -58,6 +75,21 @@ jobs:
           foreach ($exe in "xax-mcp-native.exe", "xax-mcp-sandbox.exe", "xax-mcp-seed.exe") {
             if (-not (Test-Path (Join-Path build $exe))) { throw "the build did not produce $exe" }
           }
+
+      - name: The built server reports the pin and starts no Python
+        shell: pwsh
+        run: |
+          $request = @(
+            '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"ci","version":"0"}}}',
+            '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"xax_capabilities","arguments":{}}}'
+          ) -join "`n"
+          $out = ($request | & build/xax-mcp-native.exe --read-only) -join "`n"
+          $payload = ($out -split "`n" | Where-Object { $_ -match '"id":2' } | ConvertFrom-Json).result.content[0].text | ConvertFrom-Json
+          if ($payload.server.version -ne "0.8.0+native") { throw "version $($payload.server.version)" }
+          if ($payload.xax.pinned_commit -ne "$env:XAX_COMPILER_COMMIT") { throw "pin $($payload.xax.pinned_commit)" }
+          if ($payload.server.python_on_request_path -ne $false) { throw "python_on_request_path" }
+          if ($payload.xax.host_contract -ne "xax-host-contract-v1 r10") { throw "contract $($payload.xax.host_contract)" }
+          "identity ok: $($payload.server.version) $($payload.xax.pinned_commit)"
 
       - name: Drive the PE32+ over STDIO (the suite lives in XAX; the artifacts under test are committed here)
         env:
