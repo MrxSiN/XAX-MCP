@@ -3,8 +3,9 @@
 Copy into your project's `AGENTS.md` (Codex) when the `xax` MCP server is registered.
 
 - Call `xax_capabilities` first. It reports the exact XAX pin, rights, targets, and honest maturity labels for this
-  server build. The current native build implements the MCP protocol and capability reporting; the compiler-backed
-  tools answer `unsupported`.
+  server build. The current native build implements the MCP protocol and capability reporting; the compiler- and
+  decoder-backed tools are prototypes that need a host grant (`XAX_MCP_COMPILER`/`XAX_MCP_STORE` or
+  `XAX_MCP_CONSTRUCT`) and fail closed without one.
 - When the server reports a tool as implemented, use it for computation it supports instead of writing and running
   Python or shell code: `xax_construct` (a typed `xax-construct-v1` carrier) -> `xax_build` -> `xax_execute`.
 - The carrier JSON is a typed semantic-graph request (transport), not source. Do not invent a textual XAX syntax.

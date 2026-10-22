@@ -1,15 +1,15 @@
 # Tool reference (`xax-mcp-tools-v1`)
 
-> **Historical (0.5.x Python prototype).** The schemas still describe the transport interface, but `xax_capabilities` is implemented by the deployed 0.7.0 native server; five compiler-backed tools are a
-> narrow prototype (one of them, `xax_execute`, only on Windows) and two tools return `unsupported`. See [NATIVE.md](NATIVE.md).
+> **Historical (0.5.x Python prototype).** The schemas still describe the transport interface, but `xax_capabilities` is implemented by the deployed 0.7.0 native server; the five compiler-backed tools and
+> `xax_construct` are a narrow prototype (`xax_execute` and `xax_construct` only on Windows) and `xax_result` returns `unsupported`. See [NATIVE.md](NATIVE.md).
 
 Every tool returns one JSON object as `structuredContent`, mirrored as a compact text block. Success is
 `{"ok": true, ...}`. Failure is `{"ok": false, "error": {"code", "message", "xax_diagnostic"?, "repair"?, "details"?}}`
 with `isError: true`.
 
 Error codes: `unsupported`, `invalid_request`, `verification_failed`, `stale_root`, `conflict`, `build_error`,
-`denied_capability`, `resource_limit`, `runtime_failure`, `not_found`, `stale_artifact`, `sandbox_unavailable`,
-`incompatible_xax`, `internal_error`.
+`construct_rejected`, `construct_failed`, `io_error`, `denied_capability`, `resource_limit`, `runtime_failure`,
+`not_found`, `stale_artifact`, `sandbox_unavailable`, `incompatible_xax`, `internal_error`.
 
 Required rights (granted by launch flags, never by arguments): `read` for capabilities, workspace, query and
 result; `mutate` for construct and transaction; `build` for build; `execute` for execute (`--allow-execute`).

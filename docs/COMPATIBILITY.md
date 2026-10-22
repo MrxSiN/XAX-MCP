@@ -4,15 +4,16 @@
 
 | xax-mcp | XAX commit | XAX host contract | Toolchain fingerprint (sha256) | mcp SDK (test client) | Python (build/test only) | OS / arch | Result |
 |---|---|---|---|---|---|---|---|
-| 0.7.0 | `4c3e60bef96c56162003838b36d6756295b1de41` (first commit carrying `compiler/integration/mcp`; its `compiler/src` is byte-identical to `f79b532fd4651ba808676d02f4b038e2cc271e6a`, XAX `main`, 2026-10-19) | `xax-host-contract-v1` r10 | `0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9` | 2.3.0 | 3.12.10 | Windows 11 x86-64 | native protocol suite: 43 passed, 1 skipped; compiler-backed tools PROTOTYPE over a host-granted native compiler (docs/NATIVE.md) |
+| 0.7.0 | `0a0b1c4f1b217ce3a46917e93c1a1b7a66ee9bd8` (`feat/mcp-tooling`: its parent `4c3e60bef96c56162003838b36d6756295b1de41` moved `compiler/integration/mcp` into XAX; this tip wires `xax_construct`; its `compiler/src` is byte-identical to `f79b532fd4651ba808676d02f4b038e2cc271e6a`, XAX `main`, 2026-10-19) | `xax-host-contract-v1` r10 | `0ab800baf79464895bceeb0ccdaa13f4b8d1969fc627644f01e447575731f5d9` | 2.3.0 | 3.12.10 | Windows 11 x86-64 | native protocol suite: 43 passed, 2 skipped on this host (no `mcp` 2.x client, no native `xaxc`); compiler- and decoder-backed tools PROTOTYPE over host-granted native programs (docs/NATIVE.md) |
 
-Declared support for 0.7.0: exactly `bc4f342`, whose compiler tree is exactly `f79b532` (XAX `main`), with
-`xax-host-contract-v1` at revision 10. The
+Declared support for 0.7.0: exactly `0a0b1c4f1b217ce3a46917e93c1a1b7a66ee9bd8`, whose `compiler/src` is exactly
+`f79b532` (XAX `main`), with `xax-host-contract-v1` at revision 10. The
 fingerprint covers every Python module and bootstrap `.xax` store of the `xax-compiler` distribution at that
 commit. It is used by the **build** to identify the compiler that produced the committed store; the deployed
 server has no embedded compiler and no runtime Python, so it does not probe a toolchain at startup. The
 compiler-backed tools drive a compiler only when the host grants `XAX_MCP_COMPILER`, `XAX_MCP_WORK` and
-`XAX_MCP_STORE`; that compiler's own version is the host's responsibility.
+`XAX_MCP_STORE`; `xax_construct` drives a native carrier decoder only when the host grants `XAX_MCP_CONSTRUCT`
+and `XAX_MCP_WORK`. Those native programs' own versions are the host's responsibility.
 
 The native server embeds the pin it was built with (`xax.pinned_commit` in `xax_capabilities`). Rebuilding the
 store at another XAX revision is not a supported configuration: the committed store/request equality check in
@@ -49,7 +50,7 @@ work, not as descriptions of 0.7.0. The implementation remains in git history.
 
 | Host | Version | Verified |
 |---|---|---|
-| Official MCP Python SDK client (`mcp.Client`, STDIO) | mcp 2.3.0 | initialize, `tools/list`, `xax_capabilities`, denied `xax_construct` (tests/test_native_stdio.py) |
+| Official MCP Python SDK client (`mcp.Client`, STDIO) | mcp 2.3.0 | initialize, `tools/list`, `xax_capabilities`, `xax_construct` denied under `--read-only` (tests/test_native_stdio.py) |
 | Raw JSON-RPC (handshake 2025-11-25) | — | initialize, `tools/list`, `tools/call`, stdout purity, 1500-case JSON differential |
 | MCP Inspector CLI | 2.10.1 | not re-run against the native 0.7.0 build; the 0.5.1 result is historical |
 | Claude Code | 2.1.294 | registration and `claude mcp list` health check only (0.5.1, historical); no model-driven run |
@@ -57,8 +58,8 @@ work, not as descriptions of 0.7.0. The implementation remains in git history.
 | Claude Desktop | — | not run here |
 
 No model-driven host session (an agent choosing the tools) has been recorded. The compiler-backed tools work only
-for the narrow seed/edit case and execution is refused, so a model-driven construct/build/execute loop cannot be
-claimed.
+for the narrow seed/edit case, `xax_construct` needs a host-granted decoder and is exercised on Windows only, and
+execution is a Windows prototype, so a model-driven construct/build/execute loop cannot be claimed.
 
 ## Upgrading XAX
 

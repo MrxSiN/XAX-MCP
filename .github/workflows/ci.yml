@@ -9,9 +9,9 @@ permissions:
   contents: read
 
 env:
-  # First XAX commit that carries compiler/integration/mcp (the server's authoring tooling).  Its compiler/src is
-  # byte-identical to f79b532, the toolchain recorded in server.py as NATIVE_XAX_COMMIT (fingerprint 0ab800ba...).
-  XAX_COMMIT: 4c3e60bef96c56162003838b36d6756295b1de41
+  # XAX tip that carries compiler/integration/mcp (the server's authoring tooling) and the xax_construct wiring.  Its
+  # compiler/src is byte-identical to f79b532, the toolchain recorded in server.py as NATIVE_XAX_COMMIT (0ab800ba...).
+  XAX_COMMIT: 0a0b1c4f1b217ce3a46917e93c1a1b7a66ee9bd8
   XAX_MCP_HOME: ${{ github.workspace }}
 
 jobs:

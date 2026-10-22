@@ -1,0 +1,170 @@
+{
+  "kind": "xax-mcp-construct-tool",
+  "label": "EXECUTED",
+  "recorded": "2026-10-22",
+  "host": {
+    "os": "Windows 11 x86-64",
+    "python": "3.12.10",
+    "note": "Python is build tooling and the test/oracle client only; the server, the sandbox and the carrier decoder are native XAX programs (windows-x86_64 PE32+)"
+  },
+  "change": {
+    "summary": "M3: xax_construct has an implementation. The server copies the `request` value's JSON text verbatim to <work>\\construct-request.json, deletes any stale <work>\\constructed.xax, and spawns the host-granted native decoder with a fixed three-word argv (`<decoder> <carrier> <store>`) through _spawnv. The store becomes the work directory's current store only after the decoder exits 0 and the file is at least 39 bytes. The grant is XAX_MCP_CONSTRUCT plus XAX_MCP_WORK; it does not need the compiler trio. A carrier is bounded by the 1 MiB arguments limit; a refusal or a missing/absent decoder leaves current.xax exactly as it was.",
+    "xax_repository": "MrxSiN/XAX",
+    "xax_branch": "feat/mcp-tooling",
+    "xax_commit": "0a0b1c4f1b217ce3a46917e93c1a1b7a66ee9bd8",
+    "xax_parent": "4c3e60bef96c56162003838b36d6756295b1de41",
+    "xax_mcp_pin_before": "4c3e60bef96c56162003838b36d6756295b1de41",
+    "xax_mcp_pin_after": "0a0b1c4f1b217ce3a46917e93c1a1b7a66ee9bd8",
+    "pin_note": "the pin's compiler/src is byte-identical to f79b532 (git diff f79b532 0a0b1c4 -- compiler/src is empty; 211 files each)", 
+    "semantic_base": "f79b532fd4651ba808676d02f4b038e2cc271e6a",
+    "files": [
+      "compiler/integration/mcp/server.py",
+      "compiler/integration/mcp/schemas.py",
+      "compiler/integration/mcp/tests/test_native_stdio.py"
+    ],
+    "server_constructor_changes": {
+      "keys_and_slots": "KEYS gains `request`; the RES slot table is derived from len(KEYS) (SLOT_COUNT 22, SLOT_KEY_START/END/TOP 23/24/25), so the scanner zeroes 26 slots",
+      "regions": "O_CARRIER = 5 MiB (carrier text, at most MAX_ARGUMENTS = 1 MiB), asserted below O_PATHS = 6 MiB",
+      "config": "XAX_MCP_CONSTRUCT is a fourth configuration name with its own path slot and packed span; xax_construct is gated on a new `conready` flag (non-empty work + non-empty decoder)",
+      "paths": "P_CONSTRUCT = 13 KiB, P_CARRIER = 14 KiB (<work>\\construct-request.json), P_CSTORE = 15 KiB (<work>\\constructed.xax)"
+    }
+  },
+  "build_identity": {
+    "command": "python compiler/integration/mcp/server.py compiler/src <out>  (from the feat/mcp-tooling worktree)",
+    "measured": "2026-10-22, 25.4 s wall, exit 0, four committed files (native/construction_request.json, native/xax-mcp-native-gen0.xax) and the PE rebuilt and compared",
+    "server_store_root": "9493014f098495602948c08ed3688c75fe1bddd2ff362f965efbcd2620b81eb9",
+    "server_release_request": "ffd93c4bf62afb855e975b704acdc33fdbf0fbbf16d91a6a3912040113a8b620",
+    "server_store_bytes": 1103601,
+    "server_store_sha256": "afa5b600d73d0c437769ea95ff12618476a66455b914e041b95f87c27e8c9013",
+    "server_artifact_bytes": 359424,
+    "server_artifact_sha256": "2c72ea0f7c3769833f3c0dfbb5da047509c29bf683f16a8cab607db2ca8ccfc1",
+    "functions": 181,
+    "distinct_store_objects": 3621,
+    "store_object_cap": 8192,
+    "previous_build": {
+      "pin": "4c3e60b",
+      "store_bytes": 1020614,
+      "store_sha256": "bbe28c1e5568abf40cb2d38a354f4dcbaae09b231abeb04f87674d5f1a70e25f",
+      "functions": 171
+    },
+    "why_changed": "the new tool function, the carrier copy/write/spawn/verify path and the fourth host grant added ten functions and 83 000 store bytes"
+  },
+  "oracle": {
+    "kind": "the native carrier decoder built from XAX feat/native-construct 486fa9d writes a store from native/construction_request.json; that store is compared with the store the pinned Python builder produced",
+    "decoder": {
+      "path": "D:\\GitHub\\XAX\\build\\construct_cmd\\construct.exe",
+      "bytes": 2852352,
+      "sha256": "a6bd67fddce407e348c23604434d536690f87e0cfe0e7a6c7c1f8a073dc4c94f",
+      "built_from": "feat/native-construct 486fa9d",
+      "committed": false,
+      "note": "still a local prototype outside the pin (B1); the decoder lives on feat/native-construct, not on the pinned feat/mcp-tooling branch"
+    },
+    "invocation": "construct.exe native/construction_request.json <store>",
+    "exit": 0,
+    "wall_seconds": 0.38,
+    "store_bytes": 1103601,
+    "store_sha256": "afa5b600d73d0c437769ea95ff12618476a66455b914e041b95f87c27e8c9013",
+    "builder_sha256": "afa5b600d73d0c437769ea95ff12618476a66455b914e041b95f87c27e8c9013",
+    "result": "MATCH",
+    "meaning": "the same bytes are both the pinned builder's output and the native decoder's output for the new server source"
+  },
+  "tool_results_over_stdio": {
+    "transport": "real STDIO (newline-delimited JSON-RPC) against the built PE; Python only as the test client",
+    "launch_environment": "XAX_MCP_WORK=<fresh directory>, XAX_MCP_CONSTRUCT=<decoder above>; no compiler trio",
+    "calls": [
+      {
+        "tool": "xax_construct",
+        "arguments": "the committed native/sandbox_request.json (66 322 B) as the inline request object",
+        "result": {"bytes": 74434, "ok": true, "root": "7ef7099d5358bf022715faff1ef26387c1486c554ed2f7d9145bd9d8953ef8b6", "workspace": "ws_0"},
+        "isError": false,
+        "current_store": "<work>\\current.xax, 74 434 B, sha256 588f57c0fa69eb175b6e06e88c73977292d42c06dfc5b814ec48cc5710bab2b8",
+        "reference": "native/xax-mcp-sandbox-gen0.xax",
+        "byte_identical": true
+      },
+      {
+        "tool": "xax_construct",
+        "arguments": "request = {\"format\": \"xax-construct-v0\", \"platform\": \"windows-x86_64\", \"functions\": [{}], \"package\": {}}",
+        "result_code": "construct_rejected",
+        "isError": true,
+        "used_current_store": "the current store read back byte-identical to the previous step; nothing was replaced"
+      },
+      {
+        "tool": "xax_construct",
+        "arguments": "request = 7",
+        "result_code": "invalid_request",
+        "isError": true
+      },
+      {
+        "tool": "xax_construct",
+        "arguments": "no request member",
+        "result_code": "invalid_request",
+        "isError": true
+      },
+      {
+        "tool": "xax_construct",
+        "launch_environment": "XAX_MCP_CONSTRUCT set, XAX_MCP_WORK unset",
+        "result_code": "denied_capability",
+        "message_names": "XAX_MCP_CONSTRUCT/XAX_MCP_WORK",
+        "isError": true
+      },
+      {
+        "tool": "xax_construct",
+        "launch_environment": "XAX_MCP_WORK set, XAX_MCP_CONSTRUCT unset",
+        "result_code": "denied_capability",
+        "isError": true
+      },
+      {
+        "tool": "xax_construct",
+        "launch_environment": "XAX_MCP_WORK set, XAX_MCP_CONSTRUCT=<a path that does not exist>",
+        "result_code": "construct_rejected",
+        "isError": true,
+        "meaning": "_spawnv fails closed; no store is moved"
+      },
+      {
+        "tool": "xax_construct",
+        "launch_environment": "read-only rights (no mutate)",
+        "result_code": "denied_capability",
+        "isError": true,
+        "meaning": "the host right is checked before any file is written"
+      }
+    ],
+    "written_files": ["construct-request.json", "current.xax"],
+    "note": "construct-request.json is the transport file and is left behind; constructed.xax no longer exists after a successful call because it is renamed to current.xax"
+  },
+  "tests": {
+    "command": "python -m pytest compiler/integration/mcp/tests/test_native_stdio.py -q -rs (in the feat/mcp-tooling worktree)",
+    "environment": {
+      "XAX_MCP_HOME": "D:\\GitHub\\XAX-MCP",
+      "XAX_NATIVE_SRC": "the feat/mcp-tooling worktree compiler/src",
+      "XAX_MCP_NATIVE_EXE": "the built PE above",
+      "XAX_MCP_TEST_CONSTRUCT": "the decoder above",
+      "XAX_MCP_TEST_COMPILER": "unset: no native Windows xaxc on this host"
+    },
+    "result": "43 passed, 2 skipped in 27.65 s",
+    "skips": [
+      "needs the mcp 2.x SDK client (the installed mcp package has no Client attribute on this host)",
+      "set XAX_MCP_TEST_COMPILER (native xaxc) and XAX_NATIVE_SRC to drive the native chain"
+    ],
+    "new_test": "test_native_construct_over_stdio: carrier -> committed store byte for byte, refused carrier leaves the current store intact, non-object/missing request, either grant missing, and a missing decoder executable",
+    "regeneration": "server.py, sandbox.py and seed.py at this pin reproduce all six committed native/ files byte for byte; the PE rebuild is deterministic (test_build_is_deterministic)"
+  },
+  "defects_found": [
+    "the first build of the tool answered denied_capability with both variables set: the new XAX_MCP_CONSTRUCT name buffer was never written (place() was not called for it), so GetEnvironmentVariableA read an empty name. The smoke test caught it before any evidence was recorded; the fix and rebuild produced the identity above, and the oracle and the full suite were re-run on that build"
+  ],
+  "upstream_changes": [
+    "three files in compiler/integration/mcp at 0a0b1c4 (server.py, schemas.py, tests/test_native_stdio.py); no compiler/src change, so the compiler identity stays f79b532"
+  ],
+  "not_done": [
+    "no reproducible committed native Windows decoder build for the pinned tree (B1); the decoder used here is the local 486fa9d prototype",
+    "the general driver does not dispatch `construct`: carrier decoding is a separate program with a file/exit-status contract (B2)",
+    "Linux: no construct, no build and no run were tested on this host (B3)",
+    "candidate stores, rollback and handles for carriers over the 1 MiB arguments limit are not implemented",
+    "paths containing spaces fail closed: the native decoder splits its command line on spaces",
+    "typed I/O to artifacts and xax_result handles remain unimplemented",
+    "no model-driven session (an agent choosing construct -> build -> execute) has been recorded"
+  ],
+  "claim": {
+    "label": "EXECUTED",
+    "statement": "On this host, the native server's xax_construct copied the committed sandbox carrier into its fixed transport path, spawned the host-granted native decoder with a fixed three-word argv, and reported the verified store's root (7ef7099d...) and size (74 434 B); the store it made current is byte-identical to native/xax-mcp-sandbox-gen0.xax. The same decoder reproduced the new server store (1 103 601 B / sha256 afa5b600... / root 9493014f...) from native/construction_request.json byte for byte, and the pinned builder produced the same bytes. Refusals and missing grants fail closed without touching the current store. The decoder and compiler are uncommitted local prototypes, and construct remains windows-x86_64 only."
+  }
+}
