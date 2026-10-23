@@ -50,8 +50,8 @@ upstream gaps and the proposed native compiler service.
 ## Build
 
 This repository contains no source code and no Python. The carriers, canonical stores and executables under
-`native/` are the build products; the tooling that produces them lives in XAX at
-[`compiler/integration/mcp`](https://github.com/MrxSiN/XAX/tree/6b6c35939ff02c365a58c3534cf1b75a2281d393/compiler/integration/mcp).
+`native/` are the build products; the programs and the tooling that builds and checks them live in XAX at
+[`compiler/integration/mcp`](https://github.com/MrxSiN/XAX/tree/7ed308f001544dff8cdf4bb825a6811d00b2027f/compiler/integration/mcp).
 Rebuilding has two stages. Both can run with no interpreter when a native decoder and compiler are granted; the
 compiler is rebuilt locally from the pinned tree and is not committed (B1):
 
@@ -73,20 +73,23 @@ reproduces exactly; fixing that omission is the narrowed B1 item
 was executed against the native compiler: 45 passed, 0 skipped, with the edited artifact executed under confinement
 (`exit_code 41`); `docs/evidence/native-windows-x86_64-chain-3e9b0c2.json`.
 The six carriers, stores and snapshots are committed and deterministic: the decoder reproduces both stores from the
-committed carriers byte for byte, and CI regenerates them from the pinned tooling and fails unless every one matches.
-The three executables are rebuilt from the committed stores; they are not committed. The tool schemas the server
-embeds come from the same upstream tooling.
+committed carriers byte for byte. The three executables are committed canonical artifacts: the executor rebuilds
+byte-identically, and the server build is the same size and behavior but carries the B1 probe omission. CI no longer
+runs an author; it verifies the committed executables against their recorded SHA-256 values and runs the external
+suite against them. The tool schemas the server embeds are `programs/tool-schemas.json` in the same upstream
+directory.
 
 The certified XAX pin is `3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b` (XAX `main`, 2026-10-22): host contract
 `xax-host-contract-v1` r10, toolchain fingerprint
-`ba009daa933c33ba124f2dc2fcb7a09995553b867bc68289555871b2f47eb740`. The authoring tooling and tests live at
-`6b6c35939ff02c365a58c3534cf1b75a2281d393` on branch `integration/mcp-on-main-3e9b0c2`, which is `3e9b0c2` plus the
-MCP commits; its `compiler/src` is byte-identical to `3e9b0c2` (`git diff 3e9b0c2 6b6c359 -- compiler/src` is empty),
+`ba009daa933c33ba124f2dc2fcb7a09995553b867bc68289555871b2f47eb740`. The programs and tests live at
+`7ed308f001544dff8cdf4bb825a6811d00b2027f` on branch `integration/mcp-on-main-3e9b0c2`, which is `3e9b0c2` plus the
+MCP commits; its `compiler/src` is byte-identical to `3e9b0c2` (`git diff 3e9b0c2 7ed308f -- compiler/src` is empty),
 so the store embeds `3e9b0c2` as its pin. See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md).
 
-Python remains only outside this repository and off the request path: the offline carrier authors in
-`compiler/integration/mcp` (used to *change* the program's semantics, not to rebuild it) and the external MCP test
-client. Replacing those authors with native XAX code is upstream work (B5).
+The five Python carrier emitters (`server.py`, `sandbox.py`, `seed.py`, `dsl.py`, `schemas.py`) are retired; the
+verified stores in XAX `compiler/integration/mcp/programs` are the programs. Python remains only outside this
+repository and off the request path: the external MCP test client and the `chain.py`, `bench.py` and
+`fingerprint.py` helpers, which are being ported to XAX as the second half of B5.
 
 ## Run
 
@@ -147,10 +150,10 @@ tools are narrowed to the implemented prototype.
   launched by the server. The committed carriers decode to their committed stores with a native XAX decoder, and the
   build stage is the XAX compiler's `resolve`/`build`, not an interpreter; a committed reproducible native Windows
   compiler for that stage is still missing upstream (B1), and the native `build` omits the reference guard-page stack
-  probe in the large server store (same size and behavior, not byte-identical). The carrier
-  authors that emit the carriers are offline (B5).
-- It does not contain workload logic. The carrier emitter in XAX only writes the construction request; the server's
-  logic is the canonical store.
+  probe in the large server store (same size and behavior, not byte-identical). The carrier authors are retired: the
+  verified stores are the programs, and a carrier is transport.
+- It does not contain workload logic. The committed store is the program; the carrier is only its construction
+  request.
 - It does not claim sandboxing. Execution is refused until an OS-enforced sandbox is implemented in XAX.
 
 ## Documentation
@@ -173,7 +176,7 @@ STDIO and compare the committed bytes.
 ```bash
 git clone https://github.com/MrxSiN/XAX ../XAX
 git -C ../XAX fetch origin integration/mcp-on-main-3e9b0c2
-git -C ../XAX checkout 6b6c35939ff02c365a58c3534cf1b75a2281d393
+git -C ../XAX checkout 7ed308f001544dff8cdf4bb825a6811d00b2027f
 python -m pip install pytest anyio "mcp>=2.3.0,<2.4"
 XAX_MCP_HOME=$PWD XAX_NATIVE_SRC=../XAX/compiler/src \
   python -m pytest -q ../XAX/compiler/integration/mcp/tests
@@ -181,7 +184,8 @@ XAX_MCP_HOME=$PWD XAX_NATIVE_SRC=../XAX/compiler/src \
 
 Set `XAX_MCP_TEST_CONSTRUCT=/path/to/native/construct` to run the gated carrier → store test (it reproduced both
 committed stores byte for byte on the recording host) and `XAX_MCP_TEST_COMPILER=/path/to/native/xaxc` to run the
-gated end-to-end chain test (seed → build → transaction → confined execute). With both gates set the 0.8.0 suite is
-45 passed, 0 skipped in 58 s. Those Python packages are the test
-client and the upstream carrier authors; the server, the executor and the decoder that the tests drive are native
-XAX programs. Nothing here is imported by, installed into, or launched by `xax-mcp-native.exe`.
+gated end-to-end chain test (seed → build → transaction → confined execute). With both gates set the current suite is
+46 passed, 1 skipped on the development host (the SDK test needs mcp 2.x); CI installs mcp 2.3 and runs it. Those
+Python packages are the test client and the `chain.py`, `bench.py` and `fingerprint.py` helpers; the carrier authors
+are retired, and the server, the executor and the decoder that the tests drive are native XAX programs. Nothing here
+is imported by, installed into, or launched by `xax-mcp-native.exe`.

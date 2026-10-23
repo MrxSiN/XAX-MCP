@@ -12,6 +12,12 @@ byte-identical to `3e9b0c2` (`git diff 3e9b0c2 6b6c359 -- compiler/src` is empty
 the certified compiler revision are both `3e9b0c2`. Fetch the branch, or use `3e9b0c2` for the compiler and this
 commit for the tooling.
 
+On 2026-10-23 the carrier authors were retired at tooling commit
+`7ed308f001544dff8cdf4bb825a6811d00b2027f`; the authoritative programs are the verified stores in
+`compiler/integration/mcp/programs`. The 0.8.0 row above is the author-era run and is unchanged. Current CI verifies
+the committed executables by SHA-256 and drives the external suite directly; no author runs. The remaining Python in
+the tooling directory is `chain.py`, `bench.py`, `fingerprint.py` and the test client (the B5 remainder).
+
 Declared support for 0.8.0: exactly `3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b` as the compiler revision, with
 `xax-host-contract-v1` at revision 10. The
 fingerprint covers every Python module and bootstrap `.xax` store of the `xax-compiler` distribution at that
@@ -85,15 +91,14 @@ execution is a Windows prototype, so a model-driven construct/build/execute loop
    snapshot, so no request needs to be committed). The exact commands are in [NATIVE.md](NATIVE.md#build). At 0.8.0 the
    executor artifact rebuilt byte for byte this way; the server artifact is the same size and behaviorally equivalent
    but not byte-identical because it omits the reference guard-page stack probe (that codegen parity is the narrowed
-   B1 item), so the committed server PE remains the reference `xax_build.build` output. Changing the carriers
-   themselves means editing the offline authors in `compiler/integration/mcp` (B5) and re-emitting them.
+   B1 item), so the committed server PE remains the reference `xax_build.build` output. Changing a program is a
+   typed `xaxc edit` on its store, not a regeneration from the retired Python emitters.
 5. Run the external suite: `XAX_MCP_HOME=$PWD XAX_NATIVE_SRC=../XAX/compiler/src python -m pytest -q
    ../XAX/compiler/integration/mcp/tests`; the committed store/request equality check must pass. Set
    `XAX_MCP_TEST_CONSTRUCT` to a native decoder to also run the carrier test, and `XAX_MCP_TEST_COMPILER` to a
    native `xaxc` to also run the compiler-backed chain.
 6. Add a **new** evidence file under `docs/evidence/`; never edit an older one. Update this matrix, the README pin,
-   `NATIVE_XAX_COMMIT` in `compiler/integration/mcp/{server,sandbox}.py` upstream, and the CI checkout ref, in the same
-   change.
+   the programs' embedded pin upstream, and the CI checkout ref, in the same change.
 
 If the new revision changes the store bytes, that is expected; record the new root, store SHA-256, and artifact
 SHA-256. If it removes an interface the build needs, the build fails with an import or attribute error and no store

@@ -1,0 +1,79 @@
+{
+  "schema": "xax-mcp-evidence-v1",
+  "id": "native-windows-x86_64-author-retirement-7ed308f",
+  "recorded": "2026-10-23",
+  "claim": "The five Python carrier authors were retired; the verified stores under compiler/integration/mcp/programs are the authoritative programs, and the external suite drives the committed executables with no author on any build or test path.",
+  "scope": "one Windows 11 x86-64 host; the 0.8.0 artifacts; the integration/mcp-on-main-3e9b0c2 tooling at 7ed308f; the optional native compiler and decoder gates",
+  "xax_compiler_commit": "3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b",
+  "xax_tooling_commit": "7ed308f001544dff8cdf4bb825a6811d00b2027f",
+  "host": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "machine": "AMD64",
+    "python": "3.12.10",
+    "pytest": "9.1.1",
+    "mcp_sdk": "1.30.0"
+  },
+  "programs": {
+    "xax-mcp-native.xax": {"bytes": 1103602, "sha256": "0a698799883375955a421c0f0f5526862e941cc01f6e2738749a6fc61f0bdcab", "root": "18ceecd9fe284e16919bb5f0f40bdf52cf5a90407ad007d218f30d3235024b07"},
+    "xax-mcp-sandbox.xax": {"bytes": 74434, "sha256": "588f57c0fa69eb175b6e06e88c73977292d42c06dfc5b814ec48cc5710bab2b8", "root": "7ef7099d5358bf022715faff1ef26387c1486c554ed2f7d9145bd9d8953ef8b6"},
+    "xax-mcp-seed.xax": {"bytes": 1852, "sha256": "25db5e19257e81e99a79e1b0311b65c8f534507ced0607ad4c5e2f0a81821532", "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587"},
+    "xax-mcp-seed-snapshot.xax": {"bytes": 2118, "sha256": "8624c042a35600de3b4d5e04a6ef61b067b2c7780833bee911ee194596997286", "root": "1af7050c3592b013cb20043d18117362b2e8a25aee7ed405f2688961c4f013b5"}
+  },
+  "executables": {
+    "xax-mcp-native.exe": {"bytes": 359424, "sha256": "9f6e272bbbc938d3493a98b7c68409de31a09ffc4cc958bb41be7447b65c076a", "note": "canonical author build; committed 2026-10-23"},
+    "xax-mcp-sandbox.exe": {"bytes": 25600, "sha256": "6d563e0f23e4f402d55c82b200d42bce91c41c98aab101267e67d3645a1d37e2", "note": "committed 2026-10-23"},
+    "xax-mcp-seed.exe": {"bytes": 1536, "sha256": "8faaeb7e63e5d1a07bcd9c46e3ae3381af267b67e213cec6b992c628fb1843ca", "note": "committed 2026-10-23"}
+  },
+  "retired": [
+    "compiler/integration/mcp/server.py",
+    "compiler/integration/mcp/sandbox.py",
+    "compiler/integration/mcp/seed.py",
+    "compiler/integration/mcp/dsl.py",
+    "compiler/integration/mcp/schemas.py"
+  ],
+  "checks": [
+    {
+      "claim": "The programs are byte-identical to the deployed artifacts",
+      "label": "PROVEN",
+      "method": "test_programs_are_the_committed_artifacts compares all six programs/carriers with XAX_MCP_HOME/native",
+      "result": "pass"
+    },
+    {
+      "claim": "The committed server store rebuilds deterministically with the native compiler",
+      "label": "EXECUTED",
+      "method": "test_native_build_is_deterministic; two xaxc build runs from programs/xax-mcp-native.xax; 110a76a2578f5f55777e6b0438b05642013e9587cae902ef3729229af8e5420e",
+      "result": "two identical 359424-byte artifacts (a87fdd10042b6717d098af7e1014e612f460dabbe725320eeb781c388fd2a2b9); this is the native build, not the author PE",
+      "boundary": "the native build still omits the guard-page probe (B1), so it is not byte-identical to 9f6e272b"
+    },
+    {
+      "claim": "The external suite passes against the committed executables with no author",
+      "label": "EXECUTED",
+      "method": "XAX_MCP_HOME=D:\\GitHub\\XAX-MCP XAX_NATIVE_SRC=<pin>/compiler/src XAX_MCP_TEST_COMPILER=<xaxc> XAX_MCP_TEST_CONSTRUCT=<construct.exe> python -m pytest -q compiler/integration/mcp/tests",
+      "result": "46 passed, 1 skipped (mcp 1.30.0 here; the SDK test needs mcp 2.x)"
+    },
+    {
+      "claim": "The same suite without the optional gates still runs the server and the executor",
+      "label": "EXECUTED",
+      "method": "same command without XAX_MCP_TEST_COMPILER/XAX_MCP_TEST_CONSTRUCT",
+      "result": "43 passed, 4 skipped (SDK client, native build, chain, decoder)"
+    },
+    {
+      "claim": "The measurements still run against the committed executable",
+      "label": "EXECUTED",
+      "method": "bench.py native/xax-mcp-native.exe",
+      "result": "exit 0; cold initialize 17.8 ms, ping median 38 us, tools/list median 70 us, capabilities median 77 us, peak working set 8.72 MB"
+    },
+    {
+      "claim": "CI runs no author and verifies the committed executables",
+      "label": "STRUCTURAL",
+      "method": ".github/workflows/ci.yml at XAX_COMMIT=7ed308f checks the three SHA-256 values, drives native/xax-mcp-native.exe, and runs the external suite",
+      "result": "workflow updated; the run is recorded by CI, not by this file"
+    }
+  ],
+  "not_claimed": [
+    "byte-identical native build of the 181-function server PE (B1)",
+    "a committed reproducible native compiler or decoder (B1)",
+    "the full-directory port: chain.py, bench.py, fingerprint.py and the test client are still Python tooling (B5 remainder)",
+    "any security review of the Windows executor (B4)"
+  ]
+}

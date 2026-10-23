@@ -1,5 +1,24 @@
 # Handoff
 
+## State at 2026-10-23: the verified stores are the programs
+
+- XAX tooling is at `7ed308f001544dff8cdf4bb825a6811d00b2027f` on `integration/mcp-on-main-3e9b0c2`; its
+  `compiler/src` is still byte-identical to the certified pin `3e9b0c2`. The five Python carrier emitters
+  (`server.py`, `sandbox.py`, `seed.py`, `dsl.py`, `schemas.py`) are retired. Their outputs are the authoritative
+  programs in `compiler/integration/mcp/programs`: `xax-mcp-native.xax`, `xax-mcp-sandbox.xax`, `xax-mcp-seed.xax`,
+  the committed seed snapshot, both carriers and `tool-schemas.json`.
+- No author runs on any build or test path. The external suite reads `programs/` and drives the committed
+  executables; with every gate it is 46 passed, 1 skipped on this host, and without the optional gates 43 passed,
+  4 skipped. The suite checks `programs/*` byte for byte against `native/*`.
+- The three executables are now committed canonical artifacts (`native/xax-mcp-native.exe` `9f6e272b...`,
+  `native/xax-mcp-sandbox.exe` `6d563e0f...`, `native/xax-mcp-seed.exe` `8faaeb7e...`). CI verifies those SHA-256
+  values and no longer rebuilds them from an author. The server PE remains the author build because the native
+  backend still omits the guard-page probe (B1).
+- Remaining Python in the XAX directory is `chain.py`, `bench.py`, `fingerprint.py` and the external test client.
+  They are tooling only, never shipped and never on the request path; porting them to XAX is the remainder of the
+  full-directory port.
+- Evidence term: this change is EXECUTED locally and verified by the suite; the CI run is recorded by the workflow.
+
 ## State at 0.8.0 (2026-10-22): XAX `main` `3e9b0c2`, no Python in this repository or its build path
 
 - Certified XAX pin: `3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b` (XAX `main`, 2026-10-22), host contract
@@ -49,13 +68,13 @@
   separate `construct <carrier> <store>` program, not a driver command; there is no bounded query and no
   generation/root-checked transaction interface.
 - **B3**: no Linux build/run of the native server was tested here.
-- **B4**: the Windows sandbox is a prototype (LPAC AppContainer + job object in
-  `compiler/integration/mcp/sandbox.py` in XAX), measured but not reviewed as a security boundary; Linux confinement
-  and the typed I/O contract are missing.
-- **B5**: the carrier authors (`server.py`, `sandbox.py`, `seed.py`, `dsl.py`, `schemas.py` in
-  `compiler/integration/mcp`) are Python. They run offline, write a transport carrier, and never touch the request
-  path or the deployed runtime; the committed carriers make a rebuild Python-free. Replacing them with a native XAX
-  carrier author is upstream work.
+- **B4**: the Windows sandbox is a prototype (LPAC AppContainer + job object in the executor store
+  `compiler/integration/mcp/programs/xax-mcp-sandbox.xax` in XAX), measured but not reviewed as a security boundary;
+  Linux confinement and the typed I/O contract are missing.
+- **B5**: the carrier authors are retired (2026-10-23). The programs are the verified stores in
+  `compiler/integration/mcp/programs`; a carrier is transport. The remaining Python in that directory
+  (`chain.py`, `bench.py`, `fingerprint.py`, the external test client) is tooling only and is the remainder of the
+  full-directory port to XAX.
 
 ### Next steps, in order of leverage
 
@@ -63,7 +82,8 @@
    the same guard-page stack probe as `xax_build.build` in the native backend (the executor already matches
    byte-for-byte), then a versioned `xaxc serve` interface (construct/open/verify/query/edit/build, length-prefixed
    typed requests, structured diagnostics).
-2. Upstream: a native XAX carrier author, so the authoring loop is XAX-only (B5).
+2. Upstream: port the remaining tooling (`chain.py`, `bench.py`, `fingerprint.py`, the test client) to XAX programs
+   so the authoring directory is Python-free (B5 remainder). The carriers and stores are committed and verified.
 3. Here: grow the prototype behind the same tool names - bounded queries, expected-generation/root transactions,
    artifact handles and `xax_result` - without reimplementing graph construction or the compiler in the server.
 4. Sandbox: harden the Windows executor (typed I/O, argv, per-call limits, independent review), and port the Linux

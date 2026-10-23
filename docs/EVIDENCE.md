@@ -10,6 +10,8 @@ identities, the native decoder's byte-identity check, test counts),
 `docs/evidence/native-windows-x86_64-chain-3e9b0c2.json` (the chain re-run with a native compiler rebuilt at the pin),
 `docs/evidence/native-windows-x86_64-native-build-parity-3e9b0c2.json` (the native compiler running the PE stage on
 both committed stores, and the measured byte-parity result),
+`docs/evidence/native-windows-x86_64-author-retirement-7ed308f.json` (the five carrier authors retired; the stores are
+the programs; the suite and bench run against the committed executables),
 `docs/evidence/native-windows-x86_64-build-f79b532-r3.json`,
 `docs/evidence/native-windows-x86_64-chain-f79b532.json` and
 `docs/evidence/native-windows-x86_64-sandbox-f79b532.json` and
@@ -30,6 +32,9 @@ both committed stores, and the measured byte-parity result),
 | The full prototype chain runs against a **native** compiler rebuilt from the pinned tree | EXECUTED | query → resolve+build (1536-byte artifact, 268-byte provenance) → one `XAXEDIT1` edit 40→41 (root `8c01664c...`) → rebuild → `xax_execute` exit 41 with empty output; the chain test passed in 26.63 s, the suite 45 passed / 0 skipped in 58.47 s; `native-windows-x86_64-chain-3e9b0c2.json` |
 | The official MCP Python SDK client interoperates (STDIO) | EXECUTED | `test_standard_sdk_client` ran and passed at 0.8.0 (`mcp.Client`, mcp 2.3.0) |
 | Toolchain pin and fingerprint | EXECUTED | compiler revision `3e9b0c2` (byte-identical `compiler/src` in the tooling commit `6b6c359`), fingerprint `ba009daa...b740` over 125 files; `fingerprint.py` recomputed it from the checkout |
+| The carrier authors are retired; the verified stores are the programs | EXECUTED | tooling commit `7ed308f`; `programs/{xax-mcp-native,xax-mcp-sandbox,xax-mcp-seed,xax-mcp-seed-snapshot}.xax` and the two carriers are byte-identical to `native/*`; the five Python emitters are gone; `native-windows-x86_64-author-retirement-7ed308f.json` |
+| The external suite drives the committed executables with no author on any path | EXECUTED | 46 passed, 1 skipped with the native compiler/decoder gates and 43 passed, 4 skipped without them; the executor test runs the committed `xax-mcp-sandbox.exe` and `xax-mcp-seed.exe`; `native-windows-x86_64-author-retirement-7ed308f.json` |
+| The three executables are committed canonical artifacts and CI checks them | STRUCTURAL | `native/xax-mcp-native.exe` `9f6e272b...`, `native/xax-mcp-sandbox.exe` `6d563e0f...`, `native/xax-mcp-seed.exe` `8faaeb7e...`; CI verifies the SHA-256 values and no longer runs an author; the CI run itself is recorded by the workflow |
 
 The capability claims below were recorded at 0.7.0. They are unchanged and still current for 0.8.0: the protocol
 code, the tool bodies, the grants and the executor store are byte-identical, and only the embedded pin and version

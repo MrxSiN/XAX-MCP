@@ -1,4 +1,3 @@
 build/
 dist/
 .pytest_cache/
-native/*.exe

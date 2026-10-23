@@ -9,9 +9,10 @@ permissions:
   contents: read
 
 env:
-  # The MCP authoring tooling and tests. This is the certified compiler revision (3e9b0c2, XAX main) plus the MCP
-  # commits; its compiler/src is byte-identical to the pin, which is what the store embeds and what the server reports.
-  XAX_COMMIT: 6b6c35939ff02c365a58c3534cf1b75a2281d393
+  # The MCP programs and tests. This is the certified compiler revision (3e9b0c2, XAX main) plus the MCP commits;
+  # its compiler/src is byte-identical to the pin, which is what the store embeds and what the server reports. The
+  # programs are the verified stores under compiler/integration/mcp/programs; the Python carrier authors are retired.
+  XAX_COMMIT: 7ed308f001544dff8cdf4bb825a6811d00b2027f
   XAX_COMPILER_COMMIT: 3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b
   XAX_MCP_HOME: ${{ github.workspace }}
 
@@ -21,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Isolated checkout of the pinned upstream XAX (authoring tooling and tests)
+      - name: Isolated checkout of the pinned upstream XAX (programs and tests)
         uses: actions/checkout@v4
         with:
           repository: MrxSiN/XAX
@@ -47,33 +48,25 @@ jobs:
         with:
           python-version: "3.12"
 
-      # Python here is external test tooling and the offline carrier author (B5 in docs/NATIVE.md). It is never
-      # packaged with, imported by, or launched by the server, and the committed carriers rebuild without it.
+      # Python here is external test tooling (the MCP client, the chain/bench/fingerprint helpers). It is never
+      # packaged with, imported by, or launched by the server. The build path is the committed stores and the
+      # committed executables; no author runs in CI.
       - name: Install the external test client
         run: |
           python -m pip install pytest anyio "mcp>=2.3.0,<2.4"
 
-      - name: Re-emit the carriers and stores with the pinned offline authors
-        run: |
-          python -B upstream-xax/compiler/integration/mcp/server.py  upstream-xax/compiler/src build
-          python -B upstream-xax/compiler/integration/mcp/sandbox.py upstream-xax/compiler/src build
-          python -B upstream-xax/compiler/integration/mcp/seed.py    upstream-xax/compiler/src build
-
-      - name: The regenerated carriers and stores must equal the committed ones byte for byte
+      - name: The committed executables are the canonical author builds
         shell: pwsh
         run: |
-          # The executables are build products (not committed); the six carriers, stores and snapshots are.
-          git ls-files native | ForEach-Object {
-            $name = Split-Path $_ -Leaf
-            $built = Join-Path build $name
-            if (-not (Test-Path $built)) { throw "the build did not produce $name" }
-            $a = (Get-FileHash $built -Algorithm SHA256).Hash
-            $b = (Get-FileHash $_ -Algorithm SHA256).Hash
-            if ($a -ne $b) { throw "artifact differs from the committed one: $name" }
-            "ok $name $a"
+          $expected = @{
+            "native/xax-mcp-native.exe"  = "9F6E272BBBC938D3493A98B7C68409DE31A09FFC4CC958BB41BE7447B65C076A"
+            "native/xax-mcp-sandbox.exe" = "6D563E0F23E4F402D55C82B200D42BCE91C41C98AAB101267E67D3645A1D37E2"
+            "native/xax-mcp-seed.exe"    = "8FAAEB7E63E5D1A07BCD9C46E3AE3381AF267B67E213CEC6B992C628FB1843CA"
           }
-          foreach ($exe in "xax-mcp-native.exe", "xax-mcp-sandbox.exe", "xax-mcp-seed.exe") {
-            if (-not (Test-Path (Join-Path build $exe))) { throw "the build did not produce $exe" }
+          foreach ($path in $expected.Keys) {
+            $actual = (Get-FileHash $path -Algorithm SHA256).Hash
+            if ($actual -ne $expected[$path]) { throw "executable differs from the canonical artifact: $path $actual" }
+            "ok $path $actual"
           }
 
       - name: The built server reports the pin and starts no Python
@@ -83,7 +76,7 @@ jobs:
             '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"ci","version":"0"}}}',
             '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"xax_capabilities","arguments":{}}}'
           ) -join "`n"
-          $out = ($request | & build/xax-mcp-native.exe --read-only) -join "`n"
+          $out = ($request | & native/xax-mcp-native.exe --read-only) -join "`n"
           $payload = ($out -split "`n" | Where-Object { $_ -match '"id":2' } | ConvertFrom-Json).result.content[0].text | ConvertFrom-Json
           if ($payload.server.version -ne "0.8.0+native") { throw "version $($payload.server.version)" }
           if ($payload.xax.pinned_commit -ne "$env:XAX_COMPILER_COMMIT") { throw "pin $($payload.xax.pinned_commit)" }
@@ -97,7 +90,7 @@ jobs:
         run: python -m pytest -q -rs upstream-xax/compiler/integration/mcp/tests
 
       - name: Record protocol measurements (artifact only; committed evidence is curated by hand)
-        run: python upstream-xax/compiler/integration/mcp/bench.py build/xax-mcp-native.exe > evidence-native.json
+        run: python upstream-xax/compiler/integration/mcp/bench.py native/xax-mcp-native.exe > evidence-native.json
 
       - uses: actions/upload-artifact@v4
         with:
