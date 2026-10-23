@@ -1,0 +1,56 @@
+{
+  "schema": "xax-mcp-evidence-v1",
+  "id": "native-windows-ci-author-retirement-39945240009",
+  "recorded": "2026-10-23",
+  "claim": "On a clean GitHub-hosted windows-2022 runner the retired-author workflow verifies the committed executables, starts the native server, and drives the external STDIO suite with no carrier author.",
+  "scope": "one CI run of MrxSiN/XAX-MCP at 7dec53b; the XAX programs and tests at 7ed308f; the optional native compiler and decoder gates are not granted in CI",
+  "repository_commit": "7dec53bbc34ddbef0d5f06bfed57a9e1f9523d20",
+  "xax_tooling_commit": "7ed308f001544dff8cdf4bb825a6811d00b2027f",
+  "xax_compiler_commit": "3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b",
+  "workflow": {
+    "name": "ci",
+    "run_id": 39945240009,
+    "job": "native-windows",
+    "runner": "windows-2022",
+    "conclusion": "success",
+    "duration": "1m6s"
+  },
+  "checks": [
+    {
+      "claim": "The tooling commit carries exactly the certified compiler revision",
+      "label": "EXECUTED",
+      "result": "git diff 3e9b0c2 7ed308f -- compiler/src is empty"
+    },
+    {
+      "claim": "The XAX-MCP repository still contains no Python and no source code",
+      "label": "EXECUTED",
+      "result": "git ls-files '*.py' is empty"
+    },
+    {
+      "claim": "The committed executables are the canonical artifacts",
+      "label": "EXECUTED",
+      "result": "9f6e272b... (server), 6d563e0f... (executor), 8faaeb7e... (seed) all matched"
+    },
+    {
+      "claim": "The committed server reports its identity and starts no Python",
+      "label": "EXECUTED",
+      "result": "server.version 0.8.0+native, xax.pinned_commit 3e9b0c2b..., python_on_request_path false"
+    },
+    {
+      "claim": "The external suite drives the committed executable with no carrier author",
+      "label": "EXECUTED",
+      "result": "44 passed, 3 skipped in 1.72 s; skipped: native build (no XAX_MCP_TEST_COMPILER), chain (no compiler), decoder (no XAX_MCP_TEST_CONSTRUCT)"
+    },
+    {
+      "claim": "The protocol measurements run against the committed executable",
+      "label": "MEASURED",
+      "result": "bench.py native/xax-mcp-native.exe completed and uploaded as the native-evidence artifact"
+    }
+  ],
+  "not_claimed": [
+    "byte-identical native build of the 181-function server PE (B1)",
+    "a committed reproducible native compiler or decoder (B1)",
+    "the Python-free tooling directory: chain.py, bench.py, fingerprint.py and the test client remain (B5 remainder)",
+    "any security review of the Windows executor (B4)"
+  ]
+}

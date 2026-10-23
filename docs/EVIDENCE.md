@@ -12,6 +12,8 @@ identities, the native decoder's byte-identity check, test counts),
 both committed stores, and the measured byte-parity result),
 `docs/evidence/native-windows-x86_64-author-retirement-7ed308f.json` (the five carrier authors retired; the stores are
 the programs; the suite and bench run against the committed executables),
+`docs/evidence/native-windows-ci-author-retirement-39945240009.json` (the clean windows-2022 run: 44 passed, 3 skipped,
+executable hashes and server identity),
 `docs/evidence/native-windows-x86_64-build-f79b532-r3.json`,
 `docs/evidence/native-windows-x86_64-chain-f79b532.json` and
 `docs/evidence/native-windows-x86_64-sandbox-f79b532.json` and
@@ -34,7 +36,7 @@ the programs; the suite and bench run against the committed executables),
 | Toolchain pin and fingerprint | EXECUTED | compiler revision `3e9b0c2` (byte-identical `compiler/src` in the tooling commit `6b6c359`), fingerprint `ba009daa...b740` over 125 files; `fingerprint.py` recomputed it from the checkout |
 | The carrier authors are retired; the verified stores are the programs | EXECUTED | tooling commit `7ed308f`; `programs/{xax-mcp-native,xax-mcp-sandbox,xax-mcp-seed,xax-mcp-seed-snapshot}.xax` and the two carriers are byte-identical to `native/*`; the five Python emitters are gone; `native-windows-x86_64-author-retirement-7ed308f.json` |
 | The external suite drives the committed executables with no author on any path | EXECUTED | 46 passed, 1 skipped with the native compiler/decoder gates and 43 passed, 4 skipped without them; the executor test runs the committed `xax-mcp-sandbox.exe` and `xax-mcp-seed.exe`; `native-windows-x86_64-author-retirement-7ed308f.json` |
-| The three executables are committed canonical artifacts and CI checks them | STRUCTURAL | `native/xax-mcp-native.exe` `9f6e272b...`, `native/xax-mcp-sandbox.exe` `6d563e0f...`, `native/xax-mcp-seed.exe` `8faaeb7e...`; CI verifies the SHA-256 values and no longer runs an author; the CI run itself is recorded by the workflow |
+| The three executables are committed canonical artifacts and CI checks them | EXECUTED | `native/xax-mcp-native.exe` `9f6e272b...`, `native/xax-mcp-sandbox.exe` `6d563e0f...`, `native/xax-mcp-seed.exe` `8faaeb7e...`; CI run 39945240009 on windows-2022 verified all three and ran 44 passed, 3 skipped with no author; `native-windows-ci-author-retirement-39945240009.json` |
 
 The capability claims below were recorded at 0.7.0. They are unchanged and still current for 0.8.0: the protocol
 code, the tool bodies, the grants and the executor store are byte-identical, and only the embedded pin and version

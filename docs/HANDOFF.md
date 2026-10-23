@@ -8,8 +8,9 @@
   programs in `compiler/integration/mcp/programs`: `xax-mcp-native.xax`, `xax-mcp-sandbox.xax`, `xax-mcp-seed.xax`,
   the committed seed snapshot, both carriers and `tool-schemas.json`.
 - No author runs on any build or test path. The external suite reads `programs/` and drives the committed
-  executables; with every gate it is 46 passed, 1 skipped on this host, and without the optional gates 43 passed,
-  4 skipped. The suite checks `programs/*` byte for byte against `native/*`.
+  executables; with every gate it is 46 passed, 1 skipped on this host, without the optional gates 43 passed,
+  4 skipped, and on the clean windows-2022 CI runner 44 passed, 3 skipped (mcp 2.3, no compiler/decoder gates).
+  The suite checks `programs/*` byte for byte against `native/*`.
 - The three executables are now committed canonical artifacts (`native/xax-mcp-native.exe` `9f6e272b...`,
   `native/xax-mcp-sandbox.exe` `6d563e0f...`, `native/xax-mcp-seed.exe` `8faaeb7e...`). CI verifies those SHA-256
   values and no longer rebuilds them from an author. The server PE remains the author build because the native
@@ -17,7 +18,8 @@
 - Remaining Python in the XAX directory is `chain.py`, `bench.py`, `fingerprint.py` and the external test client.
   They are tooling only, never shipped and never on the request path; porting them to XAX is the remainder of the
   full-directory port.
-- Evidence term: this change is EXECUTED locally and verified by the suite; the CI run is recorded by the workflow.
+- Evidence: `native-windows-x86_64-author-retirement-7ed308f.json` (local suite and bench) and
+  `native-windows-ci-author-retirement-39945240009.json` (clean windows-2022 CI run 39945240009, success).
 
 ## State at 0.8.0 (2026-10-22): XAX `main` `3e9b0c2`, no Python in this repository or its build path
 
