@@ -1,5 +1,15 @@
 # Handoff
 
+## 2026-10-27 — Clean 0.9 Windows CI passed
+
+[Run 40451172993](https://github.com/MrxSiN/XAX-MCP/actions/runs/40451172993) at implementation commit
+`a9d285dee197864e17351bbf61801cc881dcaa0f` passed all steps on windows-2022: independent pinned XAX checkout,
+46 verified source-transaction replays, byte-identical native server/provenance rebuilds twice, sandbox rebuild,
+15 protocol golden responses, 51 client exchanges, native timeout enforcement and preview ZIP/evidence uploads.
+[Immutable run evidence](evidence/native-windows-ci-rebuild-40451172993.json) records jobs and artifact identities.
+The additional local oversized-line test rejects 4,194,305 bytes and then negotiates a valid handshake cleanly.
+Full mission/release readiness remains false for the explicit unsupported gates below.
+
 ## 2026-10-27 — 0.9 verified native construction and rebuild (current)
 
 XAX `af376e8a8a1ac5635bcad459cb7063ef0b326430` is committed/pushed separately: it publishes a pinned native Windows

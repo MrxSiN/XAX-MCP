@@ -125,3 +125,5 @@ narrow prototype, only its Windows execution path runs anything, and that path h
 boundary.
 
 Current clean-package evidence: [fresh native-only extraction](evidence/native-windows-clean-package-20261027.json), 28 checks with empty runtime PATH; [raw round trips](evidence/native-windows-roundtrips-20261027.json). These files concern 0.9 and do not alter historical records.
+
+[Windows CI run 40451172993](https://github.com/MrxSiN/XAX-MCP/actions/runs/40451172993) at implementation commit a9d285dee197864e17351bbf61801cc881dcaa0f passed every job step. [Recorded run/jobs/artifact identities](evidence/native-windows-ci-rebuild-40451172993.json) preserve the clean-run scope. [Oversized-line rejection and resynchronization](evidence/native-windows-oversize-20261027.json) is an additional local EXECUTED check.

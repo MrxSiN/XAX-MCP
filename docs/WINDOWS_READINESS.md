@@ -43,3 +43,5 @@ Evidence: [client and semantic construction](evidence/native-windows-x86_64-veri
 The protocol baseline is the official
 [2025-11-25 STDIO specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports).
 The separate [2026-07-28 version](https://modelcontextprotocol.io/specification/2026-07-28) remains open work.
+
+[Windows CI run 40451172993](https://github.com/MrxSiN/XAX-MCP/actions/runs/40451172993) passed on clean windows-2022 at implementation commit a9d285d, including preview packaging. The implementation bytes and tested source remain unchanged by this evidence update.

@@ -70,3 +70,5 @@ attempts or asynchronous cancellation. Full release readiness remains false.
 
 [Installation/rebuild](INSTALL_WINDOWS.md) · [Current gates](WINDOWS_READINESS.md) ·
 [Historical native observations](history/NATIVE_0_8.md).
+
+The crash lease test covers an idle owner. In-flight compiler crash/orphan cleanup remains unimplemented; a compiler child can outlive a crashed server and the lease is deliberately not inherited. No complete in-flight crash isolation claim is made.

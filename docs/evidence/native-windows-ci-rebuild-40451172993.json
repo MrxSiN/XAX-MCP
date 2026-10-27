@@ -1,0 +1,123 @@
+{
+  "schema": "xax-mcp-ci-evidence-v1",
+  "recorded": "2026-10-27",
+  "label": "EXECUTED",
+  "run": {
+    "id": 40451172993,
+    "sha": "a9d285dee197864e17351bbf61801cc881dcaa0f",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/MrxSiN/XAX-MCP/actions/runs/40451172993",
+    "created_at": "2026-10-27T04:42:05Z",
+    "updated_at": "2026-10-27T04:43:43Z"
+  },
+  "jobs": [
+    {
+      "id": 122013996397,
+      "name": "windows-native",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 40451172993,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Check out the immutable XAX native dependency independently",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Replay semantic transactions and rebuild native programs twice",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Replay read-only STDIO protocol golden responses",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Construct, build, confine, reject invalid requests and isolate clients",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Verify native sandbox timeout enforcement",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Assemble the native-only Windows preview package",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Post Check out the immutable XAX native dependency independently",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 12710771553,
+      "name": "xax-mcp-0.9.0-windows-x86_64-preview",
+      "bytes": 6608620,
+      "digest": "sha256:66b41927306165697ee1ea35262d8f137a38ca7e18ca085a76f1174df8d44c64",
+      "expired": false,
+      "archive_download_url": "https://api.github.com/repos/MrxSiN/XAX-MCP/actions/artifacts/12710771553/zip"
+    },
+    {
+      "id": 12710198883,
+      "name": "native-windows-evidence",
+      "bytes": 11081,
+      "digest": "sha256:bf92e35c996825a06403b6bd4c1e697900c9f5dceb9ead7bac225921a788171a",
+      "expired": false,
+      "archive_download_url": "https://api.github.com/repos/MrxSiN/XAX-MCP/actions/artifacts/12710198883/zip"
+    }
+  ],
+  "scope": "Clean windows-2022 checkout; independent immutable XAX checkout; 46 verified semantic transaction replays; two byte-identical native server/provenance builds and sandbox rebuild; 15 golden responses; 51 client exchanges; confinement wall timeout; native preview package. No interpreter or SDK setup or runtime helper."
+}

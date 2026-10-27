@@ -31,3 +31,5 @@ or full release readiness is claimed.
 Current evidence covers invalid candidate rejection/cleanup, stale/zero roots, schema path/command probes, forged
 result handle rejection, read-only and execution grants, separate directories, same-directory refusal and crash
 lease release. External test/CI PowerShell handles transport and assertions only; every runtime component is XAX.
+
+The crash-lease regression kills an idle owner. Terminating a server during a synchronous compiler call may leave its trusted compiler child running after the server handle closes; in-flight compiler crash/orphan cleanup is not yet implemented or certified. Keep this under the remaining execution-supervision release gate.

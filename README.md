@@ -66,3 +66,5 @@ remain outside this deployed path. [Compatibility](docs/COMPATIBILITY.md) · [Se
 [Evidence](docs/EVIDENCE.md) · [Handoff](docs/HANDOFF.md) · [Release status](native/release-status.json).
 
 The [clean-package audit](docs/evidence/native-windows-clean-package-20261027.json) also passed all 28 checks after fresh extraction outside both checkouts, with the bundled native seed and an empty runtime PATH.
+
+[Windows CI run 40451172993](https://github.com/MrxSiN/XAX-MCP/actions/runs/40451172993) passed from clean checkouts, including native rebuilds, 51 protocol exchanges, timeout enforcement and the downloadable preview ZIP.

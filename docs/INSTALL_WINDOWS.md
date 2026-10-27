@@ -93,3 +93,5 @@ historical Python bootstrap, disclosed upstream; these application rebuilds invo
 
 Remove the `xax` registration from your agent host ([host commands](HOSTS.md)), close its running STDIO process,
 and delete only the installation/private work directories you created. No service or interpreter is installed.
+
+Verified preview build: [Windows CI run 40451172993](https://github.com/MrxSiN/XAX-MCP/actions/runs/40451172993), artifact xax-mcp-0.9.0-windows-x86_64-preview. GitHub artifact retention applies; source and pinned rebuild instructions remain available independently.
