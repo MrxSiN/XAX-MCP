@@ -2,14 +2,14 @@
 native/*.xax binary
 # The builders write these with an exact trailing LF; a checkout must never rewrite them
 # (tests compare the committed bytes with a fresh build, and a CRLF checkout fails that).
-native/*.json -text
-docs/evidence/native-*.json -text
+native/*.json -text whitespace=cr-at-eol
+docs/evidence/native-*.json -text whitespace=cr-at-eol
 examples/native-arithmetic/*.xax binary
 examples/native-arithmetic/*.exe binary
 examples/native-arithmetic/*.prov binary
 examples/native-arithmetic/transactions/*.edit binary
-examples/native-arithmetic/*.ndjson -text
-schemas/*.json -text
-tests/protocol/*.ndjson -text
+examples/native-arithmetic/*.ndjson -text whitespace=cr-at-eol
+schemas/*.json -text whitespace=cr-at-eol
+tests/protocol/*.ndjson -text whitespace=cr-at-eol
 tests/security/*.edit binary
 tests/security/*.diag binary
