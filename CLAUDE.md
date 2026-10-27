@@ -11,8 +11,7 @@
   implementation in another programming language or move MCP application implementation into XAX.
 - Change canonical programs through native XAX construction/workspace transactions with exact roots and mandatory
   verification. Do not invent textual XAX syntax, regenerate unchanged graphs, or restore retired Python emitters.
-- A native decoder and compiler must actually be available before claiming a native rebuild. See
-  `docs/WINDOWS_READINESS.md` for the current missing decoder and candidate-publication defect.
+- The exact native compiler seed must be available before claiming a native rebuild. See `docs/WINDOWS_READINESS.md` for remaining gates.
 - No workload logic in the server or build tooling: no per-operation tools, no adapter-side computation, and no
   hard-coded results. Results must come from XAX-generated code.
 - XAX changes belong in `MrxSiN/XAX`; the dependency direction is one-way (`XAX-MCP -> XAX`).
@@ -24,3 +23,5 @@
 - Do not claim a capability that is not executable natively. Use the labels in `docs/EVIDENCE.md`.
 
 `agent-guidance/` holds optional guidance for agents that *use* the server; this file is for agents that develop it.
+
+Current native pin: `af376e8a8a1ac5635bcad459cb7063ef0b326430` (`xax-native-file-v1`); source is `native/xax-mcp-native-gen1.xax`. JSON xax-construct-v1 remains unsupported. Full mission readiness is false.

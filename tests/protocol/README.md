@@ -1,10 +1,13 @@
-# Native STDIO smoke fixture
+# Native STDIO fixtures
 
-`readonly.requests.ndjson` is non-authoritative MCP transport data. With no compiler/decoder environment grants,
-feed it to `native/xax-mcp-native.exe --read-only`; compare the 15 response lines against
-`readonly.responses.ndjson` in order. The initialization notification has no response. Malformed JSON produces
-`-32700`, and the following ping confirms framing recovery. The fixture also covers eight-tool discovery,
-capabilities, unknown method/tool, forbidden mutation/build/execution and unsupported result handles.
+`readonly.requests.ndjson` and `readonly.responses.ndjson` are the 0.9.0 native protocol golden fixture: handshake,
+notification, discovery, capabilities, denied operations, unsupported methods/tools, malformed JSON and resync.
+The emitted schema is `schemas/tools-v2.json`; the v1 file is historical.
 
-The expected responses preserve the unchanged 0.8.0 wire behavior. This is a regression smoke test, not complete
-MCP conformance, schema-validation coverage, SDK interoperability or an XAX compiler verification test.
+`native-sessions.json` contains five isolated compiler-backed client sessions with 46 exchanges and selected expected
+response fields. Together they exercise new graph construction through xax_construct, native build/confined execution
+(40 then 136), staleness, rights, schema rejection, candidate verification and zero-root rejection. CI adds five
+concurrent-process exchanges to check exclusive shared-workdir ownership and crash release (51 total).
+
+The workflow's PowerShell is external transport/assertion orchestration only; it is never a production runtime helper.
+Every operation runs in the native XAX server/compiler/launcher. Timeout fixture execution is separately checked.

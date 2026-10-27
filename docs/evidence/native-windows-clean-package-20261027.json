@@ -1,0 +1,368 @@
+{
+  "schema": "xax-mcp-clean-package-audit-v1",
+  "recorded": "2026-10-27",
+  "label": "EXECUTED",
+  "package_sha256": "0a0ed594579addd5f7f54408cec907e088b2ed11de26c974c7926a9e0f79eadc",
+  "runtime_path": "empty",
+  "compiler_location": "extracted package/xax native seed only",
+  "server_sha256": "a9400a65c6194bbc52128a22da0b59a2feabdfcf0dbb64666bc2807b000b7f1b",
+  "seed_metadata_present": true,
+  "checks": [
+    {
+      "result": {
+        "duration_ms": 15,
+        "exit_code": 40,
+        "flags": 0,
+        "ok": true,
+        "stdout_bytes": 0,
+        "stdout_hex": "",
+        "stderr_bytes": 0,
+        "stderr_hex": ""
+      },
+      "name": "existing canonical seed",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "ok": true,
+        "root": "5d50288185edc442a794ff5aa76a9aa0c0de5949b0b4dab71bf2fc154b7c1c50",
+        "workspace": "ws_0"
+      },
+      "expected_root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+      "name": "insert constant 7 before original call",
+      "record_sha256": "abeba9cc0dc9ca3bf6d858b17d5662ea1bcc11ccf82c6a45fe6d68ae94f63580",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "ok": true,
+        "root": "029342504e8597a0d996c4d2e4dc4dba2e511b034719c9c0460ec10b4a651b20",
+        "workspace": "ws_0"
+      },
+      "expected_root": "5d50288185edc442a794ff5aa76a9aa0c0de5949b0b4dab71bf2fc154b7c1c50",
+      "name": "insert wrapping add of original 40 and new 7",
+      "record_sha256": "b0da74946145ac84cb86326570aedeb41a8938b89cecddc8876c5451c13d93ab",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "ok": true,
+        "root": "20472c5c6a152054c72f77b9a808bd18f2c8fe2266cd7af5db1a3a30b3bdc78d",
+        "workspace": "ws_0"
+      },
+      "expected_root": "029342504e8597a0d996c4d2e4dc4dba2e511b034719c9c0460ec10b4a651b20",
+      "name": "insert constant 3",
+      "record_sha256": "31e67426875d493ce813b26c69a2f842d1006e3e9229f1663fec8f97f249d77f",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "ok": true,
+        "root": "49f51c9558e6226eee4c1f0c55344c093496c2131f6ca68119a6bd90acceb12f",
+        "workspace": "ws_0"
+      },
+      "expected_root": "20472c5c6a152054c72f77b9a808bd18f2c8fe2266cd7af5db1a3a30b3bdc78d",
+      "name": "insert wrapping multiply of new add and 3",
+      "record_sha256": "913c4e1ab2a76626bd350956c3f890c26f6e6a1e3a4d8acd09c01212581cd001",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "ok": true,
+        "root": "544de7832b4fab9895d437e86011bb3775cf041e176fa16ba62a04df9bd5907d",
+        "workspace": "ws_0"
+      },
+      "expected_root": "49f51c9558e6226eee4c1f0c55344c093496c2131f6ca68119a6bd90acceb12f",
+      "name": "insert constant 5",
+      "record_sha256": "16afd5eeaf205b610b39ef746fe7a8e20dff32b2c01039c5b54b3515882d83bd",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "ok": true,
+        "root": "49488d683cd70b2e696a062b0e165615821833c8211036c6043d7d706900ec24",
+        "workspace": "ws_0"
+      },
+      "expected_root": "544de7832b4fab9895d437e86011bb3775cf041e176fa16ba62a04df9bd5907d",
+      "name": "insert wrapping subtract of new product and 5",
+      "record_sha256": "932f0362a6ce09d323f5be796649fbb3f1c1a0b84632e489f6dea15cde53b017",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "ok": true,
+        "root": "236b15c2acc1ac10246b06ac5e23707cd3ffbb144507ca9bc52dd86286d6d8fb",
+        "workspace": "ws_0"
+      },
+      "expected_root": "49488d683cd70b2e696a062b0e165615821833c8211036c6043d7d706900ec24",
+      "name": "replace ExitProcess operand 0: original node 0 -> new node 6",
+      "record_sha256": "7b0b4f0bd3cd71a67329c3d417abb2c96f684e9e940d9b7cb1aaeacca81f4aec",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "error": {
+          "code": "transaction_rejected",
+          "message": "the native compiler rejected the transaction record"
+        },
+        "ok": false
+      },
+      "name": "stale exact-root transaction rejected, current root retained",
+      "status": "EXECUTED"
+    },
+    {
+      "root": "236b15c2acc1ac10246b06ac5e23707cd3ffbb144507ca9bc52dd86286d6d8fb",
+      "result": {
+        "duration_ms": 0,
+        "exit_code": 136,
+        "flags": 0,
+        "ok": true,
+        "stdout_bytes": 0,
+        "stdout_hex": "",
+        "stderr_bytes": 0,
+        "stderr_hex": ""
+      },
+      "name": "new graph ((40 + 7) * 3) - 5",
+      "build": {
+        "ok": true,
+        "root": "236b15c2acc1ac10246b06ac5e23707cd3ffbb144507ca9bc52dd86286d6d8fb",
+        "artifact": {
+          "bytes": 1536
+        },
+        "provenance": {
+          "bytes": 268,
+          "hex": "8a026a1b5340852707101317dc2e757862120cb3bb6f32485a714fcc5223c62aa1100a0104236b15c2acc1ac10246b06ac5e23707cd3ffbb144507ca9bc52dd86286d6d8fb99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967ef70d825d9a7ad3963cfcefb9a92019dfb34db792500e8b3e8dc8e7305c1e7b416605030001026f4d89d144bed43f682190f5176cd154bcd9e2454bafb818e31790a79cc5057dbc351ca3286fa3ff21d2b39e3ea374c3b0f01fb45a5e601d29c2dc08105ce117c3edae156dc12219a764eaafcc5ada5648480107b6df728fb63cb4c2e881c0ff00"
+        }
+      },
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "duration_ms": 0,
+        "exit_code": 136,
+        "flags": 0,
+        "ok": true,
+        "stdout_bytes": 0,
+        "stdout_hex": "",
+        "stderr_bytes": 0,
+        "stderr_hex": ""
+      },
+      "name": "repeat exact new canonical graph",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "error": {
+          "code": "invalid_request",
+          "message": "arguments must contain a hex 'record' string"
+        },
+        "ok": false
+      },
+      "name": "unsupported JSON construction rejected without fallback",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "error": {
+          "code": "unsupported",
+          "message": "xax_result is not implemented by the native XAX server: result handles need session state, which the native server does not implement yet; it fails closed (docs/NATIVE.md)"
+        },
+        "ok": false
+      },
+      "name": "forged result handle fails closed",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "error": {
+          "code": "denied_capability",
+          "message": "this server was not granted the 'mutate' right by its host configuration",
+          "repair": [
+            "the host owner may add --grant mutate to the server launch command"
+          ]
+        },
+        "ok": false
+      },
+      "name": "read-only denies xax_transaction",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "error": {
+          "code": "denied_capability",
+          "message": "this server was not granted the 'build' right by its host configuration",
+          "repair": [
+            "the host owner may add --grant build to the server launch command"
+          ]
+        },
+        "ok": false
+      },
+      "name": "read-only denies xax_build",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "error": {
+          "code": "denied_capability",
+          "message": "this server was not granted the 'execute' right by its host configuration",
+          "repair": [
+            "the host owner may add --allow-execute to the server launch command"
+          ]
+        },
+        "ok": false
+      },
+      "name": "read-only denies xax_execute",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "error": {
+          "code": "denied_capability",
+          "message": "this server was not granted the 'mutate' right by its host configuration",
+          "repair": [
+            "the host owner may add --grant mutate to the server launch command"
+          ]
+        },
+        "ok": false
+      },
+      "name": "read-only denies xax_construct",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "bytes": 1852,
+        "ok": true,
+        "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+        "workspace": "ws_0",
+        "function": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+      },
+      "name": "two processes with distinct host work directories retain separate roots",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "error": {
+          "code": "denied_capability",
+          "message": "this server was not granted the 'execute' right by its host configuration",
+          "repair": [
+            "the host owner may add --allow-execute to the server launch command"
+          ]
+        },
+        "ok": false
+      },
+      "name": "execution requires explicit launch grant",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "error": {
+          "code": "invalid_request",
+          "message": "this tool takes no arguments"
+        },
+        "ok": false
+      },
+      "arguments": {
+        "path": "../../private"
+      },
+      "name": "reject invalid arguments: xax_query",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "error": {
+          "code": "invalid_request",
+          "message": "this tool takes no arguments"
+        },
+        "ok": false
+      },
+      "arguments": {
+        "command": "cmd.exe"
+      },
+      "name": "reject invalid arguments: xax_build",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "error": {
+          "code": "invalid_request",
+          "message": "record requires an exact expected root"
+        },
+        "ok": false
+      },
+      "arguments": {
+        "record": "00"
+      },
+      "name": "reject invalid arguments: xax_transaction",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "error": {
+          "code": "invalid_request",
+          "details": {
+            "errors": 1
+          },
+          "message": "(root): Additional properties are not allowed ('execute' was unexpected)"
+        },
+        "ok": false
+      },
+      "arguments": {
+        "execute": true
+      },
+      "name": "reject invalid arguments: xax_capabilities",
+      "status": "EXECUTED"
+    },
+    {
+      "native_verifier_exit": 0,
+      "executed_candidate": false,
+      "result": {
+        "error": {
+          "code": "transaction_rejected",
+          "message": "the native compiler rejected the transaction record"
+        },
+        "ok": false
+      },
+      "name": "candidate verification before transaction publication",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "error": {
+          "code": "invalid_request",
+          "message": "record requires an exact expected root"
+        },
+        "ok": false
+      },
+      "name": "zero expected root denied; canonical root retained",
+      "status": "EXECUTED"
+    },
+    {
+      "name": "invalid candidate removed after verification rejection",
+      "candidate_exists": false,
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "error": {
+          "code": "workspace_busy",
+          "message": "host workspace is leased or unavailable"
+        },
+        "ok": false
+      },
+      "name": "same host directory denied to a second native process",
+      "status": "EXECUTED"
+    },
+    {
+      "result": {
+        "bytes": 1852,
+        "ok": true,
+        "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+        "workspace": "ws_0",
+        "function": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+      },
+      "name": "OS lease released after owner crash; waiting process retries",
+      "status": "EXECUTED"
+    }
+  ],
+  "note": "Fresh final archive extraction outside either checkout, no bootstrap interpreter or development tooling on request path. External PowerShell process client only."
+}

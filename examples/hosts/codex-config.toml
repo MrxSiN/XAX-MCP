@@ -1,9 +1,12 @@
-# Append to ~/.codex/config.toml (or $CODEX_HOME/config.toml).
-# Use the native XAX-built executable; no Python or MCP SDK is launched by the server.
+# Append to the host's config.toml. Replace these absolute paths for your installation.
+# Native STDIO; execution rights remain with the host owner.
 [mcp_servers.xax]
-command = "C:/ABSOLUTE/PATH/TO/xax-mcp-native.exe"
+command = "D:/Tools/XAX-MCP/native/xax-mcp-native.exe"
 args = ["--read-only"]
-# The native server answers initialize in about 12 ms.  Keep generous tool timeouts for future compiler-backed
-# tools; today they return a structured "unsupported" error immediately.
 startup_timeout_sec = 30
 tool_timeout_sec = 180
+
+[mcp_servers.xax.env]
+XAX_MCP_COMPILER = "D:/Tools/XAX/compiler/bootstrap/windows/xaxc-windows-x86_64.exe"
+XAX_MCP_STORE = "D:/Tools/XAX-MCP/native/xax-mcp-seed.xax"
+XAX_MCP_WORK = "D:/Private/XAX-MCP-work"

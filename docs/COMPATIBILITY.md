@@ -1,5 +1,29 @@
 # Compatibility matrix
 
+## 0.9.0+native — current Windows preview
+
+| Component | Certified scope |
+|---|---|
+| XAX dependency | `af376e8a8a1ac5635bcad459cb7063ef0b326430`, exact seed SHA-256 `aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79`; `xax-native-file-v1` |
+| Platform | Windows x86-64, local host and windows-2022 workflow |
+| MCP | Handshake STDIO through 2025-11-25; no 2026-07-28 or HTTP support |
+| Generic client | External PowerShell 7 process client, 28 checks; CI fixture 51 exchanges |
+| Codex | CLI 0.164.0-alpha.11.1 registration/get/list/remove checked in isolated configuration; no current model invocation claim |
+| Claude Code/Desktop | Current configuration examples reviewed against official docs; apps unavailable on this host, so current interoperability unverified |
+| Construction | Native typed XAXEDIT1, seven new-graph calls; JSON xax-construct-v1 unsupported |
+| Rebuild | 46 exact-root edits replay; two identical server/provenance builds; identical sandbox build from canonical source |
+
+No other upstream revision or seed is certified. `main` is not a version range. Changing the seed requires new
+native rebuild/protocol/security evidence. The historical SDK host contract r10 is not the native file contract.
+
+Upgrade: rediscover tools-v2; `xax_construct` now takes `{record: "<hex>"}`. No decoder environment variable is needed.
+The old constant generation field is removed; use exact roots. Query returns a first-function CID, not a complete
+graph query service. Work directories have exclusive process-lifetime OS leases.
+
+Rows and observations below retain their older scope, including previously failing cases; they are not current
+certification. [Current native guide](NATIVE.md) and [remaining gates](WINDOWS_READINESS.md) take precedence.
+
+
 ## Windows audit — 2026-10-27
 
 | Server | Native compiler tested | Protocol | Result and limit |

@@ -1,16 +1,17 @@
-# Computation through XAX (optional guidance for agents)
+# Computation through XAX (optional host guidance)
 
-Copy into your project's `AGENTS.md` (Codex) when the `xax` MCP server is registered.
+Use this only when the `xax` MCP server is registered. It steers agents; host policy determines available tools.
 
-- Call `xax_capabilities` first. It reports the exact XAX pin, rights, targets, and honest maturity labels for this
-  server build. The current native build implements the MCP protocol and capability reporting; the compiler- and
-  decoder-backed tools are prototypes that need a host grant (`XAX_MCP_COMPILER`/`XAX_MCP_STORE` or
-  `XAX_MCP_CONSTRUCT`) and fail closed without one.
-- When the server reports a tool as implemented, use it for computation it supports instead of writing and running
-  Python or shell code: `xax_construct` (a typed `xax-construct-v1` carrier) -> `xax_build` -> `xax_execute`.
-- The carrier JSON is a typed semantic-graph request (transport), not source. Do not invent a textual XAX syntax.
-- To change a constructed program, query the smallest neighborhood (`xax_query`) and send a typed edit with the
-  exact `expected_generation`/`expected_root` (`xax_transaction`). On `stale_root`, re-query; never retry blindly.
-- If a task needs something `xax_capabilities` reports as unsupported, say so plainly. Do not silently fall back to
-  another language and present it as XAX.
-- These instructions do not force tool selection; the host decides which tools are available.
+- Call `xax_capabilities` and discover current schemas first. Respect reported targets, rights and unsupported gates.
+- For supported computation use native `xax_query` -> `xax_construct` or `xax_transaction` -> `xax_build` ->
+  `xax_execute`. Current construction takes a hexadecimal typed XAXEDIT1 record, not a JSON xax-construct-v1 request.
+- Canonical semantic state is source. Query root and first function identity, send the smallest supported exact-root
+  mutation, and let native XAX verify it. Do not invent textual XAX or calculate an answer in an adapter.
+- Every mutation requires a nonzero exact expected root. Report rejected/stale operations before preparing a fresh
+  edit; never silently refresh/rebase or retry blindly. There is no monotonic generation service in this preview.
+- Compiler/store/work configuration and execution grants belong to the host. Read-only cannot be overridden by
+  arguments. A busy workspace needs another private directory or a retry after its owner exits.
+- Report unsupported typed runtime I/O, general graph queries, paging, result handles, modern MCP or effects plainly.
+  Do not silently fall back to another language and present the result as XAX.
+- A successful computation is an actual XAX-built artifact result with matching canonical root/provenance. The
+  current result mode is an observed u32 process exit; general typed results are not implemented.

@@ -1,5 +1,31 @@
 # Handoff
 
+## 2026-10-27 — 0.9 verified native construction and rebuild (current)
+
+XAX `af376e8a8a1ac5635bcad459cb7063ef0b326430` is committed/pushed separately: it publishes a pinned native Windows
+compiler seed and general native hash build request, with source/bootstrap identities and a versioned file contract.
+No MCP application code was added upstream and no replacement/self-host levels changed.
+
+XAX-MCP source is `native/xax-mcp-native-gen1.xax` (root `edd555239cd0bec3dd5457b882e83e0f341149fa44447878c1633600d854539d`).
+Every change went through native edit+verify; 46 carrier records reconstruct it from the seed without regenerating
+unchanged graphs. Current native executable SHA-256 is `a9400a65c6194bbc52128a22da0b59a2feabdfcf0dbb64666bc2807b000b7f1b`.
+Candidate verification/cleanup, strict query/build guards, native construction dispatch, exact nonzero roots,
+bounded function discovery and process-lifetime exclusive workdir leases are implemented and tested.
+
+28 external-client checks pass. Local CI orchestration passes 46 source edit replays, two matching server/provenance
+builds, sandbox rebuild and 51 protocol exchanges. A separate XAX Sleep(60000) fixture hits the 10-second wall limit.
+The supported non-hard-coded construction loop returns actual exit 136. Codex registration commands pass in an
+isolated config. New append-only evidence is under `docs/evidence/*20261027.json`; historical evidence stays intact.
+
+Full mission/security readiness remains false. Next work: native general semantic query/handles, typed runtime ABI
+and result paging, compiler cancellation and quota/escape coverage, current MCP protocol, actual current Claude and
+model-driven host tests, and compiler self-build. Do not replace these with non-XAX runtime helpers or inflated claims.
+The upstream legacy bootstrap/test sources remain; no new non-XAX implementation was added.
+
+Earlier dated sections below are historical. See [installation](INSTALL_WINDOWS.md), [native guide](NATIVE.md),
+[readiness](WINDOWS_READINESS.md) and [dependency manifest](../native/xax-dependency.json).
+
+
 ## 2026-10-27 — Clean Windows CI smoke passed
 
 Run [40443571319](https://github.com/MrxSiN/XAX-MCP/actions/runs/40443571319) at MCP commit `7eb687d` completed

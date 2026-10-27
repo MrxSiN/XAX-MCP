@@ -1,41 +1,33 @@
-# Native semantic transaction construction
+# Native construction example — 0.9.0
 
-This is an **EXECUTED, narrow prototype**. Starting from `native/xax-mcp-seed.xax`, seven native XAX transactions
-produce a new canonical graph computing `((40 + 7) * 3) - 5`. MCP `xax_build` compiles that graph;
-`xax_execute` runs its executable under Windows confinement and returns exit result **136**.
-No arithmetic is implemented in the adapter or the external test client.
+Starting from `native/xax-mcp-seed.xax`, seven `xax_construct` calls apply typed `XAXEDIT1` records to construct
+canonical semantics for `((40 + 7) * 3) - 5`. The client obtains each exact root and function CID through MCP query;
+no external compiler read is needed to prepare the next request. Native edit applies each candidate, native verify
+gates publication, and native build/execute returns the actual process-exit result **136** under OS confinement.
+No arithmetic is implemented by the adapter or external client.
 
-| File | Meaning |
+| File | Role |
 |---|---|
-| `program.xax` | Authoritative new canonical semantic source, 2,330 bytes |
-| `transactions/01.edit` through `07.edit` | Exact-root `XAXEDIT1` transport records, applied in order |
-| `program.exe` | Actual XAX-built Windows artifact, 1,536 bytes |
-| `program.prov` | Native build provenance, 268 bytes |
-| `requests.ndjson` | Single-session MCP replay, including expected failure cases |
+| `program.xax` | Authoritative new canonical source (2,330 bytes) |
+| `transactions/01.edit` through `07.edit` | Exact-root typed transport, in order |
+| `program.exe`, `program.prov` | Native XAX-built executable and provenance |
+| `requests.ndjson` | Current 0.9 discovery/query/construction/build/execute replay |
 
 Final root: `236b15c2acc1ac10246b06ac5e23707cd3ffbb144507ca9bc52dd86286d6d8fb`.
 Source SHA-256: `3454b07d7d958d8b15323d9d5a6e633db69b3449357b5f9fc78d9a22262d7658`.
 Artifact SHA-256: `832a06e874a109c4cdaf4385e0b50e88b7b8070ee532da6544e3568eaedd2a07`.
 
-The records insert constant 7, add, constant 3, multiply, constant 5, subtract, then replace the original
-`ExitProcess` input with the new subtraction result. Every record names the current function CID and root.
-Each intermediate candidate passed a separate native verifier invocation. Multiple inserts at the same anchor
-in one transaction were rejected by the native editor's unique-mutation-target rule; the successful example
-uses separate exact-root transactions. This is native semantic construction by edits, not a JSON decoder test.
+The edits insert constant 7, add, constant 3, multiply, constant 5, subtract, then replace the original ExitProcess
+operand. Every intermediate candidate also passed independent native verifier checks in the recorded audit.
+Use the pinned native compiler from XAX `af376e8a8a1ac5635bcad459cb7063ef0b326430`, not an unrecorded local build.
+[Installation and replay commands](../../docs/INSTALL_WINDOWS.md) set host compiler/store/private-work grants.
+The native sandbox must be beside the server, and the replay needs `--allow-execute`.
 
-To reproduce the MCP experiment, the host must grant the exact tested native compiler or independently certify
-a compatible one. Its SHA-256 is `ff0355c5bf148bc79cf463748a285c3f982b6c8e47faf8d2d25bd3571b2ad638`;
-it is a recovered local prototype and is not distributed here. Set `XAX_MCP_COMPILER` to that executable,
-`XAX_MCP_STORE` to this checkout's seed store, and `XAX_MCP_WORK` to a fresh, empty, dedicated directory. Then
-feed `requests.ndjson` to `native/xax-mcp-native.exe --allow-execute` over stdin. The host must have the committed
-sandbox executable beside the server. Do not share a work directory with another session.
+The replay runs the seed (40), constructs the graph, rejects a stale transaction, builds/runs 136 twice, rejects the
+unsupported JSON construction carrier and rejects a forged result handle. These expected errors do not indicate a
+fallback. [Current transcript](../../docs/evidence/native-windows-x86_64-verified-construction-20261027.json)
+records 28 checks. The [older transcript](../../docs/evidence/native-windows-x86_64-transaction-construction-20261027.json)
+retains its previously failing security observations; those defects were repaired and retested in 0.9.
 
-Responses 6, 18 and 19 report exit results 40, 136 and 136. Request 15 deliberately replays a stale transaction;
-20 checks the absent decoder and 21 checks an unsupported result handle. Those failures are expected. The
-complete observed transcript is in
-[`docs/evidence/native-windows-x86_64-transaction-construction-20261027.json`](../../docs/evidence/native-windows-x86_64-transaction-construction-20261027.json).
-
-CI can run the committed executable in the native sandbox without a compiler or interpreter. That validates the
-recorded artifact's behavior, not a rebuild or the full construction path. This program has no typed runtime
-arguments or outputs; its result is the process exit status. See [release blockers](../../docs/WINDOWS_READINESS.md)
-before enabling mutation/execution in an agent host.
+There are no typed runtime arguments/results here; the result is an observed unsigned process-exit value.
+General runtime I/O and other [remaining gates](../../docs/WINDOWS_READINESS.md) are not implied by this example.

@@ -1,114 +1,58 @@
-# Agent hosts: register, use, remove, troubleshoot
+# Agent host registration — native Windows preview
 
-> **Historical (0.5.x Python prototype).** The registration syntax is still useful, but replace the Python
-> `xax-mcp` command with `native/xax-mcp-native.exe`. The deployed server's compiler-backed tools are a narrow
-> prototype; see [NATIVE.md](NATIVE.md).
+Use an absolute native executable path and host-controlled environment. See [installation](INSTALL_WINDOWS.md).
+All examples default to read-only. A host owner may remove `--read-only` for construction/build or replace it with
+`--allow-execute` for sandboxed execution. No tool parameter grants these rights. Create a separate private work
+directory per client. The server implements legacy handshake MCP through 2025-11-25.
 
-Install first ([README](../README.md#install)). In the examples, `XAX=~/.venvs/xax-mcp/bin/xax-mcp`. Use an
-absolute path when the host does not inherit your shell `PATH`.
+## Codex
 
-Launch flags (the host owner's policy):
+The installed **codex-cli 0.164.0-alpha.11.1** successfully ran add/get/list/remove in a fresh isolated configuration;
+[the evidence](evidence/native-windows-codex-registration-20261027.json) does not claim model-driven invocation.
+The [official MCP configuration reference](https://developers.openai.com/codex/mcp) documents native STDIO command,
+arguments and environment. The [TOML example](../examples/hosts/codex-config.toml) uses that syntax.
 
-| Flag | Effect |
-|---|---|
-| `--allow-execute` | grant sandboxed execution (otherwise construct/edit/build only) |
-| `--read-only` / `--deny RIGHT` | withhold rights (`read`, `mutate`, `build`, `execute`) |
-| `--store-root DIR` | allow opening `.xax` stores under DIR by relative name (repeatable) |
-| `--wall-ms`, `--cpu-seconds`, `--memory-mb`, `--max-output-bytes`, `--max-request-bytes` | limits (tools can only lower them) |
-| `--check` | print compatibility and sandbox status, then exit |
-| `--prepare` | ready XAX's component images (`xax_native.prepare`, in parallel), then start the per-user warm server and wait until XAX is loaded (run once after installing) |
-| `--no-warm-server` | serve in this process instead of forking from the warm server |
-
-Environment variables: `XAX_MCP_LOG` (log level on stderr), `XAX_NATIVE_CACHE` (XAX's component image cache;
-keep it warm for fast starts), `XAX_MCP_ALLOW_UNTESTED_XAX=1` (run against an untested XAX build),
-`XAX_MCP_WARM_SERVER=0` (disable the warm server), `XAX_MCP_WARM_IDLE_SECONDS` (warm server idle exit, default 900),
-`XAX_MCP_WARM_DIR` (warm server socket directory; must be a private 0700 directory).
-
-Launches normally take about 0.1 s to answer `initialize`, because they fork from a per-user warm server
-([PERFORMANCE.md](PERFORMANCE.md)). Run `$XAX --prepare` once after installing or upgrading; otherwise the first
-launch serves in-process and starts the warm server for the next one.
-
-## Claude Code (verified with 2.1.294)
-
-```bash
-claude mcp add --scope user xax -- "$XAX" --allow-execute      # or --scope project to write .mcp.json
-claude mcp list                                                 # health check: "xax: … √ Connected"
-claude mcp remove xax -s user
-```
-
-The project-scope file is [`examples/hosts/claude-code.mcp.json`](../examples/hosts/claude-code.mcp.json).
-Claude Code asks you to approve project-scoped servers on first use.
-
-## Claude Desktop
-
-Add [`examples/hosts/claude_desktop_config.json`](../examples/hosts/claude_desktop_config.json) to
-`claude_desktop_config.json` (Settings → Developer → Edit Config) with an absolute command path, then restart.
-To remove it, delete the `xax` entry. Execution needs Linux x86-64 or Windows x86-64, so on macOS the server
-constructs and builds but reports `sandbox_unavailable` for execution. This host was not run in this
-verification.
-
-## Codex (verified with codex-cli 0.161.0)
-
-```bash
-codex mcp add xax -- "$XAX" --allow-execute
+```powershell
+codex mcp add xax --env XAX_MCP_COMPILER=D:/Tools/XAX/compiler/bootstrap/windows/xaxc-windows-x86_64.exe --env XAX_MCP_STORE=D:/Tools/XAX-MCP/native/xax-mcp-seed.xax --env XAX_MCP_WORK=D:/Private/XAX-MCP-work -- D:/Tools/XAX-MCP/native/xax-mcp-native.exe --read-only
+codex mcp get xax --json
 codex mcp list
 codex mcp remove xax
 ```
 
-Then add the timeouts from [`examples/hosts/codex-config.toml`](../examples/hosts/codex-config.toml) to the
-`[mcp_servers.xax]` table in `~/.codex/config.toml`. Run `"$XAX" --prepare` once after installing: launches then
-fork from the warm server and answer in about 0.2 s. Without it, the first launch waits for the XAX component
-warm-up (about 0.4 s with a warm `XAX_NATIVE_CACHE`, about 42 s with an empty one), which can exceed Codex's default
-tool timeout.
+For the ZIP set the compiler to its `xax/xaxc-windows-x86_64.exe`. Registration alone does not prove that a host
+negotiates a supported protocol or that a model selects a tool; verify discovery in a new host session.
 
-## Generic clients
+## Claude Code / Desktop
 
-- Official SDK: `python examples/generic_client.py` (full loop).
-- MCP Inspector: `npx @modelcontextprotocol/inspector "$XAX" --allow-execute` (UI), or
-  `npx @modelcontextprotocol/inspector --cli "$XAX" --method tools/list`. Each CLI invocation starts a new
-  server, so handles do not carry over between invocations.
-- Any client: STDIO, newline-delimited JSON-RPC. Protocol versions 2024-11-05 … 2025-11-25 (handshake) and
-  2026-07-28 are supported by the SDK.
+Current Claude applications were unavailable here. These are **unverified current-host examples**, reviewed against
+[Claude Code's official MCP guide](https://code.claude.com/docs/en/mcp); the generic STDIO client is the executed
+interoperability evidence. Do not reuse older SDK/host test counts as certification of this version.
 
-## Steering agents to XAX
+For Claude Code, copy [the project example](../examples/hosts/claude-code.mcp.json) to `.mcp.json`, replace absolute
+paths and keep its host launch approval flow. Use `claude mcp list` to inspect configuration and
+`claude mcp remove xax -s project` to unregister. For Desktop, merge
+[the Desktop example](../examples/hosts/claude_desktop_config.json) into the host's Developer configuration and restart;
+to remove, delete the `xax` entry. Neither configuration starts an interpreter or shell wrapper.
 
-Registering the server makes XAX available. It does not make a model choose it. To steer agents:
+## Generic STDIO client
 
-- add [`agent-guidance/AGENTS.md`](../agent-guidance/AGENTS.md) or [`CLAUDE.md`](../agent-guidance/CLAUDE.md)
-  to the project (advisory only);
-- where the host supports it, the host owner can disable competing execution tools. In Claude Code, add
-  `"Bash"` and other execution tools to `permissions.deny` in `.claude/settings.json`. In Codex, use a
-  restrictive `sandbox_mode`/approval policy. Check your host's current documentation, because these settings
-  change.
+[The replay](../examples/native-arithmetic/requests.ndjson) initializes, discovers tools, runs the seed, constructs
+seven new exact-root mutations, builds and executes result 136. Feed it to the native server as shown in the
+[installation guide](INSTALL_WINDOWS.md). Expected rejection cases are intentional. The machine-checked
+session fixture and expected response fields are in [native-sessions.json](../tests/protocol/native-sessions.json).
+CI contains external PowerShell process-client orchestration; every server operation runs in native XAX.
+No maintained SDK is installed or required by this server.
 
-Hosted chat products' built-in Python tools are not affected by this server.
+## Troubleshooting and tool choice
 
-## Removing the plugin completely
+* `denied_capability`: check host flags and all three compiler/store/work environment variables.
+* `workspace_busy`: another process owns that directory, or Windows could not open its lease; use a private existing
+  directory and verify its access. The lease releases on exit/crash.
+* `transaction_rejected`: inspect the exact expected root and native carrier types. Requery after reporting staleness;
+  never silently rebase an edit. Zero expected roots and unknown properties are invalid.
+* `unsupported`: typed runtime I/O, JSON construction, general query/paging, xax_result, Linux, HTTP and modern MCP
+  are not implemented. Report the limitation; do not switch to an unrestricted fallback.
 
-Unregister it from the host (above), stop the warm server, and delete the virtual environment:
-
-```bash
-pkill -f 'xax_mcp[.]warm'        # or wait: it exits after 15 idle minutes
-rm -rf ~/.venvs/xax-mcp "${XDG_RUNTIME_DIR:-$HOME/.cache/xax-mcp/run}/xax-mcp" ~/.cache/xax-mcp
-```
-
-`~/.cache/xax-native` is XAX's own image cache; remove it too if no other XAX install uses it.
-
-## Troubleshooting
-
-| Symptom | Cause and fix |
-|---|---|
-| `sandbox_unavailable: … unshare: Operation not permitted` | unprivileged user namespaces are disabled. Ubuntu 23.10+: `sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0` (or an AppArmor profile for the Python binary); others: `sysctl kernel.unprivileged_userns_clone=1` |
-| `sandbox_unavailable` on macOS | execution is Linux or Windows x86-64 only; construct/build still work |
-| `sandbox_unavailable … AppContainer profile` on Windows | the user profile cannot hold AppContainer profiles (for example a service account); run as an interactive user |
-| `unsupported … not executable by this server` | the program was constructed for the other platform; use the `platform` of `xax_capabilities` `targets[0]` |
-| `denied_capability … execute` | add `--allow-execute` to the host config |
-| server exits: `incompatible XAX toolchain` | install the pinned XAX (reinstall xax-mcp in a fresh venv) or see [COMPATIBILITY.md](COMPATIBILITY.md) |
-| first call times out | run `xax-mcp --prepare` once (it waits until XAX is loaded); keep `XAX_NATIVE_CACHE` writable |
-| a launch behaves like an older version | the socket is keyed by the installed sources, so this should not happen; stop the warm server (`pkill -f 'xax_mcp[.]warm'`) and report it |
-| want no background process | add `--no-warm-server` to the host config (or set `XAX_MCP_WARM_SERVER=0`) |
-| `stale_root` | the workspace changed; re-query and resend the edit with the new generation and root |
-| `stale_artifact` | rebuild, or pass `require_current: false` to run an older immutable build |
-| nothing on stdout, logs on stderr | expected: stdout carries JSON-RPC only |
-
-`xax-mcp --check --allow-execute` prints the XAX pin, the fingerprint, and the sandbox probe details.
+Optional [AGENTS](../agent-guidance/AGENTS.md) / [CLAUDE](../agent-guidance/CLAUDE.md) guidance can steer selection.
+It cannot change a hosted model's internal tools or enforce selection by itself. Host owners control competing tools
+through their host's own policy. No global agent configuration was modified during these registration tests.

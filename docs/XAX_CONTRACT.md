@@ -1,5 +1,16 @@
 # The XAX interfaces this adapter consumes
 
+## Native Windows contract — current 0.9
+
+The adapter consumes `xax-native-file-v1` from XAX `af376e8a8a1ac5635bcad459cb7063ef0b326430`:
+`verify`, `inspect`, `edit`, `resolve` and `build`, as documented in that revision's
+`compiler/bootstrap/windows/README.md`. The exact native seed is pinned in
+[the dependency manifest](../native/xax-dependency.json); no Python API is imported at runtime.
+`XAXEDIT1` is typed transport; semantic authority remains upstream native edit and verify. The adapter explicitly
+verifies staged candidates because native edit alone does not provide that guarantee. Source/build and native
+inspection limits are documented in [NATIVE.md](NATIVE.md). The material below concerns retired SDK prototypes.
+
+
 > **Historical (0.5.x Python prototype).** The native 0.8.0 server consumes XAX at build time
 > (`xax_construct`, `xax_build`) and, when the host grants it, spawns a native XAX compiler at runtime; it embeds no
 > compiler and no Python. See [NATIVE.md](NATIVE.md).

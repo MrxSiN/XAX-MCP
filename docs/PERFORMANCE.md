@@ -1,5 +1,21 @@
 # Start-up performance
 
+## 0.9 native observations — 2026-10-27 (current)
+
+[Raw local round trips](evidence/native-windows-roundtrips-20261027.json) record a single Windows fixture run with
+all 51 requests, including rejection cases. Successful seed build was 31.37 ms; its build-and-confined-execute
+call was 96.51 ms. After construction, build was 26.58 ms and two execute calls were 90.56 and 90.50 ms.
+These are PowerShell-observed wall round trips on one development machine, not stable performance guarantees.
+Execute currently resolves/builds again; a repeated call is not a no-build artifact-cache proof. Cold native-process
+startup and warm OS caches are distinct from the retired warm Python server discussed below.
+
+[The clean package check](evidence/native-windows-clean-package-20261027.json) ran all 28 regression checks after
+fresh extraction outside both checkouts, with an empty PATH for the server and only its bundled native compiler.
+No interpreter bootstrap or non-XAX helper was on the request path. This does not certify the unfinished release
+gates. These measurements are separate from R4 generated-code and deferred AI-token efficiency milestones.
+
+Earlier sections below concern historical prototypes.
+
 > **Historical (0.5.x Python prototype).** The deployed 0.8.0 server is native and has different (protocol-only and
 > compiler-backed) measurements in [NATIVE.md](NATIVE.md).
 

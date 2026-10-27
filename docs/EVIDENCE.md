@@ -1,5 +1,25 @@
 # Evidence and claim labels
 
+## 2026-10-27 — 0.9 native repairs (current)
+
+The exact dependency is XAX `af376e8a8a1ac5635bcad459cb7063ef0b326430`, native contract `xax-native-file-v1`.
+[28-check client evidence](evidence/native-windows-x86_64-verified-construction-20261027.json) records native
+construction result 136, verified publication/rejection/cleanup, strict query/build schemas, stale/zero-root denial,
+launch grants, distinct directories, same-directory lease denial and release on crash. All 28 checks are EXECUTED.
+[The new timeout observation](evidence/native-windows-x86_64-timeout-20261027.json) records termination of a
+60-second native sleep after approximately 10 seconds. [Codex registration evidence](evidence/native-windows-codex-registration-20261027.json)
+checks add/get/list/remove with codex-cli 0.164.0-alpha.11.1 in an isolated config; it is not a model tool-call claim.
+
+The Windows CI orchestration has also run locally: 46 exact-root source edits replay to identical canonical bytes,
+every candidate verifies, two native server/executable/provenance builds match and the sandbox rebuild matches.
+The external client fixture checks 51 exchanges. PowerShell provides external orchestration only. The compiler seed
+has a disclosed historical Python bootstrap and declines its own source; no bootstrap interpreter ran here.
+Full mission/security readiness remains false. A decoder is no longer required for supported XAXEDIT1 construction.
+
+All dated sections below describe earlier builds. Their failing observations remain immutable evidence, superseded
+only by the retested cases above. See [current readiness](WINDOWS_READINESS.md).
+
+
 ## 2026-10-27 current audit
 
 [Clean Windows CI smoke](evidence/native-windows-ci-smoke-40443571319.json), GitHub run 40443571319 at commit
@@ -103,3 +123,5 @@ are not claims about the 0.7.0 native server.
 Do not reinterpret those runs as evidence for the native server. The native server's compiler-backed tools are a
 narrow prototype, only its Windows execution path runs anything, and that path has not been reviewed as a security
 boundary.
+
+Current clean-package evidence: [fresh native-only extraction](evidence/native-windows-clean-package-20261027.json), 28 checks with empty runtime PATH; [raw round trips](evidence/native-windows-roundtrips-20261027.json). These files concern 0.9 and do not alter historical records.

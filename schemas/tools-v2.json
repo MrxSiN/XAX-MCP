@@ -1,0 +1,188 @@
+{
+  "tools": [
+    {
+      "_meta": {
+        "xax-mcp/schema": "xax-mcp-tools-v2"
+      },
+      "annotations": {
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "description": "Server/compiler identity, pinned XAX revision, targets, operations, carrier types, I/O modes, granted rights, sandbox status and honest maturity labels. Call first.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "name": "xax_capabilities",
+      "title": "XAX capabilities"
+    },
+    {
+      "_meta": {
+        "xax-mcp/schema": "xax-mcp-tools-v2"
+      },
+      "annotations": {
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "description": "Describe the single host-granted workspace: canonical root, store byte size and first function identity from bounded native inspection. The OS holds an exclusive directory lease until process exit. No open/close or portable scoped handles.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "name": "xax_workspace",
+      "title": "XAX workspace"
+    },
+    {
+      "_meta": {
+        "xax-mcp/schema": "xax-mcp-tools-v2"
+      },
+      "annotations": {
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "description": "Bounded native inspection: current root, byte size and first function CID (CID order, not necessarily entry). At most 65536 inspection bytes. General operands/uses/types/effects/proof queries and pagination are unsupported.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "name": "xax_query",
+      "title": "XAX bounded query"
+    },
+    {
+      "_meta": {
+        "xax-mcp/schema": "xax-mcp-tools-v2"
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "description": "Construct a new supported graph with an exact-root XAXEDIT1 typed mutation carrier. Native XAX applies and verifies the staged candidate before publication. The record is hexadecimal transport; canonical semantic state is source. JSON xax-construct-v1 is unsupported.",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "record"
+        ],
+        "properties": {
+          "record": {
+            "type": "string",
+            "pattern": "^[0-9A-Fa-f]+$",
+            "minLength": 2,
+            "maxLength": 2097152
+          }
+        }
+      },
+      "name": "xax_construct",
+      "title": "XAX native construction"
+    },
+    {
+      "_meta": {
+        "xax-mcp/schema": "xax-mcp-tools-v2"
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "description": "Apply an exact-root XAXEDIT1 typed mutation carrier. Native edit stages a candidate; native verify must succeed before atomic publication. Rejection or decline retains the current root. Record is hexadecimal transport, not source. Generation/read-set extensions remain unsupported.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "record": {
+            "maxLength": 2097152,
+            "minLength": 2,
+            "pattern": "^[0-9A-Fa-f]+$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "record"
+        ],
+        "type": "object"
+      },
+      "name": "xax_transaction",
+      "title": "XAX transaction"
+    },
+    {
+      "_meta": {
+        "xax-mcp/schema": "xax-mcp-tools-v2"
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "description": "PROTOTYPE: resolves and builds the current store with the host-granted native XAX compiler ('resolve' then 'build'), writing snapshot/artifact/provenance into the host-granted work directory. Returns the canonical root, artifact byte count and the provenance object (byte count and hex). Artifact handles, entry/package selection, digest reports and toolchain caching are not implemented yet.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "name": "xax_build",
+      "title": "XAX build"
+    },
+    {
+      "_meta": {
+        "xax-mcp/schema": "xax-mcp-tools-v2"
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "description": "PROTOTYPE: resolves and builds the current store, then runs that artifact inside the native OS sandbox and returns exit_code, duration_ms, flags (bit 0 timeout, bit 2 output truncated) and the artifact's stdout/stderr as hex. The sandbox is a capability-less Windows AppContainer inside a job object (fixed limits: 5 s CPU, 256 MiB, one process, 10 s wall, 1 MiB per stream); it ships beside the server as xax-mcp-sandbox.exe and is built from native/xax-mcp-sandbox-gen0.xax. Takes NO arguments yet: the artifact handle, input/output layout, argv, effects and per-call limits fail closed rather than being ignored; Linux namespaces and the xax-mcp-io-v1 framing are not implemented. Requires the host-granted execute right.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "name": "xax_execute",
+      "title": "XAX execute"
+    },
+    {
+      "_meta": {
+        "xax-mcp/schema": "xax-mcp-tools-v2"
+      },
+      "annotations": {
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "description": "UNIMPLEMENTED natively; calls fail closed with 'unsupported'. Target contract: fetch a bounded chunk of a large result by opaque handle: execution stdout (res_), a workspace's canonical store bytes (ws_), or a stored diagnostic (diag_). Never returns unbounded data.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "handle": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_.@-]+$",
+            "type": "string"
+          },
+          "length": {
+            "maximum": 65536,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "offset": {
+            "maximum": 2147483648,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "handle"
+        ],
+        "type": "object"
+      },
+      "name": "xax_result",
+      "title": "XAX result"
+    }
+  ]
+}

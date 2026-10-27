@@ -1,0 +1,12 @@
+{
+  "schema": "xax-mcp-sandbox-timeout-audit-v1",
+  "recorded": "2026-10-27",
+  "label": "EXECUTED",
+  "canonical_root": "f00c174a4d0c87085eb57e75f683b47631dfa432334b9ecde2a274413f3f379a",
+  "exe_sha256": "5f6db05726dda6ac0192e09592a81eb585b9c71876a6fd9846c6efcb9aa837f9",
+  "launcher_exit": 0,
+  "result_hex": "01000000010000001027000000000000",
+  "wall_ms": 10106,
+  "flags": 1,
+  "note": "Native XAX graph calls Windows Sleep(60000); fixed native AppContainer/job launcher terminates at 10000 ms"
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "xax-mcp-native-dependency-v1",
+  "repository": "https://github.com/MrxSiN/XAX",
+  "commit": "af376e8a8a1ac5635bcad459cb7063ef0b326430",
+  "contract": "xax-native-file-v1",
+  "seed_path": "compiler/bootstrap/windows/xaxc-windows-x86_64.exe",
+  "seed_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79",
+  "compatible_range": "Only this immutable seed is tested; no moving main or other seeds certified",
+  "bootstrap": "Historical Python SDK; no bootstrap interpreter invoked for current application build/runtime",
+  "self_host": "Not claimed; native compiler own-source build declines"
+}

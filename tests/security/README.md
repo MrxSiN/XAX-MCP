@@ -1,18 +1,14 @@
-# Native release-gate regressions
+# Native security regression data
 
-These are transport fixtures and observed native diagnostics. They are not application source or passing
-release claims. The full observations are in
-[`native-windows-x86_64-transaction-construction-20261027.json`](../../docs/evidence/native-windows-x86_64-transaction-construction-20261027.json).
+`invalid-add-operand.edit` carries a native edit with an effect-token operand where bits32 is required. The historical
+`.diag` proves the resulting candidate fails native verification. Current 0.9 MCP tests must reject the transaction,
+retain the original valid source and delete `next.xax`; the candidate is never executed.
 
-`invalid-add-operand.edit` expects the canonical seed root and inserts an add of node 0's bits32 result and
-parameter 0's effect token. Correct behavior is rejection before publication, with the seed root and generation
-unchanged. Current behavior is a successful MCP transaction publishing an invalid candidate. Independent native
-verification returns exit 1, `XAX.STRUCT.OP_TYPE / GRAPH-OP-TYPE`; `invalid-add-operand.diag` is its exact binary
-record. Never execute this candidate. Reproduce only with a fresh, isolated scratch workspace.
+`timeout/timeout.xax` is an authoritative canonical XAX program that calls Windows Sleep(60000). Its exact-root native
+construction carrier and native executable/provenance accompany it. The AppContainer/job launcher must terminate it
+at approximately 10 seconds with timeout flag 1. CI rebuilds this fixture with the pinned native seed before running.
 
-Query `{ "path": "../../private" }` and build `{ "command": "cmd.exe" }` must return `invalid_request` because
-their schemas disallow properties. The current server ignores those properties and reports success. The test
-observed the unchanged seed root/build; it did not observe arbitrary file access or shell execution.
-
-Current CI is a native smoke gate, not a passing security gate. These failing cases remain explicitly tracked
-until canonical server transactions fix them and native end-to-end checks demonstrate rejection and cleanup.
+`tests/protocol/native-sessions.json` covers the new graph, stale roots, forbidden properties, malformed carriers,
+read-only grants, execution denial, unsupported construction/results and zero expected roots. External CI orchestration
+also tests shared-workdir refusal and lease release after a process crash. All program logic is native XAX.
+These regressions do not constitute complete sandbox/escape/quota certification; release readiness remains false.

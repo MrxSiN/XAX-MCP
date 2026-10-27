@@ -1,0 +1,240 @@
+{
+  "schema": "xax-mcp-native-transactions-v1",
+  "base": "native/xax-mcp-seed.xax",
+  "base_root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+  "final": "native/xax-mcp-native-gen1.xax",
+  "final_root": "edd555239cd0bec3dd5457b882e83e0f341149fa44447878c1633600d854539d",
+  "record_authority": "Non-authoritative typed XAXEDIT1 transport; native edit and verify enforce semantic authority",
+  "records": [
+    {
+      "path": "native/transactions/20261027/server-base.import-00.edit",
+      "bytes": 15627,
+      "sha256": "94c8f36ab0e90cf565e9482e8241967fd6b41531e2a05e6de5f79d75b7f76221"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-01.edit",
+      "bytes": 22145,
+      "sha256": "fd6486ca86e35d8f815cf18b8c69ca0cd13b69a3a78f412d5bc21687aa96ab68"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-02.edit",
+      "bytes": 29809,
+      "sha256": "028e7a30274a4296050e3ea6a8f699edb4d53d49b30df51b44cf0bcd98d2a5cc"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-03.edit",
+      "bytes": 36769,
+      "sha256": "75f2369d04bd47d1fff034c75a3502884c274df2589068c1ced6e6ff6942f1ab"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-04.edit",
+      "bytes": 43053,
+      "sha256": "065eb13cc5e9ffaa3b295d6bbb0cf023fa2b06c8db62c6a41d159d9c9a087b1f"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-05.edit",
+      "bytes": 49853,
+      "sha256": "249b8580d0bdcd54f12b196041d68c82536606d961ff86ebe104d9bc0252dce5"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-06.edit",
+      "bytes": 56653,
+      "sha256": "0edcdf3cb66b9d23cd153794231a5bf1e36ab2b7cc0d05a5bf5eb64c6936aa2c"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-07.edit",
+      "bytes": 63453,
+      "sha256": "c3079f50ce13acfc7e67a34fc5dc0312eb198c05f09eba9f12158c4eb6742c02"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-08.edit",
+      "bytes": 70253,
+      "sha256": "1c495f67a7bba6edf9c11ca8e240681009d68d64d8a4dd024e52f7522f892563"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-09.edit",
+      "bytes": 77053,
+      "sha256": "6e64695d57cbbd197955f23eaa3e01bfdf2473d681a1be9c99fd493181ef8e6f"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-10.edit",
+      "bytes": 83853,
+      "sha256": "ea56165fe328b5826ff19ef1ddf724c9d3cd9e1338314a61e6dd871a8a52dff8"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-11.edit",
+      "bytes": 90502,
+      "sha256": "a5dd48b8249b61b207ae096ba82dd42940a1ab5f38838092ab7831e9892f2c99"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-12.edit",
+      "bytes": 96782,
+      "sha256": "7d9824fef064a69607fb509128963be25ee8ff865eba11065f16991ff4dbd135"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-13.edit",
+      "bytes": 104358,
+      "sha256": "ee74c21bebea0d86007494a3054cce5b6e9da6c44db1a894750a2b358a9362e4"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-14.edit",
+      "bytes": 111021,
+      "sha256": "dec3c16c21657408b56575944e9692bd77cb18e42be585d0f15f931a161a703e"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-15.edit",
+      "bytes": 117877,
+      "sha256": "de20ae38681ee8318a3dd54f790dc872f8561d3dc28f65c3f0190f14127e09a8"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-16.edit",
+      "bytes": 112750,
+      "sha256": "414bea0162759f65171a1726268b75b00c3f507ac14b25a9dbc1215664c1529b"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-17.edit",
+      "bytes": 504439,
+      "sha256": "e79be00239fbeb51d5f6ad07676fa1df1c78b745ab1b12b8bf6a785a0df575e9"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-18.edit",
+      "bytes": 237462,
+      "sha256": "a5dc13b7c9dab383c3afc74d453dc3fbfc73bc238f53590a41f46f5c75594a58"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-19.edit",
+      "bytes": 162893,
+      "sha256": "7c06ce69a024ff9bfd0736f3969b69ec3c6099030f4ecb5ca2c42f66fa116260"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-20.edit",
+      "bytes": 150996,
+      "sha256": "46c4c14795805bedef7fef10b03efb19f956dc52cd2227b40cb268e674f55886"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-21.edit",
+      "bytes": 220741,
+      "sha256": "7abded2dc1bfd15cd06bcce554962a1e70bd502c88328f277f7d00f88fffdb5d"
+    },
+    {
+      "path": "native/transactions/20261027/server-base.import-22.edit",
+      "bytes": 306,
+      "sha256": "ec66302cf041acd3c12ed987bbe18de5eb7ed0fbe1c1ea3a1a4a9b574e06990f"
+    },
+    {
+      "path": "native/transactions/20261027/server-security.edit",
+      "bytes": 32555,
+      "sha256": "aa17f44ed59c91e6f2548a0eda1b648f633ba418274f69ab7ec26639a25b4b5d"
+    },
+    {
+      "path": "native/transactions/20261027/native-construction.edit",
+      "bytes": 64919,
+      "sha256": "48a15316ece76ca8bbb5d6ca5073e1c877f756f762d79f61b3223037d2c840c5"
+    },
+    {
+      "path": "native/transactions/20261027/interface-literals-0.edit",
+      "bytes": 94,
+      "sha256": "ff2d4b78794e31781e57a094dccbba3672de4c1fc6b33296a989b43801dcf949"
+    },
+    {
+      "path": "native/transactions/20261027/interface-literals-1.edit",
+      "bytes": 10822,
+      "sha256": "769d87c71baa074023f2bbd680028baf47b9bc243c3019978307f9cbafe1b78c"
+    },
+    {
+      "path": "native/transactions/20261027/interface-literals-2.edit",
+      "bytes": 10794,
+      "sha256": "f8bde73f666b4fd3aa4804a609500f63e8ea709c33f600542d3329fd7516da4b"
+    },
+    {
+      "path": "native/transactions/20261027/interface-literals-3.edit",
+      "bytes": 157,
+      "sha256": "5c18732ef175c9af3cf0cc11a7b44c598355e5127a8dbdce3dfe5ae947451a5b"
+    },
+    {
+      "path": "native/transactions/20261027/interface-literals-4.edit",
+      "bytes": 10841,
+      "sha256": "3e52d1b81394405f7230144166460600659d5466ce1c3e1c18f9db2f65b9b04c"
+    },
+    {
+      "path": "native/transactions/20261027/interface-literals-5.edit",
+      "bytes": 10842,
+      "sha256": "9a9f2b31b35ba550ac02a689316be2d4cf2892061a06554d93995095fe86d5d1"
+    },
+    {
+      "path": "native/transactions/20261027/interface-literals-6.edit",
+      "bytes": 9474,
+      "sha256": "e4da37d70925e6d1e74fb950155f11740fe9e734f779a1443ec447281bde7b05"
+    },
+    {
+      "path": "native/transactions/20261027/interface-literals-7.edit",
+      "bytes": 6569,
+      "sha256": "7d620ddaa541a9732d2894336ef96d9914d3bd8eca3db02045679712640b7241"
+    },
+    {
+      "path": "native/transactions/20261027/interface-literals-8.edit",
+      "bytes": 10820,
+      "sha256": "9dd54cd3a3feaabf0ea8c156335300bfc4e70cb292c020ca99fd6c61ab1fffcd"
+    },
+    {
+      "path": "native/transactions/20261027/interface-literals-9.edit",
+      "bytes": 10068,
+      "sha256": "1dd01537ebd1d6ab9ed4738bb4050e5536ebbbae962c1c551843f889f0bdb165"
+    },
+    {
+      "path": "native/transactions/20261027/query-exact-root.edit",
+      "bytes": 33506,
+      "sha256": "81a16e7e09be4f514d37744152dd9839a184462d346695ef11c1d3839bf1d30c"
+    },
+    {
+      "path": "native/transactions/20261027/workspace-lease.edit",
+      "bytes": 57186,
+      "sha256": "aac3b09b20ed795eb9a5abdcabcde6e5b10297315a3c83c1a27c372b5ee620a3"
+    },
+    {
+      "path": "native/transactions/20261027/release-literals-0.edit",
+      "bytes": 10842,
+      "sha256": "1c8d51cb4ecd593561d1a95fa3c4cb17a0cad25517cd0b7badfb70caf5441857"
+    },
+    {
+      "path": "native/transactions/20261027/release-literals-1.edit",
+      "bytes": 5603,
+      "sha256": "2203a83db64b06df899c2a1ef45404ece54e55bd92fbb27ea8faaa8ab5b1fdd4"
+    },
+    {
+      "path": "native/transactions/20261027/release-literals-2.edit",
+      "bytes": 364,
+      "sha256": "de6e0b0674e123d04d8a4430a10745e6c0206750e43c10ac663e968603af0c08"
+    },
+    {
+      "path": "native/transactions/20261027/release-literals-3.edit",
+      "bytes": 10842,
+      "sha256": "d300809ffbf6e9a472ea513671bf29c2b28fff3a4b1836519591c162aa6cac6e"
+    },
+    {
+      "path": "native/transactions/20261027/release-literals-4.edit",
+      "bytes": 10842,
+      "sha256": "a0160fc8c91991330e9343ef31a1510a4b0858cfdbd5755c5a70224dda50e4b8"
+    },
+    {
+      "path": "native/transactions/20261027/release-literals-5.edit",
+      "bytes": 10842,
+      "sha256": "b04889b1f0bea372f148c6341009382bd7fdd9b7295969cc97569daa17c85db8"
+    },
+    {
+      "path": "native/transactions/20261027/release-literals-6.edit",
+      "bytes": 743,
+      "sha256": "e5a9578bc518cc50171f70f14356e06970050e8db99082741e42a3c0c2a5ec59"
+    },
+    {
+      "path": "native/transactions/20261027/release-literals-7.edit",
+      "bytes": 10842,
+      "sha256": "7f4ae65b08d9b291e16601caae29c2c35f2504d04269cac3712eae9f694f2cff"
+    },
+    {
+      "path": "native/transactions/20261027/release-literals-8.edit",
+      "bytes": 6467,
+      "sha256": "f6b8bd3e8d21457c78dd6c209e2a945fa20a97b408366685f3a4ee49eeed0979"
+    }
+  ]
+}

@@ -1,33 +1,48 @@
 {
   "schema": "xax-mcp-release-status-v1",
-  "server_version": "0.8.0+native",
+  "server_version": "0.9.0+native",
   "recorded": "2026-10-27",
   "release_ready": false,
-  "embedded_xax_pin": "3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b",
-  "host_contract": "xax-host-contract-v1 r10",
+  "full_mission_complete": false,
+  "supported_path": "EXECUTED: native Windows exact-root construction, candidate verification, atomic publication, build, confined process-exit result",
+  "embedded_xax_pin": "af376e8a8a1ac5635bcad459cb7063ef0b326430",
+  "native_contract": "xax-native-file-v1",
   "platform": "windows-x86_64",
+  "resolved_findings": [
+    "invalid candidate publication",
+    "query/build forbidden schema properties",
+    "native construction carrier available as XAXEDIT1",
+    "pinned native Windows compiler seed and reproducible application build",
+    "exclusive same-workdir lease and crash release"
+  ],
   "blocking_findings": [
-    "unverified transaction candidate can be published",
-    "query and build accept forbidden schema properties",
-    "native carrier decoder unavailable on recording host",
-    "reproducible native Windows toolchain unavailable",
-    "typed I/O, scoped handles, bounded queries and current MCP unfinished"
+    "typed runtime I/O and bounded result paging unsupported",
+    "general semantic query/pagination and opaque session handles incomplete",
+    "MCP 2026-07-28 unsupported; legacy 2025-11-25 tested",
+    "compiler-call cancellation and full quota/security coverage incomplete",
+    "current Claude host unavailable for interoperability testing",
+    "trusted historical native compiler bootstrap; Windows self-build declines"
   ],
   "artifacts": [
     {
+      "path": "native/xax-mcp-native-gen1.xax",
+      "bytes": 1062507,
+      "sha256": "f833986ee2e7539efd4f67c6a0d91bf60c972ff03cb2b992207e4f581bd3fe28"
+    },
+    {
+      "path": "native/xax-mcp-native-snapshot.xax",
+      "bytes": 1062786,
+      "sha256": "a649ca5821d9d88c0f66f9dd9169ae7c3148dc8acc8a8eebe66284a948d7041a"
+    },
+    {
       "path": "native/xax-mcp-native.exe",
-      "bytes": 359424,
-      "sha256": "9f6e272bbbc938d3493a98b7c68409de31a09ffc4cc958bb41be7447b65c076a"
+      "bytes": 347136,
+      "sha256": "a9400a65c6194bbc52128a22da0b59a2feabdfcf0dbb64666bc2807b000b7f1b"
     },
     {
-      "path": "native/xax-mcp-native-gen0.xax",
-      "bytes": 1103602,
-      "sha256": "0a698799883375955a421c0f0f5526862e941cc01f6e2738749a6fc61f0bdcab"
-    },
-    {
-      "path": "native/xax-mcp-sandbox.exe",
-      "bytes": 25600,
-      "sha256": "6d563e0f23e4f402d55c82b200d42bce91c41c98aab101267e67d3645a1d37e2"
+      "path": "native/xax-mcp-native.prov",
+      "bytes": 268,
+      "sha256": "77e71a54db6395138caa20c760b309c5b180ba8eb77ea5fec1e15190823a433e"
     },
     {
       "path": "native/xax-mcp-sandbox-gen0.xax",
@@ -35,24 +50,19 @@
       "sha256": "588f57c0fa69eb175b6e06e88c73977292d42c06dfc5b814ec48cc5710bab2b8"
     },
     {
+      "path": "native/xax-mcp-sandbox.exe",
+      "bytes": 25600,
+      "sha256": "6d563e0f23e4f402d55c82b200d42bce91c41c98aab101267e67d3645a1d37e2"
+    },
+    {
       "path": "native/xax-mcp-seed.xax",
       "bytes": 1852,
       "sha256": "25db5e19257e81e99a79e1b0311b65c8f534507ced0607ad4c5e2f0a81821532"
     },
     {
-      "path": "examples/native-arithmetic/program.xax",
-      "bytes": 2330,
-      "sha256": "3454b07d7d958d8b15323d9d5a6e633db69b3449357b5f9fc78d9a22262d7658"
-    },
-    {
-      "path": "examples/native-arithmetic/program.exe",
+      "path": "native/xax-mcp-seed.exe",
       "bytes": 1536,
-      "sha256": "832a06e874a109c4cdaf4385e0b50e88b7b8070ee532da6544e3568eaedd2a07"
-    },
-    {
-      "path": "examples/native-arithmetic/program.prov",
-      "bytes": 268,
-      "sha256": "960f8960afa106238fa283fb89ee07974106c35ca033c0d91cb692327b5a32e4"
+      "sha256": "8faaeb7e63e5d1a07bcd9c46e3ae3381af267b67e213cec6b992c628fb1843ca"
     }
   ],
   "readiness": "docs/WINDOWS_READINESS.md"

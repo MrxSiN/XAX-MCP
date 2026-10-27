@@ -1,10 +1,16 @@
 {
   "mcpServers": {
     "xax": {
-      "type": "stdio",
-      "command": "C:/ABSOLUTE/PATH/TO/xax-mcp-native.exe",
-      "args": ["--read-only"],
-      "env": {}
+      "command": "D:/Tools/XAX-MCP/native/xax-mcp-native.exe",
+      "args": [
+        "--read-only"
+      ],
+      "env": {
+        "XAX_MCP_COMPILER": "D:/Tools/XAX/compiler/bootstrap/windows/xaxc-windows-x86_64.exe",
+        "XAX_MCP_STORE": "D:/Tools/XAX-MCP/native/xax-mcp-seed.xax",
+        "XAX_MCP_WORK": "D:/Private/XAX-MCP-work"
+      },
+      "type": "stdio"
     }
   }
 }

@@ -1,0 +1,69 @@
+{
+  "schema": "xax-mcp-host-registration-audit-v1",
+  "recorded": "2026-10-27",
+  "label": "EXECUTED",
+  "host_version": "codex-cli 0.164.0-alpha.11.1",
+  "scope": "Registration/get/list/remove in a fresh isolated config; no current chat config changed; does not claim model-selected invocation or tools interoperability",
+  "commands": [
+    {
+      "exit": 0,
+      "stderr": "",
+      "stdout": "Added global MCP server 'xax'.\n",
+      "arguments": [
+        "mcp",
+        "add",
+        "xax",
+        "--env",
+        "XAX_MCP_COMPILER=D:/GitHub/XAX/compiler/bootstrap/windows/xaxc-windows-x86_64.exe",
+        "--env",
+        "XAX_MCP_STORE=D:/GitHub/XAX-MCP/native/xax-mcp-seed.xax",
+        "--env",
+        "XAX_MCP_WORK=D:/Private/XAX-MCP-work",
+        "--",
+        "D:/GitHub/XAX-MCP/native/xax-mcp-native.exe",
+        "--read-only"
+      ]
+    },
+    {
+      "exit": 0,
+      "stderr": "",
+      "stdout": "{\n  \"name\": \"xax\",\n  \"enabled\": true,\n  \"disabled_reason\": null,\n  \"transport\": {\n    \"type\": \"stdio\",\n    \"command\": \"D:/GitHub/XAX-MCP/native/xax-mcp-native.exe\",\n    \"args\": [\n      \"--read-only\"\n    ],\n    \"env\": {\n      \"XAX_MCP_COMPILER\": \"D:/GitHub/XAX/compiler/bootstrap/windows/xaxc-windows-x86_64.exe\",\n      \"XAX_MCP_STORE\": \"D:/GitHub/XAX-MCP/native/xax-mcp-seed.xax\",\n      \"XAX_MCP_WORK\": \"D:/Private/XAX-MCP-work\"\n    },\n    \"env_vars\": [],\n    \"cwd\": null\n  },\n  \"enabled_tools\": null,\n  \"disabled_tools\": null,\n  \"startup_timeout_sec\": null,\n  \"tool_timeout_sec\": null\n}\n",
+      "arguments": [
+        "mcp",
+        "get",
+        "xax",
+        "--json"
+      ]
+    },
+    {
+      "exit": 0,
+      "stderr": "",
+      "stdout": "[\n  {\n    \"name\": \"xax\",\n    \"enabled\": true,\n    \"disabled_reason\": null,\n    \"transport\": {\n      \"type\": \"stdio\",\n      \"command\": \"D:/GitHub/XAX-MCP/native/xax-mcp-native.exe\",\n      \"args\": [\n        \"--read-only\"\n      ],\n      \"env\": {\n        \"XAX_MCP_STORE\": \"D:/GitHub/XAX-MCP/native/xax-mcp-seed.xax\",\n        \"XAX_MCP_COMPILER\": \"D:/GitHub/XAX/compiler/bootstrap/windows/xaxc-windows-x86_64.exe\",\n        \"XAX_MCP_WORK\": \"D:/Private/XAX-MCP-work\"\n      },\n      \"env_vars\": [],\n      \"cwd\": null\n    },\n    \"startup_timeout_sec\": null,\n    \"tool_timeout_sec\": null,\n    \"auth_status\": \"unsupported\"\n  }\n]\n",
+      "arguments": [
+        "mcp",
+        "list",
+        "--json"
+      ]
+    },
+    {
+      "exit": 0,
+      "stderr": "",
+      "stdout": "Removed global MCP server 'xax'.\n",
+      "arguments": [
+        "mcp",
+        "remove",
+        "xax"
+      ]
+    },
+    {
+      "exit": 0,
+      "stderr": "",
+      "stdout": "[]\n",
+      "arguments": [
+        "mcp",
+        "list",
+        "--json"
+      ]
+    }
+  ]
+}

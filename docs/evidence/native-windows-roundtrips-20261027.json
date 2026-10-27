@@ -1,0 +1,322 @@
+{
+  "schema": "xax-mcp-roundtrip-observation-v1",
+  "recorded": "2026-10-27",
+  "label": "MEASURED",
+  "server_sha256": "a9400a65c6194bbc52128a22da0b59a2feabdfcf0dbb64666bc2807b000b7f1b",
+  "note": "Single local Windows fixture run; PowerShell wall round trips; includes negative cases. Not an R4 or AI-token benchmark. xax_execute rebuilds, so repeats are not a no-build artifact cache.",
+  "groups": [
+    {
+      "tool": "protocol",
+      "count": 8,
+      "minimum_ms": 0.2947,
+      "median_ms": 12.0542,
+      "maximum_ms": 18.7091
+    },
+    {
+      "tool": "xax_build",
+      "count": 4,
+      "minimum_ms": 0.058,
+      "median_ms": 0.0826,
+      "maximum_ms": 31.3715
+    },
+    {
+      "tool": "xax_capabilities",
+      "count": 2,
+      "minimum_ms": 0.0585,
+      "median_ms": 0.0585,
+      "maximum_ms": 0.1775
+    },
+    {
+      "tool": "xax_construct",
+      "count": 10,
+      "minimum_ms": 0.0697,
+      "median_ms": 25.2441,
+      "maximum_ms": 30.1552
+    },
+    {
+      "tool": "xax_execute",
+      "count": 5,
+      "minimum_ms": 0.0625,
+      "median_ms": 90.4955,
+      "maximum_ms": 96.5126
+    },
+    {
+      "tool": "xax_query",
+      "count": 17,
+      "minimum_ms": 0.1931,
+      "median_ms": 12.6328,
+      "maximum_ms": 17.523
+    },
+    {
+      "tool": "xax_result",
+      "count": 1,
+      "minimum_ms": 0.0778,
+      "median_ms": 0.0778,
+      "maximum_ms": 0.0778
+    },
+    {
+      "tool": "xax_transaction",
+      "count": 4,
+      "minimum_ms": 0.0778,
+      "median_ms": 0.0859,
+      "maximum_ms": 31.0215
+    }
+  ],
+  "samples": [
+    {
+      "tool": null,
+      "ms": 10.4846,
+      "method": "initialize"
+    },
+    {
+      "tool": null,
+      "ms": 0.2947,
+      "method": "tools/list"
+    },
+    {
+      "tool": "xax_capabilities",
+      "ms": 0.1775,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 15.8204,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_build",
+      "ms": 31.3715,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_execute",
+      "ms": 96.5126,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 13.2419,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_construct",
+      "ms": 30.1552,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 12.6328,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_construct",
+      "ms": 26.2837,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 12.3187,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_construct",
+      "ms": 25.9894,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 12.8205,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_construct",
+      "ms": 25.0769,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 13.4401,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_construct",
+      "ms": 26.5512,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 12.269,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_construct",
+      "ms": 26.9618,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 12.0828,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_construct",
+      "ms": 25.2441,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 12.5874,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_transaction",
+      "ms": 12.1502,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 11.7245,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_build",
+      "ms": 26.5833,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_execute",
+      "ms": 90.5592,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_execute",
+      "ms": 90.4955,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_construct",
+      "ms": 0.121,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_result",
+      "ms": 0.0778,
+      "method": "tools/call"
+    },
+    {
+      "tool": null,
+      "ms": 18.2915,
+      "method": "initialize"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 16.3373,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_transaction",
+      "ms": 0.0859,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_build",
+      "ms": 0.058,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_execute",
+      "ms": 0.0625,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_construct",
+      "ms": 0.0697,
+      "method": "tools/call"
+    },
+    {
+      "tool": null,
+      "ms": 18.7091,
+      "method": "initialize"
+    },
+    {
+      "tool": "xax_execute",
+      "ms": 0.1527,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 0.331,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_build",
+      "ms": 0.0826,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_transaction",
+      "ms": 0.0778,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_capabilities",
+      "ms": 0.0585,
+      "method": "tools/call"
+    },
+    {
+      "tool": null,
+      "ms": 17.8047,
+      "method": "initialize"
+    },
+    {
+      "tool": "xax_transaction",
+      "ms": 31.0215,
+      "method": "tools/call"
+    },
+    {
+      "tool": null,
+      "ms": 17.5002,
+      "method": "initialize"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 17.523,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_construct",
+      "ms": 0.1097,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 12.2572,
+      "method": "tools/call"
+    },
+    {
+      "tool": null,
+      "ms": 12.0542,
+      "method": "initialize"
+    },
+    {
+      "tool": null,
+      "ms": 0.7346,
+      "method": "initialize"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 15.3592,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 0.1931,
+      "method": "tools/call"
+    },
+    {
+      "tool": "xax_query",
+      "ms": 15.1417,
+      "method": "tools/call"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-name: native-smoke
+name: native-windows
 
 on:
   push:
@@ -11,59 +11,167 @@ permissions:
 jobs:
   windows-native:
     runs-on: windows-2022
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - name: Check out the immutable XAX native dependency independently
+        uses: actions/checkout@v4
+        with:
+          repository: MrxSiN/XAX
+          ref: af376e8a8a1ac5635bcad459cb7063ef0b326430
+          path: .xax-upstream
 
-      - name: Check native artifact identities
+      # PowerShell is external CI/test orchestration. All canonical construction,
+      # verification, compilation, protocol handling and execution run in native XAX.
+      - name: Replay semantic transactions and rebuild native programs twice
         shell: pwsh
         run: |
-          $expected = @{
-            'native/xax-mcp-native.exe' = '9F6E272BBBC938D3493A98B7C68409DE31A09FFC4CC958BB41BE7447B65C076A'
-            'native/xax-mcp-sandbox.exe' = '6D563E0F23E4F402D55C82B200D42BCE91C41C98AAB101267E67D3645A1D37E2'
-            'native/xax-mcp-seed.exe' = '8FAAEB7E63E5D1A07BCD9C46E3AE3381AF267B67E213CEC6B992C628FB1843CA'
-            'examples/native-arithmetic/program.xax' = '3454B07D7D958D8B15323D9D5A6E633DB69B3449357B5F9FC78D9A22262D7658'
-            'examples/native-arithmetic/program.exe' = '832A06E874A109C4CDAF4385E0B50E88B7B8070EE532DA6544E3568EAEDD2A07'
-            'examples/native-arithmetic/program.prov' = '960F8960AFA106238FA283FB89EE07974106C35CA033C0D91CB692327B5A32E4'
+          $ErrorActionPreference='Stop'
+          $compiler=Join-Path $PWD '.xax-upstream/compiler/bootstrap/windows/xaxc-windows-x86_64.exe'
+          $dependency=Get-Content native/xax-dependency.json -Raw|ConvertFrom-Json
+          if((Get-FileHash $compiler).Hash.ToLowerInvariant()-ne$dependency.seed_sha256){throw 'Wrong XAX seed'}
+          New-Item -ItemType Directory -Force build/replay,build/rebuild | Out-Null
+          function Native([string[]]$Arguments){& $compiler @Arguments;if($LASTEXITCODE-ne0){throw "Native compiler rejected/declined: $($Arguments[0]) ($LASTEXITCODE)"}}
+          $status=Get-Content native/release-status.json -Raw|ConvertFrom-Json
+          foreach($a in $status.artifacts){if((Get-FileHash $a.path).Hash.ToLowerInvariant()-ne$a.sha256-or(Get-Item $a.path).Length-ne$a.bytes){throw "Artifact identity differs: $($a.path)"}}
+          $manifest=Get-Content native/transactions/20261027/manifest.json -Raw|ConvertFrom-Json
+          Copy-Item $manifest.base build/replay/current.xax -Force
+          foreach($record in $manifest.records){
+           if((Get-FileHash $record.path).Hash.ToLowerInvariant()-ne$record.sha256){throw 'Mutation carrier identity differs'}
+           Native @('edit','build/replay/current.xax',$record.path,'build/replay/next.xax')
+           Native @('verify','build/replay/next.xax','build/replay/verify.diag')
+           Move-Item build/replay/next.xax build/replay/current.xax -Force
           }
-          foreach ($path in $expected.Keys) {
-            if ((Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash -ne $expected[$path]) {
-              throw "Native artifact changed: $path"
-            }
+          if((Get-FileHash build/replay/current.xax).Hash-ne(Get-FileHash native/xax-mcp-native-gen1.xax).Hash){throw 'Transaction replay differs from canonical source'}
+          Native @('resolve','native/xax-mcp-native-gen1.xax','build/rebuild/server-snapshot.xax')
+          if((Get-FileHash build/rebuild/server-snapshot.xax).Hash-ne(Get-FileHash native/xax-mcp-native-snapshot.xax).Hash){throw 'Resolved snapshot differs'}
+          foreach($attempt in 1..2){
+           Native @('build','build/rebuild/server-snapshot.xax',"build/rebuild/server-$attempt.exe","build/rebuild/server-$attempt.prov")
+           if((Get-FileHash "build/rebuild/server-$attempt.exe").Hash-ne(Get-FileHash native/xax-mcp-native.exe).Hash){throw 'Native server rebuild differs'}
+           if((Get-FileHash "build/rebuild/server-$attempt.prov").Hash-ne(Get-FileHash native/xax-mcp-native.prov).Hash){throw 'Native provenance differs'}
           }
+          Native @('verify','native/xax-mcp-sandbox-gen0.xax','build/rebuild/sandbox.diag')
+          Native @('build','native/xax-mcp-sandbox-gen0.xax','build/rebuild/sandbox.exe','build/rebuild/sandbox.prov')
+          if((Get-FileHash build/rebuild/sandbox.exe).Hash-ne(Get-FileHash native/xax-mcp-sandbox.exe).Hash){throw 'Sandbox rebuild differs'}
+          Write-Output "Verified $($manifest.records.Count) exact-root edits and two byte-identical native server rebuilds"
 
-      # PowerShell and Git are external CI orchestration. No compiler implementation,
-      # SDK, source emitter or non-XAX runtime helper is installed or executed.
-      - name: Replay the STDIO protocol smoke fixture
+      - name: Replay read-only STDIO protocol golden responses
         shell: pwsh
         run: |
-          New-Item -ItemType Directory -Force build | Out-Null
+          $ErrorActionPreference = 'Stop'
           $actual = @(Get-Content tests/protocol/readonly.requests.ndjson | & native/xax-mcp-native.exe --read-only)
           if ($LASTEXITCODE -ne 0) { throw 'Native server failed' }
-          $actual | Set-Content build/readonly.responses.ndjson -Encoding utf8NoBOM
           $expected = @(Get-Content tests/protocol/readonly.responses.ndjson)
-          if ($actual.Count -ne $expected.Count -or (Compare-Object $expected $actual -SyncWindow 0)) {
-            throw 'STDIO response fixture differs'
-          }
+          if ($actual.Count -ne $expected.Count -or (Compare-Object $expected $actual -SyncWindow 0)) { throw 'STDIO fixture differs' }
+          $actual | Set-Content build/readonly.responses.ndjson -Encoding utf8NoBOM
 
-      - name: Run the new canonical arithmetic program in native confinement
+      - name: Construct, build, confine, reject invalid requests and isolate clients
         shell: pwsh
         run: |
-          New-Item -ItemType Directory -Force build/sandbox | Out-Null
-          & native/xax-mcp-sandbox.exe (Resolve-Path examples/native-arithmetic/program.exe).Path (Resolve-Path build/sandbox).Path
-          if ($LASTEXITCODE -ne 0) { throw "Confinement unavailable or failed: $LASTEXITCODE" }
-          $result = [IO.File]::ReadAllBytes((Join-Path $PWD 'build/sandbox/sandbox-result.bin'))
-          if ($result.Length -ne 16 -or [BitConverter]::ToUInt32($result, 0) -ne 136 -or [BitConverter]::ToUInt32($result, 4) -ne 0) {
-            throw 'Expected confined exit result 136 with no timeout or truncation'
+          $ErrorActionPreference='Stop'
+          $repo=$PWD.Path
+          $compiler=Join-Path $repo '.xax-upstream/compiler/bootstrap/windows/xaxc-windows-x86_64.exe'
+          $server=Join-Path $repo 'native/xax-mcp-native.exe'
+          $fixtures=Get-Content tests/protocol/native-sessions.json -Raw|ConvertFrom-Json -Depth 80
+          New-Item -ItemType Directory -Force build/native-sessions | Out-Null
+          $observed=[Collections.Generic.List[string]]::new();$script:timings=[Collections.Generic.List[object]]::new()
+          function Start-Server([string]$Flags,[string]$Directory){
+           New-Item -ItemType Directory -Force $Directory|Out-Null
+           $info=[Diagnostics.ProcessStartInfo]::new($server);$info.UseShellExecute=$false;$info.CreateNoWindow=$true;$info.Arguments=$Flags
+           $info.RedirectStandardInput=$true;$info.RedirectStandardOutput=$true;$info.RedirectStandardError=$true;$info.StandardInputEncoding=[Text.UTF8Encoding]::new($false)
+           $info.Environment['XAX_MCP_COMPILER']=$compiler;$info.Environment['XAX_MCP_STORE']=Join-Path $repo 'native/xax-mcp-seed.xax';$info.Environment['XAX_MCP_WORK']=$Directory;$info.Environment.Remove('XAX_MCP_CONSTRUCT')|Out-Null
+           return [Diagnostics.Process]::Start($info)
           }
-          if ((Get-Item build/sandbox/sandbox-out.bin).Length -ne 0 -or (Get-Item build/sandbox/sandbox-err.bin).Length -ne 0) {
-            throw 'Unexpected artifact output'
+          function Exchange($Process,$Request){
+           $wire=ConvertTo-Json -InputObject $Request -Compress -Depth 70;$watch=[Diagnostics.Stopwatch]::StartNew();$Process.StandardInput.WriteLine($wire);$Process.StandardInput.Flush()
+           $pending=$Process.StandardOutput.ReadLineAsync();if(!$pending.Wait(30000)){throw 'Response timeout'};$watch.Stop();if($null-eq$pending.Result){throw 'Unexpected EOF'}
+           $response=ConvertFrom-Json -InputObject $pending.Result -Depth 80
+           if($response.jsonrpc-ne'2.0'-or$response.id-ne$Request.id){throw 'Invalid protocol response'}
+           $observed.Add($pending.Result);$script:timings.Add(@{method=$Request.method;tool=$Request.params.name;ms=$watch.Elapsed.TotalMilliseconds})
+           if($Request.method-eq'initialize'){$Process.StandardInput.WriteLine('{"jsonrpc":"2.0","method":"notifications/initialized"}');$Process.StandardInput.Flush()}
+           return $response
           }
+          function Stop-Server($Process){
+           $Process.StandardInput.Close();if(!$Process.WaitForExit(30000)){$Process.Kill($true);throw 'Shutdown timed out'}
+           if($Process.ExitCode-ne0-or$Process.StandardOutput.ReadToEnd()-ne''-or$Process.StandardError.ReadToEnd()-ne''){throw 'Unclean shutdown/protocol pollution'};$Process.Dispose()
+          }
+          foreach($session in $fixtures.sessions){
+           $work=Join-Path $repo ('build/native-sessions/'+$session.name);New-Item -ItemType Directory -Force $work|Out-Null;Copy-Item native/xax-mcp-seed.xax (Join-Path $work 'current.xax') -Force
+           $process=Start-Server $session.flags $work
+           try{
+            foreach($exchange in $session.exchanges){
+             $response=Exchange $process $exchange.request
+             foreach($property in $exchange.expected.PSObject.Properties){$value=$response;foreach($part in $property.Name.Split('.')){$value=$value.$part};if($value-ne$property.Value){throw "Unexpected $($session.name) response field $($property.Name): $value"}}
+             if($null-ne$response.result.structuredContent){$text=$response.result.content[0].text|ConvertFrom-Json -Depth 80;if($text.ok-ne$response.result.structuredContent.ok-or$response.result.isError-eq$text.ok){throw 'Tool text/structured/error mismatch'}}
+             if($exchange.request.method-eq'tools/list'){$schemas=Get-Content schemas/tools-v2.json -Raw|ConvertFrom-Json -Depth 80;if(($response.result|ConvertTo-Json -Compress -Depth 80)-ne($schemas|ConvertTo-Json -Compress -Depth 80)){throw 'Published tools schema differs'}}
+            }
+           }finally{Stop-Server $process}
+           & $compiler verify (Join-Path $work 'current.xax') (Join-Path $work 'candidate.diag');if($LASTEXITCODE-ne0){throw 'Published current store invalid'}
+           if($session.name-in@('invalid-candidate','exact-root')){
+            if((Get-FileHash (Join-Path $work 'current.xax')).Hash-ne(Get-FileHash native/xax-mcp-seed.xax).Hash){throw 'Rejected mutation changed canonical store'}
+            if(Test-Path (Join-Path $work 'next.xax')){throw 'Rejected candidate leaked'}
+           }
+           if(Test-Path (Join-Path $work '.xax-mcp.lock')){throw 'Lease leaked on exit'}
+          }
+          # Two independent processes must never operate on shared compiler scratch concurrently.
+          $shared=Join-Path $repo 'build/native-sessions/shared';$owner=Start-Server '' $shared;$waiter=Start-Server '' $shared
+          $init=@{jsonrpc='2.0';id=1;method='initialize';params=@{protocolVersion='2025-11-25';capabilities=@{};clientInfo=@{name='native-ci';version='1'}}};$query=@{jsonrpc='2.0';id=2;method='tools/call';params=@{name='xax_query';arguments=@{}}}
+          try{
+           Exchange $owner $init|Out-Null;Exchange $waiter $init|Out-Null
+           $root=(Exchange $owner $query).result.structuredContent;if(!$root.ok){throw 'Initial lease refused'}
+           $busy=(Exchange $waiter $query).result.structuredContent;if($busy.ok-or$busy.error.code-ne'workspace_busy'){throw 'Shared workdir accepted concurrently'}
+           $owner.Kill($true);$owner.WaitForExit();$owner.Dispose();$owner=$null
+           $retry=(Exchange $waiter $query).result.structuredContent;if(!$retry.ok-or$retry.root-ne$root.root){throw 'Lease not released on crash'}
+          }finally{if($null-ne$owner){Stop-Server $owner};Stop-Server $waiter}
+          if(Test-Path (Join-Path $shared '.xax-mcp.lock')){throw 'Crash lease leaked'}
+          $observed|Set-Content build/native-sessions.responses.ndjson -Encoding utf8NoBOM
+          $script:timings|ConvertTo-Json -Depth 10|Set-Content build/native-session-timings.json -Encoding utf8NoBOM
+          Write-Output "Passed $($observed.Count) native request/response checks, isolated directories, publication verification and crash lease recovery"
+
+      - name: Verify native sandbox timeout enforcement
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $compiler = Join-Path $PWD '.xax-upstream/compiler/bootstrap/windows/xaxc-windows-x86_64.exe'
+          & $compiler verify tests/security/timeout/timeout.xax build/timeout.diag
+          if ($LASTEXITCODE -ne 0) { throw 'Timeout fixture invalid' }
+          & $compiler resolve tests/security/timeout/timeout.xax build/timeout-snapshot.xax
+          if ($LASTEXITCODE -ne 0) { throw 'Timeout fixture resolve failed' }
+          & $compiler build build/timeout-snapshot.xax build/timeout.exe build/timeout.prov
+          if ($LASTEXITCODE -ne 0) { throw 'Timeout fixture build failed' }
+          if ((Get-FileHash build/timeout.exe).Hash -ne (Get-FileHash tests/security/timeout/timeout.exe).Hash) { throw 'Timeout artifact differs' }
+          New-Item -ItemType Directory -Force build/timeout-sandbox | Out-Null
+          $watch = [Diagnostics.Stopwatch]::StartNew()
+          & native/xax-mcp-sandbox.exe (Resolve-Path build/timeout.exe).Path (Resolve-Path build/timeout-sandbox).Path
+          if ($LASTEXITCODE -ne 0) { throw 'Sandbox unavailable or failed' }
+          $watch.Stop()
+          $result = [IO.File]::ReadAllBytes((Join-Path $PWD 'build/timeout-sandbox/sandbox-result.bin'))
+          if ($result.Length -ne 16 -or ([BitConverter]::ToUInt32($result, 4) -band 1) -ne 1 -or $watch.ElapsedMilliseconds -lt 9000 -or $watch.ElapsedMilliseconds -gt 25000) { throw 'Sandbox failed to enforce wall timeout' }
+
+      - name: Assemble the native-only Windows preview package
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          New-Item -ItemType Directory -Force build/package/native,build/package/xax,build/package/docs,build/package/schemas | Out-Null
+          Copy-Item native/* build/package/native/ -Recurse -Force
+          Copy-Item .xax-upstream/compiler/bootstrap/windows/xaxc-windows-x86_64.exe,.xax-upstream/compiler/bootstrap/windows/seed.json build/package/xax/
+          Copy-Item README.md build/package/
+          Copy-Item docs/* build/package/docs/ -Recurse -Force
+          Copy-Item schemas/* build/package/schemas/
+          Copy-Item examples,tests,agent-guidance build/package/ -Recurse -Force
+          Compress-Archive -Path build/package/* -DestinationPath build/xax-mcp-0.9.0-windows-x86_64-preview.zip -Force
 
       - uses: actions/upload-artifact@v4
         with:
-          name: native-smoke-evidence
+          name: xax-mcp-0.9.0-windows-x86_64-preview
+          path: build/xax-mcp-0.9.0-windows-x86_64-preview.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: native-windows-evidence
           path: |
             build/readonly.responses.ndjson
-            build/sandbox/sandbox-result.bin
-            build/sandbox/sandbox-out.bin
-            build/sandbox/sandbox-err.bin
+            build/native-sessions.responses.ndjson
+            build/native-session-timings.json
+            build/timeout-sandbox/sandbox-result.bin
+            build/timeout-sandbox/sandbox-out.bin
+            build/timeout-sandbox/sandbox-err.bin

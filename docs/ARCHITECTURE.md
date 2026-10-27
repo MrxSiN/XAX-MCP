@@ -1,82 +1,31 @@
-# Architecture
+# Architecture — native Windows preview
 
-> **Historical (0.5.x Python prototype).** This document describes the retired Python adapter. The deployed 0.8.0
-> server is the native XAX program in [NATIVE.md](NATIVE.md); its compiler-backed tools are a narrow prototype.
-
-```text
-Codex / Claude / any MCP client
-  │  JSON-RPC over STDIO (mcp SDK 2.3, protocol 2025-11-25 handshake or 2026-07-28)
-  ▼
-server.py      tool list, JSON-schema validation, size cap, session keying, audit log (stderr), STDOUT isolation
-  ▼
-service.py     session-scoped opaque handles; maps tools to upstream calls; error classification; provenance
-  ├─ xax_construct.construct ─────────► verified canonical build-snapshot store       (upstream XAX)
-  ├─ xax_workspace.Workspace ─────────► bounded queries, verify/commit/rollback       (upstream XAX)
-  ├─ xax_local_protocol.LocalMutationSession ─► snapshot-bound edit expansion          (upstream XAX)
-  ├─ xax_build.build ─────────────────► static ELF64 + provenance object               (upstream XAX)
-  └─ sandbox.py ──► _sandbox_exec.py (fixed launcher) ──► execve("/prog") in isolation
+```mermaid
+flowchart TD
+    A[Agent or generic STDIO client] --> B[Native XAX MCP: JSON-RPC, schema, grants]
+    B --> C[Exclusive host-directory lease]
+    C --> D[Pinned native XAX file contract]
+    D --> E[Canonical semantic store]
+    E --> F[Stage exact-root edit and verify]
+    F --> G[Atomic publish]
+    G --> H[Resolve and build exact root]
+    H --> I[Native XAX AppContainer and job launcher]
+    I --> J[Actual exit result, bounded captures, provenance]
 ```
 
-## Components
+The dependency direction is `XAX-MCP -> XAX`. Application semantic stores, protocol, schemas, confinement program,
+installation and host examples live here. The compiler repository publishes a host-independent native CLI seed and
+canonical compiler/hash programs. Ordinary XAX users install no MCP dependency.
 
-| File | Role | Holds workload logic? |
-|---|---|---|
-| `src/xax_mcp/server.py` | MCP transport adapter (low-level `mcp.server.lowlevel.Server`) | no |
-| `src/xax_mcp/schemas.py` | versioned tool input schemas (`xax-mcp-tools-v1`) | no |
-| `src/xax_mcp/service.py` | handle tables, upstream calls, errors, provenance | no |
-| `src/xax_mcp/io_codec.py` | `xax-mcp-io-v1`: typed integers to/from little-endian stdin/stdout bytes | no (framing only) |
-| `src/xax_mcp/policy.py` | rights and limits from launch flags; store-root path resolution | no |
-| `src/xax_mcp/compat.py` | XAX pin and toolchain fingerprint check | no |
-| `src/xax_mcp/sandbox.py` | probe, launch, wall time, output quotas, cancellation | no |
-| `src/xax_mcp/_sandbox_exec.py` | single-purpose executor: namespaces, chroot, rlimits, seccomp, execve | no |
+The server and launcher are canonical `.xax` programs compiled into Windows executables. MCP/JSON and typed edit
+records carry requests but never replace semantic source. Upstream native edit/verify/resolve/build enforce XAX
+semantics; this repository contains no independent compiler or verifier. Exact-root transactions preserve unchanged
+semantic object identities and native verification gates publication.
 
-## Data flow of one computation
+Host environment and CLI flags define authority. Compiler/work/seed paths cannot be supplied by tools. Native process
+calls use fixed argument vectors, with no shell. A non-inheritable OS lease excludes simultaneous servers from one
+work directory. Private directories remain a host prerequisite, and this is not a general multi-tenant service.
 
-1. `xax_construct` receives an `xax-construct-v1` carrier (types, functions of blocks of typed nodes, package
-   entries). After size and shape bounds checks, `xax_construct.construct` decodes it into canonical semantic
-   objects and returns a verified store. The XAX verifier checks types, effects, linearity, memory facts, and so
-   on. The store is opened as an upstream `Workspace` behind an opaque `ws_…` handle. The carrier is discarded.
-2. `xax_query` and `xax_transaction` call the workspace's own bounded queries and its `verify`/`commit`/`rollback`.
-   Typed mutations are rendered to the upstream local edit grammar (ADR-200) only after every token is validated.
-   `LocalMutationSession` binds them to the queried generation, and `Workspace.commit` does the final atomic
-   expected-root check.
-3. `xax_build` reads the current root's build snapshot and calls `xax_build.build` for the selected package
-   entry, deriving the build request for non-release entries exactly as upstream's `bench_r6_xb64._builds`
-   does. Artifacts are cached per session by `(root, entry, toolchain fingerprint)`.
-4. `xax_execute` re-hashes the artifact (BLAKE3), refuses it if the workspace has moved on (unless
-   `require_current=false`), frames stdin, and runs the bytes through the sandbox. The stdout bytes are decoded
-   only through the caller's declared layout.
-
-## What is and is not XAX
-
-| Part | Language | Notes |
-|---|---|---|
-| Program semantics, verification, code generation | XAX (upstream) | canonical store; the bootstrap compiler is Python with XAX-hosted hashing, decoding, typing and verifier components (`xax_native.AUTHORITY`, reported in provenance) |
-| Executed computation | XAX-generated x86-64 machine code | static ELF; no libc, loader or runtime |
-| MCP adapter, sandbox launcher, I/O framing | Python | bootstrap integration code, disclosed; no workload logic |
-| Carrier JSON, edit grammar, function views | transport and tooling views | never authoritative source |
-
-## Session model
-
-The MCP SDK (2.3) builds a fresh session object per request, and on protocol 2026-07-28 a fresh `Connection`
-too. Handle tables are therefore keyed on the transport's connection-scoped outbound channel
-(`server.transport_key`). With STDIO this is the single client that launched the process. Handles are
-`<kind>_<96 random bits>`, stored per session, never derived from content, and never accepted across sessions.
-Tables are bounded (16 workspaces, 64 artifacts, 64 results, oldest evicted first).
-
-## Startup and warm-up
-
-On the first verification in a process, XAX loads its XAX-hosted compiler components (typing program, store
-verifier, ...). With XAX `01ad841` this took about 25 s with a populated `XAX_NATIVE_CACHE`. Since `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183`
-(upstream ADR-222) the components' stores are verified once per store and compiler version, so it takes about
-3 s, and since `13a6843` (ADR-248 to ADR-250) about 0.4 s. With an empty cache, every component image is still
-lowered once (about 42 s in sequence). Since 0.5.0 the server loads the components through the host contract,
-`xax_native.prepare()` (r3), in a background thread at launch, and tool calls that reach XAX wait for it. The warm
-server and `--prepare` first call `xax_native.prepare(parallel=True)`, which lowers missing images in child
-processes (about 24 s with an empty cache). Later calls take tens of
-milliseconds ([evidence](evidence)).
-
-Since 0.4.0 a launch normally skips all of this: `xax-mcp` hands its STDIO descriptors to a per-user warm server
-that has already loaded the components, and a forked child serves the client
-([ADR-0008](adr/0008-per-user-warm-server.md), [PERFORMANCE.md](PERFORMANCE.md)). Without a ready warm server the
-launch serves in-process as described above and starts one for later launches.
+The native launcher creates a capability-less AppContainer and constrained job. A verified program alone does not
+authorize execution. Only a host grant enables it. See [security boundaries](SECURITY.md),
+[current source/build](NATIVE.md), and [unimplemented gates](WINDOWS_READINESS.md).

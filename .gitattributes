@@ -13,3 +13,11 @@ schemas/*.json -text whitespace=cr-at-eol
 tests/protocol/*.ndjson -text whitespace=cr-at-eol
 tests/security/*.edit binary
 tests/security/*.diag binary
+native/transactions/**/*.edit binary
+native/transactions/**/*.json -text whitespace=cr-at-eol
+native/*.prov binary
+tests/security/timeout/*.xax binary
+tests/security/timeout/*.exe binary
+tests/security/timeout/*.edit binary
+tests/security/timeout/*.prov binary
+tests/protocol/*.json -text whitespace=cr-at-eol

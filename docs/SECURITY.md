@@ -1,122 +1,33 @@
-# Security model
+# Security — native preview
 
-> **Historical (0.5.x Python prototype).** The retired Python server's sandbox and policy are not part of the
-> deployed 0.8.0 server. The native server refuses execution unless the host grants it, and its Windows executor is a
-> measured prototype, not this policy; see [NATIVE.md](NATIVE.md).
+Version 0.9.0 fixes the previously observed unverified-publication and argument-validation defects. It remains a
+preview with incomplete security coverage. Passing XAX verification establishes semantic validity, not permission
+to run arbitrary native code. [Remaining release gates](WINDOWS_READINESS.md) are normative for current claims.
 
-Agent-supplied programs and tool arguments are untrusted. Passing the XAX verifier proves semantic
-well-formedness, not that it is safe to run native code. Execution is therefore a separate host grant, and it
-happens only inside OS-enforced isolation.
+Host-only configuration supplies compiler, seed, private work directory and rights. Tools cannot choose arbitrary
+paths, commands, interpreters, network grants or effects. Read-only clients cannot acquire mutate/build/execute by
+changing arguments. Execution requires `--allow-execute`, the native launcher and working Windows confinement.
+There is no unrestricted fallback. STDOUT contains only JSON-RPC responses; closing stdin releases resources.
 
-## Authority
+Public construction/edit requires a nonzero exact expected root. Native edit checks freshness; native verify must
+succeed on the staged candidate before atomic publication. Verification rejection deletes the candidate and retains
+the valid current store. Native compiler nonzero exits are failures, including unsupported/declined status 2.
 
-- Rights (`read`, `mutate`, `build`, `execute`) come only from launch flags in the host configuration. The
-  defaults are `read`, `mutate` and `build`; `--allow-execute` adds execution; `--read-only` and `--deny RIGHT`
-  restrict. No tool argument changes rights.
-- Executed programs get the `stdio` effect only. Filesystem, network, process, environment, and clock effects are
-  denied (`denied_capability`), and the sandbox enforces this even if a program attempts the system calls.
-- Opening stores needs a host-granted `--store-root`. Names must be relative `.xax` paths without `..`, and
-  symlinks are refused. The resolved file must stay inside the root and within 16 MiB, and it is verified by
-  XAX before use.
-- Handles are random (96 bits), session-scoped, and bounded in number. Forged, guessed, expired, or foreign
-  handles get `not_found`.
+A share-mode-zero, delete-on-close `CreateFileA` handle leases the host work directory for the server lifetime.
+It is not inherited by child processes. Competing server processes get `workspace_busy`; retries after normal exit
+or crash are tested. This does not defend against hostile peers running with the same Windows user's filesystem
+rights. The host must keep compiler/store/work directories private and prevent untrusted link or file replacement.
 
-## Sandbox (Linux x86-64)
+The native XAX launcher runs generated code in a capability-less Windows AppContainer inside a job object. Fixed
+limits are 5 seconds CPU, 256 MiB memory, one process, 10 seconds wall and 1 MiB capture per stream. Missing launcher
+or confinement failure refuses execution. The timeout fixture is current evidence of wall-limit enforcement;
+older AppContainer/outside-write observations retain their recorded historical scope.
 
-`_sandbox_exec.py` is the entire executor boundary. The server starts it as `python -I -S <file> --status FD
---dir DIR --memory N --cpu N --parent PID` with an empty environment and no shell. Before `execve("/prog")` it:
+Unfinished security work includes asynchronous compiler cancellation, comprehensive disk/handle/output saturation
+quotas, current host interoperability and independent sandbox/escape review. No HTTP service, remote authority,
+general effectful workload, scoped result store or typed runtime-data ABI is exposed. No blanket security certification
+or full release readiness is claimed.
 
-1. sets `PR_SET_PDEATHSIG=SIGKILL` (the program dies with the server);
-2. `unshare`s user, mount, network, IPC, UTS, and cgroup namespaces and maps the caller to uid/gid 65534, so the
-   executed program has no capabilities and an interface-less network namespace;
-3. bind-mounts the artifact directory read-only/nosuid/nodev onto itself and `chroot`s into it (the root
-   contains only `prog`);
-4. sets limits: address space (256 MiB by default), CPU seconds (SIGXCPU, then SIGKILL one second later), zero
-   file size, no core dumps, 3 file descriptors, 1 process, no locked memory;
-5. sets `no_new_privs` and installs a seccomp-BPF allowlist: `read write close mmap munmap brk rt_sigreturn
-   execve exit exit_group`. Every other syscall returns EPERM. A non-x86-64 arch or an x32 syscall kills the
-   process.
-
-Any failure is reported on a close-on-exec status pipe, and the launcher exits 125 without running the artifact.
-The parent enforces wall time, stdout/stderr quotas, and cancellation by SIGKILL of the process group. It also
-removes the temporary directory. At startup the server probes the sandbox and checks that the namespaces
-differ from its own, that the root holds only `prog`, and that `openat` is denied. If the probe fails, execution
-is refused with `sandbox_unavailable` and nothing runs unconfined.
-
-## Regression tests (`tests/test_security.py`, `tests/test_e2e_stdio.py`, `tests/test_warm.py`)
-
-| Threat | Test |
-|---|---|
-| filesystem read from artifact | `test_filesystem_is_unreachable_from_artifacts` (openat → -EPERM), with an unconfined positive control |
-| execution without isolation | `test_execution_fails_closed_without_sandbox` |
-| rights via arguments | `test_rights_come_from_host_policy_not_arguments` |
-| undeclared effects | `test_undeclared_effects_are_denied` |
-| forged/foreign handles, cross-client leakage | `test_forged_and_foreign_handles_are_rejected`, `test_two_clients_are_isolated_and_stores_reopen`, `test_concurrent_executions_and_sessions_are_isolated` |
-| stale or tampered artifacts | `test_semantic_edit_changes_the_executed_result`, `test_tampered_artifact_is_refused` |
-| oversized or malformed requests | `test_oversized_and_malformed_requests_are_rejected_before_compilation` |
-| edit injection | `test_mutation_tokens_cannot_inject_extra_edits` |
-| path traversal and symlink escape | `test_store_roots_block_traversal_and_symlinks`, `test_store_open_verifies_bytes` |
-| runaway programs | `test_wall_time_limit_kills_spinning_artifact`, `test_cpu_limit_is_enforced`, `test_output_quota_kills_flooding_artifact` |
-| cancellation and server crash | `test_cancellation_kills_the_process`, `test_server_crash_kills_running_artifact` |
-| arbitrary shell/Python | no such tool or code path; `test_construct_rejects_semantic_errors_with_diagnostics` rejects non-XAX operations |
-| STDOUT corruption | `test_stdout_carries_only_json_rpc` (fd 1 is redirected to stderr at startup) |
-
-## Warm server (`warm.py`, ADR-0008)
-
-- The socket lives in a directory that must be owned by the user and mode 0700 (`$XDG_RUNTIME_DIR/xax-mcp`, else
-  `~/.cache/xax-mcp/run`, or `XAX_MCP_WARM_DIR`); otherwise the launcher serves in-process and starts nothing. The
-  socket file is 0600 and the server also checks the peer uid with `SO_PEERCRED`.
-- Authority is unchanged: the forked child parses the launcher's own command line, exactly as an in-process
-  server would. The warm server itself holds no rights, no sessions, and no client data, and children do not share
-  memory with each other after the fork.
-- The warm server runs with a reduced environment (`PATH`, `HOME`, locale, temporary and XDG directories, and
-  `XAX_*`). Only `XAX_MCP_LOG` and `XAX_MCP_REQUIRE_SANDBOX` are forwarded per launch.
-- It forks only while single-threaded, accepts at most a 64 KiB launch header, and exactly three descriptors.
-- A child exits on STDIN EOF or when the launcher's connection closes, including when the launcher is killed
-  (`tests/test_warm.py::test_child_exits_when_its_launcher_dies`). Sandboxed programs still die with the child that
-  launched them (`PR_SET_PDEATHSIG`).
-- `--no-warm-server` or `XAX_MCP_WARM_SERVER=0` disables it.
-
-## Sandbox (Windows x86-64)
-
-`_sandbox_win.py` is the entire executor boundary on Windows (ctypes, no helper process). It writes the artifact as
-`prog.exe` into a fresh private directory whose ACL adds read/execute for the sandbox's AppContainer SID, and calls
-`CreateProcessW` with a fixed command line, no shell, `LOCALAPPDATA` and `SystemRoot` as the only environment, and
-exactly three inherited handles (stdin/stdout/stderr pipes). The process starts suspended with:
-
-1. a less privileged AppContainer (LPAC) token with no capabilities: no network, no access to other processes'
-   named objects, and file access only where an ACL names the container (its run directory) or all restricted
-   application packages (system DLLs);
-2. a job object: committed memory (256 MiB by default), CPU time, one active process, kill on job close (the
-   program dies with the server), die on unhandled exception, and every UI restriction;
-3. mitigation policies: no child processes, no dynamic code, no win32k system calls, no extension points, no
-   remote or low-label images; `DETACHED_PROCESS`, so no console host.
-
-Before resuming it, the server checks the token is an AppContainer carrying `WIN://NOALLAPPPKG` (less privileged)
-and that the process is in the job; otherwise it kills the process and refuses. The parent enforces wall time, CPU
-time (polled every 50 ms; the job limit is the backstop), stdout/stderr quotas, and cancellation by terminating the
-job. The startup probe runs the same path with `whoami.exe`, suspended and never resumed.
-
-The `windows-x86_64` carrier has no file-open or command-line entities (XAX ADR-252), so an artifact can reach
-only its standard handles, memory, and process exit. `argv` is refused with `unsupported`.
-
-## Audit
-
-Each tool call writes one JSON line to stderr: the tool, whether it succeeded, the error code, and the request
-size. Payloads, inputs, outputs, and file contents are never logged.
-
-## Known limits
-
-- Only Linux x86-64 and Windows x86-64 are supported. Elsewhere the probe fails and execution is refused.
-- On Windows there is no test that an artifact's file open is denied, because the carrier cannot express one; the
-  LPAC token and its ACL scope are checked by the probe instead.
-- The sandbox needs unprivileged user namespaces. Ubuntu 23.10+ restricts them through AppArmor (see
-  [HOSTS.md](HOSTS.md#troubleshooting)).
-- The cgroup namespace is created but no cgroup controller limits are applied. Memory and CPU are bounded by
-  rlimits.
-- `execve` stays in the allowlist because the launcher needs it. Inside the chroot the only executable is the
-  artifact itself.
-- The warm server stays resident until idle for `XAX_MCP_WARM_IDLE_SECONDS` (default 900), with about 100 MB
-  RSS at XAX `13a6843` (about 800 MB at `6c2df90`, before XAX ADR-248).
-- No HTTP transport is shipped. An HTTP deployment would need authentication, origin/host validation, TLS, and
-  per-session isolation before it could be offered.
+Current evidence covers invalid candidate rejection/cleanup, stale/zero roots, schema path/command probes, forged
+result handle rejection, read-only and execution grants, separate directories, same-directory refusal and crash
+lease release. External test/CI PowerShell handles transport and assertions only; every runtime component is XAX.
