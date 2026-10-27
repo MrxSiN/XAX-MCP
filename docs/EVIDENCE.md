@@ -1,5 +1,18 @@
 # Evidence and claim labels
 
+## 2026-10-27 current audit
+
+[Native transaction construction evidence](evidence/native-windows-x86_64-transaction-construction-20261027.json)
+records a new canonical arithmetic graph built and executed through the unchanged XAX MCP server, returning
+136 under native confinement, plus stale-root, launch-right and separate-work-directory checks. It also
+preserves failing schema checks and successful publication of an invalid candidate before independent native
+verification rejected it. These negative results block release; the invalid candidate was never executed.
+
+The native carrier decoder is unavailable on this host. The recovered compiler is identified separately from
+the embedded pin and has not been certified as that pin. Current CI is a native smoke workflow; the SDK and
+external Python-suite counts below are historical. Canonical `.xax` application state is source owned here.
+See [Windows readiness](WINDOWS_READINESS.md) for exact scope and unresolved work.
+
 Labels: **PROVEN** (formal or exhaustive argument), **EXECUTED** (ran end to end and checked against an
 independent oracle), **MEASURED** (raw samples recorded), **STRUCTURAL** (present and wired, but not exercised end
 to end), **PROTOTYPE** (works for a narrow case), **UNIMPLEMENTED**.

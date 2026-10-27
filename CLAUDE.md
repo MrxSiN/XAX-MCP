@@ -6,18 +6,20 @@
   "Generated with" lines in commit messages, PR descriptions, or code.
 
 ## Project rules
-- The deployed server and every runtime component are XAX. This repository contains **no Python and no source code
-  at all**: carriers, canonical stores, executables, evidence and documents. Rebuilding the committed artifacts needs
-  only native XAX programs (a host-granted carrier decoder and compiler); the offline carrier authors and the external
-  MCP test client live in `MrxSiN/XAX` (`compiler/integration/mcp`) and are disclosed as B5 in `docs/NATIVE.md`.
+- The deployed server and every runtime component are XAX. Canonical `.xax` semantic stores ARE application source
+  and belong here. MCP schemas, carriers, regression data, packaging and guides also belong here. Do not add an
+  implementation in another programming language or move MCP application implementation into XAX.
+- Change canonical programs through native XAX construction/workspace transactions with exact roots and mandatory
+  verification. Do not invent textual XAX syntax, regenerate unchanged graphs, or restore retired Python emitters.
+- A native decoder and compiler must actually be available before claiming a native rebuild. See
+  `docs/WINDOWS_READINESS.md` for the current missing decoder and candidate-publication defect.
 - No workload logic in the server or build tooling: no per-operation tools, no adapter-side computation, and no
   hard-coded results. Results must come from XAX-generated code.
 - XAX changes belong in `MrxSiN/XAX`; the dependency direction is one-way (`XAX-MCP -> XAX`).
 - When the XAX pin changes, update the CI checkout ref, `README.md`, `docs/NATIVE.md`, `docs/COMPATIBILITY.md`,
   `docs/HANDOFF.md`, `docs/EVIDENCE.md` and this file together. Check that the new pin's `compiler/src` is
-  byte-identical to the recorded `NATIVE_XAX_COMMIT`; if it is not, update it in
-  `compiler/integration/mcp/{server,sandbox}.py` upstream, regenerate both stores, and record the new toolchain
-  fingerprint too.
+  compatible with the canonical program's recorded compiler identity. Change embedded identity through a verified
+  XAX transaction and record the exact toolchain/artifact identities. Do not edit retired upstream Python authors.
 - Record new evidence in new files under `docs/evidence/`; never overwrite old evidence.
 - Do not claim a capability that is not executable natively. Use the labels in `docs/EVIDENCE.md`.
 

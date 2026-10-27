@@ -1,5 +1,21 @@
 # Compatibility matrix
 
+## Windows audit — 2026-10-27
+
+| Server | Native compiler tested | Protocol | Result and limit |
+|---|---|---|---|
+| Unchanged `0.8.0+native`, embedded XAX pin `3e9b0c2` | Recovered Windows prototype SHA-256 `ff0355c5bf148bc79cf463748a285c3f982b6c8e47faf8d2d25bd3571b2ad638`, canonical source root `2b8136a8...3d17`; not certified as the embedded pin | `2025-11-25` handshake | Seven native transactions, each independently verified, then build and sandbox execute of a new arithmetic graph: exit 136. Stale-root and launch-right checks passed. Candidate-publication and query/build schema checks failed. Decoder absent; no full mission or release-readiness claim. |
+
+The XAX checkout was updated to `fdc7312d60e12b6e784d920217f09df535090d55`; its compiler sources differ from
+the embedded pin. Syncing the checkout does not declare that revision compatible or silently repin the server.
+The native compiler used above is recorded by exact digest, not represented as current `main`.
+
+Current CI checks this repository's native artifacts and transport data without installing Python or SDKs.
+It does not rebuild against XAX or rerun the historical SDK suite. Current MCP `2026-07-28` is unsupported;
+Codex/Claude current-version adoption has not been re-certified. The following release rows are historical
+certifications, retained unchanged. See [current readiness](WINDOWS_READINESS.md) and
+[raw observations](evidence/native-windows-x86_64-transaction-construction-20261027.json).
+
 ## Current release
 
 | xax-mcp | XAX commit | XAX host contract | Toolchain fingerprint (sha256) | mcp SDK (test client) | Python (test client and offline authors only) | OS / arch | Result |

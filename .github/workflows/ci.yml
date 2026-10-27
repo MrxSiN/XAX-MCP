@@ -1,4 +1,4 @@
-name: ci
+name: native-smoke
 
 on:
   push:
@@ -8,91 +8,62 @@ on:
 permissions:
   contents: read
 
-env:
-  # The MCP programs and tests. This is the certified compiler revision (3e9b0c2, XAX main) plus the MCP commits;
-  # its compiler/src is byte-identical to the pin, which is what the store embeds and what the server reports. The
-  # programs are the verified stores under compiler/integration/mcp/programs; the Python carrier authors are retired.
-  XAX_COMMIT: 7ed308f001544dff8cdf4bb825a6811d00b2027f
-  XAX_COMPILER_COMMIT: 3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b
-  XAX_MCP_HOME: ${{ github.workspace }}
-
 jobs:
-  native-windows:
+  windows-native:
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
 
-      - name: Isolated checkout of the pinned upstream XAX (programs and tests)
-        uses: actions/checkout@v4
-        with:
-          repository: MrxSiN/XAX
-          ref: ${{ env.XAX_COMMIT }}
-          path: upstream-xax
-          fetch-depth: 0
-
-      - name: The tooling commit must carry exactly the certified compiler revision
-        shell: bash
-        run: |
-          git -C upstream-xax cat-file -e "$XAX_COMPILER_COMMIT^{commit}"
-          git -C upstream-xax diff --exit-code "$XAX_COMPILER_COMMIT" HEAD -- compiler/src
-          echo "compiler/src is byte-identical to $XAX_COMPILER_COMMIT"
-
-      - name: This repository contains no Python and no source code
-        shell: bash
-        run: |
-          test -z "$(git ls-files '*.py')"
-          test ! -d .venv
-          echo "no tracked Python; carriers, stores, executables, evidence, docs only"
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      # Python here is external test tooling (the MCP client, the chain/bench/fingerprint helpers). It is never
-      # packaged with, imported by, or launched by the server. The build path is the committed stores and the
-      # committed executables; no author runs in CI.
-      - name: Install the external test client
-        run: |
-          python -m pip install pytest anyio "mcp>=2.3.0,<2.4"
-
-      - name: The committed executables are the canonical author builds
+      - name: Check native artifact identities
         shell: pwsh
         run: |
           $expected = @{
-            "native/xax-mcp-native.exe"  = "9F6E272BBBC938D3493A98B7C68409DE31A09FFC4CC958BB41BE7447B65C076A"
-            "native/xax-mcp-sandbox.exe" = "6D563E0F23E4F402D55C82B200D42BCE91C41C98AAB101267E67D3645A1D37E2"
-            "native/xax-mcp-seed.exe"    = "8FAAEB7E63E5D1A07BCD9C46E3AE3381AF267B67E213CEC6B992C628FB1843CA"
+            'native/xax-mcp-native.exe' = '9F6E272BBBC938D3493A98B7C68409DE31A09FFC4CC958BB41BE7447B65C076A'
+            'native/xax-mcp-sandbox.exe' = '6D563E0F23E4F402D55C82B200D42BCE91C41C98AAB101267E67D3645A1D37E2'
+            'native/xax-mcp-seed.exe' = '8FAAEB7E63E5D1A07BCD9C46E3AE3381AF267B67E213CEC6B992C628FB1843CA'
+            'examples/native-arithmetic/program.xax' = '3454B07D7D958D8B15323D9D5A6E633DB69B3449357B5F9FC78D9A22262D7658'
+            'examples/native-arithmetic/program.exe' = '832A06E874A109C4CDAF4385E0B50E88B7B8070EE532DA6544E3568EAEDD2A07'
+            'examples/native-arithmetic/program.prov' = '960F8960AFA106238FA283FB89EE07974106C35CA033C0D91CB692327B5A32E4'
           }
           foreach ($path in $expected.Keys) {
-            $actual = (Get-FileHash $path -Algorithm SHA256).Hash
-            if ($actual -ne $expected[$path]) { throw "executable differs from the canonical artifact: $path $actual" }
-            "ok $path $actual"
+            if ((Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash -ne $expected[$path]) {
+              throw "Native artifact changed: $path"
+            }
           }
 
-      - name: The built server reports the pin and starts no Python
+      # PowerShell and Git are external CI orchestration. No compiler implementation,
+      # SDK, source emitter or non-XAX runtime helper is installed or executed.
+      - name: Replay the STDIO protocol smoke fixture
         shell: pwsh
         run: |
-          $request = @(
-            '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"ci","version":"0"}}}',
-            '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"xax_capabilities","arguments":{}}}'
-          ) -join "`n"
-          $out = ($request | & native/xax-mcp-native.exe --read-only) -join "`n"
-          $payload = ($out -split "`n" | Where-Object { $_ -match '"id":2' } | ConvertFrom-Json).result.content[0].text | ConvertFrom-Json
-          if ($payload.server.version -ne "0.8.0+native") { throw "version $($payload.server.version)" }
-          if ($payload.xax.pinned_commit -ne "$env:XAX_COMPILER_COMMIT") { throw "pin $($payload.xax.pinned_commit)" }
-          if ($payload.server.python_on_request_path -ne $false) { throw "python_on_request_path" }
-          if ($payload.xax.host_contract -ne "xax-host-contract-v1 r10") { throw "contract $($payload.xax.host_contract)" }
-          "identity ok: $($payload.server.version) $($payload.xax.pinned_commit)"
+          New-Item -ItemType Directory -Force build | Out-Null
+          $actual = @(Get-Content tests/protocol/readonly.requests.ndjson | & native/xax-mcp-native.exe --read-only)
+          if ($LASTEXITCODE -ne 0) { throw 'Native server failed' }
+          $actual | Set-Content build/readonly.responses.ndjson -Encoding utf8NoBOM
+          $expected = @(Get-Content tests/protocol/readonly.responses.ndjson)
+          if ($actual.Count -ne $expected.Count -or (Compare-Object $expected $actual -SyncWindow 0)) {
+            throw 'STDIO response fixture differs'
+          }
 
-      - name: Drive the PE32+ over STDIO (the suite lives in XAX; the artifacts under test are committed here)
-        env:
-          XAX_NATIVE_SRC: ${{ github.workspace }}\upstream-xax\compiler\src
-        run: python -m pytest -q -rs upstream-xax/compiler/integration/mcp/tests
-
-      - name: Record protocol measurements (artifact only; committed evidence is curated by hand)
-        run: python upstream-xax/compiler/integration/mcp/bench.py native/xax-mcp-native.exe > evidence-native.json
+      - name: Run the new canonical arithmetic program in native confinement
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force build/sandbox | Out-Null
+          & native/xax-mcp-sandbox.exe (Resolve-Path examples/native-arithmetic/program.exe).Path (Resolve-Path build/sandbox).Path
+          if ($LASTEXITCODE -ne 0) { throw "Confinement unavailable or failed: $LASTEXITCODE" }
+          $result = [IO.File]::ReadAllBytes((Join-Path $PWD 'build/sandbox/sandbox-result.bin'))
+          if ($result.Length -ne 16 -or [BitConverter]::ToUInt32($result, 0) -ne 136 -or [BitConverter]::ToUInt32($result, 4) -ne 0) {
+            throw 'Expected confined exit result 136 with no timeout or truncation'
+          }
+          if ((Get-Item build/sandbox/sandbox-out.bin).Length -ne 0 -or (Get-Item build/sandbox/sandbox-err.bin).Length -ne 0) {
+            throw 'Unexpected artifact output'
+          }
 
       - uses: actions/upload-artifact@v4
         with:
-          name: native-evidence
-          path: evidence-native.json
+          name: native-smoke-evidence
+          path: |
+            build/readonly.responses.ndjson
+            build/sandbox/sandbox-result.bin
+            build/sandbox/sandbox-out.bin
+            build/sandbox/sandbox-err.bin

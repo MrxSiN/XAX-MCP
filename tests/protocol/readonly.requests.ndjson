@@ -1,0 +1,16 @@
+{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"native-smoke","version":"1"}}}
+{"jsonrpc":"2.0","method":"notifications/initialized"}
+{"jsonrpc":"2.0","id":2,"method":"ping"}
+{"jsonrpc":"2.0","id":3,"method":"tools/list"}
+{"jsonrpc":"2.0","id":4,"method":"tools/call","params":{"name":"xax_capabilities","arguments":{}}}
+{"jsonrpc":"2.0","id":5,"method":"tools/call","params":{"name":"xax_capabilities","arguments":{"execute":true}}}
+{"jsonrpc":"2.0","id":6,"method":"tools/call","params":{"name":"xax_transaction","arguments":{"record":"00"}}}
+{"jsonrpc":"2.0","id":7,"method":"tools/call","params":{"name":"xax_construct","arguments":{"request":{}}}}
+{"jsonrpc":"2.0","id":8,"method":"tools/call","params":{"name":"xax_build","arguments":{}}}
+{"jsonrpc":"2.0","id":9,"method":"tools/call","params":{"name":"xax_execute","arguments":{}}}
+{"jsonrpc":"2.0","id":10,"method":"tools/call","params":{"name":"xax_result","arguments":{"handle":"forged"}}}
+{"jsonrpc":"2.0","id":11,"method":"tools/call","params":{"name":"not_a_tool","arguments":{}}}
+{"jsonrpc":"2.0","id":12,"method":"not_a_method"}
+{"jsonrpc":"2.0","id":13,"method":"ping","params":{}}
+{]
+{"jsonrpc":"2.0","id":14,"method":"ping"}

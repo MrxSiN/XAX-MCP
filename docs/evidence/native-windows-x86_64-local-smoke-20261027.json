@@ -1,0 +1,36 @@
+{
+  "schema": "xax-mcp-local-smoke-v1",
+  "recorded": "2026-10-27",
+  "label": "EXECUTED",
+  "scope": "Local Windows smoke and fresh replay; no GitHub runner or full conformance claim",
+  "workflow": ".github/workflows/ci.yml",
+  "workflow_steps_executed": 3,
+  "workflow_steps_passed": 3,
+  "readonly_responses": 15,
+  "fresh_arithmetic_replay_responses": 21,
+  "execution_exit_results": [
+    40,
+    136,
+    136
+  ],
+  "fresh_replay_source_sha256": "3454b07d7d958d8b15323d9d5a6e633db69b3449357b5f9fc78d9a22262d7658",
+  "native_final_verifier_exit": 0,
+  "recorded_artifact_sha256": "832a06e874a109c4cdaf4385e0b50e88b7b8070ee532da6544e3568eaedd2a07",
+  "native_server_rebuild": {
+    "replaces_committed_artifact": false,
+    "bytes": 359424,
+    "exit_code": 0,
+    "sha256": "a87fdd10042b6717d098af7e1014e612f460dabbe725320eeb781c388fd2a2b9"
+  },
+  "current_windows_compiler_store_build": {
+    "status": "DECLINED",
+    "exit_code": 2,
+    "self_build_claim": false
+  },
+  "audit_summary": {
+    "executed_checks": 20,
+    "release_blockers": 3,
+    "blocked_checks": 1
+  },
+  "release_ready": false
+}

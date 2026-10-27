@@ -1,5 +1,28 @@
 # Handoff
 
+## 2026-10-27 — Windows native construction evidence; release blocked
+
+Both checkouts were synchronized with remote `main`. XAX's previous local state was preserved in the stash
+named `Preserve pre-sync Windows checkout 2026-10-27`; the old `feat/native-construct` branch remains.
+The server executable/version/pin are unchanged. Canonical programs are application source owned by this
+repository, not "no source code". `schemas/tools-v1.json` is now the local schema transport snapshot.
+
+Seven native `XAXEDIT1` records constructed a new add/multiply/subtract graph. Native verification passed for
+each intermediate store; MCP build and sandbox execution returned 136. The source, transactions, artifact,
+provenance and replay are in `examples/native-arithmetic`; full positive and negative results are in
+`docs/evidence/native-windows-x86_64-transaction-construction-20261027.json`.
+
+Fix the failing release gates first: `xax_transaction` publishes a candidate containing a type-invalid add;
+query/build ignore forbidden schema properties. The invalid program was never executed. The current Windows
+host has no native carrier decoder, and the recovered native compiler declines the current Windows driver
+store. Do not invoke the upstream Python builders to work around the XAX-only instruction. Typed I/O, bounded
+queries, opaque handles, compiler-call cancellation and current MCP 2026-07-28 support remain unfinished.
+
+CI is now an independent native artifact/protocol/sandbox smoke workflow. It has no upstream source checkout,
+Python setup or SDK installation. This deliberately narrows the automated scope: historical 44/46-test and
+SDK-interoperability counts are not current CI results. No Windows runner result is claimed until that workflow
+actually executes. See `docs/WINDOWS_READINESS.md` for precise next work and upstream native-only requirements.
+
 ## State at 2026-10-23: the verified stores are the programs
 
 - XAX tooling is at `7ed308f001544dff8cdf4bb825a6811d00b2027f` on `integration/mcp-on-main-3e9b0c2`; its

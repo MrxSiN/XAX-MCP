@@ -1,191 +1,135 @@
 # XAX-MCP
 
-An optional [Model Context Protocol](https://modelcontextprotocol.io) server for
-[XAX](https://github.com/MrxSiN/XAX), implemented as a **native XAX program**: a verified canonical
-`xax-construct-v1` store that XAX builds into a Windows x86-64 PE32+ executable. The deployed server does not start
-Python, an MCP SDK, a shell wrapper, or another language.
+A native XAX STDIO MCP server for Windows x86-64. **Prototype; the full execution-plugin mission is not complete
+and the release security gate is failing.** The executable version remains `0.8.0+native`.
 
-This repository contains no source code: only carriers, canonical stores, executables, evidence and documents. The
-tooling that produces them lives in XAX (`compiler/integration/mcp`), so nothing here has to be maintained or built
-separately.
+The authoritative application source is the canonical semantic state in `native/*.xax`. XAX semantics,
+verification, construction, editing and compilation belong to [XAX](https://github.com/MrxSiN/XAX).
+JSON schemas, MCP messages and construction/edit carriers are transport data, never authoritative XAX source.
 
-```text
-MCP client ──newline-delimited JSON-RPC over STDIO──► xax-mcp-native.exe  (XAX-generated native code)
-                                                      ├─ STDIO framing, 4 MiB line limit, resync
-                                                      ├─ RFC 8259 JSON validation, UTF-8, depth 64
-                                                      ├─ JSON-RPC 2.0, MCP initialize/ping/tools
-                                                      ├─ tool dispatch and host-granted rights
-                                                      ├─ spawn a host-granted native XAX compiler
-                                                      └─ kernel32 + msvcrt only (no Python, no SDK)
-```
+The deployed server, sandbox launcher and generated computation execute XAX machine code. They start no Python,
+JavaScript, MCP SDK server or shell helper. Windows system DLL imports are operating-system interfaces. No new
+implementation in another programming language is part of this repository.
 
-XAX's invariant holds: **meaning is source.** The canonical store is the authoritative program. Tool schemas and
-capability text are transport, embedded at construction time; they are never XAX source.
+## Windows result — 2026-10-27
 
-## Status (0.8.0)
-
-| Capability | Status |
-|---|---|
-| STDIO transport, framing, JSON validation, JSON-RPC, MCP lifecycle, tool dispatch, host rights | **EXECUTED**: `compiler/integration/mcp/tests/test_native_stdio.py` in XAX over the real PE32+ (44 passed, 1 skipped without a compiler; 45 passed, 0 skipped with a native `xaxc` rebuilt at the pin) |
-| Official MCP Python SDK client (`mcp.Client`) interoperability | **EXECUTED**: handshake, `tools/list`, `tools/call` |
-| `xax_capabilities` | **EXECUTED** (native, reports the exact blockers below) |
-| `xax_workspace`, `xax_query`, `xax_build`, `xax_transaction` | **PROTOTYPE** over a host-granted native XAX compiler: describe the current store, `resolve`+`build`, one `XAXEDIT1` edit |
-| `xax_construct` (new canonical program from a typed carrier) | **PROTOTYPE on windows-x86_64**: the server copies the inline `xax-construct-v1` carrier to the work directory and spawns the host-granted native `construct <carrier> <store>` command (`XAX_MCP_CONSTRUCT`); the store it writes becomes the current store. `native/sandbox_request.json` decodes to `native/xax-mcp-sandbox-gen0.xax` byte for byte (74 434 B, root `7ef7099d...`). Linux, candidate stores, rollback and result handles are open |
-| `xax_execute` in an OS sandbox | **PROTOTYPE, MEASURED on windows-x86_64** (also reproduced on a clean windows-2022 CI runner): a second XAX program (authored by `compiler/integration/mcp/sandbox.py` in XAX) runs the built artifact as a capability-less AppContainer in a job object; Linux and typed I/O are open (B3, B4) |
-| `xax_result` (bounded result retrieval) | **UNIMPLEMENTED natively**: needs session state |
-| Streamable HTTP transport | **UNIMPLEMENTED** (STDIO only) |
-
-The protocol layer is real and measured, and the narrow compiler chain was executed end to end: a committed seed
-store is described, resolved and built (1536-byte PE + 268-byte provenance), a 78-byte `XAXEDIT1` record sets a
-constant from 40 to 41 with the compiler's native `edit`, and the edited artifact is then run under OS confinement
-(`exit_code 41`, 16 ms reported sandbox duration in the 0.8.0 re-run). `xax_construct` was executed over the same
-STDIO transport with a host-granted native decoder: the committed sandbox carrier produced the committed sandbox
-store byte for byte and became the work directory's current store. Without
-`XAX_MCP_COMPILER`/`XAX_MCP_WORK`/`XAX_MCP_STORE` the five compiler-backed tools answer `denied_capability`;
-`xax_construct` needs `XAX_MCP_CONSTRUCT` plus `XAX_MCP_WORK`; `xax_execute` additionally needs `--allow-execute` and
-a `xax-mcp-sandbox.exe` beside the server. Only `xax_result` remains unimplemented and answers `unsupported`. No
-result is fabricated, and no Python server is used as a fallback. See [docs/NATIVE.md](docs/NATIVE.md) for the exact
-upstream gaps and the proposed native compiler service.
-
-## Build
-
-This repository contains no source code and no Python. The carriers, canonical stores and executables under
-`native/` are the build products; the programs and the tooling that builds and checks them live in XAX at
-[`compiler/integration/mcp`](https://github.com/MrxSiN/XAX/tree/7ed308f001544dff8cdf4bb825a6811d00b2027f/compiler/integration/mcp).
-Rebuilding has two stages. Both can run with no interpreter when a native decoder and compiler are granted; the
-compiler is rebuilt locally from the pinned tree and is not committed (B1):
+A client initialized the actual server over STDIO, discovered all eight tools, and built and executed the seed
+program with exit result `40`. Seven exact-root XAX semantic transactions then inserted three integer constants,
+three arithmetic operations and a changed use into a new graph:
 
 ```text
-carrier --> store      native XAX decoder, host-granted as XAX_MCP_CONSTRUCT      [verified: byte-identical]
-store   --> PE + prov  native xaxc `build` on the committed snapshot store        [executor: byte-identical]
-                                                                                 [server: same size, probe omitted]
+((40 + 7) * 3) - 5  ->  136
 ```
 
-The decoder is the `construct <carrier> <store>` program from `compiler/integration/construct` in XAX. The build
-stage is the same `resolve`, `build` and `edit` command set the server drives; the server only ever spawns a native
-`xaxc` granted as `XAX_MCP_COMPILER`, never Python. On this host the native compiler ran `build` directly on both
-committed snapshot stores: the 8-function executor artifact is byte-identical to the committed PE, and the
-181-function server artifact is the same 359 424 B and passes every external test except the byte-identity
-assertion, but it omits the reference build's Windows guard-page stack probe, shifting the rest of the image and
-changing 231 313 bytes. The committed server PE therefore remains the author-built one, which `xax_build.build`
-reproduces exactly; fixing that omission is the narrowed B1 item
-(`docs/evidence/native-windows-x86_64-native-build-parity-3e9b0c2.json`). The same `resolve`, `build` and `edit` chain
-was executed against the native compiler: 45 passed, 0 skipped, with the edited artifact executed under confinement
-(`exit_code 41`); `docs/evidence/native-windows-x86_64-chain-3e9b0c2.json`.
-The six carriers, stores and snapshots are committed and deterministic: the decoder reproduces both stores from the
-committed carriers byte for byte. The three executables are committed canonical artifacts: the executor rebuilds
-byte-identically, and the server build is the same size and behavior but carries the B1 probe omission. CI no longer
-runs an author; it verifies the committed executables against their recorded SHA-256 values and runs the external
-suite against them. The tool schemas the server embeds are `programs/tool-schemas.json` in the same upstream
-directory.
+Every intermediate store passed the native XAX verifier. The server built the final root
+`236b15c2acc1ac10246b06ac5e23707cd3ffbb144507ca9bc52dd86286d6d8fb` and ran its actual executable through
+the XAX Windows AppContainer/job-object launcher. It returned `exit_code: 136`, `flags: 0`, empty stdout/stderr,
+and native build provenance. A repeated run also returned `136`. Replaying the first transaction after the edits
+was rejected and retained the final root. This is new semantic graph construction by native transactions; it is
+not evidence that the separate JSON carrier decoder works on this host, or that a general typed result ABI exists.
 
-The certified XAX pin is `3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b` (XAX `main`, 2026-10-22): host contract
-`xax-host-contract-v1` r10, toolchain fingerprint
-`ba009daa933c33ba124f2dc2fcb7a09995553b867bc68289555871b2f47eb740`. The programs and tests live at
-`7ed308f001544dff8cdf4bb825a6811d00b2027f` on branch `integration/mcp-on-main-3e9b0c2`, which is `3e9b0c2` plus the
-MCP commits; its `compiler/src` is byte-identical to `3e9b0c2` (`git diff 3e9b0c2 7ed308f -- compiler/src` is empty),
-so the store embeds `3e9b0c2` as its pin. See [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md).
+[Canonical example and replay](examples/native-arithmetic/README.md) ·
+[Complete request/response evidence](docs/evidence/native-windows-x86_64-transaction-construction-20261027.json) ·
+[Windows findings and remaining work](docs/WINDOWS_READINESS.md).
 
-The five Python carrier emitters (`server.py`, `sandbox.py`, `seed.py`, `dsl.py`, `schemas.py`) are retired; the
-verified stores in XAX `compiler/integration/mcp/programs` are the programs. Python remains only outside this
-repository and off the request path: the external MCP test client and the `chain.py`, `bench.py` and
-`fingerprint.py` helpers, which are being ported to XAX as the second half of B5.
+## Release blockers
+
+* **Invalid candidates can be published.** A native transaction inserting an add with an effect-token operand
+  returned success and replaced the current store. Independent native verification rejected that store with
+  `XAX.STRUCT.OP_TYPE / GRAPH-OP-TYPE`. It was never executed. Verification must precede publication.
+* `xax_query` and `xax_build` ignore some properties forbidden by their schemas. The tested `path` and `command`
+  properties did not grant filesystem or shell access, but they should have been rejected.
+* There is no native carrier decoder installed on this Windows host. `xax_construct` fails closed with
+  `denied_capability`. The upstream decoder's canonical store and reproducible Windows executable are not committed.
+* The recovered native compiler is a local prototype, identified separately from the server's embedded pin. It
+  builds these small programs, but declines the current Windows compiler store itself. It is not a reproducible
+  Windows self-hosting toolchain.
+* Bounded semantic queries, session-scoped opaque handles, typed runtime I/O, result paging, cancellation during
+  compiler calls and hardened sandbox coverage remain unfinished. Separate host work directories were tested;
+  sharing one directory between clients is not session isolation.
+* The latest [MCP specification is 2026-07-28](https://modelcontextprotocol.io/specification/2026-07-28).
+  This server implements the older handshake protocol through `2025-11-25`; current-protocol support is open.
+
+The full mission must remain incomplete until these gates pass. Historical successful tests do not override the
+new negative results. Use read-only operation for evaluation; the mutation/execution configuration is experimental.
 
 ## Run
 
-```bash
-./native/xax-mcp-native.exe --read-only
+From a Windows checkout:
+
+```powershell
+& .\native\xax-mcp-native.exe --read-only
 ```
 
-The executable speaks newline-delimited JSON-RPC 2.0 on stdin/stdout. STDOUT is protocol-only; diagnostics, if any,
-go to stderr. Accepted flags: `--allow-execute`, `--read-only`, `--deny RIGHT`, `--deny=RIGHT`, and
-`--no-warm-server` (a no-op). Any other argument makes the server exit with status 2 before reading stdin.
+The process reads newline-delimited JSON-RPC from stdin and writes protocol messages to stdout. It requires no
+language interpreter or SDK. Stop it by closing stdin. Supported launch flags are `--read-only`, `--allow-execute`,
+`--deny RIGHT`, `--deny=RIGHT` and the compatibility no-op `--no-warm-server`; unknown flags exit with status 2.
 
-Register the executable with an MCP client:
-
-```json
-{"mcpServers": {"xax": {"type": "stdio", "command": "C:/path/to/xax-mcp-native.exe", "args": ["--read-only"]}}}
-```
-
-The five compiler-backed tools also need a host grant: a native XAX compiler, a writable work directory, and a seed
-build-request store. The server spawns that compiler; it does not embed one.
-
-```json
-{"mcpServers": {"xax": {"type": "stdio", "command": "C:/path/to/xax-mcp-native.exe", "args": ["--read-only"],
-  "env": {"XAX_MCP_COMPILER": "C:/path/to/xaxc.exe",
-          "XAX_MCP_WORK": "C:/path/to/work",
-          "XAX_MCP_STORE": "C:/path/to/xax-mcp-seed.xax"}}}}
-```
-
-`--allow-execute` is the host owner's grant for `xax_execute`. Tool arguments can never grant a right. With the right
-granted and a `xax-mcp-sandbox.exe` beside the server, execution resolves and builds the current store and runs the
-artifact under Windows OS confinement; without either, it fails closed with `denied_capability` or
-`sandbox_unavailable` and runs nothing.
+The compiler-backed prototype additionally uses host-controlled `XAX_MCP_COMPILER`, `XAX_MCP_WORK` and
+`XAX_MCP_STORE`; the carrier tool uses `XAX_MCP_CONSTRUCT`. Execution additionally requires `--allow-execute` and
+`xax-mcp-sandbox.exe` beside the server. Tool arguments cannot grant these capabilities. Give every client its
+own empty work directory. The work directory contains program state, artifacts and bounded execution captures.
 
 ## Tools
 
-The schemas are versioned as `xax-mcp-tools-v1`. The native dispatch accepts all eight names; the compiler-backed
-tools are narrowed to the implemented prototype.
+| Tool | Current behavior |
+|---|---|
+| `xax_capabilities` | Native identity, legacy protocol versions, launch rights and explicit maturity labels |
+| `xax_workspace`, `xax_query` | Current store root and byte count only; full workspace/query operations are open |
+| `xax_construct` | Host-granted native decoder prototype; unavailable on this recording host |
+| `xax_transaction` | Native `XAXEDIT1` mutation; exact-root preconditions work, candidate verification before publication is defective |
+| `xax_build` | Native `resolve` and `build`; returns artifact size and provenance |
+| `xax_execute` | Rebuild and run current artifact in the native Windows sandbox; exit status and captured bytes only |
+| `xax_result` | Unsupported; result handles are unfinished |
 
-| Tool | Intended capability | Current native status |
-|---|---|---|
-| `xax_capabilities` | identity, pin, rights, targets, sandbox, maturity | EXECUTED |
-| `xax_workspace` | open/identify/close a bounded store | PROTOTYPE: describes the current store's root and size |
-| `xax_query` | bounded graph queries | PROTOTYPE: `root` only (root + byte size) |
-| `xax_construct` | carrier → verified canonical root | PROTOTYPE (Windows): one inline `xax-construct-v1` carrier → native `construct <carrier> <store>`, replaces the current store |
-| `xax_transaction` | verify/commit/rollback exact-root edits | PROTOTYPE: one `XAXEDIT1` hex record → native `edit` |
-| `xax_build` | build an exact root/entry/target | PROTOTYPE: native `resolve` + `build` of the current store |
-| `xax_execute` | run an artifact in an OS sandbox | PROTOTYPE (Windows): rebuilds the current store, runs the artifact in `xax-mcp-sandbox.exe`, returns exit code, wall time, flags, stdout/stderr hex |
-| `xax_result` | bounded result/artifact retrieval | UNIMPLEMENTED |
+The schema transport snapshot is owned here at [schemas/tools-v1.json](schemas/tools-v1.json). It retains the
+existing wire descriptions, including stale references to retired authors; changing a schema file alone does not
+change an executable or fix validation.
 
-## What this is not
+## Dependency and reproduction
 
-- It is not a complete XAX agent execution plugin yet. The native server negotiates MCP, reports capabilities,
-  describes and builds the current store, applies one record-shaped edit, constructs a new program from one typed
-  carrier with a host-granted decoder, and runs the result under Windows OS confinement. It cannot query the graph
-  beyond the root, cannot construct on Linux, and cannot feed typed input to an artifact or read typed output back.
-  That is stated in every capability response, not hidden.
-- It is not a Python server, and this repository contains no Python. The 0.5.x Python adapter is retired; it remains
-  in git history and in the historical documents marked "Python prototype". No Python is packaged, imported or
-  launched by the server. The committed carriers decode to their committed stores with a native XAX decoder, and the
-  build stage is the XAX compiler's `resolve`/`build`, not an interpreter; a committed reproducible native Windows
-  compiler for that stage is still missing upstream (B1), and the native `build` omits the reference guard-page stack
-  probe in the large server store (same size and behavior, not byte-identical). The carrier authors are retired: the
-  verified stores are the programs, and a carrier is transport.
-- It does not contain workload logic. The committed store is the program; the carrier is only its construction
-  request.
-- It does not claim sandboxing. Execution is refused until an OS-enforced sandbox is implemented in XAX.
+The unchanged server embeds XAX compiler commit `3e9b0c2b3f88d2193caae72a5fe8eefa83d1995b`, host contract r10.
+Earlier certification is in [COMPATIBILITY.md](docs/COMPATIBILITY.md). Updating the XAX checkout to current `main`
+does not change this pin or certify a different compiler.
+
+The new example was constructed and compiled with a recovered XAX native Windows compiler, SHA-256
+`ff0355c5bf148bc79cf463748a285c3f982b6c8e47faf8d2d25bd3571b2ad638`, source root
+`2b8136a8e052ccefd88f31b5d906dc986a070f2ca6e370668b73b17783ed3d17`.
+It is not shipped here or declared equivalent to the embedded pin. No Python bootstrap was run for this work.
+Its historical bootstrap used Python, as the evidence discloses. Upstream still contains non-XAX bootstrap and
+test implementations; a repository-wide XAX-only migration has not been completed.
+
+For a compatible native compiler, the existing file commands are:
+
+```text
+xaxc verify <store> <diagnostic>
+xaxc edit <store> <XAXEDIT1-record> <candidate>
+xaxc resolve <request-store> <snapshot>
+xaxc build <snapshot> <artifact> <provenance>
+```
+
+Always verify a candidate before accepting it. The native editor and MCP prototype currently do not provide that
+guarantee together. A compiler exit 2 is a decline, not a validity or build-success claim.
+
+## Checks
+
+CI now depends only on this repository: it checks native artifact hashes, replays a fixed STDIO smoke fixture and
+executes the committed arithmetic artifact under confinement. Git and PowerShell provide external CI orchestration;
+no SDK, interpreter-based compiler, source emitter or non-XAX runtime helper is installed. These are smoke checks,
+not a complete protocol, security, compiler or rebuild suite. The prior Python/SDK suite results remain historical;
+that suite is no longer the current CI path.
+
+The full native transaction experiment used an external PowerShell process client, stored outside both repositories.
+It supplied typed mutation carriers, decoded the native inspection record and checked observed results; all program
+mutation, verification, compilation and execution ran in native XAX executables. No external test client belongs
+to the deployed request path.
 
 ## Documentation
 
-[Native server](docs/NATIVE.md) · [Compatibility](docs/COMPATIBILITY.md) · [Handoff](docs/HANDOFF.md) ·
-[Evidence](docs/EVIDENCE.md) · [XAX contract](docs/XAX_CONTRACT.md) ·
-[Upstream proposals](docs/UPSTREAM_PROPOSALS.md) · [Architecture (historical)](docs/ARCHITECTURE.md) ·
-[Tools (historical)](docs/TOOLS.md) · [Security (historical)](docs/SECURITY.md) ·
-[Performance (historical)](docs/PERFORMANCE.md) · [Hosts (historical)](docs/HOSTS.md)
+[Windows readiness](docs/WINDOWS_READINESS.md) · [Native implementation/history](docs/NATIVE.md) ·
+[Compatibility](docs/COMPATIBILITY.md) · [Handoff](docs/HANDOFF.md) · [Evidence](docs/EVIDENCE.md) ·
+[Repository ownership decision](docs/adr/0009-canonical-programs-are-application-source.md).
 
-Documents marked historical describe the retired 0.5.x Python adapter. They are kept for provenance and for the
-porting work that remains; they are not descriptions of the deployed 0.8.0 server.
-
-## Development
-
-There is nothing to install or run in this repository: it holds the carriers, stores and executables, and their
-checks live in XAX. The executable is the deliverable; the tests are **external MCP clients** that drive it over
-STDIO and compare the committed bytes.
-
-```bash
-git clone https://github.com/MrxSiN/XAX ../XAX
-git -C ../XAX fetch origin integration/mcp-on-main-3e9b0c2
-git -C ../XAX checkout 7ed308f001544dff8cdf4bb825a6811d00b2027f
-python -m pip install pytest anyio "mcp>=2.3.0,<2.4"
-XAX_MCP_HOME=$PWD XAX_NATIVE_SRC=../XAX/compiler/src \
-  python -m pytest -q ../XAX/compiler/integration/mcp/tests
-```
-
-Set `XAX_MCP_TEST_CONSTRUCT=/path/to/native/construct` to run the gated carrier → store test (it reproduced both
-committed stores byte for byte on the recording host) and `XAX_MCP_TEST_COMPILER=/path/to/native/xaxc` to run the
-gated end-to-end chain test (seed → build → transaction → confined execute). With both gates set the current suite is
-46 passed, 1 skipped on the development host (the SDK test needs mcp 2.x); CI installs mcp 2.3 and runs it. Those
-Python packages are the test client and the `chain.py`, `bench.py` and `fingerprint.py` helpers; the carrier authors
-are retired, and the server, the executor and the decoder that the tests drive are native XAX programs. Nothing here
-is imported by, installed into, or launched by `xax-mcp-native.exe`.
+Existing [host configuration examples](examples/hosts) are historical and were not re-certified against current
+Codex or Claude versions in this audit. Making XAX tools available does not force agents to choose them or change
+a hosted model's internal tools. The 0.5.x architecture/security/performance documents describe a retired adapter.

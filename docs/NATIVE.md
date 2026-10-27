@@ -1,5 +1,12 @@
 # Native XAX server (`xax-mcp-native`)
 
+> **2026-10-27 current audit:** [Windows readiness](WINDOWS_READINESS.md) supersedes the current-state and
+> source-ownership wording below. Canonical application source belongs in this repository's `native/*.xax`;
+> current CI no longer depends on upstream MCP tooling or Python. A new arithmetic graph was constructed by
+> native transactions and executed with exit result 136. An invalid candidate was also published before
+> verification, a release-blocking defect. The decoder is absent on this host and the full mission is incomplete.
+> Earlier observations below retain their original scope; they do not establish current release readiness.
+
 Status: **0.8.0, native protocol layer complete; compiler- and decoder-backed tools a host-granted prototype; Windows
 execution a measured prototype** (2026-10-22, XAX `3e9b0c2`). The MCP protocol layer is an XAX program: a verified
 canonical store that XAX builds into a Windows x86-64 PE32+ executable. The deployed server starts no Python, no MCP

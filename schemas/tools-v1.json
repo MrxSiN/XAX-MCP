@@ -1,0 +1,218 @@
+{
+  "version": "xax-mcp-tools-v1",
+  "tools": [
+    {
+      "_meta": {
+        "xax-mcp/schema": "xax-mcp-tools-v1"
+      },
+      "annotations": {
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "description": "Server/compiler identity, pinned XAX revision, targets, operations, carrier types, I/O modes, granted rights, sandbox status and honest maturity labels. Call first.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "name": "xax_capabilities",
+      "title": "XAX capabilities"
+    },
+    {
+      "_meta": {
+        "xax-mcp/schema": "xax-mcp-tools-v1"
+      },
+      "annotations": {
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "description": "PROTOTYPE: describes the current store (the root bytes recorded in its header and its byte size). The workspace handle lifecycle (open/list/describe/close) is not implemented by the native server yet; the store is the host-granted seed until a transaction replaces it in the work directory. The server does not re-verify the store; the compiler verifies it on build.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "name": "xax_workspace",
+      "title": "XAX workspace"
+    },
+    {
+      "_meta": {
+        "xax-mcp/schema": "xax-mcp-tools-v1"
+      },
+      "annotations": {
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "description": "PROTOTYPE: implements the root query only: the root bytes recorded in the current store's header and its byte size. The server does not re-verify the store (xax_build resolves it first). The bounded graph queries (functions, function_nodes, function_view, operands, neighborhood, uses, callers, callees, type, effects, effect_summary, entity, proof, diff, repair) are not implemented by the native server yet.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "name": "xax_query",
+      "title": "XAX bounded query"
+    },
+    {
+      "_meta": {
+        "xax-mcp/schema": "xax-mcp-tools-v1"
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "description": "PROTOTYPE: constructs and verifies a NEW XAX program from one xax-construct-v1 carrier (typed semantic graph: types, functions of blocks of [operation, operands, result types, extra] nodes, package entries) by driving the host-granted native carrier decoder (XAX_MCP_CONSTRUCT) with a fixed argv. The carrier is transport; the verified canonical store it writes replaces the work directory's current store and the result reports its root and byte count. The decoder is a windows-x86_64 XAX program: a carrier that names another platform, needs an unimplemented feature, or is larger than the decoder's carrier limit is refused (construct_rejected), never partially encoded. Without XAX_MCP_CONSTRUCT and XAX_MCP_WORK the call fails closed. Candidate stores, rollback and handles for very large carriers are not implemented yet.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "request": {
+            "properties": {
+              "format": {
+                "const": "xax-construct-v1"
+              },
+              "functions": {
+                "items": {
+                  "type": "object"
+                },
+                "maxItems": 256,
+                "minItems": 1,
+                "type": "array"
+              },
+              "package": {
+                "type": "object"
+              },
+              "platform": {
+                "enum": [
+                  "linux-x86_64",
+                  "windows-x86_64"
+                ]
+              },
+              "types": {
+                "maxProperties": 256,
+                "type": "object"
+              }
+            },
+            "required": [
+              "format",
+              "platform",
+              "functions",
+              "package"
+            ],
+            "type": "object"
+          }
+        },
+        "required": [
+          "request"
+        ],
+        "type": "object"
+      },
+      "name": "xax_construct",
+      "title": "XAX construct"
+    },
+    {
+      "_meta": {
+        "xax-mcp/schema": "xax-mcp-tools-v1"
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "description": "PROTOTYPE: applies one XAXEDIT1 transaction carrier to the current store by driving the host-granted native XAX compiler's 'edit' command. 'record' is the carrier as a lowercase/uppercase hex string; the edited store replaces the work directory's current store and the result reports its new canonical root. Typed mutations, expected generation/root, candidates and rollback are not implemented yet.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "record": {
+            "maxLength": 2097152,
+            "minLength": 2,
+            "pattern": "^[0-9A-Fa-f]+$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "record"
+        ],
+        "type": "object"
+      },
+      "name": "xax_transaction",
+      "title": "XAX transaction"
+    },
+    {
+      "_meta": {
+        "xax-mcp/schema": "xax-mcp-tools-v1"
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "description": "PROTOTYPE: resolves and builds the current store with the host-granted native XAX compiler ('resolve' then 'build'), writing snapshot/artifact/provenance into the host-granted work directory. Returns the canonical root, artifact byte count and the provenance object (byte count and hex). Artifact handles, entry/package selection, digest reports and toolchain caching are not implemented yet.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "name": "xax_build",
+      "title": "XAX build"
+    },
+    {
+      "_meta": {
+        "xax-mcp/schema": "xax-mcp-tools-v1"
+      },
+      "annotations": {
+        "destructiveHint": false,
+        "openWorldHint": false,
+        "readOnlyHint": false
+      },
+      "description": "PROTOTYPE: resolves and builds the current store, then runs that artifact inside the native OS sandbox and returns exit_code, duration_ms, flags (bit 0 timeout, bit 2 output truncated) and the artifact's stdout/stderr as hex. The sandbox is a capability-less Windows AppContainer inside a job object (fixed limits: 5 s CPU, 256 MiB, one process, 10 s wall, 1 MiB per stream); it ships beside the server as xax-mcp-sandbox.exe and is built from native/sandbox.py. Takes NO arguments yet: the artifact handle, input/output layout, argv, effects and per-call limits fail closed rather than being ignored; Linux namespaces and the xax-mcp-io-v1 framing are not implemented. Requires the host-granted execute right.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "name": "xax_execute",
+      "title": "XAX execute"
+    },
+    {
+      "_meta": {
+        "xax-mcp/schema": "xax-mcp-tools-v1"
+      },
+      "annotations": {
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "description": "UNIMPLEMENTED natively; calls fail closed with 'unsupported'. Target contract: fetch a bounded chunk of a large result by opaque handle: execution stdout (res_), a workspace's canonical store bytes (ws_), or a stored diagnostic (diag_). Never returns unbounded data.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "handle": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_.@-]+$",
+            "type": "string"
+          },
+          "length": {
+            "maximum": 65536,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "offset": {
+            "maximum": 2147483648,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "handle"
+        ],
+        "type": "object"
+      },
+      "name": "xax_result",
+      "title": "XAX result"
+    }
+  ]
+}
