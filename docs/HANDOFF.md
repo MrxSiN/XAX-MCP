@@ -1,5 +1,14 @@
 # Handoff
 
+## 2026-10-27 — Clean Windows CI smoke passed
+
+Run [40443571319](https://github.com/MrxSiN/XAX-MCP/actions/runs/40443571319) at MCP commit `7eb687d` completed
+successfully on the configured `windows-2022` runner. Native artifact identity checks, the 15-response STDIO
+fixture and confined execution of the new arithmetic artifact all passed. The job installed no Python, SDK
+or compiler implementation and checked out no upstream application tooling. Exact job/step results are in
+`docs/evidence/native-windows-ci-smoke-40443571319.json`. This updates the earlier local-only CI observation
+below; release remains blocked by the independently reproduced failures and native toolchain gaps.
+
 ## 2026-10-27 — Windows native construction evidence; release blocked
 
 Both checkouts were synchronized with remote `main`. XAX's previous local state was preserved in the stash

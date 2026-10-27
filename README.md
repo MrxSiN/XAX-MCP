@@ -119,6 +119,10 @@ no SDK, interpreter-based compiler, source emitter or non-XAX runtime helper is 
 not a complete protocol, security, compiler or rebuild suite. The prior Python/SDK suite results remain historical;
 that suite is no longer the current CI path.
 
+The native smoke workflow passed on the clean `windows-2022` runner in
+[run 40443571319](https://github.com/MrxSiN/XAX-MCP/actions/runs/40443571319), including confined exit result 136.
+This passes the smoke scope only; `native/release-status.json` remains `release_ready: false`.
+
 The full native transaction experiment used an external PowerShell process client, stored outside both repositories.
 It supplied typed mutation carriers, decoded the native inspection record and checked observed results; all program
 mutation, verification, compilation and execution ran in native XAX executables. No external test client belongs

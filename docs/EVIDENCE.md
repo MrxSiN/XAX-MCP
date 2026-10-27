@@ -2,6 +2,10 @@
 
 ## 2026-10-27 current audit
 
+[Clean Windows CI smoke](evidence/native-windows-ci-smoke-40443571319.json), GitHub run 40443571319 at commit
+`7eb687d`, passed native artifact identities, the STDIO replay and confined execution returning 136. This is
+separate from a compiler/decoder rebuild or security certification; release remains blocked.
+
 [Native transaction construction evidence](evidence/native-windows-x86_64-transaction-construction-20261027.json)
 records a new canonical arithmetic graph built and executed through the unchanged XAX MCP server, returning
 136 under native confinement, plus stale-root, launch-right and separate-work-directory checks. It also

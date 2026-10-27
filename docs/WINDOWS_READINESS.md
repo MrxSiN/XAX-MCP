@@ -100,3 +100,8 @@ The revised workflow checks native artifact identities, a 15-response STDIO smok
 of the committed arithmetic executable. It has no upstream source checkout, Python setup, source emitter or SDK
 installation. It does not recompile the program or close the failing security gates. Earlier Python-suite and
 SDK-client counts remain historical observations, not the current CI's test count.
+
+The independent smoke workflow subsequently passed on the configured `windows-2022` GitHub runner in
+[run 40443571319](https://github.com/MrxSiN/XAX-MCP/actions/runs/40443571319) at commit `7eb687d`.
+[The recorded job steps](evidence/native-windows-ci-smoke-40443571319.json) confirm artifact hashes, STDIO
+replay and confined exit result 136. The release failures above remain unresolved.
