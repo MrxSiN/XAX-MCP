@@ -1,6 +1,21 @@
 # Compatibility matrix
 
-## 0.9.0+native — current Windows preview
+## 0.10.0+native — current local Windows preview
+
+The XAX pin and native file contract are unchanged. `xax_execute` gains optional
+`stdin_hex` and `args` excluding argv[0]; omission preserves empty-input/no-extra-
+argument behavior. Existing exit/flags/stream fields remain, with measured resource
+fields added. Timeout/output/CPU exhaustion and transport/cleanup failures now
+return explicit tool errors. Bounds are host-owned capabilities, not compiler limits.
+
+Canonical sources are server gen2 and launcher gen1. Replay the 46-record base
+manifest, 15 server-increment records and three launcher records; every candidate
+requires native verification. See [the contract](NATIVE_EXECUTION_INCREMENT.md) and
+[local evidence](evidence/native-executor-input-argv-20261101.json). No new upstream
+seed, hosted CI run, published package, desktop-host certification or full CUM
+prepare compatibility is claimed.
+
+## 0.9.0+native — historical Windows preview
 
 | Component | Certified scope |
 |---|---|

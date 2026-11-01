@@ -1,6 +1,17 @@
 # Start-up performance
 
-## 0.9 native observations — 2026-10-27 (current)
+## 0.10 execution observations — 2026-11-01
+
+[Retained local acceptance](evidence/native-executor-input-argv-20261101.json)
+includes a 256 KiB binary stdin echo to both streams without deadlock and a 1 MiB
+exact output-boundary run. These are synthetic acceptance cases, not a throughput
+benchmark. CPU enforcement uses actual user+kernel accounting: the final retained
+busy worker consumed 5.015625 CPU seconds, with 15.625 ms observed overshoot.
+Its wall duration was 6.797 seconds under concurrent local acceptance work. A
+10-second wall timeout is a separate budget; requested 5 ms sampling is not a hard
+scheduling-latency bound. Compilation/setup are excluded from worker duration.
+
+## 0.9 native observations — 2026-10-27 (historical)
 
 [Raw local round trips](evidence/native-windows-roundtrips-20261027.json) record a single Windows fixture run with
 all 51 requests, including rejection cases. Successful seed build was 31.37 ms; its build-and-confined-execute

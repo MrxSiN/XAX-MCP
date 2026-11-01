@@ -1,6 +1,6 @@
 # XAX-MCP
 
-A Windows x86-64 STDIO MCP server implemented as canonical XAX semantic programs. Version **0.9.0+native**.
+A Windows x86-64 STDIO MCP server implemented as canonical XAX semantic programs. Version **0.10.0+native**.
 The supported construction/build/run loop works; this is a **preview**, and the full execution-plugin mission
 remains incomplete. See [remaining gates](docs/WINDOWS_READINESS.md).
 
@@ -18,12 +18,20 @@ seven `xax_construct` calls, built it and ran its actual executable in a capabil
 ((40 + 7) * 3) - 5 -> exit_code 136
 ```
 
+`xax_execute` now accepts optional `stdin_hex` and `args` (excluding argv[0]),
+preserves exact separate stdout/stderr bytes and reports measured resources. Native
+probes cover binary EOF, difficult argv, concurrent streams, CPU/wall/output budgets
+and confinement. See [the contract and CUM integration gaps](docs/NATIVE_EXECUTION_INCREMENT.md).
+
 The server stages native edits, verifies candidates before atomic publication, rejects stale or zero expected roots,
 cleans rejected candidates and refuses forbidden query/build properties. An exclusive Windows directory lease
 prevents concurrent processes from sharing compiler scratch and releases automatically on exit or crash.
 
-**EXECUTED:** 28 local checks; CI orchestration replays 51 request/response exchanges, all 46 application-source
-transactions, two byte-identical server rebuilds and a byte-identical sandbox rebuild. A native sleeping program
+**EXECUTED:** retained native 0.10 acceptance and failure observations are in
+[the increment evidence](docs/evidence/native-executor-input-argv-20261101.json).
+The historical 0.9 baseline includes 28 local checks. Updated CI orchestration replays
+51 base request/response exchanges, all 46 application-source base
+transactions plus 18 increment records, native fixtures and reproducible builds. A native sleeping program
 was terminated at approximately 10 seconds. These observations do not establish complete sandbox hardening.
 
 [New graph and replay](examples/native-arithmetic/README.md) ·

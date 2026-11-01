@@ -1,10 +1,31 @@
 {
   "schema": "xax-mcp-release-status-v1",
-  "server_version": "0.9.0+native",
-  "recorded": "2026-10-27",
+  "server_version": "0.10.0+native",
+  "recorded": "2026-11-01",
   "release_ready": false,
   "full_mission_complete": false,
-  "supported_path": "EXECUTED: native Windows exact-root construction, candidate verification, atomic publication, build, confined process-exit result",
+  "executor_input_argv_increment": {
+    "recorded": "2026-11-01",
+    "status": "EXECUTED; release acceptance false",
+    "source_written": true,
+    "new_candidate_verified": true,
+    "compiled": true,
+    "executed": true,
+    "acceptance_tested": true,
+    "resource_measured": true,
+    "release_accepted": false,
+    "evidence": "docs/evidence/native-executor-input-argv-20261101.json",
+    "contract": "docs/NATIVE_EXECUTION_INCREMENT.md",
+    "transactions": "native/transactions/20261101/manifest.json",
+    "note": "Native synthetic acceptance and retained failures; general typed layouts, registered external tools, CUM transformations/full prepare, exhaustive crash/pressure/escape coverage and current desktop-host interoperability are not established.",
+    "exact_root_replay_verified": true,
+    "source_records_replayed": 64,
+    "native_probes_replayed": 15,
+    "final_client_exchanges": 92,
+    "clean_package_checked": true,
+    "clean_package_evidence": "docs/evidence/native-executor-clean-package-20261101.json"
+  },
+  "supported_path": "EXECUTED: native Windows exact-root construction, verified publication, pinned build, confined current-artifact execution with binary stdin, explicit argv, separate exact streams and actual resource observations",
   "embedded_xax_pin": "af376e8a8a1ac5635bcad459cb7063ef0b326430",
   "native_contract": "xax-native-file-v1",
   "platform": "windows-x86_64",
@@ -13,14 +34,23 @@
     "query/build forbidden schema properties",
     "native construction carrier available as XAXEDIT1",
     "pinned native Windows compiler seed and reproducible application build",
-    "exclusive same-workdir lease and crash release"
+    "exclusive same-workdir lease and crash release",
+    "binary stdin and physical EOF",
+    "explicit Windows argv independently observed",
+    "concurrent stdout/stderr drains and explicit combined output exhaustion",
+    "actual sampled total user+kernel CPU enforcement",
+    "explicit inherited handle list and reduced stdin access",
+    "launch-time job membership and tested launcher-termination cleanup",
+    "separate child/launcher/measurement/cleanup outcomes"
   ],
   "blocking_findings": [
-    "typed runtime I/O and bounded result paging unsupported",
+    "general typed entry layouts and bounded result paging unsupported",
+    "registered external-tool capability and full CUM prepare absent",
     "general semantic query/pagination and opaque session handles incomplete",
     "MCP 2026-07-28 unsupported; legacy 2025-11-25 tested",
-    "compiler-call cancellation and full quota/security coverage incomplete",
-    "current Claude host unavailable for interoperability testing",
+    "in-flight compiler cancellation/orphan cleanup and exhaustive crash windows unverified",
+    "memory-pressure, disk/handle exhaustion and independent escape review incomplete",
+    "current desktop-host interoperability not exercised",
     "trusted historical native compiler bootstrap; Windows self-build declines"
   ],
   "artifacts": [
@@ -31,18 +61,18 @@
     },
     {
       "path": "native/xax-mcp-native-snapshot.xax",
-      "bytes": 1062786,
-      "sha256": "a649ca5821d9d88c0f66f9dd9169ae7c3148dc8acc8a8eebe66284a948d7041a"
+      "bytes": 1268734,
+      "sha256": "05ea2905764c6b87e6c8497460a24806dc4ed2e71bc734a96949d71bce54c17d"
     },
     {
       "path": "native/xax-mcp-native.exe",
-      "bytes": 347136,
-      "sha256": "a9400a65c6194bbc52128a22da0b59a2feabdfcf0dbb64666bc2807b000b7f1b"
+      "bytes": 395776,
+      "sha256": "9ddafb7ee463fe3dd9a5f8643fe21afacbfcd96a6cdfc4b9791377f6d3eb38f8"
     },
     {
       "path": "native/xax-mcp-native.prov",
       "bytes": 268,
-      "sha256": "77e71a54db6395138caa20c760b309c5b180ba8eb77ea5fec1e15190823a433e"
+      "sha256": "80b9d0ab058f1b28ba8371c0018e4003f6e7da05a4322d4436e520e20dc9a90e"
     },
     {
       "path": "native/xax-mcp-sandbox-gen0.xax",
@@ -51,8 +81,8 @@
     },
     {
       "path": "native/xax-mcp-sandbox.exe",
-      "bytes": 25600,
-      "sha256": "6d563e0f23e4f402d55c82b200d42bce91c41c98aab101267e67d3645a1d37e2"
+      "bytes": 150016,
+      "sha256": "a189b73a7b17cacf4f8680e3f84ed3ed35a44c9ebf4c1f6465b0d4af03ec779a"
     },
     {
       "path": "native/xax-mcp-seed.xax",
@@ -63,7 +93,68 @@
       "path": "native/xax-mcp-seed.exe",
       "bytes": 1536,
       "sha256": "8faaeb7e63e5d1a07bcd9c46e3ae3381af267b67e213cec6b992c628fb1843ca"
+    },
+    {
+      "path": "native/xax-mcp-native-gen2.xax",
+      "bytes": 1268455,
+      "sha256": "e9354ced587e68a0bb1cf64b31c744c3e169983bcd39d5b14831bc516c1dbb64"
+    },
+    {
+      "path": "native/xax-mcp-sandbox-gen1.xax",
+      "bytes": 128327,
+      "sha256": "5d67469fc8f153f15a37b6e2bfd3978e2de80fc62dddef0cd9a0606eac2387f7"
+    },
+    {
+      "path": "native/xax-mcp-sandbox-snapshot.xax",
+      "bytes": 128605,
+      "sha256": "76947d22fd779d9f65a794117d99f4e9a10b6e87e034b3345ccc5951fbf1aba8"
+    },
+    {
+      "path": "native/xax-mcp-sandbox.prov",
+      "bytes": 268,
+      "sha256": "4e7a9b05e7c9ccc9aaa7c3689d29dee4cee9227fac94a0080eb6f9e7b87ec6c8"
     }
   ],
-  "readiness": "docs/WINDOWS_READINESS.md"
+  "readiness": "docs/WINDOWS_READINESS.md",
+  "authoritative_sources": {
+    "server": {
+      "path": "native/xax-mcp-native-gen2.xax",
+      "root": "16a25c0805b900e3bb45082b0ac88e1217cbf184c1bf739d29d1df1bc298eb83"
+    },
+    "sandbox": {
+      "path": "native/xax-mcp-sandbox-gen1.xax",
+      "root": "d378055b3c4c490c667db8d7f61b2d871f4bb3b8701ae54e5dc5308037904dff"
+    }
+  },
+  "execution_capabilities": {
+    "stdin": "hex bytes + physical EOF",
+    "args": "UTF-16 argument vector excluding executor-controlled argv[0]",
+    "max_stdin_bytes": 262144,
+    "max_args": 64,
+    "max_argument_utf16_units": 8192,
+    "max_combined_output_bytes": 1048576,
+    "max_cpu_100ns": 50000000,
+    "max_wall_ms": 10000,
+    "max_process_memory_bytes": 268435456,
+    "cpu_sampling_ms": 5,
+    "environment": "Supplied: OS-derived LOCALAPPDATA and SystemRoot. Windows rewrites LOCALAPPDATA and adds container-local TEMP/TMP.",
+    "scope": "currently authorized built artifact only",
+    "typed_layouts": false,
+    "registered_external_tools": false,
+    "max_request_bytes": 4194304,
+    "observed_cpu_overshoot_100ns": 156250
+  },
+  "external_runtime_dependencies": {
+    "compiler": "Only the pinned native XAX seed is tested",
+    "windows_system_dlls": [
+      "kernel32.dll",
+      "msvcrt.dll",
+      "advapi32.dll",
+      "userenv.dll",
+      "shell32.dll"
+    ],
+    "startup_job_list_support_required": true,
+    "foreign_runtime_helpers": [],
+    "note": "ws2_32.dll is used by a synthetic isolation probe, not by the installed executor."
+  }
 }

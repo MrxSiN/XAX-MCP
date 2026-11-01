@@ -137,10 +137,26 @@
         "openWorldHint": false,
         "readOnlyHint": false
       },
-      "description": "PROTOTYPE: resolves and builds the current store, then runs that artifact inside the native OS sandbox and returns exit_code, duration_ms, flags (bit 0 timeout, bit 2 output truncated) and the artifact's stdout/stderr as hex. The sandbox is a capability-less Windows AppContainer inside a job object (fixed limits: 5 s CPU, 256 MiB, one process, 10 s wall, 1 MiB per stream); it ships beside the server as xax-mcp-sandbox.exe and is built from native/xax-mcp-sandbox-gen0.xax. Takes NO arguments yet: the artifact handle, input/output layout, argv, effects and per-call limits fail closed rather than being ignored; Linux namespaces and the xax-mcp-io-v1 framing are not implemented. Requires the host-granted execute right.",
+      "description": "Preview: builds the current authorized artifact, then executes it in the native Windows AppContainer and one-process job. Optional stdin_hex supplies exact binary stdin followed by EOF; args excludes argv[0]. Returns exit_code, separate stdout_hex/stderr_hex, duration_ms, user_cpu_100ns, kernel_cpu_100ns, peak_memory_bytes and stdin_bytes_supplied. Host-owned limits: 262144 stdin bytes, 64 arguments, 8192 total UTF-16 argument units, 1048576 combined output bytes, 5 s total CPU, 10 s wall, 256 MiB memory. Exhaustion, setup, measurement and cleanup failures return isError. No executable, environment, grant or budget overrides. Typed layouts, registered external tools and Linux execution remain unsupported.",
       "inputSchema": {
         "additionalProperties": false,
-        "properties": {},
+        "properties": {
+          "stdin_hex": {
+            "type": "string",
+            "maxLength": 524288,
+            "pattern": "^(?:[0-9a-fA-F]{2})*$",
+            "description": "Exact binary stdin as hexadecimal; omitted means empty input. Maximum 262144 decoded bytes."
+          },
+          "args": {
+            "type": "array",
+            "maxItems": 64,
+            "items": {
+              "type": "string",
+              "maxLength": 8192
+            },
+            "description": "Arguments after argv[0]. Empty strings are preserved. Maximum 8192 UTF-16 code units in total; embedded NUL and invalid Unicode are rejected."
+          }
+        },
         "type": "object"
       },
       "name": "xax_execute",

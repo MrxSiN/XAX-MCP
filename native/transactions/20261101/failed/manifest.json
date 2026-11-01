@@ -1,0 +1,26 @@
+{
+  "schema": "xax-mcp-retained-failed-candidates-v1",
+  "note": "Negative observations only; never promoted as successful source or executables. See current acceptance evidence for exact failures and repairs.",
+  "artifacts": [
+    {
+      "path": "native/transactions/20261101/failed/sandbox-snapshot-root.edit",
+      "bytes": 49417,
+      "sha256": "4ede92c6b5d4d349b739771629e10b96c2b2d39f7869ea1577ac0f316142b493"
+    },
+    {
+      "path": "native/transactions/20261101/failed/sandbox-multi-result.edit",
+      "bytes": 49417,
+      "sha256": "95f398d5e994d010b98004af43e10501ad91bc64f26981dae33cdd713de5e4ef"
+    },
+    {
+      "path": "native/transactions/20261101/failed/server-monolithic.edit",
+      "bytes": 275263,
+      "sha256": "d0529a2edf161a4a5186a6dac2fc42b3454751729b66b2cb1b078da9f41f3a0a"
+    },
+    {
+      "path": "native/transactions/20261101/failed/server-before-hex-span-fix.edit",
+      "bytes": 227681,
+      "sha256": "d768d16e337bc437528a801b8ff864f023411cf70388cae735ccf6044030aa1f"
+    }
+  ]
+}

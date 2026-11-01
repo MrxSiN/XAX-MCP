@@ -1,0 +1,2806 @@
+{
+  "schema": "xax-mcp-native-executor-input-argv-evidence-v1",
+  "recorded": "2026-11-01",
+  "scope": "Local Windows x86-64 native executor increment. Only synthetic programs/data and read-only CUM integration references. No push, remote package publication, visibility change or private CUM project/identity access.",
+  "states": {
+    "source_written": true,
+    "native_candidate_verified": true,
+    "compiled": true,
+    "executed": true,
+    "acceptance_tested": true,
+    "resource_measured": true,
+    "supported_scope_acceptance_passed": true,
+    "release_accepted": false,
+    "full_cum_prepare_complete": false
+  },
+  "environment": {
+    "os": "Microsoft Windows 11 Pro",
+    "version": "10.0.26300",
+    "build": "26300",
+    "architecture": "64-bit",
+    "hosted_windows_2022_ci_run_claimed": false
+  },
+  "git_base": "27ffb9491bfe69000b3ce9744b2b689a4d594a3e",
+  "toolchain": {
+    "dependency": {
+      "schema": "xax-mcp-native-dependency-v1",
+      "repository": "https://github.com/MrxSiN/XAX",
+      "commit": "af376e8a8a1ac5635bcad459cb7063ef0b326430",
+      "contract": "xax-native-file-v1",
+      "seed_path": "compiler/bootstrap/windows/xaxc-windows-x86_64.exe",
+      "seed_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79",
+      "compatible_range": "Only this immutable seed is tested; no moving main or other seeds certified",
+      "bootstrap": "Historical Python SDK; no bootstrap interpreter invoked for current application build/runtime",
+      "self_host": "Not claimed; native compiler own-source build declines"
+    },
+    "seed": {
+      "schema": "xax-native-windows-seed-v1",
+      "contract": "xax-native-file-v1",
+      "sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79",
+      "bytes": 11876864,
+      "source_commit": "c97a11d0d1762c863ae9fc17ca311954d195aaba",
+      "source_path": "compiler/integration/windows_helpers/driver.xax",
+      "source_root": "ec66899fddc117eb0496bbd504e06742daf9931d0b8e64e9efde0725dae45ebd",
+      "source_sha256": "894820c6ec0b777232ac6817f454add9f00493f95c72d53071de8ed4c690eced",
+      "source_git_blob": "bdc740cd3ed4b8bbf8cf43e352663c8d19959db5",
+      "historical_bootstrap": "Python SDK; reused existing native executable, no bootstrap interpreter run in this publication",
+      "native_self_build": "DECLINED; no fixed point or B/R promotion",
+      "commands": [
+        "verify",
+        "inspect",
+        "edit",
+        "resolve",
+        "build"
+      ],
+      "runtime": "native XAX machine code and Windows system DLLs"
+    },
+    "observed_seed_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79",
+    "bootstrap_interpreter_invoked": false,
+    "xax_or_bbc_modified": false,
+    "compiler_self_build": "Not rerun for this increment; no fixed-point or promotion claim."
+  },
+  "source_identities": [
+    {
+      "path": "native/xax-mcp-native-gen2.xax",
+      "bytes": 1268455,
+      "sha256": "e9354ced587e68a0bb1cf64b31c744c3e169983bcd39d5b14831bc516c1dbb64",
+      "root": "16a25c0805b900e3bb45082b0ac88e1217cbf184c1bf739d29d1df1bc298eb83",
+      "semantic_objects": 3852
+    },
+    {
+      "path": "native/xax-mcp-sandbox-gen1.xax",
+      "bytes": 128327,
+      "sha256": "5d67469fc8f153f15a37b6e2bfd3978e2de80fc62dddef0cd9a0606eac2387f7",
+      "root": "d378055b3c4c490c667db8d7f61b2d871f4bb3b8701ae54e5dc5308037904dff",
+      "semantic_objects": 374
+    }
+  ],
+  "artifact_identities": [
+    {
+      "path": "native/xax-mcp-native-gen1.xax",
+      "bytes": 1062507,
+      "sha256": "f833986ee2e7539efd4f67c6a0d91bf60c972ff03cb2b992207e4f581bd3fe28"
+    },
+    {
+      "path": "native/xax-mcp-native-snapshot.xax",
+      "bytes": 1268734,
+      "sha256": "05ea2905764c6b87e6c8497460a24806dc4ed2e71bc734a96949d71bce54c17d"
+    },
+    {
+      "path": "native/xax-mcp-native.exe",
+      "bytes": 395776,
+      "sha256": "9ddafb7ee463fe3dd9a5f8643fe21afacbfcd96a6cdfc4b9791377f6d3eb38f8"
+    },
+    {
+      "path": "native/xax-mcp-native.prov",
+      "bytes": 268,
+      "sha256": "80b9d0ab058f1b28ba8371c0018e4003f6e7da05a4322d4436e520e20dc9a90e"
+    },
+    {
+      "path": "native/xax-mcp-sandbox-gen0.xax",
+      "bytes": 74434,
+      "sha256": "588f57c0fa69eb175b6e06e88c73977292d42c06dfc5b814ec48cc5710bab2b8"
+    },
+    {
+      "path": "native/xax-mcp-sandbox.exe",
+      "bytes": 150016,
+      "sha256": "a189b73a7b17cacf4f8680e3f84ed3ed35a44c9ebf4c1f6465b0d4af03ec779a"
+    },
+    {
+      "path": "native/xax-mcp-seed.xax",
+      "bytes": 1852,
+      "sha256": "25db5e19257e81e99a79e1b0311b65c8f534507ced0607ad4c5e2f0a81821532"
+    },
+    {
+      "path": "native/xax-mcp-seed.exe",
+      "bytes": 1536,
+      "sha256": "8faaeb7e63e5d1a07bcd9c46e3ae3381af267b67e213cec6b992c628fb1843ca"
+    },
+    {
+      "path": "native/xax-mcp-native-gen2.xax",
+      "bytes": 1268455,
+      "sha256": "e9354ced587e68a0bb1cf64b31c744c3e169983bcd39d5b14831bc516c1dbb64"
+    },
+    {
+      "path": "native/xax-mcp-sandbox-gen1.xax",
+      "bytes": 128327,
+      "sha256": "5d67469fc8f153f15a37b6e2bfd3978e2de80fc62dddef0cd9a0606eac2387f7"
+    },
+    {
+      "path": "native/xax-mcp-sandbox-snapshot.xax",
+      "bytes": 128605,
+      "sha256": "76947d22fd779d9f65a794117d99f4e9a10b6e87e034b3345ccc5951fbf1aba8"
+    },
+    {
+      "path": "native/xax-mcp-sandbox.prov",
+      "bytes": 268,
+      "sha256": "4e7a9b05e7c9ccc9aaa7c3689d29dee4cee9227fac94a0080eb6f9e7b87ec6c8"
+    }
+  ],
+  "retention": {
+    "server": {
+      "before_objects": 3485,
+      "after_objects": 3852,
+      "retained_by_cid": 2784,
+      "retained_function_cids": [
+        "01ea3796277de7baaad1383c9257a688a09e5696a8d1a7de04790d155165f3f1",
+        "021f4b4689c13e9ae2ca061ae5ef4c00a461c2b5355f10657dab51de38bcf118",
+        "023aad466a32d641a3d11639c79e77f61f14a685e1257e0e5c13c0282ddfb85a",
+        "03118b771e8773ecbe333e485f5ae0e7a56b2beb9ded11d3e20cbbd1abf9c58e",
+        "032d6deb37c11fd88e05d4597c5e73a10f2a5db06edd21debd632e0c78c63ab0",
+        "04b9b438603948478fa6cf27b05082a9136abe5f2f47bf72aa14112041b70d6f",
+        "06a716da3b4722548e761a7ec37468c76c9756ea900bfb7bd8434690d20a627f",
+        "06c9029cd7e2854d4951dad09e83901909a0ae4faedc3c1474fac5c9695819ac",
+        "0738bc54d9bda273a54e3937f6069f7fbaf0ce00cbc4e417d920aaacd17fef13",
+        "07b62337624c9c78db448d6665de605b9fd3d3810c63e27373dec347baf5cf4f",
+        "08561cc6ec08ab78445cb7098823d56bf14f07ee8194ffd0b29cbb49ac7a2c7d",
+        "091099aa955a9d7d4e28e5b052c8bb7c71cfae6b96b835e5d53ed2f145b56b7b",
+        "0a8b977b98baa38d8fe98cf6ccce6c636abfd857411a37d1debe58e5a24685b7",
+        "0aeb55cadbbdebc0ef5a22eafe5cb0f2afa9643f6f8707c4720ea8efee3ae177",
+        "0aec251337cb6fd2c57ea27f6c539645c00f0a0e16a54b6f74465cacbd120091",
+        "0b3dd587575d441a9593d91d89371b9f9c067e2b3c73d14035c7f4ecd683a9bc",
+        "0e1891dcebff301a53879e2bb7d4b533b0f247ceacc03b9df667e5c013799b34",
+        "11fdbf7c6eab89032190cad46e5785bfc56362bc0585ec1584d9ed7e78789510",
+        "14f77d84abe41e57a51784f0de0ba293b1f6cfea12885a90c8104ca8c3f73f76",
+        "173e9e0f37e65d5052f41fb8f74ec1745a26fb14a6ca9ba34655840af7312255",
+        "17df746d3929ec2847c1798828d48a2036c82f7d1452ba6b5717e67cce10bff1",
+        "1e15408a9221ad0448c4cbd3ab82687d54494258a3e7fdff72eaf31131bfe5aa",
+        "1edad961c6151d786a69a1bd5adff5437cc2189619db5b48b88f531913188445",
+        "22016e46b14c0f633911ff4accca33845ae736ba8df5b0da3c26c54e96e0aa61",
+        "22e66607e26f0761dfd01828be33df81e9ae3a458cbc490ced6be9569ecc3e28",
+        "24147de03a184f5122996c9d83e788137af55e98248ed65820956115801f4594",
+        "25a05a0d2ead251986d278644dc22ca90df731ab517cdf07b5877d2a67141907",
+        "27780392f2d5068192b795dd3d42a42c906d37d0a108e8c11699885f59ac0b31",
+        "2b14438e24a9cedf01b2869a9a3f9bc61f95586065e1599f3e7910c92bcc2c73",
+        "2b5efdf173643afc0e143d95dec96b95eaf6b6eaefc0762c14ca3dc84629af49",
+        "2c3a46b32672741222ef4ea31e3e30f4b672e64cf2af78582e97970572b47f63",
+        "2c9e7c931062baf788da44380c514617833c877759cb24b1b869431b466d907c",
+        "2f49f60448f37d2ff54d9152798b52a5104a797d5927b665f6d8ae3544fb5fff",
+        "2feee77352add773ececa919c4ec1a548adfbec7b0bf2ee938c6b561a11bffd4",
+        "34269a429dbb26b76ba40c2d36e79ea5c1aff546d415a8e9ed3615d5a6da73f8",
+        "377d75e4cc2ab3fa35d4d454d41b342353097d57cc6cdb92c9aae2d3cfeb35f0",
+        "37d1e56278049fce1df79e6d31769ab91725cb341b3735740596629ea096042b",
+        "380c7130c318b37d1068b6de21ea476872758c6c862ead867d273364ed8287ee",
+        "3a134a6ef797b2dc2904e2aebc1e4a9cb7e652a263600f2a05a9ce18c66899f7",
+        "3a712509daed5cab9f4718ef22860571a5e02db887fda0aacf55613e192d7621",
+        "3cc290f25a10c225ce4ecbc904f8960df7df9e1258e10d5a182ba5e59278fb5f",
+        "3cfff9b7a4131ca8424c6b23f7545d10738092e288f17b2721a42668da604ef1",
+        "3df7703acbb917d582cc7d077903e8856b1d5547c3e24384c84ddf16852ac421",
+        "3f5853a952a1e59343b8ac4ee3b5c92b6d93ed0707df9f32ec19c312f4b8f529",
+        "42c673f9cabe0017853825987d48dc70f11caddc63650ec8d3a2f83094a72d97",
+        "42e82d440d2570b4c89bcfe3a448499fb4d0d2cf7a984f6505a6b3e6d7433066",
+        "447d6c041bb2b90d2d4a60f66f0348f024332232b06a2940583e519971ca4d31",
+        "44d7ac2457340ee3893eac29e174c1bcfd3e52f1867f3760f7e840d6321cd095",
+        "4538004bea7ea5129b4a18471f87959d6707fc5a6ff01537e52464b973bf988b",
+        "46d502c9242245928bddaa7e4597f1f192f703bd16a5cafa188e93a7c0a6e886",
+        "48e1b76b2ab0b6f16d4a460b316f46b15f5054f8c4820daa71570a733cbee12d",
+        "4949e13e89ce26c5c9e3169827e5ff94fbf478d4552f9d6d638b3c0903e14de9",
+        "4c38b52a93e98ef44b5c896ed505921b987aa66a6921e3841c6c088f25394118",
+        "4cba24b73fc797662925306f45af999b06279e21b47ebc4de2a1a3e67cf136c4",
+        "51326c1b5007c6216dd925b7313a43763d2a8389649d90aff777890038d9cad4",
+        "5182479a1d477e8b83832ac9fc12601e27cc3933b53888209c3b7ab739f9344f",
+        "5230af33420049dbe481f1d6fb2c083fd46f7056ae121010c7326a1533848af7",
+        "585d99bb6a0dabed3bc9ae1f41ab4d0e5364030487b3d297fe58c39aac4eafc6",
+        "5a76467ff55a02a741b386470ffe67b3d9386c5b2d573ca35938124059fc6c0e",
+        "5bd2c52fc474c987ab27f7ea1961941ecf9a357657c1915d7468c3143748aa8f",
+        "5e4240feeccf6e086b46e6cd5e8f3361539c87b4e8dbec82282352a30a2e33ec",
+        "5f7d1212dc34498ca193dbdfae5114f072a6174740505bdeace32bc12e55bad0",
+        "61c61796b0c7ae2c47bc79183e968be2e888b6ea80634728903df83b574039d7",
+        "6457adfe25f7e8b0bbfb315ccc6eb00a3cd491ed35ff753bae20c7c88e8b42bb",
+        "69d22f7a3088e2068f22e4653242d869a3cd0761933f5d26a2b1e15e31a20f57",
+        "6c53c0541f64d3488612a8eb421ab74c6d6f8e144301862219f4397c70b3d294",
+        "6d39370f5e9fd40e25385e8c26e1147bb0c4b7114dff033ac361dd43e118f5d3",
+        "6ec4ee932ebfe05418d78d8dba54f5f8a758bbe069a3b00bf8e3e3439be86669",
+        "70441ca8155c0ca179f7a17913cba3c75c525cdb3d16c0e6b130e8f608555c39",
+        "709dbf9321701d74d3e2fb9ab1674c41bc0e65440cc0a9956e855f5fc83a5ea7",
+        "71675c6e448d39a4dd39e73ba763e404bee7139ebc90f70a14a4f0e11e297678",
+        "71eea3c5302a1add5a5a2526acfbdc95dcbf0f60497a123812e5dde86ccea3e9",
+        "74237f43bd9a1baf1f079a5f9de35716b2375a628a375a987dec55cfc1014ae2",
+        "76569d7db743c57106ebd71cf9ff489a63ed37e53dfef20411cf0deaa70c213c",
+        "76eaad81ebd87904fb4ff3778a8665abb33665cad6d22fb80bfe51777e5f2994",
+        "79082da5b024859089b8369eef8e717b3c2031ec4a5952273f757b421623af37",
+        "7dae6cab928a818dab6926c8a105093d4ce5d9c110943b2c72f24bea673c4438",
+        "7ddbc59f7a7b69357b2af2fb179261a18cd693f611b057bcb2b198ecd7844fa8",
+        "80b62e21463babfad57a0784fa68ea3fbec6e2be7faf29bc13a110ce5e671237",
+        "8352403d65b5457378b02bbaf0f39f6a5b6b18664d9c5e22e7808633f6f7ca6e",
+        "84de94baa85eae48005d52a910facc5120161cba39d2288aabfa1e206ed3b6aa",
+        "861e98d57d10256bfe0db953f31c779db927d1bda824d1246cabd8cb01de63b0",
+        "868fd156734e00a73768531018d3e3d71c72948150c6b9072ada897452544550",
+        "8a2782662438c64e49601629ac327b7367eb50d8ef429a9a37213737aa900d47",
+        "8b16995925825f51ae8441354558e35401c959b07e1aba24e38b75bce4385a3f",
+        "91fc117e7572302bce695bcfd75509f622bf57970edcc470444ab69876d981d4",
+        "920b4b7e1b4b3090ee15f557cd1e07659ebd1ed64011be99cc98713670efb945",
+        "93193dcf40d1fc6b0f6d00e70f3d5c41781db9a87ea353cef0d7b4ef3883449c",
+        "951fe6971efefff5d54bfc80f43d72ae62a072e52efc36ed3a3d7099dfc4bf44",
+        "9655116ea1229cc211fe1c5fee83ee974e9080b1dfba6a3d7341ad463306491e",
+        "9a680f79a04b7a422401629b30377d05b4d8b25a7c64ea3bdb35f5c8af605bac",
+        "9acc35391a057499cf472819ac75d7cbd40d7516167b0210a78d17daf65cea07",
+        "9b79bed124ba4af4b914cbfb33e14bac153fab829c3bba1fa38363e615b3036d",
+        "a0da1417db42fee702300e690c3a743450bbf30ab6c5fa9ea15e735a4d704f28",
+        "a19044a959a41cfb0deb717d2f58680f90d756c112e34882d5c2f7efabaefbcf",
+        "a2caa39ba7c92e103108461aaff03b2f580a0c5c01bcecd879d279c0235970f0",
+        "a4bdd6da3782b82ddd72dd47656b30c5f9425a95a2020105ca9586026bb16aac",
+        "a6ddfdef523089304283e5fc7130b9b7f57db54bb878987fe02e95c7910c5ca0",
+        "ab21bfdd49d4d58b99aaafa99b5791d47bd858c4582435f6409ec3ace5021211",
+        "ac7730f8f7d0d72e5be47b7df507f5e63489b7b4fbeb43ea5245c29a3fd2731c",
+        "afd843da0ee62cad4a7fe703e2589ab5665cd789e1989a57bb8f98d229b47d4b",
+        "b165e112aa1f02bdebd92101f390576f0611ccdbfff7d4cbe2ccdcaead922b58",
+        "b32e22b982bff693bea593825f8d072fcde20a58836723edc8e35b4144297dc8",
+        "b3d7c5ceb7e459c494096d201ffe6a6d561d31c8649149e9e63acab18693f561",
+        "b46aeb80957d5b0b6452697f5905a1d4e9f1f1e4ae3690450d660042b21cf959",
+        "b4cc66f671d439d4d786fb1ae812ffff9deec2c023baeefd8ae5af41a66cfe83",
+        "b61aca46b5f0969d30a50fbeadc2deb73cb68a1076ccc765fec390fb640133e7",
+        "b622076f74469a1d763e23f5443d234d5a9cb30b88a6c5a52dae9f95e1aaeb7d",
+        "b6d43ec3c6834334271575d0ee15024e2c6cee246953b5f61c752d7bd52eaf52",
+        "b89ad144e18943cd7c1a72189655eb2d29aea2e1922f42f8b7e2fa00d0bf369a",
+        "ba5288e344b3b735b5de6f1b6cd50056c3af403eb7f94966838e9a15fcab7257",
+        "bb114d41f5a708b5e7e94f1c8998183a89b34add848308e66ebee527535abb22",
+        "bc4af49389b48d1216c2fbe21d71ddf7df49cc0a4cbeb1d6f01f0acec09f2003",
+        "be3ddc299fafdca7d8a4413c2582614c331fba99d91a65d3e475bddbd9e10776",
+        "becea59788644f193bb9e6f57608a101f4b1881b69785e4cde6c13560b7b25a5",
+        "c0140d72d10728745c018dbe3984af8eb9564d8048c01bcf2facbd589b530fe2",
+        "c0a5870035800d8ff0a02ebd895adef2a2dd0955d4d81f5128830ff1418d49f4",
+        "c1e945f75be852f97d16a0a59de8b4291dbd09f5e505225a1f249d2d8904403d",
+        "c23e0aa8beb38ab320ff45f5abcbeb83fabe86e9a227a622238ce874c62b4e36",
+        "c5f865336685adf742e0e2c80728a727f6ce5236aa0f877b9c3a128d6fb7dcba",
+        "c68f4972119378eadbee31fbe912f6dabc83d6cb7605ae5f948cfd900312c621",
+        "ca7ec7ff79b47e81b60ce20f48cceb386972cd57d34139054e630ccf45ce38c9",
+        "cc96718912ac1c1d40fea02428235b2145984dcc91a45dc94cb7b6a8ae5742ed",
+        "ccc038ddf1d07550e37ff97fb2dcac077440fb05a0283898ae6ec80720f28d3c",
+        "cd41e9e2ffecfccd516e15bc31b86c71f54babb5bec763c6fd880c3852b22bb2",
+        "ce065e65322c01cae38e3baccd85184a7fa5c9335c341cd943cf3f8b6a7daef4",
+        "cf90e6dc77d546ea407763d12a0c114b24b881938876bb012228bfaf27ace067",
+        "d00ce3eae4e7aa20604993a5782d6bd05b6b66af0904d0c402df3d35ab0c79bc",
+        "d0fcc31a858ba0ffc8e0fd148d68819bf138e8fd937f7f99f09d419262c0bdeb",
+        "d1750ce1d58f18720b697208fd022ae7cd956b3da01a43575daed4ee0343d374",
+        "d20ca79e2fbcd418b8b9e67339eed2710d3b71dc921dc3a0c06d3e2fea059fad",
+        "d2b2e0c42a8f8da91cc6396ec511396830b69378a1c53c2d9609239ee9f29f4a",
+        "d4ed5384c25022ee9b676626d339b6aadfdb073e4b151f101c2a452055dd5b5a",
+        "d5875de3e3bd794e8a159fd32a3cc3ae82d500bccbcd162c8948c32fe33a1d51",
+        "d6104c9c99db6c89636bd84c6a1d7981cd3371698f4c55f65fd5e261a6506e53",
+        "d64c3a7f70d051aeb53210cc0c4ec2b62099c559d87e02c4fb4e7b99aab0d487",
+        "d7b6383724d5166197f38ddcc3c95c4a00c4eb497122c11ff118f635438dbcc1",
+        "dac4484df27be153438d61197abb6547e01adb22825ec268d583d21b03d82cda",
+        "df1469b92ff78ac078b5c70db6ca3375afc08ed4b6ab9c15b33e8bc493538040",
+        "e05dee7194ada4c299f74807168bc25e988c2e7d5ecfd2a32d38db6dddb149e1",
+        "e194828aed12e81ad0098cddc526a73f7e6ab259d8c8e039a10e7c3e66b99b7c",
+        "e1e67ab4807ffb0ef76859be73bec57c8c840f291a1f85afa90255ce321366c3",
+        "e2e7d17fd4510c68e98ef982a0e77c2191e6537970be141197561a658cff0db0",
+        "e396e4bb7d504b342ace1f1d9b0c415db11f0fa397c318b7c811489cd09ff095",
+        "e3d4401f01a39e14cb12751f40ee4b8c965d9a785bcbc43b7fae040ddfe50c37",
+        "e5427f3d873e454bdc07eed7851a6907baec35d0f3fef9ef747713408ce4e3f2",
+        "ea33bf0a9ad2c6e4f908a29bf9eaeb061018897ea610601f43bc45d3c230ede1",
+        "eb6993ebd3d81fc5cdf9fd6c9a4dda97c6c047cca2c4dce958b5f0cc9faf372f",
+        "f0b42a3f7c11a9dbbdd0fce5d4f23e3633ea71ea009561c8640c8d8edd0bdd7e",
+        "f0bccfb9a8d4296566318b1a45d96f7059039af6d4815983c9fa023c8a3c5492",
+        "f4bda12204e7f12551e98a42e2de9aa1efc10ba87beddb6b6fa6335f98c72213",
+        "f865eb52c2ea9dcdaf55ab848ebfcaca9c5c3f2610bca5688611803a24e17f15",
+        "f946b1a79508fc32844719b5e28bba768a0ab195a8db1f19362e8a75eddf3dc2",
+        "fd229886f57d518d1d5653e518fb59e1b3b36c5d0a450585c4a42e172a671a2b"
+      ],
+      "shared_bodies_identical": true,
+      "note": "Native transactions replace affected references and canonicalize reachable closure; unreferenced old objects may be removed. Shared unchanged objects retain exact semantic identity."
+    },
+    "sandbox": {
+      "before_objects": 271,
+      "after_objects": 374,
+      "retained_by_cid": 243,
+      "retained_function_cids": [
+        "35175ba8670e5eca6bc7e192dbd013063960434a9ff71644ec6ddeedde274f5f",
+        "65eaffeb10ad398d1586c167348c4bb9e05a50bce4e86bebd9b6475c4813a478",
+        "87099257280d26cf9887c9cb1905ea11b44013df24f96e8682fc6caa64c16d57",
+        "becad582819479408929b5679a5afa518f0a41008d56d0594ad730e96185419c",
+        "e36aba47b3118a43fea6c6fc147af2454d2af341d053f915c22eac7b6a982a0a",
+        "e840ad4855a7ea3d7511ff91f9719d2d897dcc8066f1b5337bda4d9171fb55df",
+        "ffcdc02acd739950afaaf49f5114ac29026e139a4a1ed7fe04c4fd8a2bd198be"
+      ],
+      "shared_bodies_identical": true,
+      "note": "Native transactions replace affected references and canonicalize reachable closure; unreferenced old objects may be removed. Shared unchanged objects retain exact semantic identity."
+    }
+  },
+  "transactions": {
+    "manifest": "native/transactions/20261101/manifest.json",
+    "base_manifest": "native/transactions/20261027/manifest.json",
+    "base_server_records": 46,
+    "server_increment_records": 15,
+    "sandbox_records": 3,
+    "every_candidate_native_verified": true,
+    "exact_source_replay_byte_identical": true,
+    "stale_current_root_rejected_without_mutation": true,
+    "invalid_public_candidates_rejected_without_publication": true,
+    "sandbox_envelope_migration_reproduced_original_executable": true
+  },
+  "rebuilds": {
+    "server": {
+      "attempts": [
+        {
+          "attempt": 1,
+          "executable": {
+            "path": "build/rebuild/server-1.exe",
+            "bytes": 395776,
+            "sha256": "9ddafb7ee463fe3dd9a5f8643fe21afacbfcd96a6cdfc4b9791377f6d3eb38f8"
+          },
+          "provenance": {
+            "path": "build/rebuild/server-1.prov",
+            "bytes": 268,
+            "sha256": "80b9d0ab058f1b28ba8371c0018e4003f6e7da05a4322d4436e520e20dc9a90e"
+          }
+        },
+        {
+          "attempt": 2,
+          "executable": {
+            "path": "build/rebuild/server-2.exe",
+            "bytes": 395776,
+            "sha256": "9ddafb7ee463fe3dd9a5f8643fe21afacbfcd96a6cdfc4b9791377f6d3eb38f8"
+          },
+          "provenance": {
+            "path": "build/rebuild/server-2.prov",
+            "bytes": 268,
+            "sha256": "80b9d0ab058f1b28ba8371c0018e4003f6e7da05a4322d4436e520e20dc9a90e"
+          }
+        }
+      ],
+      "snapshot": {
+        "path": "build/rebuild/server-snapshot.xax",
+        "bytes": 1268734,
+        "sha256": "05ea2905764c6b87e6c8497460a24806dc4ed2e71bc734a96949d71bce54c17d"
+      },
+      "byte_identical": true
+    },
+    "sandbox": {
+      "attempts": [
+        {
+          "attempt": 1,
+          "executable": {
+            "path": "build/rebuild/sandbox-1.exe",
+            "bytes": 150016,
+            "sha256": "a189b73a7b17cacf4f8680e3f84ed3ed35a44c9ebf4c1f6465b0d4af03ec779a"
+          },
+          "provenance": {
+            "path": "build/rebuild/sandbox-1.prov",
+            "bytes": 268,
+            "sha256": "4e7a9b05e7c9ccc9aaa7c3689d29dee4cee9227fac94a0080eb6f9e7b87ec6c8"
+          }
+        },
+        {
+          "attempt": 2,
+          "executable": {
+            "path": "build/rebuild/sandbox-2.exe",
+            "bytes": 150016,
+            "sha256": "a189b73a7b17cacf4f8680e3f84ed3ed35a44c9ebf4c1f6465b0d4af03ec779a"
+          },
+          "provenance": {
+            "path": "build/rebuild/sandbox-2.prov",
+            "bytes": 268,
+            "sha256": "4e7a9b05e7c9ccc9aaa7c3689d29dee4cee9227fac94a0080eb6f9e7b87ec6c8"
+          }
+        }
+      ],
+      "snapshot": {
+        "path": "build/rebuild/sandbox-snapshot.xax",
+        "bytes": 128605,
+        "sha256": "76947d22fd779d9f65a794117d99f4e9a10b6e87e034b3345ccc5951fbf1aba8"
+      },
+      "byte_identical": true
+    }
+  },
+  "execution_capabilities": {
+    "stdin": "hex bytes + physical EOF",
+    "args": "UTF-16 argument vector excluding executor-controlled argv[0]",
+    "max_stdin_bytes": 262144,
+    "max_args": 64,
+    "max_argument_utf16_units": 8192,
+    "max_combined_output_bytes": 1048576,
+    "max_cpu_100ns": 50000000,
+    "max_wall_ms": 10000,
+    "max_process_memory_bytes": 268435456,
+    "cpu_sampling_ms": 5,
+    "environment": "Supplied: OS-derived LOCALAPPDATA and SystemRoot. Windows rewrites LOCALAPPDATA and adds container-local TEMP/TMP.",
+    "scope": "currently authorized built artifact only",
+    "typed_layouts": false,
+    "registered_external_tools": false,
+    "max_request_bytes": 4194304,
+    "observed_cpu_overshoot_100ns": 156250
+  },
+  "resource_observations": {
+    "final_manual_campaign": [
+      {
+        "label": "echo",
+        "ok": true,
+        "wall_ms": 62,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15409152,
+        "stdout_bytes": 262144,
+        "stderr_bytes": 262144
+      },
+      {
+        "label": "argv",
+        "ok": true,
+        "wall_ms": 16,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 15400960,
+        "stdout_bytes": 118,
+        "stderr_bytes": 0
+      },
+      {
+        "label": "cpu",
+        "ok": false,
+        "error": "cpu_limit",
+        "wall_ms": 6797,
+        "user_cpu_100ns": 48750000,
+        "kernel_cpu_100ns": 1406250,
+        "peak_memory_bytes": 1748992,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0
+      },
+      {
+        "label": "timeout",
+        "ok": false,
+        "error": "wall_timeout",
+        "wall_ms": 10000,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 1748992,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0
+      },
+      {
+        "label": "output-exact",
+        "ok": true,
+        "wall_ms": 250,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15405056,
+        "stdout_bytes": 1048576,
+        "stderr_bytes": 0
+      },
+      {
+        "label": "output-over",
+        "ok": false,
+        "error": "output_limit",
+        "wall_ms": 281,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15417344,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0
+      },
+      {
+        "label": "stderr-flood",
+        "ok": false,
+        "error": "output_limit",
+        "wall_ms": 250,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15405056,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0
+      }
+    ],
+    "cpu_measurements": [
+      {
+        "duration_ms": 5078,
+        "user_cpu_100ns": 49531250,
+        "kernel_cpu_100ns": 468750,
+        "total_cpu_100ns": 50000000,
+        "overshoot_100ns": 0
+      },
+      {
+        "duration_ms": 6797,
+        "user_cpu_100ns": 48750000,
+        "kernel_cpu_100ns": 1406250,
+        "total_cpu_100ns": 50156250,
+        "overshoot_100ns": 156250
+      },
+      {
+        "duration_ms": 5000,
+        "user_cpu_100ns": 49843750,
+        "kernel_cpu_100ns": 156250,
+        "total_cpu_100ns": 50000000,
+        "overshoot_100ns": 0
+      }
+    ],
+    "max_observed_cpu_overshoot_100ns": 156250,
+    "sampling_wait_requested_ms": 5,
+    "hard_sampling_latency_bound_claimed": false,
+    "memory_metric": "JOBOBJECT_EXTENDED_LIMIT_INFORMATION.PeakProcessMemoryUsed (peak process commit), not working set",
+    "wall_metric": "GetTickCount64 from immediately before resume through completion/termination/measurement; compilation/setup/output publication excluded",
+    "stdin_file_offset_reported": false,
+    "semantic_stdin_consumption_claimed": false,
+    "unknown_measurements_omitted_on_launcher_failure": true,
+    "timeout": {
+      "metadata_bytes": 64,
+      "exit_code": 1,
+      "flags": 1,
+      "duration_ms": 10000,
+      "user_cpu_100ns": 0,
+      "kernel_cpu_100ns": 156250,
+      "peak_memory_bytes": 1724416,
+      "metadata_version": 1
+    },
+    "launcher_termination": {
+      "worker_image": "D:\\GitHub\\XAX-MCP\\build\\termination-sandbox\\sandbox-run\\prog.exe",
+      "launcher_terminated": true,
+      "stdin_removed": true,
+      "child_survived": false,
+      "worker_alive_before_termination": true,
+      "worker_pid": 19764,
+      "metadata_published": false,
+      "cleanup_observed_ms": 6
+    }
+  },
+  "final_gates": {
+    "local_workflow_client_exchanges": 92,
+    "protocol_golden": "tests/protocol/readonly.responses.ndjson",
+    "native_probe_manifest": "tests/security/executor-input/manifest.json",
+    "native_probes_replayed_verified_rebuilt": 15,
+    "stream_separation_marker": {
+      "stdout_hex": "4f55540a",
+      "stderr_hex": "4552520a"
+    },
+    "input_sizes_tested": [
+      0,
+      256,
+      131072,
+      262144
+    ],
+    "request_boundaries": [
+      {
+        "request_bytes": 4194304,
+        "response": {
+          "ok": true,
+          "exit_code": 40,
+          "duration_ms": 15,
+          "user_cpu_100ns": 156250,
+          "kernel_cpu_100ns": 0,
+          "peak_memory_bytes": 1769472,
+          "stdin_bytes_supplied": 0,
+          "stdout_hex": "",
+          "stderr_hex": ""
+        },
+        "id": 2,
+        "elapsed_ms": 120,
+        "files": [
+          ".xax-mcp.lock",
+          "artifact.exe",
+          "artifact.prov",
+          "current.xax",
+          "exec",
+          "snapshot.xax"
+        ]
+      },
+      {
+        "request_bytes": 4194305,
+        "response": {
+          "code": -32600,
+          "message": "Invalid Request: the message exceeds 4194304 bytes"
+        },
+        "id": null,
+        "elapsed_ms": 13,
+        "files": [
+          "current.xax"
+        ]
+      }
+    ],
+    "authority_denial_before_child": true,
+    "malformed_requests_before_compiler": true,
+    "appcontainer_token_and_outside_file_denial": true,
+    "live_loopback_peer_confined_connections": 0,
+    "native_operator_positive_control_connections": 1,
+    "environment_keys": [
+      "LOCALAPPDATA",
+      "SystemRoot",
+      "TEMP",
+      "TMP"
+    ],
+    "actual_locked_file_cleanup_failure_is_error": true,
+    "launcher_status_fixtures": "Native simulated exit codes 7/8/9/10 test protocol mapping only; actual WinAPI measurement-failure injection not claimed."
+  },
+  "executed_observations": [
+    {
+      "label": "binary-0",
+      "pass": true,
+      "elapsed_ms": 166,
+      "response": {
+        "ok": true,
+        "exit_code": 7,
+        "duration_ms": 31,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 312500,
+        "peak_memory_bytes": 15417344,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "binary-256",
+      "pass": true,
+      "elapsed_ms": 163,
+      "response": {
+        "ok": true,
+        "exit_code": 7,
+        "duration_ms": 31,
+        "user_cpu_100ns": 312500,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 15388672,
+        "stdin_bytes_supplied": 256,
+        "stdout_observation": {
+          "bytes": 256,
+          "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880"
+        },
+        "stderr_observation": {
+          "bytes": 256,
+          "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880"
+        }
+      }
+    },
+    {
+      "label": "binary-131072",
+      "pass": true,
+      "elapsed_ms": 170,
+      "response": {
+        "ok": true,
+        "exit_code": 7,
+        "duration_ms": 31,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 15364096,
+        "stdin_bytes_supplied": 131072,
+        "stdout_observation": {
+          "bytes": 131072,
+          "sha256": "59f410ae5e17962412e2aed4f815918f634932f2abf084f00bb638c4db017850"
+        },
+        "stderr_observation": {
+          "bytes": 131072,
+          "sha256": "59f410ae5e17962412e2aed4f815918f634932f2abf084f00bb638c4db017850"
+        }
+      }
+    },
+    {
+      "label": "binary-262144",
+      "pass": true,
+      "elapsed_ms": 302,
+      "response": {
+        "ok": true,
+        "exit_code": 7,
+        "duration_ms": 63,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 312500,
+        "peak_memory_bytes": 15380480,
+        "stdin_bytes_supplied": 262144,
+        "stdout_observation": {
+          "bytes": 262144,
+          "sha256": "2312394bd99545d9de131c24efb781e765ac1aec243f2ed9347597a793a415e9"
+        },
+        "stderr_observation": {
+          "bytes": 262144,
+          "sha256": "2312394bd99545d9de131c24efb781e765ac1aec243f2ed9347597a793a415e9"
+        }
+      }
+    },
+    {
+      "label": "independent-argv",
+      "pass": true,
+      "elapsed_ms": 187,
+      "response": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 32,
+        "user_cpu_100ns": 312500,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 15400960,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 118,
+          "sha256": "c77a2df0ad429907845b459c2bfc7ae24cbd457ce80df55054370f224199602f"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "flood-out",
+      "pass": true,
+      "elapsed_ms": 467,
+      "response": {
+        "ok": false,
+        "error": "output_limit",
+        "exit_code": 1,
+        "duration_ms": 297,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 312500,
+        "peak_memory_bytes": 15417344,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "flood-err",
+      "pass": true,
+      "elapsed_ms": 467,
+      "response": {
+        "ok": false,
+        "error": "output_limit",
+        "exit_code": 1,
+        "duration_ms": 282,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15392768,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "output-over",
+      "pass": true,
+      "elapsed_ms": 467,
+      "response": {
+        "ok": false,
+        "error": "output_limit",
+        "exit_code": 1,
+        "duration_ms": 297,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15413248,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "output-exact",
+      "pass": true,
+      "elapsed_ms": 602,
+      "response": {
+        "ok": true,
+        "exit_code": 7,
+        "duration_ms": 297,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 15396864,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 1048576,
+          "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "cpu",
+      "pass": true,
+      "elapsed_ms": 5246,
+      "response": {
+        "ok": false,
+        "error": "cpu_limit",
+        "exit_code": 1,
+        "duration_ms": 5078,
+        "user_cpu_100ns": 49531250,
+        "kernel_cpu_100ns": 468750,
+        "peak_memory_bytes": 1765376,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "timeout",
+      "pass": true,
+      "elapsed_ms": 10168,
+      "response": {
+        "ok": false,
+        "error": "wall_timeout",
+        "exit_code": 1,
+        "duration_ms": 10000,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 1753088,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "unknown",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "odd-hex",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "nonhex",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "stdin-type",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "stdin-null",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "args-type",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "args-null",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "arg-type",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "arg-null",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "arg-object",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "embedded-nul",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "lone-high",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "lone-low",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "duplicate-input",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "duplicate-args",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "escaped-duplicate",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "trailing-comma",
+      "pass": false
+    },
+    {
+      "label": "input-over",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "count-over",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "units-over",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "aggregate-units-over",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "environment-override",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "path-override",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "budget-override",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "count-exact",
+      "pass": true,
+      "elapsed_ms": 168,
+      "response": {
+        "ok": true,
+        "exit_code": 40,
+        "duration_ms": 31,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 1773568,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "units-exact",
+      "pass": true,
+      "elapsed_ms": 152,
+      "response": {
+        "ok": true,
+        "exit_code": 40,
+        "duration_ms": 31,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 1761280,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "escaped-hex",
+      "pass": true,
+      "elapsed_ms": 150,
+      "response": {
+        "ok": true,
+        "exit_code": 40,
+        "duration_ms": 31,
+        "user_cpu_100ns": 468750,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 1716224,
+        "stdin_bytes_supplied": 3,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "empty-fields",
+      "pass": true,
+      "elapsed_ms": 149,
+      "response": {
+        "ok": true,
+        "exit_code": 40,
+        "duration_ms": 31,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 1720320,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "escaped-keys-and-hex",
+      "pass": true,
+      "response": {
+        "ok": true,
+        "exit_code": 40,
+        "duration_ms": 62,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 1720320,
+        "stdin_bytes_supplied": 1,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "authority---read-only",
+      "pass": true,
+      "response": {
+        "error": {
+          "code": "denied_capability",
+          "message": "this server was not granted the 'execute' right by its host configuration",
+          "repair": [
+            "the host owner may add --allow-execute to the server launch command"
+          ]
+        },
+        "ok": false
+      },
+      "files": [
+        "current.xax"
+      ]
+    },
+    {
+      "label": "authority---allow-execute --deny execute",
+      "pass": true,
+      "response": {
+        "error": {
+          "code": "denied_capability",
+          "message": "this server was not granted the 'execute' right by its host configuration",
+          "repair": [
+            "the host owner may add --allow-execute to the server launch command"
+          ]
+        },
+        "ok": false
+      },
+      "files": [
+        "current.xax"
+      ]
+    },
+    {
+      "label": "filesystem-network-with-args-and-stdin",
+      "pass": false,
+      "elapsed_ms": 2188,
+      "response": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 2063,
+        "user_cpu_100ns": 312500,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15482880,
+        "stdin_bytes_supplied": 62,
+        "stdout_observation": {
+          "bytes": 20,
+          "sha256": "f9e55ba3933a49d909bff53e52094fe2aca4568b7b1e3c63e705c95306ade415"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "confinement-live-loopback-peer",
+      "pass": false,
+      "response": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 7547,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 15482880,
+        "stdin_bytes_supplied": 3,
+        "stdout_observation": {
+          "bytes": 20,
+          "sha256": "f9e55ba3933a49d909bff53e52094fe2aca4568b7b1e3c63e705c95306ade415"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "native-token-filesystem-network",
+      "pass": false,
+      "elapsed_ms": 1122,
+      "response": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 1031,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15523840,
+        "stdin_bytes_supplied": 3,
+        "stdout_observation": {
+          "bytes": 24,
+          "sha256": "c709aeea0371693dfe4a571b993e3daa4bc71293c0107e410bd1d0d90033be54"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "native-isolation-with-live-peer",
+      "pass": true,
+      "elapsed_ms": 1112,
+      "response": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 1031,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15519744,
+        "stdin_bytes_supplied": 3,
+        "stdout_observation": {
+          "bytes": 24,
+          "sha256": "c709aeea0371693dfe4a571b993e3daa4bc71293c0107e410bd1d0d90033be54"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "native-network-positive-control",
+      "pass": true,
+      "observation_hex": "000000000000000000000000ffffffff3327000000000000",
+      "peerConnections": 1
+    },
+    {
+      "label": "malformed-json-correct-parse-error",
+      "pass": true,
+      "expected": {
+        "error": {
+          "code": -32700
+        },
+        "id": null
+      },
+      "corrects": "trailing-comma expectation; prior observation retained"
+    },
+    {
+      "label": "readonly-stdin-handle-exact-boundary",
+      "pass": true,
+      "elapsed_ms": 158,
+      "response": {
+        "ok": true,
+        "exit_code": 7,
+        "duration_ms": 62,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15405056,
+        "stdin_bytes_supplied": 262144,
+        "stdout_observation": {
+          "bytes": 262144,
+          "sha256": "2312394bd99545d9de131c24efb781e765ac1aec243f2ed9347597a793a415e9"
+        },
+        "stderr_observation": {
+          "bytes": 262144,
+          "sha256": "2312394bd99545d9de131c24efb781e765ac1aec243f2ed9347597a793a415e9"
+        }
+      }
+    },
+    {
+      "label": "final-legacy-fields",
+      "pass": true,
+      "elapsed_ms": 102,
+      "response": {
+        "ok": true,
+        "exit_code": 40,
+        "duration_ms": 15,
+        "flags": 0,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 1769472,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "final-dispatch-noargs",
+      "pass": true,
+      "elapsed_ms": 103,
+      "response": {
+        "ok": true,
+        "exit_code": 40,
+        "duration_ms": 16,
+        "flags": 0,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 1789952,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "native-simulated-launcher-status-7",
+      "pass": false,
+      "elapsed_ms": 84,
+      "response": {
+        "ok": false,
+        "error": "incomplete_transport"
+      }
+    },
+    {
+      "label": "final-native-simulated-launcher-status-7",
+      "pass": false,
+      "elapsed_ms": 71,
+      "response": {
+        "ok": false,
+        "error": "incomplete_transport"
+      }
+    },
+    {
+      "label": "corrected-native-simulated-launcher-status-7",
+      "pass": false,
+      "elapsed_ms": 71,
+      "response": {
+        "ok": false,
+        "error": "incomplete_transport"
+      }
+    },
+    {
+      "label": "repaired-native-simulated-launcher-status-7",
+      "pass": true,
+      "elapsed_ms": 87,
+      "response": {
+        "ok": false,
+        "error": "launcher_setup_failed"
+      }
+    },
+    {
+      "label": "repaired-native-simulated-launcher-status-8",
+      "pass": true,
+      "elapsed_ms": 79,
+      "response": {
+        "ok": false,
+        "error": "measurement_failed"
+      }
+    },
+    {
+      "label": "repaired-native-simulated-launcher-status-9",
+      "pass": true,
+      "elapsed_ms": 74,
+      "response": {
+        "ok": false,
+        "error": "incomplete_transport"
+      }
+    },
+    {
+      "label": "repaired-native-simulated-launcher-status-10",
+      "pass": true,
+      "elapsed_ms": 69,
+      "response": {
+        "ok": false,
+        "error": "cleanup_failed"
+      }
+    },
+    {
+      "label": "actual-cleanup-failure-before-child",
+      "pass": true,
+      "elapsed_ms": 45,
+      "response": {
+        "ok": false,
+        "error": "cleanup_failed"
+      }
+    },
+    {
+      "label": "final-unknown",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-odd-hex",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-nonhex",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-stdin-type",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-stdin-null",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-args-type",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-args-null",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-arg-type",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-arg-null",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-arg-object",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-embedded-nul",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-lone-high",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-lone-low",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-duplicate-input",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-duplicate-args",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-escaped-duplicate",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-trailing-comma",
+      "pass": true,
+      "response": {
+        "code": -32700,
+        "message": "Parse error"
+      }
+    },
+    {
+      "label": "final-input-over",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-count-over",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-units-over",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-aggregate-units-over",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-environment-override",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-path-override",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-budget-override",
+      "pass": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-utf16-exact-boundary",
+      "pass": true,
+      "elapsed_ms": 104,
+      "response": {
+        "ok": true,
+        "exit_code": 40,
+        "duration_ms": 16,
+        "flags": 0,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 1810432,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "final-utf16-one-unit-over",
+      "pass": true,
+      "elapsed_ms": 1,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Expected optional stdin_hex (even hexadecimal, at most 262144 bytes) and args (at most 64 strings and 8192 UTF-16 units total). args excludes argv[0]."
+        }
+      }
+    },
+    {
+      "label": "final-artifact-argv",
+      "pass": true,
+      "elapsed_ms": 358,
+      "response": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 16,
+        "flags": 0,
+        "stdout_bytes": 118,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 15400960,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 118,
+          "sha256": "c77a2df0ad429907845b459c2bfc7ae24cbd457ce80df55054370f224199602f"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "final-artifact-echo",
+      "pass": true,
+      "elapsed_ms": 428,
+      "response": {
+        "ok": true,
+        "exit_code": 7,
+        "duration_ms": 62,
+        "flags": 0,
+        "stdout_bytes": 262144,
+        "stderr_bytes": 262144,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15409152,
+        "stdin_bytes_supplied": 262144,
+        "stdout_observation": {
+          "bytes": 262144,
+          "sha256": "2312394bd99545d9de131c24efb781e765ac1aec243f2ed9347597a793a415e9"
+        },
+        "stderr_observation": {
+          "bytes": 262144,
+          "sha256": "2312394bd99545d9de131c24efb781e765ac1aec243f2ed9347597a793a415e9"
+        }
+      }
+    },
+    {
+      "label": "final-artifact-stderr-flood",
+      "pass": true,
+      "elapsed_ms": 593,
+      "response": {
+        "ok": false,
+        "error": "output_limit",
+        "exit_code": 1,
+        "duration_ms": 250,
+        "flags": 4,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15405056,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "final-artifact-output-exact",
+      "pass": true,
+      "elapsed_ms": 668,
+      "response": {
+        "ok": true,
+        "exit_code": 7,
+        "duration_ms": 250,
+        "flags": 0,
+        "stdout_bytes": 1048576,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15405056,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 1048576,
+          "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "final-artifact-output-over",
+      "pass": true,
+      "elapsed_ms": 668,
+      "response": {
+        "ok": false,
+        "error": "output_limit",
+        "exit_code": 1,
+        "duration_ms": 281,
+        "flags": 4,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15417344,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "final-artifact-cpu",
+      "pass": true,
+      "elapsed_ms": 7135,
+      "response": {
+        "ok": false,
+        "error": "cpu_limit",
+        "exit_code": 1,
+        "duration_ms": 6797,
+        "flags": 8,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 48750000,
+        "kernel_cpu_100ns": 1406250,
+        "peak_memory_bytes": 1748992,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "final-artifact-timeout",
+      "pass": true,
+      "elapsed_ms": 10333,
+      "response": {
+        "ok": false,
+        "error": "wall_timeout",
+        "exit_code": 1,
+        "duration_ms": 10000,
+        "flags": 1,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 1748992,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "final-native-child-environment",
+      "pass": false,
+      "elapsed_ms": 184,
+      "response": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 31,
+        "flags": 0,
+        "stdout_bytes": 440,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 312500,
+        "peak_memory_bytes": 15405056,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 440,
+          "sha256": "10ffa0d1f509c3a6d60cba7a89a8efdccb6f71a4dea81af984416daa4a40ec3c"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "final-observed-child-environment",
+      "pass": true,
+      "elapsed_ms": 224,
+      "response": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 31,
+        "flags": 0,
+        "stdout_bytes": 440,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 312500,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 15425536,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 440,
+          "sha256": "10ffa0d1f509c3a6d60cba7a89a8efdccb6f71a4dea81af984416daa4a40ec3c"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "final-published-environment-keys",
+      "pass": true,
+      "elapsed_ms": 191,
+      "response": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 46,
+        "flags": 0,
+        "stdout_bytes": 440,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 312500,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 15405056,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 440,
+          "sha256": "10ffa0d1f509c3a6d60cba7a89a8efdccb6f71a4dea81af984416daa4a40ec3c"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "final-raw-invalid-utf8",
+      "pass": true,
+      "response": {
+        "code": -32700,
+        "message": "Parse error"
+      },
+      "files": [
+        "current.xax"
+      ]
+    },
+    {
+      "label": "final-argument-controls-and-unicode-extremes",
+      "pass": true,
+      "elapsed_ms": 120,
+      "response": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 16,
+        "flags": 0,
+        "stdout_bytes": 170,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 312500,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 15409152,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 170,
+          "sha256": "15d7fc54139933b0c8eb8f8033ca105ae1000b03f60bb1c7722cab0eb7af8960"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "label": "local-ci-initial-client-run",
+      "pass": false,
+      "reason": "Native status fixture returned from its PE entry without explicit ExitProcess; PowerShell call/shutdown timed out. Fixture changed to explicit native whole-process termination; no executor/compiler change for this repair."
+    },
+    {
+      "label": "local-ci-client-after-fixture-fix",
+      "pass": true,
+      "exchanges": 90,
+      "note": "Includes base sessions, independent native I/O/argv/resource/environment/live-peer checks, strict validation, locked cleanup and four status classifications."
+    },
+    {
+      "label": "final-distinct-stream-markers",
+      "pass": true,
+      "elapsed_ms": 158,
+      "response": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 31,
+        "flags": 0,
+        "stdout_bytes": 4,
+        "stderr_bytes": 4,
+        "user_cpu_100ns": 312500,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 15417344,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 4,
+          "sha256": "ef5683848bd33d0531d8cbe5123f1a7f121764c5dce98c7de61c2fe5a1031e6c"
+        },
+        "stderr_observation": {
+          "bytes": 4,
+          "sha256": "2f04b3a77625532f0d36a27e3c3a97d307133a910f4ab2bec0e55b7cf0440965"
+        }
+      }
+    },
+    {
+      "label": "final-uppercase-hex",
+      "pass": true,
+      "elapsed_ms": 135,
+      "response": {
+        "ok": true,
+        "exit_code": 7,
+        "duration_ms": 16,
+        "flags": 0,
+        "stdout_bytes": 3,
+        "stderr_bytes": 3,
+        "user_cpu_100ns": 312500,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 15405056,
+        "stdin_bytes_supplied": 3,
+        "stdout_observation": {
+          "bytes": 3,
+          "sha256": "712450d3c4a79eea9509e75dc1dacdeff58034df538536cfae2da882bd8a0c50"
+        },
+        "stderr_observation": {
+          "bytes": 3,
+          "sha256": "712450d3c4a79eea9509e75dc1dacdeff58034df538536cfae2da882bd8a0c50"
+        }
+      }
+    },
+    {
+      "label": "final-local-ci-client-gate",
+      "pass": true,
+      "exchanges": 92,
+      "note": "Final workflow client block, including distinct streams and argument controls/Unicode edge scalars."
+    },
+    {
+      "label": "final-native-fixture-replay",
+      "pass": true,
+      "fixtures": 15,
+      "note": "Each canonical edit, verify, resolve, executable and provenance reproduced."
+    }
+  ],
+  "final_ci_execution_observations": [
+    {
+      "response": {
+        "ok": true,
+        "exit_code": 40,
+        "duration_ms": 15,
+        "flags": 0,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 1720320,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mcp_isError": false
+    },
+    {
+      "response": {
+        "ok": true,
+        "exit_code": 136,
+        "duration_ms": 16,
+        "flags": 0,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 1720320,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mcp_isError": false
+    },
+    {
+      "response": {
+        "ok": true,
+        "exit_code": 136,
+        "duration_ms": 16,
+        "flags": 0,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 1732608,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mcp_isError": false
+    },
+    {
+      "response": {
+        "ok": true,
+        "exit_code": 7,
+        "duration_ms": 16,
+        "flags": 0,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 15368192,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mcp_isError": false
+    },
+    {
+      "response": {
+        "ok": true,
+        "exit_code": 7,
+        "duration_ms": 16,
+        "flags": 0,
+        "stdout_bytes": 256,
+        "stderr_bytes": 256,
+        "user_cpu_100ns": 312500,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 15372288,
+        "stdin_bytes_supplied": 256,
+        "stdout_observation": {
+          "bytes": 256,
+          "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880"
+        },
+        "stderr_observation": {
+          "bytes": 256,
+          "sha256": "40aff2e9d2d8922e47afd4648e6967497158785fbd1da870e7110266bf944880"
+        }
+      },
+      "mcp_isError": false
+    },
+    {
+      "response": {
+        "ok": true,
+        "exit_code": 7,
+        "duration_ms": 16,
+        "flags": 0,
+        "stdout_bytes": 131072,
+        "stderr_bytes": 131072,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15388672,
+        "stdin_bytes_supplied": 131072,
+        "stdout_observation": {
+          "bytes": 131072,
+          "sha256": "59f410ae5e17962412e2aed4f815918f634932f2abf084f00bb638c4db017850"
+        },
+        "stderr_observation": {
+          "bytes": 131072,
+          "sha256": "59f410ae5e17962412e2aed4f815918f634932f2abf084f00bb638c4db017850"
+        }
+      },
+      "mcp_isError": false
+    },
+    {
+      "response": {
+        "ok": true,
+        "exit_code": 7,
+        "duration_ms": 63,
+        "flags": 0,
+        "stdout_bytes": 262144,
+        "stderr_bytes": 262144,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 15368192,
+        "stdin_bytes_supplied": 262144,
+        "stdout_observation": {
+          "bytes": 262144,
+          "sha256": "2312394bd99545d9de131c24efb781e765ac1aec243f2ed9347597a793a415e9"
+        },
+        "stderr_observation": {
+          "bytes": 262144,
+          "sha256": "2312394bd99545d9de131c24efb781e765ac1aec243f2ed9347597a793a415e9"
+        }
+      },
+      "mcp_isError": false
+    },
+    {
+      "response": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 15,
+        "flags": 0,
+        "stdout_bytes": 4,
+        "stderr_bytes": 4,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15409152,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 4,
+          "sha256": "ef5683848bd33d0531d8cbe5123f1a7f121764c5dce98c7de61c2fe5a1031e6c"
+        },
+        "stderr_observation": {
+          "bytes": 4,
+          "sha256": "2f04b3a77625532f0d36a27e3c3a97d307133a910f4ab2bec0e55b7cf0440965"
+        }
+      },
+      "mcp_isError": false
+    },
+    {
+      "response": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 15,
+        "flags": 0,
+        "stdout_bytes": 284,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 15372288,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 284,
+          "sha256": "4fa3c83b9642c51a70343f8e9b1ff6ef8b789d798c49547d9caafe133ec11e39"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mcp_isError": false
+    },
+    {
+      "response": {
+        "ok": false,
+        "error": "cpu_limit",
+        "exit_code": 1,
+        "duration_ms": 5000,
+        "flags": 8,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 49843750,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 1720320,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mcp_isError": true
+    },
+    {
+      "response": {
+        "ok": false,
+        "error": "output_limit",
+        "exit_code": 1,
+        "duration_ms": 234,
+        "flags": 4,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15364096,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mcp_isError": true
+    },
+    {
+      "response": {
+        "ok": false,
+        "error": "output_limit",
+        "exit_code": 1,
+        "duration_ms": 234,
+        "flags": 4,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15364096,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mcp_isError": true
+    },
+    {
+      "response": {
+        "ok": true,
+        "exit_code": 7,
+        "duration_ms": 219,
+        "flags": 0,
+        "stdout_bytes": 1048576,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15368192,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 1048576,
+          "sha256": "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mcp_isError": false
+    },
+    {
+      "response": {
+        "ok": false,
+        "error": "output_limit",
+        "exit_code": 1,
+        "duration_ms": 250,
+        "flags": 4,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15376384,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mcp_isError": true
+    },
+    {
+      "response": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 31,
+        "flags": 0,
+        "stdout_bytes": 440,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15364096,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 440,
+          "sha256": "10ffa0d1f509c3a6d60cba7a89a8efdccb6f71a4dea81af984416daa4a40ec3c"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mcp_isError": false
+    },
+    {
+      "response": {
+        "ok": true,
+        "exit_code": 40,
+        "duration_ms": 16,
+        "flags": 0,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 0,
+        "peak_memory_bytes": 1728512,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mcp_isError": false
+    },
+    {
+      "response": {
+        "ok": true,
+        "exit_code": 40,
+        "duration_ms": 31,
+        "flags": 0,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 1757184,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mcp_isError": false
+    },
+    {
+      "response": {
+        "ok": true,
+        "exit_code": 40,
+        "duration_ms": 16,
+        "flags": 0,
+        "stdout_bytes": 0,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 156250,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 1716224,
+        "stdin_bytes_supplied": 0,
+        "stdout_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mcp_isError": false
+    },
+    {
+      "response": {
+        "ok": true,
+        "exit_code": 0,
+        "duration_ms": 1016,
+        "flags": 0,
+        "stdout_bytes": 24,
+        "stderr_bytes": 0,
+        "user_cpu_100ns": 0,
+        "kernel_cpu_100ns": 156250,
+        "peak_memory_bytes": 15482880,
+        "stdin_bytes_supplied": 3,
+        "stdout_observation": {
+          "bytes": 24,
+          "sha256": "c709aeea0371693dfe4a571b993e3daa4bc71293c0107e410bd1d0d90033be54"
+        },
+        "stderr_observation": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "mcp_isError": false
+    }
+  ],
+  "development_failures": [
+    {
+      "stage": "direct sandbox snapshot edit",
+      "status": "BLOCKED for that source form",
+      "code": "XAX.WORKSPACE.TOPOLOGY",
+      "rule": "WORKSPACE-SUPPORTED-USER",
+      "repair": "Two exact-root native envelope transactions retained the original closure and reproduced its executable before the increment."
+    },
+    {
+      "stage": "initial quote probe verification",
+      "status": "REJECTED",
+      "detail": "pointer.address lacked its required attribute; corrected in semantic graph data before native verification/build."
+    },
+    {
+      "stage": "borrowed-result native calls",
+      "status": "REJECTED",
+      "code": "XAX.NATIVE.ABI",
+      "rule": "NATIVE-CALL-ARITY",
+      "repair": "Explicit graph composition and separate bounded native function boundaries; XAX/BBC unchanged."
+    },
+    {
+      "stage": "monolithic verified/compiled server candidate",
+      "status": "EXECUTION_FAILED",
+      "exit_unsigned": 3221226505,
+      "exit_hex": "c0000409",
+      "detail": "Failed inside composed parser path; standalone native parser worked. Exact backend/source root cause not established.",
+      "repair": "Retained a separate native parser boundary; final validation/streams passed."
+    },
+    {
+      "stage": "argument decoder scratch layout",
+      "status": "TEST_FAILED",
+      "detail": "Four stale scratch offsets rejected recognized keys.",
+      "repair": "Corrected offsets; exact native parser/argv checks passed."
+    },
+    {
+      "stage": "capture result formatter",
+      "status": "EXECUTION_FAILED",
+      "exit_unsigned": 3221225501,
+      "exit_hex": "c000001d",
+      "detail": "Used existing hex helper span as an end offset instead of a relative offset and length.",
+      "repair": "Corrected packing; exact binary and distinct-stream tests passed."
+    },
+    {
+      "stage": "AppContainer environment setup",
+      "status": "SETUP_FAILED",
+      "windows_error": 203,
+      "detail": "Empty/incomplete explicit environment failed; LOCALAPPDATA separator offset was also wrong.",
+      "repair": "OS-derived LOCALAPPDATA/SystemRoot and corrected offsets; successful contained launches."
+    },
+    {
+      "stage": "environment observation expectation",
+      "status": "TEST_EXPECTATION_FAILED",
+      "detail": "Expected two keys; native observation found Windows-added container-local TEMP/TMP and rewritten LOCALAPPDATA.",
+      "repair": "Documented supplied versus observed environment; asserted exactly four observed keys, no parent MCP config/PATH."
+    },
+    {
+      "stage": "native editor metadata batch",
+      "status": "REJECTED",
+      "code": "XAX.EDIT.RECORD",
+      "rule": "EDIT-RECORD-COUNT",
+      "repair": "Verified exact-root intermediate imports within 256 supplied objects per transaction."
+    },
+    {
+      "stage": "pure infinite CPU fixture",
+      "status": "BLOCKED",
+      "compiler_exit": 2,
+      "detail": "A no-return entry graph verified but native build declined.",
+      "alternative": "A verified finite 1e12-iteration native loop exercised actual CPU termination. No unconfined helper or compiler change."
+    },
+    {
+      "stage": "malformed JSON assertion",
+      "status": "TEST_EXPECTATION_FAILED",
+      "detail": "Trailing comma correctly returned JSON-RPC parse error -32700, not tool invalid_request.",
+      "repair": "Corrected expectation; malformed bytes/JSON still reject before execution."
+    },
+    {
+      "stage": "initial isolation assertions",
+      "status": "TEST_EXPECTATION_FAILED",
+      "detail": "Copied-file reopen/write assumptions and expected WSA 10013 were false. Closed-port refusal was insufficient network evidence.",
+      "repair": "No grants added. Native token/outside-denial observation and live synthetic peer with successful native positive control established the tested scope."
+    },
+    {
+      "stage": "launcher failure dispatch",
+      "status": "TEST_FAILED",
+      "detail": "Status-only native fixture exposed use of p21 instead of launcher status p16.",
+      "repair": "Exact-root transaction corrected the slot; four distinct failure mappings passed. Two immediate retests reused locked older test images and were retained as operator failures."
+    },
+    {
+      "stage": "metadata rebuild output path",
+      "status": "OPERATOR_IO_FAILED",
+      "detail": "Attempted to overwrite a test executable still open by a process.",
+      "repair": "Fresh native output path verified/built; correct executable promoted only after success."
+    },
+    {
+      "stage": "PowerShell status-fixture call/shutdown",
+      "status": "TEST_FAILED",
+      "detail": "Status-only fixture returned from its PE entry without explicit whole-process ExitProcess. It did not promptly terminate under that operator client.",
+      "repair": "Changed only native test fixtures to explicit ExitProcess; subsequent client suite passed."
+    }
+  ],
+  "retained_failed_transactions": "native/transactions/20261101/failed/manifest.json",
+  "unsupported_or_blocked": [
+    {
+      "capability": "Native no-return CPU entry graph code generation",
+      "status": "BLOCKED for that graph form",
+      "observed_compiler_exit": 2,
+      "alternative": "Verified finite 1e12-iteration native CPU probe; actual CPU-limit behavior measured."
+    },
+    {
+      "capability": "JSON xax-construct-v1 / native construct command",
+      "status": "BLOCKED / unsupported by pinned seed",
+      "alternative": "Official exact-root native edit records with supplied semantic objects; no foreign decoder."
+    },
+    {
+      "capability": "Deterministic actual WinAPI measurement-failure injection",
+      "status": "BLOCKED in the unchanged launcher test surface",
+      "scope": "Status-only fixtures verify response classification, not OS measurement API failure coverage."
+    },
+    {
+      "capability": "CUM transformations and full prepare",
+      "status": "UNIMPLEMENTED / outside this increment"
+    },
+    {
+      "capability": "Registered external executable/tool capability",
+      "status": "UNIMPLEMENTED; current authorized artifact only"
+    },
+    {
+      "capability": "General typed entry/data layouts and result paging",
+      "status": "UNIMPLEMENTED"
+    },
+    {
+      "capability": "Asynchronous compiler cancellation and immediate in-flight server-death cleanup",
+      "status": "UNIMPLEMENTED / not certified"
+    },
+    {
+      "capability": "Every process-creation, publication, host/kernel crash window",
+      "status": "UNTESTED; live-worker launcher termination is narrower evidence"
+    },
+    {
+      "capability": "Memory-pressure, disk/handle exhaustion and independent escape certification",
+      "status": "UNTESTED / release gate"
+    },
+    {
+      "capability": "Current desktop-host interoperability, modern MCP 2026-07-28 and Linux execution",
+      "status": "UNTESTED or unsupported; no fallback"
+    }
+  ],
+  "integration": {
+    "usage_examples": [
+      {
+        "name": "xax_execute",
+        "arguments": {}
+      },
+      {
+        "name": "xax_execute",
+        "arguments": {
+          "stdin_hex": "",
+          "args": []
+        }
+      },
+      {
+        "name": "xax_execute",
+        "arguments": {
+          "stdin_hex": "00ff0a",
+          "args": [
+            "",
+            "one two",
+            "Unicode Ω"
+          ]
+        }
+      }
+    ],
+    "args_excludes_argv0": true,
+    "argv0_executor_controlled": "prog.exe",
+    "artifact_path_executor_controlled": true,
+    "contract": "docs/NATIVE_EXECUTION_INCREMENT.md",
+    "remaining_gaps": [
+      "CUM transformations/full prepare",
+      "registered external tools/BBC bridge",
+      "payloads exceeding host transport/execution caps",
+      "typed entry layouts"
+    ]
+  },
+  "operator_tooling": "PowerShell/.NET/Node performed external transport, assertions, semantic data packing and a synthetic loopback peer. Semantic authority, executable implementation, workers/observers and installed request path are canonical/native XAX; no foreign runtime helper was added."
+}

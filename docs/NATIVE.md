@@ -1,26 +1,35 @@
-# Native XAX server 0.9.0
+# Native XAX server 0.10.0
 
-The authoritative server source is `native/xax-mcp-native-gen1.xax`, canonical root
-`edd555239cd0bec3dd5457b882e83e0f341149fa44447878c1633600d854539d`.
-The old gen0 store and construction JSON remain historical inputs, not current source. Unchanged semantic objects
-were retained by identity; a native transaction imported the existing snapshot closure into an editable build
-request and subsequent exact-root transactions changed only affected graphs/constants. No textual XAX exists.
+The native executor accepts binary stdin and an explicit argument vector and
+returns separate exact byte streams and resource observations. It remains a
+Windows preview. [Execution contract and bounds](NATIVE_EXECUTION_INCREMENT.md),
+[acceptance evidence](evidence/native-executor-input-argv-20261101.json), and
+[remaining gates](WINDOWS_READINESS.md) define the supported scope.
 
-The [46-record manifest](../native/transactions/20261027/manifest.json) starts from the committed seed, imports the
-unchanged application closure, then applies candidate verification, schema guards, native construction dispatch,
-identity/schema literals, bounded inspection, exact-root checks, the exclusive directory lease and corrected metadata.
-Records are transport; native `edit` plus `verify` are the authority. CI replays every record and compares the exact
-final canonical bytes before building twice.
+Authoritative canonical sources:
 
-## Native dependency
+| Program | Source | Root |
+|---|---|---|
+| Server | `native/xax-mcp-native-gen2.xax` | `16a25c0805b900e3bb45082b0ac88e1217cbf184c1bf739d29d1df1bc298eb83` |
+| Launcher | `native/xax-mcp-sandbox-gen1.xax` | `d378055b3c4c490c667db8d7f61b2d871f4bb3b8701ae54e5dc5308037904dff` |
 
-[XAX af376e8a8a1ac5635bcad459cb7063ef0b326430](https://github.com/MrxSiN/XAX/tree/af376e8a8a1ac5635bcad459cb7063ef0b326430)
-exports `xax-native-file-v1`. The committed Windows seed SHA-256 is
+Older stores and construction JSON are historical references. Executable changes
+were authored as semantic objects and applied through official exact-root native
+transactions. Unchanged objects retain their identities. No textual XAX exists.
+The [20261027 manifest](../native/transactions/20261027/manifest.json) reconstructs
+the previous server; the [20261101 manifest](../native/transactions/20261101/manifest.json)
+adds the server increment and reconstructs the new launcher. Native `edit` and
+mandatory `verify` establish authority before atomic local promotion.
+
+## Pinned dependency
+
+XAX commit `af376e8a8a1ac5635bcad459cb7063ef0b326430` exports
+`xax-native-file-v1`. The Windows compiler seed SHA-256 is
 `aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79`.
-Its source identity and historical bootstrap are recorded upstream in `compiler/bootstrap/windows/seed.json`;
-[the dependency manifest](../native/xax-dependency.json) pins it independently from the application.
-No compiler or verifier is reimplemented in XAX-MCP. The seed's own-source compilation declines (exit 2);
-no self-hosting or language replacement-level promotion is claimed.
+[xax-dependency.json](../native/xax-dependency.json) pins that exact executable.
+No XAX or BBC compiler changes were made. The seed has a disclosed historical
+bootstrap; no bootstrap interpreter is invoked in these application builds or
+requests. A compiler own-source fixed point is not claimed.
 
 ```text
 xaxc verify  store.xax diagnostic
@@ -30,45 +39,47 @@ xaxc resolve request.xax snapshot.xax
 xaxc build   snapshot.xax artifact.exe provenance
 ```
 
-Exit status 0 means success, 1 rejection, 2 unsupported/declined, 3 I/O or usage failure. Any nonzero status must
-fail the operation. Native `edit` alone does not verify a candidate; the adapter explicitly does so before publication.
+Status 0 means success, 1 rejection, 2 unsupported/declined, 3 I/O/usage failure.
+Every nonzero result fails the operation. A diagnostic can occupy an output path
+after rejection; it is not a successful executable or canonical candidate.
+The seed's `construct` command remains unsupported; supplied semantic objects in
+native edit records provide the implemented authoring path.
 
 ## Runtime and authority
 
-Native XAX implements STDIO framing, UTF-8/JSON validation, JSON-RPC, handshake, tool schemas, dispatch, launch rights,
-compiler argument arrays and the sandbox launcher. Windows/MSVCRT imports are OS interfaces. Launch flags and
-host environment select authority; tool arguments cannot change the compiler, paths, rights or quotas.
-The server has no interpreter, SDK or shell process in its request path.
+Native XAX implements STDIO/JSON-RPC, UTF-8/JSON validation, schemas, dispatch,
+host rights, compiler argument arrays, exact-root edits and launcher supervision.
+Windows/MSVCRT imports are explicit system interfaces. No interpreter, shell
+wrapper, foreign implementation or PATH lookup handles requests.
 
-Construction and transaction stage `next.xax`, call native `verify`, and publish with `MoveFileExA` only on success.
-Every public carrier must have a nonzero exact expected root. The native editor checks freshness; invalid, declined
-and stale candidates never replace current state. Verification rejection deletes the candidate.
+Host configuration selects the compiler, seed, private work directory and rights.
+Tool arguments cannot replace them or add grants, environment variables, arbitrary
+executables or budgets. Execution rebuilds only the current authorized artifact.
+`--allow-execute` and working AppContainer/job confinement are required.
 
-Before any compiler-backed operation a native XAX helper obtains an exclusive `CreateFileA` lease in the work
-directory: share mode zero, temporary/delete-on-close, non-inheritable handle retained until process exit. A second
-process receives `workspace_busy`; a failed acquisition can retry after the owner exits. This excludes cooperating
-server processes, not hostile processes with the same Windows user's filesystem authority. Private host directories
-must not be writable by untrusted peers; filesystem links and host changes remain the owner's responsibility.
+Construction/transaction stages `next.xax`, calls native verification, and uses
+`MoveFileExA` only on success. A nonzero exact root is mandatory; stale, invalid
+and declined candidates never replace current state. The process-lifetime
+share-mode-zero, delete-on-close workspace lease is non-inheritable. Competing
+servers get `workspace_busy` and may retry after the owner exits. This coordinates
+cooperating servers, not hostile peers with the same Windows user's authority.
 
-The one workspace label `ws_0` is descriptive, not an accepted cross-session capability. No tool accepts an arbitrary
-path. The query scans at most 65,536 native inspection bytes and returns the first function in CID order, which is
-not necessarily the program entry. General semantic queries and paging remain unsupported. Root identity is the
-freshness token; the old constant `generation: 1` field has been removed.
+The query reads at most 65,536 inspection bytes. Its first function is CID-ordered,
+not necessarily entry. `ws_0` is descriptive, not a cross-session capability.
+General graph queries, paging and portable scoped result handles remain absent.
 
-## Verification and limits
+## Verification scope
 
-All current server/sandbox bytes, source hashes and supported-path findings are in
-[release-status.json](../native/release-status.json). Two native builds reproduce the shipped server and provenance
-byte for byte; the sandbox also rebuilds identically. An external PowerShell client checked 28 cases, including new
-construction result 136, invalid candidate rejection/cleanup, schema violations, stale/zero roots, authority denial,
-isolated directories, shared-directory refusal and crash release. It performs transport/orchestration only.
+[release-status.json](../native/release-status.json) records source/compiler/artifact
+identities and separate verification states. Both programs have native deterministic
+rebuild and transaction-replay checks. Synthetic canonical probes independently
+observe argv, binary EOF/streams, environment and confinement; CPU enforcement is
+measured rather than inferred from configured job flags.
 
-The sandbox is the unchanged canonical XAX program `native/xax-mcp-sandbox-gen0.xax`: capability-less AppContainer,
-job object, 5 seconds CPU, 256 MiB, one process, 10 seconds wall and 1 MiB per captured stream. The new native timeout
-fixture confirms the wall limit. This does not certify output saturation, disk quotas, handle quotas, all escape
-attempts or asynchronous cancellation. Full release readiness remains false.
+Source verification does not establish OS security or full release readiness.
+Asynchronous cancellation, in-flight server/compiler crash cleanup, exhaustive
+resource pressure and independent escape review remain open. CUM transformations,
+typed layouts, registered external tools and full prepare are separate capabilities.
 
-[Installation/rebuild](INSTALL_WINDOWS.md) · [Current gates](WINDOWS_READINESS.md) ·
+[Installation/rebuild](INSTALL_WINDOWS.md) · [Security](SECURITY.md) ·
 [Historical native observations](history/NATIVE_0_8.md).
-
-The crash lease test covers an idle owner. In-flight compiler crash/orphan cleanup remains unimplemented; a compiler child can outlive a crashed server and the lease is deliberately not inherited. No complete in-flight crash isolation claim is made.

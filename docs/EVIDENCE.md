@@ -1,6 +1,25 @@
 # Evidence and claim labels
 
-## 2026-10-27 — 0.9 native repairs (current)
+## 2026-11-01 — 0.10 native executor increment (current)
+
+[Native stdin/argv evidence](evidence/native-executor-input-argv-20261101.json)
+records canonical source and exact-root transactions, candidate verification,
+native builds/replay, independent synthetic argv and binary probes, stream and
+request boundaries, actual CPU/wall enforcement, resource observations,
+AppContainer/filesystem/live-peer network checks, environment and cleanup.
+Failed candidates, bad test expectations, repaired failure dispatch and unsupported
+cases remain separately recorded. Simulated launcher exits test response mapping;
+they are not actual WinAPI measurement-failure injection.
+
+Source-written, verified, compiled, executed, tested and measured are separate
+states. Release acceptance is false. CUM transformations/full prepare, registered
+external tools, typed layouts, exhaustive crash/pressure/escape coverage and
+current desktop-host interoperability are not established by passing stdin/argv.
+Only local work is performed; no push, remote package or new hosted CI is claimed.
+The [clean extracted package check](evidence/native-executor-clean-package-20261101.json)
+also passed with an empty parent PATH and only its bundled pinned compiler.
+
+## 2026-10-27 — 0.9 native repairs (historical)
 
 The exact dependency is XAX `af376e8a8a1ac5635bcad459cb7063ef0b326430`, native contract `xax-native-file-v1`.
 [28-check client evidence](evidence/native-windows-x86_64-verified-construction-20261027.json) records native

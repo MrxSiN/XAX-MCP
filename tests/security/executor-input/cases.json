@@ -1,0 +1,231 @@
+{
+  "schema": "xax-mcp-executor-acceptance-v1",
+  "recorded": "2026-11-01",
+  "binary_pattern": "byte[i] = i mod 256",
+  "binary_sizes": [
+    0,
+    256,
+    131072,
+    262144
+  ],
+  "args": [
+    "",
+    "one two",
+    "\t",
+    "\"",
+    "\\",
+    "ends\\",
+    "x\\\"z",
+    "Ω漢字🙂",
+    "a\t b",
+    "\\\\\"",
+    " \\\"\\"
+  ],
+  "malformed": [
+    {
+      "label": "unknown",
+      "arguments_json": "{\"bad\":1}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "odd-hex",
+      "arguments_json": "{\"stdin_hex\":\"0\"}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "nonhex",
+      "arguments_json": "{\"stdin_hex\":\"gg\"}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "stdin-type",
+      "arguments_json": "{\"stdin_hex\":0}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "stdin-null",
+      "arguments_json": "{\"stdin_hex\":null}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "args-type",
+      "arguments_json": "{\"args\":\"x\"}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "args-null",
+      "arguments_json": "{\"args\":null}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "arg-type",
+      "arguments_json": "{\"args\":[1]}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "arg-null",
+      "arguments_json": "{\"args\":[null]}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "arg-object",
+      "arguments_json": "{\"args\":[{}]}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "embedded-nul",
+      "arguments_json": "{\"args\":[\"a\\u0000b\"]}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "lone-high",
+      "arguments_json": "{\"args\":[\"\\ud800\"]}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "lone-low",
+      "arguments_json": "{\"args\":[\"\\udfff\"]}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "duplicate-input",
+      "arguments_json": "{\"stdin_hex\":\"\",\"stdin_hex\":\"00\"}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "duplicate-args",
+      "arguments_json": "{\"args\":[],\"args\":[]}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "escaped-duplicate",
+      "arguments_json": "{\"args\":[],\"\\u0061rgs\":[]}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "trailing-comma",
+      "arguments_json": "{\"args\":[\"x\",]}",
+      "expected": {
+        "jsonrpc_error": -32700
+      }
+    },
+    {
+      "label": "environment-override",
+      "arguments_json": "{\"args\":[],\"env\":{}}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "path-override",
+      "arguments_json": "{\"executable\":\"C:\\\\Windows\\\\System32\\\\cmd.exe\"}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    },
+    {
+      "label": "budget-override",
+      "arguments_json": "{\"timeout_ms\":20000}",
+      "expected": {
+        "tool_error": "invalid_request"
+      }
+    }
+  ],
+  "bounds": {
+    "stdin_bytes": 262144,
+    "args_count": 64,
+    "args_total_utf16_units": 8192,
+    "combined_output_bytes": 1048576,
+    "request_bytes": 4194304
+  },
+  "resource_cases": [
+    {
+      "fixture": "cpu-probe",
+      "error": "cpu_limit",
+      "flags": 8
+    },
+    {
+      "fixture": "flood-out-probe",
+      "error": "output_limit",
+      "flags": 4
+    },
+    {
+      "fixture": "flood-err-probe",
+      "error": "output_limit",
+      "flags": 4
+    },
+    {
+      "fixture": "output-boundary-0-probe",
+      "ok": true,
+      "stdout_bytes": 1048576
+    },
+    {
+      "fixture": "output-boundary-1-probe",
+      "error": "output_limit",
+      "flags": 4
+    }
+  ],
+  "environment_keys": [
+    "LOCALAPPDATA",
+    "SystemRoot",
+    "TEMP",
+    "TMP"
+  ],
+  "network_peer": {
+    "address": "127.0.0.1",
+    "port": 9,
+    "scope": "synthetic local peer; native confined observer and native operator positive control"
+  },
+  "unsupported": [
+    "CUM transformations/full prepare",
+    "registered external tools",
+    "general typed entry layouts",
+    "actual WinAPI measurement-failure injection",
+    "all process-creation/host-crash windows",
+    "in-flight compiler cancellation/orphan cleanup",
+    "memory-pressure and disk/handle exhaustion certification"
+  ],
+  "extra_args": [
+    "line\nbreak",
+    "carriage\rreturn",
+    "back\bspace",
+    "form\ffeed",
+    "\u0001\u001f",
+    "﻿￾￿",
+    "􏿿",
+    "😀",
+    "single'quote"
+  ]
+}

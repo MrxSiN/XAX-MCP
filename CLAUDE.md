@@ -24,4 +24,4 @@
 
 `agent-guidance/` holds optional guidance for agents that *use* the server; this file is for agents that develop it.
 
-Current native pin: `af376e8a8a1ac5635bcad459cb7063ef0b326430` (`xax-native-file-v1`); source is `native/xax-mcp-native-gen1.xax`. JSON xax-construct-v1 remains unsupported. Full mission readiness is false.
+Current native pin: `af376e8a8a1ac5635bcad459cb7063ef0b326430` (`xax-native-file-v1`); sources are `native/xax-mcp-native-gen2.xax` and `native/xax-mcp-sandbox-gen1.xax`. Binary stdin/argv are implemented within host bounds; JSON xax-construct-v1 and full CUM prepare remain unsupported. Full mission readiness is false.

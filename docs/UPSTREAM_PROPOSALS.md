@@ -1,5 +1,11 @@
 # Upstream XAX proposals and their status
 
+Current 0.10 Windows stdin/argv uses the unchanged pinned native compiler and
+Windows process APIs in canonical XAX graphs. It needs no XAX/BBC change. Native
+`construct` remains unsupported; exact-root native edit records with supplied
+objects are the implemented authoring route. Historical Linux/SDK claims below do
+not establish current native Windows typed layouts or full CUM prepare.
+
 > **Historical (0.5.x Python prototype).** The central proposal is still current: a native, versioned XAX compiler
 > service is the next step for the native 0.8.0 server's compiler-backed prototype ([NATIVE.md](NATIVE.md)).
 

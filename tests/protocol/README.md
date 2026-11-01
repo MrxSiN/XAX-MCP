@@ -1,6 +1,6 @@
 # Native STDIO fixtures
 
-`readonly.requests.ndjson` and `readonly.responses.ndjson` are the 0.9.0 native protocol golden fixture: handshake,
+`readonly.requests.ndjson` and `readonly.responses.ndjson` are the 0.10.0 native protocol golden fixture: handshake,
 notification, discovery, capabilities, denied operations, unsupported methods/tools, malformed JSON and resync.
 The emitted schema is `schemas/tools-v2.json`; the v1 file is historical.
 
@@ -11,3 +11,8 @@ concurrent-process exchanges to check exclusive shared-workdir ownership and cra
 
 The workflow's PowerShell is external transport/assertion orchestration only; it is never a production runtime helper.
 Every operation runs in the native XAX server/compiler/launcher. Timeout fixture execution is separately checked.
+
+`tests/security/executor-input/` contains replayable canonical native probes for
+binary EOF/streams, independent argv, CPU/output boundaries, token/filesystem/network
+and environment observations, plus simulated launcher-status fixtures. These are
+synthetic data and XAX programs; no foreign runtime helper implements the executor.

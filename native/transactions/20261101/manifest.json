@@ -1,0 +1,151 @@
+{
+  "schema": "xax-mcp-native-execution-increment-v1",
+  "recorded": "2026-11-01",
+  "record_authority": "XAXEDIT1 transports supplied semantic objects; pinned native edit and mandatory verify establish authority. Review JSON is diagnostic data, not textual XAX.",
+  "server": {
+    "base": "native/xax-mcp-native-gen1.xax",
+    "base_root": "edd555239cd0bec3dd5457b882e83e0f341149fa44447878c1633600d854539d",
+    "base_replay": "native/transactions/20261027/manifest.json",
+    "final": "native/xax-mcp-native-gen2.xax",
+    "final_root": "16a25c0805b900e3bb45082b0ac88e1217cbf184c1bf739d29d1df1bc298eb83",
+    "records": [
+      {
+        "path": "native/transactions/20261101/server-execution.edit",
+        "bytes": 180955,
+        "sha256": "525531808302622a69acf85df1d2d687234f80af2263b1374f2ffa77f6a19b96",
+        "base_root": "edd555239cd0bec3dd5457b882e83e0f341149fa44447878c1633600d854539d",
+        "result_root": "f0011d0fc3b7f7f7aa71ed9bfdf024e80ce76c4bb9547ad3cb056d89d8b9ce54"
+      },
+      {
+        "path": "native/transactions/20261101/server-schema-0-import.edit",
+        "bytes": 36088,
+        "sha256": "76b0e0aef16428c9c93f53e0dec0ed886e3ba01b5892a530e10994ff7b812443",
+        "base_root": "f0011d0fc3b7f7f7aa71ed9bfdf024e80ce76c4bb9547ad3cb056d89d8b9ce54",
+        "result_root": "38f007b079b6c0b4d68a07ce026ff5e4b8c46e799b9a2d54a4ab4561c6245dc4"
+      },
+      {
+        "path": "native/transactions/20261101/server-schema-0.edit",
+        "bytes": 40062,
+        "sha256": "bc60d49090746a95e4e3bf21bd7645d15543d7cdde4cdeff2ba11096d5acfac3",
+        "base_root": "38f007b079b6c0b4d68a07ce026ff5e4b8c46e799b9a2d54a4ab4561c6245dc4",
+        "result_root": "08e580803618d5803fd31e72930c567391d7690c05829db90e1a40a0d6c9f24f"
+      },
+      {
+        "path": "native/transactions/20261101/server-schema-1-import.edit",
+        "bytes": 37538,
+        "sha256": "4c6741a063f24d2c627cf6d3f567cb920ed3a62e84ae5b2d4d087232d7a807b4",
+        "base_root": "08e580803618d5803fd31e72930c567391d7690c05829db90e1a40a0d6c9f24f",
+        "result_root": "2c44433bcd8f2863733acd356ea726801ca260c92ad9c3dabfb8118765605023"
+      },
+      {
+        "path": "native/transactions/20261101/server-schema-1.edit",
+        "bytes": 40690,
+        "sha256": "d9e89424553fc57aa213e3914ddf42249f8a37a10917739b286b31a529e5a56e",
+        "base_root": "2c44433bcd8f2863733acd356ea726801ca260c92ad9c3dabfb8118765605023",
+        "result_root": "0b29b57bd51a5968e508a7e658cb07a066cad8d922e42731b82fb105060c4a0f"
+      },
+      {
+        "path": "native/transactions/20261101/server-schema-2.edit",
+        "bytes": 87518,
+        "sha256": "6686dea156012a8a7590e7a1847592e9f719706af6773a57d3f02e68fe72e9a6",
+        "base_root": "0b29b57bd51a5968e508a7e658cb07a066cad8d922e42731b82fb105060c4a0f",
+        "result_root": "4ea070e915061827e644cbda512aa6660f91d1cdb48fda6322760de2d99d3c91"
+      },
+      {
+        "path": "native/transactions/20261101/server-schema-3.edit",
+        "bytes": 2134,
+        "sha256": "799dad448e96ef96675c52012d7ed7cc4b31d6f63c39eb7ab40453c43edc301e",
+        "base_root": "4ea070e915061827e644cbda512aa6660f91d1cdb48fda6322760de2d99d3c91",
+        "result_root": "60bc61775e632121e67e1a018753e848c9d7ef9ed6819d4d3495fb60b20fe573"
+      },
+      {
+        "path": "native/transactions/20261101/server-schema-4.edit",
+        "bytes": 1708,
+        "sha256": "6b3bd5b9fbdecf5f73aca3596074f43ab8b90aab9b0c892a4375f4846209aaae",
+        "base_root": "60bc61775e632121e67e1a018753e848c9d7ef9ed6819d4d3495fb60b20fe573",
+        "result_root": "40d5bcdf04b1e93b48abcc41b2e6db7cd99af3d40a1a277138c6d47082e93878"
+      },
+      {
+        "path": "native/transactions/20261101/server-schema-5.edit",
+        "bytes": 1601,
+        "sha256": "89c49cfaaf93c58d2b4f90869f93b72bfe73653e715fb6ab43fac708adbd2402",
+        "base_root": "40d5bcdf04b1e93b48abcc41b2e6db7cd99af3d40a1a277138c6d47082e93878",
+        "result_root": "5fdb1456275a54e2e896e1ec4c137d002ccdd2e74fc8741b10455b7f834b98be"
+      },
+      {
+        "path": "native/transactions/20261101/server-schema-6.edit",
+        "bytes": 10826,
+        "sha256": "32f762abeedcd018f01efb831fab98ce3c5d58cdef584bbaa53115e751982b69",
+        "base_root": "5fdb1456275a54e2e896e1ec4c137d002ccdd2e74fc8741b10455b7f834b98be",
+        "result_root": "1e28c86345b97397b2660476c3b4d4de18aa4cae3104fa756e07f9ae18075a46"
+      },
+      {
+        "path": "native/transactions/20261101/server-result-compatibility.edit",
+        "bytes": 104259,
+        "sha256": "384a9d4aa1a26f40d460dfe0042ccde84c89ffcb2e64b65fd8583839bcfb7cd8",
+        "base_root": "1e28c86345b97397b2660476c3b4d4de18aa4cae3104fa756e07f9ae18075a46",
+        "result_root": "88aedb2b333d64a672381a33942a2001ff9c939174a7d5aa4127bf9abf317c19"
+      },
+      {
+        "path": "native/transactions/20261101/server-failure-dispatch.edit",
+        "bytes": 65877,
+        "sha256": "19055aa68ea3f19713c10cd7cbc7b2f077ada5b90d5d1406dfe36a53aa83ff82",
+        "base_root": "88aedb2b333d64a672381a33942a2001ff9c939174a7d5aa4127bf9abf317c19",
+        "result_root": "ff2b8a940fabaa01388689fc52a42b36d47f36fa1749878df593a225dd9ffaa6"
+      },
+      {
+        "path": "native/transactions/20261101/server-launcher-status-slot.edit",
+        "bytes": 65877,
+        "sha256": "4b71cba3932e0924046a49b3c3c3bca0d1a0049aec86c1f7e1a1ac6ba299fe80",
+        "base_root": "ff2b8a940fabaa01388689fc52a42b36d47f36fa1749878df593a225dd9ffaa6",
+        "result_root": "fbe519a525cb9b93030f9917ffeed9eda925b6045b89637159e2dd1d6f6b8c27"
+      },
+      {
+        "path": "native/transactions/20261101/server-environment-observation-0.edit",
+        "bytes": 33359,
+        "sha256": "17be0a741893cad4de8dcbfcae38430b87b6d02d2961e549e1fdd5d91dd0329a",
+        "base_root": "fbe519a525cb9b93030f9917ffeed9eda925b6045b89637159e2dd1d6f6b8c27",
+        "result_root": "1ed46acb40d258449b16a998562eb6bb464b1a7811b3dc0df6172a79c4fe70c2"
+      },
+      {
+        "path": "native/transactions/20261101/server-environment-observation-1.edit",
+        "bytes": 34034,
+        "sha256": "c2f570f4038b375f64c50204c90c2b441bd1b1196960eb8f745c30c06e254d28",
+        "base_root": "1ed46acb40d258449b16a998562eb6bb464b1a7811b3dc0df6172a79c4fe70c2",
+        "result_root": "16a25c0805b900e3bb45082b0ac88e1217cbf184c1bf739d29d1df1bc298eb83"
+      }
+    ]
+  },
+  "sandbox": {
+    "base": "native/xax-mcp-seed.xax",
+    "base_root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+    "original_snapshot": "native/xax-mcp-sandbox-gen0.xax",
+    "original_snapshot_root": "7ef7099d5358bf022715faff1ef26387c1486c554ed2f7d9145bd9d8953ef8b6",
+    "migration": "Direct snapshot-root edits reject WORKSPACE-SUPPORTED-USER. Two verified exact-root transactions retain the original program closure and reproduce the original executable byte-for-byte in its existing editable request envelope before changing executable semantics.",
+    "final": "native/xax-mcp-sandbox-gen1.xax",
+    "final_root": "d378055b3c4c490c667db8d7f61b2d871f4bb3b8701ae54e5dc5308037904dff",
+    "records": [
+      {
+        "path": "native/transactions/20261101/sandbox-envelope-helpers.edit",
+        "bytes": 14957,
+        "sha256": "3693aa7ab205d874e044211a365a798b67a3b0d42bd7c49b6c75af15b53f4aaa",
+        "base_root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+        "result_root": "f69b68b03619ff2938b759560fb8d5073b568b02d40c6f2d5746021dc94560f8"
+      },
+      {
+        "path": "native/transactions/20261101/sandbox-envelope-package.edit",
+        "bytes": 40377,
+        "sha256": "55710e4035e24fda0e28c9b381de4bb0d4024b7877271cfccd221b2585fe3fdc",
+        "base_root": "f69b68b03619ff2938b759560fb8d5073b568b02d40c6f2d5746021dc94560f8",
+        "result_root": "6fbb92a5c1d2902c9a7ba217c36942ddcc049523211b31911e7c3395522e7c1a"
+      },
+      {
+        "path": "native/transactions/20261101/sandbox-execution.edit",
+        "bytes": 73298,
+        "sha256": "7d9cbf963dabe0870e4ef35032d83549bf7271114eead1623cf1e84af7e733a2",
+        "base_root": "6fbb92a5c1d2902c9a7ba217c36942ddcc049523211b31911e7c3395522e7c1a",
+        "result_root": "d378055b3c4c490c667db8d7f61b2d871f4bb3b8701ae54e5dc5308037904dff"
+      }
+    ]
+  }
+}

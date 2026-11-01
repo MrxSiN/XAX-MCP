@@ -21,3 +21,8 @@ tests/security/timeout/*.exe binary
 tests/security/timeout/*.edit binary
 tests/security/timeout/*.prov binary
 tests/protocol/*.json -text whitespace=cr-at-eol
+tests/security/executor-input/*.xax binary
+tests/security/executor-input/*.exe binary
+tests/security/executor-input/*.edit binary
+tests/security/executor-input/*.prov binary
+tests/security/executor-input/*.json -text whitespace=cr-at-eol

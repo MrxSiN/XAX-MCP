@@ -1,35 +1,70 @@
-# Security — native preview
+# Security — native 0.10 preview
 
-Version 0.9.0 fixes the previously observed unverified-publication and argument-validation defects. It remains a
-preview with incomplete security coverage. Passing XAX verification establishes semantic validity, not permission
-to run arbitrary native code. [Remaining release gates](WINDOWS_READINESS.md) are normative for current claims.
+Binary stdin and argv are implemented with measured Windows acceptance, not full
+release certification. [Execution contract](NATIVE_EXECUTION_INCREMENT.md) and
+[current evidence](evidence/native-executor-input-argv-20261101.json) supersede only
+the historical cases actually retested. XAX semantic verification is not permission
+to run arbitrary native code.
 
-Host-only configuration supplies compiler, seed, private work directory and rights. Tools cannot choose arbitrary
-paths, commands, interpreters, network grants or effects. Read-only clients cannot acquire mutate/build/execute by
-changing arguments. Execution requires `--allow-execute`, the native launcher and working Windows confinement.
-There is no unrestricted fallback. STDOUT contains only JSON-RPC responses; closing stdin releases resources.
+Host configuration owns compiler/seed paths, private workspace, rights and installed
+execution bounds. `xax_execute` accepts only optional `stdin_hex` and `args`.
+Arguments exclude argv[0] and cannot grant access, choose an executable or compiler,
+invoke a shell, override the environment, add filesystem/network grants or raise
+quotas. Unknown/duplicate fields, invalid Unicode/NUL, malformed hex, wrong types
+and exceeded bounds are rejected before compiler or artifact execution. Invalid
+JSON/UTF-8 is rejected at framing. Authority denial precedes the execution path.
 
-Public construction/edit requires a nonzero exact expected root. Native edit checks freshness; native verify must
-succeed on the staged candidate before atomic publication. Verification rejection deletes the candidate and retains
-the valid current store. Native compiler nonzero exits are failures, including unsupported/declined status 2.
+Public edits require a nonzero exact root. Native edit checks freshness, native
+verify checks the staged candidate, and atomic publication follows only success.
+Rejected/declined candidates cannot replace the current source. A native diagnostic
+file must never be mistaken for a successful output.
 
-A share-mode-zero, delete-on-close `CreateFileA` handle leases the host work directory for the server lifetime.
-It is not inherited by child processes. Competing server processes get `workspace_busy`; retries after normal exit
-or crash are tested. This does not defend against hostile peers running with the same Windows user's filesystem
-rights. The host must keep compiler/store/work directories private and prevent untrusted link or file replacement.
+A non-inheritable, share-mode-zero, delete-on-close lease owns compiler scratch for
+the server lifetime. It excludes cooperating concurrent servers and releases on
+process exit. Host directories and pinned tools must remain protected from hostile
+same-user peers, links and replacement. The lease is not a defence against such peers.
 
-The native XAX launcher runs generated code in a capability-less Windows AppContainer inside a job object. Fixed
-limits are 5 seconds CPU, 256 MiB memory, one process, 10 seconds wall and 1 MiB capture per stream. Missing launcher
-or confinement failure refuses execution. The timeout fixture is current evidence of wall-limit enforcement;
-older AppContainer/outside-write observations retain their recorded historical scope.
+The launcher uses an explicit `CreateProcessW` application path, checked attribute
+list, capability-less AppContainer and job membership at creation. Membership is
+checked before resume. The explicit inherited-handle list contains only a read-only
+stdin duplicate and stdout/stderr write ends. Parent pipe ends, job, workspace
+lease and configuration handles are excluded. Only the host-selected current build
+is copied and launched; there is no unrestricted fallback.
 
-Unfinished security work includes asynchronous compiler cancellation, comprehensive disk/handle/output saturation
-quotas, current host interoperability and independent sandbox/escape review. No HTTP service, remote authority,
-general effectful workload, scoped result store or typed runtime-data ABI is exposed. No blanket security certification
-or full release readiness is claimed.
+The parent supplies OS-derived `LOCALAPPDATA` and `SystemRoot`. Windows rewrites
+`LOCALAPPDATA` and adds container-local `TEMP`/`TMP`; an independent native observer
+found exactly those four keys and no parent MCP configuration/PATH. AppContainer's
+existing OS-owned storage remains part of its policy. No tool argument grants a path.
+Synthetic tests observed token isolation, outside-file denial and blocked access to
+a live loopback peer, with a successful native operator control. They are not an
+exhaustive escape audit.
 
-Current evidence covers invalid candidate rejection/cleanup, stale/zero roots, schema path/command probes, forged
-result handle rejection, read-only and execution grants, separate directories, same-directory refusal and crash
-lease release. External test/CI PowerShell handles transport and assertions only; every runtime component is XAX.
+Current host caps are 4 MiB request, 256 KiB stdin, 64 arguments/8192 UTF-16 units,
+1 MiB combined stdout/stderr, 5 seconds total user+kernel CPU, 10 seconds worker
+wall time, 256 MiB job process commit and one active process. They are transport/
+execution capabilities, not compiler limits. CPU is sampled with requested 5 ms
+waits; observed accounting/scheduling overshoot reached 15.625 ms in the retained
+final CPU test. No hard sampling-latency guarantee is claimed. Both output streams
+are drained concurrently. Exhaustion, short transport, failed measurement or cleanup
+cannot produce successful execution or successful truncated output.
 
-The crash-lease regression kills an idle owner. Terminating a server during a synchronous compiler call may leave its trusted compiler child running after the server handle closes; in-flight compiler crash/orphan cleanup is not yet implemented or certified. Keep this under the remaining execution-supervision release gate.
+The launcher waits for job cleanup and closes handles before publishing a versioned
+resource record. The server checks exact capture lengths and removes transport
+files before returning success. Timeout and launcher-termination cleanup were
+executed; a locked-file cleanup failure is an explicit error. Setup/measurement
+failures omit unknown observations instead of fabricating zeroes. Stdin consumption
+and file offsets are not reported as semantic consumption.
+
+Remaining security gates include memory-pressure/disk/handle exhaustion coverage,
+actual WinAPI measurement-failure injection, independent escape review, current
+desktop-host interoperability and complete asynchronous cancellation/crash handling.
+The launcher-termination test covers a live contained child, not every creation or
+publication crash window. Killing a server during synchronous compiler work can
+leave its trusted compiler child running; during launcher work, immediate server-
+death cancellation is not certified. Host/kernel crashes and interrupted publication
+are not fully tested. No HTTP service, Linux fallback, typed entry ABI, registered
+external-tool launcher or full CUM prepare is exposed.
+
+External PowerShell/Node verification and semantic transport packing are operator
+orchestration only. Every installed request-path component and synthetic worker is
+canonical/native XAX. Historical evidence remains append-only.

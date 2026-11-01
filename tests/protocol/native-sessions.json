@@ -25,7 +25,7 @@
             "jsonrpc": "2.0",
             "id": 1,
             "result.protocolVersion": "2025-11-25",
-            "result.serverInfo.version": "0.9.0+native"
+            "result.serverInfo.version": "0.10.0+native"
           }
         },
         {
@@ -554,7 +554,7 @@
             "jsonrpc": "2.0",
             "id": 29,
             "result.protocolVersion": "2025-11-25",
-            "result.serverInfo.version": "0.9.0+native"
+            "result.serverInfo.version": "0.10.0+native"
           }
         },
         {
@@ -668,7 +668,7 @@
             "jsonrpc": "2.0",
             "id": 35,
             "result.protocolVersion": "2025-11-25",
-            "result.serverInfo.version": "0.9.0+native"
+            "result.serverInfo.version": "0.10.0+native"
           }
         },
         {
@@ -788,7 +788,7 @@
             "jsonrpc": "2.0",
             "id": 41,
             "result.protocolVersion": "2025-11-25",
-            "result.serverInfo.version": "0.9.0+native"
+            "result.serverInfo.version": "0.10.0+native"
           }
         },
         {
@@ -834,7 +834,7 @@
             "jsonrpc": "2.0",
             "id": 43,
             "result.protocolVersion": "2025-11-25",
-            "result.serverInfo.version": "0.9.0+native"
+            "result.serverInfo.version": "0.10.0+native"
           }
         },
         {

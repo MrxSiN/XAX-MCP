@@ -1,0 +1,998 @@
+{
+  "schema": "xax-mcp-executor-input-audit-v1",
+  "recorded": "2026-11-01",
+  "status": "INCOMPLETE",
+  "requested_upgrade_implemented": false,
+  "states": {
+    "new_candidate_verified": false,
+    "acceptance_tested": false,
+    "release_accepted": false,
+    "source_written": false,
+    "resource_measured": false,
+    "executed": false,
+    "compiled": false
+  },
+  "scope": "Local baseline audit only. Existing artifact rebuilds and old request rejection are not implementation or acceptance evidence for stdin/argv.",
+  "source_revision": "27ffb9491bfe69000b3ce9744b2b689a4d594a3e",
+  "native_dependency": {
+    "bbc_modified": false,
+    "contract": "xax-native-file-v1",
+    "compiler_modified": false,
+    "seed_manifest": "native/xax-dependency.json",
+    "commit": "af376e8a8a1ac5635bcad459cb7063ef0b326430",
+    "seed_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79"
+  },
+  "roots": {
+    "sandbox": "7ef7099d5358bf022715faff1ef26387c1486c554ed2f7d9145bd9d8953ef8b6",
+    "server": "edd555239cd0bec3dd5457b882e83e0f341149fa44447878c1633600d854539d"
+  },
+  "artifacts": [
+    {
+      "matches_release_manifest": true,
+      "path": "native/xax-mcp-native-gen1.xax",
+      "bytes": 1062507,
+      "sha256": "f833986ee2e7539efd4f67c6a0d91bf60c972ff03cb2b992207e4f581bd3fe28"
+    },
+    {
+      "matches_release_manifest": true,
+      "path": "native/xax-mcp-native-snapshot.xax",
+      "bytes": 1062786,
+      "sha256": "a649ca5821d9d88c0f66f9dd9169ae7c3148dc8acc8a8eebe66284a948d7041a"
+    },
+    {
+      "matches_release_manifest": true,
+      "path": "native/xax-mcp-native.exe",
+      "bytes": 347136,
+      "sha256": "a9400a65c6194bbc52128a22da0b59a2feabdfcf0dbb64666bc2807b000b7f1b"
+    },
+    {
+      "matches_release_manifest": true,
+      "path": "native/xax-mcp-native.prov",
+      "bytes": 268,
+      "sha256": "77e71a54db6395138caa20c760b309c5b180ba8eb77ea5fec1e15190823a433e"
+    },
+    {
+      "matches_release_manifest": true,
+      "path": "native/xax-mcp-sandbox-gen0.xax",
+      "bytes": 74434,
+      "sha256": "588f57c0fa69eb175b6e06e88c73977292d42c06dfc5b814ec48cc5710bab2b8"
+    },
+    {
+      "matches_release_manifest": true,
+      "path": "native/xax-mcp-sandbox.exe",
+      "bytes": 25600,
+      "sha256": "6d563e0f23e4f402d55c82b200d42bce91c41c98aab101267e67d3645a1d37e2"
+    },
+    {
+      "matches_release_manifest": true,
+      "path": "native/xax-mcp-seed.xax",
+      "bytes": 1852,
+      "sha256": "25db5e19257e81e99a79e1b0311b65c8f534507ced0607ad4c5e2f0a81821532"
+    },
+    {
+      "matches_release_manifest": true,
+      "path": "native/xax-mcp-seed.exe",
+      "bytes": 1536,
+      "sha256": "8faaeb7e63e5d1a07bcd9c46e3ae3381af267b67e213cec6b992c628fb1843ca"
+    }
+  ],
+  "baseline_native_verify": {
+    "hash_utility_resolve_exit": 0,
+    "hash_utility_build_exit": 0,
+    "server_exit": 0,
+    "sandbox_exit": 0,
+    "hash_utility_verify_exit": 0
+  },
+  "baseline_replay": {
+    "byte_identical": true,
+    "records": 46,
+    "every_candidate_verified": true,
+    "trace": [
+      {
+        "record": "native/transactions/20261027/server-base.import-00.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-01.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-02.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-03.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-04.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-05.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-06.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-07.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-08.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-09.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-10.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-11.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-12.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-13.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-14.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-15.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-16.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-17.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-18.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-19.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-20.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-21.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-base.import-22.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/server-security.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/native-construction.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/interface-literals-0.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/interface-literals-1.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/interface-literals-2.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/interface-literals-3.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/interface-literals-4.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/interface-literals-5.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/interface-literals-6.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/interface-literals-7.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/interface-literals-8.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/interface-literals-9.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/query-exact-root.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/workspace-lease.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/release-literals-0.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/release-literals-1.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/release-literals-2.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/release-literals-3.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/release-literals-4.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/release-literals-5.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/release-literals-6.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/release-literals-7.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      },
+      {
+        "record": "native/transactions/20261027/release-literals-8.edit",
+        "verify_exit": 0,
+        "edit_exit": 0
+      }
+    ]
+  },
+  "baseline_rebuilds": [
+    {
+      "server_provenance_byte_identical": true,
+      "attempt": 1,
+      "sandbox_byte_identical": true,
+      "server_byte_identical": true
+    },
+    {
+      "server_provenance_byte_identical": true,
+      "attempt": 2,
+      "sandbox_byte_identical": true,
+      "server_byte_identical": true
+    }
+  ],
+  "baseline_rejections": {
+    "stale_diagnostic_hex": "010000000000000018000000000000005841582e574f524b53504143452e5354414c455f524f4f5401000000000000000200000000000000523000000000000001000000000000001700000000000000574f524b53504143452d45585045435445442d524f4f54000400000000000000fe4ed9223e682f57ed859bf5735b4b40424361d2cb6c3efd8715b66ce68ff5fd0400000000000000c3bed09c2355d5ed0f3ee882b85754dd78784444fa4911349d5354d8003663c1",
+    "stale_editor_exit": 1,
+    "invalid_candidate_verify_exit": 1,
+    "invalid_candidate_edit_exit": 0,
+    "stale_diagnostic_bytes": 184,
+    "stale_diagnostic_verify_exit": 1
+  },
+  "baseline_protocol_exchanges": [
+    {
+      "request": {
+        "id": 1,
+        "params": {
+          "capabilities": {},
+          "protocolVersion": "2025-11-25",
+          "clientInfo": {
+            "name": "native-executor-audit",
+            "version": "1"
+          }
+        },
+        "method": "initialize",
+        "jsonrpc": "2.0"
+      },
+      "name": "initialize-granted",
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "capabilities": {
+            "tools": {
+              "listChanged": false
+            }
+          },
+          "instructions": "Call xax_capabilities first. Construct and edit with typed XAXEDIT1 record carriers. The server invokes pinned native XAX edit, verifies the staged candidate and only then publishes it. Build invokes native resolve/build. Execute requires --allow-execute and the native AppContainer/job launcher. Supported inputs are construction constants; results are u32 process exits. No shell, interpreter or JSON xax-construct-v1 decoder fallback.",
+          "protocolVersion": "2025-11-25",
+          "serverInfo": {
+            "name": "xax-mcp",
+            "title": "XAX MCP server",
+            "version": "0.9.0+native"
+          }
+        }
+      },
+      "operator_wall_ms": 15.9525
+    },
+    {
+      "request": {
+        "id": 2,
+        "params": {},
+        "method": "tools/list",
+        "jsonrpc": "2.0"
+      },
+      "name": "published-tools",
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "tools": [
+            {
+              "_meta": {
+                "xax-mcp/schema": "xax-mcp-tools-v2"
+              },
+              "annotations": {
+                "idempotentHint": true,
+                "openWorldHint": false,
+                "readOnlyHint": true
+              },
+              "description": "Server/compiler identity, pinned XAX revision, targets, operations, carrier types, I/O modes, granted rights, sandbox status and honest maturity labels. Call first.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {},
+                "type": "object"
+              },
+              "name": "xax_capabilities",
+              "title": "XAX capabilities"
+            },
+            {
+              "_meta": {
+                "xax-mcp/schema": "xax-mcp-tools-v2"
+              },
+              "annotations": {
+                "openWorldHint": false,
+                "readOnlyHint": true
+              },
+              "description": "Describe the single host-granted workspace: canonical root, store byte size and first function identity from bounded native inspection. The OS holds an exclusive directory lease until process exit. No open/close or portable scoped handles.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {},
+                "type": "object"
+              },
+              "name": "xax_workspace",
+              "title": "XAX workspace"
+            },
+            {
+              "_meta": {
+                "xax-mcp/schema": "xax-mcp-tools-v2"
+              },
+              "annotations": {
+                "openWorldHint": false,
+                "readOnlyHint": true
+              },
+              "description": "Bounded native inspection: current root, byte size and first function CID (CID order, not necessarily entry). At most 65536 inspection bytes. General operands/uses/types/effects/proof queries and pagination are unsupported.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {},
+                "type": "object"
+              },
+              "name": "xax_query",
+              "title": "XAX bounded query"
+            },
+            {
+              "_meta": {
+                "xax-mcp/schema": "xax-mcp-tools-v2"
+              },
+              "annotations": {
+                "destructiveHint": false,
+                "idempotentHint": false,
+                "openWorldHint": false,
+                "readOnlyHint": false
+              },
+              "description": "Construct a new supported graph with an exact-root XAXEDIT1 typed mutation carrier. Native XAX applies and verifies the staged candidate before publication. The record is hexadecimal transport; canonical semantic state is source. JSON xax-construct-v1 is unsupported.",
+              "inputSchema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "record"
+                ],
+                "properties": {
+                  "record": {
+                    "type": "string",
+                    "pattern": "^[0-9A-Fa-f]+$",
+                    "minLength": 2,
+                    "maxLength": 2097152
+                  }
+                }
+              },
+              "name": "xax_construct",
+              "title": "XAX native construction"
+            },
+            {
+              "_meta": {
+                "xax-mcp/schema": "xax-mcp-tools-v2"
+              },
+              "annotations": {
+                "destructiveHint": false,
+                "openWorldHint": false,
+                "readOnlyHint": false
+              },
+              "description": "Apply an exact-root XAXEDIT1 typed mutation carrier. Native edit stages a candidate; native verify must succeed before atomic publication. Rejection or decline retains the current root. Record is hexadecimal transport, not source. Generation/read-set extensions remain unsupported.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "record": {
+                    "maxLength": 2097152,
+                    "minLength": 2,
+                    "pattern": "^[0-9A-Fa-f]+$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "record"
+                ],
+                "type": "object"
+              },
+              "name": "xax_transaction",
+              "title": "XAX transaction"
+            },
+            {
+              "_meta": {
+                "xax-mcp/schema": "xax-mcp-tools-v2"
+              },
+              "annotations": {
+                "destructiveHint": false,
+                "idempotentHint": true,
+                "openWorldHint": false,
+                "readOnlyHint": false
+              },
+              "description": "PROTOTYPE: resolves and builds the current store with the host-granted native XAX compiler ('resolve' then 'build'), writing snapshot/artifact/provenance into the host-granted work directory. Returns the canonical root, artifact byte count and the provenance object (byte count and hex). Artifact handles, entry/package selection, digest reports and toolchain caching are not implemented yet.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {},
+                "type": "object"
+              },
+              "name": "xax_build",
+              "title": "XAX build"
+            },
+            {
+              "_meta": {
+                "xax-mcp/schema": "xax-mcp-tools-v2"
+              },
+              "annotations": {
+                "destructiveHint": false,
+                "openWorldHint": false,
+                "readOnlyHint": false
+              },
+              "description": "PROTOTYPE: resolves and builds the current store, then runs that artifact inside the native OS sandbox and returns exit_code, duration_ms, flags (bit 0 timeout, bit 2 output truncated) and the artifact's stdout/stderr as hex. The sandbox is a capability-less Windows AppContainer inside a job object (fixed limits: 5 s CPU, 256 MiB, one process, 10 s wall, 1 MiB per stream); it ships beside the server as xax-mcp-sandbox.exe and is built from native/xax-mcp-sandbox-gen0.xax. Takes NO arguments yet: the artifact handle, input/output layout, argv, effects and per-call limits fail closed rather than being ignored; Linux namespaces and the xax-mcp-io-v1 framing are not implemented. Requires the host-granted execute right.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {},
+                "type": "object"
+              },
+              "name": "xax_execute",
+              "title": "XAX execute"
+            },
+            {
+              "_meta": {
+                "xax-mcp/schema": "xax-mcp-tools-v2"
+              },
+              "annotations": {
+                "idempotentHint": true,
+                "openWorldHint": false,
+                "readOnlyHint": true
+              },
+              "description": "UNIMPLEMENTED natively; calls fail closed with 'unsupported'. Target contract: fetch a bounded chunk of a large result by opaque handle: execution stdout (res_), a workspace's canonical store bytes (ws_), or a stored diagnostic (diag_). Never returns unbounded data.",
+              "inputSchema": {
+                "additionalProperties": false,
+                "properties": {
+                  "handle": {
+                    "maxLength": 64,
+                    "minLength": 1,
+                    "pattern": "^[A-Za-z0-9_.@-]+$",
+                    "type": "string"
+                  },
+                  "length": {
+                    "maximum": 65536,
+                    "minimum": 1,
+                    "type": "integer"
+                  },
+                  "offset": {
+                    "maximum": 2147483648,
+                    "minimum": 0,
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "handle"
+                ],
+                "type": "object"
+              },
+              "name": "xax_result",
+              "title": "XAX result"
+            }
+          ]
+        }
+      },
+      "operator_wall_ms": 2.6899
+    },
+    {
+      "request": {
+        "id": 3,
+        "params": {
+          "name": "xax_execute",
+          "arguments": {}
+        },
+        "method": "tools/call",
+        "jsonrpc": "2.0"
+      },
+      "name": "legacy-no-arguments",
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "result": {
+          "content": [
+            {
+              "text": "{\"duration_ms\":31,\"exit_code\":40,\"flags\":0,\"ok\":true,\"stdout_bytes\":0,\"stdout_hex\":\"\",\"stderr_bytes\":0,\"stderr_hex\":\"\"}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "duration_ms": 31,
+            "exit_code": 40,
+            "flags": 0,
+            "ok": true,
+            "stdout_bytes": 0,
+            "stdout_hex": "",
+            "stderr_bytes": 0,
+            "stderr_hex": ""
+          }
+        }
+      },
+      "operator_wall_ms": 143.5102
+    },
+    {
+      "request": {
+        "id": 4,
+        "params": {
+          "name": "xax_execute",
+          "arguments": {
+            "args": [],
+            "stdin_hex": ""
+          }
+        },
+        "method": "tools/call",
+        "jsonrpc": "2.0"
+      },
+      "name": "current-unsupported-input-4",
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 4,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"xax_execute takes no arguments yet: it builds the current store and runs that artifact (input/output/argv/effects/limits are not implemented; docs/NATIVE.md)\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "xax_execute takes no arguments yet: it builds the current store and runs that artifact (input/output/argv/effects/limits are not implemented; docs/NATIVE.md)"
+            },
+            "ok": false
+          }
+        }
+      },
+      "operator_wall_ms": 0.1355
+    },
+    {
+      "request": {
+        "id": 5,
+        "params": {
+          "name": "xax_execute",
+          "arguments": {
+            "stdin_hex": "00ff0a"
+          }
+        },
+        "method": "tools/call",
+        "jsonrpc": "2.0"
+      },
+      "name": "current-unsupported-input-5",
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 5,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"xax_execute takes no arguments yet: it builds the current store and runs that artifact (input/output/argv/effects/limits are not implemented; docs/NATIVE.md)\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "xax_execute takes no arguments yet: it builds the current store and runs that artifact (input/output/argv/effects/limits are not implemented; docs/NATIVE.md)"
+            },
+            "ok": false
+          }
+        }
+      },
+      "operator_wall_ms": 0.1062
+    },
+    {
+      "request": {
+        "id": 6,
+        "params": {
+          "name": "xax_execute",
+          "arguments": {
+            "args": [
+              "",
+              "one two",
+              "Unicode Ω"
+            ]
+          }
+        },
+        "method": "tools/call",
+        "jsonrpc": "2.0"
+      },
+      "name": "current-unsupported-input-6",
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 6,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"xax_execute takes no arguments yet: it builds the current store and runs that artifact (input/output/argv/effects/limits are not implemented; docs/NATIVE.md)\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "xax_execute takes no arguments yet: it builds the current store and runs that artifact (input/output/argv/effects/limits are not implemented; docs/NATIVE.md)"
+            },
+            "ok": false
+          }
+        }
+      },
+      "operator_wall_ms": 0.0516
+    },
+    {
+      "request": {
+        "id": 7,
+        "params": {
+          "name": "xax_execute",
+          "arguments": {
+            "stdin_hex": "0g"
+          }
+        },
+        "method": "tools/call",
+        "jsonrpc": "2.0"
+      },
+      "name": "current-unsupported-input-7",
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 7,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"xax_execute takes no arguments yet: it builds the current store and runs that artifact (input/output/argv/effects/limits are not implemented; docs/NATIVE.md)\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "xax_execute takes no arguments yet: it builds the current store and runs that artifact (input/output/argv/effects/limits are not implemented; docs/NATIVE.md)"
+            },
+            "ok": false
+          }
+        }
+      },
+      "operator_wall_ms": 0.0494
+    },
+    {
+      "request": {
+        "id": 8,
+        "params": {
+          "name": "xax_execute",
+          "arguments": {
+            "args": 1
+          }
+        },
+        "method": "tools/call",
+        "jsonrpc": "2.0"
+      },
+      "name": "current-unsupported-input-8",
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 8,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"xax_execute takes no arguments yet: it builds the current store and runs that artifact (input/output/argv/effects/limits are not implemented; docs/NATIVE.md)\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "xax_execute takes no arguments yet: it builds the current store and runs that artifact (input/output/argv/effects/limits are not implemented; docs/NATIVE.md)"
+            },
+            "ok": false
+          }
+        }
+      },
+      "operator_wall_ms": 0.041
+    },
+    {
+      "request": {
+        "id": 9,
+        "params": {
+          "name": "xax_execute",
+          "arguments": {
+            "executable": "C:\\Windows\\System32\\cmd.exe"
+          }
+        },
+        "method": "tools/call",
+        "jsonrpc": "2.0"
+      },
+      "name": "current-unsupported-input-9",
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 9,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"xax_execute takes no arguments yet: it builds the current store and runs that artifact (input/output/argv/effects/limits are not implemented; docs/NATIVE.md)\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "xax_execute takes no arguments yet: it builds the current store and runs that artifact (input/output/argv/effects/limits are not implemented; docs/NATIVE.md)"
+            },
+            "ok": false
+          }
+        }
+      },
+      "operator_wall_ms": 0.0532
+    },
+    {
+      "request": {
+        "id": 1,
+        "params": {
+          "capabilities": {},
+          "protocolVersion": "2025-11-25",
+          "clientInfo": {
+            "name": "native-executor-audit",
+            "version": "1"
+          }
+        },
+        "method": "initialize",
+        "jsonrpc": "2.0"
+      },
+      "name": "initialize-readonly",
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "capabilities": {
+            "tools": {
+              "listChanged": false
+            }
+          },
+          "instructions": "Call xax_capabilities first. Construct and edit with typed XAXEDIT1 record carriers. The server invokes pinned native XAX edit, verifies the staged candidate and only then publishes it. Build invokes native resolve/build. Execute requires --allow-execute and the native AppContainer/job launcher. Supported inputs are construction constants; results are u32 process exits. No shell, interpreter or JSON xax-construct-v1 decoder fallback.",
+          "protocolVersion": "2025-11-25",
+          "serverInfo": {
+            "name": "xax-mcp",
+            "title": "XAX MCP server",
+            "version": "0.9.0+native"
+          }
+        }
+      },
+      "operator_wall_ms": 30.6149
+    },
+    {
+      "request": {
+        "id": 2,
+        "params": {
+          "name": "xax_execute",
+          "arguments": {}
+        },
+        "method": "tools/call",
+        "jsonrpc": "2.0"
+      },
+      "name": "readonly-execution-denied",
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"denied_capability\",\"message\":\"this server was not granted the 'execute' right by its host configuration\",\"repair\":[\"the host owner may add --allow-execute to the server launch command\"]},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "denied_capability",
+              "message": "this server was not granted the 'execute' right by its host configuration",
+              "repair": [
+                "the host owner may add --allow-execute to the server launch command"
+              ]
+            },
+            "ok": false
+          }
+        }
+      },
+      "operator_wall_ms": 0.0956
+    }
+  ],
+  "baseline_wall_timeout": {
+    "duration_ms": 10000,
+    "launcher_stderr": "",
+    "metadata_hex": "01000000010000001027000000000000",
+    "child_exit": 1,
+    "peak_memory_bytes": null,
+    "stderr_bytes": 0,
+    "operator_wall_ms": 10079.1819,
+    "user_cpu_100ns": null,
+    "flags": 1,
+    "stdout_bytes": 0,
+    "launcher_exit": 0,
+    "launcher_stdout": "",
+    "kernel_cpu_100ns": null
+  },
+  "native_constructor": {
+    "intrinsic_stdin_argv_or_windows_api_blocker_established": false,
+    "supplied_semantic_objects_supported": true,
+    "meaning": "Unsupported command/usage, not code-generation decline",
+    "command": "pinned xaxc construct native/sandbox_request.json candidate.xax",
+    "candidate_produced": false,
+    "exit": 3,
+    "exact_root_editor_available": true
+  },
+  "new_canonical_transactions": [],
+  "failed_observations": [
+    {
+      "published": false,
+      "stage": "Transient operator carrier preparation",
+      "classification": "Operator tooling failure, not native compiler rejection",
+      "complete_candidate_produced": false,
+      "result": "Tool execution timed out at 30 seconds and reset its kernel"
+    },
+    {
+      "correction": "Diagnostic identifies XAX.WORKSPACE.STALE_ROOT, native verify rejects it, authoritative source remains unchanged",
+      "stage": "First stale-root operator assertion",
+      "result": "Assertion incorrectly required no output file; native editor exited 1 and wrote a 184-byte diagnostic"
+    },
+    {
+      "correction": "Repeated in a fresh directory using u32 exit at 0, u32 flags at 4, u64 duration at 8; successful observation retained separately",
+      "stage": "First timeout operator assertion",
+      "metadata_hex": "01000000010000002027000000000000",
+      "result": "Incorrectly decoded legacy metadata offsets as exit/duration/flags; assertion failed"
+    }
+  ],
+  "remaining_acceptance": [
+    "NOT EXECUTED: new omitted/empty fields and exact binary stdin, all 256 bytes, physical EOF and input beyond pipe capacity",
+    "NOT EXECUTED: independent native argv observation, quoting/backslash/Unicode preservation",
+    "NOT EXECUTED: simultaneous substantial stdin/stdout/stderr without deadlock",
+    "NOT EXECUTED: stdout/stderr saturation, exact new bounds and one-byte-over rejection",
+    "NOT EXECUTED: new strict type/hex/Unicode/unknown-field validation before execution",
+    "NOT EXECUTED: actual child CPU sampling/enforcement, user/kernel CPU and peak memory observations",
+    "NOT EXECUTED: independent current filesystem/network/handle/environment isolation probes",
+    "NOT EXECUTED: new nonzero-exit versus launcher/transport/measurement/cleanup failure semantics",
+    "NOT EXECUTED: launcher-termination cleanup, process-creation crash window, host crash and asynchronous cancellation"
+  ],
+  "measurements": {
+    "new_increment_kernel_cpu_100ns": null,
+    "stdin_semantic_bytes_consumed": null,
+    "new_increment_peak_memory_bytes": null,
+    "new_increment_wall_ms": null,
+    "note": "Legacy wall timeout is recorded separately; unknown observations are not zero-valued passing evidence",
+    "new_increment_user_cpu_100ns": null
+  },
+  "operator_only": "Transient PowerShell/.NET and Node commands performed inspection, byte transport and assertions. No foreign runtime/helper source file was added. Native XAX performed verification, edit replay, resolution, build and baseline execution.",
+  "cum_facing": {
+    "args_excludes_argv0": "Unimplemented target contract",
+    "full_prepare": "NOT IMPLEMENTED",
+    "requested_but_rejected": {
+      "arguments": {
+        "args": [
+          "",
+          "one two",
+          "Unicode Ω"
+        ],
+        "stdin_hex": "00ff0a"
+      },
+      "name": "xax_execute"
+    },
+    "current_error": "invalid_request",
+    "registered_external_tools": "UNIMPLEMENTED separate capability",
+    "working": {
+      "arguments": {},
+      "name": "xax_execute"
+    }
+  },
+  "server_or_sandbox_source_changed": false,
+  "public_schema_changed": false,
+  "release_ready": false,
+  "published": false,
+  "pushed": false,
+  "cum_modified": false
+}

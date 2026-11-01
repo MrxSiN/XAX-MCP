@@ -1,4 +1,11 @@
-# Windows readiness — 0.9.0, 2026-10-27
+# Windows readiness — 0.10.0, 2026-11-01
+
+Binary stdin, explicit argv, separate byte streams, sampled total CPU and resource
+observations are implemented and exercised with independent native synthetic probes.
+See the [execution contract](NATIVE_EXECUTION_INCREMENT.md) and
+[retained acceptance results](evidence/native-executor-input-argv-20261101.json).
+Source-written, verified, compiled, executed and measured do not mean release-accepted.
+Release readiness and full CUM prepare remain false.
 
 The supported native construction/build/confined-exit loop is **EXECUTED**. The full mission and general release
 security gate remain **incomplete**. Earlier 0.8 findings are preserved in
@@ -15,10 +22,16 @@ security gate remain **incomplete**. Earlier 0.8 findings are preserved in
 | Same-directory concurrency unsafe | Exclusive Windows lease denies a second process and releases automatically on owner crash |
 | Function discovery required external compiler reads | MCP query returns root/bytes/first function from bounded native inspection |
 | Zero expected root admitted | Public construction/transaction reject zero roots before edit |
+| No binary stdin or explicit argv | Optional stdin_hex/args, physical EOF and independent native argv checks pass |
+| Wait-before-drain pipe deadlock | Simultaneous large stdin/stdout/stderr and exact stream checks pass |
+| CPU configuration assumed sufficient | Total user+kernel CPU sampled and actually enforced; observed overshoot documented |
+| Output truncation treated as success | Exact combined budget passes; one-byte-over and both floods return explicit errors |
+| Unknown cleanup/measurement presented as success | Locked-file cleanup fails explicitly; simulated native launcher statuses omit unknown observations |
 
-The generic external client recorded **28 EXECUTED checks**, with no blocker status in that run. The workflow's
+The historical 0.9 generic client recorded **28 EXECUTED checks**, with no blocker status in that run. The workflow's
 transport fixture contains 46 sequential exchanges plus five concurrency exchanges. CI replays all 46 canonical
-application-source edits, verifies every candidate and performs native deterministic rebuilds. The timeout program
+application-source base edits; the 0.10 increment adds 15 server and three launcher records, with verification
+of every candidate and native deterministic rebuilds. The timeout program
 calls Windows `Sleep(60000)` from XAX and is terminated after approximately 10 seconds with timeout flag 1.
 
 ## Remaining gates
@@ -27,8 +40,8 @@ calls Windows `Sleep(60000)` from XAX and is terminated after approximately 10 s
 |---|---|
 | Modern MCP | Handshake protocol through 2025-11-25; 2026-07-28 stateless/per-request protocol unsupported |
 | Semantic service | One private host workspace, root and first-function query; general graph queries, pagination and portable scoped handles absent |
-| Runtime data | Construction constants and exit-u32 results; no general typed entry ABI, argv/effects input or result paging |
-| Execution supervision | AppContainer/job prototype; no compiler-call cancellation, comprehensive output/disk/handle quota or escape certification |
+| Runtime data | Binary stdin/argv and separate streams work within host bounds; general typed entry ABI, result paging and registered external tools remain absent |
+| Execution supervision | AppContainer/job prototype, CPU/wall/output enforcement measured; no compiler-call cancellation, exhaustive crash/resource-pressure coverage or escape certification |
 | Host adoption | Generic STDIO client executed; Codex registration syntax checked locally; no current Claude installation available |
 | Toolchain | Trusted historical native seed; application builds reproduce, compiler own-source build declines |
 | Repository migration | No new non-XAX implementation; upstream legacy bootstrap/test code still exists and was not deleted |
@@ -44,4 +57,6 @@ The protocol baseline is the official
 [2025-11-25 STDIO specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports).
 The separate [2026-07-28 version](https://modelcontextprotocol.io/specification/2026-07-28) remains open work.
 
-[Windows CI run 40451172993](https://github.com/MrxSiN/XAX-MCP/actions/runs/40451172993) passed on clean windows-2022 at implementation commit a9d285d, including preview packaging. The implementation bytes and tested source remain unchanged by this evidence update.
+[Windows CI run 40451172993](https://github.com/MrxSiN/XAX-MCP/actions/runs/40451172993) is historical 0.9 evidence.
+The 0.10 workflow and local acceptance checks are updated; this task does not push,
+publish a package, or claim a new GitHub-hosted CI run.

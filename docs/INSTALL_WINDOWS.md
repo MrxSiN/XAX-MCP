@@ -1,14 +1,17 @@
 # Install and rebuild on Windows
 
-This is a native-only **preview**, version 0.9.0+native. Use Windows x86-64. Full release readiness remains false;
+This is a native-only **preview**, version 0.10.0+native. Use Windows x86-64. Full release readiness remains false;
 read [the remaining gates](WINDOWS_READINESS.md) before granting mutation or execution.
 
 ## Preview ZIP
 
-Download `xax-mcp-0.9.0-windows-x86_64-preview` from a successful
-[native-windows workflow run](https://github.com/MrxSiN/XAX-MCP/actions/workflows/ci.yml) and extract its inner ZIP
-to a private directory such as `D:/Tools/XAX-MCP`. Keep `native/xax-mcp-native.exe` and `native/xax-mcp-sandbox.exe`
-together. The ZIP has the pinned native compiler at `xax/xaxc-windows-x86_64.exe`; no language runtime is required.
+The local 0.10 increment has not been pushed or published. Use this checkout and
+the pinned rebuild below. The updated native workflow can assemble a
+`xax-mcp-0.10.0-windows-x86_64-preview` ZIP when an operator runs it; no such remote
+run is claimed here. Historical 0.9 packages do not contain the stdin/argv upgrade.
+Keep `native/xax-mcp-native.exe` and `native/xax-mcp-sandbox.exe` together. A workflow
+ZIP includes the pinned compiler at `xax/xaxc-windows-x86_64.exe`; no runtime language
+helper is required.
 
 Check file identities against `native/release-status.json` and `native/xax-dependency.json`. The compiler seed's
 SHA-256 must be `aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79`.
@@ -44,6 +47,12 @@ sandboxed execution. Closing stdin ends the server and releases its work-directo
 `--read-only`, `--allow-execute`, `--deny RIGHT` or `--deny=RIGHT` (`read`, `mutate`, `build`, `execute`).
 `--no-warm-server` is a compatibility no-op. Unknown flags exit 2. Limits are fixed, not configurable per call.
 
+`xax_execute` accepts `{}` or optional `stdin_hex` and `args`. `args` excludes
+argv[0]. For example, `{"stdin_hex":"00ff0a","args":["","one two","Unicode Ω"]}`
+supplies three binary bytes and three arguments to the current authorized artifact.
+See [bounds, results, failure classes and CUM gaps](NATIVE_EXECUTION_INCREMENT.md).
+Host-owned limits cannot be raised through tool arguments.
+
 Keep compiler, seed and work-directory permissions under host control. Different clients should use different
 private directories. A second live server targeting the same directory gets `workspace_busy`; retry after the owner
 exits. The OS removes its lock on crash. No public tool opens paths or grants shell, network or arbitrary effects.
@@ -71,21 +80,28 @@ compiler exit. In particular status 2 is a decline, never success.
 $xaxCompiler = 'D:/Tools/XAX/compiler/bootstrap/windows/xaxc-windows-x86_64.exe'
 Set-Location D:/Tools/XAX-MCP
 New-Item -ItemType Directory -Force build/rebuild | Out-Null
-& $xaxCompiler verify native/xax-mcp-native-gen1.xax build/rebuild/server.diag
+& $xaxCompiler verify native/xax-mcp-native-gen2.xax build/rebuild/server.diag
 if ($LASTEXITCODE -ne 0) { throw 'Server verification rejected/declined' }
-& $xaxCompiler resolve native/xax-mcp-native-gen1.xax build/rebuild/server-snapshot.xax
+& $xaxCompiler resolve native/xax-mcp-native-gen2.xax build/rebuild/server-snapshot.xax
 if ($LASTEXITCODE -ne 0) { throw 'Server resolve rejected/declined' }
 & $xaxCompiler build build/rebuild/server-snapshot.xax build/rebuild/server.exe build/rebuild/server.prov
 if ($LASTEXITCODE -ne 0) { throw 'Server build rejected/declined' }
 Get-FileHash native/xax-mcp-native.exe,build/rebuild/server.exe
-& $xaxCompiler verify native/xax-mcp-sandbox-gen0.xax build/rebuild/sandbox.diag
+& $xaxCompiler verify native/xax-mcp-sandbox-gen1.xax build/rebuild/sandbox.diag
 if ($LASTEXITCODE -ne 0) { throw 'Sandbox verification rejected/declined' }
-& $xaxCompiler build native/xax-mcp-sandbox-gen0.xax build/rebuild/sandbox.exe build/rebuild/sandbox.prov
+& $xaxCompiler resolve native/xax-mcp-sandbox-gen1.xax build/rebuild/sandbox-snapshot.xax
+if ($LASTEXITCODE -ne 0) { throw 'Sandbox resolve rejected/declined' }
+& $xaxCompiler build build/rebuild/sandbox-snapshot.xax build/rebuild/sandbox.exe build/rebuild/sandbox.prov
 if ($LASTEXITCODE -ne 0) { throw 'Sandbox build rejected/declined' }
 Get-FileHash native/xax-mcp-sandbox.exe,build/rebuild/sandbox.exe
 ```
 
-Both pairs must match byte for byte. CI additionally replays all 46 semantic transactions from the seed and compares
+Both pairs and their provenance must match byte for byte. Replay the 20261027
+manifest followed by `native/transactions/20261101/manifest.json`'s server records;
+replay its sandbox records separately from the seed. Verify every staged candidate
+before advancing to the next root. The original sandbox snapshot is historical;
+the new editable source requires resolve before build. CI additionally replays the
+46 base, 15 server-increment and three launcher semantic transactions and compares
 the canonical source, resolved snapshot, executable and provenance. The trusted native compiler seed has a
 historical Python bootstrap, disclosed upstream; these application rebuilds invoke only native XAX.
 
@@ -94,4 +110,7 @@ historical Python bootstrap, disclosed upstream; these application rebuilds invo
 Remove the `xax` registration from your agent host ([host commands](HOSTS.md)), close its running STDIO process,
 and delete only the installation/private work directories you created. No service or interpreter is installed.
 
-Verified preview build: [Windows CI run 40451172993](https://github.com/MrxSiN/XAX-MCP/actions/runs/40451172993), artifact xax-mcp-0.9.0-windows-x86_64-preview. GitHub artifact retention applies; source and pinned rebuild instructions remain available independently.
+Historical 0.9 preview build: [Windows CI run 40451172993](https://github.com/MrxSiN/XAX-MCP/actions/runs/40451172993), artifact xax-mcp-0.9.0-windows-x86_64-preview.
+The local 0.10 archive was freshly extracted and exercised with an empty PATH and
+its bundled pinned compiler: [package evidence](evidence/native-executor-clean-package-20261101.json).
+No 0.10 remote upload is claimed. Source and pinned rebuild instructions remain available independently.

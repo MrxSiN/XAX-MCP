@@ -43,17 +43,43 @@ jobs:
            Move-Item build/replay/next.xax build/replay/current.xax -Force
           }
           if((Get-FileHash build/replay/current.xax).Hash-ne(Get-FileHash native/xax-mcp-native-gen1.xax).Hash){throw 'Transaction replay differs from canonical source'}
-          Native @('resolve','native/xax-mcp-native-gen1.xax','build/rebuild/server-snapshot.xax')
+          $increment=Get-Content native/transactions/20261101/manifest.json -Raw|ConvertFrom-Json
+          foreach($kind in @('server','sandbox')){
+           $chain=$increment.$kind;Copy-Item $chain.base "build/replay/$kind.current.xax" -Force
+           foreach($record in $chain.records){
+            if((Get-FileHash $record.path).Hash.ToLowerInvariant()-ne$record.sha256){throw 'Increment record identity differs'}
+            Native @('edit',"build/replay/$kind.current.xax",$record.path,"build/replay/$kind.next.xax")
+            Native @('verify',"build/replay/$kind.next.xax","build/replay/$kind.diag")
+            Move-Item "build/replay/$kind.next.xax" "build/replay/$kind.current.xax" -Force
+           }
+           if((Get-FileHash "build/replay/$kind.current.xax").Hash-ne(Get-FileHash $chain.final).Hash){throw "Increment replay differs: $kind"}
+          }
+          Native @('resolve','native/xax-mcp-native-gen2.xax','build/rebuild/server-snapshot.xax')
           if((Get-FileHash build/rebuild/server-snapshot.xax).Hash-ne(Get-FileHash native/xax-mcp-native-snapshot.xax).Hash){throw 'Resolved snapshot differs'}
           foreach($attempt in 1..2){
            Native @('build','build/rebuild/server-snapshot.xax',"build/rebuild/server-$attempt.exe","build/rebuild/server-$attempt.prov")
            if((Get-FileHash "build/rebuild/server-$attempt.exe").Hash-ne(Get-FileHash native/xax-mcp-native.exe).Hash){throw 'Native server rebuild differs'}
            if((Get-FileHash "build/rebuild/server-$attempt.prov").Hash-ne(Get-FileHash native/xax-mcp-native.prov).Hash){throw 'Native provenance differs'}
           }
-          Native @('verify','native/xax-mcp-sandbox-gen0.xax','build/rebuild/sandbox.diag')
-          Native @('build','native/xax-mcp-sandbox-gen0.xax','build/rebuild/sandbox.exe','build/rebuild/sandbox.prov')
-          if((Get-FileHash build/rebuild/sandbox.exe).Hash-ne(Get-FileHash native/xax-mcp-sandbox.exe).Hash){throw 'Sandbox rebuild differs'}
-          Write-Output "Verified $($manifest.records.Count) exact-root edits and two byte-identical native server rebuilds"
+          Native @('verify','native/xax-mcp-sandbox-gen1.xax','build/rebuild/sandbox.diag')
+          Native @('resolve','native/xax-mcp-sandbox-gen1.xax','build/rebuild/sandbox-snapshot.xax')
+          if((Get-FileHash build/rebuild/sandbox-snapshot.xax).Hash-ne(Get-FileHash native/xax-mcp-sandbox-snapshot.xax).Hash){throw 'Sandbox snapshot differs'}
+          foreach($attempt in 1..2){
+           Native @('build','build/rebuild/sandbox-snapshot.xax',"build/rebuild/sandbox-$attempt.exe","build/rebuild/sandbox-$attempt.prov")
+           if((Get-FileHash "build/rebuild/sandbox-$attempt.exe").Hash-ne(Get-FileHash native/xax-mcp-sandbox.exe).Hash){throw 'Sandbox rebuild differs'}
+           if((Get-FileHash "build/rebuild/sandbox-$attempt.prov").Hash-ne(Get-FileHash native/xax-mcp-sandbox.prov).Hash){throw 'Sandbox provenance differs'}
+          }
+          $probes=Get-Content tests/security/executor-input/manifest.json -Raw|ConvertFrom-Json
+          foreach($probe in $probes.fixtures){
+           $source=($probe.artifacts|Where-Object path -Like '*.xax').path;$edit=($probe.artifacts|Where-Object path -Like '*.edit').path
+           $exe=($probe.artifacts|Where-Object path -Like '*.exe').path;$prov=($probe.artifacts|Where-Object path -Like '*.prov').path
+           foreach($a in $probe.artifacts){if((Get-FileHash $a.path).Hash.ToLowerInvariant()-ne$a.sha256){throw 'Probe artifact identity differs'}}
+           Native @('edit',$probes.base,$edit,'build/replay/probe.xax');Native @('verify','build/replay/probe.xax','build/replay/probe.diag')
+           if((Get-FileHash build/replay/probe.xax).Hash-ne(Get-FileHash $source).Hash){throw 'Probe replay differs'}
+           Native @('resolve',$source,'build/rebuild/probe-snapshot.xax');Native @('build','build/rebuild/probe-snapshot.xax','build/rebuild/probe.exe','build/rebuild/probe.prov')
+           if((Get-FileHash build/rebuild/probe.exe).Hash-ne(Get-FileHash $exe).Hash-or(Get-FileHash build/rebuild/probe.prov).Hash-ne(Get-FileHash $prov).Hash){throw 'Probe rebuild differs'}
+          }
+          Write-Output 'Verified 46 base + 18 increment exact-root edits, native probes and two byte-identical builds of each executor'
 
       - name: Replay read-only STDIO protocol golden responses
         shell: pwsh
@@ -75,11 +101,11 @@ jobs:
           $fixtures=Get-Content tests/protocol/native-sessions.json -Raw|ConvertFrom-Json -Depth 80
           New-Item -ItemType Directory -Force build/native-sessions | Out-Null
           $observed=[Collections.Generic.List[string]]::new();$script:timings=[Collections.Generic.List[object]]::new()
-          function Start-Server([string]$Flags,[string]$Directory){
+          function Start-Server([string]$Flags,[string]$Directory,[string]$Store=(Join-Path $repo 'native/xax-mcp-seed.xax')){
            New-Item -ItemType Directory -Force $Directory|Out-Null
            $info=[Diagnostics.ProcessStartInfo]::new($server);$info.UseShellExecute=$false;$info.CreateNoWindow=$true;$info.Arguments=$Flags
            $info.RedirectStandardInput=$true;$info.RedirectStandardOutput=$true;$info.RedirectStandardError=$true;$info.StandardInputEncoding=[Text.UTF8Encoding]::new($false)
-           $info.Environment['XAX_MCP_COMPILER']=$compiler;$info.Environment['XAX_MCP_STORE']=Join-Path $repo 'native/xax-mcp-seed.xax';$info.Environment['XAX_MCP_WORK']=$Directory;$info.Environment.Remove('XAX_MCP_CONSTRUCT')|Out-Null
+           $info.Environment['XAX_MCP_COMPILER']=$compiler;$info.Environment['XAX_MCP_STORE']=$Store;$info.Environment['XAX_MCP_WORK']=$Directory;$info.Environment.Remove('XAX_MCP_CONSTRUCT')|Out-Null
            return [Diagnostics.Process]::Start($info)
           }
           function Exchange($Process,$Request){
@@ -124,6 +150,85 @@ jobs:
            $retry=(Exchange $waiter $query).result.structuredContent;if(!$retry.ok-or$retry.root-ne$root.root){throw 'Lease not released on crash'}
           }finally{if($null-ne$owner){Stop-Server $owner};Stop-Server $waiter}
           if(Test-Path (Join-Path $shared '.xax-mcp.lock')){throw 'Crash lease leaked'}
+          # Synthetic operator transport only; every observer and worker below is native XAX.
+          function Start-Probe([string]$Name){
+           $store=Join-Path $repo "tests/security/executor-input/$Name.xax";$directory=Join-Path $repo "build/native-sessions/probe-$Name"
+           New-Item -ItemType Directory -Force $directory|Out-Null;Copy-Item $store (Join-Path $directory 'current.xax') -Force
+           $p=Start-Server '--allow-execute' $directory $store;Exchange $p $init|Out-Null;return $p
+          }
+          function Run-Execute($Process,$Arguments){
+           $response=Exchange $Process @{jsonrpc='2.0';id=200;method='tools/call';params=@{name='xax_execute';arguments=$Arguments}}
+           $content=$response.result.structuredContent;$text=$response.result.content[0].text|ConvertFrom-Json -Depth 80
+           if($response.result.isError-eq$content.ok-or($text|ConvertTo-Json -Compress -Depth 80)-ne($content|ConvertTo-Json -Compress -Depth 80)){throw 'Execution text/structured/error framing mismatch'}
+           return $content
+          }
+          $cases=Get-Content tests/security/executor-input/cases.json -Raw|ConvertFrom-Json
+          $p=Start-Probe 'io-echo-probe'
+          try{foreach($size in $cases.binary_sizes){
+           $bytes=[byte[]]::new($size);for($i=0;$i-lt$size;$i++){$bytes[$i]=[byte]($i-band255)};$hex=[Convert]::ToHexString($bytes).ToLowerInvariant()
+           $r=Run-Execute $p @{stdin_hex=$hex};if(!$r.ok-or$r.exit_code-ne7-or$r.stdout_hex-ne$hex-or$r.stderr_hex-ne$hex-or$r.stdout_bytes-ne$size-or$r.stderr_bytes-ne$size){throw 'Binary EOF/stream mismatch'}
+          }}finally{Stop-Server $p}
+          $p=Start-Probe 'stream-separation-probe'
+          try{$r=Run-Execute $p @{};if(!$r.ok-or$r.stdout_hex-ne'4f55540a'-or$r.stderr_hex-ne'4552520a'-or$r.stdout_bytes-ne4-or$r.stderr_bytes-ne4){throw 'Distinct stdout/stderr bytes were mixed'}}finally{Stop-Server $p}
+          $p=Start-Probe 'argv-probe'
+          try{
+           $expectedArgs=@($cases.args)+@($cases.extra_args)
+           $r=Run-Execute $p @{args=$expectedArgs};$bytes=[Convert]::FromHexString($r.stdout_hex);$count=[BitConverter]::ToUInt32($bytes,0);$at=4
+           if(!$r.ok-or$count-ne$expectedArgs.Count){throw 'Argv count mismatch'}
+           for($i=0;$i-lt$count;$i++){$units=[BitConverter]::ToUInt32($bytes,$at);$at+=4;$arg=[Text.Encoding]::Unicode.GetString($bytes,$at,2*$units);$at+=2*$units;if($arg-cne$expectedArgs[$i]){throw 'Independent argv mismatch'}}
+           if($at-ne$bytes.Length){throw 'Incomplete argv observation'}
+          }finally{Stop-Server $p}
+          foreach($case in $cases.resource_cases){$p=Start-Probe $case.fixture;try{
+           $r=Run-Execute $p @{};if($null-ne$case.error){if($r.ok-or$r.error-ne$case.error-or$r.flags-ne$case.flags){throw 'Resource failure mismatch'}}
+           elseif(!$r.ok-or$r.stdout_bytes-ne$case.stdout_bytes){throw 'Exact output boundary mismatch'}
+           if($case.fixture-eq'cpu-probe'-and($r.user_cpu_100ns+$r.kernel_cpu_100ns-lt50000000)){throw 'CPU limit was not actually observed'}
+           if($r.peak_memory_bytes-le0){throw 'Missing memory observation'}
+          }finally{Stop-Server $p}}
+          $p=Start-Probe 'environment-probe'
+          try{$r=Run-Execute $p @{};$keys=@([Text.Encoding]::Unicode.GetString([Convert]::FromHexString($r.stdout_hex)).Split([char]0)|Where-Object{$_}|ForEach-Object{$_.Split('=')[0]}|Sort-Object)
+           if(!$r.ok-or(Compare-Object ($cases.environment_keys|Sort-Object) $keys)){throw 'Ambient child environment leaked or observation incomplete'}
+          }finally{Stop-Server $p}
+          $malformedWork=Join-Path $repo 'build/native-sessions/executor-malformed';New-Item -ItemType Directory -Force $malformedWork|Out-Null
+          $p=Start-Server '--allow-execute' $malformedWork
+          try{Exchange $p $init|Out-Null;foreach($case in $cases.malformed){
+           $wire='{"jsonrpc":"2.0","id":201,"method":"tools/call","params":{"name":"xax_execute","arguments":'+$case.arguments_json+'}}'
+           $p.StandardInput.WriteLine($wire);$p.StandardInput.Flush();$pending=$p.StandardOutput.ReadLineAsync();if(!$pending.Wait(10000)){throw 'Malformed response timeout'};$r=$pending.Result|ConvertFrom-Json -Depth 80
+           if($null-ne$case.expected.jsonrpc_error){if($r.error.code-ne$case.expected.jsonrpc_error){throw 'Malformed JSON accepted'}}elseif($r.result.structuredContent.ok-or$r.result.structuredContent.error.code-ne'invalid_request'){throw 'Malformed tool arguments accepted'}
+          }
+          foreach($executeArguments in @(@{stdin_hex=('00'*262145)},@{args=(@('')*65)},@{args=@(('x'*8193))})){$r=Run-Execute $p $executeArguments;if($r.ok-or$r.error.code-ne'invalid_request'){throw 'Exceeded input/argument bound accepted'}}
+          if(Test-Path (Join-Path $malformedWork 'artifact.exe')){throw 'Malformed requests launched compiler work'}
+          }finally{Stop-Server $p}
+          $p=Start-Server '--allow-execute' (Join-Path $repo 'build/native-sessions/executor-boundaries')
+          try{Exchange $p $init|Out-Null;foreach($executeArguments in @(@{args=(@('')*64)},@{args=@(('x'*8192))},@{args=@();stdin_hex=''})){$r=Run-Execute $p $executeArguments;if(!$r.ok-or$r.exit_code-ne40){throw 'Exact argument boundary rejected'}}}finally{Stop-Server $p}
+          $lockedWork=Join-Path $repo 'build/native-sessions/executor-locked-cleanup';New-Item -ItemType Directory -Force (Join-Path $lockedWork 'exec')|Out-Null
+          $lockedFile=[IO.File]::Open((Join-Path $lockedWork 'exec/sandbox-result.bin'),[IO.FileMode]::OpenOrCreate,[IO.FileAccess]::ReadWrite,[IO.FileShare]::None)
+          $p=Start-Server '--allow-execute' $lockedWork
+          try{Exchange $p $init|Out-Null;$r=Run-Execute $p @{};if($r.ok-or$r.error-ne'cleanup_failed'-or(Test-Path (Join-Path $lockedWork 'exec/sandbox-run'))){throw 'Failed cleanup did not refuse child execution'}}finally{$lockedFile.Dispose();Stop-Server $p}
+          # Status-only native fixtures verify protocol mapping, not forced WinAPI failures.
+          $realServer=$server
+          foreach($code in @(7,8,9,10)){
+           $faultDirectory=Join-Path $repo "build/native-sessions/launcher-status-$code";New-Item -ItemType Directory -Force $faultDirectory|Out-Null
+           Copy-Item $realServer (Join-Path $faultDirectory 'xax-mcp-native.exe') -Force
+           Copy-Item "tests/security/executor-input/launcher-status-$code-probe.exe" (Join-Path $faultDirectory 'xax-mcp-sandbox.exe') -Force
+           $server=Join-Path $faultDirectory 'xax-mcp-native.exe';$p=Start-Server '--allow-execute' (Join-Path $faultDirectory 'work')
+           try{Exchange $p $init|Out-Null;$r=Run-Execute $p @{};$expectedError=@{7='launcher_setup_failed';8='measurement_failed';9='incomplete_transport';10='cleanup_failed'}[$code]
+            if($r.ok-or$r.error-ne$expectedError-or$null-ne$r.user_cpu_100ns-or$null-ne$r.peak_memory_bytes){throw 'Launcher failure mapping or unknown-measurement handling differs'}
+           }finally{Stop-Server $p;$server=$realServer}
+          }
+          $outside=Join-Path $repo 'build/native-sessions/outside-fixture.bin';[IO.File]::WriteAllBytes($outside,[byte[]](0..255))
+          $peer=[Net.Sockets.TcpListener]::new([Net.IPAddress]::Loopback,9)
+          try{$peer.Start()}catch{throw 'BLOCKED: synthetic loopback peer cannot listen on port 9'}
+          $p=Start-Probe 'confinement-read-network-probe'
+          try{
+           $r=Run-Execute $p @{args=@($outside);stdin_hex='00ff0a'};$bytes=[Convert]::FromHexString($r.stdout_hex)
+           if(!$r.ok-or$bytes.Length-ne24-or[BitConverter]::ToUInt32($bytes,0)-ne1-or[BitConverter]::ToUInt32($bytes,4)-ne5-or[BitConverter]::ToUInt32($bytes,20)-ne1-or$peer.Pending()){throw 'Native token/filesystem/live-peer isolation mismatch'}
+           $controlInfo=[Diagnostics.ProcessStartInfo]::new((Join-Path $repo 'tests/security/executor-input/confinement-read-network-probe.exe'))
+           $controlInfo.UseShellExecute=$false;$controlInfo.CreateNoWindow=$true;$controlInfo.ArgumentList.Add($outside);$controlInfo.RedirectStandardOutput=$true;$controlInfo.RedirectStandardError=$true
+           $control=[Diagnostics.Process]::Start($controlInfo);$controlBytes=[IO.MemoryStream]::new();$copy=$control.StandardOutput.BaseStream.CopyToAsync($controlBytes)
+           if(!$control.WaitForExit(5000)){ $control.Kill();throw 'Native network positive-control timeout' };$copy.GetAwaiter().GetResult()|Out-Null
+           $bytes=$controlBytes.ToArray();if($control.ExitCode-ne0-or!$peer.Pending()-or$bytes.Length-ne24-or[BitConverter]::ToUInt32($bytes,0)-ne0-or[BitConverter]::ToUInt32($bytes,20)-ne0){throw 'Native loopback positive control failed'}
+           $control.Dispose();$controlBytes.Dispose()
+          }finally{Stop-Server $p;$peer.Stop()}
           $observed|Set-Content build/native-sessions.responses.ndjson -Encoding utf8NoBOM
           $script:timings|ConvertTo-Json -Depth 10|Set-Content build/native-session-timings.json -Encoding utf8NoBOM
           Write-Output "Passed $($observed.Count) native request/response checks, isolated directories, publication verification and crash lease recovery"
@@ -141,12 +246,30 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Timeout fixture build failed' }
           if ((Get-FileHash build/timeout.exe).Hash -ne (Get-FileHash tests/security/timeout/timeout.exe).Hash) { throw 'Timeout artifact differs' }
           New-Item -ItemType Directory -Force build/timeout-sandbox | Out-Null
+          [IO.File]::WriteAllBytes((Join-Path $PWD 'build/timeout-sandbox/execute-stdin.bin'),[byte[]]@())
+          [IO.File]::WriteAllBytes((Join-Path $PWD 'build/timeout-sandbox/execute-argv.bin'),[Text.Encoding]::Unicode.GetBytes('"prog.exe"'))
           $watch = [Diagnostics.Stopwatch]::StartNew()
           & native/xax-mcp-sandbox.exe (Resolve-Path build/timeout.exe).Path (Resolve-Path build/timeout-sandbox).Path
           if ($LASTEXITCODE -ne 0) { throw 'Sandbox unavailable or failed' }
           $watch.Stop()
           $result = [IO.File]::ReadAllBytes((Join-Path $PWD 'build/timeout-sandbox/sandbox-result.bin'))
-          if ($result.Length -ne 16 -or ([BitConverter]::ToUInt32($result, 4) -band 1) -ne 1 -or $watch.ElapsedMilliseconds -lt 9000 -or $watch.ElapsedMilliseconds -gt 25000) { throw 'Sandbox failed to enforce wall timeout' }
+          if ($result.Length -ne 64 -or ([BitConverter]::ToUInt64($result,56))-ne1 -or ([BitConverter]::ToUInt32($result, 4) -band 1) -ne 1 -or $watch.ElapsedMilliseconds -lt 9000 -or $watch.ElapsedMilliseconds -gt 25000) { throw 'Sandbox failed to enforce wall timeout' }
+          New-Item -ItemType Directory -Force build/termination-sandbox|Out-Null
+          [IO.File]::WriteAllBytes((Join-Path $PWD 'build/termination-sandbox/execute-stdin.bin'),[byte[]]@(0,255,10))
+          [IO.File]::WriteAllBytes((Join-Path $PWD 'build/termination-sandbox/execute-argv.bin'),[Text.Encoding]::Unicode.GetBytes('"prog.exe"'))
+          $launchInfo=[Diagnostics.ProcessStartInfo]::new((Join-Path $PWD 'native/xax-mcp-sandbox.exe'));$launchInfo.UseShellExecute=$false;$launchInfo.CreateNoWindow=$true
+          $launchInfo.ArgumentList.Add((Join-Path $PWD 'build/timeout.exe'));$launchInfo.ArgumentList.Add((Join-Path $PWD 'build/termination-sandbox'))
+          $launcher=[Diagnostics.Process]::Start($launchInfo);$child=$null;$worker=$null
+          $workerImage=[IO.Path]::GetFullPath((Join-Path $PWD 'build/termination-sandbox/sandbox-run/prog.exe'))
+          try{
+           foreach($attempt in 1..30){$child=Get-CimInstance Win32_Process -Filter "ParentProcessId=$($launcher.Id)"|Where-Object{$_.ExecutablePath-eq$workerImage};if($null-ne$child){break};Start-Sleep -Milliseconds 100}
+           if($null-eq$child){throw 'BLOCKED: contained termination-test child unavailable'}
+           $worker=[Diagnostics.Process]::GetProcessById($child.ProcessId);if($worker.HasExited){throw 'Contained worker was not alive before termination'}
+           $cleanupWatch=[Diagnostics.Stopwatch]::StartNew();$launcher.Kill();$launcher.WaitForExit()
+           if(!$worker.WaitForExit(5000)){throw 'Child survived launcher termination'}
+           if((Test-Path build/termination-sandbox/execute-stdin.bin)-or(Test-Path build/termination-sandbox/sandbox-result.bin)){throw 'Termination leaked stdin or published successful metadata'}
+           @{launcher_terminated=$true;worker_pid=$child.ProcessId;worker_image=$workerImage;worker_alive_before_termination=$true;child_survived=$false;stdin_removed=$true;metadata_published=$false;cleanup_observed_ms=$cleanupWatch.ElapsedMilliseconds}|ConvertTo-Json|Set-Content build/executor-termination.json -Encoding utf8NoBOM
+          }finally{if(!$launcher.HasExited){$launcher.Kill()};if($null-ne$worker){$worker.Dispose()};$launcher.Dispose()}
 
       - name: Assemble the native-only Windows preview package
         shell: pwsh
@@ -159,12 +282,12 @@ jobs:
           Copy-Item docs/* build/package/docs/ -Recurse -Force
           Copy-Item schemas/* build/package/schemas/
           Copy-Item examples,tests,agent-guidance build/package/ -Recurse -Force
-          Compress-Archive -Path build/package/* -DestinationPath build/xax-mcp-0.9.0-windows-x86_64-preview.zip -Force
+          Compress-Archive -Path build/package/* -DestinationPath build/xax-mcp-0.10.0-windows-x86_64-preview.zip -Force
 
       - uses: actions/upload-artifact@v4
         with:
-          name: xax-mcp-0.9.0-windows-x86_64-preview
-          path: build/xax-mcp-0.9.0-windows-x86_64-preview.zip
+          name: xax-mcp-0.10.0-windows-x86_64-preview
+          path: build/xax-mcp-0.10.0-windows-x86_64-preview.zip
       - uses: actions/upload-artifact@v4
         with:
           name: native-windows-evidence
@@ -172,6 +295,7 @@ jobs:
             build/readonly.responses.ndjson
             build/native-sessions.responses.ndjson
             build/native-session-timings.json
+            build/executor-termination.json
             build/timeout-sandbox/sandbox-result.bin
             build/timeout-sandbox/sandbox-out.bin
             build/timeout-sandbox/sandbox-err.bin
