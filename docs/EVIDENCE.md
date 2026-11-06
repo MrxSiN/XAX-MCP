@@ -1,5 +1,8 @@
 # Evidence and claim labels
 
+Rows name files as they existed at the cited commit or run. Superseded stores, carriers and
+failed transaction records were later removed from the tree; check out that commit to reproduce them.
+
 ## 2026-11-01 — 0.10 native executor increment (current)
 
 [Native stdin/argv evidence](evidence/native-executor-input-argv-20261101.json)

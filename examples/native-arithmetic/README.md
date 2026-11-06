@@ -19,7 +19,7 @@ Artifact SHA-256: `832a06e874a109c4cdaf4385e0b50e88b7b8070ee532da6544e3568eaedd2
 
 The edits insert constant 7, add, constant 3, multiply, constant 5, subtract, then replace the original ExitProcess
 operand. Every intermediate candidate also passed independent native verifier checks in the recorded audit.
-Use the pinned native compiler from XAX `af376e8a8a1ac5635bcad459cb7063ef0b326430`, not an unrecorded local build.
+Use the pinned native compiler pinned in [`native/xax-dependency.json`](../../native/xax-dependency.json), not an unrecorded local build.
 [Installation and replay commands](../../docs/INSTALL_WINDOWS.md) set host compiler/store/private-work grants.
 The native sandbox must be beside the server, and the replay needs `--allow-execute`.
 

@@ -12,6 +12,8 @@ jobs:
   windows-native:
     runs-on: windows-2022
     timeout-minutes: 15
+    env:
+      XAXC: ${{ github.workspace }}/.xax-upstream/compiler/bootstrap/windows/xaxc-windows-x86_64.exe
     steps:
       - uses: actions/checkout@v4
       - name: Check out the immutable XAX native dependency independently
@@ -27,7 +29,7 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference='Stop'
-          $compiler=Join-Path $PWD '.xax-upstream/compiler/bootstrap/windows/xaxc-windows-x86_64.exe'
+          $compiler=$env:XAXC
           $dependency=Get-Content native/xax-dependency.json -Raw|ConvertFrom-Json
           if((Get-FileHash $compiler).Hash.ToLowerInvariant()-ne$dependency.seed_sha256){throw 'Wrong XAX seed'}
           New-Item -ItemType Directory -Force build/replay,build/rebuild | Out-Null
@@ -96,7 +98,7 @@ jobs:
         run: |
           $ErrorActionPreference='Stop'
           $repo=$PWD.Path
-          $compiler=Join-Path $repo '.xax-upstream/compiler/bootstrap/windows/xaxc-windows-x86_64.exe'
+          $compiler=$env:XAXC
           $server=Join-Path $repo 'native/xax-mcp-native.exe'
           $fixtures=Get-Content tests/protocol/native-sessions.json -Raw|ConvertFrom-Json -Depth 80
           New-Item -ItemType Directory -Force build/native-sessions | Out-Null
@@ -237,13 +239,10 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
-          $compiler = Join-Path $PWD '.xax-upstream/compiler/bootstrap/windows/xaxc-windows-x86_64.exe'
-          & $compiler verify tests/security/timeout/timeout.xax build/timeout.diag
-          if ($LASTEXITCODE -ne 0) { throw 'Timeout fixture invalid' }
-          & $compiler resolve tests/security/timeout/timeout.xax build/timeout-snapshot.xax
-          if ($LASTEXITCODE -ne 0) { throw 'Timeout fixture resolve failed' }
-          & $compiler build build/timeout-snapshot.xax build/timeout.exe build/timeout.prov
-          if ($LASTEXITCODE -ne 0) { throw 'Timeout fixture build failed' }
+          function Native([string[]]$Arguments){& $env:XAXC @Arguments;if($LASTEXITCODE-ne0){throw "Timeout fixture $($Arguments[0]) failed ($LASTEXITCODE)"}}
+          Native @('verify','tests/security/timeout/timeout.xax','build/timeout.diag')
+          Native @('resolve','tests/security/timeout/timeout.xax','build/timeout-snapshot.xax')
+          Native @('build','build/timeout-snapshot.xax','build/timeout.exe','build/timeout.prov')
           if ((Get-FileHash build/timeout.exe).Hash -ne (Get-FileHash tests/security/timeout/timeout.exe).Hash) { throw 'Timeout artifact differs' }
           New-Item -ItemType Directory -Force build/timeout-sandbox | Out-Null
           [IO.File]::WriteAllBytes((Join-Path $PWD 'build/timeout-sandbox/execute-stdin.bin'),[byte[]]@())
@@ -276,7 +275,7 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           New-Item -ItemType Directory -Force build/package/native,build/package/xax,build/package/docs,build/package/schemas | Out-Null
-          Copy-Item native/* build/package/native/ -Recurse -Force
+          Copy-Item native/* build/package/native/ -Exclude transactions -Recurse -Force
           Copy-Item .xax-upstream/compiler/bootstrap/windows/xaxc-windows-x86_64.exe,.xax-upstream/compiler/bootstrap/windows/seed.json build/package/xax/
           Copy-Item README.md build/package/
           Copy-Item docs/* build/package/docs/ -Recurse -Force

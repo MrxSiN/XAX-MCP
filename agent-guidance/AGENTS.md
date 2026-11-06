@@ -1,6 +1,6 @@
 # Computation through XAX (optional host guidance)
 
-Use this only when the `xax` MCP server is registered. It steers agents; host policy determines available tools.
+Copy this file into a project as `AGENTS.md` or `CLAUDE.md`. Use it only when the `xax` MCP server is registered. It steers agents; host policy determines available tools.
 
 - Call `xax_capabilities` and discover current schemas first. Respect reported targets, rights and unsupported gates.
 - For supported computation use native `xax_query` -> `xax_construct` or `xax_transaction` -> `xax_build` ->

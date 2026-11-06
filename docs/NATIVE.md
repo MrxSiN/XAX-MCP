@@ -23,10 +23,9 @@ mandatory `verify` establish authority before atomic local promotion.
 
 ## Pinned dependency
 
-XAX commit `af376e8a8a1ac5635bcad459cb7063ef0b326430` exports
-`xax-native-file-v1`. The Windows compiler seed SHA-256 is
-`aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79`.
-[xax-dependency.json](../native/xax-dependency.json) pins that exact executable.
+The pinned XAX commit exports `xax-native-file-v1`.
+[xax-dependency.json](../native/xax-dependency.json) records the commit and the
+exact Windows compiler seed SHA-256.
 No XAX or BBC compiler changes were made. The seed has a disclosed historical
 bootstrap; no bootstrap interpreter is invoked in these application builds or
 requests. A compiler own-source fixed point is not claimed.
@@ -81,5 +80,4 @@ Asynchronous cancellation, in-flight server/compiler crash cleanup, exhaustive
 resource pressure and independent escape review remain open. CUM transformations,
 typed layouts, registered external tools and full prepare are separate capabilities.
 
-[Installation/rebuild](INSTALL_WINDOWS.md) · [Security](SECURITY.md) ·
-[Historical native observations](history/NATIVE_0_8.md).
+[Installation/rebuild](INSTALL_WINDOWS.md) · [Security](SECURITY.md).

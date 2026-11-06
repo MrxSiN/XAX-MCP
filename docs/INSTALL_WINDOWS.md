@@ -22,7 +22,7 @@ The package includes canonical sources and provenance; no PowerShell production 
 ```powershell
 git clone https://github.com/MrxSiN/XAX-MCP D:/Tools/XAX-MCP
 git clone https://github.com/MrxSiN/XAX D:/Tools/XAX
-git -C D:/Tools/XAX checkout --detach af376e8a8a1ac5635bcad459cb7063ef0b326430
+git -C D:/Tools/XAX checkout --detach (Get-Content D:/Tools/XAX-MCP/native/xax-dependency.json -Raw | ConvertFrom-Json).commit
 ```
 
 Do not substitute moving upstream `main`. The dependency contract is `xax-native-file-v1`; only the pinned seed is

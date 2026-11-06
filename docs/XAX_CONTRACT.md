@@ -2,7 +2,7 @@
 
 ## Native Windows contract — current 0.10
 
-The adapter consumes `xax-native-file-v1` from XAX `af376e8a8a1ac5635bcad459cb7063ef0b326430`:
+The adapter consumes `xax-native-file-v1` from the XAX commit pinned in [`native/xax-dependency.json`](../native/xax-dependency.json):
 `verify`, `inspect`, `edit`, `resolve` and `build`, as documented in that revision's
 `compiler/bootstrap/windows/README.md`. The exact native seed is pinned in
 [the dependency manifest](../native/xax-dependency.json); no Python API is imported at runtime.

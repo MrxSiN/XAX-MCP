@@ -43,7 +43,7 @@ was terminated at approximately 10 seconds. These observations do not establish 
 Use a repository checkout or the Windows preview ZIP produced by the
 [native workflow](https://github.com/MrxSiN/XAX-MCP/actions/workflows/ci.yml).
 The ZIP includes the native compiler seed; the source checkout pins XAX at
-[`af376e8a8a1ac5635bcad459cb7063ef0b326430`](https://github.com/MrxSiN/XAX/tree/af376e8a8a1ac5635bcad459cb7063ef0b326430).
+the commit in [`native/xax-dependency.json`](native/xax-dependency.json).
 Only this immutable native seed is certified for this preview. It historically used the upstream Python SDK for
 bootstrap; no bootstrap interpreter was run for these changes. Its own-source build still declines, so this is
 reproducible application building from a trusted seed, not a Windows compiler fixed point.

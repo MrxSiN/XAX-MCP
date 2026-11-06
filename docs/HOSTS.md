@@ -53,6 +53,6 @@ No maintained SDK is installed or required by this server.
 * `unsupported`: typed runtime I/O, JSON construction, general query/paging, xax_result, Linux, HTTP and modern MCP
   are not implemented. Report the limitation; do not switch to an unrestricted fallback.
 
-Optional [AGENTS](../agent-guidance/AGENTS.md) / [CLAUDE](../agent-guidance/CLAUDE.md) guidance can steer selection.
+Optional [agent guidance](../agent-guidance/AGENTS.md) (copy as `AGENTS.md` or `CLAUDE.md`) can steer selection.
 It cannot change a hosted model's internal tools or enforce selection by itself. Host owners control competing tools
 through their host's own policy. No global agent configuration was modified during these registration tests.

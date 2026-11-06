@@ -90,11 +90,6 @@
       "sha256": "25db5e19257e81e99a79e1b0311b65c8f534507ced0607ad4c5e2f0a81821532"
     },
     {
-      "path": "native/xax-mcp-seed.exe",
-      "bytes": 1536,
-      "sha256": "8faaeb7e63e5d1a07bcd9c46e3ae3381af267b67e213cec6b992c628fb1843ca"
-    },
-    {
       "path": "native/xax-mcp-native-gen2.xax",
       "bytes": 1268455,
       "sha256": "e9354ced587e68a0bb1cf64b31c744c3e169983bcd39d5b14831bc516c1dbb64"

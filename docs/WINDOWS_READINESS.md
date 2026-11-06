@@ -8,8 +8,8 @@ Source-written, verified, compiled, executed and measured do not mean release-ac
 Release readiness and full CUM prepare remain false.
 
 The supported native construction/build/confined-exit loop is **EXECUTED**. The full mission and general release
-security gate remain **incomplete**. Earlier 0.8 findings are preserved in
-[the historical audit](history/WINDOWS_READINESS_0_8.md); new evidence supersedes only the cases actually retested.
+security gate remain **incomplete**. Earlier 0.8 findings are in git history and `docs/evidence/`; new evidence
+supersedes only the cases actually retested.
 
 ## Repaired and tested
 
@@ -18,7 +18,7 @@ security gate remain **incomplete**. Earlier 0.8 findings are preserved in
 | Invalid candidate published | Native verify precedes atomic publication; invalid-add fixture rejects, current source verifies unchanged and candidate is removed |
 | Query/build ignored forbidden properties | Native argument guards return `invalid_request` before compiler work |
 | No native construction route | `xax_construct` accepts native `XAXEDIT1` records; seven calls construct the new result-136 graph |
-| No shipped usable Windows seed | Immutable XAX dependency `af376e8a8a1ac5635bcad459cb7063ef0b326430` publishes the exact tested native seed; application source rebuilds twice identically |
+| No shipped usable Windows seed | The immutable XAX dependency in [`native/xax-dependency.json`](../native/xax-dependency.json) publishes the exact tested native seed; application source rebuilds twice identically |
 | Same-directory concurrency unsafe | Exclusive Windows lease denies a second process and releases automatically on owner crash |
 | Function discovery required external compiler reads | MCP query returns root/bytes/first function from bounded native inspection |
 | Zero expected root admitted | Public construction/transaction reject zero roots before edit |

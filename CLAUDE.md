@@ -22,8 +22,8 @@
 - No workload logic in the server or build tooling: no per-operation tools, no adapter-side computation, and no
   hard-coded results. Results must come from XAX-generated code.
 - XAX changes belong in `MrxSiN/XAX`; the dependency direction is one-way (`XAX-MCP -> XAX`).
-- When the XAX pin changes, update the CI checkout ref, `README.md`, `docs/NATIVE.md`, `docs/COMPATIBILITY.md`,
-  `docs/HANDOFF.md`, `docs/EVIDENCE.md` and this file together. Check that the new pin's `compiler/src` is
+- The XAX pin lives in `native/xax-dependency.json` and the CI checkout ref (`native/release-status.json` records
+  the embedded pin). When it changes, update those together; docs link to the JSON instead of repeating the hash. Check that the new pin's `compiler/src` is
   compatible with the canonical program's recorded compiler identity. Change embedded identity through a verified
   XAX transaction and record the exact toolchain/artifact identities. Do not edit retired upstream Python authors.
 - Record new evidence in new files under `docs/evidence/`; never overwrite old evidence.
@@ -31,4 +31,4 @@
 
 `agent-guidance/` holds optional guidance for agents that *use* the server; this file is for agents that develop it.
 
-Current native pin: `af376e8a8a1ac5635bcad459cb7063ef0b326430` (`xax-native-file-v1`); sources are `native/xax-mcp-native-gen2.xax` and `native/xax-mcp-sandbox-gen1.xax`. Binary stdin/argv are implemented within host bounds; JSON xax-construct-v1 and full CUM prepare remain unsupported. Full mission readiness is false.
+Current native pin: see `native/xax-dependency.json` (`xax-native-file-v1`); sources are `native/xax-mcp-native-gen2.xax` and `native/xax-mcp-sandbox-gen1.xax`. Binary stdin/argv are implemented within host bounds; JSON xax-construct-v1 and full CUM prepare remain unsupported. Full mission readiness is false.

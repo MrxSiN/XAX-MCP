@@ -19,7 +19,7 @@ prepare compatibility is claimed.
 
 | Component | Certified scope |
 |---|---|
-| XAX dependency | `af376e8a8a1ac5635bcad459cb7063ef0b326430`, exact seed SHA-256 `aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79`; `xax-native-file-v1` |
+| XAX dependency | Commit and seed SHA-256 in [`native/xax-dependency.json`](../native/xax-dependency.json); `xax-native-file-v1` |
 | Platform | Windows x86-64, local host and windows-2022 workflow |
 | MCP | Handshake STDIO through 2025-11-25; no 2026-07-28 or HTTP support |
 | Generic client | External PowerShell 7 process client, 28 checks; CI fixture 51 exchanges |
