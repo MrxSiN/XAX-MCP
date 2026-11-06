@@ -21,7 +21,14 @@ and [release identities](../native/release-status.json) before extending it.
 Source-written/verified/compiled/executed/measured are not release acceptance.
 Keep CUM transformations/full prepare, registered external tools, typed data layouts,
 compiler cancellation and comprehensive crash/pressure/escape work separate.
-This task keeps changes local and does not push or publish.
+Implementation commit `1e584cdfb00fe3230855b82b92eda3c63a50e807` is pushed to `main`.
+[Windows CI run 41314738774](https://github.com/MrxSiN/XAX-MCP/actions/runs/41314738774)
+passed all steps and uploaded the 0.10 preview and evidence artifacts. The
+[new CI record](evidence/native-executor-ci-41314738774.json) supplements the original
+local-only evidence without rewriting it: 92 client exchanges, 64 source records,
+15 probes, deterministic builds, timeout and launcher-termination cleanup passed.
+Release acceptance remains false. Review [ADR-0011](adr/0011-binary-stdin-and-explicit-argv.md)
+before changing input, argument or resource supervision semantics.
 
 ## Earlier state
 

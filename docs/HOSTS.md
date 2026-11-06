@@ -7,7 +7,7 @@ directory per client. The server implements legacy handshake MCP through 2025-11
 
 ## Codex
 
-The installed **codex-cli 0.164.0-alpha.11.1** successfully ran add/get/list/remove in a fresh isolated configuration;
+On 2026-10-27, **codex-cli 0.164.0-alpha.11.1** successfully ran add/get/list/remove in a fresh isolated configuration;
 [the evidence](evidence/native-windows-codex-registration-20261027.json) does not claim model-driven invocation.
 The [official MCP configuration reference](https://developers.openai.com/codex/mcp) documents native STDIO command,
 arguments and environment. The [TOML example](../examples/hosts/codex-config.toml) uses that syntax.
@@ -24,7 +24,7 @@ negotiates a supported protocol or that a model selects a tool; verify discovery
 
 ## Claude Code / Desktop
 
-Current Claude applications were unavailable here. These are **unverified current-host examples**, reviewed against
+Claude applications were unavailable during the recorded registration audit. These are **unverified current-host examples**, reviewed against
 [Claude Code's official MCP guide](https://code.claude.com/docs/en/mcp); the generic STDIO client is the executed
 interoperability evidence. Do not reuse older SDK/host test counts as certification of this version.
 
@@ -43,6 +43,16 @@ session fixture and expected response fields are in [native-sessions.json](../te
 CI contains external PowerShell process-client orchestration; every server operation runs in native XAX.
 No maintained SDK is installed or required by this server.
 
+For 0.10, rediscover [tools-v2](../schemas/tools-v2.json). With the host's execution
+grant, `xax_execute` accepts `{"stdin_hex":"00ff0a","args":["","one two","Unicode Ω"]}`.
+`args` excludes argv[0]; `{}` retains empty stdin/no extra arguments. Returned
+stdout/stderr are separate hex bytes with resource observations. Treat MCP
+`isError` as failure even if a child exit is also available; a nonzero child exit
+alone is an observed result. [Bounds and failure classes](NATIVE_EXECUTION_INCREMENT.md)
+are host-owned. Typed entry layouts, arbitrary executable launch and CUM's full
+prepare workflow remain unavailable. The [passing generic-client CI run](evidence/native-executor-ci-41314738774.json)
+does not establish model-driven Codex/Claude interoperability.
+
 ## Troubleshooting and tool choice
 
 * `denied_capability`: check host flags and all three compiler/store/work environment variables.
@@ -52,6 +62,10 @@ No maintained SDK is installed or required by this server.
   never silently rebase an edit. Zero expected roots and unknown properties are invalid.
 * `unsupported`: typed runtime I/O, JSON construction, general query/paging, xax_result, Linux, HTTP and modern MCP
   are not implemented. Report the limitation; do not switch to an unrestricted fallback.
+* `invalid_request` on execution: check even-length hex, argument types, Unicode/NUL,
+  unknown fields and host bounds. Binary stdin/argv are supported; typed layouts are separate.
+* `cpu_limit`, `wall_timeout` or `output_limit`: execution exhausted a host budget.
+  Partial captures are withheld; tool arguments cannot increase limits.
 
 Optional [agent guidance](../agent-guidance/AGENTS.md) (copy as `AGENTS.md` or `CLAUDE.md`) can steer selection.
 It cannot change a hosted model's internal tools or enforce selection by itself. Host owners control competing tools

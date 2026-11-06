@@ -32,3 +32,8 @@
 `agent-guidance/` holds optional guidance for agents that *use* the server; this file is for agents that develop it.
 
 Current native pin: see `native/xax-dependency.json` (`xax-native-file-v1`); sources are `native/xax-mcp-native-gen2.xax` and `native/xax-mcp-sandbox-gen1.xax`. Binary stdin/argv are implemented within host bounds; JSON xax-construct-v1 and full CUM prepare remain unsupported. Full mission readiness is false.
+
+Current evidence: local acceptance and clean-package records plus hosted run
+41314738774 at implementation commit `1e584cdfb00fe3230855b82b92eda3c63a50e807`.
+See `docs/EVIDENCE.md` and ADR-0011. Passing CI and uploaded preview artifacts do
+not change `release_ready` or full CUM prepare to true.

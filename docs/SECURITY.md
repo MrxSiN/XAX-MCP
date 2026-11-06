@@ -68,3 +68,7 @@ external-tool launcher or full CUM prepare is exposed.
 External PowerShell/Node verification and semantic transport packing are operator
 orchestration only. Every installed request-path component and synthetic worker is
 canonical/native XAX. Historical evidence remains append-only.
+
+[Hosted Windows CI](evidence/native-executor-ci-41314738774.json) also passed the
+synthetic confinement, budget and live-worker launcher-termination gates. It does
+not certify the untested security and crash scenarios listed above.

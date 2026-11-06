@@ -5,7 +5,8 @@ Date: 2026-10-27. Status: accepted for repository ownership; native-only toolcha
 `meaning is source`: a verified canonical `.xax` store is XAX source. Earlier wording that this repository
 contained "no source code" while holding those stores was incorrect. The server, sandbox and application
 fixtures belong in XAX-MCP. Their canonical stores in `native/` are authoritative application state.
-The schema snapshot is `schemas/tools-v1.json`; messages and mutation records remain transport.
+The schema snapshot at this decision was `schemas/tools-v1.json`; the current
+snapshot is `schemas/tools-v2.json`. Messages and mutation records remain transport.
 
 The dependency direction remains XAX-MCP -> XAX. Generic graph construction, verification, workspace mutation,
 native compilation and file-command contracts belong upstream. Existing upstream `compiler/integration/mcp`

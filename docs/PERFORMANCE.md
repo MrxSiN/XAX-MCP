@@ -10,6 +10,11 @@ busy worker consumed 5.015625 CPU seconds, with 15.625 ms observed overshoot.
 Its wall duration was 6.797 seconds under concurrent local acceptance work. A
 10-second wall timeout is a separate budget; requested 5 ms sampling is not a hard
 scheduling-latency bound. Compilation/setup are excluded from worker duration.
+The [hosted CI record](evidence/native-executor-ci-41314738774.json) separately
+identifies its response/timing artifacts and actual resource observations. Those
+runner samples are acceptance evidence, not comparable hardware benchmarks. The
+[0.10 local extracted-package check](evidence/native-executor-clean-package-20261101.json)
+also exercised 128 KiB stdin and both output streams with an empty parent PATH.
 
 ## 0.9 native observations — 2026-10-27 (historical)
 
@@ -27,8 +32,8 @@ gates. These measurements are separate from R4 generated-code and deferred AI-to
 
 Earlier sections below concern historical prototypes.
 
-> **Historical (0.5.x Python prototype).** The deployed 0.8.0 server is native and has different (protocol-only and
-> compiler-backed) measurements in [NATIVE.md](NATIVE.md).
+> **Historical (0.5.x Python prototype).** The import/warm-server analysis below concerns
+> the retired implementation. Current native behavior is documented in [NATIVE.md](NATIVE.md).
 
 These are MCP tool round trips on one host. They are not XAX generated-code (R4) benchmarks, and they are not the
 AI-token efficiency milestone.

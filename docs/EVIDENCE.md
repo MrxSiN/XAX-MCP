@@ -18,7 +18,11 @@ Source-written, verified, compiled, executed, tested and measured are separate
 states. Release acceptance is false. CUM transformations/full prepare, registered
 external tools, typed layouts, exhaustive crash/pressure/escape coverage and
 current desktop-host interoperability are not established by passing stdin/argv.
-Only local work is performed; no push, remote package or new hosted CI is claimed.
+The original local records predate the implementation push and remain unchanged.
+Subsequent [Windows CI evidence](evidence/native-executor-ci-41314738774.json) records
+passing run 41314738774 at commit `1e584cdfb00fe3230855b82b92eda3c63a50e807`,
+92 client exchanges, native replay/rebuild gates, timeout/launcher cleanup and
+uploaded preview/evidence artifact identities. CI success does not imply release acceptance.
 The [clean extracted package check](evidence/native-executor-clean-package-20261101.json)
 also passed with an empty parent PATH and only its bundled pinned compiler.
 
@@ -42,7 +46,7 @@ All dated sections below describe earlier builds. Their failing observations rem
 only by the retested cases above. See [current readiness](WINDOWS_READINESS.md).
 
 
-## 2026-10-27 current audit
+## 2026-10-27 audit (historical)
 
 [Clean Windows CI smoke](evidence/native-windows-ci-smoke-40443571319.json), GitHub run 40443571319 at commit
 `7eb687d`, passed native artifact identities, the STDIO replay and confined execution returning 136. This is
@@ -64,7 +68,7 @@ independent oracle), **MEASURED** (raw samples recorded), **STRUCTURAL** (presen
 to end), **PROTOTYPE** (works for a narrow case), **UNIMPLEMENTED**.
 
 Evidence files are append-only. A new pin, build or capability writes a new file; older files are never edited.
-Raw samples for the current build are in `docs/evidence/native-windows-x86_64-build-3e9b0c2.json` (this pin: new
+Raw samples for the historical 0.8 build are in `docs/evidence/native-windows-x86_64-build-3e9b0c2.json` (that pin: new
 identities, the native decoder's byte-identity check, test counts),
 `docs/evidence/native-windows-x86_64-chain-3e9b0c2.json` (the chain re-run with a native compiler rebuilt at the pin),
 `docs/evidence/native-windows-x86_64-native-build-parity-3e9b0c2.json` (the native compiler running the PE stage on
@@ -146,6 +150,6 @@ Do not reinterpret those runs as evidence for the native server. The native serv
 narrow prototype, only its Windows execution path runs anything, and that path has not been reviewed as a security
 boundary.
 
-Current clean-package evidence: [fresh native-only extraction](evidence/native-windows-clean-package-20261027.json), 28 checks with empty runtime PATH; [raw round trips](evidence/native-windows-roundtrips-20261027.json). These files concern 0.9 and do not alter historical records.
+Historical 0.9 clean-package evidence: [fresh native-only extraction](evidence/native-windows-clean-package-20261027.json), 28 checks with empty runtime PATH; [raw round trips](evidence/native-windows-roundtrips-20261027.json). These files do not alter historical records.
 
 [Windows CI run 40451172993](https://github.com/MrxSiN/XAX-MCP/actions/runs/40451172993) at implementation commit a9d285dee197864e17351bbf61801cc881dcaa0f passed every job step. [Recorded run/jobs/artifact identities](evidence/native-windows-ci-rebuild-40451172993.json) preserve the clean-run scope. [Oversized-line rejection and resynchronization](evidence/native-windows-oversize-20261027.json) is an additional local EXECUTED check.

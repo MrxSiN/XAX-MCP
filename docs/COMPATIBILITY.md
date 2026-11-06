@@ -11,9 +11,17 @@ return explicit tool errors. Bounds are host-owned capabilities, not compiler li
 Canonical sources are server gen2 and launcher gen1. Replay the 46-record base
 manifest, 15 server-increment records and three launcher records; every candidate
 requires native verification. See [the contract](NATIVE_EXECUTION_INCREMENT.md) and
-[local evidence](evidence/native-executor-input-argv-20261101.json). No new upstream
-seed, hosted CI run, published package, desktop-host certification or full CUM
-prepare compatibility is claimed.
+[local evidence](evidence/native-executor-input-argv-20261101.json). The pushed
+implementation passed [Windows CI run 41314738774](https://github.com/MrxSiN/XAX-MCP/actions/runs/41314738774)
+and produced a 0.10 preview artifact; [run evidence](evidence/native-executor-ci-41314738774.json)
+records the identities and checks. No new upstream seed, desktop-host certification,
+production release acceptance or full CUM prepare compatibility is claimed.
+
+For a future XAX upgrade, pin the exact native seed and file contract, change embedded
+identity through verified exact-root transactions, and rerun the native workflow.
+Record fresh source/compiler/artifact identities and new evidence; update the pin
+in CI, developer instructions and current guides together. The SDK-era upgrade
+procedure below is historical and does not apply to this preview.
 
 ## 0.9.0+native — historical Windows preview
 
@@ -49,13 +57,13 @@ The XAX checkout was updated to `fdc7312d60e12b6e784d920217f09df535090d55`; its 
 the embedded pin. Syncing the checkout does not declare that revision compatible or silently repin the server.
 The native compiler used above is recorded by exact digest, not represented as current `main`.
 
-Current CI checks this repository's native artifacts and transport data without installing Python or SDKs.
-It does not rebuild against XAX or rerun the historical SDK suite. Current MCP `2026-07-28` is unsupported;
+At that audit, CI checked native artifacts and transport data without installing Python or SDKs.
+It did not rebuild against XAX or rerun the historical SDK suite. MCP `2026-07-28` remains unsupported;
 Codex/Claude current-version adoption has not been re-certified. The following release rows are historical
 certifications, retained unchanged. See [current readiness](WINDOWS_READINESS.md) and
 [raw observations](evidence/native-windows-x86_64-transaction-construction-20261027.json).
 
-## Current release
+## Historical native release (0.8.0)
 
 | xax-mcp | XAX commit | XAX host contract | Toolchain fingerprint (sha256) | mcp SDK (test client) | Python (test client and offline authors only) | OS / arch | Result |
 |---|---|---|---|---|---|---|---|
@@ -119,7 +127,7 @@ work, not as descriptions of 0.7.0. The implementation remains in git history.
 | 0.2.0 | `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183` (2026-10-08) | r1 | `cdf3e5868810fb47884391cbe60fe7c79589ca8c0d14979644223f1dce012a7b` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 38/38 tests pass on both, sandbox required |
 | 0.1.0 | `01ad841c76416fc741dd1386b12124904924c10d` (2026-10-08) | — | `2d5b1f3be0c6c40f394a1e6a109239d38e2b9abc2634b02fbb21cffae172392f` | 2.3.0 | 3.13.16, 3.11.17 | Linux 6.18 x86-64 | 36/36 tests pass on both, sandbox required |
 
-## Hosts
+## Historical host observations (0.8.0 and earlier)
 
 | Host | Version | Verified |
 |---|---|---|
@@ -134,7 +142,7 @@ No model-driven host session (an agent choosing the tools) has been recorded. Th
 for the narrow seed/edit case, `xax_construct` needs a host-granted decoder and is exercised on Windows only, and
 execution is a Windows prototype, so a model-driven construct/build/execute loop cannot be claimed.
 
-## Upgrading XAX
+## Historical SDK-era XAX upgrade procedure
 
 1. Check out the new immutable XAX commit (it must carry `compiler/integration/mcp`) and record its full hash.
 2. Verify the host contract (`xax_contract.HOST_CONTRACT`, `HOST_CONTRACT_MINOR`) and the interfaces the build
@@ -143,7 +151,7 @@ execution is a Windows prototype, so a model-driven construct/build/execute loop
    (`fingerprint.py` in `compiler/integration/mcp` recomputes it from a checkout).
 4. Rebuild with native programs, not an interpreter: decode each committed carrier with the native decoder, then build
    each PE with `xaxc build <store> <artifact> <prov>` directly on the decoded store (the store root is a resolved
-   snapshot, so no request needs to be committed). The exact commands are in [NATIVE.md](NATIVE.md#build). At 0.8.0 the
+   snapshot, so no request needs to be committed). Those commands are in the 0.8 `docs/history/NATIVE_0_8.md` in git history. At 0.8.0 the
    executor artifact rebuilt byte for byte this way; the server artifact is the same size and behaviorally equivalent
    but not byte-identical because it omits the reference guard-page stack probe (that codegen parity is the narrowed
    B1 item), so the committed server PE remains the reference `xax_build.build` output. Changing a program is a

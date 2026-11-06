@@ -29,10 +29,11 @@ prevents concurrent processes from sharing compiler scratch and releases automat
 
 **EXECUTED:** retained native 0.10 acceptance and failure observations are in
 [the increment evidence](docs/evidence/native-executor-input-argv-20261101.json).
-The historical 0.9 baseline includes 28 local checks. Updated CI orchestration replays
-51 base request/response exchanges, all 46 application-source base
-transactions plus 18 increment records, native fixtures and reproducible builds. A native sleeping program
-was terminated at approximately 10 seconds. These observations do not establish complete sandbox hardening.
+The 0.10 Windows CI run passed 92 client exchanges, 64 verified source-transaction
+replays, 15 native probes and two byte-identical builds of each executor. It also
+checked wall timeout and live-worker cleanup after launcher termination. The
+[recorded run and artifact identities](docs/evidence/native-executor-ci-41314738774.json)
+remain separate from full release acceptance and complete sandbox hardening.
 
 [New graph and replay](examples/native-arithmetic/README.md) ·
 [Recorded client evidence](docs/evidence/native-windows-x86_64-verified-construction-20261027.json) ·
@@ -73,6 +74,8 @@ No new non-XAX implementation has been added to either repository; upstream's hi
 remain outside this deployed path. [Compatibility](docs/COMPATIBILITY.md) · [Security](docs/SECURITY.md) ·
 [Evidence](docs/EVIDENCE.md) · [Handoff](docs/HANDOFF.md) · [Release status](native/release-status.json).
 
-The [clean-package audit](docs/evidence/native-windows-clean-package-20261027.json) also passed all 28 checks after fresh extraction outside both checkouts, with the bundled native seed and an empty runtime PATH.
-
-[Windows CI run 40451172993](https://github.com/MrxSiN/XAX-MCP/actions/runs/40451172993) passed from clean checkouts, including native rebuilds, 51 protocol exchanges, timeout enforcement and the downloadable preview ZIP.
+The [0.10 clean-package check](docs/evidence/native-executor-clean-package-20261101.json)
+passed after local extraction with the bundled native seed and an empty parent PATH.
+[Windows CI run 41314738774](https://github.com/MrxSiN/XAX-MCP/actions/runs/41314738774)
+also passed and uploaded the 0.10 preview ZIP. The extracted local package and the
+hosted artifact have separately recorded identities; neither is a production release.

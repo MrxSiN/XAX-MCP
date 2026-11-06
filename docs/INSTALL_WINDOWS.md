@@ -5,10 +5,14 @@ read [the remaining gates](WINDOWS_READINESS.md) before granting mutation or exe
 
 ## Preview ZIP
 
-The local 0.10 increment has not been pushed or published. Use this checkout and
-the pinned rebuild below. The updated native workflow can assemble a
-`xax-mcp-0.10.0-windows-x86_64-preview` ZIP when an operator runs it; no such remote
-run is claimed here. Historical 0.9 packages do not contain the stdin/argv upgrade.
+[Windows CI run 41314738774](https://github.com/MrxSiN/XAX-MCP/actions/runs/41314738774)
+passed for implementation commit `1e584cdfb00fe3230855b82b92eda3c63a50e807` and uploaded
+`xax-mcp-0.10.0-windows-x86_64-preview`. Download that named artifact from the run
+and extract its inner ZIP. GitHub authentication and artifact retention may affect
+availability; a source checkout and pinned rebuild remain supported. See the
+[run/artifact identities](evidence/native-executor-ci-41314738774.json). This is a
+preview artifact, not production release acceptance. Historical 0.9 packages do not
+contain the stdin/argv upgrade.
 Keep `native/xax-mcp-native.exe` and `native/xax-mcp-sandbox.exe` together. A workflow
 ZIP includes the pinned compiler at `xax/xaxc-windows-x86_64.exe`; no runtime language
 helper is required.
@@ -113,4 +117,6 @@ and delete only the installation/private work directories you created. No servic
 Historical 0.9 preview build: [Windows CI run 40451172993](https://github.com/MrxSiN/XAX-MCP/actions/runs/40451172993), artifact xax-mcp-0.9.0-windows-x86_64-preview.
 The local 0.10 archive was freshly extracted and exercised with an empty PATH and
 its bundled pinned compiler: [package evidence](evidence/native-executor-clean-package-20261101.json).
-No 0.10 remote upload is claimed. Source and pinned rebuild instructions remain available independently.
+The hosted 0.10 artifact was assembled and uploaded in the passing run linked above.
+Its GitHub artifact digest identifies the outer artifact archive; it is distinct
+from the inner ZIP and the locally extracted package's recorded digest.

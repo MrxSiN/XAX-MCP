@@ -2,6 +2,10 @@
 
 Date: 2026-10-27. Status: implemented for the narrow 0.9 Windows preview.
 
+Retained in 0.10. [ADR-0011](0011-binary-stdin-and-explicit-argv.md) extends the
+execution boundary with binary stdin/argv and measured resource supervision;
+general typed layouts and result paging remain unsupported.
+
 Use the immutable upstream native Windows seed and xax-native-file-v1, keeping the compiler's generic seed/hash
 contract upstream and all MCP application semantics here. Canonical application source is edited through native
 XAXEDIT1 transactions; transport carries typed edits, never authoritative source. Historical JSON construction

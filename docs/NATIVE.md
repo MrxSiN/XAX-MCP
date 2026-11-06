@@ -76,6 +76,10 @@ observe argv, binary EOF/streams, environment and confinement; CPU enforcement i
 measured rather than inferred from configured job flags.
 
 Source verification does not establish OS security or full release readiness.
+The pushed implementation also passed [Windows CI run 41314738774](https://github.com/MrxSiN/XAX-MCP/actions/runs/41314738774),
+including all source/probe replays, deterministic builds and runtime gates. The
+[CI record](evidence/native-executor-ci-41314738774.json) preserves run/artifact
+identities and downloaded observations separately from the earlier local evidence.
 Asynchronous cancellation, in-flight server/compiler crash cleanup, exhaustive
 resource pressure and independent escape review remain open. CUM transformations,
 typed layouts, registered external tools and full prepare are separate capabilities.

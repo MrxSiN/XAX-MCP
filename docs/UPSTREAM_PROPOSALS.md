@@ -6,8 +6,14 @@ Windows process APIs in canonical XAX graphs. It needs no XAX/BBC change. Native
 objects are the implemented authoring route. Historical Linux/SDK claims below do
 not establish current native Windows typed layouts or full CUM prepare.
 
-> **Historical (0.5.x Python prototype).** The central proposal is still current: a native, versioned XAX compiler
-> service is the next step for the native 0.8.0 server's compiler-backed prototype ([NATIVE.md](NATIVE.md)).
+> **Historical (0.5.x Python prototype).** The proposals, SDK APIs and Linux claims
+> below retain their original scope. The current Windows preview uses the native
+> file contract in [NATIVE.md](NATIVE.md), not a compiler service or SDK runtime.
+
+The 0.10 increment passed [hosted CI](evidence/native-executor-ci-41314738774.json)
+without an upstream compiler change. Typed layouts, registered external-tool
+authority and full CUM prepare remain separate capability gaps; they must not be
+inferred from the historical P1 argv or typed-framing entries below.
 
 These were the smallest general upstream interfaces that would remove limitations of this adapter. They are now
 upstream decisions in `MrxSiN/XAX`, committed as `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183` and merged into XAX `main`

@@ -28,10 +28,11 @@ supersedes only the cases actually retested.
 | Output truncation treated as success | Exact combined budget passes; one-byte-over and both floods return explicit errors |
 | Unknown cleanup/measurement presented as success | Locked-file cleanup fails explicitly; simulated native launcher statuses omit unknown observations |
 
-The historical 0.9 generic client recorded **28 EXECUTED checks**, with no blocker status in that run. The workflow's
-transport fixture contains 46 sequential exchanges plus five concurrency exchanges. CI replays all 46 canonical
-application-source base edits; the 0.10 increment adds 15 server and three launcher records, with verification
-of every candidate and native deterministic rebuilds. The timeout program
+The 0.10 local and hosted workflows passed **92 client exchanges**, including the
+46 sequential and five concurrency baseline exchanges. CI replays 46 canonical
+application-source base edits, 15 server and three launcher increment records,
+verifies every candidate, replays/rebuilds 15 native probes, and builds both
+executors twice identically. The timeout program
 calls Windows `Sleep(60000)` from XAX and is terminated after approximately 10 seconds with timeout flag 1.
 
 ## Remaining gates
@@ -57,6 +58,7 @@ The protocol baseline is the official
 [2025-11-25 STDIO specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports).
 The separate [2026-07-28 version](https://modelcontextprotocol.io/specification/2026-07-28) remains open work.
 
-[Windows CI run 40451172993](https://github.com/MrxSiN/XAX-MCP/actions/runs/40451172993) is historical 0.9 evidence.
-The 0.10 workflow and local acceptance checks are updated; this task does not push,
-publish a package, or claim a new GitHub-hosted CI run.
+[Windows CI run 41314738774](https://github.com/MrxSiN/XAX-MCP/actions/runs/41314738774)
+passed for the pushed 0.10 implementation, including timeout, launcher termination
+and preview artifact upload. [Run and downloaded evidence observations](evidence/native-executor-ci-41314738774.json)
+record that scope. It does not close the remaining release gates above.

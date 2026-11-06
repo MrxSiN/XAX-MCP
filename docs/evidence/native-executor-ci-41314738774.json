@@ -1,0 +1,176 @@
+{
+  "schema": "xax-mcp-ci-evidence-v1",
+  "recorded": "2026-11-06",
+  "label": "EXECUTED",
+  "provenance": "Written after the run from GitHub run/job/artifact metadata and the downloaded native-windows-evidence artifact. Supplements native-executor-input-argv-20261101.json without rewriting it.",
+  "run": {
+    "id": 41314738774,
+    "sha": "1e584cdfb00fe3230855b82b92eda3c63a50e807",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/MrxSiN/XAX-MCP/actions/runs/41314738774",
+    "created_at": "2026-11-01T14:09:10Z",
+    "updated_at": "2026-11-01T14:11:40Z"
+  },
+  "jobs": [
+    {
+      "id": 124872275410,
+      "name": "windows-native",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 41314738774,
+      "started_at": "2026-11-01T14:09:12Z",
+      "completed_at": "2026-11-01T14:11:39Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Check out the immutable XAX native dependency independently",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Replay semantic transactions and rebuild native programs twice",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Replay read-only STDIO protocol golden responses",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Construct, build, confine, reject invalid requests and isolate clients",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Verify native sandbox timeout enforcement",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Assemble the native-only Windows preview package",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10
+        },
+        {
+          "name": "Post Check out the immutable XAX native dependency independently",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 19
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 20
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 21
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": 13086692675,
+      "name": "xax-mcp-0.10.0-windows-x86_64-preview",
+      "bytes": 8435421,
+      "digest": "sha256:ef3beb64d0c1ce8ea271e8b60865a026ba94c0ac935de84af94308a553fdbdbe",
+      "expired": false,
+      "archive_download_url": "https://api.github.com/repos/MrxSiN/XAX-MCP/actions/artifacts/13086692675/zip"
+    },
+    {
+      "id": 13087041064,
+      "name": "native-windows-evidence",
+      "bytes": 36480,
+      "digest": "sha256:42380fbac2341bf22fcdcdb0845e19f91b61b908aa7f5b7a759d179281d5e964",
+      "expired": false,
+      "archive_download_url": "https://api.github.com/repos/MrxSiN/XAX-MCP/actions/artifacts/13087041064/zip"
+    }
+  ],
+  "checks": {
+    "source_transaction_replays": {
+      "base": 46,
+      "increment": 18,
+      "total": 64,
+      "log": "Verified 46 base + 18 increment exact-root edits, native probes and two byte-identical builds of each executor"
+    },
+    "native_probe_fixtures": 15,
+    "deterministic_builds": "server and launcher each rebuilt twice; executables and provenance byte-identical to committed artifacts",
+    "readonly_golden_responses": {
+      "count": 15,
+      "matches_committed": true
+    },
+    "client_exchanges": {
+      "count": 92,
+      "log": "Passed 92 native request/response checks, isolated directories, publication verification and crash lease recovery"
+    },
+    "wall_timeout": {
+      "result_bytes": 64,
+      "timeout_flag": 1,
+      "field_56": 1,
+      "stdout_bytes": 0,
+      "stderr_bytes": 0,
+      "step_seconds": 10
+    },
+    "launcher_termination": {
+      "cleanup_observed_ms": 7,
+      "metadata_published": false,
+      "stdin_removed": true,
+      "launcher_terminated": true,
+      "worker_image": "D:\\a\\XAX-MCP\\XAX-MCP\\build\\termination-sandbox\\sandbox-run\\prog.exe",
+      "child_survived": false,
+      "worker_pid": 6620,
+      "worker_alive_before_termination": true
+    }
+  },
+  "downloaded_evidence_files": {
+    "readonly.responses.ndjson": "c00e460c6f955dfa613ce9d14f831c634f10c948c0eabeb0d121d540b6c6fc8a",
+    "native-sessions.responses.ndjson": "4b08477a543c74030f57145872d6a652994b50c6d12cec83c81d7e4eb9c95acd",
+    "native-session-timings.json": "51bba3bc9406feb53edefe97b1b0ab599347db251171df35e79b56044dda0bc5",
+    "executor-termination.json": "48eebc0ed406507d87dc711e8baa644d66199bfae3811c35fc3277b1c04c3e19",
+    "timeout-sandbox/sandbox-result.bin": "d04f0de4ae9f6dccf68f72473c768de66122745dd3b3ed943b2eeb8a81dc1dcb",
+    "timeout-sandbox/sandbox-out.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timeout-sandbox/sandbox-err.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "scope": "Clean windows-2022 checkout of implementation commit 1e584cd; independent immutable XAX checkout; 64 verified exact-root source transaction replays; 15 native probe rebuilds; two byte-identical builds of each executor; 15 golden read-only responses; 92 client exchanges covering binary stdin, argv, stream separation, resource limits, environment, malformed input, bounds, cleanup, launcher status mapping and confinement; wall timeout; launcher-termination cleanup; 0.10 preview ZIP and evidence uploads.",
+  "not_established": [
+    "release acceptance (release_ready stays false)",
+    "full CUM prepare",
+    "model-driven Codex/Claude host interoperability",
+    "forced WinAPI measurement-failure injection (launcher status fixtures test response mapping only)"
+  ]
+}

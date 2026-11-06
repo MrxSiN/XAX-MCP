@@ -31,5 +31,11 @@ See [execution bounds and usage](NATIVE_EXECUTION_INCREMENT.md). General typed e
 layouts, environment/effects overrides, per-call quotas and artifact selection remain
 unsupported. Passing path text as an argument grants no filesystem capability.
 
-The schema upgrade changes `xax_construct` from the obsolete `{request: ...}` prototype to `{record: ...}`. Clients
+For example, call `xax_execute` with
+`{"stdin_hex":"00ff0a","args":["","one two","Unicode Ω"]}` after host authorization
+and MCP initialization. Omitted fields or `{}` preserve empty stdin/no extra argv.
+The child receives physical EOF, not a sentinel byte. Capture hex is binary data;
+decode it according to the application protocol, not as JSON-RPC or assumed UTF-8.
+
+The earlier 0.9 schema upgrade changed `xax_construct` from the obsolete `{request: ...}` prototype to `{record: ...}`. Clients
 must rediscover schemas. Its `idempotentHint` is false. The constant `generation:1` response was removed; compare roots.

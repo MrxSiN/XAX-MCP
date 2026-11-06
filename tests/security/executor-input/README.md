@@ -34,3 +34,5 @@ decline 2; diagnostic files must not be executed as programs.
 
 See [the contract](../../../docs/NATIVE_EXECUTION_INCREMENT.md) and
 [retained failures and results](../../../docs/evidence/native-executor-input-argv-20261101.json).
+All 15 fixtures were also replayed, verified and rebuilt in
+[hosted Windows CI](../../../docs/evidence/native-executor-ci-41314738774.json).

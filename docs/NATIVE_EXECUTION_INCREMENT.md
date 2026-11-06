@@ -5,6 +5,10 @@ graphs implement the server and launcher. The pinned compiler is unchanged.
 [Acceptance evidence](evidence/native-executor-input-argv-20261101.json) separates
 source-written, verified, compiled, executed, measured and release-accepted states.
 Release acceptance and full CUM prepare remain false.
+Implementation commit `1e584cdfb00fe3230855b82b92eda3c63a50e807` was subsequently
+pushed and passed [Windows CI run 41314738774](https://github.com/MrxSiN/XAX-MCP/actions/runs/41314738774).
+[New CI evidence](evidence/native-executor-ci-41314738774.json) records hosted gates
+and preview artifact identities; the original local observations remain unchanged.
 The earlier incomplete [baseline audit](evidence/native-executor-input-audit-20261101.json)
 is retained as historical evidence, not the state of this completed increment.
 
@@ -134,6 +138,9 @@ locked-file cleanup failure, launcher termination, stale roots, candidate reject
 replay and deterministic builds. Failed candidates and mistaken test expectations
 remain in the evidence. Status-only native fixtures exercise launcher failure
 classification; they do not claim forced WinAPI measurement-failure coverage.
+
+The [architecture decision](adr/0011-binary-stdin-and-explicit-argv.md) records why
+this remains a bounded current-artifact API rather than a general process launcher.
 
 ## Remaining gaps
 

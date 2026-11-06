@@ -14,10 +14,14 @@ in [NATIVE_EXECUTION_INCREMENT.md](NATIVE_EXECUTION_INCREMENT.md); they do not
 change XAX/BBC or implement the retired typed-data ABI. The material below concerns
 retired SDK prototypes.
 
+[ADR-0011](adr/0011-binary-stdin-and-explicit-argv.md) records the execution decision.
+[Hosted CI evidence](evidence/native-executor-ci-41314738774.json) confirms the
+current application replay/build path with the same pinned seed; no compiler
+own-source fixed point is implied.
 
-> **Historical (0.5.x Python prototype).** The native 0.8.0 server consumes XAX at build time
-> (`xax_construct`, `xax_build`) and, when the host grants it, spawns a native XAX compiler at runtime; it embeds no
-> compiler and no Python. See [NATIVE.md](NATIVE.md).
+
+> **Historical SDK contracts.** The Python interfaces and typed framing below describe
+> retired prototypes. Current requests use the native file contract above, not these APIs.
 
 Since commit `f38cbeea2b90e9b6a580417ce7efaa7d3d75a183`, XAX publishes a versioned integration surface: `xax_contract`
 (`xax-host-contract-v1`, ADR-225). XAX-MCP 0.3.0 and 0.3.1 require that contract at revision >= 2 (r2, ADR-231:
