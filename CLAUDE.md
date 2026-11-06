@@ -3,7 +3,14 @@
 ## Git
 - Commit and push directly to `main`.
 - Do not add Claude (or any AI tool) as a contributor: no `Co-Authored-By:` trailers, no session links, and no
-  "Generated with" lines in commit messages, PR descriptions, or code.
+  "Generated with" lines in commit messages, PR descriptions, or code. The only exception is a commit that does
+  nothing but record a benchmark the AI ran; that commit may carry one `Co-Authored-By:` trailer.
+- Do not push branches named after an AI tool (for example `claude/...`).
+- Write commit subjects and PR titles in plain English that says what changed for a reader, for example
+  "Let the native executor accept binary stdin and arguments". Skip internal codes (W3, S15, ADR numbers),
+  hashes and jargon in the title; put them in the body if they matter.
+- PR descriptions: start with one or two sentences on what changed and why. Then list how it was checked and
+  anything still missing. Use short paragraphs or bullets, not a wall of identifiers.
 
 ## Project rules
 - The deployed server and every runtime component are XAX. Canonical `.xax` semantic stores ARE application source
