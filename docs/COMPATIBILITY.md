@@ -1,6 +1,20 @@
 # Compatibility matrix
 
-## 0.10.0+native — current local Windows preview
+2026-11-10 gen3 [host-path validation](NATIVE_HOST_PATH_GUARD.md) intentionally
+requires existing drive-qualified absolute configured paths and rejects reparse
+components/ambiguous forms. Unsafe configured paths return `unsafe_host_path`;
+ordinary lease contention remains `workspace_busy`. Tool schemas, preview version
+string, legacy MCP and the deployment/compiler pin remain unchanged. Source roots
+and artifact hashes identify the security increment. No modern MCP/host-adoption
+or production release claim follows.
+
+2026-11-10: [memory-denial evidence](evidence/native-memory-commit-20261110.json)
+adds tests without changing the deployed pin, application roots, schemas or legacy
+STDIO contract. The Linux native compiler was an identified authoring tool only;
+the pinned Windows seed verifies/builds the results. Modern MCP and model-driven
+host interoperability remain unverified.
+
+## 0.10.0+native — 2026-11-01 baseline (historical)
 
 The XAX pin and native file contract are unchanged. `xax_execute` gains optional
 `stdin_hex` and `args` excluding argv[0]; omission preserves empty-input/no-extra-

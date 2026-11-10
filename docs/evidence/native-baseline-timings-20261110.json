@@ -1,0 +1,462 @@
+[
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 10.9551
+  },
+  {
+    "method": "tools/list",
+    "tool": null,
+    "ms": 0.3927
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_capabilities",
+    "ms": 0.3514
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 21.4045
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_build",
+    "ms": 47.2901
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 152.9187
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 13.1653
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_construct",
+    "ms": 29.2858
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 15.5169
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_construct",
+    "ms": 24.1613
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 16.4363
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_construct",
+    "ms": 25.7452
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 17.1296
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_construct",
+    "ms": 24.5918
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 16.1194
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_construct",
+    "ms": 24.4953
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 16.702
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_construct",
+    "ms": 25.6503
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 15.8682
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_construct",
+    "ms": 23.7116
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 16.3632
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_transaction",
+    "ms": 12.8865
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 12.3519
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_build",
+    "ms": 37.7326
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 106.2443
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 99.8124
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_construct",
+    "ms": 0.1219
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_result",
+    "ms": 0.0687
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 17.5941
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 17.5927
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_transaction",
+    "ms": 0.1225
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_build",
+    "ms": 0.0696
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 0.0683
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_construct",
+    "ms": 0.0789
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 16.5522
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 0.0946
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 0.2939
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_build",
+    "ms": 0.0704
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_transaction",
+    "ms": 0.0798
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_capabilities",
+    "ms": 0.1192
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 17.0594
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_transaction",
+    "ms": 31.5464
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 17.091
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 15.7811
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_construct",
+    "ms": 0.1289
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 12.1676
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 11.2903
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 0.1012
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 15.2684
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 0.2508
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_query",
+    "ms": 15.6585
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 18.0496
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 139.9826
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 106.3245
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 126.3882
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 188.6945
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 17.6415
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 123.0865
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 17.359
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 128.3846
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 16.8871
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 5199.1913
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 18.0873
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 360.5476
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 21.0991
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 372.827
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 16.354
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 371.8144
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 19.1727
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 368.1077
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 19.3024
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 138.5732
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 19.2656
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 35.9035
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 0.1043
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 0.2985
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 17.6499
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 113.0101
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 108.2849
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 108.9712
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 18.2592
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 32.7137
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 21.1979
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 66.0357
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 22.4472
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 68.1185
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 22.0392
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 72.4331
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 21.6732
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 76.4437
+  },
+  {
+    "method": "initialize",
+    "tool": null,
+    "ms": 17.161
+  },
+  {
+    "method": "tools/call",
+    "tool": "xax_execute",
+    "ms": 1158.8224
+  }
+]

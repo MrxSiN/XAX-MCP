@@ -1,0 +1,270 @@
+{
+  "results": [
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"bytes\":1852,\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"workspace\":\"ws_0\",\"function\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "bytes": 1852,
+            "ok": true,
+            "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+            "workspace": "ws_0",
+            "function": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+          }
+        }
+      },
+      "rejection_required": false,
+      "name": "ordinary-path"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "rejection_required": true,
+      "name": "work-leaf-junction"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "rejection_required": true,
+      "name": "work-ancestor-junction"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "rejection_required": true,
+      "name": "compiler-ancestor-junction"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "rejection_required": true,
+      "name": "store-ancestor-junction"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "rejection_required": true,
+      "name": "dot-component"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "rejection_required": true,
+      "name": "dotdot-component"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "rejection_required": true,
+      "name": "trailing-dot"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "rejection_required": true,
+      "name": "relative-work"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"bytes\":1852,\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"workspace\":\"ws_0\",\"function\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "bytes": 1852,
+            "ok": true,
+            "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+            "workspace": "ws_0",
+            "function": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+          }
+        }
+      },
+      "rejection_required": false,
+      "name": "valid-trailing-separator"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"bytes\":1852,\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"workspace\":\"ws_0\",\"function\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "bytes": 1852,
+            "ok": true,
+            "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+            "workspace": "ws_0",
+            "function": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+          }
+        }
+      },
+      "rejection_required": false,
+      "name": "valid-forward-slashes"
+    }
+  ],
+  "baseline": false,
+  "server": "D:\\GitHub\\XAX-MCP\\native\\xax-mcp-native.exe"
+}

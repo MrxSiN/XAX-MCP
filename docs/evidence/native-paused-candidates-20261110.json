@@ -1,0 +1,34 @@
+{
+  "schema": "xax-mcp-native-paused-candidates-evidence-v1",
+  "recorded": "2026-11-10",
+  "checkpoints": "native/candidates/20261110/checkpoints.json",
+  "default_source": "native/xax-mcp-native-gen3.xax",
+  "candidates_promoted": false,
+  "windows_seed_verified_sources": 7,
+  "pins_baseline_exchanges": 92,
+  "compiler_process_baseline_exchanges": 92,
+  "json_helper_cases": 160,
+  "retained_modern_semantic_exchanges": 25,
+  "independent_seed_inventory": {
+    "objects": 12,
+    "all_cids_kinds_references_match": true,
+    "text_structured_content_match": true
+  },
+  "known_failed_candidate": "native/candidates/20261110/server-modern-capabilities.xax",
+  "failed_response": {
+    "path": "docs/evidence/native-modern-capabilities-failure-20261110.bin",
+    "bytes": 9023,
+    "sha256": "ab4af6b10dd2a7fc29fe5e339b68d5eb7038bae10cb44578e8eea917450f4262"
+  },
+  "failure": "JSON decoder expected a comma at character 5304; 9023-byte response. Native verify/build are insufficient.",
+  "test_orchestration": "External PowerShell/Python independent clients and read-only StoreReader oracle; not retained as implementation in this repository",
+  "uncompleted": [
+    "request-level compiler cancellation",
+    "writable workspace child-file replacement races",
+    "DOS drive alias remapping",
+    "semantic selectors, root-bound pagination and typed function facts",
+    "capabilities framing and complete version reporting",
+    "pinned Windows XAXEDIT1 candidate replay, final integration and clean-package acceptance",
+    "current real desktop-client interoperability"
+  ]
+}

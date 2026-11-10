@@ -1,5 +1,19 @@
 # XAX-MCP
 
+Work paused on 2026-11-10. The [continuation prompt](CONTINUE_NATIVE_EVOLUTION.md)
+records unfinished file-race, compiler-cancellation, semantic API and modern MCP
+work. Archived experimental candidates are not the default gen3 deployment.
+
+2026-11-10: the [native configured-path guard](docs/NATIVE_HOST_PATH_GUARD.md)
+rejects configured reparse/ambiguous paths before compiler-backed work and
+rechecks them on every call. Preview packaging now includes source replay
+carriers and refuses existing staging/output. Release readiness remains false.
+
+2026-11-10: [native commit-memory probes](tests/security/memory-commit/README.md)
+observe a 320 MiB allocation denied by the 256 MiB job cap, with 64 MiB confined
+and unconfined positive controls. This is local test evidence; the server,
+dependency pin and preview release status are unchanged.
+
 A Windows x86-64 STDIO MCP server implemented as canonical XAX semantic programs. Version **0.10.0+native**.
 The supported construction/build/run loop works; this is a **preview**, and the full execution-plugin mission
 remains incomplete. See [remaining gates](docs/WINDOWS_READINESS.md).

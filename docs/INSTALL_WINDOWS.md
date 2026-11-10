@@ -1,5 +1,11 @@
 # Install and rebuild on Windows
 
+The gen3 [configured-path increment](NATIVE_HOST_PATH_GUARD.md) requires existing
+drive-qualified absolute compiler/seed/work paths without reparse components.
+Current source packaging includes `native/transactions` and refuses pre-existing
+staging/output. Historical hosted artifacts below retain their original gen2
+scope; no new hosted upload is claimed.
+
 This is a native-only **preview**, version 0.10.0+native. Use Windows x86-64. Full release readiness remains false;
 read [the remaining gates](WINDOWS_READINESS.md) before granting mutation or execution.
 
@@ -84,9 +90,9 @@ compiler exit. In particular status 2 is a decline, never success.
 $xaxCompiler = 'D:/Tools/XAX/compiler/bootstrap/windows/xaxc-windows-x86_64.exe'
 Set-Location D:/Tools/XAX-MCP
 New-Item -ItemType Directory -Force build/rebuild | Out-Null
-& $xaxCompiler verify native/xax-mcp-native-gen2.xax build/rebuild/server.diag
+& $xaxCompiler verify native/xax-mcp-native-gen3.xax build/rebuild/server.diag
 if ($LASTEXITCODE -ne 0) { throw 'Server verification rejected/declined' }
-& $xaxCompiler resolve native/xax-mcp-native-gen2.xax build/rebuild/server-snapshot.xax
+& $xaxCompiler resolve native/xax-mcp-native-gen3.xax build/rebuild/server-snapshot.xax
 if ($LASTEXITCODE -ne 0) { throw 'Server resolve rejected/declined' }
 & $xaxCompiler build build/rebuild/server-snapshot.xax build/rebuild/server.exe build/rebuild/server.prov
 if ($LASTEXITCODE -ne 0) { throw 'Server build rejected/declined' }
@@ -101,11 +107,11 @@ Get-FileHash native/xax-mcp-sandbox.exe,build/rebuild/sandbox.exe
 ```
 
 Both pairs and their provenance must match byte for byte. Replay the 20261027
-manifest followed by `native/transactions/20261101/manifest.json`'s server records;
+manifest followed by `native/transactions/20261110-host-paths/manifest.json`'s server records;
 replay its sandbox records separately from the seed. Verify every staged candidate
 before advancing to the next root. The original sandbox snapshot is historical;
 the new editable source requires resolve before build. CI additionally replays the
-46 base, 15 server-increment and three launcher semantic transactions and compares
+46 base, 16 server-increment and three launcher semantic transactions and compares
 the canonical source, resolved snapshot, executable and provenance. The trusted native compiler seed has a
 historical Python bootstrap, disclosed upstream; these application rebuilds invoke only native XAX.
 

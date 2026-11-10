@@ -1,0 +1,143 @@
+{
+  "schema": "xax-mcp-native-candidate-checkpoints-v1",
+  "recorded": "2026-11-10",
+  "state": "paused at user request",
+  "default_source": "native/xax-mcp-native-gen3.xax",
+  "default_unchanged_by_candidates": true,
+  "release_ready": false,
+  "full_mission_complete": false,
+  "continuation_prompt": "CONTINUE_NATIVE_EVOLUTION.md",
+  "deployed_compiler_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79",
+  "native_authoring_compiler_sha256": "a35fd59fc9effe08f58f6d1db0d2e951abbd56a065dc0dca729c9bc6f5ec793b",
+  "checkpoints": [
+    {
+      "path": "native/candidates/20261110/server-file-pins.xax",
+      "bytes": 1284541,
+      "sha256": "48b3abf403791d0b74b780f7bbe327221da390766c179a1ed17430a121418e99",
+      "root": "8653cd6040139ee2c80308ed4fb66a71e8464c520c1a2849520d5f7bddee9db7",
+      "base": {
+        "path": "native/xax-mcp-native-gen3.xax",
+        "bytes": 1279937,
+        "sha256": "21cf0eeae9c64c6f4db0045965269ee89c0dca84488050a6bd9feb09c3b167f9"
+      },
+      "base_root": "44f8e6b34a4bd3d50bfb670c1be6a73c9e5bfae7f701383f70eb51e37befd94d",
+      "native_batch": {
+        "path": "native/transactions/20261110-file-pins/server-file-pins.batch",
+        "bytes": 10632,
+        "sha256": "1d651ad38086bf8edd8d73e2548da8d9c74b2ff19010b955dc8d1112df23cd35"
+      },
+      "unchanged_objects": 3860,
+      "new_objects": 36,
+      "removed_objects": 23,
+      "windows_seed_verify": true,
+      "deployment_selected": false,
+      "pinned_windows_edit_transport_complete": false,
+      "status": "EXECUTED candidate: 92 exchanges; seven OS replacement denials; not promoted"
+    },
+    {
+      "path": "native/candidates/20261110/server-compiler-process.xax",
+      "bytes": 1290422,
+      "sha256": "95979436bffc3a46bd3b2e19f36b5c9101eeb8402026ee30570952b9aae7cd03",
+      "root": "4e1d313b828c4061e85f27f8dd2cfdcd07c03c604ccc54d279ec2d71dccab7f8",
+      "base": {
+        "path": "native/candidates/20261110/server-file-pins.xax",
+        "bytes": 1284541,
+        "sha256": "48b3abf403791d0b74b780f7bbe327221da390766c179a1ed17430a121418e99"
+      },
+      "base_root": "8653cd6040139ee2c80308ed4fb66a71e8464c520c1a2849520d5f7bddee9db7",
+      "native_batch": {
+        "path": "native/transactions/20261110-compiler-process/server-compiler-process.batch",
+        "bytes": 548487,
+        "sha256": "581291dde66b1d8d1fc55b1809ec92eae0c429b7707227268bbbc129487a7ead"
+      },
+      "unchanged_objects": 3880,
+      "new_objects": 30,
+      "removed_objects": 16,
+      "windows_seed_verify": true,
+      "deployment_selected": false,
+      "pinned_windows_edit_transport_complete": false,
+      "status": "EXECUTED candidate: 92 exchanges; compiler deadline and server-death cleanup; incoming request cancellation absent"
+    },
+    {
+      "path": "native/candidates/20261110/server-modern-mcp.xax",
+      "bytes": 1352426,
+      "sha256": "6f672cb35626bd4f78e9ae1b8160e9aeb16e38df0858261672a2aa34eed3e3c4",
+      "root": "c2754c01f0a30f3d235ebb07ed12c2f76ddc0b3c899d1a23ded807c926874053",
+      "base": {
+        "path": "native/candidates/20261110/server-compiler-process.xax",
+        "bytes": 1290422,
+        "sha256": "95979436bffc3a46bd3b2e19f36b5c9101eeb8402026ee30570952b9aae7cd03"
+      },
+      "base_root": "4e1d313b828c4061e85f27f8dd2cfdcd07c03c604ccc54d279ec2d71dccab7f8",
+      "native_batch": {
+        "path": "native/transactions/20261110-modern-mcp/server-modern-mcp.batch",
+        "bytes": 266962,
+        "sha256": "e28357d1467c583c352959812cb1ca1c2abd5fe17f9dbb49ec43399699537ecd"
+      },
+      "unchanged_objects": 3903,
+      "new_objects": 211,
+      "removed_objects": 7,
+      "windows_seed_verify": true,
+      "deployment_selected": false,
+      "pinned_windows_edit_transport_complete": false,
+      "status": "EXECUTED candidate: 25 modern/legacy exchanges; capabilities metadata unfinished"
+    },
+    {
+      "path": "native/candidates/20261110/server-semantic-inspect.xax",
+      "bytes": 1364682,
+      "sha256": "dec1f4c84d36b2da8813515d4f9646672479f984ad2b83f2f4227391c2ab4862",
+      "root": "d30c15dcb672863e7bbfe097a03ec951b8cf90921bca4d01d0bd56a195df4b0e",
+      "base": {
+        "path": "native/candidates/20261110/server-modern-mcp.xax",
+        "bytes": 1352426,
+        "sha256": "6f672cb35626bd4f78e9ae1b8160e9aeb16e38df0858261672a2aa34eed3e3c4"
+      },
+      "base_root": "c2754c01f0a30f3d235ebb07ed12c2f76ddc0b3c899d1a23ded807c926874053",
+      "native_batch": {
+        "path": "native/transactions/20261110-semantic-inspect/server-semantic-inspect.batch",
+        "bytes": 44701,
+        "sha256": "187f2258680ab299c232a542bf4193c33a25e16b06b1a1570e047074cc2fe8b9"
+      },
+      "unchanged_objects": 4105,
+      "new_objects": 46,
+      "removed_objects": 9,
+      "windows_seed_verify": true,
+      "deployment_selected": false,
+      "pinned_windows_edit_transport_complete": false,
+      "status": "EXECUTED candidate: 25 exchanges; 12 seed object records independently compared; paging absent"
+    },
+    {
+      "path": "native/candidates/20261110/server-modern-capabilities.xax",
+      "bytes": 1371366,
+      "sha256": "533baaf02d0543ccfb10d58824820ac694a1aa9a5c5d9b0e1f4cad1b53a0da3b",
+      "root": "c82ecce8d297c753b90553ab71e6340029315fdd8897c650bbc8179c29a6b020",
+      "base": {
+        "path": "native/candidates/20261110/server-semantic-inspect.xax",
+        "bytes": 1364682,
+        "sha256": "dec1f4c84d36b2da8813515d4f9646672479f984ad2b83f2f4227391c2ab4862"
+      },
+      "base_root": "d30c15dcb672863e7bbfe097a03ec951b8cf90921bca4d01d0bd56a195df4b0e",
+      "native_batch": {
+        "path": "native/transactions/20261110-modern-mcp/server-modern-capabilities.batch",
+        "bytes": 85908,
+        "sha256": "f6cabb2b574139b05e70b3149c8376bf7023723f3c37181e21237c388e5f03f7"
+      },
+      "unchanged_objects": 3816,
+      "new_objects": 372,
+      "removed_objects": 335,
+      "windows_seed_verify": true,
+      "deployment_selected": false,
+      "pinned_windows_edit_transport_complete": false,
+      "status": "FAILED runtime JSON framing; native verify and build passed; never deploy"
+    },
+    {
+      "path": "native/candidates/20261110/json-test.xax",
+      "bytes": 31975,
+      "sha256": "0dab77bd53a00bdd76b53fc2d036c3ebb8f5bce9c25bf9ea363f1846dea72bb0",
+      "root": "bc2f84fe4e4ca0231d818a1de115b4e7359f5ad914d0e47da1a5226c2e495190",
+      "windows_seed_verify": true,
+      "status": "EXECUTED separate native JSON helper test: 160 cases; original sixteen reserved keywords",
+      "deployment_selected": false
+    }
+  ]
+}

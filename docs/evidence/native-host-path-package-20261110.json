@@ -1,0 +1,53 @@
+{
+  "schema": "xax-mcp-native-host-path-package-v1",
+  "recorded": "2026-11-10",
+  "status": "EXECUTED locally",
+  "archive": {
+    "path": "D:/GitHub/XAX-MCP/build/xax-mcp-0.10.0-windows-x86_64-preview.zip",
+    "bytes": 8611957,
+    "sha256": "36368ec4157b830ea445828ec4e037f138637f29704ee2c6bd1a0972dd8f010f"
+  },
+  "fresh_extraction": "C:/Users/User/.codex/scratch/xax-mcp-20261110/clean-host-path-package-3776535064a84cadbe1c9e44bbe9f4e5",
+  "parent_path_empty": true,
+  "compiler_from_bundle": true,
+  "seed_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79",
+  "server_root": "44f8e6b34a4bd3d50bfb670c1be6a73c9e5bfae7f701383f70eb51e37befd94d",
+  "all_release_artifact_identities_match": true,
+  "all_source_replay_carriers_in_archive_match": true,
+  "source_records_replayed": 65,
+  "native_probes_rebuilt": 15,
+  "byte_identical_executor_builds_each": 2,
+  "golden_stdio_responses": 15,
+  "client_exchanges": 92,
+  "timeout_enforced": true,
+  "launcher_termination": {
+    "worker_alive_before_termination": true,
+    "worker_image": "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261110\\clean-host-path-package-3776535064a84cadbe1c9e44bbe9f4e5\\extracted\\build\\termination-sandbox\\sandbox-run\\prog.exe",
+    "stdin_removed": true,
+    "launcher_terminated": true,
+    "cleanup_observed_ms": 3,
+    "metadata_published": false,
+    "child_survived": false,
+    "worker_pid": 5140
+  },
+  "staging_reuse_rejected": true,
+  "archive_replacement_rejected": true,
+  "stale_root_only_test": {
+    "no_archive_published": true,
+    "no_subdirectories_created": true,
+    "sentinel_preserved": true,
+    "preexisting_root_only_rejected": true
+  },
+  "non_xax_program_files_in_archive": [],
+  "raw_client_transcript": {
+    "path": "docs/evidence/native-host-path-package-baseline-20261110.ndjson.gz",
+    "bytes": 29809,
+    "sha256": "3200fcbea3f8ee02440cbfd3c6a2d4e4fd910f1448e7b52e7f4c678593964315"
+  },
+  "raw_client_uncompressed_sha256": "1cc7c4da343c0e44f54b816f6614a12ed7640514de85b41fb838f488f16d0b48",
+  "external_orchestration": "Existing workflow blocks extracted outside repository; compiler location rebound to exact tested local seed for assembly; extracted run uses bundled compiler and empty PATH. No helper program is packaged.",
+  "reporting_note": "This tested archive captures source/security documentation and source-test evidence at assembly. Later supplemental reporting/package evidence remains outside that archive.",
+  "hosted_ci_executed": false,
+  "release_accepted": false,
+  "full_mission_complete": false
+}

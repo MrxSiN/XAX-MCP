@@ -1,0 +1,60 @@
+define @view_l
+object 4 0x0481020104c080800200
+end
+define @json_test_main
+(T0,T1,T2)->(T5,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2)
+N0 constant 0 -> T6
+N1 constant 4194368 -> T6
+N2 constant 12288 -> T5
+N3 constant 4 -> T5
+N4 call.foreign entity=e8cf5a7cb5283490c972afd87b89985a4a1f8e616e6d47b2326aa6c3061e6a58 N0 N1 N2 N3 P2 -> T3,T7,T2
+N5 heap.view N4 N4.R1 N4.R2 -> T3,T4,T2 [4194368,1]
+N6 constant 4294967286 -> T5
+N7 call.foreign entity=66106a0a4d2276820c66d380ccb8848324ef0f80182a2ed40897e09424a392c0 N6 P0 -> T6,T0
+N8 constant 4294967285 -> T5
+N9 call.foreign entity=66106a0a4d2276820c66d380ccb8848324ef0f80182a2ed40897e09424a392c0 N8 N7.R1 -> T6,T0
+N10 address.offset N5 -> T3 [4194304]
+N11 constant 4194304 -> T5
+N12 call.foreign entity=1b84d516577b3d9600567e232b782e2e1caf7900c3b757336549325a585fff77 N7 N5 N11 N10 N0 P1 N5.R2 -> T5,T1,T2
+N13 constant 4194304 -> T5
+N14 checked.load.bits.le N5 N13 N12.R2 -> T5,T2 [4,1]
+N15 constant 0 -> T5
+N16 checked.load.bits.le N5 N15 N14.R1 -> T5,T2 [4,1]
+N17 constant 4 -> T5
+N18 call.direct entity=@json_skip N5 N5.R1 N16.R1 N17 N14 -> T5,T3,T4,T2
+N19 int.zero.extend N17 -> T6
+N20 int.zero.extend N14 -> T6
+N21 constant 4294967296 -> T6
+N22 mul.wrap N20 N21 -> T6
+N23 bit.or N19 N22 -> T6
+N24 call.direct entity=@json_object_find N18.R1 N18.R2 N18.R3 N23 N16 -> T6,T3,T4,T2
+N25 int.truncate N24 -> T5
+N26 rotate.right N24 -> T6 [32]
+N27 int.truncate N26 -> T5
+N28 constant 4194312 -> T5
+N29 checked.store.bits.le N24.R1 N28 N18 N24.R3 -> T2 [4,1]
+N30 constant 4194316 -> T5
+N31 checked.store.bits.le N24.R1 N30 N25 N29 -> T2 [4,1]
+N32 constant 4194320 -> T5
+N33 checked.store.bits.le N24.R1 N32 N27 N31 -> T2 [4,1]
+N34 constant 4194324 -> T5
+N35 checked.store.bits.le N24.R1 N34 N16 N33 -> T2 [4,1]
+N36 address.offset N24.R1 -> T3 [4194312]
+N37 pointer.address N36 -> T6 [1]
+N38 constant 16 -> T5
+N39 address.offset N24.R1 -> T3 [4194336]
+N40 call.foreign entity=3a965abc286d0d3fcd1a4883853d79470c5bd78bff2de5a547ab259c51b29fe5 N9 N37 N38 N39 N0 N12.R1 N35 -> T5,T1,T2
+N41 resource.release N24.R2 N40.R2 -> T2
+N42 constant 0 -> T5
+N43 call.foreign entity=8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4 N42 N9.R1 -> T0
+ret N42 N43 N40.R1 N41
+T0 form3 ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b
+T1 form3 c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T4 form4 6e07cf197c4ff1ebe46f19c84ad2c1c74d7ea8f2cb15177e6e8f960d224cbc65
+T5 bits32
+T6 bits64
+T7 form4 933b152d7a3ae1cbd182fd6ece7825ad5a2536c7395b404382763b99acb94833
+end

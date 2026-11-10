@@ -45,7 +45,7 @@ jobs:
            Move-Item build/replay/next.xax build/replay/current.xax -Force
           }
           if((Get-FileHash build/replay/current.xax).Hash-ne(Get-FileHash native/xax-mcp-native-gen1.xax).Hash){throw 'Transaction replay differs from canonical source'}
-          $increment=Get-Content native/transactions/20261101/manifest.json -Raw|ConvertFrom-Json
+          $increment=Get-Content native/transactions/20261110-host-paths/manifest.json -Raw|ConvertFrom-Json
           foreach($kind in @('server','sandbox')){
            $chain=$increment.$kind;Copy-Item $chain.base "build/replay/$kind.current.xax" -Force
            foreach($record in $chain.records){
@@ -56,7 +56,7 @@ jobs:
            }
            if((Get-FileHash "build/replay/$kind.current.xax").Hash-ne(Get-FileHash $chain.final).Hash){throw "Increment replay differs: $kind"}
           }
-          Native @('resolve','native/xax-mcp-native-gen2.xax','build/rebuild/server-snapshot.xax')
+          Native @('resolve','native/xax-mcp-native-gen3.xax','build/rebuild/server-snapshot.xax')
           if((Get-FileHash build/rebuild/server-snapshot.xax).Hash-ne(Get-FileHash native/xax-mcp-native-snapshot.xax).Hash){throw 'Resolved snapshot differs'}
           foreach($attempt in 1..2){
            Native @('build','build/rebuild/server-snapshot.xax',"build/rebuild/server-$attempt.exe","build/rebuild/server-$attempt.prov")
@@ -81,7 +81,7 @@ jobs:
            Native @('resolve',$source,'build/rebuild/probe-snapshot.xax');Native @('build','build/rebuild/probe-snapshot.xax','build/rebuild/probe.exe','build/rebuild/probe.prov')
            if((Get-FileHash build/rebuild/probe.exe).Hash-ne(Get-FileHash $exe).Hash-or(Get-FileHash build/rebuild/probe.prov).Hash-ne(Get-FileHash $prov).Hash){throw 'Probe rebuild differs'}
           }
-          Write-Output 'Verified 46 base + 18 increment exact-root edits, native probes and two byte-identical builds of each executor'
+          Write-Output 'Verified 46 base + 19 increment exact-root edits, native probes and two byte-identical builds of each executor'
 
       - name: Replay read-only STDIO protocol golden responses
         shell: pwsh
@@ -274,14 +274,14 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
-          New-Item -ItemType Directory -Force build/package/native,build/package/xax,build/package/docs,build/package/schemas | Out-Null
-          Copy-Item native/* build/package/native/ -Exclude transactions -Recurse -Force
+          New-Item -ItemType Directory build/package,build/package/native,build/package/xax,build/package/docs,build/package/schemas | Out-Null
+          Copy-Item native/* build/package/native/ -Recurse -Force
           Copy-Item .xax-upstream/compiler/bootstrap/windows/xaxc-windows-x86_64.exe,.xax-upstream/compiler/bootstrap/windows/seed.json build/package/xax/
           Copy-Item README.md build/package/
           Copy-Item docs/* build/package/docs/ -Recurse -Force
           Copy-Item schemas/* build/package/schemas/
           Copy-Item examples,tests,agent-guidance build/package/ -Recurse -Force
-          Compress-Archive -Path build/package/* -DestinationPath build/xax-mcp-0.10.0-windows-x86_64-preview.zip -Force
+          Compress-Archive -Path build/package/* -DestinationPath build/xax-mcp-0.10.0-windows-x86_64-preview.zip
 
       - uses: actions/upload-artifact@v4
         with:

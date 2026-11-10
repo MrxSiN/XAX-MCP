@@ -1,0 +1,9 @@
+{"method":"initialize","params":{"capabilities":{},"clientInfo":{"name":"native-memory-evolution","version":"2026.11.10"},"protocolVersion":"2025-11-25"},"id":1,"jsonrpc":"2.0"}
+{"jsonrpc":"2.0","method":"notifications/initialized"}
+{"method":"tools/call","params":{"name":"xax_query","arguments":{}},"id":2,"jsonrpc":"2.0"}
+{"method":"tools/call","params":{"name":"xax_execute","arguments":{}},"id":3,"jsonrpc":"2.0"}
+{"method":"tools/call","params":{"name":"xax_transaction","arguments":{"record":"58415845444954315c8f5c28b78cae3f179a4f1ed072716846e46e968c3a23ed660c70638e4d44100102026b1b2b1e69744dd01338f100e69451a62ebc0ea1a7148ba35ed94c05180626000180808020808080a001"}},"id":4,"jsonrpc":"2.0"}
+{"method":"tools/call","params":{"name":"xax_query","arguments":{}},"id":5,"jsonrpc":"2.0"}
+{"method":"tools/call","params":{"name":"xax_execute","arguments":{}},"id":6,"jsonrpc":"2.0"}
+{"method":"tools/call","params":{"name":"xax_transaction","arguments":{"record":"58415845444954315c8f5c28b78cae3f179a4f1ed072716846e46e968c3a23ed660c70638e4d44100102026b1b2b1e69744dd01338f100e69451a62ebc0ea1a7148ba35ed94c05180626000180808020808080a001"}},"id":7,"jsonrpc":"2.0"}
+{"method":"tools/call","params":{"name":"xax_query","arguments":{}},"id":8,"jsonrpc":"2.0"}

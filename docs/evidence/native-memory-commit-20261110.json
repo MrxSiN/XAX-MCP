@@ -1,0 +1,216 @@
+{
+  "schema": "xax-mcp-native-memory-commit-evidence-v1",
+  "recorded": "2026-11-10",
+  "scope": "Local P0 baseline and native memory-allocation denial probes; full mission incomplete",
+  "checkout": {
+    "mcp_head": "27ffb9491bfe69000b3ce9744b2b689a4d594a3e",
+    "mcp_dirty_entries_at_start": 55,
+    "xax_head": "8c9ce91351b664b927df066d4c2ef549167ae0ef",
+    "xax_dirty_entries_at_start": 1236,
+    "published_0_10_commit_not_present_in_local_git_object_database": true,
+    "upstream_changed": false
+  },
+  "host": {
+    "os": "Microsoft Windows 11 Home Single Language",
+    "version": "10.0.26300.0",
+    "architecture": "AMD64",
+    "powershell": "7.6.9",
+    "native_authoring_host": "WSL2 Ubuntu Linux 6.18.33.2-microsoft-standard-WSL2 x86_64"
+  },
+  "deployment_dependency": {
+    "schema": "xax-mcp-native-dependency-v1",
+    "repository": "https://github.com/MrxSiN/XAX",
+    "commit": "af376e8a8a1ac5635bcad459cb7063ef0b326430",
+    "contract": "xax-native-file-v1",
+    "seed_path": "compiler/bootstrap/windows/xaxc-windows-x86_64.exe",
+    "seed_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79",
+    "compatible_range": "Only this immutable seed is tested; no moving main or other seeds certified",
+    "bootstrap": "Historical Python SDK; no bootstrap interpreter invoked for current application build/runtime",
+    "self_host": "Not claimed; native compiler own-source build declines"
+  },
+  "authoring_tool": {
+    "path": "D:\\GitHub\\XAX\\compiler\\bootstrap\\seed\\xaxc-linux-x86_64",
+    "sha256": "a35fd59fc9effe08f58f6d1db0d2e951abbd56a065dc0dca729c9bc6f5ec793b",
+    "xax_checkout_head": "8c9ce91351b664b927df066d4c2ef549167ae0ef",
+    "checkout_dirty": true,
+    "host": "Linux x86-64 under WSL2",
+    "role": "Native definition/replacement authoring only; not a deployment/compiler pin upgrade"
+  },
+  "claims": {
+    "source_authored_natively": true,
+    "structurally_verified": true,
+    "native_built": true,
+    "executed": true,
+    "behaviorally_tested": true,
+    "resource_measured": true,
+    "independently_reviewed": false,
+    "release_accepted": false,
+    "full_mission_complete": false
+  },
+  "baseline": {
+    "commands": "Entry .github/workflows/ci.yml run blocks: replay/rebuild, golden STDIO, native sessions, timeout/termination; extracted to external scripts and executed unchanged",
+    "source_transactions": 64,
+    "native_probes": 15,
+    "identical_application_builds_each": 2,
+    "client_exchanges": 92,
+    "readonly_responses": 15,
+    "timeout_enforced": true,
+    "launcher_termination": {
+      "worker_pid": 3432,
+      "worker_alive_before_termination": true,
+      "stdin_removed": true,
+      "cleanup_observed_ms": 3,
+      "metadata_published": false,
+      "child_survived": false,
+      "worker_image": "D:\\GitHub\\XAX-MCP\\build\\termination-sandbox\\sandbox-run\\prog.exe",
+      "launcher_terminated": true
+    },
+    "raw_responses_uncompressed_bytes": 7411346,
+    "raw_responses_sha256": "a2d013500b435fd5d0093e98714b33e59c14bc31c486dc1eed66aaa7aaa0c2d4",
+    "compressed_transcript": {
+      "path": "docs/evidence/native-baseline-20261110.ndjson.gz",
+      "bytes": 29872,
+      "sha256": "c42bd5b78a2ce9b37e05d83e153d8af08b864352d149aaeb5e1922404b7a9018"
+    },
+    "timings": {
+      "path": "docs/evidence/native-baseline-timings-20261110.json",
+      "bytes": 7783,
+      "sha256": "a4a55f957e126db74ea6c73e1c265abad0d3fb6b30975d2e5e3aac2464e0647b"
+    }
+  },
+  "new_probes": [
+    {
+      "name": "low",
+      "root": "5c8f5c28b78cae3f179a4f1ed072716846e46e968c3a23ed660c70638e4d4410",
+      "function": "026b1b2b1e69744dd01338f100e69451a62ebc0ea1a7148ba35ed94c05180626",
+      "requested_commit_bytes": 67108864,
+      "native_batch": {
+        "path": "native/transactions/20261110/memory-low.batch",
+        "bytes": 1095,
+        "sha256": "293a87ecb84682ee8d82f418294511f35b2d28c996391731d8eeced78a810414"
+      },
+      "artifacts": [
+        {
+          "path": "tests/security/memory-commit/memory-low.xax",
+          "bytes": 3478,
+          "sha256": "50252f029ac8a5023cf71e7a858994b37bd7afdb77f0c5b74b188b4f394e1f8b"
+        },
+        {
+          "path": "tests/security/memory-commit/memory-low.exe",
+          "bytes": 1536,
+          "sha256": "4dc280c584b55c2a5d4f41ef1a6580e3058c022ac415d782bc06cf29176bac53"
+        },
+        {
+          "path": "tests/security/memory-commit/memory-low.prov",
+          "bytes": 268,
+          "sha256": "77ce2bf948773525ced156f2bc5720b5fcf22fc6378bbad784a350fc9ab09865"
+        }
+      ],
+      "pinned_windows_verified": true,
+      "byte_identical_builds": 2
+    },
+    {
+      "name": "high",
+      "root": "26df6a1e33a626b9d20bbe5d2b35f95ab209d49bbe5af2269ba3b2f2819b5a0c",
+      "function": "1d3bbd657da3474d4b62f9a8f66894846c318dc8979e397558022d643b0f0c63",
+      "requested_commit_bytes": 335544320,
+      "native_batch": {
+        "path": "native/transactions/20261110/memory-high.batch",
+        "bytes": 1096,
+        "sha256": "6941f8d02298db31e7b384c60089320045aafed9d169b830bc80910b66abafc9"
+      },
+      "artifacts": [
+        {
+          "path": "tests/security/memory-commit/memory-high.xax",
+          "bytes": 3478,
+          "sha256": "2c0a2eff8089d3deb484bf4ccf09c70ee792aec968b28fbe35fe9bf4e8d4ab5b"
+        },
+        {
+          "path": "tests/security/memory-commit/memory-high.exe",
+          "bytes": 1536,
+          "sha256": "a4c8a031105e3917adc8f7a87f1db1d6c5a9bc58e175e7a39d6c0533789c0a4d"
+        },
+        {
+          "path": "tests/security/memory-commit/memory-high.prov",
+          "bytes": 268,
+          "sha256": "0c534a324e58c7d2f782bd64ca57d9a2bc65524ed26743bc18edda04a23559ad"
+        }
+      ],
+      "pinned_windows_verified": true,
+      "byte_identical_builds": 2
+    }
+  ],
+  "native_low_to_high": {
+    "carrier": {
+      "path": "native/transactions/20261110/memory-high.edit",
+      "bytes": 85,
+      "sha256": "317ca2acd218bcd15ed8e7f3b6078f31c15fe50a86663fa7ca6ade52b2a94768"
+    },
+    "expected_root": "5c8f5c28b78cae3f179a4f1ed072716846e46e968c3a23ed660c70638e4d4410",
+    "result_root": "26df6a1e33a626b9d20bbe5d2b35f95ab209d49bbe5af2269ba3b2f2819b5a0c",
+    "operation": "SetConstant: function main, block 0, node 1, expected 67108864, value 335544320",
+    "supplied_graph_objects": 0,
+    "canonical_bytes_match_independent_native_batch": true,
+    "stale_replay_exit": 1
+  },
+  "acceptance": {
+    "confined_64_mib_succeeded_trials": 3,
+    "confined_320_mib_denied_trials": 3,
+    "unconfined_positive_controls": 2,
+    "host_cap_bytes": 268435456,
+    "streams_empty": true,
+    "flags_zero": true,
+    "mcp_evolution_exchanges": 8,
+    "mcp_stale_error_code": "transaction_rejected",
+    "stale_edit_preserved_committed_root": true,
+    "published_source_independently_verified_and_byte_identical_to_native_high_probe": true,
+    "raw_trials": {
+      "path": "docs/evidence/native-memory-commit-observations-20261110.json",
+      "bytes": 7273,
+      "sha256": "79cbeb003d9e7d6d33a256c157a51e96b98d9350fd5bbfa76c7f3b281d996111"
+    },
+    "raw_evolution": {
+      "path": "docs/evidence/native-memory-evolution-20261110.ndjson",
+      "bytes": 4144,
+      "sha256": "725767061d947908fb4c5dc1750b28eaf910c348bef2ba82bf3edead26c41a8b"
+    }
+  },
+  "failed_attempts": [
+    {
+      "stage": "native authoring / verification",
+      "observed": "Mismatched heap-view bound rejected with HEAP-VIEW-TOKEN-TYPE. Allocator provenance through block parameters rejected with HEAP-VIEW-ALLOCATION-PROVEN, HEAP-VIEW-ALLOCATOR-EFFECT-PROVEN and HEAP-VIEW-OWNER-PROVEN. Rejected candidates not published."
+    },
+    {
+      "stage": "first high allocation execution",
+      "observed": "Heap view of a failed null allocation produced child 3221225501 (0xC000001D); server ok was true. Final probes compare the allocation address without heap.view/dereference, release the semantic token and exit. Trap classification remains unsupported."
+    },
+    {
+      "stage": "first integer carrier",
+      "observed": "Unnecessary trailing zero rejected with EDIT-RECORD-END. Corrected no-supplied-objects carrier is 85 bytes and replays identically. Stale replay rejects with compiler exit 1."
+    },
+    {
+      "stage": "initial packaging slice",
+      "observed": "Other-language scripts withdrawn and moved outside repository after user clarified XAX-only authorship. Workflow changes restored; packaging defect remains open."
+    }
+  ],
+  "implementation_boundary": {
+    "new_other_language_implementation_files_in_repository": [],
+    "native_authoring": "Native Linux compiler consumes batch carrier and creates graph objects. Hand-framed integer-only XAXEDIT1 supplies zero objects; pinned Windows native edit constructs the changed constant and graph.",
+    "external_test_directory": "C:/Users/User/.codex/scratch/xax-mcp-20261110",
+    "external_test_scripts": [
+      "Test-MemoryCommit.ps1",
+      "Test-MemoryEvolution.ps1"
+    ],
+    "no_non_xax_runtime_helper": true,
+    "production_server_root_unchanged": "16a25c0805b900e3bb45082b0ac88e1217cbf184c1bf739d29d1df1bc298eb83",
+    "production_launcher_root_unchanged": "d378055b3c4c490c667db8d7f61b2d871f4bb3b8701ae54e5dc5308037904dff"
+  },
+  "limitations": [
+    "Local new-probe evidence; no new hosted CI memory-enforcement gate.",
+    "No gradual or physical-page pressure, concurrent exhaustion, exhaustive crash/cleanup or independent escape review.",
+    "Pinned Windows seed cannot consume modern definition batches; native Linux authoring tool is identified separately.",
+    "General graph queries/pagination, typed mutations/candidates/results, modern MCP, model-driven Codex/Claude and AI comparisons remain incomplete.",
+    "Packaging still excludes replay transactions.",
+    "Pre-existing dirty 0.10 working tree is not contained in its HEAD; no commit/push combines that work."
+  ]
+}

@@ -1,0 +1,147 @@
+define @choose_word
+(T0,T0,T1,T1)->(T1)
+B0(P0:T0,P1:T0,P2:T1,P3:T1)
+N0 int.compare P0 P1 -> T2 [1]
+N1 int.zero.extend N0 -> T1
+N2 mul.wrap N1 P2 -> T1
+N3 bit.or N2 P3 -> T1
+ret N3
+T0 bits32
+T1 bits64
+T2 bits1
+end
+define @semantic_word
+(T0)->(T1)
+B0(P0:T0)
+N0 constant 0 -> T1
+N1 constant 0 -> T0
+N2 constant 7162254423478575660 -> T1
+N3 call.direct entity=@choose_word P0 N1 N2 N0 -> T1
+N4 constant 1 -> T0
+N5 constant 2484643538981054836 -> T1
+N6 call.direct entity=@choose_word P0 N4 N5 N3 -> T1
+N7 constant 2 -> T0
+N8 constant 4189038565204848486 -> T1
+N9 call.direct entity=@choose_word P0 N7 N8 N6 -> T1
+N10 constant 3 -> T0
+N11 constant 8386105122712811554 -> T1
+N12 call.direct entity=@choose_word P0 N10 N11 N9 -> T1
+N13 constant 4 -> T0
+N14 constant 7308332182884677225 -> T1
+N15 call.direct entity=@choose_word P0 N13 N14 N12 -> T1
+N16 constant 5 -> T0
+N17 constant 7092925511079392813 -> T1
+N18 call.direct entity=@choose_word P0 N16 N17 N15 -> T1
+N19 constant 6 -> T0
+N20 constant 6573604485369914730 -> T1
+N21 call.direct entity=@choose_word P0 N19 N20 N18 -> T1
+N22 constant 8 -> T0
+N23 constant 2466321560598946427 -> T1
+N24 call.direct entity=@choose_word P0 N22 N23 N21 -> T1
+N25 constant 16 -> T0
+N26 constant 2478227094008638498 -> T1
+N27 call.direct entity=@choose_word P0 N25 N26 N24 -> T1
+N28 constant 17 -> T0
+N29 constant 58 -> T1
+N30 call.direct entity=@choose_word P0 N28 N29 N27 -> T1
+N31 constant 24 -> T0
+N32 constant 7310016635638784556 -> T1
+N33 call.direct entity=@choose_word P0 N31 N32 N30 -> T1
+N34 constant 25 -> T0
+N35 constant 25678142519993198 -> T1
+N36 call.direct entity=@choose_word P0 N34 N35 N33 -> T1
+N37 constant 32 -> T0
+N38 constant 34 -> T1
+N39 call.direct entity=@choose_word P0 N37 N38 N36 -> T1
+N40 constant 40 -> T0
+N41 constant 32093 -> T1
+N42 call.direct entity=@choose_word P0 N40 N41 N39 -> T1
+N43 constant 48 -> T0
+N44 constant 44 -> T1
+N45 call.direct entity=@choose_word P0 N43 N44 N42 -> T1
+N46 constant 56 -> T0
+N47 constant 7813865678659791965 -> T1
+N48 call.direct entity=@choose_word P0 N46 N47 N45 -> T1
+N49 constant 57 -> T0
+N50 constant 8462954442816582757 -> T1
+N51 call.direct entity=@choose_word P0 N49 N50 N48 -> T1
+N52 constant 58 -> T0
+N53 constant 8224101 -> T1
+N54 call.direct entity=@choose_word P0 N52 N53 N51 -> T1
+N55 constant 64 -> T0
+N56 constant 7813865678659791965 -> T1
+N57 call.direct entity=@choose_word P0 N55 N56 N54 -> T1
+N58 constant 65 -> T0
+N59 constant 7809635628708361317 -> T1
+N60 call.direct entity=@choose_word P0 N58 N59 N57 -> T1
+N61 constant 66 -> T0
+N62 constant 2105369971 -> T1
+N63 call.direct entity=@choose_word P0 N61 N62 N60 -> T1
+ret N63
+T0 bits32
+T1 bits64
+end
+define @semantic_byte
+(T0,T0)->(T0)
+B0(P0:T0,P1:T0)
+N0 constant 64 -> T0
+N1 int.compare P1 N0 -> T2 [3]
+cbr N1 B1(P0,P1) B5()
+B1(P2:T0,P3:T0)
+N2 constant 8 -> T0
+N3 udiv P3 N2 -> T0
+N4 mul.wrap P2 N2 -> T0
+N5 add.wrap N3 N4 -> T0
+N6 call.direct entity=@semantic_word N5 -> T1
+N7 urem P3 N2 -> T0
+N8 constant 1 -> T1
+br B2(N6,N7,N8)
+B2(P4:T1,P5:T0,P6:T1)
+N9 constant 0 -> T0
+N10 int.compare P5 N9 -> T2 [2]
+cbr N10 B3(P4,P5,P6) B4(P4,P6)
+B3(P7:T1,P8:T0,P9:T1)
+N11 constant 1 -> T0
+N12 sub.wrap P8 N11 -> T0
+N13 constant 256 -> T1
+N14 mul.wrap P9 N13 -> T1
+br B2(P7,N12,N14)
+B4(P10:T1,P11:T1)
+N15 udiv P10 P11 -> T1
+N16 constant 255 -> T1
+N17 bit.and N15 N16 -> T1
+N18 int.truncate N17 -> T0
+ret N18
+B5()
+N19 constant 0 -> T0
+ret N19
+T0 bits32
+T1 bits64
+T2 bits1
+end
+define @emit_semantic
+(T0,T1,T2,T3,T3)->(T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3,P4:T3)
+N0 constant 0 -> T3
+br B1(P0,P1,P2,P3,P4,N0)
+B1(P5:T0,P6:T1,P7:T2,P8:T3,P9:T3,P10:T3)
+N1 call.direct entity=@semantic_byte P9 P10 -> T3
+N2 constant 0 -> T3
+N3 int.compare N1 N2 -> T5 [2]
+cbr N3 B2(P5,P6,P7,P8,P9,P10,N1) B3(P5,P6,P7,P8)
+B2(P11:T0,P12:T1,P13:T2,P14:T3,P15:T3,P16:T3,P17:T3)
+N4 int.truncate P17 -> T4
+N5 checked.store.bits.le P11 P14 N4 P13 -> T2 [1,1]
+N6 constant 1 -> T3
+N7 add.wrap P14 N6 -> T3
+N8 add.wrap P16 N6 -> T3
+br B1(P11,P12,N5,N7,P15,N8)
+B3(P18:T0,P19:T1,P20:T2,P21:T3)
+ret P21 P18 P19 P20
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 6e07cf197c4ff1ebe46f19c84ad2c1c74d7ea8f2cb15177e6e8f960d224cbc65
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits8
+T5 bits1
+end

@@ -1,0 +1,103 @@
+define @modern_validate
+(T0,T1,T2,T3)->(T4,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3)
+N0 constant 2 -> T4
+N1 call.direct entity=@json_object_find P0 P1 P2 P3 N0 -> T3,T0,T1,T2
+N2 constant 0 -> T4
+N3 call.direct entity=@json_object_find N1.R1 N1.R2 N1.R3 P3 N2 -> T3,T0,T1,T2
+N4 constant 3 -> T4
+N5 call.direct entity=@json_object_find N3.R1 N3.R2 N3.R3 P3 N4 -> T3,T0,T1,T2
+N6 constant 16 -> T4
+N7 call.direct entity=@json_object_find N5.R1 N5.R2 N5.R3 P3 N6 -> T3,T0,T1,T2
+N8 constant 1 -> T4
+N9 call.direct entity=@json_find_optional N7.R1 N7.R2 N7.R3 N3 N8 -> T3,T0,T1,T2
+N10 constant 4 -> T4
+N11 call.direct entity=@json_find_optional N9.R1 N9.R2 N9.R3 N9 N10 -> T3,T0,T1,T2
+N12 constant 5 -> T4
+N13 call.direct entity=@json_find_optional N11.R1 N11.R2 N11.R3 N9 N12 -> T3,T0,T1,T2
+N14 constant 6 -> T4
+N15 call.direct entity=@json_find_optional N13.R1 N13.R2 N13.R3 N9 N14 -> T3,T0,T1,T2
+N16 constant 7 -> T4
+N17 call.direct entity=@json_find_optional N15.R1 N15.R2 N15.R3 N15 N16 -> T3,T0,T1,T2
+N18 constant 8 -> T4
+N19 call.direct entity=@json_find_optional N17.R1 N17.R2 N17.R3 N15 N18 -> T3,T0,T1,T2
+N20 constant 9 -> T4
+N21 constant 18 -> T4
+N22 call.direct entity=@json_classify N19.R1 N19.R2 N19.R3 N1 N20 N21 -> T4,T0,T1,T2
+N23 constant 17 -> T4
+N24 call.direct entity=@json_match N22.R1 N22.R2 N22.R3 N7 N23 -> T4,T0,T1,T2
+N25 constant 10 -> T4
+N26 call.direct entity=@json_match N24.R1 N24.R2 N24.R3 N11 N25 -> T4,T0,T1,T2
+N27 call.direct entity=@json_first N26.R1 N26.R2 N26.R3 N1 -> T4,T0,T1,T2
+N28 call.direct entity=@json_first N27.R1 N27.R2 N27.R3 N5 -> T4,T0,T1,T2
+N29 call.direct entity=@json_first N28.R1 N28.R2 N28.R3 N9 -> T4,T0,T1,T2
+N30 call.direct entity=@json_first N29.R1 N29.R2 N29.R3 N11 -> T4,T0,T1,T2
+N31 call.direct entity=@json_first N30.R1 N30.R2 N30.R3 N13 -> T4,T0,T1,T2
+N32 call.direct entity=@json_first N31.R1 N31.R2 N31.R3 N15 -> T4,T0,T1,T2
+N33 call.direct entity=@json_first N32.R1 N32.R2 N32.R3 N17 -> T4,T0,T1,T2
+N34 call.direct entity=@json_first N33.R1 N33.R2 N33.R3 N19 -> T4,T0,T1,T2
+N35 constant 34 -> T4
+N36 constant 123 -> T4
+N37 constant 0 -> T3
+N38 constant 0 -> T4
+N39 int.compare N27 N35 -> T5 [1]
+N40 int.compare N24 N38 -> T5 [2]
+N41 bit.and N39 N40 -> T5
+N42 int.compare N5 N37 -> T5 [1]
+N43 int.compare N28 N35 -> T5 [1]
+N44 constant 45 -> T4
+N45 int.compare N28 N44 -> T5 [1]
+N46 constant 48 -> T4
+N47 int.compare N28 N46 -> T5 [6]
+N48 constant 57 -> T4
+N49 int.compare N28 N48 -> T5 [4]
+N50 bit.and N47 N49 -> T5
+N51 constant 110 -> T4
+N52 int.compare N28 N51 -> T5 [1]
+N53 bit.or N42 N43 -> T5
+N54 bit.or N45 N50 -> T5
+N55 bit.or N53 N54 -> T5
+N56 bit.or N55 N52 -> T5
+N57 bit.and N41 N56 -> T5
+N58 int.compare N29 N36 -> T5 [1]
+N59 int.compare N30 N35 -> T5 [1]
+N60 int.compare N31 N36 -> T5 [1]
+N61 bit.and N58 N59 -> T5
+N62 bit.and N61 N60 -> T5
+N63 int.compare N32 N36 -> T5 [1]
+N64 int.compare N33 N35 -> T5 [1]
+N65 int.compare N34 N35 -> T5 [1]
+N66 bit.and N63 N64 -> T5
+N67 bit.and N66 N65 -> T5
+N68 int.compare N15 N37 -> T5 [1]
+N69 bit.or N67 N68 -> T5
+N70 bit.and N62 N69 -> T5
+N71 constant 1 -> T4
+N72 constant 3 -> T4
+N73 int.compare N26 N38 -> T5 [2]
+N74 call.direct entity=@select32 N73 N71 N72 -> T4
+N75 constant 2 -> T4
+N76 call.direct entity=@select32 N70 N74 N75 -> T4
+N77 constant 4 -> T4
+N78 call.direct entity=@select32 N57 N76 N77 -> T4
+N79 int.compare N9 N37 -> T5 [2]
+N80 constant 9 -> T4
+N81 int.compare N22 N80 -> T5 [1]
+N82 bit.or N79 N81 -> T5
+N83 call.direct entity=@select32 N82 N78 N38 -> T4
+N84 constant 4194320 -> T4
+N85 checked.store.bits.le N34.R1 N84 N11 N34.R3 -> T2 [8,1]
+N86 constant 4194328 -> T4
+N87 checked.store.bits.le N34.R1 N86 N5 N85 -> T2 [8,1]
+N88 constant 4194336 -> T4
+N89 checked.store.bits.le N34.R1 N88 N3 N87 -> T2 [8,1]
+N90 constant 4194344 -> T4
+N91 checked.store.bits.le N34.R1 N90 N22 N89 -> T2 [4,1]
+ret N83 N34.R1 N34.R2 N91
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 6e07cf197c4ff1ebe46f19c84ad2c1c74d7ea8f2cb15177e6e8f960d224cbc65
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits64
+T4 bits32
+T5 bits1
+end

@@ -1,0 +1,76 @@
+define @modern_complete
+(T0,T1,T2,T3)->(T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3)
+N0 constant 12020000 -> T3
+N1 checked.load.bits.le P0 N0 P2 -> T3,T2 [4,1]
+N2 constant 0 -> T3
+N3 int.compare N1 N2 -> T6 [2]
+N4 constant 11 -> T3
+N5 int.compare P3 N4 -> T6 [6]
+N6 bit.and N3 N5 -> T6
+cbr N6 B1(P0,P1,N1.R1,P3,N2) B6(P0,P1,N1.R1,P3)
+B1(P4:T0,P5:T1,P6:T2,P7:T3,P8:T3)
+N7 constant 11 -> T3
+N8 add.wrap P8 N7 -> T3
+N9 int.compare N8 P7 -> T6 [4]
+cbr N9 B2(P4,P5,P6,P7,P8) B6(P4,P5,P6,P7)
+B2(P9:T0,P10:T1,P11:T2,P12:T3,P13:T3)
+N10 checked.load.bits.le P9 P13 P11 -> T4,T2 [8,1]
+N11 constant 8389209344368058924 -> T4
+N12 int.compare N10 N11 -> T6 [1]
+N13 constant 8 -> T3
+N14 add.wrap P13 N13 -> T3
+N15 checked.load.bits.le P9 N14 N10.R1 -> T7,T2 [2,1]
+N16 constant 14882 -> T7
+N17 int.compare N15 N16 -> T6 [1]
+N18 constant 10 -> T3
+N19 add.wrap P13 N18 -> T3
+N20 checked.load.bits.le P9 N19 N15.R1 -> T5,T2 [1,1]
+N21 constant 123 -> T5
+N22 int.compare N20 N21 -> T6 [1]
+N23 bit.and N12 N17 -> T6
+N24 bit.and N23 N22 -> T6
+N25 constant 1 -> T3
+N26 add.wrap P13 N25 -> T3
+N27 constant 11 -> T3
+N28 add.wrap P13 N27 -> T3
+cbr N24 B3(P9,P10,N20.R1,P12,N28,P12) B1(P9,P10,N20.R1,P12,N26)
+B3(P14:T0,P15:T1,P16:T2,P17:T3,P18:T3,P19:T3)
+N29 int.compare P19 P18 -> T6 [5]
+cbr N29 B4(P14,P15,P16,P17,P18,P19) B5(P14,P15,P16,P17,P18)
+B4(P20:T0,P21:T1,P22:T2,P23:T3,P24:T3,P25:T3)
+N30 constant 1 -> T3
+N31 sub.wrap P25 N30 -> T3
+N32 checked.load.bits.le P20 N31 P22 -> T5,T2 [1,1]
+N33 constant 24 -> T3
+N34 add.wrap N31 N33 -> T3
+N35 checked.store.bits.le P20 N34 N32 N32.R1 -> T2 [1,1]
+br B3(P20,P21,N35,P23,P24,N31)
+B5(P26:T0,P27:T1,P28:T2,P29:T3,P30:T3)
+N36 constant 53 -> T3
+N37 call.direct entity=@emit_key P26 P27 P28 P30 N36 -> T3,T0,T1,T2
+N38 constant 24 -> T3
+N39 add.wrap P29 N38 -> T3
+N900 add.wrap P30 N38 -> T3
+N901 checked.load.bits.le N37.R1 N900 N37.R3 -> T5,T2 [1,1]
+N902 constant 125 -> T5
+N903 int.compare N901 N902 -> T6 [1]
+N904 constant 32 -> T3
+N905 constant 44 -> T3
+N906 call.direct entity=@select32 N903 N904 N905 -> T3
+N907 int.truncate N906 -> T5
+N908 constant 23 -> T3
+N909 add.wrap P30 N908 -> T3
+N910 checked.store.bits.le N37.R1 N909 N907 N901.R1 -> T2 [1,1]
+ret N39 N37.R1 N37.R2 N910
+B6(P31:T0,P32:T1,P33:T2,P34:T3)
+ret P34 P31 P32 P33
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 bits8
+T6 bits1
+T7 bits16
+end

@@ -1,0 +1,33 @@
+[
+  {
+    "subsequent_request": true,
+    "compiler_terminated": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "content": [
+          {
+            "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+            "type": "text"
+          }
+        ],
+        "isError": true,
+        "structuredContent": {
+          "error": {
+            "code": "workspace_unavailable",
+            "message": "the current store could not be read (need at least 39 bytes)"
+          },
+          "ok": false
+        }
+      }
+    },
+    "elapsed_ms": 30035,
+    "case": "deadline"
+  },
+  {
+    "compiler_terminated": true,
+    "elapsed_ms": 0,
+    "case": "death"
+  }
+]

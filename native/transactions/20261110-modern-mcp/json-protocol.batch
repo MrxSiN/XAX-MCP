@@ -1,0 +1,83 @@
+define @json_first
+(T0,T1,T2,T3)->(T4,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3)
+N0 int.truncate P3 -> T4
+N1 rotate.right P3 -> T3 [32]
+N2 int.truncate N1 -> T4
+N3 int.compare N0 N2 -> T5 [3]
+N4 constant 4194304 -> T4
+N5 int.compare N2 N4 -> T5 [4]
+N6 bit.and N3 N5 -> T5
+cbr N6 B1(P0,P1,P2,N0) B2(P0,P1,P2)
+B1(P4:T0,P5:T1,P6:T2,P7:T4)
+N7 checked.load.bits.le P4 P7 P6 -> T6,T2 [1,1]
+N8 int.zero.extend N7 -> T4
+ret N8 P4 P5 N7.R1
+B2(P8:T0,P9:T1,P10:T2)
+N9 constant 0 -> T4
+ret N9 P8 P9 P10
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 6e07cf197c4ff1ebe46f19c84ad2c1c74d7ea8f2cb15177e6e8f960d224cbc65
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits64
+T4 bits32
+T5 bits1
+T6 bits8
+end
+define @select32
+(T0,T1,T1)->(T1)
+B0(P0:T0,P1:T1,P2:T1)
+N0 int.zero.extend P0 -> T1
+N1 sub.wrap P1 P2 -> T1
+N2 mul.wrap N0 N1 -> T1
+N3 add.wrap P2 N2 -> T1
+ret N3
+T0 bits1
+T1 bits32
+end
+define @json_find_optional
+(T0,T1,T2,T3,T4)->(T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3,P4:T4)
+N0 call.direct entity=@json_first P0 P1 P2 P3 -> T4,T0,T1,T2
+N1 constant 123 -> T4
+N2 int.compare N0 N1 -> T5 [1]
+cbr N2 B1(N0.R1,N0.R2,N0.R3,P3,P4) B2(N0.R1,N0.R2,N0.R3)
+B1(P5:T0,P6:T1,P7:T2,P8:T3,P9:T4)
+N3 call.direct entity=@json_object_find P5 P6 P7 P8 P9 -> T3,T0,T1,T2
+ret N3 N3.R1 N3.R2 N3.R3
+B2(P10:T0,P11:T1,P12:T2)
+N4 constant 0 -> T3
+ret N4 P10 P11 P12
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 6e07cf197c4ff1ebe46f19c84ad2c1c74d7ea8f2cb15177e6e8f960d224cbc65
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits64
+T4 bits32
+T5 bits1
+end
+define @json_classify
+(T0,T1,T2,T3,T4,T4)->(T4,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3,P4:T4,P5:T4)
+N0 int.compare P4 P5 -> T5 [4]
+cbr N0 B1(P0,P1,P2,P3,P4,P5) B3(P0,P1,P2)
+B1(P6:T0,P7:T1,P8:T2,P9:T3,P10:T4,P11:T4)
+N1 call.direct entity=@json_match P6 P7 P8 P9 P10 -> T4,T0,T1,T2
+N2 constant 0 -> T4
+N3 int.compare N1 N2 -> T5 [2]
+cbr N3 B2(N1.R1,N1.R2,N1.R3,P10) B4(N1.R1,N1.R2,N1.R3,P9,P10,P11)
+B2(P12:T0,P13:T1,P14:T2,P15:T4)
+ret P15 P12 P13 P14
+B3(P16:T0,P17:T1,P18:T2)
+N4 constant 4294967295 -> T4
+ret N4 P16 P17 P18
+B4(P19:T0,P20:T1,P21:T2,P22:T3,P23:T4,P24:T4)
+N5 constant 1 -> T4
+N6 add.wrap P23 N5 -> T4
+br B0(P19,P20,P21,P22,N6,P24)
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 6e07cf197c4ff1ebe46f19c84ad2c1c74d7ea8f2cb15177e6e8f960d224cbc65
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits64
+T4 bits32
+T5 bits1
+end

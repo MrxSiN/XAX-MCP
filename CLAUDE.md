@@ -31,9 +31,16 @@
 
 `agent-guidance/` holds optional guidance for agents that *use* the server; this file is for agents that develop it.
 
-Current native pin: see `native/xax-dependency.json` (`xax-native-file-v1`); sources are `native/xax-mcp-native-gen2.xax` and `native/xax-mcp-sandbox-gen1.xax`. Binary stdin/argv are implemented within host bounds; JSON xax-construct-v1 and full CUM prepare remain unsupported. Full mission readiness is false.
+Implementation was paused on 2026-11-10. Read [the continuation prompt](CONTINUE_NATIVE_EVOLUTION.md)
+before resuming file races, compiler cancellation, semantic APIs or modern MCP.
+Experimental canonical checkpoints are archived under `native/candidates/20261110/`;
+they are not the default deployment. The last capabilities candidate has a known JSON framing failure.
 
-Current evidence: local acceptance and clean-package records plus hosted run
+Current native pin: see `native/xax-dependency.json` (`xax-native-file-v1`); sources are `native/xax-mcp-native-gen3.xax` and `native/xax-mcp-sandbox-gen1.xax`. The 20261110-host-paths manifest extends native replay through the configured-path guard. Binary stdin/argv are implemented within host bounds; JSON xax-construct-v1 and full CUM prepare remain unsupported. Full mission readiness is false.
+
+Current gen3 evidence: `docs/evidence/native-host-path-guard-20261110.json` and the separate clean-package record. The current hosted result below remains the historical gen2 baseline.
+
+Historical evidence: local acceptance and clean-package records plus hosted run
 41314738774 at implementation commit `1e584cdfb00fe3230855b82b92eda3c63a50e807`.
 See `docs/EVIDENCE.md` and ADR-0011. Passing CI and uploaded preview artifacts do
 not change `release_ready` or full CUM prepare to true.

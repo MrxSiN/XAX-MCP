@@ -1,5 +1,9 @@
 # Current tool surface — 0.10.0
 
+Gen3 validates host-configured compiler/store/work paths before every compiler-backed
+tool. Unsafe configured names return `unsafe_host_path` before scratch leasing or
+compiler work. See [path policy and remaining race boundaries](NATIVE_HOST_PATH_GUARD.md).
+
 The exact emitted schema is [tools-v2.json](../schemas/tools-v2.json). Input JSON is transport; canonical semantic
 stores are source. Every tool rejects unsupported properties. Rights come from host launch configuration.
 

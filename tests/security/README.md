@@ -1,5 +1,10 @@
 # Native security regression data
 
+2026-11-10: [memory-commit](memory-commit/README.md) adds canonical XAX allocation
+probes, positive controls, native transactions and MCP evolution/stale-root evidence.
+Only XAX implementation was added. The broader pressure/escape/cancellation
+release gates remain open.
+
 `invalid-add-operand.edit` carries a native edit with an effect-token operand where bits32 is required. The historical
 `.diag` proves the resulting candidate fails native verification. Current 0.10 MCP tests must reject the transaction,
 retain the original valid source and delete `next.xax`; the candidate is never executed.

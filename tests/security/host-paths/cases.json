@@ -1,0 +1,123 @@
+{
+  "schema": "xax-mcp-host-path-vectors-v1",
+  "recorded": "2026-11-10",
+  "note": "Declarative setup/expectation data. External Windows test orchestration is not part of the repository or runtime.",
+  "before_server_root": "16a25c0805b900e3bb45082b0ac88e1217cbf184c1bf739d29d1df1bc298eb83",
+  "after_server_root": "44f8e6b34a4bd3d50bfb670c1be6a73c9e5bfae7f701383f70eb51e37befd94d",
+  "path_cases": [
+    {
+      "name": "ordinary-path",
+      "tool": "xax_query",
+      "expected_ok": true,
+      "expected_error": null
+    },
+    {
+      "name": "work-leaf-junction",
+      "tool": "xax_query",
+      "expected_ok": false,
+      "expected_error": "unsafe_host_path"
+    },
+    {
+      "name": "work-ancestor-junction",
+      "tool": "xax_query",
+      "expected_ok": false,
+      "expected_error": "unsafe_host_path"
+    },
+    {
+      "name": "compiler-ancestor-junction",
+      "tool": "xax_query",
+      "expected_ok": false,
+      "expected_error": "unsafe_host_path"
+    },
+    {
+      "name": "store-ancestor-junction",
+      "tool": "xax_query",
+      "expected_ok": false,
+      "expected_error": "unsafe_host_path"
+    },
+    {
+      "name": "dot-component",
+      "tool": "xax_query",
+      "expected_ok": false,
+      "expected_error": "unsafe_host_path"
+    },
+    {
+      "name": "dotdot-component",
+      "tool": "xax_query",
+      "expected_ok": false,
+      "expected_error": "unsafe_host_path"
+    },
+    {
+      "name": "trailing-dot",
+      "tool": "xax_query",
+      "expected_ok": false,
+      "expected_error": "unsafe_host_path"
+    },
+    {
+      "name": "relative-work",
+      "tool": "xax_query",
+      "expected_ok": false,
+      "expected_error": "unsafe_host_path"
+    },
+    {
+      "name": "valid-trailing-separator",
+      "tool": "xax_query",
+      "expected_ok": true,
+      "expected_error": null
+    },
+    {
+      "name": "valid-forward-slashes",
+      "tool": "xax_query",
+      "expected_ok": true,
+      "expected_error": null
+    }
+  ],
+  "enforcement_cases": [
+    {
+      "setup": "configured workspace is a directory junction",
+      "tools": [
+        "xax_workspace",
+        "xax_query",
+        "xax_construct",
+        "xax_transaction",
+        "xax_build",
+        "xax_execute"
+      ],
+      "expected_error": "unsafe_host_path",
+      "scratch_files_created": false
+    },
+    {
+      "setup": "query succeeds with ordinary compiler directory, then directory is moved aside and replaced by a junction to an identical compiler copy",
+      "tools": [
+        "xax_workspace",
+        "xax_query",
+        "xax_construct",
+        "xax_transaction",
+        "xax_build"
+      ],
+      "expected_error": "unsafe_host_path",
+      "note": "Replacement between requests after lease acquisition; not a check/use race test"
+    },
+    {
+      "setup": [
+        "device namespace compiler",
+        "alternate data stream compiler",
+        "compiler is directory",
+        "seed is directory"
+      ],
+      "expected_error": "unsafe_host_path",
+      "scratch_files_created": false
+    },
+    {
+      "setup": "compiler name exceeds startup configuration bound",
+      "expected_error": "denied_capability",
+      "scratch_files_created": false
+    }
+  ],
+  "host_grants": "Trusted compiler/store/work environment; default read/mutate/build, explicit --allow-execute for execution check; no tool-granted authority",
+  "raw_evidence": [
+    "docs/evidence/native-host-paths-before-20261110.json",
+    "docs/evidence/native-host-paths-after-20261110.json",
+    "docs/evidence/native-host-paths-enforcement-20261110.json"
+  ]
+}

@@ -1,5 +1,30 @@
 # Evidence and claim labels
 
+## 2026-11-10 — native configured-path rejection and package repair
+
+[New evidence](evidence/native-host-path-guard-20261110.json) records before/after
+path cases, all compiler-backed tool denials, revalidation after lease acquisition,
+no initial-denial scratch writes, native source authoring, exact pinned replay,
+deterministic builds and the unchanged 92-exchange baseline. The
+[contract](NATIVE_HOST_PATH_GUARD.md) distinguishes configured-path checks from
+unresolved replacement races and independent review. Package input/reuse repairs
+are existing CI configuration changes, with local fresh-package evidence. These
+are local executed results; historical evidence is unchanged and no new hosted CI
+or release acceptance is claimed.
+
+## 2026-11-10 — local baseline and native memory denial
+
+[Entry gap matrix](evidence/mission-audit-20261110.md) records exact HEADs and
+pre-existing dirty trees. [New evidence](evidence/native-memory-commit-20261110.json)
+records 64 source replays, 15 probe rebuilds, 92 client exchanges and timeout/
+termination checks, plus newly native-authored memory probes, positive controls,
+identical pinned builds and an eight-exchange MCP evolution/stale-root replay.
+[Raw trials](evidence/native-memory-commit-observations-20261110.json) and
+[evolution responses](evidence/native-memory-evolution-20261110.ndjson) are separate
+from historical evidence. These are local source-authored, verified, native-built,
+executed and behaviorally tested observations. Independent security review,
+hosted CI, production release and full mission acceptance are not claimed.
+
 Rows name files as they existed at the cited commit or run. Superseded stores, carriers and
 failed transaction records were later removed from the tree; check out that commit to reproduce them.
 

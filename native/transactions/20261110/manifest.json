@@ -1,0 +1,102 @@
+{
+  "schema": "xax-mcp-native-memory-probe-transactions-v1",
+  "recorded": "2026-11-10",
+  "source_authority": "Canonical .xax stores; native exact-root edit and mandatory verify. Batches and XAXEDIT1 are transport.",
+  "deployment_pin_unchanged": true,
+  "authoring_tool": {
+    "path": "D:\\GitHub\\XAX\\compiler\\bootstrap\\seed\\xaxc-linux-x86_64",
+    "sha256": "a35fd59fc9effe08f58f6d1db0d2e951abbd56a065dc0dca729c9bc6f5ec793b",
+    "xax_checkout_head": "8c9ce91351b664b927df066d4c2ef549167ae0ef",
+    "checkout_dirty": true,
+    "host": "Linux x86-64 under WSL2",
+    "role": "Native definition/replacement authoring only; not a deployment/compiler pin upgrade"
+  },
+  "base": {
+    "path": "tests/security/executor-input/io-echo-probe.xax",
+    "bytes": 7972,
+    "sha256": "4ec2078960c0a64ff063e8fb962ddfd9a0e9109c9704340f1e60ba5ec7e84a01"
+  },
+  "base_root": "03027b9c2965abea39ad6c3c976aa5aa335d192157149c595152a02df87c692f",
+  "base_function": "1c03bf87633c87bb9507ff2aa3dcd5109205f044aff62f9ec3717c3a9154b9e8",
+  "probes": [
+    {
+      "name": "low",
+      "root": "5c8f5c28b78cae3f179a4f1ed072716846e46e968c3a23ed660c70638e4d4410",
+      "function": "026b1b2b1e69744dd01338f100e69451a62ebc0ea1a7148ba35ed94c05180626",
+      "requested_commit_bytes": 67108864,
+      "native_batch": {
+        "path": "native/transactions/20261110/memory-low.batch",
+        "bytes": 1095,
+        "sha256": "293a87ecb84682ee8d82f418294511f35b2d28c996391731d8eeced78a810414"
+      },
+      "artifacts": [
+        {
+          "path": "tests/security/memory-commit/memory-low.xax",
+          "bytes": 3478,
+          "sha256": "50252f029ac8a5023cf71e7a858994b37bd7afdb77f0c5b74b188b4f394e1f8b"
+        },
+        {
+          "path": "tests/security/memory-commit/memory-low.exe",
+          "bytes": 1536,
+          "sha256": "4dc280c584b55c2a5d4f41ef1a6580e3058c022ac415d782bc06cf29176bac53"
+        },
+        {
+          "path": "tests/security/memory-commit/memory-low.prov",
+          "bytes": 268,
+          "sha256": "77ce2bf948773525ced156f2bc5720b5fcf22fc6378bbad784a350fc9ab09865"
+        }
+      ],
+      "pinned_windows_verified": true,
+      "byte_identical_builds": 2
+    },
+    {
+      "name": "high",
+      "root": "26df6a1e33a626b9d20bbe5d2b35f95ab209d49bbe5af2269ba3b2f2819b5a0c",
+      "function": "1d3bbd657da3474d4b62f9a8f66894846c318dc8979e397558022d643b0f0c63",
+      "requested_commit_bytes": 335544320,
+      "native_batch": {
+        "path": "native/transactions/20261110/memory-high.batch",
+        "bytes": 1096,
+        "sha256": "6941f8d02298db31e7b384c60089320045aafed9d169b830bc80910b66abafc9"
+      },
+      "artifacts": [
+        {
+          "path": "tests/security/memory-commit/memory-high.xax",
+          "bytes": 3478,
+          "sha256": "2c0a2eff8089d3deb484bf4ccf09c70ee792aec968b28fbe35fe9bf4e8d4ab5b"
+        },
+        {
+          "path": "tests/security/memory-commit/memory-high.exe",
+          "bytes": 1536,
+          "sha256": "a4c8a031105e3917adc8f7a87f1db1d6c5a9bc58e175e7a39d6c0533789c0a4d"
+        },
+        {
+          "path": "tests/security/memory-commit/memory-high.prov",
+          "bytes": 268,
+          "sha256": "0c534a324e58c7d2f782bd64ca57d9a2bc65524ed26743bc18edda04a23559ad"
+        }
+      ],
+      "pinned_windows_verified": true,
+      "byte_identical_builds": 2
+    }
+  ],
+  "pinned_low_to_high": {
+    "carrier": {
+      "path": "native/transactions/20261110/memory-high.edit",
+      "bytes": 85,
+      "sha256": "317ca2acd218bcd15ed8e7f3b6078f31c15fe50a86663fa7ca6ade52b2a94768"
+    },
+    "expected_root": "5c8f5c28b78cae3f179a4f1ed072716846e46e968c3a23ed660c70638e4d4410",
+    "result_root": "26df6a1e33a626b9d20bbe5d2b35f95ab209d49bbe5af2269ba3b2f2819b5a0c",
+    "operation": "SetConstant: function main, block 0, node 1, expected 67108864, value 335544320",
+    "supplied_graph_objects": 0,
+    "canonical_bytes_match_independent_native_batch": true,
+    "stale_replay_exit": 1
+  },
+  "unchanged_identities": {
+    "production_server_root": "16a25c0805b900e3bb45082b0ac88e1217cbf184c1bf739d29d1df1bc298eb83",
+    "production_launcher_root": "d378055b3c4c490c667db8d7f61b2d871f4bb3b8701ae54e5dc5308037904dff",
+    "VirtualAlloc": "e8cf5a7cb5283490c972afd87b89985a4a1f8e616e6d47b2326aa6c3061e6a58",
+    "ExitProcess": "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4"
+  }
+}

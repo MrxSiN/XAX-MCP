@@ -1,0 +1,27 @@
+R 03027b9c2965abea39ad6c3c976aa5aa335d192157149c595152a02df87c692f
+F0
+define @memory_commit
+(T0,T1,T2)->(T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2)
+N0 constant 0 -> T4
+N1 constant 335544320 -> T4
+N2 constant 12288 -> T3
+N3 constant 4 -> T3
+N4 call.foreign entity=e8cf5a7cb5283490c972afd87b89985a4a1f8e616e6d47b2326aa6c3061e6a58 N0 N1 N2 N3 P2 -> T5,T6,T2
+N5 pointer.address N4 -> T4 [1]
+N6 int.compare N5 N0 -> T8 [2]
+N7 int.zero.extend N6 -> T3
+N8 resource.release N4.R1 N4.R2 -> T2
+N9 call.foreign entity=8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4 N7 P0 -> T0
+ret N7 N9 P1 N8
+T0 form3 ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b
+T1 form3 c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T6 form4 933b152d7a3ae1cbd182fd6ece7825ad5a2536c7395b404382763b99acb94833
+T7 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T8 bits1
+end
+replace F0 @memory_commit

@@ -1,0 +1,59 @@
+define @compiler_spawn
+(T0,T1,T2,T3,T0,T0)->(T4,T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3,P4:T0,P5:T0)
+N0 call.direct entity=@compiler_job P0 P1 P2 P3 -> T4,T0,T1,T2,T3
+N1 constant 0 -> T4
+N2 int.compare N0 N1 -> T6 [2]
+cbr N2 B1(N0.R1,N0.R2,N0.R3,N0.R4,P4,P5) B7(N0.R1,N0.R2,N0.R3,N0.R4)
+B1(P6:T0,P7:T1,P8:T2,P9:T3,P10:T0,P11:T0)
+N3 constant 1 -> T4
+N4 call.foreign entity=@spawn_nowait N3 P10 P11 P9 -> T5,T3
+N5 constant 18446744073709551615 -> T5
+N6 int.compare N4 N5 -> T6 [2]
+cbr N6 B2(P6,P7,P8,N4.R1,N4) B7(P6,P7,P8,N4.R1)
+B2(P12:T0,P13:T1,P14:T2,P15:T3,P16:T5)
+N7 constant 30000 -> T4
+N8 call.foreign entity=@WaitForSingleObject P16 N7 P15 -> T4,T3
+N9 constant 0 -> T4
+N10 int.compare N8 N9 -> T6 [1]
+cbr N10 B3(P12,P13,P14,N8.R1,P16) B4(P12,P13,P14,N8.R1,P16)
+B3(P17:T0,P18:T1,P19:T2,P20:T3,P21:T5)
+N11 address.offset P17 -> T0 [12010300]
+N12 call.foreign entity=@exit_code P21 N11 P20 P19 -> T4,T3,T2
+N13 constant 12010300 -> T4
+N14 checked.load.bits.le P17 N13 N12.R2 -> T4,T2 [4,1]
+N15 constant 0 -> T4
+N16 int.compare N12 N15 -> T6 [2]
+cbr N16 B6(P17,P18,N14.R1,N12.R1,P21,N14) B8(P17,P18,N14.R1,N12.R1,P21)
+B4(P22:T0,P23:T1,P24:T2,P25:T3,P26:T5)
+N17 constant 124 -> T4
+N18 call.foreign entity=@TerminateProcess P26 N17 P25 -> T4,T3
+N19 constant 5000 -> T4
+N20 call.foreign entity=@WaitForSingleObject P26 N19 N18.R1 -> T4,T3
+N21 constant 0 -> T4
+N22 int.compare N20 N21 -> T6 [1]
+cbr N22 B5(P22,P23,P24,N20.R1,P26) B9(P22,P23,P24,N20.R1)
+B5(P27:T0,P28:T1,P29:T2,P30:T3,P31:T5)
+N23 constant 124 -> T4
+br B6(P27,P28,P29,P30,P31,N23)
+B6(P32:T0,P33:T1,P34:T2,P35:T3,P36:T5,P37:T4)
+N24 call.foreign entity=c7ec41346397b9909788d6bf45efd2c2ae580023927c3f13c346571521c744c4 P36 P35 -> T4,T3
+ret P37 N24.R1 P32 P33 P34
+B7(P38:T0,P39:T1,P40:T2,P41:T3)
+N25 constant 255 -> T4
+ret N25 P41 P38 P39 P40
+B8(P42:T0,P43:T1,P44:T2,P45:T3,P46:T5)
+N26 constant 255 -> T4
+br B6(P42,P43,P44,P45,P46,N26)
+B9(P47:T0,P48:T1,P49:T2,P50:T3)
+N27 constant 125 -> T4
+N28 call.foreign entity=8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4 N27 P50 -> T3
+ret N27 N28 P47 P48 P49
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 form3 ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b
+T4 bits32
+T5 bits64
+T6 bits1
+end

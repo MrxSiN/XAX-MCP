@@ -1,0 +1,201 @@
+{
+  "schema": "xax-mcp-native-host-path-guard-v1",
+  "recorded": "2026-11-10",
+  "scope": "Native configured-path checks and existing CI package-input configuration; not TOCTOU security certification",
+  "checkout": {
+    "mcp_head": "27ffb9491bfe69000b3ce9744b2b689a4d594a3e",
+    "pre_existing_dirty_working_tree": true,
+    "xax_head": "8c9ce91351b664b927df066d4c2ef549167ae0ef",
+    "xax_checkout_dirty": true,
+    "upstream_files_changed": false
+  },
+  "host": {
+    "os": "Windows 11 Home Single Language",
+    "version": "10.0.26300.0",
+    "architecture": "AMD64",
+    "test_orchestration": "PowerShell 7.6.9 outside repository",
+    "authoring": "native Linux x86-64 XAX compiler under WSL2"
+  },
+  "deployment_dependency": {
+    "schema": "xax-mcp-native-dependency-v1",
+    "repository": "https://github.com/MrxSiN/XAX",
+    "commit": "af376e8a8a1ac5635bcad459cb7063ef0b326430",
+    "contract": "xax-native-file-v1",
+    "seed_path": "compiler/bootstrap/windows/xaxc-windows-x86_64.exe",
+    "seed_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79",
+    "compatible_range": "Only this immutable seed is tested; no moving main or other seeds certified",
+    "bootstrap": "Historical Python SDK; no bootstrap interpreter invoked for current application build/runtime",
+    "self_host": "Not claimed; native compiler own-source build declines"
+  },
+  "native_authoring": {
+    "base": "native/xax-mcp-native-gen2.xax",
+    "base_root": "16a25c0805b900e3bb45082b0ac88e1217cbf184c1bf739d29d1df1bc298eb83",
+    "batch": {
+      "path": "native/transactions/20261110-host-paths/server-host-paths.batch",
+      "bytes": 473887,
+      "sha256": "97a7bdce370612e2979ca616aaf2c423cbaf3a72d349b261906ddaf60493157e"
+    },
+    "tool_sha256": "a35fd59fc9effe08f58f6d1db0d2e951abbd56a065dc0dca729c9bc6f5ec793b",
+    "tool_path": "D:/GitHub/XAX/compiler/bootstrap/seed/xaxc-linux-x86_64",
+    "role": "Authoring only, not deployed; Windows pin unchanged",
+    "unchanged_native_objects": 3837,
+    "supplied_native_objects_packed_without_modification": 45,
+    "transport_packer": "External Python reference StoreReader/edit_record: copies already native-authored objects; no semantic graph generation; no script retained in repository"
+  },
+  "old_server": {
+    "root": "16a25c0805b900e3bb45082b0ac88e1217cbf184c1bf739d29d1df1bc298eb83",
+    "source": {
+      "path": "native/xax-mcp-native-gen2.xax",
+      "bytes": 1268455,
+      "sha256": "e9354ced587e68a0bb1cf64b31c744c3e169983bcd39d5b14831bc516c1dbb64"
+    },
+    "executable": {
+      "path": "C:/Users/User/.codex/scratch/xax-mcp-20261110/pre-host-paths/xax-mcp-native.exe",
+      "bytes": 395776,
+      "sha256": "9ddafb7ee463fe3dd9a5f8643fe21afacbfcd96a6cdfc4b9791377f6d3eb38f8"
+    }
+  },
+  "new_server": {
+    "root": "44f8e6b34a4bd3d50bfb670c1be6a73c9e5bfae7f701383f70eb51e37befd94d",
+    "source": {
+      "path": "native/xax-mcp-native-gen3.xax",
+      "bytes": 1279937,
+      "sha256": "21cf0eeae9c64c6f4db0045965269ee89c0dca84488050a6bd9feb09c3b167f9"
+    },
+    "snapshot": {
+      "path": "native/xax-mcp-native-snapshot.xax",
+      "bytes": 1280216,
+      "sha256": "c34944447475aa6fb961dd5338bc605e77e8bdbfa758541e4b62a999960f2e13"
+    },
+    "executable": {
+      "path": "native/xax-mcp-native.exe",
+      "bytes": 399360,
+      "sha256": "871af53219b5d1176242113e5494a5fbcf0bf8601bac39786171087e7cef0ca2"
+    },
+    "provenance": {
+      "path": "native/xax-mcp-native.prov",
+      "bytes": 268,
+      "sha256": "cd302024485b64e3cd5fd9c0d3b01d19f486729acf720e1af19e3c640235bf0a"
+    }
+  },
+  "launcher_unchanged": {
+    "path": "native/xax-mcp-sandbox.exe",
+    "bytes": 150016,
+    "sha256": "a189b73a7b17cacf4f8680e3f84ed3ed35a44c9ebf4c1f6465b0d4af03ec779a"
+  },
+  "claims": {
+    "source_authored_natively": true,
+    "structurally_verified": true,
+    "native_built": true,
+    "executed": true,
+    "behaviorally_tested": true,
+    "independently_reviewed": false,
+    "release_accepted": false,
+    "full_mission_complete": false
+  },
+  "reproduction": {
+    "native_batch": "wsl -d Ubuntu -- /mnt/d/GitHub/XAX/compiler/bootstrap/seed/xaxc-linux-x86_64 edit /mnt/d/GitHub/XAX-MCP/native/xax-mcp-native-gen2.xax /mnt/d/GitHub/XAX-MCP/native/transactions/20261110-host-paths/server-host-paths.batch <candidate>",
+    "pinned_replay": "<pinned-windows-xaxc> edit native/xax-mcp-native-gen2.xax native/transactions/20261110-host-paths/server-host-paths.edit <candidate>",
+    "mandatory_verification": "<pinned-windows-xaxc> verify <candidate> <diagnostic>; require exit 0 and empty diagnostic",
+    "build": "<pinned-windows-xaxc> resolve <candidate> <snapshot>; build <snapshot> <exe> <provenance>; require exit 0 and match identities",
+    "full_native_gate": "Existing .github/workflows/ci.yml first four run blocks, extracted and executed externally with exact pinned compiler",
+    "external_path_tests": "C:/Users/User/.codex/scratch/xax-mcp-20261110/Test-HostPaths.ps1",
+    "external_enforcement_tests": "C:/Users/User/.codex/scratch/xax-mcp-20261110/Test-HostPathEnforcement.ps1"
+  },
+  "acceptance": {
+    "path_cases": 11,
+    "unsafe_forms_accepted_before_and_rejected_after": 8,
+    "valid_forms_preserved": 3,
+    "enforcement_checks": 16,
+    "compiler_backed_tools_checked": [
+      "xax_workspace",
+      "xax_query",
+      "xax_construct",
+      "xax_transaction",
+      "xax_build",
+      "xax_execute"
+    ],
+    "rechecked_after_existing_lease": true,
+    "initial_denial_created_no_scratch_files": true,
+    "text_structured_error_consistent": true,
+    "ordinary_busy_code_preserved": true,
+    "native_source_records_replayed": 65,
+    "native_probes_rebuilt": 15,
+    "identical_application_builds_each": 2,
+    "native_client_exchanges": 92,
+    "golden_stdio_responses": 15,
+    "timeout_gate_passed": true,
+    "launcher_termination": {
+      "stdin_removed": true,
+      "metadata_published": false,
+      "worker_alive_before_termination": true,
+      "launcher_terminated": true,
+      "worker_image": "D:\\GitHub\\XAX-MCP\\build\\termination-sandbox\\sandbox-run\\prog.exe",
+      "child_survived": false,
+      "cleanup_observed_ms": 6,
+      "worker_pid": 1052
+    }
+  },
+  "raw_evidence": {
+    "before": {
+      "path": "docs/evidence/native-host-paths-before-20261110.json",
+      "bytes": 9731,
+      "sha256": "5d67ab08d4165b93fee6288fd848bdfd5f59fe4646dbf04491b78b71a28214bf"
+    },
+    "after": {
+      "path": "docs/evidence/native-host-paths-after-20261110.json",
+      "bytes": 8564,
+      "sha256": "e578dfc144645d0f75dd3d3983986a3f40984d48ea3a7d6956fb6eda10185396"
+    },
+    "enforcement": {
+      "path": "docs/evidence/native-host-paths-enforcement-20261110.json",
+      "bytes": 12177,
+      "sha256": "aec7e4fe3077fc78e84ac97bfcedb167b13775bc4b30cb809c06817984f41b1e"
+    },
+    "baseline": {
+      "path": "docs/evidence/native-host-paths-baseline-20261110.ndjson.gz",
+      "bytes": 29805,
+      "sha256": "a6f19e86df0a63316197071d5d9ecee38ea333180de911d651c53df353e9c9c9"
+    },
+    "timings": {
+      "path": "docs/evidence/native-host-paths-timings-20261110.json",
+      "bytes": 7784,
+      "sha256": "7b075443fce0f764ea52ae171b0c693da4980b4967572ad7a5177effc3666e3a"
+    }
+  },
+  "baseline_uncompressed_sha256": "0063338663490874560e2de5e0f8207e8976a89013d36a33c77c9cd3ecf048a6",
+  "failed_candidates": [
+    {
+      "stage": "native simultaneous replacements",
+      "observed": "Native edit returned a candidate with three missing references. Mandatory pinned verification rejected XAX.IDENTITY.OBJECT_MISSING; no invalid source published. Final carrier uses explicit supplied-function references and a single handler replacement."
+    },
+    {
+      "stage": "first execution wrapper",
+      "observed": "Verified/built wrapper candidate passed query tests but crashed the server with 0xC0000005 in the existing execution regression. The final native graph inserts the guard at the existing execute entry instead of adding that wrapper. Full baseline then passed. Underlying backend/ABI cause was not isolated; no upstream compiler fix is claimed."
+    },
+    {
+      "stage": "overlong configuration expectation",
+      "observed": "Startup parser rejected an overlong compiler configuration as denied_capability before the new guard. Test expectation corrected; no scratch was created."
+    }
+  ],
+  "implementation_boundary": {
+    "new_non_xax_implementation_files_in_repository": [],
+    "other_language_runtime_helpers": [],
+    "external_transport_packing": "Reference reader/record encoder only copies immutable native-authored objects. Canonical object creation, rehashing and graph validation are native. No packer script retained in repository.",
+    "ci_changes": "Existing native input paths and package inclusion/fresh-output options only; no new other-language program or function."
+  },
+  "limitations": [
+    "Component checks do not hold identity through subsequent use; same-user TOCTOU races remain.",
+    "Hard links, workspace child-file substitutions, mapped-drive/volume policy and compiler hash at point of use are not solved.",
+    "No new hosted CI run, independent security review or release acceptance.",
+    "General query/pagination, typed mutation/candidate/result service, modern MCP, model-driven host adoption and AI comparisons remain incomplete."
+  ],
+  "package_evidence": "docs/evidence/native-host-path-package-20261110.json",
+  "package_checks_executed": true,
+  "recovery_after_host_path_repair": {
+    "executed": true,
+    "preserved_root_observed": true,
+    "evidence": "docs/evidence/native-host-paths-recovery-20261110.json",
+    "sha256": "ab114367e7b5668f86cc454ad2bc272a70aff1edeea8e6d895bbfa568b0ecbfa"
+  }
+}

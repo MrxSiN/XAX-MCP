@@ -26,3 +26,14 @@ tests/security/executor-input/*.exe binary
 tests/security/executor-input/*.edit binary
 tests/security/executor-input/*.prov binary
 tests/security/executor-input/*.json -text whitespace=cr-at-eol
+tests/security/memory-commit/*.xax binary
+tests/security/memory-commit/*.exe binary
+tests/security/memory-commit/*.prov binary
+tests/security/memory-commit/*.ndjson -text whitespace=cr-at-eol
+native/transactions/20261110/*.batch -text whitespace=cr-at-eol
+native/transactions/20261110-host-paths/*.batch -text whitespace=cr-at-eol
+native/transactions/20261110-*/*.batch -text whitespace=cr-at-eol
+native/candidates/**/*.xax binary
+native/candidates/**/*.json -text whitespace=cr-at-eol
+docs/evidence/native-*.bin binary
+docs/evidence/native-*.ndjson -text whitespace=cr-at-eol

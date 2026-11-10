@@ -1,0 +1,36 @@
+{
+  "exchanges": [
+    {
+      "id": 2,
+      "root": "5c8f5c28b78cae3f179a4f1ed072716846e46e968c3a23ed660c70638e4d4410"
+    },
+    {
+      "ok": true,
+      "id": 3,
+      "exit_code": 1
+    },
+    {
+      "id": 4,
+      "ok": true
+    },
+    {
+      "id": 5,
+      "root": "26df6a1e33a626b9d20bbe5d2b35f95ab209d49bbe5af2269ba3b2f2819b5a0c"
+    },
+    {
+      "ok": true,
+      "id": 6,
+      "exit_code": 0
+    },
+    {
+      "ok": false,
+      "id": 7,
+      "error_code": "transaction_rejected"
+    },
+    {
+      "id": 8,
+      "root": "26df6a1e33a626b9d20bbe5d2b35f95ab209d49bbe5af2269ba3b2f2819b5a0c"
+    }
+  ],
+  "protocol": "2025-11-25"
+}

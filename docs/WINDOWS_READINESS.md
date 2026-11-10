@@ -1,5 +1,17 @@
 # Windows readiness — 0.10.0, 2026-11-01
 
+2026-11-10: the [native configured-path guard](NATIVE_HOST_PATH_GUARD.md) rejects
+configured junction/reparse components before compiler-backed operations, including
+after lease acquisition. Native replay now covers 65 source records; the 92-client
+baseline remains passing locally. Packaging includes source carriers and refuses
+stale staging/output. TOCTOU, hard links, workspace child-file substitution,
+cancellation and independent security review remain release blockers.
+
+2026-11-10: [native memory tests](../tests/security/memory-commit/README.md)
+observe allocation denial above the existing cap with positive controls. This
+narrows one local coverage gap; broad pressure, independent escape review and
+release acceptance remain open. The server/runtime is unchanged.
+
 Binary stdin, explicit argv, separate byte streams, sampled total CPU and resource
 observations are implemented and exercised with independent native synthetic probes.
 See the [execution contract](NATIVE_EXECUTION_INCREMENT.md) and

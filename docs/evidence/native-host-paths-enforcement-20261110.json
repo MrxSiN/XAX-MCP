@@ -1,0 +1,395 @@
+{
+  "results": [
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "tool": "xax_workspace",
+      "case": "linked-work"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "tool": "xax_query",
+      "case": "linked-work"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "tool": "xax_construct",
+      "case": "linked-work"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "tool": "xax_transaction",
+      "case": "linked-work"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "tool": "xax_build",
+      "case": "linked-work"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "tool": "xax_execute",
+      "case": "linked-work"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "tool": "xax_workspace",
+      "case": "ancestor-replaced-after-lease"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "tool": "xax_query",
+      "case": "ancestor-replaced-after-lease"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "tool": "xax_construct",
+      "case": "ancestor-replaced-after-lease"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "tool": "xax_transaction",
+      "case": "ancestor-replaced-after-lease"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "tool": "xax_build",
+      "case": "ancestor-replaced-after-lease"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "tool": "xax_query",
+      "case": "device-path"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "tool": "xax_query",
+      "case": "ads-path"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "tool": "xax_query",
+      "case": "compiler-is-directory"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "tool": "xax_query",
+      "case": "seed-is-directory"
+    },
+    {
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"denied_capability\",\"message\":\"the host granted no native XAX compiler; set XAX_MCP_COMPILER, XAX_MCP_WORK and XAX_MCP_STORE in the server launch environment\",\"repair\":[\"set XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE to a native XAX compiler, a writable directory and a seed .xax store\"]},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "denied_capability",
+              "message": "the host granted no native XAX compiler; set XAX_MCP_COMPILER, XAX_MCP_WORK and XAX_MCP_STORE in the server launch environment",
+              "repair": [
+                "set XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE to a native XAX compiler, a writable directory and a seed .xax store"
+              ]
+            },
+            "ok": false
+          }
+        }
+      },
+      "tool": "xax_query",
+      "case": "overlong-compiler"
+    }
+  ],
+  "no_writes_on_initial_denial": true,
+  "baseline": false,
+  "server": "D:\\GitHub\\XAX-MCP\\native\\xax-mcp-native.exe",
+  "checks": 16
+}

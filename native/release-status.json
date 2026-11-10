@@ -1,7 +1,7 @@
 {
   "schema": "xax-mcp-release-status-v1",
   "server_version": "0.10.0+native",
-  "recorded": "2026-11-01",
+  "recorded": "2026-11-10",
   "release_ready": false,
   "full_mission_complete": false,
   "executor_input_argv_increment": {
@@ -41,7 +41,8 @@
     "actual sampled total user+kernel CPU enforcement",
     "explicit inherited handle list and reduced stdin access",
     "launch-time job membership and tested launcher-termination cleanup",
-    "separate child/launcher/measurement/cleanup outcomes"
+    "separate child/launcher/measurement/cleanup outcomes",
+    "configured compiler/store/work path reparse components rejected before scratch lease and revalidated per operation"
   ],
   "blocking_findings": [
     "general typed entry layouts and bounded result paging unsupported",
@@ -51,7 +52,9 @@
     "in-flight compiler cancellation/orphan cleanup and exhaustive crash windows unverified",
     "memory-pressure, disk/handle exhaustion and independent escape review incomplete",
     "current desktop-host interoperability not exercised",
-    "trusted historical native compiler bootstrap; Windows self-build declines"
+    "trusted historical native compiler bootstrap; Windows self-build declines",
+    "native child traps are not separately classified from raw u32 exits",
+    "same-user TOCTOU races, hard links and workspace child-file substitution remain unverified"
   ],
   "artifacts": [
     {
@@ -61,18 +64,18 @@
     },
     {
       "path": "native/xax-mcp-native-snapshot.xax",
-      "bytes": 1268734,
-      "sha256": "05ea2905764c6b87e6c8497460a24806dc4ed2e71bc734a96949d71bce54c17d"
+      "bytes": 1280216,
+      "sha256": "c34944447475aa6fb961dd5338bc605e77e8bdbfa758541e4b62a999960f2e13"
     },
     {
       "path": "native/xax-mcp-native.exe",
-      "bytes": 395776,
-      "sha256": "9ddafb7ee463fe3dd9a5f8643fe21afacbfcd96a6cdfc4b9791377f6d3eb38f8"
+      "bytes": 399360,
+      "sha256": "871af53219b5d1176242113e5494a5fbcf0bf8601bac39786171087e7cef0ca2"
     },
     {
       "path": "native/xax-mcp-native.prov",
       "bytes": 268,
-      "sha256": "80b9d0ab058f1b28ba8371c0018e4003f6e7da05a4322d4436e520e20dc9a90e"
+      "sha256": "cd302024485b64e3cd5fd9c0d3b01d19f486729acf720e1af19e3c640235bf0a"
     },
     {
       "path": "native/xax-mcp-sandbox-gen0.xax",
@@ -108,13 +111,18 @@
       "path": "native/xax-mcp-sandbox.prov",
       "bytes": 268,
       "sha256": "4e7a9b05e7c9ccc9aaa7c3689d29dee4cee9227fac94a0080eb6f9e7b87ec6c8"
+    },
+    {
+      "path": "native/xax-mcp-native-gen3.xax",
+      "bytes": 1279937,
+      "sha256": "21cf0eeae9c64c6f4db0045965269ee89c0dca84488050a6bd9feb09c3b167f9"
     }
   ],
   "readiness": "docs/WINDOWS_READINESS.md",
   "authoritative_sources": {
     "server": {
-      "path": "native/xax-mcp-native-gen2.xax",
-      "root": "16a25c0805b900e3bb45082b0ac88e1217cbf184c1bf739d29d1df1bc298eb83"
+      "path": "native/xax-mcp-native-gen3.xax",
+      "root": "44f8e6b34a4bd3d50bfb670c1be6a73c9e5bfae7f701383f70eb51e37befd94d"
     },
     "sandbox": {
       "path": "native/xax-mcp-sandbox-gen1.xax",
@@ -151,5 +159,51 @@
     "startup_job_list_support_required": true,
     "foreign_runtime_helpers": [],
     "note": "ws2_32.dll is used by a synthetic isolation probe, not by the installed executor."
+  },
+  "memory_commit_denial_probe_increment": {
+    "recorded": "2026-11-10",
+    "status": "EXECUTED locally; bounded allocation-denial case only",
+    "canonical_source_authored_natively": true,
+    "pinned_windows_verified": true,
+    "identical_builds_per_probe": 2,
+    "confined_trials": 6,
+    "unconfined_positive_controls": 2,
+    "mcp_evolution_exchanges": 8,
+    "runtime_changed": false,
+    "hosted_ci_executed": false,
+    "release_accepted": false,
+    "transactions": "native/transactions/20261110/manifest.json",
+    "evidence": "docs/evidence/native-memory-commit-20261110.json",
+    "remaining": "General pressure/exhaustion, crash/cleanup, trap classification and independent escape review remain open."
+  },
+  "host_path_guard_increment": {
+    "recorded": "2026-11-10",
+    "status": "EXECUTED locally; release acceptance false",
+    "source_authored_natively": true,
+    "pinned_exact_root_replay_verified": true,
+    "configured_path_checks": "Existing drive-qualified absolute compiler/store files and work directory; reject reparse components, dot/dotdot/trailing-dot or space components, ADS/device/relative paths; revalidate on every compiler-backed operation",
+    "max_checked_path_bytes": 4096,
+    "source_transactions_replayed": 65,
+    "baseline_client_exchanges": 92,
+    "path_cases": 11,
+    "enforcement_checks": 16,
+    "runtime_changed": true,
+    "hosted_ci_executed": false,
+    "release_accepted": false,
+    "transactions": "native/transactions/20261110-host-paths/manifest.json",
+    "evidence": "docs/evidence/native-host-path-guard-20261110.json",
+    "remaining": "Same-user TOCTOU replacement, hard links, workspace child-file substitution, compiler cancellation and independent review remain open.",
+    "clean_package_checked": true,
+    "clean_package_evidence": "docs/evidence/native-host-path-package-20261110.json",
+    "stale_package_staging_and_archive_refused": true
+  },
+  "paused_native_evolution_candidates": {
+    "recorded": "2026-11-10",
+    "state": "paused at user request; not deployed",
+    "prompt": "CONTINUE_NATIVE_EVOLUTION.md",
+    "checkpoints": "native/candidates/20261110/checkpoints.json",
+    "evidence": "docs/evidence/native-paused-candidates-20261110.json",
+    "last_capabilities_candidate": "FAILED runtime JSON framing despite native verification/build",
+    "default_server_source": "native/xax-mcp-native-gen3.xax"
   }
 }

@@ -1,5 +1,21 @@
 # Security — native 0.10 preview
 
+Current gen3 [path validation](NATIVE_HOST_PATH_GUARD.md) checks configured compiler,
+seed and work-directory components before each compiler-backed operation. Initial
+rejection creates no lease/scratch files and returns `unsafe_host_path`. This
+rejects configured junctions, not replacement races across check/use, hard links
+or every workspace child-file substitution. Host directories still require trusted
+ownership. A drive-qualified name is not proof of local storage. New negative
+tests and remaining boundaries are recorded separately from historical evidence.
+
+2026-11-10: [native memory probes](../tests/security/memory-commit/README.md)
+observed 64 MiB allowed and 320 MiB denied in three confined trials each; both
+allocations succeeded outside confinement. The unchanged 256 MiB job cap is thus
+observed for this pattern. No pages are dereferenced. Gradual/physical pressure,
+concurrent exhaustion and exhaustive crash/cleanup coverage remain open. The
+server still returns raw u32 exits; it does not classify every trap as a tool
+error. See [new evidence](evidence/native-memory-commit-20261110.json).
+
 Binary stdin and argv are implemented with measured Windows acceptance, not full
 release certification. [Execution contract](NATIVE_EXECUTION_INCREMENT.md) and
 [current evidence](evidence/native-executor-input-argv-20261101.json) supersede only

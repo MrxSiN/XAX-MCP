@@ -1,0 +1,136 @@
+define @json_ws
+(T0,T1,T2,T3,T3)->(T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3,P4:T3)
+N0 int.compare P3 P4 -> T5 [3]
+cbr N0 B1(P0,P1,P2,P3,P4) B2(P0,P1,P2,P3)
+B1(P5:T0,P6:T1,P7:T2,P8:T3,P9:T3)
+N1 checked.load.bits.le P5 P8 P7 -> T4,T2 [1,1]
+N2 constant 32 -> T4
+N3 int.compare N1 N2 -> T5 [1]
+N4 constant 9 -> T4
+N5 int.compare N1 N4 -> T5 [1]
+N6 constant 10 -> T4
+N7 int.compare N1 N6 -> T5 [1]
+N8 constant 13 -> T4
+N9 int.compare N1 N8 -> T5 [1]
+N10 bit.or N3 N5 -> T5
+N11 bit.or N7 N9 -> T5
+N12 bit.or N10 N11 -> T5
+N13 constant 1 -> T3
+N14 add.wrap P8 N13 -> T3
+cbr N12 B0(P5,P6,N1.R1,N14,P9) B2(P5,P6,N1.R1,P8)
+B2(P10:T0,P11:T1,P12:T2,P13:T3)
+ret P13 P10 P11 P12
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 6e07cf197c4ff1ebe46f19c84ad2c1c74d7ea8f2cb15177e6e8f960d224cbc65
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits8
+T5 bits1
+end
+define @json_object_find
+(T0,T1,T2,T4,T3)->(T4,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T4,P4:T3)
+N0 int.truncate P3 -> T3
+N1 rotate.right P3 -> T4 [32]
+N2 int.truncate N1 -> T3
+N3 constant 2 -> T3
+N4 add.wrap N0 N3 -> T3
+N5 int.compare N4 N2 -> T6 [4]
+N6 constant 4194304 -> T3
+N7 int.compare N2 N6 -> T6 [4]
+N8 bit.and N5 N7 -> T6
+cbr N8 B1(P0,P1,P2,N0,N2,P4) B10(P0,P1,P2)
+B1(P5:T0,P6:T1,P7:T2,P8:T3,P9:T3,P10:T3)
+N9 checked.load.bits.le P5 P8 P7 -> T5,T2 [1,1]
+N10 constant 123 -> T5
+N11 int.compare N9 N10 -> T6 [1]
+N12 constant 1 -> T3
+N13 add.wrap P8 N12 -> T3
+N14 constant 0 -> T4
+N15 constant 0 -> T3
+cbr N11 B2(P5,P6,N9.R1,N13,P9,P10,N14,N15) B10(P5,P6,N9.R1)
+B2(P11:T0,P12:T1,P13:T2,P14:T3,P15:T3,P16:T3,P17:T4,P18:T3)
+N16 call.direct entity=@json_ws P11 P12 P13 P14 P15 -> T3,T0,T1,T2
+N17 int.compare N16 P15 -> T6 [3]
+N18 constant 256 -> T3
+N19 int.compare P18 N18 -> T6 [4]
+N20 bit.and N17 N19 -> T6
+cbr N20 B3(N16.R1,N16.R2,N16.R3,N16,P15,P16,P17,P18) B10(N16.R1,N16.R2,N16.R3)
+B3(P19:T0,P20:T1,P21:T2,P22:T3,P23:T3,P24:T3,P25:T4,P26:T3)
+N21 checked.load.bits.le P19 P22 P21 -> T5,T2 [1,1]
+N22 constant 125 -> T5
+N23 int.compare N21 N22 -> T6 [1]
+N24 constant 34 -> T5
+N25 int.compare N21 N24 -> T6 [1]
+cbr N23 B11(P19,P20,N21.R1,P25) B12(P19,P20,N21.R1,P22,P23,P24,P25,P26,N25)
+B4(P27:T0,P28:T1,P29:T2,P30:T3,P31:T3,P32:T3,P33:T4,P34:T3)
+N26 call.direct entity=@json_skip P27 P28 P29 P30 P31 -> T3,T0,T1,T2
+N27 int.compare N26 P30 -> T6 [5]
+N28 int.zero.extend P30 -> T4
+N29 int.zero.extend N26 -> T4
+N30 constant 4294967296 -> T4
+N31 mul.wrap N29 N30 -> T4
+N32 bit.or N28 N31 -> T4
+cbr N27 B5(N26.R1,N26.R2,N26.R3,N26,P31,P32,P33,P34,N32) B10(N26.R1,N26.R2,N26.R3)
+B5(P35:T0,P36:T1,P37:T2,P38:T3,P39:T3,P40:T3,P41:T4,P42:T3,P43:T4)
+N33 call.direct entity=@json_match P35 P36 P37 P43 P40 -> T3,T0,T1,T2
+N34 call.direct entity=@json_ws N33.R1 N33.R2 N33.R3 P38 P39 -> T3,T0,T1,T2
+N35 int.compare N34 P39 -> T6 [3]
+cbr N35 B6(N34.R1,N34.R2,N34.R3,N34,P39,P40,P41,P42,N33) B10(N34.R1,N34.R2,N34.R3)
+B6(P44:T0,P45:T1,P46:T2,P47:T3,P48:T3,P49:T3,P50:T4,P51:T3,P52:T3)
+N36 checked.load.bits.le P44 P47 P46 -> T5,T2 [1,1]
+N37 constant 58 -> T5
+N38 int.compare N36 N37 -> T6 [1]
+N39 constant 1 -> T3
+N40 add.wrap P47 N39 -> T3
+N41 call.direct entity=@json_ws P44 P45 N36.R1 N40 P48 -> T3,T0,T1,T2
+N42 call.direct entity=@json_skip N41.R1 N41.R2 N41.R3 N41 P48 -> T3,T0,T1,T2
+N43 int.compare N42 N41 -> T6 [5]
+N44 bit.and N38 N43 -> T6
+N45 int.zero.extend N41 -> T4
+N46 int.zero.extend N42 -> T4
+N47 constant 4294967296 -> T4
+N48 mul.wrap N46 N47 -> T4
+N49 bit.or N45 N48 -> T4
+cbr N44 B7(N42.R1,N42.R2,N42.R3,N42,P48,P49,P50,P51,P52,N49) B10(N42.R1,N42.R2,N42.R3)
+B7(P53:T0,P54:T1,P55:T2,P56:T3,P57:T3,P58:T3,P59:T4,P60:T3,P61:T3,P62:T4)
+N50 constant 0 -> T3
+N51 int.compare P61 N50 -> T6 [2]
+N52 constant 0 -> T4
+N53 int.compare P59 N52 -> T6 [2]
+N54 bit.and N51 N53 -> T6
+cbr N54 B10(P53,P54,P55) B13(P53,P54,P55,P56,P57,P58,P59,P60,P62,N51)
+B8(P63:T0,P64:T1,P65:T2,P66:T3,P67:T3,P68:T3,P69:T4,P70:T3)
+N55 call.direct entity=@json_ws P63 P64 P65 P66 P67 -> T3,T0,T1,T2
+N56 int.compare N55 P67 -> T6 [3]
+cbr N56 B9(N55.R1,N55.R2,N55.R3,N55,P67,P68,P69,P70) B10(N55.R1,N55.R2,N55.R3)
+B9(P71:T0,P72:T1,P73:T2,P74:T3,P75:T3,P76:T3,P77:T4,P78:T3)
+N57 checked.load.bits.le P71 P74 P73 -> T5,T2 [1,1]
+N58 constant 44 -> T5
+N59 int.compare N57 N58 -> T6 [1]
+N60 constant 125 -> T5
+N61 int.compare N57 N60 -> T6 [1]
+N62 constant 1 -> T3
+N63 add.wrap P74 N62 -> T3
+N64 add.wrap P78 N62 -> T3
+cbr N59 B2(P71,P72,N57.R1,N63,P75,P76,P77,N64) B14(P71,P72,N57.R1,P77,N61)
+B10(P79:T0,P80:T1,P81:T2)
+N65 constant 18446744073709551615 -> T4
+ret N65 P79 P80 P81
+B11(P82:T0,P83:T1,P84:T2,P85:T4)
+ret P85 P82 P83 P84
+B12(P86:T0,P87:T1,P88:T2,P89:T3,P90:T3,P91:T3,P92:T4,P93:T3,P94:T6)
+cbr P94 B4(P86,P87,P88,P89,P90,P91,P92,P93) B10(P86,P87,P88)
+B13(P95:T0,P96:T1,P97:T2,P98:T3,P99:T3,P100:T3,P101:T4,P102:T3,P103:T4,P104:T6)
+cbr P104 B8(P95,P96,P97,P98,P99,P100,P103,P102) B8(P95,P96,P97,P98,P99,P100,P101,P102)
+B14(P105:T0,P106:T1,P107:T2,P108:T4,P109:T6)
+cbr P109 B11(P105,P106,P107,P108) B10(P105,P106,P107)
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 6e07cf197c4ff1ebe46f19c84ad2c1c74d7ea8f2cb15177e6e8f960d224cbc65
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 bits8
+T6 bits1
+end
