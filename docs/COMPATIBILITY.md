@@ -1,5 +1,12 @@
 # Compatibility matrix
 
+2026-11-11 experimental checkpoint: [candidate-only checks](NATIVE_CANDIDATE_20261111.md)
+exercise modern `2026-07-28` per-request metadata and legacy handshakes for
+`2024-11-05`, `2025-03-26`, `2025-06-18` and `2025-11-25`. Discovery/cache fields
+pass the recorded official schema. Tool input schemas remain tools-v2; queries
+still take `{}`. The default gen3 deployment supports its existing legacy path.
+The candidate is not installed, and current real desktop clients remain untested.
+
 2026-11-10 gen3 [host-path validation](NATIVE_HOST_PATH_GUARD.md) intentionally
 requires existing drive-qualified absolute configured paths and rejects reparse
 components/ambiguous forms. Unsafe configured paths return `unsafe_host_path`;

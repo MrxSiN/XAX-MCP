@@ -1,0 +1,31 @@
+{
+  "schema": "xax-mcp-experimental-clean-package-v1",
+  "recorded": "2026-11-11",
+  "status": "EXECUTED locally; candidate not deployed; known security failures remain",
+  "archive": {
+    "path": "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261111\\xax-mcp-experimental-20261111.zip",
+    "bytes": 17451762,
+    "sha256": "02df099033ac2761cd6289d0d41acd9c327e33b31696d62ce32319e5cd4f2f42"
+  },
+  "fresh_extraction": "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261111\\clean\\extracted",
+  "source_inventory_files": 378,
+  "installed_source_inventory_unchanged": true,
+  "parent_path_empty": true,
+  "compiler_from_archive": true,
+  "compiler_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79",
+  "native_source_replay_records": 65,
+  "candidate_replay_records": 8,
+  "native_probes_rebuilt": 15,
+  "identical_builds_per_default_executor": 2,
+  "identical_candidate_builds": 2,
+  "baseline_client_exchanges": 92,
+  "extended_modern_exchanges": 96,
+  "compiler_deadline_and_server_death_cleanup": true,
+  "non_xax_program_files_in_archive": [],
+  "promoted": false,
+  "release_ready": false,
+  "full_mission_complete": false,
+  "reporting_note": "Archive captures the candidate and evidence at assembly. This supplemental package result is written after testing and is not part of the tested archive. Experimental selection is explicit; default gen3 remains installed by the normal workflow.",
+  "candidate_root": "61e54137999517707265a218ee1437ffce4297d2e2bb66b1dc24b2918a651b98",
+  "role": "First candidate package; predates the trailing-whitespace framing repair"
+}

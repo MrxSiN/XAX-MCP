@@ -1,0 +1,7 @@
+{
+  "validated_request_response_objects": 162,
+  "schema_url": "https://raw.githubusercontent.com/modelcontextprotocol/modelcontextprotocol/main/schema/2026-07-28/schema.json",
+  "schema_sha256": "edbb197ed0f92e90d658866e23cf76f107df0caac5ce25c2b9e64e1ca9a6314a",
+  "validator": "jsonschema 4.26.0",
+  "passed": true
+}

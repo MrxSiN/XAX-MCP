@@ -1,5 +1,16 @@
 # Continuation prompt: native reliability, semantic APIs and modern MCP
 
+## Resume update — 2026-11-11
+
+The prompt below records the 2026-11-10 pause. Continue from
+[the resumed candidate](docs/NATIVE_CANDIDATE_20261111.md) and
+`native/candidates/20261111/checkpoints.json`. Its capabilities JSON is repaired,
+discovery reports all five tested versions and required cache hints, and nine
+pinned Windows transactions reproduce it. It remains experimental: controlled
+workspace record aliases overwrite disposable files outside work. Cancellation,
+typed semantic queries, paging and desktop-client acceptance remain unfinished.
+The default gen3 deployment and XAX pin are unchanged.
+
 Resume work in `D:\GitHub\XAX-MCP`. The user paused implementation on 2026-11-10
 and requested this prompt, a commit and a push. Do not describe the unfinished
 candidate work below as delivered functionality.

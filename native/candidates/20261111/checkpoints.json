@@ -1,0 +1,84 @@
+{
+  "schema": "xax-mcp-native-candidate-checkpoints-v1",
+  "recorded": "2026-11-11",
+  "state": "resumed; experimental; not deployed",
+  "default_source": "native/xax-mcp-native-gen3.xax",
+  "default_unchanged_by_candidates": true,
+  "release_ready": false,
+  "full_mission_complete": false,
+  "deployment_pin_unchanged": true,
+  "previous_checkpoints": "native/candidates/20261110/checkpoints.json",
+  "checkpoints": [
+    {
+      "path": "native/candidates/20261111/server-capabilities-structured.xax",
+      "bytes": 1396205,
+      "sha256": "ef0852b7301fb7c6c9dc77850af0110f6fff285b8c6902199c85d0350d0ab956",
+      "root": "c3662bc43b98f1aeaa14626a753a47ca1c23dd8ac439f930a592f10e0003181d",
+      "windows_seed_verify": true,
+      "deployment_selected": false
+    },
+    {
+      "path": "native/candidates/20261111/server-capabilities.xax",
+      "bytes": 1431137,
+      "sha256": "6ccd1eaa58a8c5ed09146d0db0d3707f4d0f922e8b36727eaf8dc3b9dfb69a38",
+      "root": "f651bf5835526022d7315e52e8f3370ffa9a321e566fdafda83ff37ddac386ee",
+      "windows_seed_verify": true,
+      "deployment_selected": false
+    },
+    {
+      "path": "native/candidates/20261111/server-discovery.xax",
+      "bytes": 1437948,
+      "sha256": "80ce8bda120d606a0aa51759271c27e50e65a260fab6e3e1d802087379b7d8ef",
+      "root": "1d9154400c4152b6103e60d6ce1ca22e7d26ce116533e90e1865e350e7eedb15",
+      "windows_seed_verify": true,
+      "deployment_selected": false
+    },
+    {
+      "path": "native/candidates/20261111/server-caching.xax",
+      "bytes": 1438893,
+      "sha256": "a1acc0c7d9b7a8fbc6abef85e89298f13c047dcda8f4b70ed39b4521547bc6dd",
+      "root": "61e54137999517707265a218ee1437ffce4297d2e2bb66b1dc24b2918a651b98",
+      "windows_seed_verify": true,
+      "deployment_selected": false
+    },
+    {
+      "path": "native/candidates/20261111/server-modern-mcp.xax",
+      "bytes": 1439921,
+      "sha256": "023e7248b021e43a1ea9b61a7e5384806750a29e1037505601f8bc9840888415",
+      "root": "38724fe570dcddb9bb82c5bf2bd49aca468445a38ab2d0e5d19ed4599559c10f",
+      "windows_seed_verify": true,
+      "deployment_selected": false
+    }
+  ],
+  "final_source": "native/candidates/20261111/server-modern-mcp.xax",
+  "final_root": "38724fe570dcddb9bb82c5bf2bd49aca468445a38ab2d0e5d19ed4599559c10f",
+  "artifacts": [
+    {
+      "path": "native/candidates/20261111/server-modern-mcp-snapshot.xax",
+      "bytes": 1440200,
+      "sha256": "43425f9eb5b91398530bc2556a13ed6639a5d6fd0e292fbca613d9c5fb11bc8c"
+    },
+    {
+      "path": "native/candidates/20261111/xax-mcp-native.exe",
+      "bytes": 428544,
+      "sha256": "3c61b65176af52c3d0011a324434fe19a383f35fb50bccb8fe42d4b7ecbc287f"
+    },
+    {
+      "path": "native/candidates/20261111/xax-mcp-native.prov",
+      "bytes": 268,
+      "sha256": "5f28dd8e62ce2af4b2fa67d7ebcc95bc6a70d39b346ffe19e01a5ef56ec4d787"
+    }
+  ],
+  "identical_pinned_builds": 2,
+  "pinned_windows_edit_transport_complete": true,
+  "transactions": "native/transactions/20261111-capabilities/manifest.json",
+  "evidence": "docs/evidence/native-resumed-candidate-20261111.json",
+  "known_failures": [
+    "Pre-existing and concurrently installed workspace edit.rec hard-link aliases overwrite a disposable file outside work",
+    "Request-level cancellation is not implemented",
+    "Typed semantic queries and root-bound pagination are not implemented"
+  ],
+  "promotion_accepted": false,
+  "clean_package_checked": true,
+  "clean_package_evidence": "docs/evidence/native-resumed-package-20261111.json"
+}

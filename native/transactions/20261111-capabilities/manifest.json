@@ -1,0 +1,210 @@
+{
+  "schema": "xax-mcp-experimental-native-replay-v1",
+  "recorded": "2026-11-11",
+  "state": "EXPERIMENTAL; not deployed",
+  "source_authority": "Canonical XAX stores, authored only through native exact-root batches with mandatory verify; XAXEDIT1 copies supplied immutable native objects without graph generation",
+  "base": "native/xax-mcp-native-gen3.xax",
+  "base_root": "44f8e6b34a4bd3d50bfb670c1be6a73c9e5bfae7f701383f70eb51e37befd94d",
+  "base_replay": "native/transactions/20261110-host-paths/manifest.json",
+  "final": "native/candidates/20261111/server-modern-mcp.xax",
+  "final_root": "38724fe570dcddb9bb82c5bf2bd49aca468445a38ab2d0e5d19ed4599559c10f",
+  "deployment_pin": "native/xax-dependency.json",
+  "windows_seed_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79",
+  "native_authoring_sha256": "a35fd59fc9effe08f58f6d1db0d2e951abbd56a065dc0dca729c9bc6f5ec793b",
+  "records": [
+    {
+      "path": "native/transactions/20261111-capabilities/01-server-file-pins.edit",
+      "bytes": 219531,
+      "sha256": "44ad8242b14531f2ebd7b0a9d41a8d47e105393801d2756b08738aab7ea9c320",
+      "base_root": "44f8e6b34a4bd3d50bfb670c1be6a73c9e5bfae7f701383f70eb51e37befd94d",
+      "result_root": "8653cd6040139ee2c80308ed4fb66a71e8464c520c1a2849520d5f7bddee9db7",
+      "new_native_objects": 36,
+      "unchanged_objects": 3860,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "path": "native/candidates/20261110/server-file-pins.xax",
+        "bytes": 1284541,
+        "sha256": "48b3abf403791d0b74b780f7bbe327221da390766c179a1ed17430a121418e99"
+      },
+      "native_batch": {
+        "path": "native/transactions/20261110-file-pins/server-file-pins.batch",
+        "bytes": 10632,
+        "sha256": "1d651ad38086bf8edd8d73e2548da8d9c74b2ff19010b955dc8d1112df23cd35"
+      }
+    },
+    {
+      "path": "native/transactions/20261111-capabilities/02-server-compiler-process.edit",
+      "bytes": 215458,
+      "sha256": "6424bcf251cec6d9d3113cc99e46743fec758bfbcbffe6835052646292c84eb6",
+      "base_root": "8653cd6040139ee2c80308ed4fb66a71e8464c520c1a2849520d5f7bddee9db7",
+      "result_root": "4e1d313b828c4061e85f27f8dd2cfdcd07c03c604ccc54d279ec2d71dccab7f8",
+      "new_native_objects": 30,
+      "unchanged_objects": 3880,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "path": "native/candidates/20261110/server-compiler-process.xax",
+        "bytes": 1290422,
+        "sha256": "95979436bffc3a46bd3b2e19f36b5c9101eeb8402026ee30570952b9aae7cd03"
+      },
+      "native_batch": {
+        "path": "native/transactions/20261110-compiler-process/server-compiler-process.batch",
+        "bytes": 548487,
+        "sha256": "581291dde66b1d8d1fc55b1809ec92eae0c429b7707227268bbbc129487a7ead"
+      }
+    },
+    {
+      "path": "native/transactions/20261111-capabilities/03-server-modern-mcp.edit",
+      "bytes": 152040,
+      "sha256": "4a3ff6e62eb5faadc9f15fe603805e7a36be9599fd95985e25712e2956cedef8",
+      "base_root": "4e1d313b828c4061e85f27f8dd2cfdcd07c03c604ccc54d279ec2d71dccab7f8",
+      "result_root": "c2754c01f0a30f3d235ebb07ed12c2f76ddc0b3c899d1a23ded807c926874053",
+      "new_native_objects": 211,
+      "unchanged_objects": 3903,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "path": "native/candidates/20261110/server-modern-mcp.xax",
+        "bytes": 1352426,
+        "sha256": "6f672cb35626bd4f78e9ae1b8160e9aeb16e38df0858261672a2aa34eed3e3c4"
+      },
+      "native_batch": {
+        "path": "native/transactions/20261110-modern-mcp/server-modern-mcp.batch",
+        "bytes": 266962,
+        "sha256": "e28357d1467c583c352959812cb1ca1c2abd5fe17f9dbb49ec43399699537ecd"
+      }
+    },
+    {
+      "path": "native/transactions/20261111-capabilities/04-server-semantic-inspect.edit",
+      "bytes": 130121,
+      "sha256": "4ee2ed240b5b97e3adfbdf32d5a17007418d845efc03e465c4a881335f918123",
+      "base_root": "c2754c01f0a30f3d235ebb07ed12c2f76ddc0b3c899d1a23ded807c926874053",
+      "result_root": "d30c15dcb672863e7bbfe097a03ec951b8cf90921bca4d01d0bd56a195df4b0e",
+      "new_native_objects": 46,
+      "unchanged_objects": 4105,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "path": "native/candidates/20261110/server-semantic-inspect.xax",
+        "bytes": 1364682,
+        "sha256": "dec1f4c84d36b2da8813515d4f9646672479f984ad2b83f2f4227391c2ab4862"
+      },
+      "native_batch": {
+        "path": "native/transactions/20261110-semantic-inspect/server-semantic-inspect.batch",
+        "bytes": 44701,
+        "sha256": "187f2258680ab299c232a542bf4193c33a25e16b06b1a1570e047074cc2fe8b9"
+      }
+    },
+    {
+      "path": "native/transactions/20261111-capabilities/05-server-capabilities-structured.edit",
+      "bytes": 155919,
+      "sha256": "9d6c2a79c2e4407dd7245f39511c0dc1124f25ed7e20f340c623f8f8165e9f2d",
+      "base_root": "d30c15dcb672863e7bbfe097a03ec951b8cf90921bca4d01d0bd56a195df4b0e",
+      "result_root": "c3662bc43b98f1aeaa14626a753a47ca1c23dd8ac439f930a592f10e0003181d",
+      "new_native_objects": 183,
+      "unchanged_objects": 4140,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "path": "native/candidates/20261111/server-capabilities-structured.xax",
+        "bytes": 1396205,
+        "sha256": "ef0852b7301fb7c6c9dc77850af0110f6fff285b8c6902199c85d0350d0ab956"
+      },
+      "native_batch": {
+        "path": "native/transactions/20261111-capabilities/server-capabilities-structured.batch",
+        "bytes": 53013,
+        "sha256": "a2f6988f37e63d24d6b27afa364772118d12d96a4e1b61b4838deb6fb78a051e"
+      }
+    },
+    {
+      "path": "native/transactions/20261111-capabilities/06-server-capabilities.edit",
+      "bytes": 159161,
+      "sha256": "c06994b00494810ca43a7b614ccf18c8237fd5538beffff415386ac0e14d09b1",
+      "base_root": "c3662bc43b98f1aeaa14626a753a47ca1c23dd8ac439f930a592f10e0003181d",
+      "result_root": "f651bf5835526022d7315e52e8f3370ffa9a321e566fdafda83ff37ddac386ee",
+      "new_native_objects": 207,
+      "unchanged_objects": 4312,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "path": "native/candidates/20261111/server-capabilities.xax",
+        "bytes": 1431137,
+        "sha256": "6ccd1eaa58a8c5ed09146d0db0d3707f4d0f922e8b36727eaf8dc3b9dfb69a38"
+      },
+      "native_batch": {
+        "path": "native/transactions/20261111-capabilities/server-capabilities-text.batch",
+        "bytes": 55762,
+        "sha256": "5e31aa8d490ee17277701c48ce30e2ffea4e7504d9bba8eeaeb9e009d4948a90"
+      }
+    },
+    {
+      "path": "native/transactions/20261111-capabilities/07-server-discovery.edit",
+      "bytes": 143825,
+      "sha256": "1b8255787cb9469a7e30ef15d1bd8e3e0f5436197c05d4bf45c9d637809ffa5d",
+      "base_root": "f651bf5835526022d7315e52e8f3370ffa9a321e566fdafda83ff37ddac386ee",
+      "result_root": "1d9154400c4152b6103e60d6ce1ca22e7d26ce116533e90e1865e350e7eedb15",
+      "new_native_objects": 70,
+      "unchanged_objects": 4488,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "path": "native/candidates/20261111/server-discovery.xax",
+        "bytes": 1437948,
+        "sha256": "80ce8bda120d606a0aa51759271c27e50e65a260fab6e3e1d802087379b7d8ef"
+      },
+      "native_batch": {
+        "path": "native/transactions/20261111-capabilities/server-discovery.batch",
+        "bytes": 28592,
+        "sha256": "4b9e9edbb538667480c899a8d17ef48143b1219b2ee0b2c9b7733bbd98108ca1"
+      }
+    },
+    {
+      "path": "native/transactions/20261111-capabilities/08-server-caching.edit",
+      "bytes": 110914,
+      "sha256": "e8490a8532fea1a27f57dfe75c7648f6f1869c5f5e8c65f60347935cec62ebc7",
+      "base_root": "1d9154400c4152b6103e60d6ce1ca22e7d26ce116533e90e1865e350e7eedb15",
+      "result_root": "61e54137999517707265a218ee1437ffce4297d2e2bb66b1dc24b2918a651b98",
+      "new_native_objects": 13,
+      "unchanged_objects": 4547,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "path": "native/candidates/20261111/server-caching.xax",
+        "bytes": 1438893,
+        "sha256": "a1acc0c7d9b7a8fbc6abef85e89298f13c047dcda8f4b70ed39b4521547bc6dd"
+      },
+      "native_batch": {
+        "path": "native/transactions/20261111-capabilities/server-caching.batch",
+        "bytes": 7551,
+        "sha256": "2d9256dc3abb2d36acff75be9ad35aa41017f07150dd4c3e7c4a0329dd3ba2f1"
+      }
+    },
+    {
+      "path": "native/transactions/20261111-capabilities/09-server-trailing-space.edit",
+      "bytes": 109269,
+      "sha256": "2238abdbeadc0e7639ba160cc99e6dc8ad03ccb1be7a12e602a4d3a283ff90c9",
+      "base_root": "61e54137999517707265a218ee1437ffce4297d2e2bb66b1dc24b2918a651b98",
+      "result_root": "38724fe570dcddb9bb82c5bf2bd49aca468445a38ab2d0e5d19ed4599559c10f",
+      "new_native_objects": 11,
+      "unchanged_objects": 4551,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "path": "native/candidates/20261111/server-modern-mcp.xax",
+        "bytes": 1439921,
+        "sha256": "023e7248b021e43a1ea9b61a7e5384806750a29e1037505601f8bc9840888415"
+      },
+      "native_batch": {
+        "path": "native/transactions/20261111-capabilities/server-trailing-space.batch",
+        "bytes": 5086,
+        "sha256": "21d3615d8d6bbe0ff85237f63db1345c10e09e852473f1feb0220fa012375f94"
+      }
+    }
+  ],
+  "packing": "External transport packing only; no compiler or canonical graph generator added to this repository",
+  "mandatory_verify_after_every_edit": true,
+  "unchanged_objects_retain_exact_cids": true,
+  "release_ready": false,
+  "full_mission_complete": false
+}

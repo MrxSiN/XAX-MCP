@@ -1,8 +1,10 @@
 # XAX-MCP
 
-Work paused on 2026-11-10. The [continuation prompt](CONTINUE_NATIVE_EVOLUTION.md)
-records unfinished file-race, compiler-cancellation, semantic API and modern MCP
-work. Archived experimental candidates are not the default gen3 deployment.
+Work resumed on 2026-11-11. A [new experimental checkpoint](docs/NATIVE_CANDIDATE_20261111.md)
+repairs capabilities framing, discovery metadata and pinned replay. Controlled
+workspace hard-link tests still fail the outside-write boundary. The default
+deployment remains gen3; cancellation and paginated semantic APIs remain open.
+The [original continuation prompt](CONTINUE_NATIVE_EVOLUTION.md) is retained.
 
 2026-11-10: the [native configured-path guard](docs/NATIVE_HOST_PATH_GUARD.md)
 rejects configured reparse/ambiguous paths before compiler-backed work and

@@ -1,0 +1,48 @@
+{
+  "schema": "xax-mcp-crlf-state-failure-v1",
+  "recorded": "2026-11-11",
+  "candidate_root": "61e54137999517707265a218ee1437ffce4297d2e2bb66b1dc24b2918a651b98",
+  "sequence": "Schema session IDs 35-40 from the retained native sessions, with modern per-request metadata on tool calls and CRLF framing. After the malformed transaction at ID 39, ID 40 omitted resultType. Reproduced with and without the legacy handshake; LF-only sequence passed.",
+  "request": {
+    "params": {
+      "name": "xax_capabilities",
+      "arguments": {
+        "execute": true
+      },
+      "_meta": {
+        "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+        "io.modelcontextprotocol/clientCapabilities": {}
+      }
+    },
+    "method": "tools/call",
+    "id": 40,
+    "jsonrpc": "2.0"
+  },
+  "response": {
+    "jsonrpc": "2.0",
+    "id": 40,
+    "result": {
+      "content": [
+        {
+          "text": "{\"error\":{\"code\":\"invalid_request\",\"details\":{\"errors\":1},\"message\":\"(root): Additional properties are not allowed ('execute' was unexpected)\"},\"ok\":false}",
+          "type": "text"
+        }
+      ],
+      "isError": true,
+      "structuredContent": {
+        "error": {
+          "code": "invalid_request",
+          "details": {
+            "errors": 1
+          },
+          "message": "(root): Additional properties are not allowed ('execute' was unexpected)"
+        },
+        "ok": false
+      }
+    }
+  },
+  "failure": "Modern result omitted resultType complete",
+  "repaired_by": "native/transactions/20261111-capabilities/09-server-trailing-space.edit",
+  "regression": "docs/evidence/native-trailing-whitespace-20261111.json",
+  "promoted": false
+}

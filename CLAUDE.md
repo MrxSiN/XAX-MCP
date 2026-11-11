@@ -40,6 +40,12 @@ before resuming file races, compiler cancellation, semantic APIs or modern MCP.
 Experimental canonical checkpoints are archived under `native/candidates/20261110/`;
 they are not the default deployment. The last capabilities candidate has a known JSON framing failure.
 
+Work resumed on 2026-11-11. Read `docs/NATIVE_CANDIDATE_20261111.md` and
+`native/candidates/20261111/checkpoints.json` for the repaired experimental successor
+and its complete pinned replay. It is not deployed: controlled workspace `edit.rec`
+hard-link aliases still overwrite files outside work. Request cancellation and
+typed/paginated semantic APIs remain absent. The 20261110 failure record is historical.
+
 Current native pin: see `native/xax-dependency.json` (`xax-native-file-v1`); sources are `native/xax-mcp-native-gen3.xax` and `native/xax-mcp-sandbox-gen1.xax`. The 20261110-host-paths manifest extends native replay through the configured-path guard. Binary stdin/argv are implemented within host bounds; JSON xax-construct-v1 and full CUM prepare remain unsupported. Full mission readiness is false.
 
 Current gen3 evidence: `docs/evidence/native-host-path-guard-20261110.json` and the separate clean-package record. The current hosted result below remains the historical gen2 baseline.

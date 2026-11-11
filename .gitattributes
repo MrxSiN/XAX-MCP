@@ -33,7 +33,10 @@ tests/security/memory-commit/*.ndjson -text whitespace=cr-at-eol
 native/transactions/20261110/*.batch -text whitespace=cr-at-eol
 native/transactions/20261110-host-paths/*.batch -text whitespace=cr-at-eol
 native/transactions/20261110-*/*.batch -text whitespace=cr-at-eol
+native/transactions/20261111-capabilities/*.batch -text whitespace=cr-at-eol
 native/candidates/**/*.xax binary
 native/candidates/**/*.json -text whitespace=cr-at-eol
+native/candidates/**/*.exe binary
+native/candidates/**/*.prov binary
 docs/evidence/native-*.bin binary
 docs/evidence/native-*.ndjson -text whitespace=cr-at-eol

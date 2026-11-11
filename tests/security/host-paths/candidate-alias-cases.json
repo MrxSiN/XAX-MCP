@@ -1,0 +1,17 @@
+{
+  "schema": "xax-mcp-experimental-alias-cases-v1",
+  "recorded": "2026-11-11",
+  "candidate_checkpoints": "native/candidates/20261111/checkpoints.json",
+  "orchestration": "External independent clients; no foreign test implementation retained in this repository",
+  "cases": [
+    {"name": "compiler-hardlink", "setup": "Copy the compiler to a disposable directory; add a second hard link before launch", "expected": "unsafe_host_path; source and outside sentinel unchanged", "observed": "PASS", "evidence": "docs/evidence/native-candidate-aliases-20261111.json"},
+    {"name": "seed-hardlink", "setup": "Copy the seed; add a second hard link before launch", "expected": "unsafe_host_path; configured and current source bytes unchanged", "observed": "PASS", "evidence": "docs/evidence/native-candidate-aliases-20261111.json"},
+    {"name": "preexisting-workspace-record-alias", "setup": "Link work/edit.rec to a disposable sentinel outside work before query", "expected": "Reject or operate on an exclusive owned object; no outside write", "observed": "FAIL: query succeeded and outside sentinel changed; source bytes/root preserved", "evidence": "docs/evidence/native-candidate-aliases-20261111.json"},
+    {"name": "concurrent-workspace-record-alias", "setup": "A bounded concurrent attacker substitutes disposable work/edit.rec hard links during query", "expected": "No outside write or publication through a substituted object", "observed": "FAIL: query succeeded and outside sentinel changed; source bytes/root preserved", "evidence": "docs/evidence/native-candidate-aliases-20261111.json"},
+    {"name": "configured-directory-replacement", "setup": "Attempt compiler-ancestor, workspace and shared-ancestor rename after query", "expected": "OS denies all three replacements; query root preserved; handles release on exit", "observed": "PASS", "evidence": "docs/evidence/native-resumed-file-pins-20261111.json"},
+    {"name": "owner-crash-lease-recovery", "setup": "Existing baseline kills a workspace owner and retries the waiter", "expected": "Exclusive lease recovers; retained mutation/stale/invalid-source checks pass", "observed": "PASS existing baseline scope", "evidence": "docs/evidence/native-resumed-baseline-20261111.ndjson.gz"}
+  ],
+  "not_executed": ["DOS drive-alias remapping", "every create/seal/verify/publish crash window", "handle-based candidate publication", "matching request cancellation with descendants and no publication"],
+  "security_gate_closed": false,
+  "promotion_accepted": false
+}

@@ -1,5 +1,18 @@
 # Evidence and claim labels
 
+## 2026-11-11 — resumed candidate, not deployed
+
+[New experimental evidence](evidence/native-resumed-candidate-20261111.json)
+records repaired capabilities JSON, complete discovery versions/cache hints,
+nine exact-root pinned replay records, deterministic builds, 92 baseline,
+25 metadata and 96 extended exchanges, 162 official-schema validations and
+160 native JSON cases. Full text/structured bodies and the seed inventory agree.
+[Alias trials](evidence/native-candidate-aliases-20261111.json) retain both
+configured-file denials and outside-write failures at workspace `edit.rec`.
+[Separate fresh-package evidence](evidence/native-resumed-package-20261111.json)
+names the experimental archive. No promotion, complete race protection,
+request cancellation, semantic pagination or release acceptance is claimed.
+
 ## 2026-11-10 — native configured-path rejection and package repair
 
 [New evidence](evidence/native-host-path-guard-20261110.json) records before/after

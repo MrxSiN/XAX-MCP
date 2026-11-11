@@ -1,0 +1,10 @@
+{
+  "exchanges": 769,
+  "modern_complete_results": 768,
+  "legacy_initializations": 1,
+  "padding_lengths": 16,
+  "trailing_whitespace_forms": 8,
+  "with_and_without_legacy_handshake": true,
+  "passed": true,
+  "valid_mutation_carriers_submitted": false
+}

@@ -205,5 +205,19 @@
     "evidence": "docs/evidence/native-paused-candidates-20261110.json",
     "last_capabilities_candidate": "FAILED runtime JSON framing despite native verification/build",
     "default_server_source": "native/xax-mcp-native-gen3.xax"
+  },
+  "resumed_native_evolution_candidates": {
+    "recorded": "2026-11-11",
+    "state": "experimental; not deployed",
+    "checkpoints": "native/candidates/20261111/checkpoints.json",
+    "transactions": "native/transactions/20261111-capabilities/manifest.json",
+    "evidence": "docs/evidence/native-resumed-candidate-20261111.json",
+    "capabilities_json_repaired": true,
+    "discovery_versions_and_cache_hints_tested": true,
+    "pinned_windows_replay_records": 9,
+    "modern_trailing_whitespace_framing_repaired": true,
+    "candidate_promotion_accepted": false,
+    "workspace_alias_boundary": "Controlled pre-existing/concurrent edit.rec aliases overwrote disposable files outside work; gate remains open",
+    "default_server_source": "native/xax-mcp-native-gen3.xax"
   }
 }

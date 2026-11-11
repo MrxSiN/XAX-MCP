@@ -1,0 +1,59 @@
+{
+  "schema": "xax-mcp-experimental-clean-package-v1",
+  "recorded": "2026-11-11",
+  "status": "EXECUTED locally; candidate not deployed; known security failures remain",
+  "archive": {
+    "path": "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261111\\xax-mcp-experimental-20261111-final.zip",
+    "bytes": 18383532,
+    "sha256": "d34c592bc96b554445f3ac467073c95b0237ae4980daae9145d98c950645f1a0"
+  },
+  "fresh_extraction": "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261111\\clean-final\\extracted",
+  "candidate_root": "38724fe570dcddb9bb82c5bf2bd49aca468445a38ab2d0e5d19ed4599559c10f",
+  "source_inventory_files": 389,
+  "installed_source_inventory_unchanged": true,
+  "parent_path_empty": true,
+  "compiler_from_archive": true,
+  "compiler_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79",
+  "native_source_replay_records": 65,
+  "candidate_replay_records": 9,
+  "native_probes_rebuilt": 15,
+  "identical_builds_per_default_executor": 2,
+  "identical_candidate_builds": 2,
+  "baseline_client_exchanges": 92,
+  "mixed_modern_baseline_exchanges": 92,
+  "mixed_baseline_modern_complete_results": 68,
+  "extended_modern_exchanges": 96,
+  "whitespace_state_exchanges": 769,
+  "compiler_deadline_and_server_death_cleanup": true,
+  "non_xax_program_files_in_archive": [],
+  "promoted": false,
+  "release_ready": false,
+  "full_mission_complete": false,
+  "reporting_note": "Archive captures the candidate and evidence at assembly. This supplemental package result is written after testing and is not part of the tested archive. Experimental selection is explicit; default gen3 remains installed by the normal workflow.",
+  "raw_transcripts": [
+    {
+      "path": "docs/evidence/native-resumed-package-baseline-20261111.ndjson.gz",
+      "bytes": 35185,
+      "sha256": "528cf4783adc82615291b61ee1278f4fa159ae04fd3773b084d5bdc4dc4a6f80",
+      "exchanges": 92
+    },
+    {
+      "path": "docs/evidence/native-resumed-package-modern-baseline-20261111.ndjson.gz",
+      "bytes": 35151,
+      "sha256": "78391ae38cc24f665e12766dd9b1af0eada34d66ceadc5291c0097d9134f6a48",
+      "exchanges": 92
+    },
+    {
+      "path": "docs/evidence/native-resumed-package-protocol-20261111.ndjson.gz",
+      "bytes": 17873,
+      "sha256": "f69e8dae4e1c13c9acc2c860cf3baec05ee7411b3c136ab6f13057a67c9f5e50",
+      "exchanges": 96
+    },
+    {
+      "path": "docs/evidence/native-resumed-package-whitespace-20261111.ndjson.gz",
+      "bytes": 9756,
+      "sha256": "9969a1742136a748377d935bf5201a3667d719bd68ea62942330413caa521190",
+      "exchanges": 769
+    }
+  ]
+}

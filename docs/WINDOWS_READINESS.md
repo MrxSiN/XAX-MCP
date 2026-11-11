@@ -1,5 +1,11 @@
 # Windows readiness — 0.10.0, 2026-11-01
 
+2026-11-11: a [resumed experimental candidate](NATIVE_CANDIDATE_20261111.md)
+repairs capabilities framing and discovery and has complete pinned replay.
+It remains unpromoted. Controlled workspace `edit.rec` hard-link aliases overwrite
+outside disposable files; request cancellation and typed/paginated semantic APIs
+remain absent. Default gen3 and both readiness flags remain unchanged.
+
 2026-11-10: the [native configured-path guard](NATIVE_HOST_PATH_GUARD.md) rejects
 configured junction/reparse components before compiler-backed operations, including
 after lease acquisition. Native replay now covers 65 source records; the 92-client

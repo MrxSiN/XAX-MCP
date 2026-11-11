@@ -1,5 +1,11 @@
 # Upstream XAX proposals and their status
 
+2026-11-11: the [required native handle/identity and public inspection contracts](NATIVE_HANDLE_CONTRACT.md)
+are open proposals, not APIs implemented by the pinned compiler. Controlled workspace
+record aliases still overwrite outside disposable files. General compiler changes
+must be independently verified upstream before integration/repinning; this resumed
+candidate does not modify the XAX checkout or the deployment pin.
+
 Current 0.10 Windows stdin/argv uses the unchanged pinned native compiler and
 Windows process APIs in canonical XAX graphs. It needs no XAX/BBC change. Native
 `construct` remains unsupported; exact-root native edit records with supplied

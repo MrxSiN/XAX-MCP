@@ -1,5 +1,17 @@
 # Handoff
 
+## 2026-11-11 — resumed experimental checkpoint
+
+Continue from [the repaired candidate](NATIVE_CANDIDATE_20261111.md) and its
+[exact-root manifest](../native/transactions/20261111-capabilities/manifest.json).
+Capabilities framing, complete discovery versions, identity and cache hints pass
+new native/client checks; nine Windows records reproduce the candidate. The
+default gen3 deployment and compiler pin are unchanged. Controlled pre-existing
+and concurrent workspace `edit.rec` hard links overwrite outside disposable files;
+those failures remain open. The [required upstream contract](NATIVE_HANDLE_CONTRACT.md)
+and remaining cancellation, semantic paging and desktop-client gates are explicit.
+No unimplemented candidate feature is released.
+
 ## 2026-11-10 — user-requested pause
 
 Continue from [the remaining-work prompt](../CONTINUE_NATIVE_EVOLUTION.md).
