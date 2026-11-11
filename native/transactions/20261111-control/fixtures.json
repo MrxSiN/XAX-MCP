@@ -1,0 +1,145 @@
+{
+  "schema": "xax-mcp-native-control-fixtures-v1",
+  "recorded": "2026-11-11",
+  "fixtures": [
+    {
+      "name": "program",
+      "base": {
+        "path": "tests/security/timeout/timeout.xax",
+        "bytes": 2260,
+        "sha256": "4dc94eeaaedb133e31872db12cc54c2c4e15585bb2de2dfa2e8a4e491dbbc4c5"
+      },
+      "base_root": "f00c174a4d0c87085eb57e75f683b47631dfa432334b9ecde2a274413f3f379a",
+      "result_root": "6b3dc91d8261a28bcfedfdaaa91c921b73c9bd591356cc7b0f266268175cded4",
+      "source": {
+        "path": "tests/protocol/semantic-paging/program.xax",
+        "bytes": 2488,
+        "sha256": "d44c2cc0a1c5a14520d5ed16bbfeb100f5aeab9a522c32533666099ee6a6abbd"
+      },
+      "native_batch": {
+        "path": "native/transactions/20261111-control/semantic-program.batch",
+        "bytes": 623,
+        "sha256": "2b28d3d90784fd622a9a475c71b14727522c01f39c4c170b1a463e54b8a86c9f"
+      },
+      "native_carrier": {
+        "path": "native/transactions/20261111-control/semantic-program.edit",
+        "bytes": 1209,
+        "sha256": "87b5aae7caf1dd2e105e7f1e84652a6b566bd359ca92aef4f454ddc27d4eec04"
+      },
+      "windows_verified": true,
+      "canonical_and_raw_replay_equal": true,
+      "identical_builds": 2,
+      "artifacts": [
+        {
+          "path": "tests/protocol/semantic-paging/program-snapshot.xax",
+          "bytes": 2765,
+          "sha256": "3c50b2b5649a5dd0ae394f55ff83db3b41ed654835274a736f3849654c4255a5"
+        },
+        {
+          "path": "tests/protocol/semantic-paging/program.exe",
+          "bytes": 1024,
+          "sha256": "8c9330c79d31ed3e4770c7055ef26746c639d0dbb48c019c3cf5c92bd3ce1325"
+        },
+        {
+          "path": "tests/protocol/semantic-paging/program.prov",
+          "bytes": 268,
+          "sha256": "1f5a71e744a313d871276e3b3e3fa08d6db66e2ab718de5e2ca6bcdb73b33ad8"
+        }
+      ]
+    },
+    {
+      "name": "hanging",
+      "base": {
+        "path": "tests/security/memory-commit/memory-low.xax",
+        "bytes": 3478,
+        "sha256": "50252f029ac8a5023cf71e7a858994b37bd7afdb77f0c5b74b188b4f394e1f8b"
+      },
+      "base_root": "5c8f5c28b78cae3f179a4f1ed072716846e46e968c3a23ed660c70638e4d4410",
+      "result_root": "c2e9e9a8f64806226927d12fc704abb42557ececaecaf39b5d03cd480d2ecd8c",
+      "source": {
+        "path": "tests/security/compiler-descendants/hanging.xax",
+        "bytes": 6250,
+        "sha256": "82d8c6ae3a0bcefdd1e794e9fad8536648e777b3fbd257a2be042239e8737c2a"
+      },
+      "native_batch": {
+        "path": "native/transactions/20261111-control/fixture-descendant-hanging.batch",
+        "bytes": 2823,
+        "sha256": "b1fe43a797cec7cadb7dd57986b2d1c17d7f9da0d0f2f26affa15148ab19da88"
+      },
+      "native_carrier": {
+        "path": "native/transactions/20261111-control/fixture-descendant-hanging.edit",
+        "bytes": 3002,
+        "sha256": "731fde59c3f337f4b1ffeba338806974ad9501ba10f1941e77407d14717e352a"
+      },
+      "windows_verified": true,
+      "canonical_and_raw_replay_equal": true,
+      "identical_builds": 2,
+      "artifacts": [
+        {
+          "path": "tests/security/compiler-descendants/hanging-snapshot.xax",
+          "bytes": 6527,
+          "sha256": "364fdcad087f177485f352b363eeba795b95b70ff5d2b233cff3758dd1ad0495"
+        },
+        {
+          "path": "tests/security/compiler-descendants/hanging.exe",
+          "bytes": 1536,
+          "sha256": "3180d2e87ddb826ee13b431ba1ceab799749eaf5f1caf41114d7ca35d908fc01"
+        },
+        {
+          "path": "tests/security/compiler-descendants/hanging.prov",
+          "bytes": 268,
+          "sha256": "6a47cfecd40efb15efe33fe106369c124577642ca5cc6f2cc3b434d82ebe0588"
+        }
+      ]
+    },
+    {
+      "name": "returning",
+      "base": {
+        "path": "tests/security/memory-commit/memory-low.xax",
+        "bytes": 3478,
+        "sha256": "50252f029ac8a5023cf71e7a858994b37bd7afdb77f0c5b74b188b4f394e1f8b"
+      },
+      "base_root": "5c8f5c28b78cae3f179a4f1ed072716846e46e968c3a23ed660c70638e4d4410",
+      "result_root": "cbb9c90378e2d68762463063cddf1fac84e4c5365f2e598fb3689c7fc561e9c0",
+      "source": {
+        "path": "tests/security/compiler-descendants/returning.xax",
+        "bytes": 6250,
+        "sha256": "a3b535e152437bd85f42259b6a0dc2ba21c16c8408283f50463ced600b4c3c62"
+      },
+      "native_batch": {
+        "path": "native/transactions/20261111-control/fixture-descendant-returning.batch",
+        "bytes": 2821,
+        "sha256": "0c69eb133ed8b3ea13aa2993b5282575de5cd4aff0d522ab56f8151aebc7029a"
+      },
+      "native_carrier": {
+        "path": "native/transactions/20261111-control/fixture-descendant-returning.edit",
+        "bytes": 3002,
+        "sha256": "ce2697fa7ca51c279e9ffa050888a0e7d9cfee520c00532b34dd6e0c002528b3"
+      },
+      "windows_verified": true,
+      "canonical_and_raw_replay_equal": true,
+      "identical_builds": 2,
+      "artifacts": [
+        {
+          "path": "tests/security/compiler-descendants/returning-snapshot.xax",
+          "bytes": 6527,
+          "sha256": "0e0a11570687682844def210b2d66d33335e17ad1303e65842a9fbab76ebea7c"
+        },
+        {
+          "path": "tests/security/compiler-descendants/returning.exe",
+          "bytes": 1536,
+          "sha256": "0c649c2e05aaa3867108e7b0e7276966dedb3b7f99d3889f51ac30d6cef93aa3"
+        },
+        {
+          "path": "tests/security/compiler-descendants/returning.prov",
+          "bytes": 268,
+          "sha256": "a02048df0b98b370f242e376c0de9c4e14aeac0545ef9bcbb20ee0b4a875cd92"
+        }
+      ]
+    }
+  ],
+  "compiler_pin": "native/xax-dependency.json",
+  "source_authority": "Native-authored canonical XAX stores; carrier packing copies immutable objects",
+  "descendant_program_path": "tests/security/timeout/timeout.exe relative to the test working directory",
+  "semantic_program_expected_exit": 66
+}

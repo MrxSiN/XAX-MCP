@@ -46,6 +46,15 @@ and its complete pinned replay. It is not deployed: controlled workspace `edit.r
 hard-link aliases still overwrite files outside work. Request cancellation and
 typed/paginated semantic APIs remain absent. The 20261110 failure record is historical.
 
+The later control preview is recorded in `docs/NATIVE_CONTROL_20261111.md` and
+`native/candidates/20261111-control/checkpoints.json`. It adds tested native
+compiler cancellation, descendant cleanup and bounded public reference-query
+pages, plus legacy progress-metadata compatibility. Its selected query schema is
+`schemas/tools-v3.json`. It is an explicit preview; Gen3 remains the default and
+the compiler dependency is unchanged. Preserve the trusted-host workspace-alias
+boundary, inspection-prefix limit, separate desktop UI evidence and false release
+readiness flags. Do not relabel older evidence as acceptance of this source.
+
 Current native pin: see `native/xax-dependency.json` (`xax-native-file-v1`); sources are `native/xax-mcp-native-gen3.xax` and `native/xax-mcp-sandbox-gen1.xax`. The 20261110-host-paths manifest extends native replay through the configured-path guard. Binary stdin/argv are implemented within host bounds; JSON xax-construct-v1 and full CUM prepare remain unsupported. Full mission readiness is false.
 
 Current gen3 evidence: `docs/evidence/native-host-path-guard-20261110.json` and the separate clean-package record. The current hosted result below remains the historical gen2 baseline.

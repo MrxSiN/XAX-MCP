@@ -40,3 +40,11 @@ native/candidates/**/*.exe binary
 native/candidates/**/*.prov binary
 docs/evidence/native-*.bin binary
 docs/evidence/native-*.ndjson -text whitespace=cr-at-eol
+native/transactions/20261111-control/*.batch -text whitespace=cr-at-eol
+tests/protocol/semantic-paging/*.xax binary
+tests/protocol/semantic-paging/*.exe binary
+tests/protocol/semantic-paging/*.prov binary
+tests/protocol/semantic-paging/*.json -text whitespace=cr-at-eol
+tests/security/compiler-descendants/*.xax binary
+tests/security/compiler-descendants/*.exe binary
+tests/security/compiler-descendants/*.prov binary

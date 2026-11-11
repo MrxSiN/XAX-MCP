@@ -1,0 +1,408 @@
+define @choose_word
+(T0,T0,T1,T1)->(T1)
+B0(P0:T0,P1:T0,P2:T1,P3:T1)
+N0 int.compare P0 P1 -> T2 [1]
+N1 int.zero.extend N0 -> T1
+N2 mul.wrap N1 P2 -> T1
+N3 bit.or N2 P3 -> T1
+ret N3
+T0 bits32
+T1 bits64
+T2 bits1
+end
+define @sem_page_words
+(T0)->(T1)
+B0(P0:T0)
+N0 constant 0 -> T1
+N1 constant 0 -> T0
+N2 constant 8247280737127965307 -> T1
+N3 call.direct entity=@choose_word P0 N1 N2 N0 -> T1
+N4 constant 1 -> T0
+N5 constant 8390047166804813173 -> T1
+N6 call.direct entity=@choose_word P0 N4 N5 N3 -> T1
+N7 constant 2 -> T0
+N8 constant 2243106 -> T1
+N9 call.direct entity=@choose_word P0 N7 N8 N6 -> T1
+N10 constant 8 -> T0
+N11 constant 7162249965381757986 -> T1
+N12 call.direct entity=@choose_word P0 N10 N11 N9 -> T1
+N13 constant 9 -> T0
+N14 constant 8008027006974257524 -> T1
+N15 call.direct entity=@choose_word P0 N13 N14 N12 -> T1
+N16 constant 10 -> T0
+N17 constant 3180231230597982818 -> T1
+N18 call.direct entity=@choose_word P0 N16 N17 N15 -> T1
+N19 constant 11 -> T0
+N20 constant 6573604485421036066 -> T1
+N21 call.direct entity=@choose_word P0 N19 N20 N18 -> T1
+N22 constant 16 -> T0
+N23 constant 7162249965381757986 -> T1
+N24 call.direct entity=@choose_word P0 N22 N23 N21 -> T1
+N25 constant 17 -> T0
+N26 constant 7287451066594978164 -> T1
+N27 call.direct entity=@choose_word P0 N25 N26 N24 -> T1
+N28 constant 18 -> T0
+N29 constant 2462381001304274030 -> T1
+N30 call.direct entity=@choose_word P0 N28 N29 N27 -> T1
+N31 constant 19 -> T0
+N32 constant 25678142521175922 -> T1
+N33 call.direct entity=@choose_word P0 N31 N32 N30 -> T1
+N34 constant 24 -> T0
+N35 constant 7162249965381757986 -> T1
+N36 call.direct entity=@choose_word P0 N34 N35 N33 -> T1
+N37 constant 25 -> T0
+N38 constant 7215393472557050228 -> T1
+N39 call.direct entity=@choose_word P0 N37 N38 N36 -> T1
+N40 constant 26 -> T0
+N41 constant 7164775539216314469 -> T1
+N42 call.direct entity=@choose_word P0 N40 N41 N39 -> T1
+N43 constant 27 -> T0
+N44 constant 8030518658506909033 -> T1
+N45 call.direct entity=@choose_word P0 N43 N44 N42 -> T1
+N46 constant 28 -> T0
+N47 constant 391817360247 -> T1
+N48 call.direct entity=@choose_word P0 N46 N47 N45 -> T1
+N49 constant 32 -> T0
+N50 constant 7162249965381757986 -> T1
+N51 call.direct entity=@choose_word P0 N49 N50 N48 -> T1
+N52 constant 33 -> T0
+N53 constant 8440372571201825140 -> T1
+N54 call.direct entity=@choose_word P0 N52 N53 N51 -> T1
+N55 constant 34 -> T0
+N56 constant 8224184396009334131 -> T1
+N57 call.direct entity=@choose_word P0 N55 N56 N54 -> T1
+N58 constant 35 -> T0
+N59 constant 100305244223343 -> T1
+N60 call.direct entity=@choose_word P0 N58 N59 N57 -> T1
+N61 constant 40 -> T0
+N62 constant 7162249965381757986 -> T1
+N63 call.direct entity=@choose_word P0 N61 N62 N60 -> T1
+N64 constant 41 -> T0
+N65 constant 7935969412936329588 -> T1
+N66 call.direct entity=@choose_word P0 N64 N65 N63 -> T1
+N67 constant 42 -> T0
+N68 constant 7526200395738605925 -> T1
+N69 call.direct entity=@choose_word P0 N67 N68 N66 -> T1
+N70 constant 43 -> T0
+N71 constant 8030518658505928559 -> T1
+N72 call.direct entity=@choose_word P0 N70 N71 N69 -> T1
+N73 constant 44 -> T0
+N74 constant 391817360247 -> T1
+N75 call.direct entity=@choose_word P0 N73 N74 N72 -> T1
+N76 constant 48 -> T0
+N77 constant 2466321560598946427 -> T1
+N78 call.direct entity=@choose_word P0 N76 N77 N75 -> T1
+N79 constant 56 -> T0
+N80 constant 2478227094008638498 -> T1
+N81 call.direct entity=@choose_word P0 N79 N80 N78 -> T1
+N82 constant 57 -> T0
+N83 constant 58 -> T1
+N84 call.direct entity=@choose_word P0 N82 N83 N81 -> T1
+N85 constant 64 -> T0
+N86 constant 7310016635638784556 -> T1
+N87 call.direct entity=@choose_word P0 N85 N86 N84 -> T1
+N88 constant 65 -> T0
+N89 constant 8389772276570350446 -> T1
+N90 call.direct entity=@choose_word P0 N88 N89 N87 -> T1
+N91 constant 66 -> T0
+N92 constant 14882 -> T1
+N93 call.direct entity=@choose_word P0 N91 N92 N90 -> T1
+N94 constant 72 -> T0
+N95 constant 125 -> T1
+N96 call.direct entity=@choose_word P0 N94 N95 N93 -> T1
+N97 constant 80 -> T0
+N98 constant 7305808869231633019 -> T1
+N99 call.direct entity=@choose_word P0 N97 N98 N96 -> T1
+N100 constant 81 -> T0
+N101 constant 2243106 -> T1
+N102 call.direct entity=@choose_word P0 N100 N101 N99 -> T1
+N103 constant 88 -> T0
+N104 constant 7306934683317709858 -> T1
+N105 call.direct entity=@choose_word P0 N103 N104 N102 -> T1
+N106 constant 89 -> T0
+N107 constant 574235252 -> T1
+N108 call.direct entity=@choose_word P0 N106 N107 N105 -> T1
+N109 constant 96 -> T0
+N110 constant 32034 -> T1
+N111 call.direct entity=@choose_word P0 N109 N110 N108 -> T1
+N112 constant 104 -> T0
+N113 constant 44 -> T1
+N114 call.direct entity=@choose_word P0 N112 N113 N111 -> T1
+N115 constant 112 -> T0
+N116 constant 4860642274874371165 -> T1
+N117 call.direct entity=@choose_word P0 N115 N116 N114 -> T1
+N118 constant 113 -> T0
+N119 constant 16363423540671093 -> T1
+N120 call.direct entity=@choose_word P0 N118 N119 N117 -> T1
+N121 constant 120 -> T0
+N122 constant 1819047278 -> T1
+N123 call.direct entity=@choose_word P0 N121 N122 N120 -> T1
+N124 constant 128 -> T0
+N125 constant 4189038625367925371 -> T1
+N126 call.direct entity=@choose_word P0 N124 N125 N123 -> T1
+N127 constant 129 -> T0
+N128 constant 34 -> T1
+N129 call.direct entity=@choose_word P0 N127 N128 N126 -> T1
+N130 constant 136 -> T0
+N131 constant 7310299210289654818 -> T1
+N132 call.direct entity=@choose_word P0 N130 N131 N129 -> T1
+N133 constant 137 -> T0
+N134 constant 3809908 -> T1
+N135 call.direct entity=@choose_word P0 N133 N134 N132 -> T1
+N136 constant 144 -> T0
+N137 constant 8389754715170742828 -> T1
+N138 call.direct entity=@choose_word P0 N136 N137 N135 -> T1
+N139 constant 145 -> T0
+N140 constant 7813865678128640623 -> T1
+N141 call.direct entity=@choose_word P0 N139 N140 N138 -> T1
+N142 constant 146 -> T0
+N143 constant 249685177445 -> T1
+N144 call.direct entity=@choose_word P0 N142 N143 N141 -> T1
+N145 constant 152 -> T0
+N146 constant 1702195828 -> T1
+N147 call.direct entity=@choose_word P0 N145 N146 N144 -> T1
+N148 constant 160 -> T0
+N149 constant 435728179558 -> T1
+N150 call.direct entity=@choose_word P0 N148 N149 N147 -> T1
+N151 constant 168 -> T0
+N152 constant 7308339910637986348 -> T1
+N153 call.direct entity=@choose_word P0 N151 N152 N150 -> T1
+N154 constant 169 -> T0
+N155 constant 975332724 -> T1
+N156 call.direct entity=@choose_word P0 N154 N155 N153 -> T1
+N157 constant 176 -> T0
+N158 constant 125 -> T1
+N159 call.direct entity=@choose_word P0 N157 N158 N156 -> T1
+N160 constant 184 -> T0
+N161 constant 7018360988809241211 -> T1
+N162 call.direct entity=@choose_word P0 N160 N161 N159 -> T1
+N163 constant 185 -> T0
+N164 constant 8246765065116939116 -> T1
+N165 call.direct entity=@choose_word P0 N163 N164 N162 -> T1
+N166 constant 186 -> T0
+N167 constant 8026296873556013679 -> T1
+N168 call.direct entity=@choose_word P0 N166 N167 N165 -> T1
+N169 constant 187 -> T0
+N170 constant 8247607291254302052 -> T1
+N171 call.direct entity=@choose_word P0 N169 N170 N168 -> T1
+N172 constant 188 -> T0
+N173 constant 8390047167832813427 -> T1
+N174 call.direct entity=@choose_word P0 N172 N173 N171 -> T1
+N175 constant 189 -> T0
+N176 constant 7166460029768920415 -> T1
+N177 call.direct entity=@choose_word P0 N175 N176 N174 -> T1
+N178 constant 190 -> T0
+N179 constant 2105352808 -> T1
+N180 call.direct entity=@choose_word P0 N178 N179 N177 -> T1
+N181 constant 192 -> T0
+N182 constant 7018360988809241211 -> T1
+N183 call.direct entity=@choose_word P0 N181 N182 N180 -> T1
+N184 constant 193 -> T0
+N185 constant 8246765065116939116 -> T1
+N186 call.direct entity=@choose_word P0 N184 N185 N183 -> T1
+N187 constant 194 -> T0
+N188 constant 8026296873556013679 -> T1
+N189 call.direct entity=@choose_word P0 N187 N188 N186 -> T1
+N190 constant 195 -> T0
+N191 constant 8390045724097799524 -> T1
+N192 call.direct entity=@choose_word P0 N190 N191 N189 -> T1
+N193 constant 196 -> T0
+N194 constant 3180214712456406623 -> T1
+N195 call.direct entity=@choose_word P0 N193 N194 N192 -> T1
+N196 constant 197 -> T0
+N197 constant 9634068596089634 -> T1
+N198 call.direct entity=@choose_word P0 N196 N197 N195 -> T1
+N199 constant 200 -> T0
+N200 constant 7018360988809241211 -> T1
+N201 call.direct entity=@choose_word P0 N199 N200 N198 -> T1
+N202 constant 201 -> T0
+N203 constant 8246765065116939116 -> T1
+N204 call.direct entity=@choose_word P0 N202 N203 N201 -> T1
+N205 constant 202 -> T0
+N206 constant 8026296873556013679 -> T1
+N207 call.direct entity=@choose_word P0 N205 N206 N204 -> T1
+N208 constant 203 -> T0
+N209 constant 8317701157525022052 -> T1
+N210 call.direct entity=@choose_word P0 N208 N209 N207 -> T1
+N211 constant 204 -> T0
+N212 constant 6876556179756246384 -> T1
+N213 call.direct entity=@choose_word P0 N211 N212 N210 -> T1
+N214 constant 205 -> T0
+N215 constant 7308339910638005865 -> T1
+N216 call.direct entity=@choose_word P0 N214 N215 N213 -> T1
+N217 constant 206 -> T0
+N218 constant 538970318196 -> T1
+N219 call.direct entity=@choose_word P0 N217 N218 N216 -> T1
+N220 constant 208 -> T0
+N221 constant 7018360988809241211 -> T1
+N222 call.direct entity=@choose_word P0 N220 N221 N219 -> T1
+N223 constant 209 -> T0
+N224 constant 8246765065116939116 -> T1
+N225 call.direct entity=@choose_word P0 N223 N224 N222 -> T1
+N226 constant 210 -> T0
+N227 constant 8026296873556013679 -> T1
+N228 call.direct entity=@choose_word P0 N226 N227 N225 -> T1
+N229 constant 211 -> T0
+N230 constant 8533873939638805860 -> T1
+N231 call.direct entity=@choose_word P0 N229 N230 N228 -> T1
+N232 constant 212 -> T0
+N233 constant 8247607553956605025 -> T1
+N234 call.direct entity=@choose_word P0 N232 N233 N231 -> T1
+N235 constant 213 -> T0
+N236 constant 137976402308979 -> T1
+N237 call.direct entity=@choose_word P0 N235 N236 N234 -> T1
+N238 constant 216 -> T0
+N239 constant 8224034 -> T1
+N240 call.direct entity=@choose_word P0 N238 N239 N237 -> T1
+ret N240
+T0 bits32
+T1 bits64
+end
+define @sem_page_byte
+(T0,T0)->(T0)
+B0(P0:T0,P1:T0)
+N0 constant 64 -> T0
+N1 int.compare P1 N0 -> T2 [3]
+cbr N1 B1(P0,P1) B5()
+B1(P2:T0,P3:T0)
+N2 constant 8 -> T0
+N3 udiv P3 N2 -> T0
+N4 mul.wrap P2 N2 -> T0
+N5 add.wrap N3 N4 -> T0
+N6 call.direct entity=@sem_page_words N5 -> T1
+N7 urem P3 N2 -> T0
+N8 constant 1 -> T1
+br B2(N6,N7,N8)
+B2(P4:T1,P5:T0,P6:T1)
+N9 constant 0 -> T0
+N10 int.compare P5 N9 -> T2 [2]
+cbr N10 B3(P4,P5,P6) B4(P4,P6)
+B3(P7:T1,P8:T0,P9:T1)
+N11 constant 1 -> T0
+N12 sub.wrap P8 N11 -> T0
+N13 constant 256 -> T1
+N14 mul.wrap P9 N13 -> T1
+br B2(P7,N12,N14)
+B4(P10:T1,P11:T1)
+N15 udiv P10 P11 -> T1
+N16 constant 255 -> T1
+N17 bit.and N15 N16 -> T1
+N18 int.truncate N17 -> T0
+ret N18
+B5()
+N19 constant 0 -> T0
+ret N19
+T0 bits32
+T1 bits64
+T2 bits1
+end
+
+define @emit_sem_page
+(T0,T1,T2,T3,T3)->(T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3,P4:T3)
+N0 constant 0 -> T3
+br B1(P0,P1,P2,P3,P4,N0)
+B1(P5:T0,P6:T1,P7:T2,P8:T3,P9:T3,P10:T3)
+N1 call.direct entity=@sem_page_byte P9 P10 -> T3
+N2 constant 0 -> T3
+N3 int.compare N1 N2 -> T5 [2]
+cbr N3 B2(P5,P6,P7,P8,P9,P10,N1) B3(P5,P6,P7,P8)
+B2(P11:T0,P12:T1,P13:T2,P14:T3,P15:T3,P16:T3,P17:T3)
+N4 int.truncate P17 -> T4
+N5 checked.store.bits.le P11 P14 N4 P13 -> T2 [1,1]
+N6 constant 1 -> T3
+N7 add.wrap P14 N6 -> T3
+N8 add.wrap P16 N6 -> T3
+br B1(P11,P12,N5,N7,P15,N8)
+B3(P18:T0,P19:T1,P20:T2,P21:T3)
+ret P21 P18 P19 P20
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 6e07cf197c4ff1ebe46f19c84ad2c1c74d7ea8f2cb15177e6e8f960d224cbc65
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits8
+T5 bits1
+end
+
+define @hex_digit
+(T0)->(T1)
+B0(P0:T0)
+N0 constant 10 -> T0
+N1 int.compare P0 N0 -> T2 [3]
+cbr N1 B1(P0) B2(P0)
+B1(P1:T0)
+N2 constant 48 -> T0
+N3 add.wrap P1 N2 -> T0
+N4 int.truncate N3 -> T1
+ret N4
+B2(P2:T0)
+N5 constant 87 -> T0
+N6 add.wrap P2 N5 -> T0
+N7 int.truncate N6 -> T1
+ret N7
+T0 bits32
+T1 bits8
+T2 bits1
+end
+define @emit_inspect_cid
+(T0,T1,T2,T0,T3,T2,T4,T4)->(T4,T0,T1,T2,T0,T3,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T0,P4:T3,P5:T2,P6:T4,P7:T4)
+N0 constant 0 -> T4
+br B1(P0,P1,P2,P3,P4,P5,P6,P7,N0)
+B1(P8:T0,P9:T1,P10:T2,P11:T0,P12:T3,P13:T2,P14:T4,P15:T4,P16:T4)
+N1 constant 32 -> T4
+N2 int.compare P16 N1 -> T6 [3]
+cbr N2 B2(P8,P9,P10,P11,P12,P13,P14,P15,P16) B3(P8,P9,P10,P11,P12,P13,P15)
+B2(P17:T0,P18:T1,P19:T2,P20:T0,P21:T3,P22:T2,P23:T4,P24:T4,P25:T4)
+N3 constant 8 -> T4
+N4 udiv P25 N3 -> T4
+N5 mul.wrap N4 N3 -> T4
+N6 urem P25 N3 -> T4
+N7 constant 7 -> T4
+N8 sub.wrap N7 N6 -> T4
+N9 add.wrap P23 N5 -> T4
+N10 add.wrap N9 N8 -> T4
+N11 checked.load.bits.le P20 N10 P22 -> T5,T2 [1,1]
+N12 int.zero.extend N11 -> T4
+N13 constant 16 -> T4
+N14 udiv N12 N13 -> T4
+N15 urem N12 N13 -> T4
+N16 call.direct entity=@hex_digit N14 -> T5
+N17 call.direct entity=@hex_digit N15 -> T5
+N18 checked.store.bits.le P17 P24 N16 P19 -> T2 [1,1]
+N19 constant 1 -> T4
+N20 add.wrap P24 N19 -> T4
+N21 checked.store.bits.le P17 N20 N17 N18 -> T2 [1,1]
+N22 constant 2 -> T4
+N23 add.wrap P24 N22 -> T4
+N24 add.wrap P25 N19 -> T4
+br B1(P17,P18,N21,P20,P21,N11.R1,P23,N23,N24)
+B3(P26:T0,P27:T1,P28:T2,P29:T0,P30:T3,P31:T2,P32:T4)
+ret P32 P26 P27 P28 P29 P30 P31
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 6e07cf197c4ff1ebe46f19c84ad2c1c74d7ea8f2cb15177e6e8f960d224cbc65
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T4 bits32
+T5 bits8
+T6 bits1
+end
+
+define @semantic_comma
+(T0,T1,T2,T3,T3)->(T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3,P4:T3)
+N0 constant 0 -> T3
+N1 int.compare P4 N0 -> T4 [2]
+cbr N1 B1(P0,P1,P2,P3) B2(P0,P1,P2,P3)
+B1(P5:T0,P6:T1,P7:T2,P8:T3)
+N2 constant 13 -> T3
+N3 call.direct entity=@emit_sem_page P5 P6 P7 P8 N2 -> T3,T0,T1,T2
+ret N3 N3.R1 N3.R2 N3.R3
+B2(P9:T0,P10:T1,P11:T2,P12:T3)
+ret P12 P9 P10 P11
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 6e07cf197c4ff1ebe46f19c84ad2c1c74d7ea8f2cb15177e6e8f960d224cbc65
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits1
+end

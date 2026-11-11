@@ -1,0 +1,58 @@
+R 5c8f5c28b78cae3f179a4f1ed072716846e46e968c3a23ed660c70638e4d4410
+F0
+define @fixture_spawn
+object 6 0xf001666f726569676e2d66756e6374696f6e2d76310777696e36342d630a6d73766372742e646c6c075f737061776e760470bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6ced7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b028c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b
+end
+define @fixture_view
+object 4 0x04810201048080c00600
+end
+define @fixture_sleep
+object 6 0x9001666f726569676e2d66756e6374696f6e2d76310777696e36342d630c6b65726e656c33322e646c6c05536c6565700270bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6cea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b01ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b
+end
+define @descendant_fixture
+(T0,T1,T2)->(T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2)
+N0 constant 0 -> T4
+N1 constant 13631488 -> T4
+N2 constant 12288 -> T3
+N3 constant 4 -> T3
+N4 call.foreign entity=e8cf5a7cb5283490c972afd87b89985a4a1f8e616e6d47b2326aa6c3061e6a58 N0 N1 N2 N3 P2 -> T5,T6,T2
+N5 heap.view N4 N4.R1 N4.R2 -> T5,T7,T2 [13631488,1]
+N6 constant 0 -> T3
+N7 constant 7310238793073911156 -> T4
+N8 checked.store.bits.le N5 N6 N7 N5.R2 -> T2 [8,1]
+N9 constant 8 -> T3
+N10 constant 8372043773197317475 -> T4
+N11 checked.store.bits.le N5 N9 N10 N8 -> T2 [8,1]
+N12 constant 16 -> T3
+N13 constant 8372038280033955177 -> T4
+N14 checked.store.bits.le N5 N12 N13 N11 -> T2 [8,1]
+N15 constant 24 -> T3
+N16 constant 7290892894488325481 -> T4
+N17 checked.store.bits.le N5 N15 N16 N14 -> T2 [8,1]
+N18 constant 32 -> T3
+N19 constant 25976 -> T4
+N20 checked.store.bits.le N5 N18 N19 N17 -> T2 [8,1]
+N21 pointer.address N5 -> T4 [1]
+N22 constant 1280 -> T3
+N23 checked.store.bits.le N5 N22 N21 N20 -> T2 [8,1]
+N24 constant 1288 -> T3
+N25 checked.store.bits.le N5 N24 N0 N23 -> T2 [8,1]
+N26 address.offset N5 -> T5 [1280]
+N27 constant 1 -> T3
+N28 call.foreign entity=@fixture_spawn N27 N5 N26 P0 -> T4,T0
+N29 resource.release N5.R1 N25 -> T2
+N30 constant 500 -> T3
+N31 call.foreign entity=@fixture_sleep N30 N28.R1 -> T0
+N32 constant 40 -> T3
+ret N32 N31 P1 N29
+T0 form3 ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b
+T1 form3 c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T6 form4 933b152d7a3ae1cbd182fd6ece7825ad5a2536c7395b404382763b99acb94833
+T7 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+end
+replace F0 @descendant_fixture

@@ -1,0 +1,70 @@
+define @number_equal
+(T0,T1,T2,T4,T4)->(T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T4,P4:T4)
+N0 constant 12040720 -> T3
+N1 call.direct entity=@number_info P0 P1 P2 P3 N0 -> T3,T0,T1,T2
+N2 constant 12040760 -> T3
+N3 call.direct entity=@number_info N1.R1 N1.R2 N1.R3 P4 N2 -> T3,T0,T1,T2
+N4 bit.and N1 N3 -> T3
+N5 constant 0 -> T3
+N6 int.compare N4 N5 -> T6 [2]
+cbr N6 B1(N3.R1,N3.R2,N3.R3) B7(N3.R1,N3.R2,N3.R3)
+B1(P10:T0,P11:T1,P12:T2)
+N7 constant 12040720 -> T3
+N8 checked.load.bits.le P10 N7 P12 -> T4,T2 [8,1]
+N9 constant 12040760 -> T3
+N10 checked.load.bits.le P10 N9 N8.R1 -> T4,T2 [8,1]
+N11 constant 12040728 -> T3
+N12 checked.load.bits.le P10 N11 N10.R1 -> T4,T2 [8,1]
+N13 constant 12040768 -> T3
+N14 checked.load.bits.le P10 N13 N12.R1 -> T4,T2 [8,1]
+N15 int.compare N12 N14 -> T6 [1]
+N16 int.truncate N8 -> T3
+N17 rotate.right N8 -> T4 [32]
+N18 int.truncate N17 -> T3
+N19 int.truncate N10 -> T3
+N20 rotate.right N10 -> T4 [32]
+N21 int.truncate N20 -> T3
+cbr N15 B2(P10,P11,N14.R1,N16,N18,N19,N21) B7(P10,P11,N14.R1)
+B2(P20:T0,P21:T1,P22:T2,P23:T3,P24:T3,P25:T3,P26:T3)
+N22 int.compare P23 P24 -> T6 [3]
+N23 int.compare P25 P26 -> T6 [3]
+N24 bit.and N22 N23 -> T6
+N25 int.compare P23 P24 -> T6 [1]
+N26 int.compare P25 P26 -> T6 [1]
+N27 bit.and N25 N26 -> T6
+cbr N24 B3(P20,P21,P22,P23,P24,P25,P26) B8(P20,P21,P22,N27)
+B3(P40:T0,P41:T1,P42:T2,P43:T3,P44:T3,P45:T3,P46:T3)
+N28 checked.load.bits.le P40 P43 P42 -> T5,T2 [1,1]
+N29 constant 46 -> T5
+N30 int.compare N28 N29 -> T6 [1]
+N31 constant 1 -> T3
+N32 add.wrap P43 N31 -> T3
+cbr N30 B2(P40,P41,N28.R1,N32,P44,P45,P46) B4(P40,P41,N28.R1,P43,P44,P45,P46,N28)
+B4(P60:T0,P61:T1,P62:T2,P63:T3,P64:T3,P65:T3,P66:T3,P67:T5)
+N33 checked.load.bits.le P60 P65 P62 -> T5,T2 [1,1]
+N34 constant 46 -> T5
+N35 int.compare N33 N34 -> T6 [1]
+N36 constant 1 -> T3
+N37 add.wrap P65 N36 -> T3
+cbr N35 B2(P60,P61,N33.R1,P63,P64,N37,P66) B5(P60,P61,N33.R1,P63,P64,P65,P66,P67,N33)
+B5(P80:T0,P81:T1,P82:T2,P83:T3,P84:T3,P85:T3,P86:T3,P87:T5,P88:T5)
+N38 int.compare P87 P88 -> T6 [1]
+N39 constant 1 -> T3
+N40 add.wrap P83 N39 -> T3
+N41 add.wrap P85 N39 -> T3
+cbr N38 B2(P80,P81,P82,N40,P84,N41,P86) B7(P80,P81,P82)
+B7(P100:T0,P101:T1,P102:T2)
+N42 constant 0 -> T3
+ret N42 P100 P101 P102
+B8(P120:T0,P121:T1,P122:T2,P123:T6)
+N43 int.zero.extend P123 -> T3
+ret N43 P120 P121 P122
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 bits8
+T6 bits1
+end

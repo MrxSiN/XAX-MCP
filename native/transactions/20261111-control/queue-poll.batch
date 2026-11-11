@@ -1,0 +1,68 @@
+define @queue_poll
+(T0,T1,T2,T0,T3,T2,T4,T5)->(T0,T1,T2,T0,T3,T2,T4,T5)
+B0(P0:T0,P1:T1,P2:T2,P3:T0,P4:T3,P5:T2,P6:T4,P7:T5)
+N0 call.direct entity=@queue_scan P0 P1 P2 P3 P4 P5 -> T6,T0,T1,T2,T0,T3,T2
+N1 constant 0 -> T6
+N2 int.compare N0 N1 -> T7 [1]
+cbr N2 B1(N0.R1,N0.R2,N0.R3,N0.R4,N0.R5,N0.R6,P6,P7) B4(N0.R1,N0.R2,N0.R3,N0.R4,N0.R5,N0.R6,P6,P7)
+B1(P10:T0,P11:T1,P12:T2,P13:T0,P14:T3,P15:T2,P16:T4,P17:T5)
+N3 call.direct entity=@queue_compact P10 P11 P12 -> T0,T1,T2
+N4 constant 12040024 -> T6
+N5 checked.load.bits.le N3 N4 N3.R2 -> T6,T2 [4,1]
+N6 constant 1048576 -> T6
+N7 int.compare N5 N6 -> T7 [3]
+cbr N7 B2(N3,N3.R1,N5.R1,P13,P14,P15,P16,P17,N5) B4(N3,N3.R1,N5.R1,P13,P14,P15,P16,P17)
+B2(P20:T0,P21:T1,P22:T2,P23:T0,P24:T3,P25:T2,P26:T4,P27:T5,P28:T6)
+N8 constant 4294967286 -> T6
+N9 call.foreign entity=66106a0a4d2276820c66d380ccb8848324ef0f80182a2ed40897e09424a392c0 N8 P27 -> T8,T5
+N10 address.offset P20 -> T0 [12040032]
+N11 constant 0 -> T8
+N12 constant 0 -> T6
+N13 call.foreign entity=@PeekNamedPipe N9 N11 N12 N11 N10 N11 N9.R1 P22 -> T6,T5,T2
+N14 constant 12040032 -> T6
+N15 checked.load.bits.le P20 N14 N13.R2 -> T6,T2 [4,1]
+N16 int.compare N13 N12 -> T7 [2]
+N17 int.compare N15 N12 -> T7 [2]
+N18 bit.and N16 N17 -> T7
+cbr N18 B3(P20,P21,N15.R1,P23,P24,P25,P26,N13.R1,P28,N9,N15) B4(P20,P21,N15.R1,P23,P24,P25,P26,N13.R1)
+B3(P30:T0,P31:T1,P32:T2,P33:T0,P34:T3,P35:T2,P36:T4,P37:T5,P38:T6,P39:T8,P40:T6)
+N19 constant 1048576 -> T6
+N20 sub.wrap N19 P38 -> T6
+N21 int.compare N20 P40 -> T7 [3]
+N22 int.zero.extend N21 -> T6
+N23 call.direct entity=62a2cb9e1e1fc144bb70357f3f0740190723361eecdf413c65f4c9e34d574420 N21 N20 P40 -> T6
+N24 constant 65536 -> T6
+N25 int.compare N23 N24 -> T7 [3]
+N26 int.zero.extend N25 -> T6
+N27 call.direct entity=62a2cb9e1e1fc144bb70357f3f0740190723361eecdf413c65f4c9e34d574420 N25 N23 N24 -> T6
+N28 address.offset P30 -> T0 [12400000]
+N900 pointer.address N28 -> T8 [1]
+N901 int.zero.extend P38 -> T8
+N902 add.wrap N900 N901 -> T8
+N29 pointer.rebase P30 N902 -> T0 [65536]
+N30 address.offset P30 -> T0 [12040032]
+N31 constant 0 -> T8
+N32 call.foreign entity=@ReadFile P39 N29 N27 N30 N31 P36 P32 -> T6,T4,T2
+N33 constant 12040032 -> T6
+N34 checked.load.bits.le P30 N33 N32.R2 -> T6,T2 [4,1]
+N35 constant 0 -> T6
+N36 int.compare N32 N35 -> T7 [2]
+N37 int.zero.extend N36 -> T6
+N38 mul.wrap N34 N37 -> T6
+N39 add.wrap P38 N38 -> T6
+N40 constant 12040024 -> T6
+N41 checked.store.bits.le P30 N40 N39 N34.R1 -> T2 [4,1]
+N42 call.direct entity=@queue_scan P30 P31 N41 P33 P34 P35 -> T6,T0,T1,T2,T0,T3,T2
+br B4(N42.R1,N42.R2,N42.R3,N42.R4,N42.R5,N42.R6,N32.R1,P37)
+B4(P50:T0,P51:T1,P52:T2,P53:T0,P54:T3,P55:T2,P56:T4,P57:T5)
+ret P50 P51 P52 P53 P54 P55 P56 P57
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 form4 f071795e03dea57e31b07a93066d497dd757e88b97be8a3ebe3cdedbdd7491bc
+T4 form3 c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567
+T5 form3 ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b
+T6 bits32
+T7 bits1
+T8 bits64
+end

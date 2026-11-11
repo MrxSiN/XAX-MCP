@@ -1,0 +1,31 @@
+define @sem_equal_cid
+(T0,T1,T2,T3,T3)->(T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3,P4:T3)
+N0 constant 0 -> T3
+br B1(P0,P1,P2,P3,P4,N0)
+B1(P10:T0,P11:T1,P12:T2,P13:T3,P14:T3,P15:T3)
+N1 constant 32 -> T3
+N2 int.compare P15 N1 -> T5 [3]
+cbr N2 B2(P10,P11,P12,P13,P14,P15) B3(P10,P11,P12)
+B2(P20:T0,P21:T1,P22:T2,P23:T3,P24:T3,P25:T3)
+N3 add.wrap P23 P25 -> T3
+N4 add.wrap P24 P25 -> T3
+N5 checked.load.bits.le P20 N3 P22 -> T4,T2 [8,1]
+N6 checked.load.bits.le P20 N4 N5.R1 -> T4,T2 [8,1]
+N7 int.compare N5 N6 -> T5 [1]
+N8 constant 8 -> T3
+N9 add.wrap P25 N8 -> T3
+cbr N7 B1(P20,P21,N6.R1,P23,P24,N9) B4(P20,P21,N6.R1)
+B3(P30:T0,P31:T1,P32:T2)
+N10 constant 1 -> T3
+ret N10 P30 P31 P32
+B4(P40:T0,P41:T1,P42:T2)
+N11 constant 0 -> T3
+ret N11 P40 P41 P42
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 bits1
+end

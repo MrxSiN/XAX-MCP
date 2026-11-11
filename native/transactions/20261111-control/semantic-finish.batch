@@ -1,0 +1,113 @@
+define @sem_fail
+(T0,T1,T2,T0,T3,T2,T4)->(T4,T0,T1,T2,T0,T3,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T0,P4:T3,P5:T2,P6:T4)
+N900 constant 24 -> T4
+N901 int.compare P6 N900 -> T5 [1]
+cbr N901 B1(P0,P1,P2,P3,P4,P5,P6) B2(P0,P1,P2,P3,P4,P5,P6)
+B1(P10:T0,P11:T1,P12:T2,P13:T0,P14:T3,P15:T2,P16:T4)
+N902 constant 0 -> T4
+N903 call.direct entity=@emit_sem_page P10 P11 P12 N902 P16 -> T4,T0,T1,T2
+N904 constant 12050140 -> T4
+N905 call.direct entity=@emit_inspect_cid N903.R1 N903.R2 N903.R3 P13 P14 P15 N904 N903 -> T4,T0,T1,T2,T0,T3,T2
+N906 constant 27 -> T4
+N907 call.direct entity=@emit_sem_page N905.R1 N905.R2 N905.R3 N905 N906 -> T4,T0,T1,T2
+br B3(N907.R1,N907.R2,N907.R3,N905.R4,N905.R5,N905.R6,N907)
+B2(P20:T0,P21:T1,P22:T2,P23:T0,P24:T3,P25:T2,P26:T4)
+N0 constant 0 -> T4
+N1 call.direct entity=@emit_sem_page P20 P21 P22 N0 P26 -> T4,T0,T1,T2
+br B3(N1.R1,N1.R2,N1.R3,P23,P24,P25,N1)
+B3(P30:T0,P31:T1,P32:T2,P33:T0,P34:T3,P35:T2,P36:T4)
+N2 constant 2147483648 -> T4
+N3 bit.or P36 N2 -> T4
+ret N3 P30 P31 P32 P33 P34 P35
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 6e07cf197c4ff1ebe46f19c84ad2c1c74d7ea8f2cb15177e6e8f960d224cbc65
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T4 bits32
+T5 bits1
+end
+
+define @sem_finish
+(T0,T1,T2,T0,T3,T2)->(T4,T0,T1,T2,T0,T3,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T0,P4:T3,P5:T2)
+N0 constant 12050000 -> T4
+N1 checked.load.bits.le P3 N0 P5 -> T4,T2 [4,1]
+N2 constant 12050216 -> T4
+N3 checked.load.bits.le P3 N2 N1.R1 -> T4,T2 [4,1]
+N4 constant 12050212 -> T4
+N5 checked.load.bits.le P3 N4 N3.R1 -> T4,T2 [4,1]
+N6 constant 12050012 -> T4
+N7 checked.load.bits.le P3 N6 N5.R1 -> T4,T2 [4,1]
+N8 constant 12050204 -> T4
+N9 checked.load.bits.le P3 N8 N7.R1 -> T4,T2 [4,1]
+N10 constant 12050200 -> T4
+N11 checked.load.bits.le P3 N10 N9.R1 -> T4,T2 [4,1]
+N12 constant 12050220 -> T4
+N13 checked.load.bits.le P3 N12 N11.R1 -> T4,T2 [4,1]
+N14 constant 1 -> T4
+N15 int.compare N1 N14 -> T7 [5]
+N16 constant 0 -> T4
+N17 int.compare N3 N16 -> T7 [1]
+N18 bit.and N15 N17 -> T7
+N19 int.compare N7 N9 -> T7 [5]
+N20 bit.or N18 N19 -> T7
+cbr N20 B1(P0,P1,P2,P3,P4,N13.R1,N5,N18) B2(P0,P1,P2,P3,P4,N13.R1,N5,N7,N9,N11,N13)
+B1(P10:T0,P11:T1,P12:T2,P13:T0,P14:T3,P15:T2,P16:T4,P17:T7)
+N21 constant 24 -> T4
+N22 constant 26 -> T4
+N23 call.direct entity=62a2cb9e1e1fc144bb70357f3f0740190723361eecdf413c65f4c9e34d574420 P17 N21 N22 -> T4
+N24 constant 0 -> T4
+N25 int.compare P16 N24 -> T7 [2]
+N26 constant 25 -> T4
+N27 call.direct entity=62a2cb9e1e1fc144bb70357f3f0740190723361eecdf413c65f4c9e34d574420 N25 N23 N26 -> T4
+N28 call.direct entity=@sem_fail P10 P11 P12 P13 P14 P15 N27 -> T4,T0,T1,T2,T0,T3,T2
+ret N28 N28.R1 N28.R2 N28.R3 N28.R4 N28.R5 N28.R6
+B2(P20:T0,P21:T1,P22:T2,P23:T0,P24:T3,P25:T2,P26:T4,P27:T4,P28:T4,P29:T4,P30:T4)
+N29 add.wrap P27 P29 -> T4
+N30 int.compare P28 N29 -> T7 [5]
+N31 constant 14 -> T4
+N32 call.direct entity=@emit_sem_page P20 P21 P22 P30 N31 -> T4,T0,T1,T2
+cbr N30 B3(N32.R1,N32.R2,N32.R3,P23,P24,P25,P26,N29,N32) B4(N32.R1,N32.R2,N32.R3,P23,P24,P25,P26,N32)
+B3(P40:T0,P41:T1,P42:T2,P43:T0,P44:T3,P45:T2,P46:T4,P47:T4,P48:T4)
+N33 constant 16 -> T4
+N34 call.direct entity=@emit_sem_page P40 P41 P42 P48 N33 -> T4,T0,T1,T2
+N35 constant 100000 -> T4
+N36 call.direct entity=@emit_inspect_cid N34.R1 N34.R2 N34.R3 P43 P44 P45 N35 N34 -> T4,T0,T1,T2,T0,T3,T2
+N37 constant 17 -> T4
+N38 call.direct entity=@emit_sem_page N36.R1 N36.R2 N36.R3 N36 N37 -> T4,T0,T1,T2
+N39 call.direct entity=d6104c9c99db6c89636bd84c6a1d7981cd3371698f4c55f65fd5e261a6506e53 N38.R1 N38.R2 N38.R3 P47 N38 -> T4,T0,T1,T2
+N40 constant 9 -> T4
+N41 call.direct entity=@emit_sem_page N39.R1 N39.R2 N39.R3 N39 N40 -> T4,T0,T1,T2
+N42 constant 0 -> T4
+br B5(N41.R1,N41.R2,N41.R3,N36.R4,N36.R5,N36.R6,P46,N42,N41)
+B4(P60:T0,P61:T1,P62:T2,P63:T0,P64:T3,P65:T2,P66:T4,P67:T4)
+N43 constant 15 -> T4
+N44 call.direct entity=@emit_sem_page P60 P61 P62 P67 N43 -> T4,T0,T1,T2
+br B5(N44.R1,N44.R2,N44.R3,P63,P64,P65,P66,P66,N44)
+B5(P80:T0,P81:T1,P82:T2,P83:T0,P84:T3,P85:T2,P86:T4,P87:T4,P88:T4)
+N45 constant 18 -> T4
+N46 call.direct entity=@emit_sem_page P80 P81 P82 P88 N45 -> T4,T0,T1,T2
+N47 constant 19 -> T4
+N48 constant 20 -> T4
+N49 constant 0 -> T4
+N50 int.compare P86 N49 -> T7 [2]
+N51 call.direct entity=62a2cb9e1e1fc144bb70357f3f0740190723361eecdf413c65f4c9e34d574420 N50 N47 N48 -> T4
+N52 call.direct entity=@emit_sem_page N46.R1 N46.R2 N46.R3 N46 N51 -> T4,T0,T1,T2
+N53 constant 21 -> T4
+N54 call.direct entity=@emit_sem_page N52.R1 N52.R2 N52.R3 N52 N53 -> T4,T0,T1,T2
+N55 int.compare P87 N49 -> T7 [2]
+N56 call.direct entity=62a2cb9e1e1fc144bb70357f3f0740190723361eecdf413c65f4c9e34d574420 N55 N47 N48 -> T4
+N57 call.direct entity=@emit_sem_page N54.R1 N54.R2 N54.R3 N54 N56 -> T4,T0,T1,T2
+N58 constant 22 -> T4
+N59 call.direct entity=@emit_sem_page N57.R1 N57.R2 N57.R3 N57 N58 -> T4,T0,T1,T2
+ret N59 N59.R1 N59.R2 N59.R3 P83 P84 P85
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 6e07cf197c4ff1ebe46f19c84ad2c1c74d7ea8f2cb15177e6e8f960d224cbc65
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T4 bits32
+T5 bits64
+T6 bits8
+T7 bits1
+end

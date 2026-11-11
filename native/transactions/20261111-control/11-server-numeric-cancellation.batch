@@ -1,0 +1,311 @@
+R 4166f654254dbbb60ed14d68e8255654721089978093d7988c86ad0e0f074b6c
+F0
+define @number_save
+(T0,T1,T2,T3,T4,T4)->(T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3,P4:T4,P5:T4)
+N0 checked.store.bits.le P0 P3 P4 P2 -> T2 [8,1]
+N1 constant 8 -> T3
+N2 add.wrap P3 N1 -> T3
+N3 checked.store.bits.le P0 N2 P5 N0 -> T2 [8,1]
+N4 constant 1 -> T3
+ret N4 P0 P1 N3
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+end
+
+define @number_info
+(T0,T1,T2,T4,T3)->(T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T4,P4:T3)
+N0 int.truncate P3 -> T3
+N1 rotate.right P3 -> T4 [32]
+N2 int.truncate N1 -> T3
+N3 int.compare N0 N2 -> T6 [3]
+N4 constant 13631488 -> T3
+N5 int.compare N2 N4 -> T6 [4]
+N6 bit.and N3 N5 -> T6
+cbr N6 B1(P0,P1,P2,N0,N2,P4) B12(P0,P1,P2)
+B1(P5:T0,P6:T1,P7:T2,P8:T3,P9:T3,P10:T3)
+N7 checked.load.bits.le P5 P8 P7 -> T5,T2 [1,1]
+N8 constant 45 -> T5
+N9 int.compare N7 N8 -> T6 [1]
+N10 int.zero.extend N9 -> T3
+N11 add.wrap P8 N10 -> T3
+N12 constant 0 -> T3
+br B2(P5,P6,N7.R1,N11,P9,P10,N10,N12,N12,N12,N12,N12)
+B2(P11:T0,P12:T1,P13:T2,P14:T3,P15:T3,P16:T3,P17:T3,P18:T3,P19:T3,P20:T3,P21:T3,P22:T3)
+N13 int.compare P14 P15 -> T6 [3]
+cbr N13 B3(P11,P12,P13,P14,P15,P16,P17,P18,P19,P20,P21,P22) B6(P11,P12,P13,P15,P15,P16,P17,P18,P19,P20,P21)
+B3(P23:T0,P24:T1,P25:T2,P26:T3,P27:T3,P28:T3,P29:T3,P30:T3,P31:T3,P32:T3,P33:T3,P34:T3)
+N14 checked.load.bits.le P23 P26 P25 -> T5,T2 [1,1]
+N15 constant 101 -> T5
+N16 int.compare N14 N15 -> T6 [1]
+N17 constant 69 -> T5
+N18 int.compare N14 N17 -> T6 [1]
+N19 bit.or N16 N18 -> T6
+N20 constant 1 -> T3
+N21 add.wrap P26 N20 -> T3
+cbr N19 B6(P23,P24,N14.R1,N21,P27,P28,P29,P30,P31,P32,P33) B4(P23,P24,N14.R1,P26,P27,P28,P29,P30,P31,P32,P33,P34,N14)
+B4(P35:T0,P36:T1,P37:T2,P38:T3,P39:T3,P40:T3,P41:T3,P42:T3,P43:T3,P44:T3,P45:T3,P46:T3,P47:T5)
+N22 constant 46 -> T5
+N23 int.compare P47 N22 -> T6 [1]
+N24 constant 1 -> T3
+N25 add.wrap P38 N24 -> T3
+cbr N23 B2(P35,P36,P37,N25,P39,P40,P41,P42,P43,P44,P45,N24) B5(P35,P36,P37,P38,P39,P40,P41,P42,P43,P44,P45,P46,P47,N25)
+B5(P48:T0,P49:T1,P50:T2,P51:T3,P52:T3,P53:T3,P54:T3,P55:T3,P56:T3,P57:T3,P58:T3,P59:T3,P60:T5,P61:T3)
+N26 constant 48 -> T5
+N27 constant 57 -> T5
+N28 int.compare P60 N26 -> T6 [6]
+N29 int.compare P60 N27 -> T6 [4]
+N30 bit.and N28 N29 -> T6
+N31 int.compare P60 N26 -> T6 [2]
+N32 constant 0 -> T3
+N33 int.compare P56 N32 -> T6 [1]
+N34 bit.and N31 N33 -> T6
+N35 int.zero.extend N34 -> T3
+N36 sub.wrap P51 P55 -> T3
+N37 mul.wrap N36 N35 -> T3
+N38 add.wrap P55 N37 -> T3
+N39 int.zero.extend N31 -> T3
+N40 sub.wrap P61 P56 -> T3
+N41 mul.wrap N40 N39 -> T3
+N42 add.wrap P56 N41 -> T3
+N43 int.compare P59 N32 -> T6 [1]
+N44 int.zero.extend N43 -> T3
+N45 add.wrap P57 N44 -> T3
+N46 int.compare P60 N26 -> T6 [1]
+N47 bit.and N46 N33 -> T6
+N48 int.zero.extend N47 -> T3
+N49 add.wrap P58 N48 -> T3
+cbr N30 B2(P48,P49,P50,P61,P52,P53,P54,N38,N42,N45,N49,P59) B12(P48,P49,P50)
+B6(P62:T0,P63:T1,P64:T2,P65:T3,P66:T3,P67:T3,P68:T3,P69:T3,P70:T3,P71:T3,P72:T3)
+N50 constant 0 -> T3
+N51 int.compare P70 N50 -> T6 [1]
+N52 sub.wrap P71 P72 -> T3
+cbr N51 B11(P62,P63,P64,P67) B7(P62,P63,P64,P65,P66,P67,P68,P69,P70,N52)
+B7(P73:T0,P74:T1,P75:T2,P76:T3,P77:T3,P78:T3,P79:T3,P80:T3,P81:T3,P82:T3)
+N53 int.compare P76 P77 -> T6 [3]
+cbr N53 B8(P73,P74,P75,P76,P77,P78,P79,P80,P81,P82) B10(P73,P74,P75,P78,P79,P80,P81,P82)
+B8(P83:T0,P84:T1,P85:T2,P86:T3,P87:T3,P88:T3,P89:T3,P90:T3,P91:T3,P92:T3)
+N54 checked.load.bits.le P83 P86 P85 -> T5,T2 [1,1]
+N55 constant 45 -> T5
+N56 int.compare N54 N55 -> T6 [1]
+N57 constant 43 -> T5
+N58 int.compare N54 N57 -> T6 [1]
+N59 bit.or N56 N58 -> T6
+N60 int.zero.extend N59 -> T3
+N61 add.wrap P86 N60 -> T3
+N62 int.zero.extend N56 -> T3
+N63 constant 0 -> T3
+br B9(P83,P84,N54.R1,N61,P87,P88,P89,P90,P91,P92,N62,N63)
+B9(P93:T0,P94:T1,P95:T2,P96:T3,P97:T3,P98:T3,P99:T3,P100:T3,P101:T3,P102:T3,P103:T3,P104:T3)
+N64 int.compare P96 P97 -> T6 [3]
+cbr N64 B13(P93,P94,P95,P96,P97,P98,P99,P100,P101,P102,P103,P104) B14(P93,P94,P95,P98,P99,P100,P101,P102,P103,P104)
+B10(P105:T0,P106:T1,P107:T2,P108:T3,P109:T3,P110:T3,P111:T3,P112:T3)
+N65 int.zero.extend P110 -> T4
+N66 int.zero.extend P111 -> T4
+N67 constant 4294967296 -> T4
+N68 mul.wrap N66 N67 -> T4
+N69 bit.or N65 N68 -> T4
+N70 int.zero.extend P109 -> T4
+N71 int.zero.extend P112 -> T4
+N72 mul.wrap N71 N67 -> T4
+N73 bit.or N70 N72 -> T4
+N74 call.direct entity=@number_save P105 P106 P107 P108 N69 N73 -> T3,T0,T1,T2
+ret N74 N74.R1 N74.R2 N74.R3
+B11(P113:T0,P114:T1,P115:T2,P116:T3)
+N75 constant 0 -> T4
+N76 call.direct entity=@number_save P113 P114 P115 P116 N75 N75 -> T3,T0,T1,T2
+ret N76 N76.R1 N76.R2 N76.R3
+B12(P117:T0,P118:T1,P119:T2)
+N77 constant 0 -> T3
+ret N77 P117 P118 P119
+B13(P120:T0,P121:T1,P122:T2,P123:T3,P124:T3,P125:T3,P126:T3,P127:T3,P128:T3,P129:T3,P130:T3,P131:T3)
+N78 checked.load.bits.le P120 P123 P122 -> T5,T2 [1,1]
+N79 int.zero.extend N78 -> T3
+N80 constant 48 -> T3
+N81 sub.wrap N79 N80 -> T3
+N82 constant 9 -> T3
+N83 int.compare N81 N82 -> T6 [4]
+N84 constant 10 -> T3
+N85 mul.wrap P131 N84 -> T3
+N86 add.wrap N85 N81 -> T3
+N87 constant 8388608 -> T3
+N88 int.compare N86 N87 -> T6 [4]
+N89 bit.and N83 N88 -> T6
+N90 constant 1 -> T3
+N91 add.wrap P123 N90 -> T3
+cbr N89 B9(P120,P121,N78.R1,N91,P124,P125,P126,P127,P128,P129,P130,N86) B12(P120,P121,N78.R1)
+B14(P132:T0,P133:T1,P134:T2,P135:T3,P136:T3,P137:T3,P138:T3,P139:T3,P140:T3,P141:T3)
+N92 constant 2 -> T3
+N93 mul.wrap P140 N92 -> T3
+N94 constant 1 -> T3
+N95 sub.wrap N94 N93 -> T3
+N96 mul.wrap P141 N95 -> T3
+N97 add.wrap P139 N96 -> T3
+br B10(P132,P133,P134,P135,P136,P137,P138,N97)
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 bits8
+T6 bits1
+end
+
+define @number_equal
+(T0,T1,T2,T4,T4)->(T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T4,P4:T4)
+N0 constant 12040720 -> T3
+N1 call.direct entity=@number_info P0 P1 P2 P3 N0 -> T3,T0,T1,T2
+N2 constant 12040760 -> T3
+N3 call.direct entity=@number_info N1.R1 N1.R2 N1.R3 P4 N2 -> T3,T0,T1,T2
+N4 bit.and N1 N3 -> T3
+N5 constant 0 -> T3
+N6 int.compare N4 N5 -> T6 [2]
+cbr N6 B1(N3.R1,N3.R2,N3.R3) B6(N3.R1,N3.R2,N3.R3)
+B1(P5:T0,P6:T1,P7:T2)
+N7 constant 12040720 -> T3
+N8 checked.load.bits.le P5 N7 P7 -> T4,T2 [8,1]
+N9 constant 12040760 -> T3
+N10 checked.load.bits.le P5 N9 N8.R1 -> T4,T2 [8,1]
+N11 constant 12040728 -> T3
+N12 checked.load.bits.le P5 N11 N10.R1 -> T4,T2 [8,1]
+N13 constant 12040768 -> T3
+N14 checked.load.bits.le P5 N13 N12.R1 -> T4,T2 [8,1]
+N15 int.compare N12 N14 -> T6 [1]
+N16 int.truncate N8 -> T3
+N17 rotate.right N8 -> T4 [32]
+N18 int.truncate N17 -> T3
+N19 int.truncate N10 -> T3
+N20 rotate.right N10 -> T4 [32]
+N21 int.truncate N20 -> T3
+cbr N15 B2(P5,P6,N14.R1,N16,N18,N19,N21) B6(P5,P6,N14.R1)
+B2(P8:T0,P9:T1,P10:T2,P11:T3,P12:T3,P13:T3,P14:T3)
+N22 int.compare P11 P12 -> T6 [3]
+N23 int.compare P13 P14 -> T6 [3]
+N24 bit.and N22 N23 -> T6
+N25 int.compare P11 P12 -> T6 [1]
+N26 int.compare P13 P14 -> T6 [1]
+N27 bit.and N25 N26 -> T6
+cbr N24 B3(P8,P9,P10,P11,P12,P13,P14) B7(P8,P9,P10,N27)
+B3(P15:T0,P16:T1,P17:T2,P18:T3,P19:T3,P20:T3,P21:T3)
+N28 checked.load.bits.le P15 P18 P17 -> T5,T2 [1,1]
+N29 constant 46 -> T5
+N30 int.compare N28 N29 -> T6 [1]
+N31 constant 1 -> T3
+N32 add.wrap P18 N31 -> T3
+cbr N30 B2(P15,P16,N28.R1,N32,P19,P20,P21) B4(P15,P16,N28.R1,P18,P19,P20,P21,N28)
+B4(P22:T0,P23:T1,P24:T2,P25:T3,P26:T3,P27:T3,P28:T3,P29:T5)
+N33 checked.load.bits.le P22 P27 P24 -> T5,T2 [1,1]
+N34 constant 46 -> T5
+N35 int.compare N33 N34 -> T6 [1]
+N36 constant 1 -> T3
+N37 add.wrap P27 N36 -> T3
+cbr N35 B2(P22,P23,N33.R1,P25,P26,N37,P28) B5(P22,P23,N33.R1,P25,P26,P27,P28,P29,N33)
+B5(P30:T0,P31:T1,P32:T2,P33:T3,P34:T3,P35:T3,P36:T3,P37:T5,P38:T5)
+N38 int.compare P37 P38 -> T6 [1]
+N39 constant 1 -> T3
+N40 add.wrap P33 N39 -> T3
+N41 add.wrap P35 N39 -> T3
+cbr N38 B2(P30,P31,P32,N40,P34,N41,P36) B6(P30,P31,P32)
+B6(P39:T0,P40:T1,P41:T2)
+N42 constant 0 -> T3
+ret N42 P39 P40 P41
+B7(P42:T0,P43:T1,P44:T2,P45:T6)
+N43 int.zero.extend P45 -> T3
+ret N43 P42 P43 P44
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 bits8
+T6 bits1
+end
+
+define @scalar_ids
+(T0,T1,T2,T3,T3)->(T4,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3,P4:T3)
+N0 int.truncate P3 -> T4
+N1 rotate.right P3 -> T3 [32]
+N2 int.truncate N1 -> T4
+N3 int.truncate P4 -> T4
+N4 rotate.right P4 -> T3 [32]
+N5 int.truncate N4 -> T4
+N6 int.compare N0 N2 -> T5 [3]
+N7 int.compare N3 N5 -> T5 [3]
+N8 constant 13631488 -> T4
+N9 int.compare N2 N8 -> T5 [4]
+N10 int.compare N5 N8 -> T5 [4]
+N11 bit.and N6 N7 -> T5
+N12 bit.and N9 N10 -> T5
+N13 bit.and N11 N12 -> T5
+cbr N13 B1(P0,P1,P2,P3,P4,N0,N2,N3,N5) B6(P0,P1,P2)
+B1(P5:T0,P6:T1,P7:T2,P8:T3,P9:T3,P10:T4,P11:T4,P12:T4,P13:T4)
+N14 checked.load.bits.le P5 P10 P7 -> T6,T2 [1,1]
+N15 checked.load.bits.le P5 P12 N14.R1 -> T6,T2 [1,1]
+N16 constant 34 -> T6
+N17 int.compare N14 N16 -> T5 [1]
+N18 int.compare N15 N16 -> T5 [1]
+N19 bit.xor N17 N18 -> T5
+cbr N19 B6(P5,P6,N15.R1) B9(P5,P6,N15.R1,P8,P9,P10,P11,P12,P13,N17)
+B2(P14:T0,P15:T1,P16:T2,P17:T3,P18:T3,P19:T4,P20:T4,P21:T4,P22:T4,P23:T5)
+N20 call.direct entity=d67ceaf70dba7a87e0e3aba92737c9c25488d3784e189601f82632953de1cfbe P14 P15 P16 P17 -> T4,T0,T1,T2
+N21 call.direct entity=d67ceaf70dba7a87e0e3aba92737c9c25488d3784e189601f82632953de1cfbe N20.R1 N20.R2 N20.R3 P18 -> T4,T0,T1,T2
+N22 bit.and N20 N21 -> T4
+N23 constant 0 -> T4
+N24 int.compare N22 N23 -> T5 [2]
+cbr N24 B7(N21.R1,N21.R2,N21.R3) B3(N21.R1,N21.R2,N21.R3,P19,P20,P21,P22,P23)
+B3(P24:T0,P25:T1,P26:T2,P27:T4,P28:T4,P29:T4,P30:T4,P31:T5)
+N25 int.zero.extend P31 -> T4
+N26 add.wrap P27 N25 -> T4
+N27 sub.wrap P28 N25 -> T4
+N28 add.wrap P29 N25 -> T4
+N29 sub.wrap P30 N25 -> T4
+br B4(P24,P25,P26,N26,N27,N28,N29)
+B4(P32:T0,P33:T1,P34:T2,P35:T4,P36:T4,P37:T4,P38:T4)
+N30 int.compare P35 P36 -> T5 [3]
+N31 int.compare P37 P38 -> T5 [3]
+N32 bit.and N30 N31 -> T5
+N33 int.compare P35 P36 -> T5 [1]
+N34 int.compare P37 P38 -> T5 [1]
+N35 bit.and N33 N34 -> T5
+cbr N32 B5(P32,P33,P34,P35,P36,P37,P38) B8(P32,P33,P34,N35)
+B5(P39:T0,P40:T1,P41:T2,P42:T4,P43:T4,P44:T4,P45:T4)
+N36 call.direct entity=1e5968ce3900e82c6d047d6f8069feca0852d6c76d05a6d78cf153c46bc5681c P39 P40 P41 P42 P43 -> T3,T0,T1,T2
+N37 call.direct entity=1e5968ce3900e82c6d047d6f8069feca0852d6c76d05a6d78cf153c46bc5681c N36.R1 N36.R2 N36.R3 P44 P45 -> T3,T0,T1,T2
+N38 int.truncate N36 -> T4
+N39 int.truncate N37 -> T4
+N40 int.compare N38 N39 -> T5 [1]
+N41 rotate.right N36 -> T3 [32]
+N42 int.truncate N41 -> T4
+N43 rotate.right N37 -> T3 [32]
+N44 int.truncate N43 -> T4
+cbr N40 B4(N37.R1,N37.R2,N37.R3,N42,P43,N44,P45) B6(N37.R1,N37.R2,N37.R3)
+B6(P46:T0,P47:T1,P48:T2)
+N45 constant 0 -> T4
+ret N45 P46 P47 P48
+B7(P49:T0,P50:T1,P51:T2)
+N46 constant 1 -> T4
+ret N46 P49 P50 P51
+B8(P52:T0,P53:T1,P54:T2,P55:T5)
+N47 int.zero.extend P55 -> T4
+ret N47 P52 P53 P54
+B9(P56:T0,P57:T1,P58:T2,P59:T3,P60:T3,P61:T4,P62:T4,P63:T4,P64:T4,P65:T5)
+cbr P65 B2(P56,P57,P58,P59,P60,P61,P62,P63,P64,P65) B10(P56,P57,P58,P59,P60)
+B10(P66:T0,P67:T1,P68:T2,P69:T3,P70:T3)
+N48 call.direct entity=@number_equal P66 P67 P68 P69 P70 -> T4,T0,T1,T2
+ret N48 N48.R1 N48.R2 N48.R3
+
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits64
+T4 bits32
+T5 bits1
+T6 bits8
+end
+replace F142 @scalar_ids

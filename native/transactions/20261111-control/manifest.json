@@ -1,0 +1,421 @@
+{
+  "schema": "xax-mcp-experimental-native-control-replay-v1",
+  "recorded": "2026-11-11",
+  "state": "EXPERIMENTAL; not selected by default deployment",
+  "base": "native/candidates/20261111/server-modern-mcp.xax",
+  "base_root": "38724fe570dcddb9bb82c5bf2bd49aca468445a38ab2d0e5d19ed4599559c10f",
+  "base_replay": "native/transactions/20261111-capabilities/manifest.json",
+  "final": "native/candidates/20261111-control/server.xax",
+  "final_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+  "deployment_pin": "native/xax-dependency.json",
+  "windows_seed_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79",
+  "native_authoring_sha256": "a35fd59fc9effe08f58f6d1db0d2e951abbd56a065dc0dca729c9bc6f5ec793b",
+  "records": [
+    {
+      "bytes": 115048,
+      "sha256": "265a8dc22c007e875e26071e877bbdbe857835bc21ce69fea1ade8e3c7701028",
+      "path": "native/transactions/20261111-control/01-server-active-id.edit",
+      "base_root": "38724fe570dcddb9bb82c5bf2bd49aca468445a38ab2d0e5d19ed4599559c10f",
+      "result_root": "413dfcdc0b4e72dd6250455bd9241a9121dc8f5bf791e07b3838ceb531d16b5e",
+      "new_native_objects": 16,
+      "unchanged_objects": 4547,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1440132,
+        "sha256": "8e70573d234ac093cd63955b3d4d13b17633a52c814b0ad00cab929971de955d"
+      },
+      "native_batch": {
+        "bytes": 1712,
+        "sha256": "c3677f3facc00c62da5fcb3fb7bbe01c35f5647757043a3d2c39b89b46102fbf",
+        "path": "native/transactions/20261111-control/01-server-active-id.batch"
+      },
+      "construction_intermediate": true
+    },
+    {
+      "bytes": 109358,
+      "sha256": "132bb21a592bdeb59bd25e3d610170b96ae9f6481ec77c74c1578eda7ab20012",
+      "path": "native/transactions/20261111-control/02-server-cancel-state.edit",
+      "base_root": "413dfcdc0b4e72dd6250455bd9241a9121dc8f5bf791e07b3838ceb531d16b5e",
+      "result_root": "e28bd98bc6c8d4ec0d3e36c8e43c534a741de19e6de40e3d2c97ce0db643c4c0",
+      "new_native_objects": 15,
+      "unchanged_objects": 4556,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1444061,
+        "sha256": "13c751ff7959cb666b83af7a52e30ce3727fc2fc15ac7e82050d38178818cd0e"
+      },
+      "native_batch": {
+        "bytes": 215196,
+        "sha256": "540dbc0eab4784999b56727cb85a7f7d87a8aa6fa5a6ec3909e5b24c0b592ed6",
+        "path": "native/transactions/20261111-control/02-server-cancel-state.batch"
+      },
+      "construction_intermediate": true
+    },
+    {
+      "bytes": 43219,
+      "sha256": "dd13386714cd1f41c7fc535cb55a1a1cfd558fa46d5f03576dbadd90e89e8f0f",
+      "path": "native/transactions/20261111-control/03-server-input-queue.edit",
+      "base_root": "e28bd98bc6c8d4ec0d3e36c8e43c534a741de19e6de40e3d2c97ce0db643c4c0",
+      "result_root": "c131d04eca586b2b461f9f811cfaa9e51f0dd3ba49810d8112f59e20e6b56346",
+      "new_native_objects": 13,
+      "unchanged_objects": 4566,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1448566,
+        "sha256": "2eca3207143d755163f06f5637f6d413275948be85033a7a3b2ca27105b867c1"
+      },
+      "native_batch": {
+        "bytes": 82420,
+        "sha256": "40716519b15573bd55a8fa05b71512e8b16f2f8ea26b6ee889ac7643882372ad",
+        "path": "native/transactions/20261111-control/03-server-input-queue.batch"
+      },
+      "construction_intermediate": true
+    },
+    {
+      "bytes": 288500,
+      "sha256": "2cc75103c7bcb27b64dcf68797121860bf627f6a5fd7eb442b65d698de3e9cc2",
+      "path": "native/transactions/20261111-control/04-server-cancellation.edit",
+      "base_root": "c131d04eca586b2b461f9f811cfaa9e51f0dd3ba49810d8112f59e20e6b56346",
+      "result_root": "fc2d6cedfb98f952ee76379620871d22bd0f09782b1805ab29a4d615397ab337",
+      "new_native_objects": 114,
+      "unchanged_objects": 4561,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1527994,
+        "sha256": "766d16910f9fe15da6a9f855a1f215326466df4677d6372b382806e809c325f3"
+      },
+      "native_batch": {
+        "bytes": 401904,
+        "sha256": "21b8e1526a5600c0fb40e4a1f4bf37a72a3a9a09ca0f1babd5b4f0e8113322b9",
+        "path": "native/transactions/20261111-control/04-server-cancellation.batch"
+      },
+      "construction_intermediate": false
+    },
+    {
+      "bytes": 146541,
+      "sha256": "cf0eaf4a16ebb1ed0de97c2e27c241469b17c28518bd9a19fa122f5e7183887a",
+      "path": "native/transactions/20261111-control/05-server-query-arguments.edit",
+      "base_root": "fc2d6cedfb98f952ee76379620871d22bd0f09782b1805ab29a4d615397ab337",
+      "result_root": "5fec947d2d531dbd94affc6d49a0bd2428ac784b34cec3274fcf12278d60f002",
+      "new_native_objects": 60,
+      "unchanged_objects": 4668,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1570258,
+        "sha256": "925556afd62958f1767b3ca41a74fe2856390cc6ee8317f6c151962997df71f3"
+      },
+      "native_batch": {
+        "bytes": 288709,
+        "sha256": "72341b2f39d721a220904b087acc7edadbc0f0143a36a0e4a431c1121350908f",
+        "path": "native/transactions/20261111-control/05-server-query-arguments.batch"
+      },
+      "construction_intermediate": true
+    },
+    {
+      "bytes": 147782,
+      "sha256": "d775c60fcd4b01bc54acb26b37beffbe960c2cd8b4d24bbea23c7716d5b4bd0d",
+      "path": "native/transactions/20261111-control/06-server-semantic-pages.edit",
+      "base_root": "5fec947d2d531dbd94affc6d49a0bd2428ac784b34cec3274fcf12278d60f002",
+      "result_root": "d0a87bd290ca5115aa4b3535071ea5d721b61024aa71385fa3e741bb07e7a0b7",
+      "new_native_objects": 88,
+      "unchanged_objects": 4719,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1600631,
+        "sha256": "040bf0e035f673ea297f88db2c04748dae085b27f6ba7b99e77a64a1bcabbba4"
+      },
+      "native_batch": {
+        "bytes": 66275,
+        "sha256": "5c83791c909c62bae1b0ec8cd7f3aa26ed1c174de5307238858ef0e0f056f129",
+        "path": "native/transactions/20261111-control/06-server-semantic-pages.batch"
+      },
+      "construction_intermediate": false
+    },
+    {
+      "bytes": 120587,
+      "sha256": "6d094e3f558364d6a17f37e158525657b369ff01b12408d0815fa557b4b420f4",
+      "path": "native/transactions/20261111-control/07-server-client-metadata.edit",
+      "base_root": "d0a87bd290ca5115aa4b3535071ea5d721b61024aa71385fa3e741bb07e7a0b7",
+      "result_root": "3a0c176051c2c4354f05a66d833e65234bfa5e42c10c25d5e1a9b96f048e74df",
+      "new_native_objects": 24,
+      "unchanged_objects": 4796,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1608903,
+        "sha256": "d76eb46dd0ec42cd06aae33009e4ea4de9ba866742d790fde656ab7c7d399b41"
+      },
+      "native_batch": {
+        "bytes": 26730,
+        "sha256": "aea63369077803dd9697b8e0d33c0249e7d9b841221c46abbb3060af5bc81e7a",
+        "path": "native/transactions/20261111-control/07-server-client-metadata.batch"
+      },
+      "construction_intermediate": false
+    },
+    {
+      "bytes": 201891,
+      "sha256": "cb4d4f3c3fcb5429c13eb87d3306914b34dbb83a05fa007f7b10e6bc42a53df2",
+      "path": "native/transactions/20261111-control/08-server-query-schema-prefix.edit",
+      "base_root": "3a0c176051c2c4354f05a66d833e65234bfa5e42c10c25d5e1a9b96f048e74df",
+      "result_root": "1c5850870349506bab800a8d29f8caa876f05631f10e3613aaac187c8cb9a473",
+      "new_native_objects": 150,
+      "unchanged_objects": 4811,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1633819,
+        "sha256": "b12b071f069d0db12b962bcb0eb03e0e448fdd1f15b068431a25a24f4582e838"
+      },
+      "native_batch": {
+        "bytes": 128826,
+        "sha256": "f1f72b0d15db8915f93cd4202b348bbef92b93b8eec4413cbc755c54247b11b8",
+        "path": "native/transactions/20261111-control/08-server-query-schema-prefix.batch"
+      },
+      "construction_intermediate": true
+    },
+    {
+      "bytes": 212049,
+      "sha256": "86286c7c350d6ce7edc754c37db080f85ce6fad31f521a0ca969881c8c14d7e0",
+      "path": "native/transactions/20261111-control/09-server-query-schema.edit",
+      "base_root": "1c5850870349506bab800a8d29f8caa876f05631f10e3613aaac187c8cb9a473",
+      "result_root": "123acb8ee0aabfc6b71779060e9bb38256c066efcd88afd221de760aa0b8054e",
+      "new_native_objects": 140,
+      "unchanged_objects": 4952,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1659415,
+        "sha256": "23a3fb28bd08869334499fedb7a3b056c69c3cd215d547a7e9f33da63968ac76"
+      },
+      "native_batch": {
+        "bytes": 149549,
+        "sha256": "13b42ba3047d419d1f117d44a4604005890408b786d83e55fffc6f8055c2815d",
+        "path": "native/transactions/20261111-control/09-server-query-schema.batch"
+      },
+      "construction_intermediate": true
+    },
+    {
+      "bytes": 158854,
+      "sha256": "35022f9f83e669beb775c5fdfb30358b3e9510e797676dcdf53a26a7bdfc383f",
+      "path": "native/transactions/20261111-control/10-server-control-capabilities-structured-01.edit",
+      "base_root": "123acb8ee0aabfc6b71779060e9bb38256c066efcd88afd221de760aa0b8054e",
+      "result_root": "2e7b30b0433ee51b62b7aafd96b61ded8591ad1960f9fbcd1da02485fb05b0ca",
+      "new_native_objects": 94,
+      "unchanged_objects": 5081,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1673539,
+        "sha256": "5e10c9bf370437d195711621c089192828419ac9e49778f39e2bc98e18dc1f14"
+      },
+      "native_batch": {
+        "bytes": 58244,
+        "sha256": "7a4010a2dededf2769ca7601533311fd50079be5d58a2d20f1fa7e64523fbc1c",
+        "path": "native/transactions/20261111-control/10-server-control-capabilities-structured-01.batch"
+      },
+      "construction_intermediate": true
+    },
+    {
+      "bytes": 163713,
+      "sha256": "75c5d7ec62bb5a3e0513a6edc524e4e30c33b47b2a18dee0a92e6690aa3fba23",
+      "path": "native/transactions/20261111-control/10-server-control-capabilities-structured-02.edit",
+      "base_root": "2e7b30b0433ee51b62b7aafd96b61ded8591ad1960f9fbcd1da02485fb05b0ca",
+      "result_root": "2dd343dfbe6e1771eae99cc1b1c1d0504b22a591c07881af9238a09d1a6d59c3",
+      "new_native_objects": 96,
+      "unchanged_objects": 5164,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1688083,
+        "sha256": "b2f587c581b043412194cd4f47bc7e12e53487a103671218dd33f9ab48df86de"
+      },
+      "native_batch": {
+        "bytes": 63512,
+        "sha256": "04196075dcfd17f841d3626afc1d678783949a52b69ca9a2f72bdb5ab8142744",
+        "path": "native/transactions/20261111-control/10-server-control-capabilities-structured-02.batch"
+      },
+      "construction_intermediate": true
+    },
+    {
+      "bytes": 160767,
+      "sha256": "286b9f387c13dcec9724dc97f7f2ea059d746fcfeffdb4ed6a32c0760d8f052e",
+      "path": "native/transactions/20261111-control/10-server-control-capabilities-structured-03.edit",
+      "base_root": "2dd343dfbe6e1771eae99cc1b1c1d0504b22a591c07881af9238a09d1a6d59c3",
+      "result_root": "2502823de55781d9e806994fcf85c9cc41a6a7daa2382b7a52ac96f109b10d10",
+      "new_native_objects": 11,
+      "unchanged_objects": 5249,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1688962,
+        "sha256": "5aa82f78c8108f9a341b2325d3ab9df1837dbebf1fb2b23e74ad11b5af242457"
+      },
+      "native_batch": {
+        "bytes": 64501,
+        "sha256": "1c2366294685ef22236df3b56a822721bc9b67dc24acab261b5257d372613e79",
+        "path": "native/transactions/20261111-control/10-server-control-capabilities-structured-03.batch"
+      },
+      "construction_intermediate": true
+    },
+    {
+      "bytes": 164629,
+      "sha256": "76861151fc3bbac32a9ad064dc6b60f384957cea08e5deb3cd9fb70629a868cd",
+      "path": "native/transactions/20261111-control/10-server-control-capabilities-structured-04.edit",
+      "base_root": "2502823de55781d9e806994fcf85c9cc41a6a7daa2382b7a52ac96f109b10d10",
+      "result_root": "b252416ff38ac0ad94b3da9c0c05a8081ce779561a27c8fa8572ddbf030658aa",
+      "new_native_objects": 38,
+      "unchanged_objects": 5249,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1694714,
+        "sha256": "79553510ca39114fc5776672939d65d5c18434eb4bc8e78826d6b8ddd1e01e71"
+      },
+      "native_batch": {
+        "bytes": 69245,
+        "sha256": "2b74aef3988bac5a15947b467e7ca17e7b92b622f2575d8349f583703d4eed44",
+        "path": "native/transactions/20261111-control/10-server-control-capabilities-structured-04.batch"
+      },
+      "construction_intermediate": true
+    },
+    {
+      "bytes": 160487,
+      "sha256": "f7b4d56a21a7b6af46b9145ec1e706579443e9d8b2c1b549ec3afdae19c4e7ad",
+      "path": "native/transactions/20261111-control/10-server-control-capabilities-text-01.edit",
+      "base_root": "b252416ff38ac0ad94b3da9c0c05a8081ce779561a27c8fa8572ddbf030658aa",
+      "result_root": "9ec11f1255205ee059ab01a5c98833d8bde793a2890b11488f03e683d65dad2e",
+      "new_native_objects": 86,
+      "unchanged_objects": 5276,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1707819,
+        "sha256": "335003652a005a7c0cc5ae6e8d4faaa39e6acd3ea71a2f40720d7f179f7a595b"
+      },
+      "native_batch": {
+        "bytes": 60993,
+        "sha256": "9c8367cc24ff95d33bdcf643d4843a714021752538b6b13de933f244622000cc",
+        "path": "native/transactions/20261111-control/10-server-control-capabilities-text-01.batch"
+      },
+      "construction_intermediate": true
+    },
+    {
+      "bytes": 159639,
+      "sha256": "7fe972d4cb257439152351d75070eafe1997289a7e27cb7ba518f968f8e4cbd5",
+      "path": "native/transactions/20261111-control/10-server-control-capabilities-text-02.edit",
+      "base_root": "9ec11f1255205ee059ab01a5c98833d8bde793a2890b11488f03e683d65dad2e",
+      "result_root": "13e6228c4a4532e62294399121d65049711a0efd0743a23b2b28abd9ef8ad688",
+      "new_native_objects": 26,
+      "unchanged_objects": 5351,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1711336,
+        "sha256": "075d605bbf2dd38830deb698a103da5334925ae327fe4066b2729832cba15726"
+      },
+      "native_batch": {
+        "bytes": 66305,
+        "sha256": "fde4d8ac596c2a34b7554a7d1dbb0e975af6dd438f8e4ceac501bffbf113daea",
+        "path": "native/transactions/20261111-control/10-server-control-capabilities-text-02.batch"
+      },
+      "construction_intermediate": true
+    },
+    {
+      "bytes": 159736,
+      "sha256": "bb7586d2aaef734c05f592333f9b374f5d4b2264f14dab11da40065fda581041",
+      "path": "native/transactions/20261111-control/10-server-control-capabilities-text-03.edit",
+      "base_root": "13e6228c4a4532e62294399121d65049711a0efd0743a23b2b28abd9ef8ad688",
+      "result_root": "ed1a3aa83c82056914d1e47f636bdffd02b835c015a27c84882c2e23d1e310af",
+      "new_native_objects": 11,
+      "unchanged_objects": 5366,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1712104,
+        "sha256": "2fa9ca1a958eab41662eddeee92bca345e3b11cc831fb76e6716861cef2f9daf"
+      },
+      "native_batch": {
+        "bytes": 67794,
+        "sha256": "1529cce3fb6db7b1d16ea50d72d041cbb1e3b134e52f4e62fec48fae66be4e26",
+        "path": "native/transactions/20261111-control/10-server-control-capabilities-text-03.batch"
+      },
+      "construction_intermediate": true
+    },
+    {
+      "bytes": 165370,
+      "sha256": "0e76c612f368b2d9a69ceb1c4a2a84dfb4d38e31f6b1e104d2ff31f16a33bba7",
+      "path": "native/transactions/20261111-control/10-server-control-capabilities-text-04.edit",
+      "base_root": "ed1a3aa83c82056914d1e47f636bdffd02b835c015a27c84882c2e23d1e310af",
+      "result_root": "4166f654254dbbb60ed14d68e8255654721089978093d7988c86ad0e0f074b6c",
+      "new_native_objects": 61,
+      "unchanged_objects": 5366,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1721238,
+        "sha256": "3f347bf0c9453946ef06b7f8c575e5baf1fe9e7683ba8ee7a9456f31fd19ae08"
+      },
+      "native_batch": {
+        "bytes": 72695,
+        "sha256": "7bbf342fd40787c904cb78b6a14a643ae6c5f6e8457f1f3fc9bc930ccc4ea3e3",
+        "path": "native/transactions/20261111-control/10-server-control-capabilities-text-04.batch"
+      },
+      "construction_intermediate": true
+    },
+    {
+      "bytes": 244870,
+      "sha256": "c125c4e42419fb80d33513b3a2d002c469070a570daa612c53ad93dba47d7c39",
+      "path": "native/transactions/20261111-control/11-server-numeric-cancellation.edit",
+      "base_root": "4166f654254dbbb60ed14d68e8255654721089978093d7988c86ad0e0f074b6c",
+      "result_root": "d5653a7c630eb6ee5e5c9ea7595bc14dbb714c646d1d07cd99ce0d926098d0b4",
+      "new_native_objects": 38,
+      "unchanged_objects": 5400,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1727388,
+        "sha256": "ba993256ac204a443cf0164def45edb68535124f33021bb6752aece92ecf108b"
+      },
+      "native_batch": {
+        "bytes": 11775,
+        "sha256": "4eb2b901e68c385ce80e5f1566ff531f31a9942d22f748b3881e0d1c1552c132",
+        "path": "native/transactions/20261111-control/11-server-numeric-cancellation.batch"
+      },
+      "construction_intermediate": false
+    },
+    {
+      "bytes": 133595,
+      "sha256": "83e785b29e8c02eafa42e667b17565e827db9c3299395491b9a6908c052a8476",
+      "path": "native/transactions/20261111-control/12-server-semantic-integers.edit",
+      "base_root": "d5653a7c630eb6ee5e5c9ea7595bc14dbb714c646d1d07cd99ce0d926098d0b4",
+      "result_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+      "new_native_objects": 22,
+      "unchanged_objects": 5421,
+      "canonical_bytes_equal": true,
+      "raw_bytes_equal": true,
+      "result_source": {
+        "bytes": 1731763,
+        "sha256": "cbdf015366be16b3eead46f982d16a71616191b8042ed9bd3e1ec82bce2067f8"
+      },
+      "native_batch": {
+        "bytes": 8997,
+        "sha256": "bcec825c523f2ed6d3e1f7de223639ee4b04d2efb70b82d1549e7e8d1e97bc0e",
+        "path": "native/transactions/20261111-control/12-server-semantic-integers.batch"
+      },
+      "construction_intermediate": false
+    }
+  ],
+  "mandatory_verify_after_every_edit": true,
+  "immutable_native_objects_only": true,
+  "unchanged_objects_retain_exact_cids": true,
+  "foreign_runtime_or_compiler_added": false,
+  "packing": "External XAXEDIT1 packing copies immutable native-authored objects; no canonical graph generation",
+  "release_ready": false,
+  "full_mission_complete": false
+}

@@ -1,0 +1,42 @@
+define @queue_consumed
+(T0,T1,T2,T3,T3)->(T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3,P4:T3)
+N0 constant 12040020 -> T3
+N1 checked.store.bits.le P0 N0 P3 P2 -> T2 [4,1]
+N2 constant 12040028 -> T3
+N3 checked.load.bits.le P0 N2 N1 -> T3,T2 [4,1]
+N4 int.compare N3 P3 -> T4 [3]
+N5 int.zero.extend N4 -> T3
+N6 sub.wrap P3 N3 -> T3
+N7 mul.wrap N5 N6 -> T3
+N8 add.wrap N3 N7 -> T3
+N9 checked.store.bits.le P0 N2 N8 N3.R1 -> T2 [4,1]
+N900 constant 12040036 -> T3
+N901 checked.load.bits.le P0 N900 N9 -> T3,T2 [4,1]
+N902 int.compare N901 P3 -> T4 [3]
+N903 int.zero.extend N902 -> T3
+N904 sub.wrap P3 N901 -> T3
+N905 mul.wrap N903 N904 -> T3
+N906 add.wrap N901 N905 -> T3
+N907 checked.store.bits.le P0 N900 N906 N901.R1 -> T2 [4,1]
+N10 int.compare P3 P4 -> T4 [1]
+cbr N10 B1(P0,P1,N907) B2(P0,P1,N907)
+B1(P10:T0,P11:T1,P12:T2)
+N11 constant 0 -> T3
+N12 constant 12040020 -> T3
+N13 checked.store.bits.le P10 N12 N11 P12 -> T2 [4,1]
+N14 constant 12040024 -> T3
+N15 checked.store.bits.le P10 N14 N11 N13 -> T2 [4,1]
+N16 constant 12040028 -> T3
+N17 checked.store.bits.le P10 N16 N11 N15 -> T2 [4,1]
+N908 constant 12040036 -> T3
+N909 checked.store.bits.le P10 N908 N11 N17 -> T2 [4,1]
+br B2(P10,P11,N909)
+B2(P20:T0,P21:T1,P22:T2)
+ret P20 P21 P22
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits1
+end

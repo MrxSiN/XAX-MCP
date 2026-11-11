@@ -1,0 +1,107 @@
+define @sem_uint
+(T0,T1,T2,T4,T3)->(T4,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T4,P4:T3)
+N0 int.truncate P3 -> T3
+N1 rotate.right P3 -> T4 [32]
+N2 int.truncate N1 -> T3
+N3 sub.wrap N2 N0 -> T3
+N4 constant 10 -> T3
+N5 int.compare N3 N4 -> T6 [4]
+N6 int.compare N0 N2 -> T6 [3]
+N7 bit.and N5 N6 -> T6
+N8 constant 4194304 -> T3
+N9 int.compare N2 N8 -> T6 [4]
+N10 bit.and N7 N9 -> T6
+N11 constant 0 -> T4
+cbr N10 B1(P0,P1,P2,N0,N2,N11,P4) B5(P0,P1,P2)
+B1(P10:T0,P11:T1,P12:T2,P13:T3,P14:T3,P15:T4,P16:T3)
+N12 int.compare P13 P14 -> T6 [3]
+cbr N12 B2(P10,P11,P12,P13,P14,P15,P16) B4(P10,P11,P12,P15,P16)
+B2(P20:T0,P21:T1,P22:T2,P23:T3,P24:T3,P25:T4,P26:T3)
+N13 checked.load.bits.le P20 P23 P22 -> T5,T2 [1,1]
+N14 constant 48 -> T5
+N15 constant 57 -> T5
+N16 int.compare N13 N14 -> T6 [6]
+N17 int.compare N13 N15 -> T6 [4]
+N18 bit.and N16 N17 -> T6
+cbr N18 B3(P20,P21,N13.R1,P23,P24,P25,P26,N13) B5(P20,P21,N13.R1)
+B3(P30:T0,P31:T1,P32:T2,P33:T3,P34:T3,P35:T4,P36:T3,P37:T5)
+N19 int.zero.extend P37 -> T4
+N20 constant 48 -> T4
+N21 sub.wrap N19 N20 -> T4
+N22 constant 10 -> T4
+N23 mul.wrap P35 N22 -> T4
+N24 add.wrap N23 N21 -> T4
+N25 constant 1 -> T3
+N26 add.wrap P33 N25 -> T3
+br B1(P30,P31,P32,N26,P34,N24,P36)
+B4(P40:T0,P41:T1,P42:T2,P43:T4,P44:T3)
+N27 int.zero.extend P44 -> T4
+N28 int.compare P43 N27 -> T6 [4]
+N29 int.zero.extend N28 -> T4
+N30 constant 4294967296 -> T4
+N31 mul.wrap N29 N30 -> T4
+N900 mul.wrap P43 N29 -> T4
+N32 bit.or N900 N31 -> T4
+ret N32 P40 P41 P42
+B5(P50:T0,P51:T1,P52:T2)
+N33 constant 0 -> T4
+ret N33 P50 P51 P52
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 6e07cf197c4ff1ebe46f19c84ad2c1c74d7ea8f2cb15177e6e8f960d224cbc65
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 bits8
+T6 bits1
+end
+
+define @sem_field_count
+(T0,T1,T2,T4)->(T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T4)
+N0 int.truncate P3 -> T3
+N1 rotate.right P3 -> T4 [32]
+N2 int.truncate N1 -> T3
+N3 call.direct entity=@sem_json_first P0 P1 P2 P3 -> T3,T0,T1,T2
+N4 constant 123 -> T3
+N5 int.compare N3 N4 -> T6 [1]
+N6 constant 1 -> T3
+N7 add.wrap N0 N6 -> T3
+N8 constant 0 -> T3
+cbr N5 B1(N3.R1,N3.R2,N3.R3,N7,N2,N8) B4(N3.R1,N3.R2,N3.R3)
+B1(P10:T0,P11:T1,P12:T2,P13:T3,P14:T3,P15:T3)
+N9 call.direct entity=@sem_json_ws P10 P11 P12 P13 P14 -> T3,T0,T1,T2
+N10 checked.load.bits.le N9.R1 N9 N9.R3 -> T5,T2 [1,1]
+N11 constant 125 -> T5
+N12 int.compare N10 N11 -> T6 [1]
+N13 constant 5 -> T3
+N14 int.compare P15 N13 -> T6 [4]
+cbr N12 B3(N9.R1,N9.R2,N10.R1,P15) B2(N9.R1,N9.R2,N10.R1,N9,P14,P15,N14)
+B2(P20:T0,P21:T1,P22:T2,P23:T3,P24:T3,P25:T3,P26:T6)
+N15 call.direct entity=@sem_json_skip P20 P21 P22 P23 P24 -> T3,T0,T1,T2
+N16 call.direct entity=@sem_json_ws N15.R1 N15.R2 N15.R3 N15 P24 -> T3,T0,T1,T2
+N17 constant 1 -> T3
+N18 add.wrap N16 N17 -> T3
+N19 call.direct entity=@sem_json_ws N16.R1 N16.R2 N16.R3 N18 P24 -> T3,T0,T1,T2
+N20 call.direct entity=@sem_json_skip N19.R1 N19.R2 N19.R3 N19 P24 -> T3,T0,T1,T2
+N21 call.direct entity=@sem_json_ws N20.R1 N20.R2 N20.R3 N20 P24 -> T3,T0,T1,T2
+N22 checked.load.bits.le N21.R1 N21 N21.R3 -> T5,T2 [1,1]
+N23 constant 44 -> T5
+N24 int.compare N22 N23 -> T6 [1]
+N25 int.zero.extend N24 -> T3
+N26 add.wrap N21 N25 -> T3
+N27 add.wrap P25 N17 -> T3
+cbr P26 B1(N21.R1,N21.R2,N22.R1,N26,P24,N27) B4(N21.R1,N21.R2,N22.R1)
+B3(P30:T0,P31:T1,P32:T2,P33:T3)
+ret P33 P30 P31 P32
+B4(P40:T0,P41:T1,P42:T2)
+N28 constant 4294967295 -> T3
+ret N28 P40 P41 P42
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 6e07cf197c4ff1ebe46f19c84ad2c1c74d7ea8f2cb15177e6e8f960d224cbc65
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 bits8
+T6 bits1
+end

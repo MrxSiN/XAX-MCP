@@ -1,0 +1,76 @@
+{
+  "schema": "xax-mcp-native-control-checkpoints-v1",
+  "recorded": "2026-11-11",
+  "state": "experimental; native runtime tested; not deployed by default",
+  "default_source": "native/xax-mcp-native-gen3.xax",
+  "deployment_pin_unchanged": true,
+  "release_ready": false,
+  "full_mission_complete": false,
+  "checkpoints": [
+    {
+      "bytes": 1527994,
+      "sha256": "766d16910f9fe15da6a9f855a1f215326466df4677d6372b382806e809c325f3",
+      "path": "native/candidates/20261111-control/server-cancellation.xax",
+      "root": "fc2d6cedfb98f952ee76379620871d22bd0f09782b1805ab29a4d615397ab337",
+      "validation": "EXECUTED cancellation; integer token/string IDs at this checkpoint",
+      "deployment_selected": false
+    },
+    {
+      "bytes": 1600631,
+      "sha256": "040bf0e035f673ea297f88db2c04748dae085b27f6ba7b99e77a64a1bcabbba4",
+      "path": "native/candidates/20261111-control/server-semantic-pages.xax",
+      "root": "d0a87bd290ca5115aa4b3535071ea5d721b61024aa71385fa3e741bb07e7a0b7",
+      "validation": "EXECUTED public reference pages; client metadata compatibility not yet corrected",
+      "deployment_selected": false
+    },
+    {
+      "bytes": 1608903,
+      "sha256": "d76eb46dd0ec42cd06aae33009e4ea4de9ba866742d790fde656ab7c7d399b41",
+      "path": "native/candidates/20261111-control/server-client-metadata.xax",
+      "root": "3a0c176051c2c4354f05a66d833e65234bfa5e42c10c25d5e1a9b96f048e74df",
+      "validation": "EXECUTED real Codex backend compatibility; schema metadata not finalized",
+      "deployment_selected": false
+    },
+    {
+      "bytes": 1731763,
+      "sha256": "cbdf015366be16b3eead46f982d16a71616191b8042ed9bd3e1ec82bce2067f8",
+      "path": "native/candidates/20261111-control/server.xax",
+      "root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+      "validation": "EXECUTED final prototype; independent final gates recorded separately",
+      "deployment_selected": false
+    }
+  ],
+  "final_source": "native/candidates/20261111-control/server.xax",
+  "final_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+  "artifacts": [
+    {
+      "bytes": 1732042,
+      "sha256": "5cbf60fa969022e425bed06c04929907140d887672d85fd7a5d243d6ba38c42e",
+      "path": "native/candidates/20261111-control/server-snapshot.xax"
+    },
+    {
+      "bytes": 520704,
+      "sha256": "30ced4891d1493f890b70fed8c7e5a63e6ab92e385e1c19604f9dcd887fe89ad",
+      "path": "native/candidates/20261111-control/xax-mcp-native.exe"
+    },
+    {
+      "bytes": 268,
+      "sha256": "ee5ec73823dd02bff30a7ebf0f3eebbc1b73bdf82f95efdbe4c7d8775504cfb6",
+      "path": "native/candidates/20261111-control/xax-mcp-native.prov"
+    },
+    {
+      "bytes": 150016,
+      "sha256": "a189b73a7b17cacf4f8680e3f84ed3ed35a44c9ebf4c1f6465b0d4af03ec779a",
+      "path": "native/candidates/20261111-control/xax-mcp-sandbox.exe"
+    }
+  ],
+  "transactions": "native/transactions/20261111-control/manifest.json",
+  "tools_schema": "schemas/tools-v3.json",
+  "known_boundaries": [
+    "Writable workspace child-file aliases and publication require a trusted host; handle contract remains upstream",
+    "Semantic records expose generic kind/CID/reference facts only; at most a 4 MiB public inspection prefix",
+    "Cancellation can be delayed by backpressure beyond the 1 MiB queued-input window",
+    "Installed Codex backend interoperability is distinct from desktop UI acceptance; UI gate remains open",
+    "No Windows compiler self-hosting, production readiness, full CUM prepare, typed effects/signatures or general semantic evolution acceptance"
+  ]
+}

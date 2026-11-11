@@ -1,0 +1,67 @@
+define @q_scalar_next
+(T0,T1,T2,T3,T3)->(T4,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3,P4:T3)
+N0 checked.load.bits.le P0 P3 P2 -> T5,T2 [1,1]
+N1 int.zero.extend N0 -> T3
+N2 constant 92 -> T3
+N3 int.compare N1 N2 -> T6 [1]
+N4 constant 1 -> T3
+N5 add.wrap P3 N4 -> T3
+cbr N3 B1(P0,P1,N0.R1,N5,P4) B2(P0,P1,N0.R1,N1,N5)
+B1(P10:T0,P11:T1,P12:T2,P13:T3,P14:T3)
+N6 call.direct entity=@q_escape P10 P11 P12 P13 P14 -> T4,T0,T1,T2
+ret N6 N6.R1 N6.R2 N6.R3
+B2(P20:T0,P21:T1,P22:T2,P23:T3,P24:T3)
+N7 constant 128 -> T3
+N8 int.compare P23 N7 -> T6 [3]
+cbr N8 B7(P20,P21,P22,P23,P24) B3(P20,P21,P22,P23,P24)
+B3(P30:T0,P31:T1,P32:T2,P33:T3,P34:T3)
+N9 constant 224 -> T3
+N10 int.compare P33 N9 -> T6 [3]
+N11 constant 31 -> T3
+N12 bit.and P33 N11 -> T3
+N13 constant 1 -> T3
+cbr N10 B6(P30,P31,P32,N12,P34,N13) B4(P30,P31,P32,P33,P34)
+B4(P40:T0,P41:T1,P42:T2,P43:T3,P44:T3)
+N14 constant 240 -> T3
+N15 int.compare P43 N14 -> T6 [3]
+N16 constant 15 -> T3
+N17 bit.and P43 N16 -> T3
+N18 constant 2 -> T3
+cbr N15 B6(P40,P41,P42,N17,P44,N18) B5(P40,P41,P42,P43,P44)
+B5(P50:T0,P51:T1,P52:T2,P53:T3,P54:T3)
+N19 constant 7 -> T3
+N20 bit.and P53 N19 -> T3
+N21 constant 3 -> T3
+br B6(P50,P51,P52,N20,P54,N21)
+B6(P60:T0,P61:T1,P62:T2,P63:T3,P64:T3,P65:T3)
+N22 constant 0 -> T3
+N23 int.compare P65 N22 -> T6 [2]
+cbr N23 B8(P60,P61,P62,P63,P64,P65) B7(P60,P61,P62,P63,P64)
+B7(P70:T0,P71:T1,P72:T2,P73:T3,P74:T3)
+N24 int.zero.extend P73 -> T4
+N25 int.zero.extend P74 -> T4
+N26 constant 4294967296 -> T4
+N27 mul.wrap N25 N26 -> T4
+N28 bit.or N24 N27 -> T4
+ret N28 P70 P71 P72
+B8(P80:T0,P81:T1,P82:T2,P83:T3,P84:T3,P85:T3)
+N29 checked.load.bits.le P80 P84 P82 -> T5,T2 [1,1]
+N30 int.zero.extend N29 -> T3
+N31 constant 63 -> T3
+N32 bit.and N30 N31 -> T3
+N33 constant 64 -> T3
+N34 mul.wrap P83 N33 -> T3
+N35 bit.or N34 N32 -> T3
+N36 constant 1 -> T3
+N37 add.wrap P84 N36 -> T3
+N38 sub.wrap P85 N36 -> T3
+br B6(P80,P81,N29.R1,N35,N37,N38)
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 bits8
+T6 bits1
+end

@@ -1,0 +1,87 @@
+define @sem_record
+(T0,T1,T2,T0,T3,T2,T4)->(T0,T1,T2,T0,T3,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T0,P4:T3,P5:T2,P6:T4)
+N0 constant 12050000 -> T4
+N1 checked.load.bits.le P3 N0 P5 -> T4,T2 [4,1]
+N2 constant 12050004 -> T4
+N3 checked.load.bits.le P3 N2 N1.R1 -> T4,T2 [4,1]
+N4 checked.load.bits.le P3 P6 N3.R1 -> T5,T2 [8,1]
+N5 int.truncate N4 -> T4
+N6 constant 4294967295 -> T4
+N7 int.compare N3 N6 -> T7 [1]
+N8 int.compare N3 N5 -> T7 [1]
+N9 bit.or N7 N8 -> T7
+N10 constant 16 -> T4
+N11 add.wrap P6 N10 -> T4
+N12 constant 12050140 -> T4
+N13 call.direct entity=@sem_equal_cid P3 P4 N4.R1 N11 N12 -> T4,T0,T3,T2
+N14 constant 12050216 -> T4
+N15 checked.load.bits.le N13.R1 N14 N13.R3 -> T4,T2 [4,1]
+N16 bit.or N15 N13 -> T4
+N17 checked.store.bits.le N13.R1 N14 N16 N15.R1 -> T2 [4,1]
+N18 constant 2 -> T4
+N19 int.compare N1 N18 -> T7 [4]
+cbr N19 B1(P0,P1,P2,N13.R1,N13.R2,N17,P6,N1,N13,N9) B3(P0,P1,P2,N13.R1,N13.R2,N17,P6,N1,N13,N9)
+B1(P10:T0,P11:T1,P12:T2,P13:T0,P14:T3,P15:T2,P16:T4,P17:T4,P18:T4,P19:T7)
+N20 constant 1 -> T4
+N21 int.compare P17 N20 -> T7 [1]
+N22 constant 0 -> T4
+N23 int.compare P18 N22 -> T7 [2]
+N24 bit.or N21 N23 -> T7
+N25 bit.and N24 P19 -> T7
+cbr N25 B2(P10,P11,P12,P13,P14,P15,P16) B7(P10,P11,P12,P13,P14,P15)
+B2(P20:T0,P21:T1,P22:T2,P23:T0,P24:T3,P25:T2,P26:T4)
+N26 constant 0 -> T4
+N27 call.direct entity=@sem_accept P20 P21 P22 P23 P24 P25 P26 N26 -> T0,T1,T2,T0,T3,T2
+ret N27 N27.R1 N27.R2 N27.R3 N27.R4 N27.R5
+B3(P30:T0,P31:T1,P32:T2,P33:T0,P34:T3,P35:T2,P36:T4,P37:T4,P38:T4,P39:T7)
+N28 constant 8 -> T4
+N29 add.wrap P36 N28 -> T4
+N30 checked.load.bits.le P33 N29 P35 -> T5,T2 [8,1]
+N31 int.truncate N30 -> T4
+N32 constant 0 -> T4
+br B4(P30,P31,P32,P33,P34,N30.R1,P36,P37,P38,P39,N32,N31)
+B4(P40:T0,P41:T1,P42:T2,P43:T0,P44:T3,P45:T2,P46:T4,P47:T4,P48:T4,P49:T7,P50:T4,P51:T4)
+N33 int.compare P50 P51 -> T7 [3]
+cbr N33 B5(P40,P41,P42,P43,P44,P45,P46,P47,P48,P49,P50,P51) B7(P40,P41,P42,P43,P44,P45)
+B5(P60:T0,P61:T1,P62:T2,P63:T0,P64:T3,P65:T2,P66:T4,P67:T4,P68:T4,P69:T7,P70:T4,P71:T4)
+N34 constant 32 -> T4
+N35 mul.wrap P70 N34 -> T4
+N36 constant 48 -> T4
+N37 add.wrap P66 N36 -> T4
+N38 add.wrap N37 N35 -> T4
+N39 constant 12050140 -> T4
+N40 call.direct entity=@sem_equal_cid P63 P64 P65 N38 N39 -> T4,T0,T3,T2
+N41 constant 0 -> T4
+N42 int.compare P68 N41 -> T7 [2]
+N43 int.compare N40 N41 -> T7 [2]
+N44 constant 3 -> T4
+N45 int.compare P67 N44 -> T7 [1]
+N46 bit.and N45 N42 -> T7
+N47 constant 4 -> T4
+N48 int.compare P67 N47 -> T7 [1]
+N49 bit.and N48 N43 -> T7
+N50 constant 5 -> T4
+N51 int.compare P67 N50 -> T7 [1]
+N52 bit.or N42 N43 -> T7
+N53 bit.and N51 N52 -> T7
+N54 bit.or N46 N49 -> T7
+N55 bit.or N54 N53 -> T7
+N56 bit.and N55 P69 -> T7
+N57 constant 1 -> T4
+N58 add.wrap P70 N57 -> T4
+cbr N56 B6(P60,P61,P62,N40.R1,N40.R2,N40.R3,P66,P67,P68,P69,N58,P71,N38) B4(P60,P61,P62,N40.R1,N40.R2,N40.R3,P66,P67,P68,P69,N58,P71)
+B6(P80:T0,P81:T1,P82:T2,P83:T0,P84:T3,P85:T2,P86:T4,P87:T4,P88:T4,P89:T7,P90:T4,P91:T4,P92:T4)
+N59 call.direct entity=@sem_accept P80 P81 P82 P83 P84 P85 P86 P92 -> T0,T1,T2,T0,T3,T2
+br B4(N59,N59.R1,N59.R2,N59.R3,N59.R4,N59.R5,P86,P87,P88,P89,P90,P91)
+B7(P100:T0,P101:T1,P102:T2,P103:T0,P104:T3,P105:T2)
+ret P100 P101 P102 P103 P104 P105
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 6e07cf197c4ff1ebe46f19c84ad2c1c74d7ea8f2cb15177e6e8f960d224cbc65
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T4 bits32
+T5 bits64
+T6 bits8
+T7 bits1
+end

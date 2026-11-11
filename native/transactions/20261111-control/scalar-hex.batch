@@ -1,0 +1,122 @@
+define @q_hex4
+(T0,T1,T2,T3)->(T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3)
+N0 constant 0 -> T3
+br B1(P0,P1,P2,P3,N0,N0)
+B1(P10:T0,P11:T1,P12:T2,P13:T3,P14:T3,P15:T3)
+N1 constant 4 -> T3
+N2 int.compare P14 N1 -> T5 [3]
+cbr N2 B2(P10,P11,P12,P13,P14,P15) B3(P10,P11,P12,P15)
+B2(P20:T0,P21:T1,P22:T2,P23:T3,P24:T3,P25:T3)
+N3 add.wrap P23 P24 -> T3
+N4 checked.load.bits.le P20 N3 P22 -> T4,T2 [1,1]
+N5 int.zero.extend N4 -> T3
+N6 call.direct entity=8bc188da40a83eb818cfd34962c566e2fa44e3db2fcaf66b84ef8d9ace17e935 N5 -> T3
+N7 constant 16 -> T3
+N8 mul.wrap P25 N7 -> T3
+N9 bit.or N8 N6 -> T3
+N10 constant 1 -> T3
+N11 add.wrap P24 N10 -> T3
+br B1(P20,P21,N4.R1,P23,N11,N9)
+B3(P30:T0,P31:T1,P32:T2,P33:T3)
+ret P33 P30 P31 P32
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits8
+T5 bits1
+end
+
+define @q_escape
+(T0,T1,T2,T3,T3)->(T4,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3,P4:T3)
+N0 checked.load.bits.le P0 P3 P2 -> T5,T2 [1,1]
+N1 int.zero.extend N0 -> T3
+N2 constant 1 -> T3
+N3 add.wrap P3 N2 -> T3
+N4 constant 117 -> T3
+N5 int.compare N1 N4 -> T6 [1]
+cbr N5 B1(P0,P1,N0.R1,N3,P4) B3(P0,P1,N0.R1,N1,N3)
+B1(P10:T0,P11:T1,P12:T2,P13:T3,P14:T3)
+N6 call.direct entity=@q_hex4 P10 P11 P12 P13 -> T3,T0,T1,T2
+N7 constant 4 -> T3
+N8 add.wrap P13 N7 -> T3
+N9 constant 55296 -> T3
+N10 int.compare N6 N9 -> T6 [6]
+N11 constant 56319 -> T3
+N12 int.compare N6 N11 -> T6 [4]
+N13 bit.and N10 N12 -> T6
+N900 constant 6 -> T3
+N901 add.wrap N8 N900 -> T3
+N902 int.compare N901 P14 -> T6 [4]
+N903 bit.and N13 N902 -> T6
+cbr N903 B2(N6.R1,N6.R2,N6.R3,N6,N8) B4(N6.R1,N6.R2,N6.R3,N6,N8)
+B2(P20:T0,P21:T1,P22:T2,P23:T3,P24:T3)
+N14 constant 2 -> T3
+N15 add.wrap P24 N14 -> T3
+N904 checked.load.bits.le P20 P24 P22 -> T5,T2 [1,1]
+N905 constant 1 -> T3
+N906 add.wrap P24 N905 -> T3
+N907 checked.load.bits.le P20 N906 N904.R1 -> T5,T2 [1,1]
+N908 constant 92 -> T5
+N909 int.compare N904 N908 -> T6 [1]
+N910 constant 117 -> T5
+N911 int.compare N907 N910 -> T6 [1]
+N912 bit.and N909 N911 -> T6
+N16 call.direct entity=@q_hex4 P20 P21 N907.R1 N15 -> T3,T0,T1,T2
+N17 constant 55296 -> T3
+N18 sub.wrap P23 N17 -> T3
+N19 constant 1024 -> T3
+N20 mul.wrap N18 N19 -> T3
+N21 constant 56320 -> T3
+N22 sub.wrap N16 N21 -> T3
+N23 add.wrap N20 N22 -> T3
+N24 constant 65536 -> T3
+N25 add.wrap N23 N24 -> T3
+N26 constant 4 -> T3
+N27 add.wrap N15 N26 -> T3
+N913 constant 56320 -> T3
+N914 int.compare N16 N913 -> T6 [6]
+N915 constant 57343 -> T3
+N916 int.compare N16 N915 -> T6 [4]
+N917 bit.and N914 N916 -> T6
+N918 bit.and N912 N917 -> T6
+cbr N918 B4(N16.R1,N16.R2,N16.R3,N25,N27) B4(N16.R1,N16.R2,N16.R3,P23,P24)
+B3(P30:T0,P31:T1,P32:T2,P33:T3,P34:T3)
+N28 constant 98 -> T3
+N29 int.compare P33 N28 -> T6 [1]
+N30 constant 8 -> T3
+N31 call.direct entity=62a2cb9e1e1fc144bb70357f3f0740190723361eecdf413c65f4c9e34d574420 N29 N30 P33 -> T3
+N32 constant 102 -> T3
+N33 int.compare P33 N32 -> T6 [1]
+N34 constant 12 -> T3
+N35 call.direct entity=62a2cb9e1e1fc144bb70357f3f0740190723361eecdf413c65f4c9e34d574420 N33 N34 N31 -> T3
+N36 constant 110 -> T3
+N37 int.compare P33 N36 -> T6 [1]
+N38 constant 10 -> T3
+N39 call.direct entity=62a2cb9e1e1fc144bb70357f3f0740190723361eecdf413c65f4c9e34d574420 N37 N38 N35 -> T3
+N40 constant 114 -> T3
+N41 int.compare P33 N40 -> T6 [1]
+N42 constant 13 -> T3
+N43 call.direct entity=62a2cb9e1e1fc144bb70357f3f0740190723361eecdf413c65f4c9e34d574420 N41 N42 N39 -> T3
+N44 constant 116 -> T3
+N45 int.compare P33 N44 -> T6 [1]
+N46 constant 9 -> T3
+N47 call.direct entity=62a2cb9e1e1fc144bb70357f3f0740190723361eecdf413c65f4c9e34d574420 N45 N46 N43 -> T3
+br B4(P30,P31,P32,N47,P34)
+B4(P40:T0,P41:T1,P42:T2,P43:T3,P44:T3)
+N48 int.zero.extend P43 -> T4
+N49 int.zero.extend P44 -> T4
+N50 constant 4294967296 -> T4
+N51 mul.wrap N49 N50 -> T4
+N52 bit.or N48 N51 -> T4
+ret N52 P40 P41 P42
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 bits8
+T6 bits1
+end
