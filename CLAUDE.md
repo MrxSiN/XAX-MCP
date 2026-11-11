@@ -28,6 +28,10 @@
   XAX transaction and record the exact toolchain/artifact identities. Do not edit retired upstream Python authors.
 - Record new evidence in new files under `docs/evidence/`; never overwrite old evidence.
 - Do not claim a capability that is not executable natively. Use the labels in `docs/EVIDENCE.md`.
+- Design choices follow the section "Engineering principles for compiler and semantic-graph changes" in XAX's `AGENT.md`
+  (SOLID, DRY, KISS, YAGNI, Law of Demeter, Boy Scout Rule, Separation of Concerns as context-sensitive rules). They
+  never override the rules above, verified state integrity or evidence quality, and they never justify code in another
+  language here.
 
 `agent-guidance/` holds optional guidance for agents that *use* the server; this file is for agents that develop it.
 
