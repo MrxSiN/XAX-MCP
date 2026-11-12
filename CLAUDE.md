@@ -54,6 +54,10 @@ pages, plus legacy progress-metadata compatibility. Its selected query schema is
 the compiler dependency is unchanged. Preserve the trusted-host workspace-alias
 boundary, inspection-prefix limit, separate desktop UI evidence and false release
 readiness flags. Do not relabel older evidence as acceptance of this source.
+Final-source acceptance completed on 2026-11-12; see
+`docs/evidence/native-control-20261112.json` for separate runtime, fresh-package,
+installed backend and active desktop read-only evidence. The prior paused handoff
+is superseded by `REMAINING_MCP_TASKS.md`; default Gen3 and release flags stay unchanged.
 
 Current native pin: see `native/xax-dependency.json` (`xax-native-file-v1`); sources are `native/xax-mcp-native-gen3.xax` and `native/xax-mcp-sandbox-gen1.xax`. The 20261110-host-paths manifest extends native replay through the configured-path guard. Binary stdin/argv are implemented within host bounds; JSON xax-construct-v1 and full CUM prepare remain unsupported. Full mission readiness is false.
 

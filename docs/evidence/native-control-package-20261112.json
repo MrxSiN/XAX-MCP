@@ -1,0 +1,602 @@
+{
+  "schema": "xax-mcp-native-control-clean-package-v1",
+  "recorded": "2026-11-12",
+  "status": "EXECUTED final-source acceptance; experimental, not promoted",
+  "archive": {
+    "path": "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261112\\package\\xax-mcp-control-20261112.zip",
+    "bytes": 26289099,
+    "sha256": "6d8dc0d6c5338472a0f3d81748e7f20fde1ab465510a4a0daed7d03808544f23"
+  },
+  "fresh_extraction": "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261112\\package\\extracted",
+  "candidate_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+  "source_inventory_files": 505,
+  "source_inventory_unchanged": true,
+  "parent_path_empty": true,
+  "compiler_from_archive": true,
+  "compiler_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79",
+  "base_source_replay_records": 65,
+  "previous_preview_records": 9,
+  "control_preview_records": 19,
+  "native_probes_rebuilt": 15,
+  "identical_builds_per_probe": 2,
+  "identical_default_server_and_sandbox_builds": 2,
+  "identical_candidate_builds": 2,
+  "fixture_replays_and_double_builds": 3,
+  "semantic_program_exit": 66,
+  "replays": [
+    {
+      "carrier": "native/transactions/20261111-capabilities/01-server-file-pins.edit",
+      "base_root": "44f8e6b34a4bd3d50bfb670c1be6a73c9e5bfae7f701383f70eb51e37befd94d",
+      "result_root": "8653cd6040139ee2c80308ed4fb66a71e8464c520c1a2849520d5f7bddee9db7",
+      "source_sha256": "48b3abf403791d0b74b780f7bbe327221da390766c179a1ed17430a121418e99",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-capabilities/02-server-compiler-process.edit",
+      "base_root": "8653cd6040139ee2c80308ed4fb66a71e8464c520c1a2849520d5f7bddee9db7",
+      "result_root": "4e1d313b828c4061e85f27f8dd2cfdcd07c03c604ccc54d279ec2d71dccab7f8",
+      "source_sha256": "95979436bffc3a46bd3b2e19f36b5c9101eeb8402026ee30570952b9aae7cd03",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-capabilities/03-server-modern-mcp.edit",
+      "base_root": "4e1d313b828c4061e85f27f8dd2cfdcd07c03c604ccc54d279ec2d71dccab7f8",
+      "result_root": "c2754c01f0a30f3d235ebb07ed12c2f76ddc0b3c899d1a23ded807c926874053",
+      "source_sha256": "6f672cb35626bd4f78e9ae1b8160e9aeb16e38df0858261672a2aa34eed3e3c4",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-capabilities/04-server-semantic-inspect.edit",
+      "base_root": "c2754c01f0a30f3d235ebb07ed12c2f76ddc0b3c899d1a23ded807c926874053",
+      "result_root": "d30c15dcb672863e7bbfe097a03ec951b8cf90921bca4d01d0bd56a195df4b0e",
+      "source_sha256": "dec1f4c84d36b2da8813515d4f9646672479f984ad2b83f2f4227391c2ab4862",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-capabilities/05-server-capabilities-structured.edit",
+      "base_root": "d30c15dcb672863e7bbfe097a03ec951b8cf90921bca4d01d0bd56a195df4b0e",
+      "result_root": "c3662bc43b98f1aeaa14626a753a47ca1c23dd8ac439f930a592f10e0003181d",
+      "source_sha256": "ef0852b7301fb7c6c9dc77850af0110f6fff285b8c6902199c85d0350d0ab956",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-capabilities/06-server-capabilities.edit",
+      "base_root": "c3662bc43b98f1aeaa14626a753a47ca1c23dd8ac439f930a592f10e0003181d",
+      "result_root": "f651bf5835526022d7315e52e8f3370ffa9a321e566fdafda83ff37ddac386ee",
+      "source_sha256": "6ccd1eaa58a8c5ed09146d0db0d3707f4d0f922e8b36727eaf8dc3b9dfb69a38",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-capabilities/07-server-discovery.edit",
+      "base_root": "f651bf5835526022d7315e52e8f3370ffa9a321e566fdafda83ff37ddac386ee",
+      "result_root": "1d9154400c4152b6103e60d6ce1ca22e7d26ce116533e90e1865e350e7eedb15",
+      "source_sha256": "80ce8bda120d606a0aa51759271c27e50e65a260fab6e3e1d802087379b7d8ef",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-capabilities/08-server-caching.edit",
+      "base_root": "1d9154400c4152b6103e60d6ce1ca22e7d26ce116533e90e1865e350e7eedb15",
+      "result_root": "61e54137999517707265a218ee1437ffce4297d2e2bb66b1dc24b2918a651b98",
+      "source_sha256": "a1acc0c7d9b7a8fbc6abef85e89298f13c047dcda8f4b70ed39b4521547bc6dd",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-capabilities/09-server-trailing-space.edit",
+      "base_root": "61e54137999517707265a218ee1437ffce4297d2e2bb66b1dc24b2918a651b98",
+      "result_root": "38724fe570dcddb9bb82c5bf2bd49aca468445a38ab2d0e5d19ed4599559c10f",
+      "source_sha256": "023e7248b021e43a1ea9b61a7e5384806750a29e1037505601f8bc9840888415",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/01-server-active-id.edit",
+      "base_root": "38724fe570dcddb9bb82c5bf2bd49aca468445a38ab2d0e5d19ed4599559c10f",
+      "result_root": "413dfcdc0b4e72dd6250455bd9241a9121dc8f5bf791e07b3838ceb531d16b5e",
+      "source_sha256": "8e70573d234ac093cd63955b3d4d13b17633a52c814b0ad00cab929971de955d",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/02-server-cancel-state.edit",
+      "base_root": "413dfcdc0b4e72dd6250455bd9241a9121dc8f5bf791e07b3838ceb531d16b5e",
+      "result_root": "e28bd98bc6c8d4ec0d3e36c8e43c534a741de19e6de40e3d2c97ce0db643c4c0",
+      "source_sha256": "13c751ff7959cb666b83af7a52e30ce3727fc2fc15ac7e82050d38178818cd0e",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/03-server-input-queue.edit",
+      "base_root": "e28bd98bc6c8d4ec0d3e36c8e43c534a741de19e6de40e3d2c97ce0db643c4c0",
+      "result_root": "c131d04eca586b2b461f9f811cfaa9e51f0dd3ba49810d8112f59e20e6b56346",
+      "source_sha256": "2eca3207143d755163f06f5637f6d413275948be85033a7a3b2ca27105b867c1",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/04-server-cancellation.edit",
+      "base_root": "c131d04eca586b2b461f9f811cfaa9e51f0dd3ba49810d8112f59e20e6b56346",
+      "result_root": "fc2d6cedfb98f952ee76379620871d22bd0f09782b1805ab29a4d615397ab337",
+      "source_sha256": "766d16910f9fe15da6a9f855a1f215326466df4677d6372b382806e809c325f3",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/05-server-query-arguments.edit",
+      "base_root": "fc2d6cedfb98f952ee76379620871d22bd0f09782b1805ab29a4d615397ab337",
+      "result_root": "5fec947d2d531dbd94affc6d49a0bd2428ac784b34cec3274fcf12278d60f002",
+      "source_sha256": "925556afd62958f1767b3ca41a74fe2856390cc6ee8317f6c151962997df71f3",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/06-server-semantic-pages.edit",
+      "base_root": "5fec947d2d531dbd94affc6d49a0bd2428ac784b34cec3274fcf12278d60f002",
+      "result_root": "d0a87bd290ca5115aa4b3535071ea5d721b61024aa71385fa3e741bb07e7a0b7",
+      "source_sha256": "040bf0e035f673ea297f88db2c04748dae085b27f6ba7b99e77a64a1bcabbba4",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/07-server-client-metadata.edit",
+      "base_root": "d0a87bd290ca5115aa4b3535071ea5d721b61024aa71385fa3e741bb07e7a0b7",
+      "result_root": "3a0c176051c2c4354f05a66d833e65234bfa5e42c10c25d5e1a9b96f048e74df",
+      "source_sha256": "d76eb46dd0ec42cd06aae33009e4ea4de9ba866742d790fde656ab7c7d399b41",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/08-server-query-schema-prefix.edit",
+      "base_root": "3a0c176051c2c4354f05a66d833e65234bfa5e42c10c25d5e1a9b96f048e74df",
+      "result_root": "1c5850870349506bab800a8d29f8caa876f05631f10e3613aaac187c8cb9a473",
+      "source_sha256": "b12b071f069d0db12b962bcb0eb03e0e448fdd1f15b068431a25a24f4582e838",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/09-server-query-schema.edit",
+      "base_root": "1c5850870349506bab800a8d29f8caa876f05631f10e3613aaac187c8cb9a473",
+      "result_root": "123acb8ee0aabfc6b71779060e9bb38256c066efcd88afd221de760aa0b8054e",
+      "source_sha256": "23a3fb28bd08869334499fedb7a3b056c69c3cd215d547a7e9f33da63968ac76",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/10-server-control-capabilities-structured-01.edit",
+      "base_root": "123acb8ee0aabfc6b71779060e9bb38256c066efcd88afd221de760aa0b8054e",
+      "result_root": "2e7b30b0433ee51b62b7aafd96b61ded8591ad1960f9fbcd1da02485fb05b0ca",
+      "source_sha256": "5e10c9bf370437d195711621c089192828419ac9e49778f39e2bc98e18dc1f14",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/10-server-control-capabilities-structured-02.edit",
+      "base_root": "2e7b30b0433ee51b62b7aafd96b61ded8591ad1960f9fbcd1da02485fb05b0ca",
+      "result_root": "2dd343dfbe6e1771eae99cc1b1c1d0504b22a591c07881af9238a09d1a6d59c3",
+      "source_sha256": "b2f587c581b043412194cd4f47bc7e12e53487a103671218dd33f9ab48df86de",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/10-server-control-capabilities-structured-03.edit",
+      "base_root": "2dd343dfbe6e1771eae99cc1b1c1d0504b22a591c07881af9238a09d1a6d59c3",
+      "result_root": "2502823de55781d9e806994fcf85c9cc41a6a7daa2382b7a52ac96f109b10d10",
+      "source_sha256": "5aa82f78c8108f9a341b2325d3ab9df1837dbebf1fb2b23e74ad11b5af242457",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/10-server-control-capabilities-structured-04.edit",
+      "base_root": "2502823de55781d9e806994fcf85c9cc41a6a7daa2382b7a52ac96f109b10d10",
+      "result_root": "b252416ff38ac0ad94b3da9c0c05a8081ce779561a27c8fa8572ddbf030658aa",
+      "source_sha256": "79553510ca39114fc5776672939d65d5c18434eb4bc8e78826d6b8ddd1e01e71",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/10-server-control-capabilities-text-01.edit",
+      "base_root": "b252416ff38ac0ad94b3da9c0c05a8081ce779561a27c8fa8572ddbf030658aa",
+      "result_root": "9ec11f1255205ee059ab01a5c98833d8bde793a2890b11488f03e683d65dad2e",
+      "source_sha256": "335003652a005a7c0cc5ae6e8d4faaa39e6acd3ea71a2f40720d7f179f7a595b",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/10-server-control-capabilities-text-02.edit",
+      "base_root": "9ec11f1255205ee059ab01a5c98833d8bde793a2890b11488f03e683d65dad2e",
+      "result_root": "13e6228c4a4532e62294399121d65049711a0efd0743a23b2b28abd9ef8ad688",
+      "source_sha256": "075d605bbf2dd38830deb698a103da5334925ae327fe4066b2729832cba15726",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/10-server-control-capabilities-text-03.edit",
+      "base_root": "13e6228c4a4532e62294399121d65049711a0efd0743a23b2b28abd9ef8ad688",
+      "result_root": "ed1a3aa83c82056914d1e47f636bdffd02b835c015a27c84882c2e23d1e310af",
+      "source_sha256": "2fa9ca1a958eab41662eddeee92bca345e3b11cc831fb76e6716861cef2f9daf",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/10-server-control-capabilities-text-04.edit",
+      "base_root": "ed1a3aa83c82056914d1e47f636bdffd02b835c015a27c84882c2e23d1e310af",
+      "result_root": "4166f654254dbbb60ed14d68e8255654721089978093d7988c86ad0e0f074b6c",
+      "source_sha256": "3f347bf0c9453946ef06b7f8c575e5baf1fe9e7683ba8ee7a9456f31fd19ae08",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/11-server-numeric-cancellation.edit",
+      "base_root": "4166f654254dbbb60ed14d68e8255654721089978093d7988c86ad0e0f074b6c",
+      "result_root": "d5653a7c630eb6ee5e5c9ea7595bc14dbb714c646d1d07cd99ce0d926098d0b4",
+      "source_sha256": "ba993256ac204a443cf0164def45edb68535124f33021bb6752aece92ecf108b",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    },
+    {
+      "carrier": "native/transactions/20261111-control/12-server-semantic-integers.edit",
+      "base_root": "d5653a7c630eb6ee5e5c9ea7595bc14dbb714c646d1d07cd99ce0d926098d0b4",
+      "result_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+      "source_sha256": "cbdf015366be16b3eead46f982d16a71616191b8042ed9bd3e1ec82bce2067f8",
+      "mandatory_verify": true,
+      "raw_bytes_equal": true
+    }
+  ],
+  "suites": {
+    "parent_path_empty": true,
+    "results": [
+      {
+        "suite": "Test-Baseline.ps1",
+        "exit_code": 0,
+        "seconds": 18.82364510000002,
+        "log": "Test-Baseline.ps1.log"
+      },
+      {
+        "suite": "modern-full/Test-ModernBaseline.ps1",
+        "exit_code": 0,
+        "seconds": 20.645401099999958,
+        "log": "modern-full-Test-ModernBaseline.ps1.log"
+      },
+      {
+        "suite": "Check-Capabilities.py",
+        "exit_code": 0,
+        "seconds": 0.4144867999999633,
+        "log": "Check-Capabilities.py.log"
+      },
+      {
+        "suite": "Check-Protocol.py",
+        "exit_code": 0,
+        "seconds": 2.311311000000046,
+        "log": "Check-Protocol.py.log"
+      },
+      {
+        "suite": "Check-Whitespace.py",
+        "exit_code": 0,
+        "seconds": 1.0857493999999406,
+        "log": "Check-Whitespace.py.log"
+      },
+      {
+        "suite": "Check-SemanticPages.py",
+        "exit_code": 0,
+        "seconds": 4.4245553000000655,
+        "log": "Check-SemanticPages.py.log"
+      },
+      {
+        "suite": "Check-PagingProgram.py",
+        "exit_code": 0,
+        "seconds": 163.7881071999999,
+        "log": "Check-PagingProgram.py.log"
+      },
+      {
+        "suite": "Check-QueryNumbers.py",
+        "exit_code": 0,
+        "seconds": 0.7263735999999881,
+        "log": "Check-QueryNumbers.py.log"
+      },
+      {
+        "suite": "Check-Cancellation.py",
+        "exit_code": 0,
+        "seconds": 91.38398619999998,
+        "log": "Check-Cancellation.py.log"
+      },
+      {
+        "suite": "Check-NumericCancellation.py",
+        "exit_code": 0,
+        "seconds": 91.47010560000001,
+        "log": "Check-NumericCancellation.py.log"
+      },
+      {
+        "suite": "Check-CancelMutation.py",
+        "exit_code": 0,
+        "seconds": 1.1938556999999719,
+        "log": "Check-CancelMutation.py.log"
+      },
+      {
+        "suite": "Check-CancelQueue.py",
+        "exit_code": 0,
+        "seconds": 31.216945800000076,
+        "log": "Check-CancelQueue.py.log"
+      },
+      {
+        "suite": "Test-CancelVerify.ps1",
+        "exit_code": 0,
+        "seconds": 3.671953599999938,
+        "log": "Test-CancelVerify.ps1.log"
+      },
+      {
+        "suite": "Test-CompilerProcess.ps1",
+        "exit_code": 0,
+        "seconds": 30.999739500000032,
+        "log": "Test-CompilerProcess.ps1.log"
+      },
+      {
+        "suite": "Test-Descendants.ps1",
+        "exit_code": 0,
+        "seconds": 1.9758181999999351,
+        "log": "Test-Descendants.ps1.log"
+      },
+      {
+        "suite": "Test-Pins.ps1",
+        "exit_code": 0,
+        "seconds": 1.0814700000000812,
+        "log": "Test-Pins.ps1.log"
+      }
+    ]
+  },
+  "non_xax_program_files_in_archive": [],
+  "readme_source": "committed HEAD bytes; working user edit preserved",
+  "promoted": false,
+  "release_ready": false,
+  "full_mission_complete": false,
+  "note": "Package reflects assembly-time source/docs/evidence; this result and later reporting-only metadata are external to the archive. Foreign acceptance clients are not packaged.",
+  "probe_double_build_evidence": {
+    "path": "docs/evidence/native-control-package-probe-builds-20261112.json",
+    "bytes": 8323,
+    "sha256": "4c84a8fb824f76663dc8bf0a097fd136975600e445414d88567133a9270e5619"
+  },
+  "runtime": {
+    "source_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+    "evidence": [
+      {
+        "path": "docs/evidence/native-control-package-20261112-protocol.ndjson.gz",
+        "bytes": 18930,
+        "sha256": "41668c579613ae3ce9e98ae862228afaea03489b326fcbeb1d257285c1d0eaef"
+      },
+      {
+        "path": "docs/evidence/native-control-package-20261112-reference-pages.ndjson.gz",
+        "bytes": 6429,
+        "sha256": "18c3156c928e01af4082826e4caa28c1022df53c8b03cd3cea43a43d3717faa1"
+      },
+      {
+        "path": "docs/evidence/native-control-package-20261112-reference-program.ndjson.gz",
+        "bytes": 250558,
+        "sha256": "4c9aebe2854a42ecf4ebd7168d060689a1073f5226226be8a9fe7d04e66b6c76"
+      },
+      {
+        "path": "docs/evidence/native-control-package-20261112-whitespace.ndjson.gz",
+        "bytes": 9756,
+        "sha256": "022b82fb3596917b2b33470c4b91939cf18352db4206e69e55c1426d2788ecf5"
+      },
+      {
+        "path": "docs/evidence/native-control-package-20261112-baseline.ndjson.gz",
+        "bytes": 35687,
+        "sha256": "232d18d7d21bfed2b3ea3804852e371e8021d234121e75ed14e00ddfc34e6937"
+      },
+      {
+        "path": "docs/evidence/native-control-package-20261112-mixed-modern.ndjson.gz",
+        "bytes": 35779,
+        "sha256": "9fcb5329c1f56c024abf2f21940e350b4713d4dc3684b510e5c6dd10ed3b7bcf"
+      },
+      {
+        "path": "docs/evidence/native-control-package-20261112-metadata.ndjson.gz",
+        "bytes": 7876,
+        "sha256": "af2c667a6fd68cfd2cb458adf66e082c7fb94e6d23214b8a0598f2ab93c2e942"
+      },
+      {
+        "path": "docs/evidence/native-control-package-20261112-observations.json",
+        "bytes": 51003,
+        "sha256": "37435b5b7448f0db7d897017b0abded289661a08d30a9eb81a5ff82f1091534a"
+      }
+    ],
+    "summaries": {
+      "protocol-summary.json": {
+        "exchanges": 96,
+        "modern_fixture_exchanges": 46,
+        "denied_authority_attempts": 18,
+        "all_legacy_versions_executed": [
+          "2024-11-05",
+          "2025-03-26",
+          "2025-06-18",
+          "2025-11-25"
+        ],
+        "seed_inventory_objects": 12,
+        "text_structured_full_equality": true,
+        "all_eight_tools_exercised": true,
+        "source_preserved_on_authority_rejections": true,
+        "malformed_and_oversize_recovery": true,
+        "notifications_silent": true
+      },
+      "semantic-page-summary.json": {
+        "exchanges": 169,
+        "cases": [
+          {
+            "case": "seed",
+            "objects": 12,
+            "all_modes": true,
+            "all_limits": true,
+            "stale_root_after_mutation_rejected": true,
+            "workspace_unchanged": true
+          }
+        ],
+        "full_text_structured_equality": true
+      },
+      "semantic-program-summary.json": {
+        "exchanges": 117,
+        "cases": [
+          {
+            "case": "native_multifunction",
+            "functions_located": 3,
+            "real_direct_calls": [
+              {
+                "caller": "600c61aa3f09813766ebae000687c880b5527392c0a3d5c1b50098d8dab5098f",
+                "body": "3fdca04306f8768689e09f492015385d9bffc9d0343fdc8724e879ada886a8fd",
+                "callee": "624d81f6e7550eb093a2f5ef424d00c0205715db9556b002ec96e9ba8bb7bee4"
+              },
+              {
+                "caller": "f9b2e16b91c38b184d023935b5e1642ec27b927912192e0377741642df571488",
+                "body": "f6e45e82c1b96a70e9aeb7a6a167ecea936e424907f1930128bcebd54d096509",
+                "callee": "600c61aa3f09813766ebae000687c880b5527392c0a3d5c1b50098d8dab5098f"
+              }
+            ],
+            "neighborhood_pages": 4,
+            "limit": 1,
+            "rows": 4,
+            "native_program_exit": 66,
+            "source_sha256": "d44c2cc0a1c5a14520d5ed16bbfeb100f5aeab9a522c32533666099ee6a6abbd",
+            "public_query_only_location": true
+          },
+          {
+            "case": "server_inventory",
+            "objects": 5443,
+            "pages": 86,
+            "all_objects_and_counts_match": true,
+            "workspace_outputs": [
+              [
+                ".xax-mcp.lock",
+                0
+              ],
+              [
+                "edit.rec",
+                894616
+              ]
+            ]
+          }
+        ],
+        "full_text_structured_equality": true
+      },
+      "whitespace-summary.json": {
+        "exchanges": 769,
+        "modern_complete_results": 768,
+        "legacy_initializations": 1,
+        "padding_lengths": 16,
+        "trailing_whitespace_forms": 8,
+        "with_and_without_legacy_handshake": true,
+        "source_mutations_requested": false,
+        "passed": true
+      },
+      "modern-full/summary.json": {
+        "exchanges": 92,
+        "passed": true,
+        "modern_complete": 68
+      },
+      "suite-results.json": {
+        "parent_path_empty": true,
+        "results": [
+          {
+            "suite": "Test-Baseline.ps1",
+            "exit_code": 0,
+            "seconds": 18.82364510000002,
+            "log": "Test-Baseline.ps1.log"
+          },
+          {
+            "suite": "modern-full/Test-ModernBaseline.ps1",
+            "exit_code": 0,
+            "seconds": 20.645401099999958,
+            "log": "modern-full-Test-ModernBaseline.ps1.log"
+          },
+          {
+            "suite": "Check-Capabilities.py",
+            "exit_code": 0,
+            "seconds": 0.4144867999999633,
+            "log": "Check-Capabilities.py.log"
+          },
+          {
+            "suite": "Check-Protocol.py",
+            "exit_code": 0,
+            "seconds": 2.311311000000046,
+            "log": "Check-Protocol.py.log"
+          },
+          {
+            "suite": "Check-Whitespace.py",
+            "exit_code": 0,
+            "seconds": 1.0857493999999406,
+            "log": "Check-Whitespace.py.log"
+          },
+          {
+            "suite": "Check-SemanticPages.py",
+            "exit_code": 0,
+            "seconds": 4.4245553000000655,
+            "log": "Check-SemanticPages.py.log"
+          },
+          {
+            "suite": "Check-PagingProgram.py",
+            "exit_code": 0,
+            "seconds": 163.7881071999999,
+            "log": "Check-PagingProgram.py.log"
+          },
+          {
+            "suite": "Check-QueryNumbers.py",
+            "exit_code": 0,
+            "seconds": 0.7263735999999881,
+            "log": "Check-QueryNumbers.py.log"
+          },
+          {
+            "suite": "Check-Cancellation.py",
+            "exit_code": 0,
+            "seconds": 91.38398619999998,
+            "log": "Check-Cancellation.py.log"
+          },
+          {
+            "suite": "Check-NumericCancellation.py",
+            "exit_code": 0,
+            "seconds": 91.47010560000001,
+            "log": "Check-NumericCancellation.py.log"
+          },
+          {
+            "suite": "Check-CancelMutation.py",
+            "exit_code": 0,
+            "seconds": 1.1938556999999719,
+            "log": "Check-CancelMutation.py.log"
+          },
+          {
+            "suite": "Check-CancelQueue.py",
+            "exit_code": 0,
+            "seconds": 31.216945800000076,
+            "log": "Check-CancelQueue.py.log"
+          },
+          {
+            "suite": "Test-CancelVerify.ps1",
+            "exit_code": 0,
+            "seconds": 3.671953599999938,
+            "log": "Test-CancelVerify.ps1.log"
+          },
+          {
+            "suite": "Test-CompilerProcess.ps1",
+            "exit_code": 0,
+            "seconds": 30.999739500000032,
+            "log": "Test-CompilerProcess.ps1.log"
+          },
+          {
+            "suite": "Test-Descendants.ps1",
+            "exit_code": 0,
+            "seconds": 1.9758181999999351,
+            "log": "Test-Descendants.ps1.log"
+          },
+          {
+            "suite": "Test-Pins.ps1",
+            "exit_code": 0,
+            "seconds": 1.0814700000000812,
+            "log": "Test-Pins.ps1.log"
+          }
+        ]
+      }
+    }
+  }
+}

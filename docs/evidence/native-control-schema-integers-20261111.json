@@ -1,0 +1,938 @@
+{
+  "exchanges": 28,
+  "decimal_oracle": true,
+  "records": [
+    {
+      "request": {
+        "raw_sha256": "b9e918bcdc9dcedad2fb7a4b87a366d6cc1397659a3c28a56634451c00d776b1",
+        "bytes": 250
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 0,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"selection\":\"objects\",\"rows\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"referenceCount\":1}],\"nextCursor\":{\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"offset\":1},\"inventoryComplete\":true,\"complete\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "ok": true,
+            "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+            "selection": "objects",
+            "rows": [
+              {
+                "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                "kind": 2,
+                "referenceCount": 1
+              }
+            ],
+            "nextCursor": {
+              "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+              "offset": 1
+            },
+            "inventoryComplete": true,
+            "complete": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "e0fa47bc536a40a278be3640b4da851385ab03e43f62d4092d6ea2701d50d314",
+        "bytes": 252
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"selection\":\"objects\",\"rows\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"referenceCount\":1}],\"nextCursor\":{\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"offset\":1},\"inventoryComplete\":true,\"complete\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "ok": true,
+            "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+            "selection": "objects",
+            "rows": [
+              {
+                "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                "kind": 2,
+                "referenceCount": 1
+              }
+            ],
+            "nextCursor": {
+              "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+              "offset": 1
+            },
+            "inventoryComplete": true,
+            "complete": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "edd440f2a031b2cc80b3dd8c92c5340cd7f624e70745e92ce094c72df028625e",
+        "bytes": 254
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"selection\":\"objects\",\"rows\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"referenceCount\":1}],\"nextCursor\":{\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"offset\":1},\"inventoryComplete\":true,\"complete\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "ok": true,
+            "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+            "selection": "objects",
+            "rows": [
+              {
+                "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                "kind": 2,
+                "referenceCount": 1
+              }
+            ],
+            "nextCursor": {
+              "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+              "offset": 1
+            },
+            "inventoryComplete": true,
+            "complete": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "fe968bece75623c76b870b4ed4757499206637a6d59e1a3131e9853e64099cc0",
+        "bytes": 254
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"selection\":\"objects\",\"rows\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"referenceCount\":1}],\"nextCursor\":{\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"offset\":1},\"inventoryComplete\":true,\"complete\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "ok": true,
+            "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+            "selection": "objects",
+            "rows": [
+              {
+                "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                "kind": 2,
+                "referenceCount": 1
+              }
+            ],
+            "nextCursor": {
+              "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+              "offset": 1
+            },
+            "inventoryComplete": true,
+            "complete": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "d3107853a4ff30dda984b6fe3ff07bd87c5a620564ffd51928ed64b30bd3a7b0",
+        "bytes": 256
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 4,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"selection\":\"objects\",\"rows\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"referenceCount\":1}],\"nextCursor\":{\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"offset\":1},\"inventoryComplete\":true,\"complete\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "ok": true,
+            "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+            "selection": "objects",
+            "rows": [
+              {
+                "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                "kind": 2,
+                "referenceCount": 1
+              }
+            ],
+            "nextCursor": {
+              "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+              "offset": 1
+            },
+            "inventoryComplete": true,
+            "complete": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "2c62aebc37d5ff2e952ac2930ec9169ac67feae7f86cddaef30588917f8da5c3",
+        "bytes": 253
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 5,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"selection\":\"objects\",\"rows\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"referenceCount\":1},{\"cid\":\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"kind\":9,\"referenceCount\":2},{\"cid\":\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"kind\":5,\"referenceCount\":1},{\"cid\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"kind\":10,\"referenceCount\":3},{\"cid\":\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"kind\":4,\"referenceCount\":0},{\"cid\":\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"kind\":6,\"referenceCount\":0},{\"cid\":\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"kind\":6,\"referenceCount\":0},{\"cid\":\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"kind\":10,\"referenceCount\":0},{\"cid\":\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"kind\":4,\"referenceCount\":0},{\"cid\":\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"kind\":7,\"referenceCount\":5},{\"cid\":\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"kind\":4,\"referenceCount\":0},{\"cid\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"kind\":3,\"referenceCount\":4}],\"nextCursor\":null,\"inventoryComplete\":true,\"complete\":true}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "ok": true,
+            "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+            "selection": "objects",
+            "rows": [
+              {
+                "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                "kind": 2,
+                "referenceCount": 1
+              },
+              {
+                "cid": "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                "kind": 9,
+                "referenceCount": 2
+              },
+              {
+                "cid": "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                "kind": 5,
+                "referenceCount": 1
+              },
+              {
+                "cid": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+                "kind": 10,
+                "referenceCount": 3
+              },
+              {
+                "cid": "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                "kind": 4,
+                "referenceCount": 0
+              },
+              {
+                "cid": "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                "kind": 6,
+                "referenceCount": 0
+              },
+              {
+                "cid": "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                "kind": 6,
+                "referenceCount": 0
+              },
+              {
+                "cid": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                "kind": 10,
+                "referenceCount": 0
+              },
+              {
+                "cid": "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                "kind": 4,
+                "referenceCount": 0
+              },
+              {
+                "cid": "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                "kind": 7,
+                "referenceCount": 5
+              },
+              {
+                "cid": "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                "kind": 4,
+                "referenceCount": 0
+              },
+              {
+                "cid": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+                "kind": 3,
+                "referenceCount": 4
+              }
+            ],
+            "nextCursor": null,
+            "inventoryComplete": true,
+            "complete": true
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "308b872fa5091ac5d19201ade45569683ccecad3b71d61fa5f19f267b2e10962",
+        "bytes": 255
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 6,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"selection\":\"objects\",\"rows\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"referenceCount\":1},{\"cid\":\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"kind\":9,\"referenceCount\":2},{\"cid\":\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"kind\":5,\"referenceCount\":1},{\"cid\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"kind\":10,\"referenceCount\":3},{\"cid\":\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"kind\":4,\"referenceCount\":0},{\"cid\":\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"kind\":6,\"referenceCount\":0},{\"cid\":\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"kind\":6,\"referenceCount\":0},{\"cid\":\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"kind\":10,\"referenceCount\":0},{\"cid\":\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"kind\":4,\"referenceCount\":0},{\"cid\":\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"kind\":7,\"referenceCount\":5},{\"cid\":\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"kind\":4,\"referenceCount\":0},{\"cid\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"kind\":3,\"referenceCount\":4}],\"nextCursor\":null,\"inventoryComplete\":true,\"complete\":true}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "ok": true,
+            "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+            "selection": "objects",
+            "rows": [
+              {
+                "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                "kind": 2,
+                "referenceCount": 1
+              },
+              {
+                "cid": "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                "kind": 9,
+                "referenceCount": 2
+              },
+              {
+                "cid": "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                "kind": 5,
+                "referenceCount": 1
+              },
+              {
+                "cid": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+                "kind": 10,
+                "referenceCount": 3
+              },
+              {
+                "cid": "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                "kind": 4,
+                "referenceCount": 0
+              },
+              {
+                "cid": "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                "kind": 6,
+                "referenceCount": 0
+              },
+              {
+                "cid": "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                "kind": 6,
+                "referenceCount": 0
+              },
+              {
+                "cid": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                "kind": 10,
+                "referenceCount": 0
+              },
+              {
+                "cid": "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                "kind": 4,
+                "referenceCount": 0
+              },
+              {
+                "cid": "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                "kind": 7,
+                "referenceCount": 5
+              },
+              {
+                "cid": "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                "kind": 4,
+                "referenceCount": 0
+              },
+              {
+                "cid": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+                "kind": 3,
+                "referenceCount": 4
+              }
+            ],
+            "nextCursor": null,
+            "inventoryComplete": true,
+            "complete": true
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "7e9a3c66f18a65479e4749c5e19eed638e087be210bdd1236019afcf3cd0bb28",
+        "bytes": 250
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 7,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"this tool takes no arguments\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "this tool takes no arguments"
+            },
+            "ok": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "9e0ddd74db6056da8d45283acef2dc3b3862f684622b8102ca5b8c47f156bd0c",
+        "bytes": 251
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 8,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"this tool takes no arguments\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "this tool takes no arguments"
+            },
+            "ok": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "86a2f840d4c24ce87c35b93b962b15eeca8fc3997e31014c0d7b96c8498d6fc9",
+        "bytes": 252
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 9,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"this tool takes no arguments\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "this tool takes no arguments"
+            },
+            "ok": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "062cb1433c28111e17568a4472bfa3b889d66267015d44d8484f78ae6487b3a9",
+        "bytes": 253
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 10,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"this tool takes no arguments\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "this tool takes no arguments"
+            },
+            "ok": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "78d7adf8f25d5cb45046ba034e8e8a4c0f7d6d7d775e34ecb365ba019b7e5eba",
+        "bytes": 252
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 11,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"this tool takes no arguments\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "this tool takes no arguments"
+            },
+            "ok": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "15f7d62ec05113df9497766ac4e5d09c10e52a65cc787942012d6c053be4c737",
+        "bytes": 255
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 12,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"this tool takes no arguments\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "this tool takes no arguments"
+            },
+            "ok": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "1e4808a4d64b5ce6d9ee616f4ade7f9e924a8c1df5dbfdd28614c6f60e3e5cd7",
+        "bytes": 252
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 13,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"this tool takes no arguments\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "this tool takes no arguments"
+            },
+            "ok": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "c5749c6ca201e1d7534b81c329a1177e01bd4d84d6c906144f6935582b32463d",
+        "bytes": 259
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 14,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"this tool takes no arguments\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "this tool takes no arguments"
+            },
+            "ok": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "4479d856e63eaa6e5b3507bddb3dc1bdd6814c9250cebbcc54f37ac1fbddd5c3",
+        "bytes": 260
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 15,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"this tool takes no arguments\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "this tool takes no arguments"
+            },
+            "ok": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "e8f29624765de3dfdfa78b7977361af03464d18ce93c546580f65af6c55ab0cd",
+        "bytes": 260
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 16,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"this tool takes no arguments\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "this tool takes no arguments"
+            },
+            "ok": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "34c5f009fe911c2be8bc9c546f6ca052ba4b1c46c1913913d27386605059f08e",
+        "bytes": 260
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 17,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"this tool takes no arguments\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "this tool takes no arguments"
+            },
+            "ok": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "edcc6728e0752831c093039ff30dc6e6c1b517ad10a7587bdec1391fcdf5c23b",
+        "bytes": 270
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 18,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"this tool takes no arguments\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "this tool takes no arguments"
+            },
+            "ok": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "74a22afed4d833a3e243b2770840d885e0e9c505d40a670d8cc322f51c5a4c9f",
+        "bytes": 261
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 19,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"this tool takes no arguments\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "this tool takes no arguments"
+            },
+            "ok": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "e9fcaef9ca8a74b4efe190a3d1a94044235266ff7900122c4680b7aa9447b0f3",
+        "bytes": 342
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 20,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"ok\":false,\"error\":{\"code\":\"cursor_root_mismatch\"}}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "ok": false,
+            "error": {
+              "code": "cursor_root_mismatch"
+            }
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "87f705197daeb676b5f7a8536d1844871b82edb8f648345b95c0db005722cd58",
+        "bytes": 343
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 21,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"ok\":false,\"error\":{\"code\":\"cursor_root_mismatch\"}}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "ok": false,
+            "error": {
+              "code": "cursor_root_mismatch"
+            }
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "cc475ed1d1a11e6cb4f0fefae17786c798923c56c578b01f134f70c551eea9e6",
+        "bytes": 342
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 22,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"ok\":false,\"error\":{\"code\":\"cursor_root_mismatch\"}}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "ok": false,
+            "error": {
+              "code": "cursor_root_mismatch"
+            }
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "47c6dac9c315446ef4ae7658c708bc99aa2f12a27035d2723548f0e697be117b",
+        "bytes": 342
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 23,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"ok\":false,\"error\":{\"code\":\"cursor_root_mismatch\"}}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "ok": false,
+            "error": {
+              "code": "cursor_root_mismatch"
+            }
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "72e67e39100cb745d7e2f345183825876e25a43d8a0114238b9bafd48beb706b",
+        "bytes": 351
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 24,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"ok\":false,\"error\":{\"code\":\"cursor_root_mismatch\"}}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "ok": false,
+            "error": {
+              "code": "cursor_root_mismatch"
+            }
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "0d394cd15c80bee7be8fd49126aa0453c61933d463a54d3b2d185bfcd40f14d0",
+        "bytes": 351
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 25,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"this tool takes no arguments\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "this tool takes no arguments"
+            },
+            "ok": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "20662c405aed1a6e088c8c61bc50ea4593b7507f2ced0b7f70300c6eb4fe5de4",
+        "bytes": 342
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 26,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"this tool takes no arguments\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "this tool takes no arguments"
+            },
+            "ok": false
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "raw_sha256": "9d270abe9555852341bdf1ead90babac8bee8cc0f93302dd9f4fe0556566a503",
+        "bytes": 343
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 27,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"invalid_request\",\"message\":\"this tool takes no arguments\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "invalid_request",
+              "message": "this tool takes no arguments"
+            },
+            "ok": false
+          }
+        }
+      }
+    }
+  ]
+}

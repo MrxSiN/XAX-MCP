@@ -1,0 +1,16 @@
+{
+  "response": {
+    "jsonrpc": "2.0",
+    "id": "after",
+    "result": {
+      "resultType": "complete"
+    }
+  },
+  "observed_verify_pid": 34608,
+  "staged_candidate_removed": true,
+  "staged_bytes": 1731763,
+  "source_file_identity_preserved": true,
+  "lease_released": true,
+  "source_preserved": true,
+  "cancelled_request_silent": true
+}

@@ -1,5 +1,14 @@
 # Windows readiness — 0.10.0, 2026-11-01
 
+2026-11-12: the later [control preview](NATIVE_CONTROL_20261111.md) completed
+[final-source, clean-package and read-only desktop acceptance](evidence/native-control-20261112.json).
+Compiler cancellation, descendant cleanup, modern metadata and bounded public
+reference pages passed within their documented limits. It remains experimental:
+workspace child-file aliases still permit outside writes, semantic facts are
+generic references, and pressure/crash/escape review remains incomplete. The
+tables below describe the default Gen3 deployment; preview acceptance does not
+promote it or change either readiness flag.
+
 2026-11-11: a [resumed experimental candidate](NATIVE_CANDIDATE_20261111.md)
 repairs capabilities framing and discovery and has complete pinned replay.
 It remains unpromoted. Controlled workspace `edit.rec` hard-link aliases overwrite

@@ -1,0 +1,202 @@
+{
+  "recorded": "2026-11-12",
+  "parent_path_empty": true,
+  "compiler_from_extracted_package": true,
+  "probes": [
+    {
+      "source": "tests/security/executor-input/quote-probe.xax",
+      "builds": [
+        {
+          "executable_sha256": "23d1e3705a34d3d2de56ac055a4ebd43e001b43a128cbde77eeafa7c0182ff6b",
+          "provenance_sha256": "5f14c93d838f54157aebad5dc939cec6a0c531f0f948650f5f71572e7b9dfeed"
+        },
+        {
+          "executable_sha256": "23d1e3705a34d3d2de56ac055a4ebd43e001b43a128cbde77eeafa7c0182ff6b",
+          "provenance_sha256": "5f14c93d838f54157aebad5dc939cec6a0c531f0f948650f5f71572e7b9dfeed"
+        }
+      ]
+    },
+    {
+      "source": "tests/security/executor-input/argv-probe.xax",
+      "builds": [
+        {
+          "executable_sha256": "72f4caa1cf35288e5ea7bcbf2c50dcce6b3dba52091abb93eea066b200754422",
+          "provenance_sha256": "da101fd0cc5bcecff79995a516776154be255bfeb1c60ba3a5fbb24909d372e7"
+        },
+        {
+          "executable_sha256": "72f4caa1cf35288e5ea7bcbf2c50dcce6b3dba52091abb93eea066b200754422",
+          "provenance_sha256": "da101fd0cc5bcecff79995a516776154be255bfeb1c60ba3a5fbb24909d372e7"
+        }
+      ]
+    },
+    {
+      "source": "tests/security/executor-input/io-echo-probe.xax",
+      "builds": [
+        {
+          "executable_sha256": "4f0af6b2c3d6fd01fd8c807e195cc8293c94c41547a2430cfff3f593b4484048",
+          "provenance_sha256": "48bdbf50ff91e4437997c3ba9a56edc2fdf40a9398f750a551e90e27bed5d6e8"
+        },
+        {
+          "executable_sha256": "4f0af6b2c3d6fd01fd8c807e195cc8293c94c41547a2430cfff3f593b4484048",
+          "provenance_sha256": "48bdbf50ff91e4437997c3ba9a56edc2fdf40a9398f750a551e90e27bed5d6e8"
+        }
+      ]
+    },
+    {
+      "source": "tests/security/executor-input/cpu-probe.xax",
+      "builds": [
+        {
+          "executable_sha256": "cebeb9b6f863745f3c84d29fccd3f2bf64884bfe4fc5299f9aed69b6259a3a96",
+          "provenance_sha256": "4e77cf219b9731371be0fc91b5dc476278b6727d63f68542a7fe1ac9c2277081"
+        },
+        {
+          "executable_sha256": "cebeb9b6f863745f3c84d29fccd3f2bf64884bfe4fc5299f9aed69b6259a3a96",
+          "provenance_sha256": "4e77cf219b9731371be0fc91b5dc476278b6727d63f68542a7fe1ac9c2277081"
+        }
+      ]
+    },
+    {
+      "source": "tests/security/executor-input/flood-out-probe.xax",
+      "builds": [
+        {
+          "executable_sha256": "b6196e608d4a262b5fdba7a89fa379a71b892b0b74f9a814348cfc73b208b668",
+          "provenance_sha256": "4a753805d6847b599df7e86d6ab09bde714576e63c874eedf9652e22c312eaff"
+        },
+        {
+          "executable_sha256": "b6196e608d4a262b5fdba7a89fa379a71b892b0b74f9a814348cfc73b208b668",
+          "provenance_sha256": "4a753805d6847b599df7e86d6ab09bde714576e63c874eedf9652e22c312eaff"
+        }
+      ]
+    },
+    {
+      "source": "tests/security/executor-input/flood-err-probe.xax",
+      "builds": [
+        {
+          "executable_sha256": "a1fbdbf78e2550628d712d6fa0384db9b8ce6d9e42557122cd41d7f80d2c7d11",
+          "provenance_sha256": "6b158df49510fd70723c5c055c23503ae8ad85ae59dd7c32806b844b5856473a"
+        },
+        {
+          "executable_sha256": "a1fbdbf78e2550628d712d6fa0384db9b8ce6d9e42557122cd41d7f80d2c7d11",
+          "provenance_sha256": "6b158df49510fd70723c5c055c23503ae8ad85ae59dd7c32806b844b5856473a"
+        }
+      ]
+    },
+    {
+      "source": "tests/security/executor-input/output-boundary-0-probe.xax",
+      "builds": [
+        {
+          "executable_sha256": "e0506c84379406affcd88a7b5b48b1099c8a3ada88387c40ca0daaf0bddde40a",
+          "provenance_sha256": "bf9e2169f7bde34dc346fbb2e99b62f05b529358f86db5e3a392b3a8ed699c4a"
+        },
+        {
+          "executable_sha256": "e0506c84379406affcd88a7b5b48b1099c8a3ada88387c40ca0daaf0bddde40a",
+          "provenance_sha256": "bf9e2169f7bde34dc346fbb2e99b62f05b529358f86db5e3a392b3a8ed699c4a"
+        }
+      ]
+    },
+    {
+      "source": "tests/security/executor-input/output-boundary-1-probe.xax",
+      "builds": [
+        {
+          "executable_sha256": "cf1f2510dfaac53793b85cdfa3466e8f58fd5133d118aac9986e1f63a063fe3a",
+          "provenance_sha256": "7315c801ad4611e77df8a6f11775c7991910a3a253638593f7794d8fa25a0b85"
+        },
+        {
+          "executable_sha256": "cf1f2510dfaac53793b85cdfa3466e8f58fd5133d118aac9986e1f63a063fe3a",
+          "provenance_sha256": "7315c801ad4611e77df8a6f11775c7991910a3a253638593f7794d8fa25a0b85"
+        }
+      ]
+    },
+    {
+      "source": "tests/security/executor-input/confinement-read-network-probe.xax",
+      "builds": [
+        {
+          "executable_sha256": "38d3c25c5a0ac224a64273472b4faccc49a99eda24d9283699601c82ec354633",
+          "provenance_sha256": "319de72c9bdc9fe87962ca76c2ce335fa578902e6007aa462c52d45cbc4483d3"
+        },
+        {
+          "executable_sha256": "38d3c25c5a0ac224a64273472b4faccc49a99eda24d9283699601c82ec354633",
+          "provenance_sha256": "319de72c9bdc9fe87962ca76c2ce335fa578902e6007aa462c52d45cbc4483d3"
+        }
+      ]
+    },
+    {
+      "source": "tests/security/executor-input/launcher-status-7-probe.xax",
+      "builds": [
+        {
+          "executable_sha256": "dc178feb694acf373ecc96b97ae36e4a77ad82da4d02bf599c28499523325b37",
+          "provenance_sha256": "28cfd41400b8b9f643175efeb08549afd2cad8dbfbf230eb94e46e228f6656f1"
+        },
+        {
+          "executable_sha256": "dc178feb694acf373ecc96b97ae36e4a77ad82da4d02bf599c28499523325b37",
+          "provenance_sha256": "28cfd41400b8b9f643175efeb08549afd2cad8dbfbf230eb94e46e228f6656f1"
+        }
+      ]
+    },
+    {
+      "source": "tests/security/executor-input/launcher-status-8-probe.xax",
+      "builds": [
+        {
+          "executable_sha256": "8d32a8c9dfd351e80038bf30d37b950bd56a37811b1d85696bd4225655c0ece2",
+          "provenance_sha256": "ff1302b7d3d24202543ab5ec0836b3c32fbf96b295d801aa1a07cfccbf27be71"
+        },
+        {
+          "executable_sha256": "8d32a8c9dfd351e80038bf30d37b950bd56a37811b1d85696bd4225655c0ece2",
+          "provenance_sha256": "ff1302b7d3d24202543ab5ec0836b3c32fbf96b295d801aa1a07cfccbf27be71"
+        }
+      ]
+    },
+    {
+      "source": "tests/security/executor-input/launcher-status-9-probe.xax",
+      "builds": [
+        {
+          "executable_sha256": "e4ef970162bc7e4eb72caf3fcd020a4855695b54b02f70816f1c5671ba78d661",
+          "provenance_sha256": "d8d7e3c18fa075087adeb0c8cfc952a59a1df7e56e3475afa5f6e5283282a8f7"
+        },
+        {
+          "executable_sha256": "e4ef970162bc7e4eb72caf3fcd020a4855695b54b02f70816f1c5671ba78d661",
+          "provenance_sha256": "d8d7e3c18fa075087adeb0c8cfc952a59a1df7e56e3475afa5f6e5283282a8f7"
+        }
+      ]
+    },
+    {
+      "source": "tests/security/executor-input/launcher-status-10-probe.xax",
+      "builds": [
+        {
+          "executable_sha256": "53e294cb650c7b913935d913b3856df4ff68e05b47f277393a517c1eb3373cfc",
+          "provenance_sha256": "7308cec4b5afd9fef3820fd5ce6098c83977cb33b569e121677a59c0b2cd007a"
+        },
+        {
+          "executable_sha256": "53e294cb650c7b913935d913b3856df4ff68e05b47f277393a517c1eb3373cfc",
+          "provenance_sha256": "7308cec4b5afd9fef3820fd5ce6098c83977cb33b569e121677a59c0b2cd007a"
+        }
+      ]
+    },
+    {
+      "source": "tests/security/executor-input/environment-probe.xax",
+      "builds": [
+        {
+          "executable_sha256": "b1355e59b9fac98e63488e6d792c3b650464d50b3e21ea91bee581475b9ba316",
+          "provenance_sha256": "682555196088da94ff1a3aab888c343e0152fed42e7a564f6922a4eae9914809"
+        },
+        {
+          "executable_sha256": "b1355e59b9fac98e63488e6d792c3b650464d50b3e21ea91bee581475b9ba316",
+          "provenance_sha256": "682555196088da94ff1a3aab888c343e0152fed42e7a564f6922a4eae9914809"
+        }
+      ]
+    },
+    {
+      "source": "tests/security/executor-input/stream-separation-probe.xax",
+      "builds": [
+        {
+          "executable_sha256": "77fa1e73cc39c507bee73ddcb7006742049af68cf6bbd35af4597d18c89d8f62",
+          "provenance_sha256": "4a9db02340b59eea0f09168cdc09b4de3626d2b898a3b0a2985b5eb62221d3e2"
+        },
+        {
+          "executable_sha256": "77fa1e73cc39c507bee73ddcb7006742049af68cf6bbd35af4597d18c89d8f62",
+          "provenance_sha256": "4a9db02340b59eea0f09168cdc09b4de3626d2b898a3b0a2985b5eb62221d3e2"
+        }
+      ]
+    }
+  ]
+}

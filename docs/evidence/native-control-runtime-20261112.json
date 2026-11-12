@@ -1,0 +1,283 @@
+{
+  "source_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+  "evidence": [
+    {
+      "path": "docs/evidence/native-control-final-20261112-protocol.ndjson.gz",
+      "bytes": 18933,
+      "sha256": "4b626fa00eccbf889f223cb110426727a0480735634d49d8b93782e2cbd0fd6c"
+    },
+    {
+      "path": "docs/evidence/native-control-final-20261112-reference-pages.ndjson.gz",
+      "bytes": 6429,
+      "sha256": "350d768aa29afca83c2d27f361b13371d9b876958e3d58073f6d0e795ca5b657"
+    },
+    {
+      "path": "docs/evidence/native-control-final-20261112-reference-program.ndjson.gz",
+      "bytes": 250558,
+      "sha256": "7992608134bfa9551172c9e73aa64907d17f8c5f0ec32a9995623bf89ba120aa"
+    },
+    {
+      "path": "docs/evidence/native-control-final-20261112-whitespace.ndjson.gz",
+      "bytes": 9756,
+      "sha256": "4b429bf11efd559b4efda21f213199e45cff2b26819b63966b0ada4a2ec84686"
+    },
+    {
+      "path": "docs/evidence/native-control-final-20261112-baseline.ndjson.gz",
+      "bytes": 35699,
+      "sha256": "19072616d658d9f3195b9afc7742a8767b9f252ad44d8e41940b59c71088d087"
+    },
+    {
+      "path": "docs/evidence/native-control-final-20261112-mixed-modern.ndjson.gz",
+      "bytes": 35773,
+      "sha256": "76378e3088ebacb9bcea479f824a0b070742d646c8c584584be01b29ee84858b"
+    },
+    {
+      "path": "docs/evidence/native-control-final-20261112-metadata.ndjson.gz",
+      "bytes": 7876,
+      "sha256": "af2c667a6fd68cfd2cb458adf66e082c7fb94e6d23214b8a0598f2ab93c2e942"
+    },
+    {
+      "path": "docs/evidence/native-control-final-20261112-codex-backend.json",
+      "bytes": 39648,
+      "sha256": "76a6a716622163ddbe6d90f86fbd28c858fe7425abd9f33b88711a3223478537"
+    },
+    {
+      "path": "docs/evidence/native-control-final-20261112-observations.json",
+      "bytes": 51015,
+      "sha256": "dfc25925b7857c2f595b23c8e78acd02a4ca3a5637b4a7488fa7410356e688dc"
+    }
+  ],
+  "summaries": {
+    "protocol-summary.json": {
+      "exchanges": 96,
+      "modern_fixture_exchanges": 46,
+      "denied_authority_attempts": 18,
+      "all_legacy_versions_executed": [
+        "2024-11-05",
+        "2025-03-26",
+        "2025-06-18",
+        "2025-11-25"
+      ],
+      "seed_inventory_objects": 12,
+      "text_structured_full_equality": true,
+      "all_eight_tools_exercised": true,
+      "source_preserved_on_authority_rejections": true,
+      "malformed_and_oversize_recovery": true,
+      "notifications_silent": true
+    },
+    "semantic-page-summary.json": {
+      "exchanges": 169,
+      "cases": [
+        {
+          "case": "seed",
+          "objects": 12,
+          "all_modes": true,
+          "all_limits": true,
+          "stale_root_after_mutation_rejected": true,
+          "workspace_unchanged": true
+        }
+      ],
+      "full_text_structured_equality": true
+    },
+    "semantic-program-summary.json": {
+      "exchanges": 117,
+      "cases": [
+        {
+          "case": "native_multifunction",
+          "functions_located": 3,
+          "real_direct_calls": [
+            {
+              "caller": "600c61aa3f09813766ebae000687c880b5527392c0a3d5c1b50098d8dab5098f",
+              "body": "3fdca04306f8768689e09f492015385d9bffc9d0343fdc8724e879ada886a8fd",
+              "callee": "624d81f6e7550eb093a2f5ef424d00c0205715db9556b002ec96e9ba8bb7bee4"
+            },
+            {
+              "caller": "f9b2e16b91c38b184d023935b5e1642ec27b927912192e0377741642df571488",
+              "body": "f6e45e82c1b96a70e9aeb7a6a167ecea936e424907f1930128bcebd54d096509",
+              "callee": "600c61aa3f09813766ebae000687c880b5527392c0a3d5c1b50098d8dab5098f"
+            }
+          ],
+          "neighborhood_pages": 4,
+          "limit": 1,
+          "rows": 4,
+          "native_program_exit": 66,
+          "source_sha256": "d44c2cc0a1c5a14520d5ed16bbfeb100f5aeab9a522c32533666099ee6a6abbd",
+          "public_query_only_location": true
+        },
+        {
+          "case": "server_inventory",
+          "objects": 5443,
+          "pages": 86,
+          "all_objects_and_counts_match": true,
+          "workspace_outputs": [
+            [
+              ".xax-mcp.lock",
+              0
+            ],
+            [
+              "edit.rec",
+              894616
+            ]
+          ]
+        }
+      ],
+      "full_text_structured_equality": true
+    },
+    "whitespace-summary.json": {
+      "exchanges": 769,
+      "modern_complete_results": 768,
+      "legacy_initializations": 1,
+      "padding_lengths": 16,
+      "trailing_whitespace_forms": 8,
+      "with_and_without_legacy_handshake": true,
+      "source_mutations_requested": false,
+      "passed": true
+    },
+    "modern-full/summary.json": {
+      "passed": true,
+      "modern_complete": 68,
+      "exchanges": 92
+    },
+    "suite-results.json": {
+      "parent_path_empty": false,
+      "results": [
+        {
+          "suite": "Test-Baseline.ps1",
+          "exit_code": 0,
+          "seconds": 20.05821489999994,
+          "log": "Test-Baseline.ps1.log"
+        },
+        {
+          "suite": "modern-full/Test-ModernBaseline.ps1",
+          "exit_code": 0,
+          "seconds": 17.863251200000036,
+          "log": "modern-full-Test-ModernBaseline.ps1.log"
+        },
+        {
+          "suite": "Check-Capabilities.py",
+          "exit_code": 0,
+          "seconds": 0.27920349999999416,
+          "log": "Check-Capabilities.py.log"
+        },
+        {
+          "suite": "Check-Protocol.py",
+          "exit_code": 0,
+          "seconds": 1.702906299999995,
+          "log": "Check-Protocol.py.log"
+        },
+        {
+          "suite": "Check-Whitespace.py",
+          "exit_code": 0,
+          "seconds": 0.6947581000000582,
+          "log": "Check-Whitespace.py.log"
+        },
+        {
+          "suite": "Check-SemanticPages.py",
+          "exit_code": 0,
+          "seconds": 3.179311499999926,
+          "log": "Check-SemanticPages.py.log"
+        },
+        {
+          "suite": "Check-PagingProgram.py",
+          "exit_code": 0,
+          "seconds": 174.79504959999997,
+          "log": "Check-PagingProgram.py.log"
+        },
+        {
+          "suite": "Check-QueryNumbers.py",
+          "exit_code": 0,
+          "seconds": 0.6150295999999571,
+          "log": "Check-QueryNumbers.py.log"
+        },
+        {
+          "suite": "Check-Cancellation.py",
+          "exit_code": 0,
+          "seconds": 91.59571979999998,
+          "log": "Check-Cancellation.py.log"
+        },
+        {
+          "suite": "Check-NumericCancellation.py",
+          "exit_code": 0,
+          "seconds": 91.33456249999995,
+          "log": "Check-NumericCancellation.py.log"
+        },
+        {
+          "suite": "Check-CancelMutation.py",
+          "exit_code": 0,
+          "seconds": 1.152806700000042,
+          "log": "Check-CancelMutation.py.log"
+        },
+        {
+          "suite": "Check-CancelQueue.py",
+          "exit_code": 0,
+          "seconds": 31.25801160000003,
+          "log": "Check-CancelQueue.py.log"
+        },
+        {
+          "suite": "Test-CancelVerify.ps1",
+          "exit_code": 0,
+          "seconds": 3.731654400000025,
+          "log": "Test-CancelVerify.ps1.log"
+        },
+        {
+          "suite": "Test-CompilerProcess.ps1",
+          "exit_code": 0,
+          "seconds": 31.10970480000003,
+          "log": "Test-CompilerProcess.ps1.log"
+        },
+        {
+          "suite": "Test-Descendants.ps1",
+          "exit_code": 0,
+          "seconds": 2.3319099999999935,
+          "log": "Test-Descendants.ps1.log"
+        },
+        {
+          "suite": "Test-Pins.ps1",
+          "exit_code": 0,
+          "seconds": 1.261074800000074,
+          "log": "Test-Pins.ps1.log"
+        },
+        {
+          "suite": "Check-CodexClient.py",
+          "exit_code": 0,
+          "seconds": 2.523460900000032,
+          "log": "Check-CodexClient.py.log"
+        }
+      ]
+    }
+  },
+  "schema": "xax-mcp-native-control-runtime-evidence-v2",
+  "recorded": "2026-11-12",
+  "status": "EXECUTED final-source local acceptance; experimental, not promoted",
+  "source": {
+    "path": "native/candidates/20261111-control/server.xax",
+    "bytes": 1731763,
+    "sha256": "cbdf015366be16b3eead46f982d16a71616191b8042ed9bd3e1ec82bce2067f8"
+  },
+  "artifacts": [
+    {
+      "path": "native/candidates/20261111-control/server-snapshot.xax",
+      "bytes": 1732042,
+      "sha256": "5cbf60fa969022e425bed06c04929907140d887672d85fd7a5d243d6ba38c42e"
+    },
+    {
+      "path": "native/candidates/20261111-control/xax-mcp-native.exe",
+      "bytes": 520704,
+      "sha256": "30ced4891d1493f890b70fed8c7e5a63e6ab92e385e1c19604f9dcd887fe89ad"
+    },
+    {
+      "path": "native/candidates/20261111-control/xax-mcp-native.prov",
+      "bytes": 268,
+      "sha256": "ee5ec73823dd02bff30a7ebf0f3eebbc1b73bdf82f95efdbe4c7d8775504cfb6"
+    }
+  ],
+  "compiler": {
+    "path": "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261112\\toolchain\\xaxc-windows-x86_64.exe",
+    "bytes": 11876864,
+    "sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79"
+  },
+  "backend_direct_native_stdio": true,
+  "backend_capture_proxy": false,
+  "release_ready": false,
+  "full_mission_complete": false
+}

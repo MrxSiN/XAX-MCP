@@ -1,0 +1,122 @@
+{
+  "schema": "xax-mcp-native-control-acceptance-index-v1",
+  "recorded": "2026-11-12",
+  "status": "EXECUTED final-source experimental acceptance; not default deployment or release acceptance",
+  "source_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+  "source": {
+    "path": "native/candidates/20261111-control/server.xax",
+    "bytes": 1731763,
+    "sha256": "cbdf015366be16b3eead46f982d16a71616191b8042ed9bd3e1ec82bce2067f8"
+  },
+  "artifacts": [
+    {
+      "path": "native/candidates/20261111-control/server-snapshot.xax",
+      "bytes": 1732042,
+      "sha256": "5cbf60fa969022e425bed06c04929907140d887672d85fd7a5d243d6ba38c42e"
+    },
+    {
+      "path": "native/candidates/20261111-control/xax-mcp-native.exe",
+      "bytes": 520704,
+      "sha256": "30ced4891d1493f890b70fed8c7e5a63e6ab92e385e1c19604f9dcd887fe89ad"
+    },
+    {
+      "path": "native/candidates/20261111-control/xax-mcp-native.prov",
+      "bytes": 268,
+      "sha256": "ee5ec73823dd02bff30a7ebf0f3eebbc1b73bdf82f95efdbe4c7d8775504cfb6"
+    }
+  ],
+  "compiler_pin": "native/xax-dependency.json",
+  "compiler_pin_unchanged": true,
+  "transactions": "native/transactions/20261111-control/manifest.json",
+  "evidence": [
+    {
+      "path": "docs/evidence/native-control-historical-runtime-20261112.json",
+      "bytes": 6114,
+      "sha256": "002d5264c72f1552b4da7d00b99bb266f60ce224a98adea9170ceee2cbf75686"
+    },
+    {
+      "path": "docs/evidence/native-control-discarded-attempts-20261111.json",
+      "bytes": 1832,
+      "sha256": "5ab5d0e1785e4136b8b897c4ca08d3debc8ee0ecfb4450375a1eb9a511e8b516"
+    },
+    {
+      "path": "docs/evidence/native-control-runtime-20261112.json",
+      "bytes": 9157,
+      "sha256": "77512c368daf47fddee625355766a0c92794defd1f4d7a533a5ce2642c610134"
+    },
+    {
+      "path": "docs/evidence/native-control-package-20261112.json",
+      "bytes": 24640,
+      "sha256": "58497842937c61ec3eca79cc16608e6cc3c721e6019bd4c8d247522e0380a4de"
+    },
+    {
+      "path": "docs/evidence/native-control-desktop-20261112.json",
+      "bytes": 27313,
+      "sha256": "c94be7bc23abcbb36337975c565944c9372143b885901ebd6decb93b6dce5a0f"
+    },
+    {
+      "path": "docs/evidence/native-control-desktop-reconnect-20261112.json",
+      "bytes": 27428,
+      "sha256": "a54c086013efbfd10fc9e7636a28d60523bf5fac00764b1d9988b8d4124c90fc"
+    },
+    {
+      "path": "docs/evidence/native-control-review-20261112.json",
+      "bytes": 849,
+      "sha256": "c31ad14aeeddc64faddffb565226de3c6513736e7dceba96394dbc856e1c6604"
+    },
+    {
+      "path": "docs/evidence/native-control-workspace-aliases-20261111.json",
+      "bytes": 16596,
+      "sha256": "8a7c98d951fca40e430f42df154584126fded8ddc095d9c74d6a03aedb9996a5"
+    }
+  ],
+  "acceptance": {
+    "source_written": true,
+    "native_verified": true,
+    "native_built": true,
+    "native_executed": true,
+    "final_source_local_suites": 17,
+    "fresh_package_suites": 16,
+    "base_source_transactions": 65,
+    "previous_preview_transactions": 9,
+    "control_preview_transactions": 19,
+    "native_probe_double_builds": 15,
+    "fixture_replay_double_builds": 3,
+    "legacy_exchanges": 92,
+    "mixed_modern_legacy_exchanges": 92,
+    "modern_complete_results_in_mixed_baseline": 68,
+    "metadata_exchanges": 25,
+    "protocol_exchanges": 96,
+    "whitespace_state_exchanges": 769,
+    "reference_page_exchanges": 169,
+    "unfamiliar_program_and_final_inventory_exchanges": 117,
+    "query_number_cases": 28,
+    "final_server_objects": 5443,
+    "final_server_inventory_pages": 86,
+    "program_functions": 3,
+    "independently_confirmed_calls": 2,
+    "program_exit": 66,
+    "installed_codex_backend_all_tools": true,
+    "installed_codex_version": "0.167.0-alpha.4.1",
+    "backend_direct_native_executable": true,
+    "backend_capture_proxy": false,
+    "desktop_read_only_tools": 8,
+    "desktop_write_build_execute_denials": true,
+    "desktop_text_structured_equality": true
+  },
+  "known_boundaries": [
+    "Writable workspace child-file aliases still cause outside writes; trusted host/workspace and upstream handle/identity contract required",
+    "DOS drive-alias remapping, publication races and broader crash/pressure/escape review remain open",
+    "Reference queries expose generic kind/CID/reference facts, not typed signatures/operations/effects/calls",
+    "Public inspection stops at a 4 MiB prefix; 64 rows per page; no continuation past that prefix",
+    "Compiler cancellation can be delayed by backpressure beyond a 1 MiB input queue; deadline 30 seconds; nonzero numeric exponent bound 8388608",
+    "Full CUM prepare, registered external tools, typed execution layouts and portable result handles remain absent",
+    "No self-hosting claim for the pinned deployment compiler; no new hosted CI run"
+  ],
+  "default_gen3_unchanged": true,
+  "candidate_promoted": false,
+  "release_ready": false,
+  "full_mission_complete": false,
+  "packaging_note": "Package reflects assembly-time source/docs/evidence; this result and later reporting-only metadata are external to the archive. Foreign acceptance clients are not packaged.",
+  "foreign_implementation_added": false
+}

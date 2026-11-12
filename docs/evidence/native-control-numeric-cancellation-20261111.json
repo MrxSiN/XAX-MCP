@@ -1,0 +1,164 @@
+[
+  {
+    "case": "decimal-one",
+    "elapsed_seconds": 0.16850960000010673,
+    "cancelled": true,
+    "prefetch": false,
+    "source_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    },
+    "recovery": true
+  },
+  {
+    "case": "decimal-exp",
+    "elapsed_seconds": 0.160922400013078,
+    "cancelled": true,
+    "prefetch": false,
+    "source_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    },
+    "recovery": true
+  },
+  {
+    "case": "negative",
+    "elapsed_seconds": 0.1777233999891905,
+    "cancelled": true,
+    "prefetch": false,
+    "source_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    },
+    "recovery": true
+  },
+  {
+    "case": "negative-zero",
+    "elapsed_seconds": 0.1531529999920167,
+    "cancelled": true,
+    "prefetch": false,
+    "source_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    },
+    "recovery": true
+  },
+  {
+    "case": "large-exact",
+    "elapsed_seconds": 0.17705280000518542,
+    "cancelled": true,
+    "prefetch": false,
+    "source_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    },
+    "recovery": true
+  },
+  {
+    "case": "distinct-large",
+    "elapsed_seconds": 30.049875999990036,
+    "cancelled": false,
+    "prefetch": false,
+    "source_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 9007199254740993,
+      "result": {
+        "resultType": "complete",
+        "content": [
+          {
+            "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+            "type": "text"
+          }
+        ],
+        "isError": true,
+        "structuredContent": {
+          "error": {
+            "code": "workspace_unavailable",
+            "message": "the current store could not be read (need at least 39 bytes)"
+          },
+          "ok": false
+        }
+      }
+    },
+    "recovery": true
+  },
+  {
+    "case": "distinct-sign",
+    "elapsed_seconds": 30.034460499999113,
+    "cancelled": false,
+    "prefetch": false,
+    "source_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1200,
+      "result": {
+        "resultType": "complete",
+        "content": [
+          {
+            "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+            "type": "text"
+          }
+        ],
+        "isError": true,
+        "structuredContent": {
+          "error": {
+            "code": "workspace_unavailable",
+            "message": "the current store could not be read (need at least 39 bytes)"
+          },
+          "ok": false
+        }
+      }
+    },
+    "recovery": true
+  },
+  {
+    "case": "distinct-exponent",
+    "elapsed_seconds": 30.068019400001504,
+    "cancelled": false,
+    "prefetch": false,
+    "source_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1200,
+      "result": {
+        "resultType": "complete",
+        "content": [
+          {
+            "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+            "type": "text"
+          }
+        ],
+        "isError": true,
+        "structuredContent": {
+          "error": {
+            "code": "workspace_unavailable",
+            "message": "the current store could not be read (need at least 39 bytes)"
+          },
+          "ok": false
+        }
+      }
+    },
+    "recovery": true
+  }
+]

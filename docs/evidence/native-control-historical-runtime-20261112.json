@@ -1,0 +1,123 @@
+{
+  "schema": "xax-mcp-native-control-history-v1",
+  "recorded": "2026-11-12",
+  "run_date": "2026-11-11",
+  "status": "Completed interrupted append-only export; source bindings preserved",
+  "evidence": [
+    {
+      "path": "docs/evidence/native-control-protocol-20261111.ndjson.gz",
+      "bytes": 18930,
+      "sha256": "98f7ddb9c2f84be5d447e1bb3749a0c0b07dab6cb4bb37aa6c526d3891ac5272",
+      "source_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+      "binding": "Historical run; acceptance applies only to this source milestone"
+    },
+    {
+      "path": "docs/evidence/native-control-reference-pages-20261111.ndjson.gz",
+      "bytes": 6429,
+      "sha256": "6eda00fc94e77b3f5d50fa806ba6e533264aa248434476aa6af255dbb09b06e2",
+      "source_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+      "binding": "Historical run; acceptance applies only to this source milestone"
+    },
+    {
+      "path": "docs/evidence/native-control-reference-program-20261111.ndjson.gz",
+      "bytes": 222032,
+      "sha256": "7c025a25e65e82dce527b763d41650678868c54fc0b1c80cd8614ce9c404ad1a",
+      "source_root": "d0a87bd290ca5115aa4b3535071ea5d721b61024aa71385fa3e741bb07e7a0b7",
+      "binding": "Historical run; acceptance applies only to this source milestone"
+    },
+    {
+      "path": "docs/evidence/native-control-cancellation-20261111.json",
+      "bytes": 3906,
+      "sha256": "c492512d8da572a880a1e663d60fa2748b0bf755bc69db8941778e5c43a9ccef",
+      "source_root": "d5653a7c630eb6ee5e5c9ea7595bc14dbb714c646d1d07cd99ce0d926098d0b4",
+      "binding": "Retained 2026-11-11 result; not relabeled as another source"
+    },
+    {
+      "path": "docs/evidence/native-control-numeric-cancellation-20261111.json",
+      "bytes": 3957,
+      "sha256": "1e47c0e076ea05de7f79b484ce23cffb13ec7f47dacc44fb60e5c1f60a976047",
+      "source_root": "d5653a7c630eb6ee5e5c9ea7595bc14dbb714c646d1d07cd99ce0d926098d0b4",
+      "binding": "Retained 2026-11-11 result; not relabeled as another source"
+    },
+    {
+      "path": "docs/evidence/native-control-cancelled-mutations-20261111.json",
+      "bytes": 1297,
+      "sha256": "2b9ac106ca1d88c96613826913db4546e2d850ee44a0719959edc6295e540ca5",
+      "source_root": "d5653a7c630eb6ee5e5c9ea7595bc14dbb714c646d1d07cd99ce0d926098d0b4",
+      "binding": "Retained 2026-11-11 result; not relabeled as another source"
+    },
+    {
+      "path": "docs/evidence/native-control-input-queue-20261111.json",
+      "bytes": 1724,
+      "sha256": "a49d1c12588a19fc3d2b5c33b8ca755abe280dd36e706d4d124273e5c19fa9ec",
+      "source_root": "d5653a7c630eb6ee5e5c9ea7595bc14dbb714c646d1d07cd99ce0d926098d0b4",
+      "binding": "Retained 2026-11-11 result; not relabeled as another source"
+    },
+    {
+      "path": "docs/evidence/native-control-cancelled-verification-20261111.json",
+      "bytes": 345,
+      "sha256": "1addfce8f47de98ce8b3e6fe4cb29577c9388ed6a2cca982f5b360ce54c24770",
+      "source_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+      "binding": "Retained 2026-11-11 result; not relabeled as another source"
+    },
+    {
+      "path": "docs/evidence/native-control-descendants-20261111.json",
+      "bytes": 412,
+      "sha256": "55fd1d80d551c0af098771e723daca2eeb069020d5d381d1847d164f789a5e44",
+      "source_root": "d5653a7c630eb6ee5e5c9ea7595bc14dbb714c646d1d07cd99ce0d926098d0b4",
+      "binding": "Retained 2026-11-11 result; not relabeled as another source"
+    },
+    {
+      "path": "docs/evidence/native-control-schema-integers-20261111.json",
+      "bytes": 31585,
+      "sha256": "4f1deb5cffe28cbbae455995e04ab6487368e761619da458b19040dbfe1496d8",
+      "source_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+      "binding": "Retained 2026-11-11 result; not relabeled as another source"
+    },
+    {
+      "path": "docs/evidence/native-control-workspace-aliases-20261111.json",
+      "bytes": 16596,
+      "sha256": "8a7c98d951fca40e430f42df154584126fded8ddc095d9c74d6a03aedb9996a5",
+      "source_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+      "binding": "Retained 2026-11-11 result; not relabeled as another source"
+    },
+    {
+      "path": "docs/evidence/native-control-codex-backend-20261111.json",
+      "bytes": 39646,
+      "sha256": "fdab9d7e6fd8e99d9fe7721a27c06fd90586f4adb49aecf8739221e19b9af16e",
+      "source_root": "d5653a7c630eb6ee5e5c9ea7595bc14dbb714c646d1d07cd99ce0d926098d0b4",
+      "binding": "Retained 2026-11-11 result; not relabeled as another source"
+    },
+    {
+      "path": "docs/evidence/native-control-file-pins-20261111.json",
+      "bytes": 564,
+      "sha256": "7a7d9997564ac9e80c589aeeacaa69fec64daa8eb86315892a455b5dbeeb6ed0",
+      "source_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+      "binding": "Historical milestone binding from paused handoff"
+    },
+    {
+      "path": "docs/evidence/native-control-deadline-20261111.json",
+      "bytes": 796,
+      "sha256": "2d55578125500810ccb3972af3ccb70c308ebd0840545d16b9d761555357431c",
+      "source_root": "fc2d6cedfb98f952ee76379620871d22bd0f09782b1805ab29a4d615397ab337",
+      "binding": "Historical milestone binding from paused handoff"
+    },
+    {
+      "path": "docs/evidence/native-control-baseline-20261111.ndjson.gz",
+      "bytes": 35662,
+      "sha256": "409ec01c11dfed9e2882edb5b08f4ac0780a40aef374d0c5cc442125a1c0816d",
+      "source_root": "d5653a7c630eb6ee5e5c9ea7595bc14dbb714c646d1d07cd99ce0d926098d0b4",
+      "binding": "92 legacy exchanges against stage 11"
+    },
+    {
+      "path": "docs/evidence/native-control-modern-metadata-20261111.ndjson",
+      "bytes": 50063,
+      "sha256": "65422849c581a784eb98129db20fb4545b099768188adde200b3bcd8d8748ac4",
+      "source_root": "4166f654254dbbb60ed14d68e8255654721089978093d7988c86ad0e0f074b6c",
+      "binding": "25 metadata cases before numeric cancellation/query argument normalization"
+    }
+  ],
+  "final_source_acceptance": "Separate 2026-11-12 records",
+  "release_ready": false,
+  "full_mission_complete": false
+}

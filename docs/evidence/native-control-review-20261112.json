@@ -1,0 +1,28 @@
+{
+  "schema": "xax-mcp-native-control-consistency-review-v1",
+  "recorded": "2026-11-12",
+  "verified_file_identities": 105,
+  "chains": [
+    {
+      "manifest": "native/transactions/20261111-capabilities/manifest.json",
+      "records": 9,
+      "continuous_roots": true
+    },
+    {
+      "manifest": "native/transactions/20261111-control/manifest.json",
+      "records": 19,
+      "continuous_roots": true
+    }
+  ],
+  "fixture_and_artifact_identities": true,
+  "tools_schema_count": 8,
+  "default_gen3_unchanged": true,
+  "readiness_flags_false": true,
+  "foreign_implementation_files": [],
+  "user_readme_preserved": true,
+  "upstream_checkout": {
+    "commit": "745e80150605f3812aa012e6884f6e417d9423b4",
+    "clean": true
+  },
+  "scope": "Read-only manifest/root/schema/source/artifact consistency review; not independent security review"
+}

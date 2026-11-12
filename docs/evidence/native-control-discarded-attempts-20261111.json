@@ -1,0 +1,34 @@
+{
+  "recorded": "2026-11-11",
+  "status": "Retained failed attempts; no deployment or final-source acceptance claims",
+  "attempts": [
+    {
+      "attempt": "Initial query integration",
+      "outcome": "Runtime fixtures detected replacement of a compiler-grant condition; integration discarded and moved into the query function; final authority tests pass"
+    },
+    {
+      "attempt": "Combined reset and handler replacement",
+      "outcome": "Mandatory native verify rejected an unresolved object; never built or selected"
+    },
+    {
+      "attempt": "Escaped CID decoding",
+      "outcome": "Independent lookup test found incorrect retained high nibbles; decoder state moved to owned native scratch; complete escaped CID tests now pass"
+    },
+    {
+      "attempt": "First installed-client startup",
+      "outcome": "Initialize succeeded; legacy tools/list progress metadata was incorrectly treated as modern metadata; native compatibility fix now passes direct installed-client calls"
+    },
+    {
+      "attempt": "Literal packing",
+      "outcome": "A combined schema exceeded the pinned transport object limit; split into verified native prefix/tail construction stages. Native verify also rejected mismatched literal widths and unsupported three-byte stores; corrected before final replay"
+    },
+    {
+      "attempt": "Initial post-edit cancellation probe",
+      "outcome": "An empty transport record did not reach verification; replaced with an existing real native transaction and observed verification child. Final source bytes/root/file identity remained unchanged"
+    },
+    {
+      "attempt": "Large upstream bootstrap inspection probe",
+      "outcome": "Pinned compiler produced a diagnostic; not used as inspection-prefix or compiler self-hosting evidence"
+    }
+  ]
+}

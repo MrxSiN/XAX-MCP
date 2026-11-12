@@ -1,0 +1,164 @@
+[
+  {
+    "case": "integer",
+    "elapsed_seconds": 0.16173540000454523,
+    "cancelled": true,
+    "prefetch": false,
+    "source_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    },
+    "recovery": true
+  },
+  {
+    "case": "prefetched",
+    "elapsed_seconds": 0.036695799994049594,
+    "cancelled": true,
+    "prefetch": true,
+    "source_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    },
+    "recovery": true
+  },
+  {
+    "case": "unicode",
+    "elapsed_seconds": 0.1619496000057552,
+    "cancelled": true,
+    "prefetch": false,
+    "source_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    },
+    "recovery": true
+  },
+  {
+    "case": "escaped-name",
+    "elapsed_seconds": 0.15940890001365915,
+    "cancelled": true,
+    "prefetch": false,
+    "source_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    },
+    "recovery": true
+  },
+  {
+    "case": "zero",
+    "elapsed_seconds": 0.16139989999646787,
+    "cancelled": true,
+    "prefetch": false,
+    "source_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    },
+    "recovery": true
+  },
+  {
+    "case": "wrong-type",
+    "elapsed_seconds": 30.04140470000857,
+    "cancelled": false,
+    "prefetch": false,
+    "source_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "resultType": "complete",
+        "content": [
+          {
+            "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+            "type": "text"
+          }
+        ],
+        "isError": true,
+        "structuredContent": {
+          "error": {
+            "code": "workspace_unavailable",
+            "message": "the current store could not be read (need at least 39 bytes)"
+          },
+          "ok": false
+        }
+      }
+    },
+    "recovery": true
+  },
+  {
+    "case": "unknown",
+    "elapsed_seconds": 30.058585199993104,
+    "cancelled": false,
+    "prefetch": false,
+    "source_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "resultType": "complete",
+        "content": [
+          {
+            "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+            "type": "text"
+          }
+        ],
+        "isError": true,
+        "structuredContent": {
+          "error": {
+            "code": "workspace_unavailable",
+            "message": "the current store could not be read (need at least 39 bytes)"
+          },
+          "ok": false
+        }
+      }
+    },
+    "recovery": true
+  },
+  {
+    "case": "malformed",
+    "elapsed_seconds": 30.042623600005754,
+    "cancelled": false,
+    "prefetch": false,
+    "source_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "resultType": "complete",
+        "content": [
+          {
+            "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+            "type": "text"
+          }
+        ],
+        "isError": true,
+        "structuredContent": {
+          "error": {
+            "code": "workspace_unavailable",
+            "message": "the current store could not be read (need at least 39 bytes)"
+          },
+          "ok": false
+        }
+      }
+    },
+    "recovery": true
+  }
+]

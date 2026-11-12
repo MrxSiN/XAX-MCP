@@ -1,0 +1,76 @@
+[
+  {
+    "case": "queued",
+    "elapsed_seconds": 0.12738240000908263,
+    "ordinary_requests_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    }
+  },
+  {
+    "case": "partial",
+    "elapsed_seconds": 0.479050299996743,
+    "ordinary_requests_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    }
+  },
+  {
+    "case": "eof",
+    "elapsed_seconds": 30.060691600010614,
+    "ordinary_requests_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "active",
+      "result": {
+        "resultType": "complete",
+        "content": [
+          {
+            "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+            "type": "text"
+          }
+        ],
+        "isError": true,
+        "structuredContent": {
+          "error": {
+            "code": "workspace_unavailable",
+            "message": "the current store could not be read (need at least 39 bytes)"
+          },
+          "ok": false
+        }
+      }
+    }
+  },
+  {
+    "case": "late",
+    "elapsed_seconds": 0.13316779999877326,
+    "ordinary_requests_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    }
+  },
+  {
+    "case": "malformed-json",
+    "elapsed_seconds": 0.13384809999843128,
+    "ordinary_requests_preserved": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    }
+  }
+]

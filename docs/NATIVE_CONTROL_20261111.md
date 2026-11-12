@@ -4,7 +4,8 @@ This is a tested experimental successor to Gen3, not the default deployment.
 The canonical source and all artifact identities are in
 [`native/candidates/20261111-control/checkpoints.json`](../native/candidates/20261111-control/checkpoints.json).
 The compiler dependency stays pinned to [`native/xax-dependency.json`](../native/xax-dependency.json).
-Windows compiler self-hosting and production readiness remain unestablished.
+These tests establish neither self-hosting of the pinned deployment compiler nor
+production readiness.
 
 The source extends the previous nine-record experimental replay with nineteen
 exact-root Windows XAXEDIT1 transactions. Every edit requires native verification;
@@ -61,7 +62,28 @@ four one-row pages. The program builds with the pinned Windows seed and exits 66
 This establishes the stated structural-reference exercise, not typed semantic
 query acceptance.
 
-Work is paused. Final evidence export and clean-package acceptance are unfinished;
-see [REMAINING_MCP_TASKS.md](../REMAINING_MCP_TASKS.md) for the exact test bindings
-and remaining gates. Historical evidence remains unchanged. `release_ready` and
-`full_mission_complete` remain false.
+Final-source acceptance completed on 2026-11-12. The [evidence index](evidence/native-control-20261112.json)
+separates [historical milestone runs](evidence/native-control-historical-runtime-20261112.json),
+[final-source runtime checks](evidence/native-control-runtime-20261112.json), and
+[fresh extracted-package acceptance](evidence/native-control-package-20261112.json).
+The package replayed 65 base, nine earlier-preview and nineteen control records,
+verified every edit, rebuilt the fifteen native probes and final binaries twice,
+and ran all final client gates with an empty parent PATH and bundled pinned seed.
+Snapshot, executable and provenance identities match the canonical artifacts.
+
+The final unfamiliar-program exercise checked three functions, two independently
+confirmed calls, a four-page neighborhood and actual exit 66. Its final-server
+inventory matched all 5,443 objects across 86 pages. These are generic-reference
+observations; typed facts still come only from the independent fixture oracle.
+
+[Active desktop tool calls](evidence/native-control-desktop-reconnect-20261112.json)
+passed for all eight tools after the upstream checkout update and compiler-pin
+relocation. Reads succeeded; mutation, build and execute respected read-only
+denials; result handles remained unsupported. Text and structured results agree.
+This is separate from the direct installed-client backend run and does not claim
+writable desktop execution. The configured read-only preview remains available.
+
+The source and default Gen3 deployment are unchanged. The remaining release
+boundaries are in [REMAINING_MCP_TASKS.md](../REMAINING_MCP_TASKS.md).
+Historical evidence is unchanged. `release_ready` and `full_mission_complete`
+remain false. No new hosted CI result is claimed.

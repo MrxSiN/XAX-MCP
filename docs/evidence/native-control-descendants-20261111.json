@@ -1,0 +1,23 @@
+[
+  {
+    "both_terminated": true,
+    "compiler_pid": 30192,
+    "case": "cancel",
+    "elapsed_ms": 38,
+    "descendant_pid": 31588
+  },
+  {
+    "both_terminated": true,
+    "compiler_pid": 37688,
+    "case": "normal",
+    "elapsed_ms": 402,
+    "descendant_pid": 15212
+  },
+  {
+    "both_terminated": true,
+    "compiler_pid": 11096,
+    "case": "death",
+    "elapsed_ms": 3,
+    "descendant_pid": 9804
+  }
+]

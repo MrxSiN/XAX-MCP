@@ -70,7 +70,9 @@
     "Writable workspace child-file aliases and publication require a trusted host; handle contract remains upstream",
     "Semantic records expose generic kind/CID/reference facts only; at most a 4 MiB public inspection prefix",
     "Cancellation can be delayed by backpressure beyond the 1 MiB queued-input window",
-    "Installed Codex backend interoperability is distinct from desktop UI acceptance; UI gate remains open",
-    "No Windows compiler self-hosting, production readiness, full CUM prepare, typed effects/signatures or general semantic evolution acceptance"
-  ]
+    "Installed Codex backend and active desktop read-only tools passed separately; writable desktop execution is not claimed",
+    "No self-hosting claim for the pinned deployment compiler, production readiness, full CUM prepare, typed effects/signatures or general semantic evolution acceptance"
+  ],
+  "acceptance_recorded": "2026-11-12",
+  "evidence": "docs/evidence/native-control-20261112.json"
 }

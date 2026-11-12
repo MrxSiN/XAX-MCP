@@ -1,7 +1,7 @@
 {
   "schema": "xax-mcp-release-status-v1",
   "server_version": "0.10.0+native",
-  "recorded": "2026-11-10",
+  "recorded": "2026-11-12",
   "release_ready": false,
   "full_mission_complete": false,
   "executor_input_argv_increment": {
@@ -219,5 +219,31 @@
     "candidate_promotion_accepted": false,
     "workspace_alias_boundary": "Controlled pre-existing/concurrent edit.rec aliases overwrote disposable files outside work; gate remains open",
     "default_server_source": "native/xax-mcp-native-gen3.xax"
+  },
+  "blocking_findings_scope": "Default selected Gen3 and general release gates; control preview acceptance is recorded separately below.",
+  "control_preview": {
+    "recorded": "2026-11-12",
+    "state": "experimental; final-source and fresh-package acceptance executed; not promoted",
+    "source": "native/candidates/20261111-control/server.xax",
+    "source_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+    "checkpoints": "native/candidates/20261111-control/checkpoints.json",
+    "transactions": "native/transactions/20261111-control/manifest.json",
+    "tools_schema": "schemas/tools-v3.json",
+    "evidence": "docs/evidence/native-control-20261112.json",
+    "historical_evidence": "docs/evidence/native-control-historical-runtime-20261112.json",
+    "clean_package_evidence": "docs/evidence/native-control-package-20261112.json",
+    "desktop_evidence": "docs/evidence/native-control-desktop-reconnect-20261112.json",
+    "final_source_acceptance": true,
+    "clean_package_checked": true,
+    "installed_codex_backend_direct_native": true,
+    "desktop_read_only_tool_calls_accepted": true,
+    "compiler_pin_unchanged": true,
+    "default_gen3_unchanged": true,
+    "workspace_alias_gate_closed": false,
+    "typed_semantic_facts": false,
+    "full_inventory_continuation": false,
+    "candidate_promoted": false,
+    "release_ready": false,
+    "full_mission_complete": false
   }
 }

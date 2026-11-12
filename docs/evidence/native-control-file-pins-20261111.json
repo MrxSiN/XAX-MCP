@@ -1,0 +1,34 @@
+{
+  "root_preserved": true,
+  "handles_released_on_exit": true,
+  "checks": [
+    {
+      "denied": true,
+      "name": "compiler-write"
+    },
+    {
+      "denied": true,
+      "name": "compiler-rename"
+    },
+    {
+      "denied": true,
+      "name": "seed-write"
+    },
+    {
+      "denied": true,
+      "name": "seed-rename"
+    },
+    {
+      "denied": true,
+      "name": "compiler-ancestor-rename"
+    },
+    {
+      "denied": true,
+      "name": "work-directory-rename"
+    },
+    {
+      "denied": true,
+      "name": "shared-ancestor-rename"
+    }
+  ]
+}

@@ -1,5 +1,23 @@
 # Evidence and claim labels
 
+## 2026-11-12 — control preview final-source acceptance, not deployed
+
+The [acceptance index](evidence/native-control-20261112.json) binds the native
+control preview's final root to [local runtime](evidence/native-control-runtime-20261112.json),
+[fresh-package](evidence/native-control-package-20261112.json), and
+[active desktop read-only calls](evidence/native-control-desktop-reconnect-20261112.json).
+All required replay/build and client gates passed, including cancellation,
+descendants, legacy/modern protocol, public reference paging and real fixture
+execution. The installed Codex backend used the native executable directly.
+The extracted package used an empty PATH and bundled immutable compiler.
+
+The [completed historical export](evidence/native-control-historical-runtime-20261112.json)
+keeps earlier milestone bindings separate from final acceptance. Known workspace
+alias outside writes remain recorded; typed semantic facts, complete inventory
+continuation and general release security remain open. Default Gen3 and both
+readiness flags remain unchanged. These are local results, with no new hosted CI
+or candidate promotion. See the [preview contract](NATIVE_CONTROL_20261111.md).
+
 ## 2026-11-11 — resumed candidate, not deployed
 
 [New experimental evidence](evidence/native-resumed-candidate-20261111.json)

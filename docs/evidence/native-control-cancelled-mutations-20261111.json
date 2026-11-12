@@ -1,0 +1,67 @@
+[
+  {
+    "case": "xax_workspace",
+    "current_and_source_preserved": true,
+    "no_program": true,
+    "lease_released": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    }
+  },
+  {
+    "case": "xax_query",
+    "current_and_source_preserved": true,
+    "no_program": true,
+    "lease_released": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    }
+  },
+  {
+    "case": "xax_construct",
+    "current_and_source_preserved": true,
+    "no_program": true,
+    "lease_released": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    }
+  },
+  {
+    "case": "xax_transaction",
+    "current_and_source_preserved": true,
+    "no_program": true,
+    "lease_released": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    }
+  },
+  {
+    "case": "xax_build",
+    "current_and_source_preserved": true,
+    "no_program": true,
+    "lease_released": true,
+    "response": {
+      "jsonrpc": "2.0",
+      "id": "after",
+      "result": {
+        "resultType": "complete"
+      }
+    }
+  }
+]

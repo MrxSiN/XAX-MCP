@@ -1,0 +1,418 @@
+{
+  "recorded": "2026-11-12",
+  "source_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+  "path": "active Codex chat tool inventory; direct native configured preview",
+  "calls": [
+    {
+      "tool": "xax_workspace",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"bytes\":2488,\"ok\":true,\"root\":\"6b3dc91d8261a28bcfedfdaaa91c921b73c9bd591356cc7b0f266268175cded4\",\"workspace\":\"ws_0\",\"function\":\"600c61aa3f09813766ebae000687c880b5527392c0a3d5c1b50098d8dab5098f\",\"inspection\":{\"format\":\"xax-native-file-v1\",\"objects\":[{\"cid\":\"067bbbfae556a4b64057449566ab2e836d883eaefc222da5bd6f3b4ba4fe3094\",\"kind\":7,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"9d6be71a8d8652b26dc58688e0504ba596f7fda82d54e3e582262675e3e1b05e\"]},{\"cid\":\"06f46befb85d74f7fc33488c762c2695168a298ca4a77a9cd5198703114ca841\",\"kind\":2,\"references\":[\"f9b2e16b91c38b184d023935b5e1642ec27b927912192e0377741642df571488\"]},{\"cid\":\"2d73f488e3cf9db6998fede88ee84339482f1e1d2a776c0e85f75c955d201a8e\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"3fdca04306f8768689e09f492015385d9bffc9d0343fdc8724e879ada886a8fd\",\"kind\":7,\"references\":[\"624d81f6e7550eb093a2f5ef424d00c0205715db9556b002ec96e9ba8bb7bee4\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"e495d16a686a737ded68b61d4a245a6ca6c16f91bc1cfd788861f3f9eae703f6\"]},{\"cid\":\"600c61aa3f09813766ebae000687c880b5527392c0a3d5c1b50098d8dab5098f\",\"kind\":3,\"references\":[\"3fdca04306f8768689e09f492015385d9bffc9d0343fdc8724e879ada886a8fd\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"624d81f6e7550eb093a2f5ef424d00c0205715db9556b002ec96e9ba8bb7bee4\",\"kind\":3,\"references\":[\"067bbbfae556a4b64057449566ab2e836d883eaefc222da5bd6f3b4ba4fe3094\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"6b3dc91d8261a28bcfedfdaaa91c921b73c9bd591356cc7b0f266268175cded4\",\"kind\":10,\"references\":[\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"ccc30e94029f2b4ca9c718e710d81de5ed74e3048ea5fd606532a4dd540a9e2d\"]},{\"cid\":\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"kind\":4,\"references\":[]},{\"cid\":\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"kind\":6,\"references\":[]},{\"cid\":\"9d6be71a8d8652b26dc58688e0504ba596f7fda82d54e3e582262675e3e1b05e\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"kind\":10,\"references\":[]},{\"cid\":\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"kind\":4,\"references\":[]},{\"cid\":\"ccc30e94029f2b4ca9c718e710d81de5ed74e3048ea5fd606532a4dd540a9e2d\",\"kind\":9,\"references\":[\"06f46befb85d74f7fc33488c762c2695168a298ca4a77a9cd5198703114ca841\",\"f9b2e16b91c38b184d023935b5e1642ec27b927912192e0377741642df571488\"]},{\"cid\":\"e495d16a686a737ded68b61d4a245a6ca6c16f91bc1cfd788861f3f9eae703f6\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"kind\":4,\"references\":[]},{\"cid\":\"f6e45e82c1b96a70e9aeb7a6a167ecea936e424907f1930128bcebd54d096509\",\"kind\":7,\"references\":[\"2d73f488e3cf9db6998fede88ee84339482f1e1d2a776c0e85f75c955d201a8e\",\"600c61aa3f09813766ebae000687c880b5527392c0a3d5c1b50098d8dab5098f\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]},{\"cid\":\"f9b2e16b91c38b184d023935b5e1642ec27b927912192e0377741642df571488\",\"kind\":3,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"f6e45e82c1b96a70e9aeb7a6a167ecea936e424907f1930128bcebd54d096509\"]}],\"complete\":true}}"
+          }
+        ],
+        "structuredContent": {
+          "bytes": 2488,
+          "ok": true,
+          "root": "6b3dc91d8261a28bcfedfdaaa91c921b73c9bd591356cc7b0f266268175cded4",
+          "workspace": "ws_0",
+          "function": "600c61aa3f09813766ebae000687c880b5527392c0a3d5c1b50098d8dab5098f",
+          "inspection": {
+            "format": "xax-native-file-v1",
+            "objects": [
+              {
+                "cid": "067bbbfae556a4b64057449566ab2e836d883eaefc222da5bd6f3b4ba4fe3094",
+                "kind": 7,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                  "9d6be71a8d8652b26dc58688e0504ba596f7fda82d54e3e582262675e3e1b05e"
+                ]
+              },
+              {
+                "cid": "06f46befb85d74f7fc33488c762c2695168a298ca4a77a9cd5198703114ca841",
+                "kind": 2,
+                "references": [
+                  "f9b2e16b91c38b184d023935b5e1642ec27b927912192e0377741642df571488"
+                ]
+              },
+              {
+                "cid": "2d73f488e3cf9db6998fede88ee84339482f1e1d2a776c0e85f75c955d201a8e",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "3fdca04306f8768689e09f492015385d9bffc9d0343fdc8724e879ada886a8fd",
+                "kind": 7,
+                "references": [
+                  "624d81f6e7550eb093a2f5ef424d00c0205715db9556b002ec96e9ba8bb7bee4",
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                  "e495d16a686a737ded68b61d4a245a6ca6c16f91bc1cfd788861f3f9eae703f6"
+                ]
+              },
+              {
+                "cid": "600c61aa3f09813766ebae000687c880b5527392c0a3d5c1b50098d8dab5098f",
+                "kind": 3,
+                "references": [
+                  "3fdca04306f8768689e09f492015385d9bffc9d0343fdc8724e879ada886a8fd",
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "624d81f6e7550eb093a2f5ef424d00c0205715db9556b002ec96e9ba8bb7bee4",
+                "kind": 3,
+                "references": [
+                  "067bbbfae556a4b64057449566ab2e836d883eaefc222da5bd6f3b4ba4fe3094",
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "6b3dc91d8261a28bcfedfdaaa91c921b73c9bd591356cc7b0f266268175cded4",
+                "kind": 10,
+                "references": [
+                  "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                  "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                  "ccc30e94029f2b4ca9c718e710d81de5ed74e3048ea5fd606532a4dd540a9e2d"
+                ]
+              },
+              {
+                "cid": "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                "kind": 4,
+                "references": []
+              },
+              {
+                "cid": "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                "kind": 6,
+                "references": []
+              },
+              {
+                "cid": "9d6be71a8d8652b26dc58688e0504ba596f7fda82d54e3e582262675e3e1b05e",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                "kind": 10,
+                "references": []
+              },
+              {
+                "cid": "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                "kind": 4,
+                "references": []
+              },
+              {
+                "cid": "ccc30e94029f2b4ca9c718e710d81de5ed74e3048ea5fd606532a4dd540a9e2d",
+                "kind": 9,
+                "references": [
+                  "06f46befb85d74f7fc33488c762c2695168a298ca4a77a9cd5198703114ca841",
+                  "f9b2e16b91c38b184d023935b5e1642ec27b927912192e0377741642df571488"
+                ]
+              },
+              {
+                "cid": "e495d16a686a737ded68b61d4a245a6ca6c16f91bc1cfd788861f3f9eae703f6",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                "kind": 4,
+                "references": []
+              },
+              {
+                "cid": "f6e45e82c1b96a70e9aeb7a6a167ecea936e424907f1930128bcebd54d096509",
+                "kind": 7,
+                "references": [
+                  "2d73f488e3cf9db6998fede88ee84339482f1e1d2a776c0e85f75c955d201a8e",
+                  "600c61aa3f09813766ebae000687c880b5527392c0a3d5c1b50098d8dab5098f",
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                  "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                  "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                ]
+              },
+              {
+                "cid": "f9b2e16b91c38b184d023935b5e1642ec27b927912192e0377741642df571488",
+                "kind": 3,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                  "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                  "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                  "f6e45e82c1b96a70e9aeb7a6a167ecea936e424907f1930128bcebd54d096509"
+                ]
+              }
+            ],
+            "complete": true
+          }
+        },
+        "isError": false
+      }
+    },
+    {
+      "tool": "xax_capabilities",
+      "arguments": {},
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"authority\":{\"effects_granted\":[],\"max_request_bytes\":4194304,\"rights\":[\"read\"],\"store_roots\":0},\"maturity\":{\"compiler cancellation\":\"PROTOTYPE (compiler calls; 1 MiB queue; backpressure; confirmed descendant cleanup)\",\"semantic reference pages\":\"PROTOTYPE (root-bound; 64 rows; 4 MiB inspection prefix; generic edges; no typed facts)\",\"construct on Linux\":\"UNIMPLEMENTED natively\",\"construct from typed XAXEDIT1\":\"EXECUTED (Windows native file contract)\",\"execute in a Windows AppContainer + job object\":\"PROTOTYPE (measured; docs/NATIVE.md)\",\"execute on Linux (namespaces, seccomp, rlimits)\":\"UNIMPLEMENTED natively\",\"modern protocol 2026-07-28\":\"PROTOTYPE (native MCP; candidate gates open)\",\"result (serves artifacts over the wire)\":\"UNIMPLEMENTED natively\",\"stdio transport, JSON validation, MCP lifecycle, tool dispatch, host rights\":\"EXECUTED (native protocol fixtures)\",\"workspace/query/transaction/build over a host-granted native compiler\":\"PROTOTYPE (docs/NATIVE.md)\",\"binary stdin, explicit argv, separate byte streams and sampled total CPU\":\"EXECUTED (Windows native synthetic acceptance; release acceptance remains false)\"},\"ok\":true,\"protocol\":{\"framing\":\"newline-delimited JSON-RPC 2.0\",\"max_json_depth\":64,\"max_message_bytes\":4194304,\"versions\":[\"2026-07-28\",\"2024-11-05\",\"2025-03-26\",\"2025-06-18\",\"2025-11-25\"]},\"sandbox\":{\"available\":\"windows-x86_64 prototype only\",\"launcher\":\"xax-mcp-sandbox.exe (canonical XAX store)\",\"reason\":\"Execution requires --allow-execute and the pinned native launcher beside the server. AppContainer has no network capabilities; only the current authorized artifact is launched. Linux confinement and typed layouts remain unsupported.\"},\"server\":{\"implementation\":\"native XAX program (windows-x86_64 PE32+ built from a canonical .xax store)\",\"name\":\"xax-mcp\",\"python_on_request_path\":false,\"transport\":\"stdio\",\"version\":\"0.10.0+native\"},\"targets\":[{\"target\":\"windows-x86_64\",\"input_modes\":[\"construction-constants\",\"binary-stdin-hex\",\"argv-utf16\"],\"result_mode\":\"exit-u32+separate-stream-hex+resource-observations\"}],\"tools\":{\"xax_build\":\"EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler\",\"xax_capabilities\":\"EXECUTED (native)\",\"xax_construct\":\"EXECUTED: verified XAXEDIT1 construction and edits through the native compiler; xax-construct-v1 JSON is unsupported\",\"xax_execute\":\"Preview: builds the current authorized artifact, then executes it in the native Windows AppContainer and one-process job. Optional stdin_hex supplies exact binary stdin followed by EOF; args excludes argv[0]. Returns exit_code, separate stdout_hex/stderr_hex, duration_ms, user_cpu_100ns, kernel_cpu_100ns, peak_memory_bytes and stdin_bytes_supplied. Host-owned limits: 262144 stdin bytes, 64 arguments, 8192 total UTF-16 argument units, 1048576 combined output bytes, 5 s total CPU, 10 s wall, 256 MiB memory. Exhaustion, setup, measurement and cleanup failures return isError. No executable, environment, grant or budget overrides. Typed layouts, registered external tools and Linux execution remain unsupported.\",\"xax_query\":\"EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler\",\"xax_result\":\"UNIMPLEMENTED natively: result handles need session state, which the native server lacks\",\"xax_transaction\":\"EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler\",\"xax_workspace\":\"EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler\"},\"xax\":{\"pinned_commit\":\"af376e8a8a1ac5635bcad459cb7063ef0b326430\",\"native_file_contract\":\"xax-native-file-v1\",\"role\":\"pinned native Windows compiler seed; no interpreter\"},\"execution\":{\"stdin\":\"hex bytes + physical EOF\",\"args\":\"UTF-16 argument vector excluding executor-controlled argv[0]\",\"max_stdin_bytes\":262144,\"max_args\":64,\"max_argument_utf16_units\":8192,\"max_combined_output_bytes\":1048576,\"max_cpu_100ns\":50000000,\"max_wall_ms\":10000,\"max_process_memory_bytes\":268435456,\"cpu_sampling_ms\":5,\"environment\":\"Supplied: OS-derived LOCALAPPDATA and SystemRoot. Windows rewrites LOCALAPPDATA and adds container-local TEMP/TMP.\",\"scope\":\"currently authorized built artifact only\",\"typed_layouts\":false,\"registered_external_tools\":false}}"
+          }
+        ],
+        "structuredContent": {
+          "authority": {
+            "effects_granted": [],
+            "max_request_bytes": 4194304,
+            "rights": [
+              "read"
+            ],
+            "store_roots": 0
+          },
+          "maturity": {
+            "compiler cancellation": "PROTOTYPE (compiler calls; 1 MiB queue; backpressure; confirmed descendant cleanup)",
+            "semantic reference pages": "PROTOTYPE (root-bound; 64 rows; 4 MiB inspection prefix; generic edges; no typed facts)",
+            "construct on Linux": "UNIMPLEMENTED natively",
+            "construct from typed XAXEDIT1": "EXECUTED (Windows native file contract)",
+            "execute in a Windows AppContainer + job object": "PROTOTYPE (measured; docs/NATIVE.md)",
+            "execute on Linux (namespaces, seccomp, rlimits)": "UNIMPLEMENTED natively",
+            "modern protocol 2026-07-28": "PROTOTYPE (native MCP; candidate gates open)",
+            "result (serves artifacts over the wire)": "UNIMPLEMENTED natively",
+            "stdio transport, JSON validation, MCP lifecycle, tool dispatch, host rights": "EXECUTED (native protocol fixtures)",
+            "workspace/query/transaction/build over a host-granted native compiler": "PROTOTYPE (docs/NATIVE.md)",
+            "binary stdin, explicit argv, separate byte streams and sampled total CPU": "EXECUTED (Windows native synthetic acceptance; release acceptance remains false)"
+          },
+          "ok": true,
+          "protocol": {
+            "framing": "newline-delimited JSON-RPC 2.0",
+            "max_json_depth": 64,
+            "max_message_bytes": 4194304,
+            "versions": [
+              "2026-07-28",
+              "2024-11-05",
+              "2025-03-26",
+              "2025-06-18",
+              "2025-11-25"
+            ]
+          },
+          "sandbox": {
+            "available": "windows-x86_64 prototype only",
+            "launcher": "xax-mcp-sandbox.exe (canonical XAX store)",
+            "reason": "Execution requires --allow-execute and the pinned native launcher beside the server. AppContainer has no network capabilities; only the current authorized artifact is launched. Linux confinement and typed layouts remain unsupported."
+          },
+          "server": {
+            "implementation": "native XAX program (windows-x86_64 PE32+ built from a canonical .xax store)",
+            "name": "xax-mcp",
+            "python_on_request_path": false,
+            "transport": "stdio",
+            "version": "0.10.0+native"
+          },
+          "targets": [
+            {
+              "target": "windows-x86_64",
+              "input_modes": [
+                "construction-constants",
+                "binary-stdin-hex",
+                "argv-utf16"
+              ],
+              "result_mode": "exit-u32+separate-stream-hex+resource-observations"
+            }
+          ],
+          "tools": {
+            "xax_build": "EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler",
+            "xax_capabilities": "EXECUTED (native)",
+            "xax_construct": "EXECUTED: verified XAXEDIT1 construction and edits through the native compiler; xax-construct-v1 JSON is unsupported",
+            "xax_execute": "Preview: builds the current authorized artifact, then executes it in the native Windows AppContainer and one-process job. Optional stdin_hex supplies exact binary stdin followed by EOF; args excludes argv[0]. Returns exit_code, separate stdout_hex/stderr_hex, duration_ms, user_cpu_100ns, kernel_cpu_100ns, peak_memory_bytes and stdin_bytes_supplied. Host-owned limits: 262144 stdin bytes, 64 arguments, 8192 total UTF-16 argument units, 1048576 combined output bytes, 5 s total CPU, 10 s wall, 256 MiB memory. Exhaustion, setup, measurement and cleanup failures return isError. No executable, environment, grant or budget overrides. Typed layouts, registered external tools and Linux execution remain unsupported.",
+            "xax_query": "EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler",
+            "xax_result": "UNIMPLEMENTED natively: result handles need session state, which the native server lacks",
+            "xax_transaction": "EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler",
+            "xax_workspace": "EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler"
+          },
+          "xax": {
+            "pinned_commit": "af376e8a8a1ac5635bcad459cb7063ef0b326430",
+            "native_file_contract": "xax-native-file-v1",
+            "role": "pinned native Windows compiler seed; no interpreter"
+          },
+          "execution": {
+            "stdin": "hex bytes + physical EOF",
+            "args": "UTF-16 argument vector excluding executor-controlled argv[0]",
+            "max_stdin_bytes": 262144,
+            "max_args": 64,
+            "max_argument_utf16_units": 8192,
+            "max_combined_output_bytes": 1048576,
+            "max_cpu_100ns": 50000000,
+            "max_wall_ms": 10000,
+            "max_process_memory_bytes": 268435456,
+            "cpu_sampling_ms": 5,
+            "environment": "Supplied: OS-derived LOCALAPPDATA and SystemRoot. Windows rewrites LOCALAPPDATA and adds container-local TEMP/TMP.",
+            "scope": "currently authorized built artifact only",
+            "typed_layouts": false,
+            "registered_external_tools": false
+          }
+        },
+        "isError": false
+      }
+    },
+    {
+      "tool": "xax_query",
+      "arguments": {
+        "select": "objects",
+        "object_kind": 3,
+        "limit": 1
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"ok\":true,\"root\":\"6b3dc91d8261a28bcfedfdaaa91c921b73c9bd591356cc7b0f266268175cded4\",\"selection\":\"objects\",\"rows\":[{\"cid\":\"600c61aa3f09813766ebae000687c880b5527392c0a3d5c1b50098d8dab5098f\",\"kind\":3,\"referenceCount\":2}],\"nextCursor\":{\"root\":\"6b3dc91d8261a28bcfedfdaaa91c921b73c9bd591356cc7b0f266268175cded4\",\"offset\":1},\"inventoryComplete\":true,\"complete\":false}"
+          }
+        ],
+        "structuredContent": {
+          "ok": true,
+          "root": "6b3dc91d8261a28bcfedfdaaa91c921b73c9bd591356cc7b0f266268175cded4",
+          "selection": "objects",
+          "rows": [
+            {
+              "cid": "600c61aa3f09813766ebae000687c880b5527392c0a3d5c1b50098d8dab5098f",
+              "kind": 3,
+              "referenceCount": 2
+            }
+          ],
+          "nextCursor": {
+            "root": "6b3dc91d8261a28bcfedfdaaa91c921b73c9bd591356cc7b0f266268175cded4",
+            "offset": 1
+          },
+          "inventoryComplete": true,
+          "complete": false
+        },
+        "isError": false
+      }
+    },
+    {
+      "tool": "xax_construct",
+      "arguments": {
+        "record": ""
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"error\":{\"code\":\"denied_capability\",\"message\":\"this server was not granted the 'mutate' right by its host configuration\",\"repair\":[\"the host owner may add --grant mutate to the server launch command\"]},\"ok\":false}"
+          }
+        ],
+        "structuredContent": {
+          "error": {
+            "code": "denied_capability",
+            "message": "this server was not granted the 'mutate' right by its host configuration",
+            "repair": [
+              "the host owner may add --grant mutate to the server launch command"
+            ]
+          },
+          "ok": false
+        },
+        "isError": true
+      }
+    },
+    {
+      "tool": "xax_transaction",
+      "arguments": {
+        "record": ""
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"error\":{\"code\":\"denied_capability\",\"message\":\"this server was not granted the 'mutate' right by its host configuration\",\"repair\":[\"the host owner may add --grant mutate to the server launch command\"]},\"ok\":false}"
+          }
+        ],
+        "structuredContent": {
+          "error": {
+            "code": "denied_capability",
+            "message": "this server was not granted the 'mutate' right by its host configuration",
+            "repair": [
+              "the host owner may add --grant mutate to the server launch command"
+            ]
+          },
+          "ok": false
+        },
+        "isError": true
+      }
+    },
+    {
+      "tool": "xax_build",
+      "arguments": {},
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"error\":{\"code\":\"denied_capability\",\"message\":\"this server was not granted the 'build' right by its host configuration\",\"repair\":[\"the host owner may add --grant build to the server launch command\"]},\"ok\":false}"
+          }
+        ],
+        "structuredContent": {
+          "error": {
+            "code": "denied_capability",
+            "message": "this server was not granted the 'build' right by its host configuration",
+            "repair": [
+              "the host owner may add --grant build to the server launch command"
+            ]
+          },
+          "ok": false
+        },
+        "isError": true
+      }
+    },
+    {
+      "tool": "xax_execute",
+      "arguments": {},
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"error\":{\"code\":\"denied_capability\",\"message\":\"this server was not granted the 'execute' right by its host configuration\",\"repair\":[\"the host owner may add --allow-execute to the server launch command\"]},\"ok\":false}"
+          }
+        ],
+        "structuredContent": {
+          "error": {
+            "code": "denied_capability",
+            "message": "this server was not granted the 'execute' right by its host configuration",
+            "repair": [
+              "the host owner may add --allow-execute to the server launch command"
+            ]
+          },
+          "ok": false
+        },
+        "isError": true
+      }
+    },
+    {
+      "tool": "xax_result",
+      "arguments": {
+        "handle": "unknown"
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"error\":{\"code\":\"unsupported\",\"message\":\"xax_result is not implemented by the native XAX server: result handles need session state, which the native server does not implement yet; it fails closed (docs/NATIVE.md)\"},\"ok\":false}"
+          }
+        ],
+        "structuredContent": {
+          "error": {
+            "code": "unsupported",
+            "message": "xax_result is not implemented by the native XAX server: result handles need session state, which the native server does not implement yet; it fails closed (docs/NATIVE.md)"
+          },
+          "ok": false
+        },
+        "isError": true
+      }
+    }
+  ],
+  "all_eight_tools_called": true,
+  "read_only_denials_preserved": true,
+  "text_structured_equality": true,
+  "configuration_compiler_relocated_to_preserve_pin": true,
+  "configuration_compiler": "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261112\\toolchain\\xaxc-windows-x86_64.exe",
+  "lifecycle_note": "Tool calls passed before quiescing the two exact configured preview instances to release the old upstream compiler file for git checkout. Read-only configuration retained with separate pinned copy; no later desktop reconnect is claimed."
+}
