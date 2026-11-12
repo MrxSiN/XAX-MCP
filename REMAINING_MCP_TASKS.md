@@ -18,8 +18,11 @@ The paused 2026-11-11 handoff remains in Git history at `1850dd7`.
 See [the Android evidence](docs/evidence/native-android-20261112.json) and
 [contract](docs/NATIVE_ANDROID_20261112.md). This is a separate explicit preview;
 static ELF only, staging-interruption cleanup and workspace aliases remain open.
-The control preview and default Gen3 remain unchanged. Continue next with workspace
-alias races and broader capability/security acceptance.
+The control preview and default Gen3 remain unchanged. A fresh [target/toolchain verification](docs/evidence/native-android-target-verification-20261112.json)
+passed before further alias work: Android ARM64 is implemented and its exact seed
+is tested for this profile. JVM is not exposed; the active desktop connection
+remains the separate Windows-only preview. Continue with workspace alias races
+and broader capability/security acceptance.
 
 ## Prior completed increment
 

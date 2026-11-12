@@ -81,5 +81,6 @@
     "android-runner-core.xax",
     "adb-host-stage-0.xax",
     "adb-host-stage-4096.xax"
-  ]
+  ],
+  "target_toolchain_validation": "native/candidates/20261112-android/toolchain-validation.json"
 }

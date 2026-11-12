@@ -1,0 +1,272 @@
+{
+  "recorded": "2026-11-12",
+  "implementation_commit": "5b6ec38",
+  "target": "android-arm64",
+  "implementation": "EXECUTED",
+  "toolchain_status": "TESTED FOR THIS ANDROID STATIC-ELF PROFILE",
+  "compiler_seed_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79",
+  "dependency_commit": "af376e8a8a1ac5635bcad459cb7063ef0b326430",
+  "dependency_compatible_range": "Only this immutable seed is tested; no moving main or other seeds certified",
+  "runtime_capabilities_contain_untested": false,
+  "advertised_targets": [
+    {
+      "target": "android-arm64",
+      "input_modes": [
+        "construction-constants",
+        "binary-stdin-hex",
+        "argv"
+      ],
+      "result_mode": "exit-u8-or-128+signal+separate-stream-hex+resource-observations"
+    }
+  ],
+  "artifact": {
+    "bytes": 456,
+    "sha256": "e7c8381c11fad8255229b7cde8f411bbf1d9d60692917f1b2252a19dc378cb47",
+    "format": "ELF64 little-endian",
+    "machine": 183
+  },
+  "device": {
+    "model": "Pixel 8 Pro",
+    "api": "37"
+  },
+  "executed_result": {
+    "ok": true,
+    "exit_code": 66,
+    "duration_ms": 8,
+    "flags": 0,
+    "stdout_bytes": 18,
+    "stderr_bytes": 0,
+    "user_cpu_100ns": 0,
+    "kernel_cpu_100ns": 70160,
+    "peak_memory_bytes": 28672,
+    "stdin_bytes_supplied": 0,
+    "stdout_hex": "58415820416e64726f69642041524d36340a",
+    "stderr_hex": ""
+  },
+  "jvm": {
+    "mcp_preview_implemented": false,
+    "mcp_preview_tested": false,
+    "advertised": false,
+    "note": "Upstream XAX JVM support is separate; no JVM runtime is selected or certified by this MCP preview"
+  },
+  "active_desktop_preview": {
+    "name": "xax_native_preview_20261111",
+    "target": "windows-x86_64",
+    "read_only": true,
+    "android_selected": false
+  },
+  "release_ready": false,
+  "records": [
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "tools/call",
+        "params": {
+          "_meta": {
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+            "io.modelcontextprotocol/clientCapabilities": {}
+          },
+          "name": "xax_capabilities",
+          "arguments": {}
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"authority\":{\"effects_granted\":[],\"max_request_bytes\":4194304,\"rights\":[\"build\",\"execute\",\"mutate\",\"read\"],\"store_roots\":0},\"maturity\":{\"compiler cancellation\":\"PROTOTYPE (compiler calls; 1 MiB queue; backpressure; confirmed descendant cleanup)\",\"semantic reference pages\":\"PROTOTYPE (root-bound; 64 rows; 4 MiB inspection prefix; generic edges; no typed facts)\",\"construct on Linux\":\"UNIMPLEMENTED natively\",\"construct from typed XAXEDIT1\":\"EXECUTED (Windows native file contract)\",\"execute on Linux (namespaces, seccomp, rlimits)\":\"UNIMPLEMENTED natively\",\"modern protocol 2026-07-28\":\"PROTOTYPE (native MCP; candidate gates open)\",\"result (serves artifacts over the wire)\":\"UNIMPLEMENTED natively\",\"stdio transport, JSON validation, MCP lifecycle, tool dispatch, host rights\":\"EXECUTED (native protocol fixtures)\",\"workspace/query/transaction/build over a host-granted native compiler\":\"PROTOTYPE (docs/NATIVE.md)\",\"Android ARM64 execution through host-controlled ADB\":\"PROTOTYPE (native Windows bridge and static ARM64 supervisor; seccomp/rlimits; bounded device profile; security gates open)\"},\"ok\":true,\"protocol\":{\"framing\":\"newline-delimited JSON-RPC 2.0\",\"max_json_depth\":64,\"max_message_bytes\":4194304,\"versions\":[\"2026-07-28\",\"2024-11-05\",\"2025-03-26\",\"2025-06-18\",\"2025-11-25\"]},\"sandbox\":{\"available\":\"Android ARM64 static ELF preview through a Windows host\",\"launcher\":\"xax-mcp-sandbox.exe + android-runner (canonical native XAX stores)\",\"reason\":\"Explicit host execution grant, ADB executable and device serial required. The native Android supervisor installs no_new_privs and an architecture-checked syscall filter, closes extra descriptors, supplies an empty environment and enforces fixed limits. Trusted device and workspace required; remote cleanup on disconnect/cancellation and broader security acceptance remain open.\"},\"server\":{\"implementation\":\"native XAX program (windows-x86_64 PE32+ built from a canonical .xax store)\",\"name\":\"xax-mcp\",\"python_on_request_path\":false,\"transport\":\"stdio\",\"version\":\"0.10.0+native\"},\"targets\":[{\"target\":\"android-arm64\",\"input_modes\":[\"construction-constants\",\"binary-stdin-hex\",\"argv\"],\"result_mode\":\"exit-u8-or-128+signal+separate-stream-hex+resource-observations\"}],\"tools\":{\"xax_build\":\"EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler\",\"xax_capabilities\":\"EXECUTED (native)\",\"xax_construct\":\"EXECUTED: verified XAXEDIT1 construction and edits through the native compiler; xax-construct-v1 JSON is unsupported\",\"xax_execute\":\"Android ARM64 static-ELF preview: builds only the current authorized canonical request and runs its artifact on the host-selected ADB device through native XAX Windows and Android launchers. Requires --allow-execute plus host-owned XAX_MCP_ADB and XAX_MCP_ANDROID_SERIAL; clients cannot choose a device, path, executable, environment, grant or budget. Optional stdin_hex supplies at most 262144 exact binary bytes followed by EOF; args excludes the controlled argv[0], preserves empty strings and Unicode, and is limited to 64 arguments and 8192 UTF-16 units. The worker has an empty environment, a syscall allowlist that denies file opening, networking and process creation, a five-second CPU limit, ten-second wall timer and 256 MiB virtual address-space limit. Returns separate exact streams, low-eight-bit exit or 128+signal, measured wall/user/kernel CPU and peak RSS bytes, and stdin_bytes_supplied. At most 1 MiB combined output is returned; device spool is bounded at 2 MiB plus two bytes and over-limit output is withheld. Setup, incomplete transport, budget and cleanup failures fail closed. Device trust, remote disconnect/cancellation cleanup, workspace aliases and wider security gates remain experimental. APKs, shared libraries, Android APIs, typed layouts and external tools are unsupported by this execution profile.\",\"xax_query\":\"EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler\",\"xax_result\":\"UNIMPLEMENTED natively: result handles need session state, which the native server lacks\",\"xax_transaction\":\"EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler\",\"xax_workspace\":\"EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler\"},\"xax\":{\"pinned_commit\":\"af376e8a8a1ac5635bcad459cb7063ef0b326430\",\"native_file_contract\":\"xax-native-file-v1\",\"role\":\"pinned native Windows compiler seed; no interpreter\"},\"execution\":{\"stdin\":\"hex bytes + physical EOF\",\"args\":\"Unicode argument vector excluding executor-controlled argv[0]\",\"max_stdin_bytes\":262144,\"max_args\":64,\"max_argument_utf16_units\":8192,\"max_returned_combined_output_bytes\":1048576,\"max_device_spool_bytes\":2097154,\"max_cpu_100ns\":50000000,\"max_wall_ms\":10000,\"max_address_space_bytes\":268435456,\"environment\":\"empty\",\"scope\":\"currently authorized static ARM64 artifact on the host-selected device\",\"peak_memory\":\"wait4 peak resident-set bytes; virtual-address limit is separate\",\"exit_status\":\"low eight bits on normal exit; 128 + signal on termination\",\"typed_layouts\":false,\"registered_external_tools\":false}}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "authority": {
+              "effects_granted": [],
+              "max_request_bytes": 4194304,
+              "rights": [
+                "build",
+                "execute",
+                "mutate",
+                "read"
+              ],
+              "store_roots": 0
+            },
+            "maturity": {
+              "compiler cancellation": "PROTOTYPE (compiler calls; 1 MiB queue; backpressure; confirmed descendant cleanup)",
+              "semantic reference pages": "PROTOTYPE (root-bound; 64 rows; 4 MiB inspection prefix; generic edges; no typed facts)",
+              "construct on Linux": "UNIMPLEMENTED natively",
+              "construct from typed XAXEDIT1": "EXECUTED (Windows native file contract)",
+              "execute on Linux (namespaces, seccomp, rlimits)": "UNIMPLEMENTED natively",
+              "modern protocol 2026-07-28": "PROTOTYPE (native MCP; candidate gates open)",
+              "result (serves artifacts over the wire)": "UNIMPLEMENTED natively",
+              "stdio transport, JSON validation, MCP lifecycle, tool dispatch, host rights": "EXECUTED (native protocol fixtures)",
+              "workspace/query/transaction/build over a host-granted native compiler": "PROTOTYPE (docs/NATIVE.md)",
+              "Android ARM64 execution through host-controlled ADB": "PROTOTYPE (native Windows bridge and static ARM64 supervisor; seccomp/rlimits; bounded device profile; security gates open)"
+            },
+            "ok": true,
+            "protocol": {
+              "framing": "newline-delimited JSON-RPC 2.0",
+              "max_json_depth": 64,
+              "max_message_bytes": 4194304,
+              "versions": [
+                "2026-07-28",
+                "2024-11-05",
+                "2025-03-26",
+                "2025-06-18",
+                "2025-11-25"
+              ]
+            },
+            "sandbox": {
+              "available": "Android ARM64 static ELF preview through a Windows host",
+              "launcher": "xax-mcp-sandbox.exe + android-runner (canonical native XAX stores)",
+              "reason": "Explicit host execution grant, ADB executable and device serial required. The native Android supervisor installs no_new_privs and an architecture-checked syscall filter, closes extra descriptors, supplies an empty environment and enforces fixed limits. Trusted device and workspace required; remote cleanup on disconnect/cancellation and broader security acceptance remain open."
+            },
+            "server": {
+              "implementation": "native XAX program (windows-x86_64 PE32+ built from a canonical .xax store)",
+              "name": "xax-mcp",
+              "python_on_request_path": false,
+              "transport": "stdio",
+              "version": "0.10.0+native"
+            },
+            "targets": [
+              {
+                "target": "android-arm64",
+                "input_modes": [
+                  "construction-constants",
+                  "binary-stdin-hex",
+                  "argv"
+                ],
+                "result_mode": "exit-u8-or-128+signal+separate-stream-hex+resource-observations"
+              }
+            ],
+            "tools": {
+              "xax_build": "EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler",
+              "xax_capabilities": "EXECUTED (native)",
+              "xax_construct": "EXECUTED: verified XAXEDIT1 construction and edits through the native compiler; xax-construct-v1 JSON is unsupported",
+              "xax_execute": "Android ARM64 static-ELF preview: builds only the current authorized canonical request and runs its artifact on the host-selected ADB device through native XAX Windows and Android launchers. Requires --allow-execute plus host-owned XAX_MCP_ADB and XAX_MCP_ANDROID_SERIAL; clients cannot choose a device, path, executable, environment, grant or budget. Optional stdin_hex supplies at most 262144 exact binary bytes followed by EOF; args excludes the controlled argv[0], preserves empty strings and Unicode, and is limited to 64 arguments and 8192 UTF-16 units. The worker has an empty environment, a syscall allowlist that denies file opening, networking and process creation, a five-second CPU limit, ten-second wall timer and 256 MiB virtual address-space limit. Returns separate exact streams, low-eight-bit exit or 128+signal, measured wall/user/kernel CPU and peak RSS bytes, and stdin_bytes_supplied. At most 1 MiB combined output is returned; device spool is bounded at 2 MiB plus two bytes and over-limit output is withheld. Setup, incomplete transport, budget and cleanup failures fail closed. Device trust, remote disconnect/cancellation cleanup, workspace aliases and wider security gates remain experimental. APKs, shared libraries, Android APIs, typed layouts and external tools are unsupported by this execution profile.",
+              "xax_query": "EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler",
+              "xax_result": "UNIMPLEMENTED natively: result handles need session state, which the native server lacks",
+              "xax_transaction": "EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler",
+              "xax_workspace": "EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler"
+            },
+            "xax": {
+              "pinned_commit": "af376e8a8a1ac5635bcad459cb7063ef0b326430",
+              "native_file_contract": "xax-native-file-v1",
+              "role": "pinned native Windows compiler seed; no interpreter"
+            },
+            "execution": {
+              "stdin": "hex bytes + physical EOF",
+              "args": "Unicode argument vector excluding executor-controlled argv[0]",
+              "max_stdin_bytes": 262144,
+              "max_args": 64,
+              "max_argument_utf16_units": 8192,
+              "max_returned_combined_output_bytes": 1048576,
+              "max_device_spool_bytes": 2097154,
+              "max_cpu_100ns": 50000000,
+              "max_wall_ms": 10000,
+              "max_address_space_bytes": 268435456,
+              "environment": "empty",
+              "scope": "currently authorized static ARM64 artifact on the host-selected device",
+              "peak_memory": "wait4 peak resident-set bytes; virtual-address limit is separate",
+              "exit_status": "low eight bits on normal exit; 128 + signal on termination",
+              "typed_layouts": false,
+              "registered_external_tools": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/call",
+        "params": {
+          "_meta": {
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+            "io.modelcontextprotocol/clientCapabilities": {}
+          },
+          "name": "xax_build",
+          "arguments": {}
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"ok\":true,\"root\":\"f1e8350d196fcd707004b0a6cf0db70c96c6250dc4b4201263b3b0a4e93954ce\",\"artifact\":{\"bytes\":456},\"provenance\":{\"bytes\":268,\"hex\":\"8a023f85d5a38d0e0482e62fedbbf83a353bf4a21ea657d2b8dc3739dcf1a54b212d0a01043d330a6817bc6d84f0e4349f0d1b1098d1318fdb58f32eece11413f0469edd098f83462908b2b5436495cc42a51a5cf5dbca53f4484171cdfbaf4e163303e1a19e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967ef1e8350d196fcd707004b0a6cf0db70c96c6250dc4b4201263b3b0a4e93954ce66050003010247e84360c3022255ce2fbfecc3e9c8a6fa15861d64437bae9184c6910790ff6cbc351ca3286fa3ff21d2b39e3ea374c3b0f01fb45a5e601d29c2dc08105ce1175bc615b85805da6f589982baa6ca6648a9e54ad983eed219df202185bec4fa3800\"}}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "ok": true,
+            "root": "f1e8350d196fcd707004b0a6cf0db70c96c6250dc4b4201263b3b0a4e93954ce",
+            "artifact": {
+              "bytes": 456
+            },
+            "provenance": {
+              "bytes": 268,
+              "hex": "8a023f85d5a38d0e0482e62fedbbf83a353bf4a21ea657d2b8dc3739dcf1a54b212d0a01043d330a6817bc6d84f0e4349f0d1b1098d1318fdb58f32eece11413f0469edd098f83462908b2b5436495cc42a51a5cf5dbca53f4484171cdfbaf4e163303e1a19e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967ef1e8350d196fcd707004b0a6cf0db70c96c6250dc4b4201263b3b0a4e93954ce66050003010247e84360c3022255ce2fbfecc3e9c8a6fa15861d64437bae9184c6910790ff6cbc351ca3286fa3ff21d2b39e3ea374c3b0f01fb45a5e601d29c2dc08105ce1175bc615b85805da6f589982baa6ca6648a9e54ad983eed219df202185bec4fa3800"
+            }
+          }
+        }
+      }
+    },
+    {
+      "request": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "_meta": {
+            "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+            "io.modelcontextprotocol/clientCapabilities": {}
+          },
+          "name": "xax_execute",
+          "arguments": {
+            "args": [
+              "one two",
+              "é😀"
+            ]
+          }
+        }
+      },
+      "response": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"ok\":true,\"exit_code\":66,\"duration_ms\":8,\"flags\":0,\"stdout_bytes\":18,\"stderr_bytes\":0,\"user_cpu_100ns\":0,\"kernel_cpu_100ns\":70160,\"peak_memory_bytes\":28672,\"stdin_bytes_supplied\":0,\"stdout_hex\":\"58415820416e64726f69642041524d36340a\",\"stderr_hex\":\"\"}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "ok": true,
+            "exit_code": 66,
+            "duration_ms": 8,
+            "flags": 0,
+            "stdout_bytes": 18,
+            "stderr_bytes": 0,
+            "user_cpu_100ns": 0,
+            "kernel_cpu_100ns": 70160,
+            "peak_memory_bytes": 28672,
+            "stdin_bytes_supplied": 0,
+            "stdout_hex": "58415820416e64726f69642041524d36340a",
+            "stderr_hex": ""
+          }
+        }
+      }
+    }
+  ]
+}

@@ -7,6 +7,15 @@ server, Windows ADB broker and Android supervisor are in
 `native/candidates/20261112-android/`; Gen3 and the existing read-only desktop
 preview remain unchanged. Release readiness and promotion remain false.
 
+The [target/toolchain verification](evidence/native-android-target-verification-20261112.json)
+confirms the live preview advertises `android-arm64`, builds ELF machine 183 and
+executes the exact artifact on the authorized device. The immutable deployment
+seed is **TESTED for this static Android profile**, not an untested toolchain.
+This does not certify a moving upstream seed, JVM, all Android devices or general
+release readiness. JVM is not exposed by this MCP preview. The currently active
+`xax_native_preview_20261111` desktop connection remains Windows-only; selecting
+the separate Android server is required for Android calls.
+
 ## Use
 
 Select `native/candidates/20261112-android/xax-mcp-native.exe` as the stdio server.

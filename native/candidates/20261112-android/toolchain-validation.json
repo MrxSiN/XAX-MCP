@@ -1,0 +1,16 @@
+{
+  "schema": "xax-mcp-target-toolchain-validation-v1",
+  "recorded": "2026-11-12",
+  "target": "android-arm64",
+  "implementation_status": "EXECUTED",
+  "toolchain_status": "TESTED",
+  "scope": "Windows-hosted native MCP build and host-controlled ADB execution of the pinned static ARM64 ELF profile on Pixel 8 Pro API 37",
+  "compiler_dependency": "native/xax-dependency.json",
+  "compiler_seed_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79",
+  "evidence": "docs/evidence/native-android-target-verification-20261112.json",
+  "broader_acceptance": "docs/evidence/native-android-20261112.json",
+  "jvm_mcp_implemented": false,
+  "jvm_mcp_toolchain_tested": false,
+  "active_desktop_android_selected": false,
+  "release_ready": false
+}

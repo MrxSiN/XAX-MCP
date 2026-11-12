@@ -255,6 +255,9 @@
     "device_target": "android-arm64",
     "deployment_pin_unchanged": true,
     "release_ready": false,
-    "workspace_alias_gate_closed": false
+    "workspace_alias_gate_closed": false,
+    "implementation_status": "EXECUTED",
+    "toolchain_status": "TESTED for the pinned Android static-ELF profile",
+    "target_verification": "docs/evidence/native-android-target-verification-20261112.json"
   }
 }
