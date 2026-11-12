@@ -259,5 +259,17 @@
     "implementation_status": "EXECUTED",
     "toolchain_status": "TESTED for the pinned Android static-ELF profile",
     "target_verification": "docs/evidence/native-android-target-verification-20261112.json"
+  },
+  "inspection_output_pin_preview": {
+    "recorded": "2026-11-12",
+    "state": "EXECUTED bounded inspection-output name pin; not default deployment",
+    "checkpoints": "native/candidates/20261112-read-pins/checkpoints.json",
+    "evidence": "docs/evidence/native-inspection-pins-20261112.json",
+    "concurrent_record_substitution_trials": 20,
+    "inspection_name_substitution_outside_writes_prevented": true,
+    "fresh_workspace_per_process": true,
+    "output_content_integrity_gate_closed": false,
+    "full_workspace_alias_gate_closed": false,
+    "release_ready": false
   }
 }

@@ -1,5 +1,18 @@
 # Evidence and claim labels
 
+## 2026-11-12 — bounded inspection output-name pins
+
+The [new evidence](evidence/native-inspection-pins-20261112.json) records one native
+transaction that prevents the tested pre-existing and concurrent `edit.rec` name
+substitutions from overwriting unrelated outside files. Twenty concurrent trials,
+authority checks, descendant cleanup, stable handle counts, native replay, a fresh
+package and the exact new CI step passed locally. Android build/run was reconfirmed
+with the tested pinned seed before and after the alias change. The
+[contract](NATIVE_INSPECTION_PINS_20261112.md) requires a fresh work directory per
+process and retains open content-integrity, other output, publication, pressure and
+full DOS namespace gates. This explicit preview does not change the user's active
+MCP configuration, Gen3 or release flags. Hosted CI is separate from local checks.
+
 ## 2026-11-12 — Android ARM64 execution preview
 
 The [Android acceptance index](evidence/native-android-20261112.json) binds the

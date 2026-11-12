@@ -18,11 +18,33 @@ The paused 2026-11-11 handoff remains in Git history at `1850dd7`.
 See [the Android evidence](docs/evidence/native-android-20261112.json) and
 [contract](docs/NATIVE_ANDROID_20261112.md). This is a separate explicit preview;
 static ELF only, staging-interruption cleanup and workspace aliases remain open.
-The control preview and default Gen3 remain unchanged. A fresh [target/toolchain verification](docs/evidence/native-android-target-verification-20261112.json)
+The control preview and default Gen3 remain unchanged. A fresh
+[target/toolchain verification](docs/evidence/native-android-target-verification-20261112.json)
 passed before further alias work: Android ARM64 is implemented and its exact seed
 is tested for this profile. JVM is not exposed; the active desktop connection
 remains the separate Windows-only preview. Continue with workspace alias races
 and broader capability/security acceptance.
+
+## Bounded alias/security increment completed
+
+- [x] Added an explicit native inspection-output pin preview. Pre-existing record
+  aliases decline before truncation; twenty concurrent substitution trials caused
+  no outside sentinel writes. All source bytes remained unchanged.
+- [x] Tested directory replacement, an owned DOS mapping, stable handles across
+  101 queries, native compiler descendant cleanup, host authority and client
+  execution-override denials. Confirmed that output content remains writable.
+- [x] Passed one exact-root pinned replay, deterministic rebuilds, public pages,
+  installed read-only backend calls and a fresh empty-PATH package.
+- [x] Added and locally executed a CI step replaying 57 new records and double
+  building thirteen native programs. Hosted acceptance is a separate gate.
+- [x] Reconfirmed Android query/build/device execution after the change. Android
+  static-profile toolchain status is tested; JVM is not exposed. At the user's
+  request, existing active MCP connection setup remains unchanged.
+
+See [the inspection-pin evidence](docs/evidence/native-inspection-pins-20261112.json)
+and [contract](docs/NATIVE_INSPECTION_PINS_20261112.md). The preview requires a fresh
+work directory for every server process and does not authenticate output contents
+or cover other compiler outputs and publication. It is not promoted.
 
 ## Prior completed increment
 
@@ -55,7 +77,12 @@ the user's working README edit remains intact and excluded from the increment.
 
 ## Current source and toolchain
 
-The canonical source remains `native/candidates/20261111-control/server.xax`, root
+The separate Android and inspection-pin canonical sources and artifacts are bound
+by `native/candidates/20261112-android/checkpoints.json` and
+`native/candidates/20261112-read-pins/checkpoints.json`. Neither is selected as
+the default or active desktop connection.
+
+The control preview remains `native/candidates/20261111-control/server.xax`, root
 `2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612`.
 Its artifacts and nineteen source records are unchanged. See
 `native/candidates/20261111-control/checkpoints.json` and
@@ -91,8 +118,9 @@ PowerShell invocation; use the separate pinned copy for this deployment.
 
 - [ ] Close writable workspace child-file substitution/publication and DOS
   drive-alias remapping through the reusable upstream handle/identity contract.
-  Pre-existing and concurrent `edit.rec` aliases still overwrite disposable
-  outside files. Preserve `docs/NATIVE_HANDLE_CONTRACT.md`; pathname rechecks
+  Historical/default/control previews retain the recorded outside writes. The
+  new inspection-pin preview prevents the tested `edit.rec` name substitutions;
+  output content remains writable and other compiler file modes are unchanged. Preserve `docs/NATIVE_HANDLE_CONTRACT.md`; pathname rechecks
   alone do not close TOCTOU races. Broaden hard-link, directory replacement,
   output and crash coverage before claiming safety for untrusted workspace files.
 - [ ] Add independently verified public typed inspection upstream before
@@ -107,7 +135,8 @@ PowerShell invocation; use the separate pinned copy for this deployment.
 - [ ] Complete exhaustive pressure/exhaustion, crash/cleanup and independent
   escape/security acceptance. The pinned deployment compiler's self-hosting
   and production readiness are not established by this increment.
-- [ ] Run new hosted CI and satisfy promotion gates before selecting this preview
+- [ ] Run/verify hosted CI for the new Android/inspection-pin workflow step and
+  satisfy promotion gates before selecting a preview
   as the default. Desktop acceptance here covers the configured read-only path;
   writable desktop execution requires separate acceptance.
 

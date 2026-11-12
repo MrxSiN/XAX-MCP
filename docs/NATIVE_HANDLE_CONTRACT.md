@@ -5,6 +5,13 @@ direction remains XAX-MCP to XAX. The deployment pin is unchanged. Any compiler
 extension belongs in a separate verified upstream change, independently tested
 before integration and repinning.
 
+The [2026-11-12 inspection output-name pin](NATIVE_INSPECTION_PINS_20261112.md)
+is a bounded application-side increment: exclusive creation and a lifetime-held
+output handle prevent the tested inspection name substitutions. Existing outputs
+are refused, including after restart. A controlled writer can still alter the
+output contents, and mutation/build/publication retain their previous contracts.
+The full upstream contracts below therefore remain required and unimplemented.
+
 ## File inputs, outputs and publication
 
 The experimental server pins configured files and ancestors, but the pinned

@@ -54,3 +54,5 @@ native/candidates/20261112-android/android-runner binary
 tests/android/*.xax binary
 tests/android/*.prov binary
 tests/android/* -text
+native/transactions/20261112-read-pins/*.batch -text whitespace=cr-at-eol
+native/candidates/20261112-read-pins/android-runner binary

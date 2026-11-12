@@ -1,0 +1,50 @@
+{
+  "schema": "xax-mcp-native-inspection-pin-checkpoints-v1",
+  "recorded": "2026-11-12",
+  "state": "EXECUTED explicit inspection output-name pin preview; not promoted",
+  "base": "native/candidates/20261112-android/checkpoints.json",
+  "artifacts": [
+    {
+      "path": "native/candidates/20261112-read-pins/server.xax",
+      "bytes": 2009522,
+      "sha256": "0551f1d3c112c7c8a00698a8457b7323cd04508c84ddcc753584d677598f634f",
+      "root": "bd96a5e9eae3f1d464ed6bc80920c3906b9331b76879d4d909054d7dcb018e0e"
+    },
+    {
+      "path": "native/candidates/20261112-read-pins/server-snapshot.xax",
+      "bytes": 2009801,
+      "sha256": "c154ef82ce554a6bb73d276dec1327526d232d8cb2019fe0e6f6ce309e49cd53",
+      "root": "7323b1032d4fd1b8b2c93c413b824bef6bec33f3beb168d43dad31b58f37bcda"
+    },
+    {
+      "path": "native/candidates/20261112-read-pins/xax-mcp-native.exe",
+      "bytes": 539648,
+      "sha256": "3a9b271e73309c1c83a114baa83d3263d0b5222e61c4fcb5283994124520506d"
+    },
+    {
+      "path": "native/candidates/20261112-read-pins/xax-mcp-native.prov",
+      "bytes": 268,
+      "sha256": "b8f367e5440996dd50bc79ca5b5fa57d6f252b16ecaead5e8501ff80f21f56d2"
+    },
+    {
+      "path": "native/candidates/20261112-read-pins/xax-mcp-sandbox.exe",
+      "bytes": 9728,
+      "sha256": "252afeeb4b2ee86b92d0a153ed4e9c813f50384cbb83a86e5a46f6207c2f975b"
+    },
+    {
+      "path": "native/candidates/20261112-read-pins/android-runner",
+      "bytes": 5732,
+      "sha256": "1406ac92bc61826445a9223357f5c7f65cab25b7512bba60a13f04b7547ba30b"
+    }
+  ],
+  "transactions": "native/transactions/20261112-read-pins/manifest.json",
+  "evidence": "docs/evidence/native-inspection-pins-20261112.json",
+  "required_launch_profile": "fresh trusted work directory; read-only acceptance plus separately tested read/build/execute sequence; general mutation/publication acceptance remains open",
+  "default_gen3_unchanged": true,
+  "android_toolchain_status": "TESTED for the pinned static-ELF profile; see separate Android target verification",
+  "fresh_workspace_after_restart": true,
+  "output_content_integrity_gate_closed": false,
+  "full_workspace_alias_gate_closed": false,
+  "release_ready": false,
+  "full_mission_complete": false
+}

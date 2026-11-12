@@ -1,0 +1,57 @@
+{
+  "schema": "xax-mcp-inspection-pin-cases-v1",
+  "recorded": "2026-11-12",
+  "source": "native/candidates/20261112-read-pins/checkpoints.json",
+  "evidence": "docs/evidence/native-inspection-pins-20261112.json",
+  "orchestration": "External clients only; no foreign implementation in the repository",
+  "cases": [
+    {
+      "name": "preexisting-record-hardlink",
+      "old": "outside sentinel overwritten",
+      "new": "declined; sentinel and source preserved"
+    },
+    {
+      "name": "concurrent-record-substitution",
+      "trials": 20,
+      "old": "outside sentinel overwritten in controlled trial",
+      "new": "successful owned inspection or decline; all outside sentinels and sources preserved"
+    },
+    {
+      "name": "preexisting-record-file",
+      "new": "declined before truncation"
+    },
+    {
+      "name": "output-rename",
+      "new": "denied while held"
+    },
+    {
+      "name": "workspace-and-ancestor-rename",
+      "new": "denied"
+    },
+    {
+      "name": "owned-DOS-drive-remapping",
+      "old": "declined; no outside write",
+      "new": "declined; no outside write",
+      "scope": "one controlled unused drive mapping, not exhaustive"
+    },
+    {
+      "name": "output-content-write",
+      "new": "possible; next inspection recovers",
+      "gate_closed": false
+    },
+    {
+      "name": "restart-existing-output",
+      "new": "declined; new work directory required"
+    },
+    {
+      "name": "query-handle-pressure",
+      "queries": 101,
+      "new": "no steady-state handle growth; exit releases pin"
+    },
+    {
+      "name": "native-fault-descendants",
+      "new": "cancel, normal return and server death clean descendants; pin released on server exit"
+    }
+  ],
+  "full_workspace_alias_gate_closed": false
+}

@@ -1,0 +1,48 @@
+{
+  "schema": "xax-mcp-native-inspection-pin-replay-v1",
+  "recorded": "2026-11-12",
+  "state": "Experimental inspection output name pin; fresh work directory required",
+  "base": {
+    "bytes": 2004476,
+    "sha256": "be01eaf79b20f457e65819428095bfc4067d29fbc9c866ab2c13f46c3bbc9dd1",
+    "path": "native/candidates/20261112-android/server.xax",
+    "root": "3d3630dbb0f69d102a34c201047907052f13bf1a9d55869c8b1288c75ba6d7a3"
+  },
+  "base_replay": "native/transactions/20261112-android/manifest.json",
+  "final": {
+    "bytes": 2009522,
+    "sha256": "0551f1d3c112c7c8a00698a8457b7323cd04508c84ddcc753584d677598f634f",
+    "path": "native/candidates/20261112-read-pins/server.xax",
+    "root": "bd96a5e9eae3f1d464ed6bc80920c3906b9331b76879d4d909054d7dcb018e0e"
+  },
+  "windows_seed": {
+    "bytes": 11876864,
+    "sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79"
+  },
+  "native_authoring_seed": {
+    "bytes": 31959040,
+    "sha256": "e2f68c00a8dee67490929b173469e383853564254ed80b3a7a5e8188d8c50122"
+  },
+  "records": [
+    {
+      "bytes": 238618,
+      "sha256": "dfe65230844c8f8f4805d03ffee33583624617a09cac9911936b7225df8bdca9",
+      "path": "native/transactions/20261112-read-pins/server-inspection-output.edit",
+      "native_batch": {
+        "bytes": 9245,
+        "sha256": "2e59095a17032d646a2d024db79b32d9469c567e56cea8ef09d5bc23caffa99b",
+        "path": "native/transactions/20261112-read-pins/server-inspection-output.batch"
+      },
+      "base_root": "3d3630dbb0f69d102a34c201047907052f13bf1a9d55869c8b1288c75ba6d7a3",
+      "result_root": "bd96a5e9eae3f1d464ed6bc80920c3906b9331b76879d4d909054d7dcb018e0e",
+      "new_native_objects": 38,
+      "unchanged_objects": 6920,
+      "raw_bytes_equal": true,
+      "canonical_bytes_equal": true,
+      "mandatory_native_verify": true
+    }
+  ],
+  "packing": "Immutable native-authored objects copied into XAXEDIT1; no foreign canonical graph construction",
+  "release_ready": false,
+  "full_workspace_alias_gate_closed": false
+}

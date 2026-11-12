@@ -1,0 +1,2310 @@
+{
+  "schema": "xax-mcp-inspection-output-pin-runtime-v1",
+  "recorded": "2026-11-12",
+  "state": "EXECUTED bounded output name protection; full security gate open",
+  "artifacts": [
+    {
+      "path": "native/candidates/20261112-read-pins/server.xax",
+      "bytes": 2009522,
+      "sha256": "0551f1d3c112c7c8a00698a8457b7323cd04508c84ddcc753584d677598f634f",
+      "root": "bd96a5e9eae3f1d464ed6bc80920c3906b9331b76879d4d909054d7dcb018e0e"
+    },
+    {
+      "path": "native/candidates/20261112-read-pins/server-snapshot.xax",
+      "bytes": 2009801,
+      "sha256": "c154ef82ce554a6bb73d276dec1327526d232d8cb2019fe0e6f6ce309e49cd53",
+      "root": "7323b1032d4fd1b8b2c93c413b824bef6bec33f3beb168d43dad31b58f37bcda"
+    },
+    {
+      "path": "native/candidates/20261112-read-pins/xax-mcp-native.exe",
+      "bytes": 539648,
+      "sha256": "3a9b271e73309c1c83a114baa83d3263d0b5222e61c4fcb5283994124520506d"
+    },
+    {
+      "path": "native/candidates/20261112-read-pins/xax-mcp-native.prov",
+      "bytes": 268,
+      "sha256": "b8f367e5440996dd50bc79ca5b5fa57d6f252b16ecaead5e8501ff80f21f56d2"
+    },
+    {
+      "path": "native/candidates/20261112-read-pins/xax-mcp-sandbox.exe",
+      "bytes": 9728,
+      "sha256": "252afeeb4b2ee86b92d0a153ed4e9c813f50384cbb83a86e5a46f6207c2f975b"
+    },
+    {
+      "path": "native/candidates/20261112-read-pins/android-runner",
+      "bytes": 5732,
+      "sha256": "1406ac92bc61826445a9223357f5c7f65cab25b7512bba60a13f04b7547ba30b"
+    }
+  ],
+  "native_replay": {
+    "schema": "xax-mcp-native-inspection-pin-replay-v1",
+    "recorded": "2026-11-12",
+    "state": "Experimental inspection output name pin; fresh work directory required",
+    "base": {
+      "bytes": 2004476,
+      "sha256": "be01eaf79b20f457e65819428095bfc4067d29fbc9c866ab2c13f46c3bbc9dd1",
+      "path": "native/candidates/20261112-android/server.xax",
+      "root": "3d3630dbb0f69d102a34c201047907052f13bf1a9d55869c8b1288c75ba6d7a3"
+    },
+    "base_replay": "native/transactions/20261112-android/manifest.json",
+    "final": {
+      "bytes": 2009522,
+      "sha256": "0551f1d3c112c7c8a00698a8457b7323cd04508c84ddcc753584d677598f634f",
+      "path": "native/candidates/20261112-read-pins/server.xax",
+      "root": "bd96a5e9eae3f1d464ed6bc80920c3906b9331b76879d4d909054d7dcb018e0e"
+    },
+    "windows_seed": {
+      "bytes": 11876864,
+      "sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79"
+    },
+    "native_authoring_seed": {
+      "bytes": 31959040,
+      "sha256": "e2f68c00a8dee67490929b173469e383853564254ed80b3a7a5e8188d8c50122"
+    },
+    "records": [
+      {
+        "bytes": 238618,
+        "sha256": "dfe65230844c8f8f4805d03ffee33583624617a09cac9911936b7225df8bdca9",
+        "path": "native/transactions/20261112-read-pins/server-inspection-output.edit",
+        "native_batch": {
+          "bytes": 9245,
+          "sha256": "2e59095a17032d646a2d024db79b32d9469c567e56cea8ef09d5bc23caffa99b",
+          "path": "native/transactions/20261112-read-pins/server-inspection-output.batch"
+        },
+        "base_root": "3d3630dbb0f69d102a34c201047907052f13bf1a9d55869c8b1288c75ba6d7a3",
+        "result_root": "bd96a5e9eae3f1d464ed6bc80920c3906b9331b76879d4d909054d7dcb018e0e",
+        "new_native_objects": 38,
+        "unchanged_objects": 6920,
+        "raw_bytes_equal": true,
+        "canonical_bytes_equal": true,
+        "mandatory_native_verify": true
+      }
+    ],
+    "packing": "Immutable native-authored objects copied into XAXEDIT1; no foreign canonical graph construction",
+    "release_ready": false,
+    "full_workspace_alias_gate_closed": false
+  },
+  "alias_trials": [
+    {
+      "server": "old",
+      "case": "preexisting-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"bytes\":1852,\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"workspace\":\"ws_0\",\"function\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"inspection\":{\"format\":\"xax-native-file-v1\",\"objects\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"references\":[\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"kind\":9,\"references\":[\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"kind\":10,\"references\":[\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\"]},{\"cid\":\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"kind\":4,\"references\":[]},{\"cid\":\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"kind\":6,\"references\":[]},{\"cid\":\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"kind\":6,\"references\":[]},{\"cid\":\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"kind\":10,\"references\":[]},{\"cid\":\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"kind\":4,\"references\":[]},{\"cid\":\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"kind\":7,\"references\":[\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]},{\"cid\":\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"kind\":4,\"references\":[]},{\"cid\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"kind\":3,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]}],\"complete\":true}}",
+                "type": "text"
+              }
+            ],
+            "isError": false,
+            "structuredContent": {
+              "bytes": 1852,
+              "ok": true,
+              "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+              "workspace": "ws_0",
+              "function": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+              "inspection": {
+                "format": "xax-native-file-v1",
+                "objects": [
+                  {
+                    "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                    "kind": 2,
+                    "references": [
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                    "kind": 9,
+                    "references": [
+                      "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                    "kind": 5,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                    ]
+                  },
+                  {
+                    "cid": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+                    "kind": 10,
+                    "references": [
+                      "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                      "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                      "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e"
+                    ]
+                  },
+                  {
+                    "cid": "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                    "kind": 10,
+                    "references": []
+                  },
+                  {
+                    "cid": "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                    "kind": 7,
+                    "references": [
+                      "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  },
+                  {
+                    "cid": "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+                    "kind": 3,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  }
+                ],
+                "complete": true
+              }
+            }
+          }
+        }
+      ],
+      "victim_preserved": false,
+      "source_bytes_preserved": true,
+      "attempts": 0,
+      "aliases_installed": 0,
+      "output_rename_denied": false
+    },
+    {
+      "server": "old",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": false,
+      "source_bytes_preserved": true,
+      "attempts": 84,
+      "aliases_installed": 83,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "normal-repeat",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"bytes\":1852,\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"workspace\":\"ws_0\",\"function\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"inspection\":{\"format\":\"xax-native-file-v1\",\"objects\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"references\":[\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"kind\":9,\"references\":[\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"kind\":10,\"references\":[\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\"]},{\"cid\":\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"kind\":4,\"references\":[]},{\"cid\":\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"kind\":6,\"references\":[]},{\"cid\":\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"kind\":6,\"references\":[]},{\"cid\":\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"kind\":10,\"references\":[]},{\"cid\":\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"kind\":4,\"references\":[]},{\"cid\":\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"kind\":7,\"references\":[\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]},{\"cid\":\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"kind\":4,\"references\":[]},{\"cid\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"kind\":3,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]}],\"complete\":true}}",
+                "type": "text"
+              }
+            ],
+            "isError": false,
+            "structuredContent": {
+              "bytes": 1852,
+              "ok": true,
+              "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+              "workspace": "ws_0",
+              "function": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+              "inspection": {
+                "format": "xax-native-file-v1",
+                "objects": [
+                  {
+                    "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                    "kind": 2,
+                    "references": [
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                    "kind": 9,
+                    "references": [
+                      "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                    "kind": 5,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                    ]
+                  },
+                  {
+                    "cid": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+                    "kind": 10,
+                    "references": [
+                      "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                      "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                      "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e"
+                    ]
+                  },
+                  {
+                    "cid": "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                    "kind": 10,
+                    "references": []
+                  },
+                  {
+                    "cid": "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                    "kind": 7,
+                    "references": [
+                      "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  },
+                  {
+                    "cid": "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+                    "kind": 3,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  }
+                ],
+                "complete": true
+              }
+            }
+          }
+        },
+        {
+          "jsonrpc": "2.0",
+          "id": 1,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"bytes\":1852,\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"workspace\":\"ws_0\",\"function\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"inspection\":{\"format\":\"xax-native-file-v1\",\"objects\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"references\":[\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"kind\":9,\"references\":[\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"kind\":10,\"references\":[\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\"]},{\"cid\":\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"kind\":4,\"references\":[]},{\"cid\":\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"kind\":6,\"references\":[]},{\"cid\":\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"kind\":6,\"references\":[]},{\"cid\":\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"kind\":10,\"references\":[]},{\"cid\":\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"kind\":4,\"references\":[]},{\"cid\":\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"kind\":7,\"references\":[\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]},{\"cid\":\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"kind\":4,\"references\":[]},{\"cid\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"kind\":3,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]}],\"complete\":true}}",
+                "type": "text"
+              }
+            ],
+            "isError": false,
+            "structuredContent": {
+              "bytes": 1852,
+              "ok": true,
+              "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+              "workspace": "ws_0",
+              "function": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+              "inspection": {
+                "format": "xax-native-file-v1",
+                "objects": [
+                  {
+                    "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                    "kind": 2,
+                    "references": [
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                    "kind": 9,
+                    "references": [
+                      "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                    "kind": 5,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                    ]
+                  },
+                  {
+                    "cid": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+                    "kind": 10,
+                    "references": [
+                      "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                      "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                      "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e"
+                    ]
+                  },
+                  {
+                    "cid": "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                    "kind": 10,
+                    "references": []
+                  },
+                  {
+                    "cid": "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                    "kind": 7,
+                    "references": [
+                      "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  },
+                  {
+                    "cid": "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+                    "kind": 3,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  }
+                ],
+                "complete": true
+              }
+            }
+          }
+        },
+        {
+          "jsonrpc": "2.0",
+          "id": 2,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"bytes\":1852,\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"workspace\":\"ws_0\",\"function\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"inspection\":{\"format\":\"xax-native-file-v1\",\"objects\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"references\":[\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"kind\":9,\"references\":[\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"kind\":10,\"references\":[\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\"]},{\"cid\":\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"kind\":4,\"references\":[]},{\"cid\":\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"kind\":6,\"references\":[]},{\"cid\":\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"kind\":6,\"references\":[]},{\"cid\":\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"kind\":10,\"references\":[]},{\"cid\":\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"kind\":4,\"references\":[]},{\"cid\":\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"kind\":7,\"references\":[\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]},{\"cid\":\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"kind\":4,\"references\":[]},{\"cid\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"kind\":3,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]}],\"complete\":true}}",
+                "type": "text"
+              }
+            ],
+            "isError": false,
+            "structuredContent": {
+              "bytes": 1852,
+              "ok": true,
+              "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+              "workspace": "ws_0",
+              "function": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+              "inspection": {
+                "format": "xax-native-file-v1",
+                "objects": [
+                  {
+                    "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                    "kind": 2,
+                    "references": [
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                    "kind": 9,
+                    "references": [
+                      "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                    "kind": 5,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                    ]
+                  },
+                  {
+                    "cid": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+                    "kind": 10,
+                    "references": [
+                      "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                      "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                      "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e"
+                    ]
+                  },
+                  {
+                    "cid": "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                    "kind": 10,
+                    "references": []
+                  },
+                  {
+                    "cid": "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                    "kind": 7,
+                    "references": [
+                      "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  },
+                  {
+                    "cid": "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+                    "kind": 3,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  }
+                ],
+                "complete": true
+              }
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 0,
+      "aliases_installed": 0,
+      "output_rename_denied": true
+    },
+    {
+      "server": "new",
+      "case": "compiler-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "unsafe_host_path",
+                "message": "host paths must be absolute drive paths without reparse points"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 0,
+      "aliases_installed": 0,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "seed-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "unsafe_host_path",
+                "message": "host paths must be absolute drive paths without reparse points"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 0,
+      "aliases_installed": 0,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "preexisting-record-file",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 0,
+      "aliases_installed": 0,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "preexisting-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 0,
+      "aliases_installed": 0,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"bytes\":1852,\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"workspace\":\"ws_0\",\"function\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"inspection\":{\"format\":\"xax-native-file-v1\",\"objects\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"references\":[\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"kind\":9,\"references\":[\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"kind\":10,\"references\":[\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\"]},{\"cid\":\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"kind\":4,\"references\":[]},{\"cid\":\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"kind\":6,\"references\":[]},{\"cid\":\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"kind\":6,\"references\":[]},{\"cid\":\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"kind\":10,\"references\":[]},{\"cid\":\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"kind\":4,\"references\":[]},{\"cid\":\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"kind\":7,\"references\":[\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]},{\"cid\":\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"kind\":4,\"references\":[]},{\"cid\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"kind\":3,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]}],\"complete\":true}}",
+                "type": "text"
+              }
+            ],
+            "isError": false,
+            "structuredContent": {
+              "bytes": 1852,
+              "ok": true,
+              "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+              "workspace": "ws_0",
+              "function": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+              "inspection": {
+                "format": "xax-native-file-v1",
+                "objects": [
+                  {
+                    "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                    "kind": 2,
+                    "references": [
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                    "kind": 9,
+                    "references": [
+                      "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                    "kind": 5,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                    ]
+                  },
+                  {
+                    "cid": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+                    "kind": 10,
+                    "references": [
+                      "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                      "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                      "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e"
+                    ]
+                  },
+                  {
+                    "cid": "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                    "kind": 10,
+                    "references": []
+                  },
+                  {
+                    "cid": "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                    "kind": 7,
+                    "references": [
+                      "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  },
+                  {
+                    "cid": "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+                    "kind": 3,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  }
+                ],
+                "complete": true
+              }
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 106,
+      "aliases_installed": 29,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"bytes\":1852,\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"workspace\":\"ws_0\",\"function\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"inspection\":{\"format\":\"xax-native-file-v1\",\"objects\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"references\":[\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"kind\":9,\"references\":[\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"kind\":10,\"references\":[\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\"]},{\"cid\":\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"kind\":4,\"references\":[]},{\"cid\":\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"kind\":6,\"references\":[]},{\"cid\":\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"kind\":6,\"references\":[]},{\"cid\":\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"kind\":10,\"references\":[]},{\"cid\":\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"kind\":4,\"references\":[]},{\"cid\":\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"kind\":7,\"references\":[\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]},{\"cid\":\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"kind\":4,\"references\":[]},{\"cid\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"kind\":3,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]}],\"complete\":true}}",
+                "type": "text"
+              }
+            ],
+            "isError": false,
+            "structuredContent": {
+              "bytes": 1852,
+              "ok": true,
+              "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+              "workspace": "ws_0",
+              "function": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+              "inspection": {
+                "format": "xax-native-file-v1",
+                "objects": [
+                  {
+                    "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                    "kind": 2,
+                    "references": [
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                    "kind": 9,
+                    "references": [
+                      "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                    "kind": 5,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                    ]
+                  },
+                  {
+                    "cid": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+                    "kind": 10,
+                    "references": [
+                      "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                      "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                      "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e"
+                    ]
+                  },
+                  {
+                    "cid": "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                    "kind": 10,
+                    "references": []
+                  },
+                  {
+                    "cid": "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                    "kind": 7,
+                    "references": [
+                      "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  },
+                  {
+                    "cid": "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+                    "kind": 3,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  }
+                ],
+                "complete": true
+              }
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 122,
+      "aliases_installed": 29,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 31,
+      "aliases_installed": 30,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 32,
+      "aliases_installed": 31,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"bytes\":1852,\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"workspace\":\"ws_0\",\"function\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"inspection\":{\"format\":\"xax-native-file-v1\",\"objects\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"references\":[\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"kind\":9,\"references\":[\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"kind\":10,\"references\":[\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\"]},{\"cid\":\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"kind\":4,\"references\":[]},{\"cid\":\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"kind\":6,\"references\":[]},{\"cid\":\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"kind\":6,\"references\":[]},{\"cid\":\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"kind\":10,\"references\":[]},{\"cid\":\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"kind\":4,\"references\":[]},{\"cid\":\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"kind\":7,\"references\":[\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]},{\"cid\":\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"kind\":4,\"references\":[]},{\"cid\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"kind\":3,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]}],\"complete\":true}}",
+                "type": "text"
+              }
+            ],
+            "isError": false,
+            "structuredContent": {
+              "bytes": 1852,
+              "ok": true,
+              "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+              "workspace": "ws_0",
+              "function": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+              "inspection": {
+                "format": "xax-native-file-v1",
+                "objects": [
+                  {
+                    "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                    "kind": 2,
+                    "references": [
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                    "kind": 9,
+                    "references": [
+                      "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                    "kind": 5,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                    ]
+                  },
+                  {
+                    "cid": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+                    "kind": 10,
+                    "references": [
+                      "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                      "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                      "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e"
+                    ]
+                  },
+                  {
+                    "cid": "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                    "kind": 10,
+                    "references": []
+                  },
+                  {
+                    "cid": "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                    "kind": 7,
+                    "references": [
+                      "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  },
+                  {
+                    "cid": "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+                    "kind": 3,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  }
+                ],
+                "complete": true
+              }
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 109,
+      "aliases_installed": 28,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 31,
+      "aliases_installed": 30,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 32,
+      "aliases_installed": 31,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 35,
+      "aliases_installed": 34,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 36,
+      "aliases_installed": 35,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"bytes\":1852,\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"workspace\":\"ws_0\",\"function\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"inspection\":{\"format\":\"xax-native-file-v1\",\"objects\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"references\":[\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"kind\":9,\"references\":[\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"kind\":10,\"references\":[\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\"]},{\"cid\":\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"kind\":4,\"references\":[]},{\"cid\":\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"kind\":6,\"references\":[]},{\"cid\":\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"kind\":6,\"references\":[]},{\"cid\":\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"kind\":10,\"references\":[]},{\"cid\":\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"kind\":4,\"references\":[]},{\"cid\":\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"kind\":7,\"references\":[\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]},{\"cid\":\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"kind\":4,\"references\":[]},{\"cid\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"kind\":3,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]}],\"complete\":true}}",
+                "type": "text"
+              }
+            ],
+            "isError": false,
+            "structuredContent": {
+              "bytes": 1852,
+              "ok": true,
+              "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+              "workspace": "ws_0",
+              "function": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+              "inspection": {
+                "format": "xax-native-file-v1",
+                "objects": [
+                  {
+                    "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                    "kind": 2,
+                    "references": [
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                    "kind": 9,
+                    "references": [
+                      "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                    "kind": 5,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                    ]
+                  },
+                  {
+                    "cid": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+                    "kind": 10,
+                    "references": [
+                      "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                      "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                      "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e"
+                    ]
+                  },
+                  {
+                    "cid": "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                    "kind": 10,
+                    "references": []
+                  },
+                  {
+                    "cid": "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                    "kind": 7,
+                    "references": [
+                      "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  },
+                  {
+                    "cid": "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+                    "kind": 3,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  }
+                ],
+                "complete": true
+              }
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 130,
+      "aliases_installed": 31,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 31,
+      "aliases_installed": 31,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 32,
+      "aliases_installed": 31,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 30,
+      "aliases_installed": 29,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 31,
+      "aliases_installed": 31,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 31,
+      "aliases_installed": 31,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 31,
+      "aliases_installed": 31,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 31,
+      "aliases_installed": 31,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"bytes\":1852,\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"workspace\":\"ws_0\",\"function\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"inspection\":{\"format\":\"xax-native-file-v1\",\"objects\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"references\":[\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"kind\":9,\"references\":[\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"kind\":10,\"references\":[\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\"]},{\"cid\":\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"kind\":4,\"references\":[]},{\"cid\":\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"kind\":6,\"references\":[]},{\"cid\":\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"kind\":6,\"references\":[]},{\"cid\":\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"kind\":10,\"references\":[]},{\"cid\":\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"kind\":4,\"references\":[]},{\"cid\":\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"kind\":7,\"references\":[\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]},{\"cid\":\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"kind\":4,\"references\":[]},{\"cid\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"kind\":3,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]}],\"complete\":true}}",
+                "type": "text"
+              }
+            ],
+            "isError": false,
+            "structuredContent": {
+              "bytes": 1852,
+              "ok": true,
+              "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+              "workspace": "ws_0",
+              "function": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+              "inspection": {
+                "format": "xax-native-file-v1",
+                "objects": [
+                  {
+                    "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                    "kind": 2,
+                    "references": [
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                    "kind": 9,
+                    "references": [
+                      "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                      "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                    ]
+                  },
+                  {
+                    "cid": "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                    "kind": 5,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                    ]
+                  },
+                  {
+                    "cid": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+                    "kind": 10,
+                    "references": [
+                      "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                      "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                      "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e"
+                    ]
+                  },
+                  {
+                    "cid": "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                    "kind": 6,
+                    "references": []
+                  },
+                  {
+                    "cid": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                    "kind": 10,
+                    "references": []
+                  },
+                  {
+                    "cid": "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                    "kind": 7,
+                    "references": [
+                      "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  },
+                  {
+                    "cid": "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                    "kind": 4,
+                    "references": []
+                  },
+                  {
+                    "cid": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+                    "kind": 3,
+                    "references": [
+                      "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                      "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                      "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                      "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                    ]
+                  }
+                ],
+                "complete": true
+              }
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 133,
+      "aliases_installed": 30,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 32,
+      "aliases_installed": 31,
+      "output_rename_denied": false
+    },
+    {
+      "server": "new",
+      "case": "concurrent-record-hardlink",
+      "responses": [
+        {
+          "jsonrpc": "2.0",
+          "id": 0,
+          "result": {
+            "resultType": "complete",
+            "content": [
+              {
+                "text": "{\"error\":{\"code\":\"workspace_unavailable\",\"message\":\"the current store could not be read (need at least 39 bytes)\"},\"ok\":false}",
+                "type": "text"
+              }
+            ],
+            "isError": true,
+            "structuredContent": {
+              "error": {
+                "code": "workspace_unavailable",
+                "message": "the current store could not be read (need at least 39 bytes)"
+              },
+              "ok": false
+            }
+          }
+        }
+      ],
+      "victim_preserved": true,
+      "source_bytes_preserved": true,
+      "attempts": 30,
+      "aliases_installed": 29,
+      "output_rename_denied": false
+    }
+  ],
+  "dos_alias_remapping": [
+    {
+      "server": "old",
+      "first": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"bytes\":1852,\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"workspace\":\"ws_0\",\"function\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"inspection\":{\"format\":\"xax-native-file-v1\",\"objects\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"references\":[\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"kind\":9,\"references\":[\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"kind\":10,\"references\":[\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\"]},{\"cid\":\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"kind\":4,\"references\":[]},{\"cid\":\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"kind\":6,\"references\":[]},{\"cid\":\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"kind\":6,\"references\":[]},{\"cid\":\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"kind\":10,\"references\":[]},{\"cid\":\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"kind\":4,\"references\":[]},{\"cid\":\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"kind\":7,\"references\":[\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]},{\"cid\":\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"kind\":4,\"references\":[]},{\"cid\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"kind\":3,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]}],\"complete\":true}}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "bytes": 1852,
+            "ok": true,
+            "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+            "workspace": "ws_0",
+            "function": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+            "inspection": {
+              "format": "xax-native-file-v1",
+              "objects": [
+                {
+                  "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                  "kind": 2,
+                  "references": [
+                    "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                  ]
+                },
+                {
+                  "cid": "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                  "kind": 9,
+                  "references": [
+                    "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                    "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                  ]
+                },
+                {
+                  "cid": "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                  "kind": 5,
+                  "references": [
+                    "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                  ]
+                },
+                {
+                  "cid": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+                  "kind": 10,
+                  "references": [
+                    "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                    "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                    "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e"
+                  ]
+                },
+                {
+                  "cid": "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                  "kind": 4,
+                  "references": []
+                },
+                {
+                  "cid": "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                  "kind": 6,
+                  "references": []
+                },
+                {
+                  "cid": "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                  "kind": 6,
+                  "references": []
+                },
+                {
+                  "cid": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                  "kind": 10,
+                  "references": []
+                },
+                {
+                  "cid": "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                  "kind": 4,
+                  "references": []
+                },
+                {
+                  "cid": "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                  "kind": 7,
+                  "references": [
+                    "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                    "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                    "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                    "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                    "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                  ]
+                },
+                {
+                  "cid": "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                  "kind": 4,
+                  "references": []
+                },
+                {
+                  "cid": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+                  "kind": 3,
+                  "references": [
+                    "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                    "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                    "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                    "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                  ]
+                }
+              ],
+              "complete": true
+            }
+          }
+        }
+      },
+      "after_remap": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "outside_sentinel_preserved": true,
+      "original_source_preserved": true,
+      "remapped_source_preserved": true
+    },
+    {
+      "server": "new",
+      "first": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"bytes\":1852,\"ok\":true,\"root\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"workspace\":\"ws_0\",\"function\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"inspection\":{\"format\":\"xax-native-file-v1\",\"objects\":[{\"cid\":\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"kind\":2,\"references\":[\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"kind\":9,\"references\":[\"0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63\",\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\"]},{\"cid\":\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587\",\"kind\":10,\"references\":[\"116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613\",\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\"]},{\"cid\":\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"kind\":4,\"references\":[]},{\"cid\":\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"kind\":6,\"references\":[]},{\"cid\":\"99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb\",\"kind\":6,\"references\":[]},{\"cid\":\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"kind\":10,\"references\":[]},{\"cid\":\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"kind\":4,\"references\":[]},{\"cid\":\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"kind\":7,\"references\":[\"5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]},{\"cid\":\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"kind\":4,\"references\":[]},{\"cid\":\"f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8\",\"kind\":3,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]}],\"complete\":true}}",
+              "type": "text"
+            }
+          ],
+          "isError": false,
+          "structuredContent": {
+            "bytes": 1852,
+            "ok": true,
+            "root": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+            "workspace": "ws_0",
+            "function": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+            "inspection": {
+              "format": "xax-native-file-v1",
+              "objects": [
+                {
+                  "cid": "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                  "kind": 2,
+                  "references": [
+                    "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                  ]
+                },
+                {
+                  "cid": "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                  "kind": 9,
+                  "references": [
+                    "0529ce0c09b6d3c43523af4e98c72c0f66af81715d57f312d3b00bd8ab19ab63",
+                    "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8"
+                  ]
+                },
+                {
+                  "cid": "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                  "kind": 5,
+                  "references": [
+                    "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                  ]
+                },
+                {
+                  "cid": "572f683e22d94efe404b5b73f59b85edfd3e6ccbd2614342fdf58fe66cb61587",
+                  "kind": 10,
+                  "references": [
+                    "116d1d1af71b9e6a7d8332a688151342311481647c0a573636910fd46c7ba613",
+                    "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                    "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e"
+                  ]
+                },
+                {
+                  "cid": "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                  "kind": 4,
+                  "references": []
+                },
+                {
+                  "cid": "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                  "kind": 6,
+                  "references": []
+                },
+                {
+                  "cid": "99480debf3b7af929fe19ccdf8da802c8fdec6f46b9e445d6319435f3964fedb",
+                  "kind": 6,
+                  "references": []
+                },
+                {
+                  "cid": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                  "kind": 10,
+                  "references": []
+                },
+                {
+                  "cid": "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                  "kind": 4,
+                  "references": []
+                },
+                {
+                  "cid": "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                  "kind": 7,
+                  "references": [
+                    "5584bcf2ef94ab628948fbb34443ffd85fffb405f17a8a7a26a2b21564155bfe",
+                    "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                    "8718568ef087172920355a78db42489d2d7c3391463aebb73164f523cb03e5e4",
+                    "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                    "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                  ]
+                },
+                {
+                  "cid": "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                  "kind": 4,
+                  "references": []
+                },
+                {
+                  "cid": "f70ba76887b02a4d27e583f490c654035490e4e9ab1c37bb2af49475a052f1d8",
+                  "kind": 3,
+                  "references": [
+                    "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                    "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                    "d83e661f9aac115016085155dd265858f78b30518e3362a387c212fa19aa13c1",
+                    "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                  ]
+                }
+              ],
+              "complete": true
+            }
+          }
+        }
+      },
+      "after_remap": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "resultType": "complete",
+          "content": [
+            {
+              "text": "{\"error\":{\"code\":\"unsafe_host_path\",\"message\":\"host paths must be absolute drive paths without reparse points\"},\"ok\":false}",
+              "type": "text"
+            }
+          ],
+          "isError": true,
+          "structuredContent": {
+            "error": {
+              "code": "unsafe_host_path",
+              "message": "host paths must be absolute drive paths without reparse points"
+            },
+            "ok": false
+          }
+        }
+      },
+      "outside_sentinel_preserved": true,
+      "original_source_preserved": true,
+      "remapped_source_preserved": true
+    }
+  ],
+  "security_cases": [
+    {
+      "case": "host_right_read",
+      "denied_attempts": 6,
+      "source_preserved": true
+    },
+    {
+      "case": "host_right_mutate",
+      "denied_attempts": 6,
+      "source_preserved": true
+    },
+    {
+      "case": "host_right_build",
+      "denied_attempts": 3,
+      "source_preserved": true
+    },
+    {
+      "case": "host_right_execute",
+      "denied_attempts": 3,
+      "source_preserved": true
+    },
+    {
+      "case": "output_content_write_boundary",
+      "name_pinned": true,
+      "content_write_possible": true,
+      "next_inspection_recovered": true,
+      "full_integrity_gate_closed": false
+    },
+    {
+      "case": "directory_replacement",
+      "checks": [
+        {
+          "path": "work",
+          "rename_denied": true
+        },
+        {
+          "path": "ancestor",
+          "rename_denied": true
+        }
+      ]
+    },
+    {
+      "case": "existing_output_after_restart",
+      "declined": true,
+      "fresh_workspace_required": true
+    },
+    {
+      "case": "client_cannot_override_host_execution",
+      "rejected_fields": 7,
+      "no_artifact_built": true
+    }
+  ],
+  "security_exchanges": 51,
+  "handle_lifecycle": {
+    "queries": 101,
+    "handle_counts": [
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92,
+      92
+    ],
+    "steady_state_no_growth": true,
+    "output_handle_released_on_exit": true
+  },
+  "native_fault_descendant_tests": [
+    {
+      "compiler_pid": 26008,
+      "case": "cancel",
+      "descendant_pid": 27828,
+      "both_terminated": true,
+      "elapsed_ms": 43,
+      "output_handle_released_after_server_exit": true
+    },
+    {
+      "compiler_pid": 248,
+      "case": "normal",
+      "descendant_pid": 31920,
+      "both_terminated": true,
+      "elapsed_ms": 422,
+      "output_handle_released_after_server_exit": true
+    },
+    {
+      "compiler_pid": 10656,
+      "case": "death",
+      "descendant_pid": 4748,
+      "both_terminated": true,
+      "elapsed_ms": 3,
+      "output_handle_released_after_server_exit": true
+    }
+  ],
+  "semantic_pages": {
+    "exchanges": 169,
+    "cases": [
+      {
+        "case": "seed",
+        "objects": 12,
+        "all_modes": true,
+        "all_limits": true,
+        "stale_root_after_mutation_rejected": true,
+        "workspace_unchanged": true
+      }
+    ],
+    "full_text_structured_equality": true
+  },
+  "installed_backend": {
+    "all_eight_tools": true,
+    "read_only": true,
+    "direct_native_stdio": true,
+    "active_desktop_changed": false
+  },
+  "android_regression": {
+    "exchanges": 6,
+    "passed": true,
+    "toolchain_status": "TESTED for this Android static profile",
+    "fresh_path_with_spaces": true
+  },
+  "records": [
+    {
+      "bytes": 2090,
+      "sha256": "f88f6c05baa656df53792abe23143a2216ba709ce58defa37cffd0792b1cf601",
+      "path": "docs/evidence/native-inspection-pins-20261112-aliases.ndjson.gz"
+    },
+    {
+      "bytes": 7409,
+      "sha256": "65218fbbacd4460d9adf0977e5cf5365a08294f518e13d409e871846d6f4aeee",
+      "path": "docs/evidence/native-inspection-pins-20261112-security.ndjson.gz"
+    },
+    {
+      "bytes": 6127,
+      "sha256": "8a11f52f0044a78ecb419716545886278f60855a3f776ee628391b0c312dd135",
+      "path": "docs/evidence/native-inspection-pins-20261112-android.ndjson.gz"
+    },
+    {
+      "bytes": 6818,
+      "sha256": "11108ef1cbf8192285279085daa460a69a6285796db8ba0e64ccd577a0b6faf5",
+      "path": "docs/evidence/native-inspection-pins-20261112-backend.ndjson.gz"
+    },
+    {
+      "bytes": 6429,
+      "sha256": "84da522423eb9410f535cf63921ec8b44a6886cce9a3eb9a03437d59af312d3b",
+      "path": "docs/evidence/native-inspection-pins-20261112-pages.ndjson.gz"
+    }
+  ],
+  "limitations": [
+    "Only the internal native inspect output is pinned; other file modes retain the existing contract",
+    "A fresh work directory is required per server process; existing outputs after restart are refused",
+    "Output contents remain writable during and after compiler work; no authenticated completion/sealing contract",
+    "Input carriers, mutation/build/provenance outputs, atomic publication and full DOS namespace identity remain open",
+    "No exhaustive pressure/crash/escape or release/promotion acceptance"
+  ],
+  "release_ready": false,
+  "full_workspace_alias_gate_closed": false
+}

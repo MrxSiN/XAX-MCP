@@ -270,6 +270,54 @@ jobs:
            @{launcher_terminated=$true;worker_pid=$child.ProcessId;worker_image=$workerImage;worker_alive_before_termination=$true;child_survived=$false;stdin_removed=$true;metadata_published=$false;cleanup_observed_ms=$cleanupWatch.ElapsedMilliseconds}|ConvertTo-Json|Set-Content build/executor-termination.json -Encoding utf8NoBOM
           }finally{if(!$launcher.HasExited){$launcher.Kill()};if($null-ne$worker){$worker.Dispose()};$launcher.Dispose()}
 
+      - name: Replay and rebuild Android and inspection-pin previews
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+          $compiler=$env:XAXC
+          function Native([string[]]$Arguments){& $compiler @Arguments;if($LASTEXITCODE-ne0){throw "Preview native operation failed: $($Arguments[0]) ($LASTEXITCODE)"}}
+          function Same([string]$Actual,[string]$Expected){if((Get-FileHash -LiteralPath $Actual).Hash-ne(Get-FileHash -LiteralPath $Expected).Hash){throw "Preview bytes differ: $Actual"}}
+          New-Item -ItemType Directory -Force build/preview-replay,build/preview-rebuild|Out-Null
+          $manifest=Get-Content native/transactions/20261112-android/manifest.json -Raw|ConvertFrom-Json
+          $current=@{}
+          foreach($row in $manifest.records){
+           if((Get-FileHash -LiteralPath $row.path).Hash.ToLowerInvariant()-ne$row.sha256){throw 'Android carrier identity differs'}
+           $group=$row.group
+           $base=if($group-eq'fixtures'-or!$current.ContainsKey($group)){$manifest.groups.$group.base}else{$current[$group]}
+           $out=Join-Path build/preview-replay ([IO.Path]::GetFileNameWithoutExtension($row.path)+'.xax')
+           Native @('edit',$base,$row.path,$out);Native @('verify',$out,($out+'.diag'))
+           if((Get-FileHash -LiteralPath $out).Hash.ToLowerInvariant()-ne$row.result_source.sha256){throw 'Android replay source differs'}
+           $current[$group]=$out
+          }
+          foreach($group in @('runner','host','server')){Same $current[$group] $manifest.groups.$group.final}
+          $pins=Get-Content native/transactions/20261112-read-pins/manifest.json -Raw|ConvertFrom-Json
+          $currentPin=$pins.base.path
+          foreach($row in $pins.records){
+           if((Get-FileHash -LiteralPath $row.path).Hash.ToLowerInvariant()-ne$row.sha256){throw 'Inspection-pin carrier identity differs'}
+           $out=Join-Path build/preview-replay ([IO.Path]::GetFileNameWithoutExtension($row.path)+'.xax')
+           Native @('edit',$currentPin,$row.path,$out);Native @('verify',$out,($out+'.diag'));$currentPin=$out
+          }
+          Same $currentPin $pins.final.path
+          foreach($directory in @('20261112-android','20261112-read-pins')){
+           $checkpoint=Get-Content "native/candidates/$directory/checkpoints.json" -Raw|ConvertFrom-Json
+           foreach($item in $checkpoint.artifacts){if((Get-FileHash -LiteralPath $item.path).Hash.ToLowerInvariant()-ne$item.sha256-or(Get-Item -LiteralPath $item.path).Length-ne$item.bytes){throw 'Preview artifact identity differs'}}
+          }
+          function Rebuild([string]$Source,[string]$Snapshot,[string]$Binary,[string]$Provenance,[string]$Tag){
+           $snap="build/preview-rebuild/$Tag.xax";Native @('resolve',$Source,$snap);Same $snap $Snapshot
+           foreach($attempt in 1..2){$exe="build/preview-rebuild/$Tag-$attempt.bin";$prov="build/preview-rebuild/$Tag-$attempt.prov";Native @('build',$snap,$exe,$prov);Same $exe $Binary;Same $prov $Provenance}
+          }
+          foreach($snapshot in Get-ChildItem tests/android -Filter '*-snapshot.xax'){
+           $name=$snapshot.Name.Replace('-snapshot.xax','');Rebuild "tests/android/$name.xax" $snapshot.FullName "tests/android/$name" "tests/android/$name.prov" $name
+          }
+          $candidate='native/candidates/20261112-android'
+          Rebuild "$candidate/server.xax" "$candidate/server-snapshot.xax" "$candidate/xax-mcp-native.exe" "$candidate/xax-mcp-native.prov" 'android-server'
+          Rebuild "$candidate/adb-host.xax" "$candidate/adb-host-snapshot.xax" "$candidate/xax-mcp-sandbox.exe" "$candidate/adb-host.prov" 'adb-host'
+          Rebuild "$candidate/android-runner.xax" "$candidate/android-runner-snapshot.xax" "$candidate/android-runner" "$candidate/android-runner.prov" 'android-runner'
+          $candidate='native/candidates/20261112-read-pins'
+          Rebuild "$candidate/server.xax" "$candidate/server-snapshot.xax" "$candidate/xax-mcp-native.exe" "$candidate/xax-mcp-native.prov" 'inspection-pin-server'
+          @{android_records=$manifest.records.Count;inspection_pin_records=$pins.records.Count;programs_double_built=13;device_execution='Separate connected-device evidence; no hosted device'}|ConvertTo-Json|Set-Content build/preview-rebuild-summary.json -Encoding utf8NoBOM
+
+
       - name: Assemble the native-only Windows preview package
         shell: pwsh
         run: |
@@ -295,6 +343,7 @@ jobs:
             build/native-sessions.responses.ndjson
             build/native-session-timings.json
             build/executor-termination.json
+            build/preview-rebuild-summary.json
             build/timeout-sandbox/sandbox-result.bin
             build/timeout-sandbox/sandbox-out.bin
             build/timeout-sandbox/sandbox-err.bin
