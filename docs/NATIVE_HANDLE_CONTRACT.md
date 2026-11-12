@@ -12,6 +12,14 @@ are refused, including after restart. A controlled writer can still alter the
 output contents, and mutation/build/publication retain their previous contracts.
 The full upstream contracts below therefore remain required and unimplemented.
 
+The later [inspection stream feasibility probe](NATIVE_INSPECTION_STREAM_PROBE_20261112.md)
+confirmed that both tested native seeds can emit inspection records to an exclusive
+Windows named pipe, with byte-equal output and separate producer-identity/failure
+controls. This is an inspection-only integration option, not an implemented server
+contract. Native asynchronous draining, complete-record acceptance, endpoint/input
+identity and cancellation/security acceptance remain required. It does not replace
+the edit/build/publication contract below or close any gate.
+
 ## File inputs, outputs and publication
 
 The experimental server pins configured files and ancestors, but the pinned

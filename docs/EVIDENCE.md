@@ -1,5 +1,15 @@
 # Evidence and claim labels
 
+## 2026-11-12 — post-JVM inspection stream feasibility
+
+After JVM acceptance, [external transport probes](evidence/native-inspection-stream-probe-20261112.json)
+confirmed that both exact native seeds emit byte-equal inspection records over a
+Windows named pipe. Four positive cases and eight endpoint/identity/interruption
+controls passed. This is [feasibility evidence](NATIVE_INSPECTION_STREAM_PROBE_20261112.md),
+with no MCP exchange or native server/compiler change. Bounded native asynchronous
+integration, local-only endpoint/input identity and full completion checks remain
+required. Content integrity, atomic publication and broader security remain open.
+
 ## 2026-11-12 — JVM snapshot build and execution preview
 
 The [JVM acceptance index](evidence/native-jvm-20261112.json) binds native source,
@@ -18,6 +28,13 @@ limits, cached-JAR crash ACL cleanup and broader integrity/publication/security
 gates remain explicit. This preview does not combine the inspection pin, change
 the default compiler or active MCP connection, or establish release readiness.
 The exact CI step passed locally; no hosted result is claimed by this record.
+
+[Later hosted acceptance](evidence/native-jvm-hosted-20261112.json) passed both
+Windows jobs at `bb57b38`, including the 49 JVM records, four deterministic double
+builds, classfile checks and expected mutation decline. The
+[initial wrapper failure and repair](evidence/native-jvm-ci-wrapper-20261112.json)
+remain separate evidence. Hosted execution of Java or an Android device is not
+claimed; their runtime acceptance is local and independently bound.
 
 ## 2026-11-12 — bounded inspection output-name pins
 

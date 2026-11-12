@@ -258,7 +258,8 @@
     "workspace_alias_gate_closed": false,
     "implementation_status": "EXECUTED",
     "toolchain_status": "TESTED for the pinned Android static-ELF profile",
-    "target_verification": "docs/evidence/native-android-target-verification-20261112.json"
+    "target_verification": "docs/evidence/native-android-target-verification-20261112.json",
+    "hosted_rebuild_evidence": "docs/evidence/native-jvm-hosted-20261112.json"
   },
   "inspection_output_pin_preview": {
     "recorded": "2026-11-12",
@@ -270,7 +271,8 @@
     "fresh_workspace_per_process": true,
     "output_content_integrity_gate_closed": false,
     "full_workspace_alias_gate_closed": false,
-    "release_ready": false
+    "release_ready": false,
+    "hosted_rebuild_evidence": "docs/evidence/native-jvm-hosted-20261112.json"
   },
   "jvm_preview": {
     "recorded": "2026-11-12",
@@ -288,6 +290,9 @@
     "snapshot_mutation": false,
     "content_integrity_gate_closed": false,
     "atomic_publication_gate_closed": false,
-    "release_ready": false
+    "release_ready": false,
+    "hosted_build_replay_checked": true,
+    "hosted_jvm_runtime_checked": false,
+    "hosted_evidence": "docs/evidence/native-jvm-hosted-20261112.json"
   }
 }

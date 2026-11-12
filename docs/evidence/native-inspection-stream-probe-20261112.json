@@ -1,0 +1,182 @@
+{
+  "schema": "xax-mcp-inspection-stream-feasibility-v1",
+  "recorded": "2026-11-12",
+  "state": "EXECUTED external transport feasibility; not an implemented native MCP feature",
+  "preceding_jvm_acceptance": "docs/evidence/native-jvm-20261112.json",
+  "contract": "docs/NATIVE_INSPECTION_STREAM_PROBE_20261112.md",
+  "native_producers": [
+    {
+      "path": "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261112\\toolchain\\xaxc-windows-x86_64.exe",
+      "bytes": 11876864,
+      "sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79"
+    },
+    {
+      "path": "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261112-jvm\\toolchain\\xaxc-windows-x86_64.exe",
+      "bytes": 31959040,
+      "sha256": "e2f68c00a8dee67490929b173469e383853564254ed80b3a7a5e8188d8c50122"
+    }
+  ],
+  "sources": [
+    {
+      "path": "native/xax-mcp-seed.xax",
+      "bytes": 1852,
+      "sha256": "25db5e19257e81e99a79e1b0311b65c8f534507ced0607ad4c5e2f0a81821532"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/server.xax",
+      "bytes": 2484331,
+      "sha256": "6aa149c1b9b0470abf1ac0fb17b4cc2e5698d44f5cfbe104aa0393a5327ba03b"
+    }
+  ],
+  "foreign_external_orchestration": [
+    {
+      "path": "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261112-jvm\\Test-InspectionPipe.ps1",
+      "bytes": 3610,
+      "sha256": "d95f2b8f87e34c5c47ff89ac0c81737eb3ff9b8747ea70199b8ac7ab547040ed"
+    },
+    {
+      "path": "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261112-jvm\\Test-InspectionPipeFailures.ps1",
+      "bytes": 5014,
+      "sha256": "76b81c1ea23dc882a2c3d41726ed4d1eaeaa9bf992a9a8acade11533d2f3469b"
+    }
+  ],
+  "positive_controls": {
+    "recorded": "2026-11-12",
+    "atomic_publication_gate_closed": false,
+    "application_integration_implemented": false,
+    "content_integrity_gate_closed": false,
+    "scope": "Independent external transport feasibility probe; no server or compiler implementation change",
+    "records": [
+      {
+        "bytes": 1128,
+        "first_instance": true,
+        "physical_eof": true,
+        "byte_equal_to_native_file_output": true,
+        "sha256": "6743e013afdfc3922e8857da142c1c27e75bc2851ddfc483c2f68abf99f0a0a2",
+        "producer_identity_matches": true,
+        "compiler": "default",
+        "source": "D:\\GitHub\\XAX-MCP\\native\\xax-mcp-seed.xax"
+      },
+      {
+        "bytes": 1403992,
+        "first_instance": true,
+        "physical_eof": true,
+        "byte_equal_to_native_file_output": true,
+        "sha256": "59ec8254074d600eb1e7acf555bc8a85c0899b2585b86e80bae749c1c40c7d30",
+        "producer_identity_matches": true,
+        "compiler": "default",
+        "source": "D:\\GitHub\\XAX-MCP\\native\\candidates\\20261112-jvm\\server.xax"
+      },
+      {
+        "bytes": 1128,
+        "first_instance": true,
+        "physical_eof": true,
+        "byte_equal_to_native_file_output": true,
+        "sha256": "6743e013afdfc3922e8857da142c1c27e75bc2851ddfc483c2f68abf99f0a0a2",
+        "producer_identity_matches": true,
+        "compiler": "jvm",
+        "source": "D:\\GitHub\\XAX-MCP\\native\\xax-mcp-seed.xax"
+      },
+      {
+        "bytes": 1403992,
+        "first_instance": true,
+        "physical_eof": true,
+        "byte_equal_to_native_file_output": true,
+        "sha256": "59ec8254074d600eb1e7acf555bc8a85c0899b2585b86e80bae749c1c40c7d30",
+        "producer_identity_matches": true,
+        "compiler": "jvm",
+        "source": "D:\\GitHub\\XAX-MCP\\native\\candidates\\20261112-jvm\\server.xax"
+      }
+    ]
+  },
+  "negative_controls": {
+    "records": [
+      {
+        "native_producer_started": false,
+        "case": "preexisting_server_endpoint",
+        "bytes_accepted": 0,
+        "refused": true
+      },
+      {
+        "trial": 1,
+        "compiler_exit": 3,
+        "producer_identity_matches": false,
+        "controlled_client": "External test process itself; not the native compiler process",
+        "case": "wrong_client_identity",
+        "bytes_accepted": 0,
+        "successful_result_published": false
+      },
+      {
+        "trial": 2,
+        "compiler_exit": 3,
+        "producer_identity_matches": false,
+        "controlled_client": "External test process itself; not the native compiler process",
+        "case": "wrong_client_identity",
+        "bytes_accepted": 0,
+        "successful_result_published": false
+      },
+      {
+        "trial": 3,
+        "compiler_exit": 3,
+        "producer_identity_matches": false,
+        "controlled_client": "External test process itself; not the native compiler process",
+        "case": "wrong_client_identity",
+        "bytes_accepted": 0,
+        "successful_result_published": false
+      },
+      {
+        "trial": 4,
+        "compiler_exit": 3,
+        "producer_identity_matches": false,
+        "controlled_client": "External test process itself; not the native compiler process",
+        "case": "wrong_client_identity",
+        "bytes_accepted": 0,
+        "successful_result_published": false
+      },
+      {
+        "trial": 5,
+        "compiler_exit": 3,
+        "producer_identity_matches": false,
+        "controlled_client": "External test process itself; not the native compiler process",
+        "case": "wrong_client_identity",
+        "bytes_accepted": 0,
+        "successful_result_published": false
+      },
+      {
+        "partial_bytes": 64,
+        "case": "producer_death",
+        "successful_result_published": false,
+        "physical_eof": true,
+        "compiler_exit": -1
+      },
+      {
+        "partial_bytes": 64,
+        "case": "consumer_abort",
+        "successful_result_published": false,
+        "compiler_exit": 3,
+        "consumer_cancel_must_override_any_compiler_success": true
+      }
+    ],
+    "source_bytes_preserved": true,
+    "atomic_publication_gate_closed": false,
+    "all_probes_cleaned_up": true,
+    "content_integrity_gate_closed": false,
+    "scope": "External transport feasibility negative controls; no native server integration or gate closure",
+    "recorded": "2026-11-12"
+  },
+  "scope": "Native inspect writes to an OS named pipe through its existing file contract; external consumer compares complete output with regular-file native baseline; no MCP exchange or native application modification",
+  "implementation_required": [
+    "Exclusive local-only endpoint; first-instance and remote-client rejection",
+    "Producer identity bound to held native compiler process; unexpected clients refused",
+    "Bounded native asynchronous draining integrated with cancellation, queues, deadlines and jobs",
+    "Complete native record and physical EOF plus successful producer/measurement/cleanup before any public result",
+    "Input root/file/volume binding; broader handle-backed edit/build/verify and atomic publication"
+  ],
+  "native_server_changed": false,
+  "native_compiler_changed": false,
+  "existing_mcp_configuration_unchanged": true,
+  "content_integrity_gate_closed": false,
+  "atomic_publication_gate_closed": false,
+  "independent_escape_review_complete": false,
+  "release_ready": false
+}

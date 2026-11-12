@@ -20,6 +20,9 @@ The paused 2026-11-11 handoff remains in Git history at `1850dd7`.
 - [x] Replayed all 49 new native records with mandatory verification and rebuilt
   four programs twice in a fresh empty-PATH package with paths containing spaces.
   Repeated feature and client gates; all packaged bytes stayed unchanged.
+- [x] Passed both hosted CI jobs after correcting the expected-decline exit status
+  in the PowerShell wrapper. Native JVM source and artifacts were unchanged by
+  that CI fix. See [hosted acceptance](docs/evidence/native-jvm-hosted-20261112.json).
 
 See [the JVM acceptance index](docs/evidence/native-jvm-20261112.json), explicit
 [target verification](docs/evidence/native-jvm-target-verification-20261112.json)
@@ -149,6 +152,13 @@ PowerShell invocation; use the separate pinned copy for this deployment.
 
 ## Remaining release and capability boundaries
 
+- [ ] Integrate protected native inspection streams if selected. The
+  [post-JVM feasibility probe](docs/NATIVE_INSPECTION_STREAM_PROBE_20261112.md)
+  passed four native output comparisons and eight endpoint/identity/failure
+  controls using both exact seeds. No server implementation changed. Bounded
+  asynchronous native draining, complete-record acceptance, cancellation,
+  local-only endpoint and input identity remain required before claiming
+  inspection-content integrity. Other output/publication gates are separate.
 - [ ] Close writable workspace child-file substitution/publication and DOS
   drive-alias remapping through the reusable upstream handle/identity contract.
   Historical/default/control previews retain the recorded outside writes. The
@@ -168,9 +178,11 @@ PowerShell invocation; use the separate pinned copy for this deployment.
 - [ ] Complete exhaustive pressure/exhaustion, crash/cleanup and independent
   escape/security acceptance. The pinned deployment compiler's self-hosting
   and production readiness are not established by this increment.
-- [ ] Run/verify hosted CI for the Android/inspection-pin workflow step and separate
-  JVM build/replay job, then satisfy promotion gates before selecting a preview
-  as the default. Desktop acceptance here covers the configured read-only path;
+- [x] Verified hosted CI for the Android/inspection-pin workflow step and separate
+  JVM build/replay job at implementation commit `bb57b38`; runtime/device execution
+  remains separately bound to local evidence.
+- [ ] Satisfy promotion gates before selecting a preview as the default.
+  Desktop acceptance here covers the configured read-only path;
   writable desktop execution requires separate acceptance.
 
 Continue canonical changes only through exact-root native XAX transactions with

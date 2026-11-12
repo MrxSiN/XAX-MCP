@@ -112,3 +112,9 @@ deterministic host/JAR rebuilds. It makes no hosted Java execution claim. Local
 execution is bound to the inventoried runtime; hosted results and promotion are
 separate gates. Continue content integrity, atomic publication and broader
 security only after this JVM increment's acceptance is recorded.
+
+The [later hosted build/replay run](evidence/native-jvm-hosted-20261112.json)
+passed both jobs after the expected native-decline status was cleared for the
+GitHub PowerShell wrapper. Source/artifact identities are unchanged. The subsequent
+[inspection stream probes](NATIVE_INSPECTION_STREAM_PROBE_20261112.md) are external
+feasibility work; no inspection integrity or publication gate is closed by them.
