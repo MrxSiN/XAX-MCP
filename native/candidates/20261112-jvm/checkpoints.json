@@ -1,0 +1,74 @@
+{
+  "schema": "xax-mcp-jvm-checkpoints-v1",
+  "recorded": "2026-11-12",
+  "state": "EXECUTED explicit JVM snapshot preview; not promoted",
+  "artifacts": [
+    {
+      "path": "native/candidates/20261112-jvm/jvm-launcher-snapshot.xax",
+      "bytes": 161968,
+      "sha256": "adf2161cafc6d9b249aed25d015b1c24a3724d0ce73c3e59bec90c0981e4f186",
+      "root": "d22915a55c25228fdfd13fb534c9616207c014b5c44d69cb7fa3dbd19c20deb2"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/jvm-launcher.prov",
+      "bytes": 268,
+      "sha256": "31644cbf3653c2b8e655f94ba5aea4d5fb1bca7d8768e60c0f5eaafaac439e17"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/jvm-launcher.xax",
+      "bytes": 161690,
+      "sha256": "9bd9919a63fa4835eb7893fb30638d775525ac54e0ad96dce723b320a3cba618",
+      "root": "5c68607f3222ce2903b4e077fee953fc3b90b92d6ff54874f6e1cadb8d7db9f9"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/server-runtime.xax",
+      "bytes": 2005855,
+      "sha256": "89591dcecd3e964247fd6341df916005d685ad6677d84fb6ea90b831d9938873",
+      "root": "5b2146cf62f4f3225672592280fc5fdb04ca26941982a1bbdd1da393510ca28e"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/server-snapshot.xax",
+      "bytes": 2484610,
+      "sha256": "772c374af352f4dde6f98ca34d48c13bad93840f2260f5de61be588069b7ac4d",
+      "root": "0c0c2e4aa44154c4d308c145b0bbd1a473539d2fef1ac14f4b9269cb411f0199"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/server.xax",
+      "bytes": 2484331,
+      "sha256": "6aa149c1b9b0470abf1ac0fb17b4cc2e5698d44f5cfbe104aa0393a5327ba03b",
+      "root": "786f4ce73c990a8c97994f0195472c7e6d5fd8ad1fff3ca2870cd5223a6a9ddb"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/xax-mcp-native.exe",
+      "bytes": 569344,
+      "sha256": "5b66d6d1e56e92ca73439c2eaf66ccf52c91a924b1ea28c2f5e19fc11f00716d"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/xax-mcp-native.prov",
+      "bytes": 268,
+      "sha256": "4078d58665d0028fb54a0e9a5d5a1dc3c540abf04885c50287bce22ce68ee230"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/xax-mcp-sandbox.exe",
+      "bytes": 153088,
+      "sha256": "6ef0f256dd1fc2f68daca439b6bb1e52b1a256cf97948142eb4b5782b352bad2"
+    }
+  ],
+  "construction_checkpoint": "server-runtime.xax has staging implementation with historical Android metadata; only final server.xax/server-snapshot.xax and matching binaries are accepted launch sources",
+  "transactions": "native/transactions/20261112-jvm/manifest.json",
+  "dependency": "native/jvm-dependency.json",
+  "tools_schema": "schemas/tools-v5.json",
+  "evidence": "docs/evidence/native-jvm-20261112.json",
+  "required_launch_profile": "Fresh trusted work directory; --allow-execute --deny mutate; explicit host XAX_MCP_JAVA and separately pinned JVM compiler",
+  "implementation_status": "EXECUTED",
+  "toolchain_status": "TESTED",
+  "snapshot_mutation": false,
+  "default_gen3_unchanged": true,
+  "existing_mcp_configuration_unchanged": true,
+  "inspection_output_pin_combined": false,
+  "content_integrity_gate_closed": false,
+  "atomic_publication_gate_closed": false,
+  "full_workspace_alias_gate_closed": false,
+  "release_ready": false,
+  "full_mission_complete": false
+}

@@ -56,3 +56,9 @@ tests/android/*.prov binary
 tests/android/* -text
 native/transactions/20261112-read-pins/*.batch -text whitespace=cr-at-eol
 native/candidates/20261112-read-pins/android-runner binary
+native/transactions/20261112-jvm/*.batch -text whitespace=cr-at-eol
+tests/jvm/*.xax binary
+tests/jvm/*.jar binary
+tests/jvm/*.prov binary
+tests/jvm/*.edit binary
+tests/jvm/*.json -text whitespace=cr-at-eol

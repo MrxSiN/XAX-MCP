@@ -1,5 +1,13 @@
 # Windows readiness — 0.10.0, 2026-11-01
 
+2026-11-12: the separate [JVM snapshot preview](NATIVE_JVM_20261112.md) passed
+native replay, deterministic host/JAR rebuilds, confined Java execution, direct
+read-only backend calls and a fresh empty-PATH package. Its implementation is
+`EXECUTED` and its exact [separate toolchain](../native/jvm-dependency.json) is
+`TESTED`. Snapshot mutation, non-Windows-1252 arguments, crash ACL cleanup and
+broader integrity/publication/security gates remain open. The default pin,
+Gen3, active MCP connection and readiness flags are unchanged.
+
 2026-11-12: the later [control preview](NATIVE_CONTROL_20261111.md) completed
 [final-source, clean-package and read-only desktop acceptance](evidence/native-control-20261112.json).
 Compiler cancellation, descendant cleanup, modern metadata and bounded public

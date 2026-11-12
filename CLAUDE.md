@@ -61,6 +61,15 @@ is superseded by `REMAINING_MCP_TASKS.md`; default Gen3 and release flags stay u
 
 Current native pin: see `native/xax-dependency.json` (`xax-native-file-v1`); sources are `native/xax-mcp-native-gen3.xax` and `native/xax-mcp-sandbox-gen1.xax`. The 20261110-host-paths manifest extends native replay through the configured-path guard. Binary stdin/argv are implemented within host bounds; JSON xax-construct-v1 and full CUM prepare remain unsupported. Full mission readiness is false.
 
+The 20261112 JVM preview is separate: read `docs/NATIVE_JVM_20261112.md`,
+`native/jvm-dependency.json` and `native/candidates/20261112-jvm/checkpoints.json`.
+Its newer immutable native compiler is tested only for that snapshot build/execute
+preview; do not silently replace the default pin or the user's existing MCP setup.
+Native snapshot mutation declines, Windows-1252 argument limits are enforced,
+and content integrity, atomic publication, crash ACL/cache cleanup and broader
+security remain open. Java is the required host platform runtime; no handwritten
+Java helper is part of the server. New evidence is `docs/evidence/native-jvm-20261112.json`.
+
 Current gen3 evidence: `docs/evidence/native-host-path-guard-20261110.json` and the separate clean-package record. The current hosted result below remains the historical gen2 baseline.
 
 Historical evidence: local acceptance and clean-package records plus hosted run

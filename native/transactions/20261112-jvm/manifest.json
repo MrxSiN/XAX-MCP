@@ -1,0 +1,1151 @@
+{
+  "schema": "xax-mcp-native-jvm-replay-v1",
+  "recorded": "2026-11-12",
+  "state": "Explicit JVM preview; immutable snapshot build/execute, snapshot mutation unsupported",
+  "dependency": "native/jvm-dependency.json",
+  "native_seed": {
+    "bytes": 31959040,
+    "sha256": "e2f68c00a8dee67490929b173469e383853564254ed80b3a7a5e8188d8c50122"
+  },
+  "groups": [
+    {
+      "name": "jvm-launcher",
+      "base": {
+        "bytes": 128327,
+        "sha256": "5d67469fc8f153f15a37b6e2bfd3978e2de80fc62dddef0cd9a0606eac2387f7",
+        "path": "native/xax-mcp-sandbox-gen1.xax",
+        "root": "d378055b3c4c490c667db8d7f61b2d871f4bb3b8701ae54e5dc5308037904dff"
+      },
+      "final": {
+        "bytes": 161690,
+        "sha256": "9bd9919a63fa4835eb7893fb30638d775525ac54e0ad96dce723b320a3cba618",
+        "path": "native/candidates/20261112-jvm/jvm-launcher.xax",
+        "root": "5c68607f3222ce2903b4e077fee953fc3b90b92d6ff54874f6e1cadb8d7db9f9"
+      },
+      "records": [
+        {
+          "bytes": 56668,
+          "sha256": "5bf3d112aa7b552b8fcb0d681e8d30ebb4630d158890272582c5a3d74f9b5fb1",
+          "path": "native/transactions/20261112-jvm/jvm-launcher.edit",
+          "native_batch": {
+            "bytes": 107226,
+            "sha256": "2edfe72de249af1c7c0fbc01f569509f9ab88013144ca60fe2cc560676e3c85b",
+            "path": "native/transactions/20261112-jvm/jvm-launcher.batch"
+          },
+          "base_root": "d378055b3c4c490c667db8d7f61b2d871f4bb3b8701ae54e5dc5308037904dff",
+          "result_root": "5c68607f3222ce2903b4e077fee953fc3b90b92d6ff54874f6e1cadb8d7db9f9",
+          "result": {
+            "bytes": 161690,
+            "sha256": "9bd9919a63fa4835eb7893fb30638d775525ac54e0ad96dce723b320a3cba618",
+            "path": "native/candidates/20261112-jvm/jvm-launcher.xax",
+            "root": "5c68607f3222ce2903b4e077fee953fc3b90b92d6ff54874f6e1cadb8d7db9f9"
+          },
+          "new_native_objects": 167,
+          "unchanged_objects": 369,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        }
+      ]
+    },
+    {
+      "name": "jvm-server",
+      "base": {
+        "bytes": 2004476,
+        "sha256": "be01eaf79b20f457e65819428095bfc4067d29fbc9c866ab2c13f46c3bbc9dd1",
+        "path": "native/candidates/20261112-android/server.xax",
+        "root": "3d3630dbb0f69d102a34c201047907052f13bf1a9d55869c8b1288c75ba6d7a3"
+      },
+      "base_replay": "native/transactions/20261112-android/manifest.json",
+      "final": {
+        "bytes": 2484331,
+        "sha256": "6aa149c1b9b0470abf1ac0fb17b4cc2e5698d44f5cfbe104aa0393a5327ba03b",
+        "path": "native/candidates/20261112-jvm/server.xax",
+        "root": "786f4ce73c990a8c97994f0195472c7e6d5fd8ad1fff3ca2870cd5223a6a9ddb"
+      },
+      "records": [
+        {
+          "bytes": 186123,
+          "sha256": "2ccde7e0822d6c7e2192ead059fb96532e9ad668e6919affa0fa2ee59661098d",
+          "path": "native/transactions/20261112-jvm/server-jvm-snapshot-build.edit",
+          "native_batch": {
+            "bytes": 209210,
+            "sha256": "1220869755b2f831f9a7a2d5405a026edbb6ea4043cc9eb5894af6433a449c34",
+            "path": "native/transactions/20261112-jvm/server-jvm-snapshot-build.batch"
+          },
+          "base_root": "3d3630dbb0f69d102a34c201047907052f13bf1a9d55869c8b1288c75ba6d7a3",
+          "result_root": "5b2146cf62f4f3225672592280fc5fdb04ca26941982a1bbdd1da393510ca28e",
+          "result": {
+            "bytes": 2005855,
+            "sha256": "89591dcecd3e964247fd6341df916005d685ad6677d84fb6ea90b831d9938873",
+            "path": "native/candidates/20261112-jvm/server-runtime.xax",
+            "root": "5b2146cf62f4f3225672592280fc5fdb04ca26941982a1bbdd1da393510ca28e"
+          },
+          "new_native_objects": 18,
+          "unchanged_objects": 6930,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 173013,
+          "sha256": "ddc846300ff975dcbfba7a78b97460210d08dd9182546c559186ae9591c8b827",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-01.edit",
+          "native_batch": {
+            "bytes": 81313,
+            "sha256": "857bcd5b508fd4fc8f37de708a14cefdd6fd6ac27364805ca527f374a81c9b30",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-01.batch"
+          },
+          "base_root": "5b2146cf62f4f3225672592280fc5fdb04ca26941982a1bbdd1da393510ca28e",
+          "result_root": "dd7af023296c5da432c319fedf9dc0ce3d7ba4dba734542f2bececc5357b26af",
+          "result": {
+            "bytes": 2010110,
+            "sha256": "89b8ddc0a865c604b1aded67327a818fce3ae08657ae1fe6d9d50911cb3520b5",
+            "root": "dd7af023296c5da432c319fedf9dc0ce3d7ba4dba734542f2bececc5357b26af"
+          },
+          "new_native_objects": 32,
+          "unchanged_objects": 6937,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 180266,
+          "sha256": "e597cc75addda1664329e5f4e1d1e55dc7e3fdcc6b43de5f34f77415d6905f9a",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-02.edit",
+          "native_batch": {
+            "bytes": 86599,
+            "sha256": "e4a5ef117832ea9d8e3f359e300dc8077586391904ad2efdd4b0f2755011cdc1",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-02.batch"
+          },
+          "base_root": "dd7af023296c5da432c319fedf9dc0ce3d7ba4dba734542f2bececc5357b26af",
+          "result_root": "2a8f1ac5a09e548b916fdabab4cd057f6d6362a6170963d147b79519e309bab3",
+          "result": {
+            "bytes": 2024328,
+            "sha256": "907cc78c8f6b1d18180108c0c1e1cf541bae5b84e889a3589f2a154abbc97c22",
+            "root": "2a8f1ac5a09e548b916fdabab4cd057f6d6362a6170963d147b79519e309bab3"
+          },
+          "new_native_objects": 97,
+          "unchanged_objects": 6958,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 179135,
+          "sha256": "b6f72521f72435feb6ca0e0d82a524cb436d03948e3bbf92cbea47244efb6353",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-03.edit",
+          "native_batch": {
+            "bytes": 88758,
+            "sha256": "f4c7f4e992f01ce9edb9b12d8307238f172126defa574d5eb87351e0319655e3",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-03.batch"
+          },
+          "base_root": "2a8f1ac5a09e548b916fdabab4cd057f6d6362a6170963d147b79519e309bab3",
+          "result_root": "f45488fca2dea2e1aef426f64a6aaa0ac8e7e2884b78713bebdcfbf114b3bbd3",
+          "result": {
+            "bytes": 2028817,
+            "sha256": "ee4e4a554affecb6e2682f62a030c139676952a6f2943d63cbeac07ae10e948b",
+            "root": "f45488fca2dea2e1aef426f64a6aaa0ac8e7e2884b78713bebdcfbf114b3bbd3"
+          },
+          "new_native_objects": 36,
+          "unchanged_objects": 7044,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 171491,
+          "sha256": "7d6b7f1e3c2d1adb545ffc063333c0db39acbc1d0790196a6b1a09e8a309ef19",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-04.edit",
+          "native_batch": {
+            "bytes": 74973,
+            "sha256": "5e4a371b8b0e22d4e044a0055333064a3d4537b396c59092a0975ec086f79791",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-04.batch"
+          },
+          "base_root": "f45488fca2dea2e1aef426f64a6aaa0ac8e7e2884b78713bebdcfbf114b3bbd3",
+          "result_root": "79d0abef11906a865e0c1dcaa30f31ce7fe5eb71bbeb19018bbbc5b89fdb13a2",
+          "result": {
+            "bytes": 2044960,
+            "sha256": "b4ee10dbc5a6e91fb558db5bc774fa3d5c550620409e8189de605ad613834cf0",
+            "root": "79d0abef11906a865e0c1dcaa30f31ce7fe5eb71bbeb19018bbbc5b89fdb13a2"
+          },
+          "new_native_objects": 110,
+          "unchanged_objects": 7069,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 174839,
+          "sha256": "8a08fa794c72ea68f9d5dd42ea181f41355334eb10cc6f832f263246c57f5e7f",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-05.edit",
+          "native_batch": {
+            "bytes": 80278,
+            "sha256": "0f0f2355d5a5e490595b258e79020e61c5717aaca3d07d4072b86bf52cb4861a",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-05.batch"
+          },
+          "base_root": "79d0abef11906a865e0c1dcaa30f31ce7fe5eb71bbeb19018bbbc5b89fdb13a2",
+          "result_root": "048dcc71e56b3e1a265b7ba4c3509c6f6cdec9ee2cdb99103f0907e1fcaf2cac",
+          "result": {
+            "bytes": 2058224,
+            "sha256": "392fb6074fb7f4e84d959f741ee2caed0a7d3fef1f71fee702b74a2509dd3c0e",
+            "root": "048dcc71e56b3e1a265b7ba4c3509c6f6cdec9ee2cdb99103f0907e1fcaf2cac"
+          },
+          "new_native_objects": 89,
+          "unchanged_objects": 7168,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 181100,
+          "sha256": "ded38c6a2ff6ca539559fac652eba9f115df5b1640e7fa193cc44f671522ce5c",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-06.edit",
+          "native_batch": {
+            "bytes": 85318,
+            "sha256": "4052eb692f10315be7e4992a728e62266f031cd62c8cf6ccf0ecdd3f98cba007",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-06.batch"
+          },
+          "base_root": "048dcc71e56b3e1a265b7ba4c3509c6f6cdec9ee2cdb99103f0907e1fcaf2cac",
+          "result_root": "479feb989abf223a0c8dfacb03dbea5a77bd5b805230d4da02863c62ad046a83",
+          "result": {
+            "bytes": 2075834,
+            "sha256": "4972fdd79a01000e1ab567c596b7a310037c1f101f276e5d255c9eeb7357c5ae",
+            "root": "479feb989abf223a0c8dfacb03dbea5a77bd5b805230d4da02863c62ad046a83"
+          },
+          "new_native_objects": 123,
+          "unchanged_objects": 7246,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 187822,
+          "sha256": "ab11cf4655455038272e2e3aebb53b8da3ceab7cb43b009c2954706695e88824",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-07.edit",
+          "native_batch": {
+            "bytes": 95455,
+            "sha256": "99ebd03ad01b830cae25b6eea14ddaa3a1051efb311840dcf3df770bf7285ea0",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-07.batch"
+          },
+          "base_root": "479feb989abf223a0c8dfacb03dbea5a77bd5b805230d4da02863c62ad046a83",
+          "result_root": "5c3dab384c4e01c62b925bb9489fdd23786f8b239f25019c34794a0e5744478c",
+          "result": {
+            "bytes": 2094789,
+            "sha256": "d6c918e29795f7e37ad637fb6514baffa063a383e46ea0ced51936feac3abcd0",
+            "root": "5c3dab384c4e01c62b925bb9489fdd23786f8b239f25019c34794a0e5744478c"
+          },
+          "new_native_objects": 114,
+          "unchanged_objects": 7358,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 193502,
+          "sha256": "b9e6c55a3265ab1ee6b7f5a42a0d19e8844260fd36df5d16b8efb04f1afde567",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-08.edit",
+          "native_batch": {
+            "bytes": 105593,
+            "sha256": "63df812bc08bccd838eece545b5600398e751867f58a18cffb3e05b18139ca3c",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-08.batch"
+          },
+          "base_root": "5c3dab384c4e01c62b925bb9489fdd23786f8b239f25019c34794a0e5744478c",
+          "result_root": "1e1ef41c430d73015f625d8e20f0f484f85ea92b9657debd768171744e8672c2",
+          "result": {
+            "bytes": 2110379,
+            "sha256": "09fe96be4e65f3ccde389fd85ce5a09bc5b4f9e7cb16e983f38c1f7a5afed533",
+            "root": "1e1ef41c430d73015f625d8e20f0f484f85ea92b9657debd768171744e8672c2"
+          },
+          "new_native_objects": 90,
+          "unchanged_objects": 7461,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 202079,
+          "sha256": "51bbf850f518e0a23c2c4fc7b11a243207ffc4fdc8788109607787ab39abb6f7",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-09.edit",
+          "native_batch": {
+            "bytes": 115729,
+            "sha256": "43e7e10bd036829ae7ad81e40e94c2cf2f20c7b1b154bba7fb0cb6b5b1cfc885",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-09.batch"
+          },
+          "base_root": "1e1ef41c430d73015f625d8e20f0f484f85ea92b9657debd768171744e8672c2",
+          "result_root": "e980946dca70869cb2501ae377f4b721480ed314bdb96163fadab6f4d2715250",
+          "result": {
+            "bytes": 2130163,
+            "sha256": "c8ba8ed845d4d216e9c9173f81bdef2f5ac59cd4a890983e633e8ee190562f05",
+            "root": "e980946dca70869cb2501ae377f4b721480ed314bdb96163fadab6f4d2715250"
+          },
+          "new_native_objects": 124,
+          "unchanged_objects": 7540,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 208855,
+          "sha256": "8d8c2f64d1b752159e593b397ee5fc163f4ea10a93cf5a93d709d89057211d81",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-10.edit",
+          "native_batch": {
+            "bytes": 125869,
+            "sha256": "083a5e6e50e6e2c246dd675d649a229f160d4f8c52544c6df4c43c0b55067ed3",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-10.batch"
+          },
+          "base_root": "e980946dca70869cb2501ae377f4b721480ed314bdb96163fadab6f4d2715250",
+          "result_root": "95a0fb425caf166f58d85d698af02d9d5ab4cc769c0aed4639a0d62fae98446b",
+          "result": {
+            "bytes": 2149258,
+            "sha256": "371903b265eb06fe423fd7ff1da2bd155e21ba40942ea750d03c9a0acd0986a3",
+            "root": "95a0fb425caf166f58d85d698af02d9d5ab4cc769c0aed4639a0d62fae98446b"
+          },
+          "new_native_objects": 118,
+          "unchanged_objects": 7653,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 216732,
+          "sha256": "07b56c068b2d749fd59884f38519c33334512c6753e76a6ac81354ac76a5c766",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-11.edit",
+          "native_batch": {
+            "bytes": 136007,
+            "sha256": "43122e8d700e4004b219f6933e33e97448398add05f67a1c53ed6c1e6638cfbf",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-11.batch"
+          },
+          "base_root": "95a0fb425caf166f58d85d698af02d9d5ab4cc769c0aed4639a0d62fae98446b",
+          "result_root": "9b7681ea97c37a734fdf10329d07d0f829f0ca09d566cdf93abc8b6d273eb6cb",
+          "result": {
+            "bytes": 2170023,
+            "sha256": "4f01b4f45edf0aed852353a62c0c80c1a5edb8adca6ee211a7eb13c6ebd20c55",
+            "root": "9b7681ea97c37a734fdf10329d07d0f829f0ca09d566cdf93abc8b6d273eb6cb"
+          },
+          "new_native_objects": 130,
+          "unchanged_objects": 7760,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 213012,
+          "sha256": "ee799b16fc2dfd5496a09020309a7864a7a70eed497aa17654769dc6eff5e55d",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-12.edit",
+          "native_batch": {
+            "bytes": 137266,
+            "sha256": "976b26d9566dc12acf75e7e604ce2b2f7b6dc650ad693262d5573084d82d025f",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-12.batch"
+          },
+          "base_root": "9b7681ea97c37a734fdf10329d07d0f829f0ca09d566cdf93abc8b6d273eb6cb",
+          "result_root": "e1b6536798cf9da1f68e599b7c684dd27b9af6907ebb7a56e5e763b01e5f4ead",
+          "result": {
+            "bytes": 2172292,
+            "sha256": "cd5deecffb1dbda061942f38f9960fd9beb22c029779b3ec8def4bea1b6e52c2",
+            "root": "e1b6536798cf9da1f68e599b7c684dd27b9af6907ebb7a56e5e763b01e5f4ead"
+          },
+          "new_native_objects": 23,
+          "unchanged_objects": 7879,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 173509,
+          "sha256": "e150ffeaa8681a05a16082c8bdfc3bc3cdbf630c1fc09807e447970494327bf6",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-13.edit",
+          "native_batch": {
+            "bytes": 85067,
+            "sha256": "939f17600a59d847f318cd378d16e1a89d306a79b9f5ee085b59b7a3716da5c6",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-13.batch"
+          },
+          "base_root": "e1b6536798cf9da1f68e599b7c684dd27b9af6907ebb7a56e5e763b01e5f4ead",
+          "result_root": "3a826503b068c1d9895d9defef13ed25d776c3ed589d4bae27eb5d420177ac23",
+          "result": {
+            "bytes": 2174884,
+            "sha256": "57dbf8f5027446a678e3b48a3bb4118f05175587f00b81f5114814ca01d1f30e",
+            "root": "3a826503b068c1d9895d9defef13ed25d776c3ed589d4bae27eb5d420177ac23"
+          },
+          "new_native_objects": 27,
+          "unchanged_objects": 7891,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 179779,
+          "sha256": "926b2dc58a61a18672ca2fe69a8bc3fedfb4b30eeadd5f324167e9b9a4c9be5a",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-14.edit",
+          "native_batch": {
+            "bytes": 90355,
+            "sha256": "6d068e9f824e14ebd9fb627f6e8b72ca46cd4376f1637ec74780b5d0ffb30f73",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-14.batch"
+          },
+          "base_root": "3a826503b068c1d9895d9defef13ed25d776c3ed589d4bae27eb5d420177ac23",
+          "result_root": "bd646be9057f87c9f8a79f9a7d2a24642e7b46eccfb13e52410a96d738da89de",
+          "result": {
+            "bytes": 2186914,
+            "sha256": "8aa0faa781f8df0799299999b69bbad364f643d60c3443a70dbcd31c8d5befb4",
+            "root": "bd646be9057f87c9f8a79f9a7d2a24642e7b46eccfb13e52410a96d738da89de"
+          },
+          "new_native_objects": 83,
+          "unchanged_objects": 7907,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 180193,
+          "sha256": "58fdd0b722a5b4eccc27ea7031c432aa1bb956c6bd93446af819ba432948405e",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-15.edit",
+          "native_batch": {
+            "bytes": 93184,
+            "sha256": "3c41a6d27170974e3e7d57419030fe52686aa74ac6b0e72ec7825b6f1331980d",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-15.batch"
+          },
+          "base_root": "bd646be9057f87c9f8a79f9a7d2a24642e7b46eccfb13e52410a96d738da89de",
+          "result_root": "c8cfbc2dce11aa2c092462201ff57b627149c2f72889eeedbf1b217987b70508",
+          "result": {
+            "bytes": 2192948,
+            "sha256": "4b726ad3ce985672b6366a706f8390d631a763b288c0170352b9b245349428bd",
+            "root": "c8cfbc2dce11aa2c092462201ff57b627149c2f72889eeedbf1b217987b70508"
+          },
+          "new_native_objects": 45,
+          "unchanged_objects": 7979,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 170407,
+          "sha256": "faf89cb43ac7220a1d378226e90f38564e5e4b398f4a5dbf7ed2c66bca745259",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-16.edit",
+          "native_batch": {
+            "bytes": 76455,
+            "sha256": "ec1af55f0333add8af0a3ad101ea82c278ac5f2698ccf39a2b06c9f8ef295ffe",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-16.batch"
+          },
+          "base_root": "c8cfbc2dce11aa2c092462201ff57b627149c2f72889eeedbf1b217987b70508",
+          "result_root": "003de9024adc1620bdcea0dc6fc05b063766489569c17f40636cbc92920187dc",
+          "result": {
+            "bytes": 2208535,
+            "sha256": "5c9413ac9ad2054b91b542dbcc97ac8449714b8cf321dd47a862b1ba35fd8450",
+            "root": "003de9024adc1620bdcea0dc6fc05b063766489569c17f40636cbc92920187dc"
+          },
+          "new_native_objects": 104,
+          "unchanged_objects": 8013,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 174055,
+          "sha256": "4565bf8d49666eaf8f4e8ac0b93c407ef9a340eda713401cb89221876f7e2439",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-17.edit",
+          "native_batch": {
+            "bytes": 81769,
+            "sha256": "f7c4745d09ca62af1539981c80da7026951283c490a836a3c1b51e481fbd8c87",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-17.batch"
+          },
+          "base_root": "003de9024adc1620bdcea0dc6fc05b063766489569c17f40636cbc92920187dc",
+          "result_root": "c2cee0cb554a2f9a66c77f6a87528e9b5c6ededa762a19bd90a2841559e57b43",
+          "result": {
+            "bytes": 2221827,
+            "sha256": "9318940941810582cb45bc766d4663c0e6c3c1f21847e7e740d9752c014521c3",
+            "root": "c2cee0cb554a2f9a66c77f6a87528e9b5c6ededa762a19bd90a2841559e57b43"
+          },
+          "new_native_objects": 89,
+          "unchanged_objects": 8106,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 180072,
+          "sha256": "4e8cc8a2b08075908c1779db682d5e28ebf8ef9ac48bc5e39666aee68a4a3805",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-18.edit",
+          "native_batch": {
+            "bytes": 87093,
+            "sha256": "6ab6a9cfd7c203e63cbd350ccf24e4168e31c645d4698e1630cc71ef64b86e0f",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-18.batch"
+          },
+          "base_root": "c2cee0cb554a2f9a66c77f6a87528e9b5c6ededa762a19bd90a2841559e57b43",
+          "result_root": "b6959a9a324fb15388ab92ce7551e51a1e08576a75fceed918b0c310903ebf78",
+          "result": {
+            "bytes": 2238634,
+            "sha256": "927ef263629d912d5587461d095c5e38fea3b93113c51aa9d904fe22c168c0b3",
+            "root": "b6959a9a324fb15388ab92ce7551e51a1e08576a75fceed918b0c310903ebf78"
+          },
+          "new_native_objects": 115,
+          "unchanged_objects": 8184,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 175832,
+          "sha256": "1d2f991513550bae3e15af594f24c4b16c535944299a6d65ac8e23c4235c7fe0",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-19.edit",
+          "native_batch": {
+            "bytes": 87375,
+            "sha256": "17052e1356e0d05da2eff9ec263f27ff66963b56379139574c8d3a7436172888",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-19.batch"
+          },
+          "base_root": "b6959a9a324fb15388ab92ce7551e51a1e08576a75fceed918b0c310903ebf78",
+          "result_root": "76dfbf20e355c7c3e1f3ef449c25cc639492940d1e80d07c0974f247d4274cd1",
+          "result": {
+            "bytes": 2239418,
+            "sha256": "0d8097fb2f2a5b04036ad55bca6906c8525dba3e406430c028fc9cfe9f64ee0e",
+            "root": "76dfbf20e355c7c3e1f3ef449c25cc639492940d1e80d07c0974f247d4274cd1"
+          },
+          "new_native_objects": 16,
+          "unchanged_objects": 8288,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 187169,
+          "sha256": "b34dd5854a1ca38cb9971f848e85a451e936dab45c9d5b112a897b9e5af7eb83",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-20.edit",
+          "native_batch": {
+            "bytes": 97512,
+            "sha256": "b2dc36f051c69e668e6f3756ff15157112762f9f69f0075ab3013a7bcf21bd51",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-20.batch"
+          },
+          "base_root": "76dfbf20e355c7c3e1f3ef449c25cc639492940d1e80d07c0974f247d4274cd1",
+          "result_root": "ed99d58e4ec667142b0841d9512f659388875d96ca2beeb431d56dfb0823b627",
+          "result": {
+            "bytes": 2257834,
+            "sha256": "817e6fff6ef8a3e3db47144bdc70df66a6664d7ca321cdc0fbb3a9f13d1efc6d",
+            "root": "ed99d58e4ec667142b0841d9512f659388875d96ca2beeb431d56dfb0823b627"
+          },
+          "new_native_objects": 109,
+          "unchanged_objects": 8293,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 193031,
+          "sha256": "a88b8b786e2f67f2f7a5162da6c51fb6a45c79d5e8bcfc86c33beb09a005e05f",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-21.edit",
+          "native_batch": {
+            "bytes": 107650,
+            "sha256": "5c32f2f8b788428fd62d92e6434836387631ba2bdde9f4927db503622fae3eae",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-21.batch"
+          },
+          "base_root": "ed99d58e4ec667142b0841d9512f659388875d96ca2beeb431d56dfb0823b627",
+          "result_root": "1ae3565a386cd1d2b1105fff8c127074696214aca39407185b527ba433902829",
+          "result": {
+            "bytes": 2272819,
+            "sha256": "33974a293723415f070dbaa005b5518b90ff859fa781bbdbb3e9a31b0b4405a7",
+            "root": "1ae3565a386cd1d2b1105fff8c127074696214aca39407185b527ba433902829"
+          },
+          "new_native_objects": 82,
+          "unchanged_objects": 8391,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 201896,
+          "sha256": "4859ee9c318331fe8ba8dabd0d188570b2f65ffe01f106d49c0e69a1a84b1f78",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-22.edit",
+          "native_batch": {
+            "bytes": 117787,
+            "sha256": "5e17b425ef4a92555fdca1b5b0789362d6ebae881f2ed0a46af7cf6a1bf91664",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-22.batch"
+          },
+          "base_root": "1ae3565a386cd1d2b1105fff8c127074696214aca39407185b527ba433902829",
+          "result_root": "65d7fdec859f937a9aa40adbcd7bf802b8d0d7a6325cd5261e949aaab2a719ff",
+          "result": {
+            "bytes": 2292319,
+            "sha256": "8e332e2cf8f0c85d6d543602ea74c46d2fac9a452bdc429616c36863ed8b449e",
+            "root": "65d7fdec859f937a9aa40adbcd7bf802b8d0d7a6325cd5261e949aaab2a719ff"
+          },
+          "new_native_objects": 121,
+          "unchanged_objects": 8462,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 208408,
+          "sha256": "2dcd98d0450663dcc2040e52a15d1fa7100798c58a7410f9df766ca1f406dfd6",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-23.edit",
+          "native_batch": {
+            "bytes": 127926,
+            "sha256": "733066db4158ddf1c5826f9bd326b5bb9736e475beb0db94ec45f57783d5b967",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-23.batch"
+          },
+          "base_root": "65d7fdec859f937a9aa40adbcd7bf802b8d0d7a6325cd5261e949aaab2a719ff",
+          "result_root": "d518387dd15c1898c5df544739efd70cde8aa8879e261e2b86b3f8588a1a7421",
+          "result": {
+            "bytes": 2311502,
+            "sha256": "d3dbdf4d68d1b36b187619a3e3fa8b1e475016f0450277dc82a9645ecf016c14",
+            "root": "d518387dd15c1898c5df544739efd70cde8aa8879e261e2b86b3f8588a1a7421"
+          },
+          "new_native_objects": 125,
+          "unchanged_objects": 8572,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 216432,
+          "sha256": "42a0376008eb0e7ed32bc69d996718f353085420896e25789f89de92136d2f6b",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-24.edit",
+          "native_batch": {
+            "bytes": 138063,
+            "sha256": "443f3b349ccb8adf98e58e9f64beeb35a3718c41efc40f113b9c525ccce841af",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-24.batch"
+          },
+          "base_root": "d518387dd15c1898c5df544739efd70cde8aa8879e261e2b86b3f8588a1a7421",
+          "result_root": "35e6bbd496c2c6a89ec5036165dc7acb6f04de2b94677027d632198286ba4527",
+          "result": {
+            "bytes": 2332240,
+            "sha256": "bd404d3c26405a746f89df2ef24c09e94658a12b1e88f3a66c54272b894f71fa",
+            "root": "35e6bbd496c2c6a89ec5036165dc7acb6f04de2b94677027d632198286ba4527"
+          },
+          "new_native_objects": 123,
+          "unchanged_objects": 8686,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 214394,
+          "sha256": "51685d10af6ef9cf05505cf5e5c2bfa3db02d245f7114abb873630e667e1577f",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-25.edit",
+          "native_batch": {
+            "bytes": 140588,
+            "sha256": "c20c131f96089dc14a9e582f850c5ddfcc535a60b094cb4e694171295a84610d",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-25.batch"
+          },
+          "base_root": "35e6bbd496c2c6a89ec5036165dc7acb6f04de2b94677027d632198286ba4527",
+          "result_root": "4c1b59b66cd873bfbf0331a20e938095d0b29a819878ab80ec5a47a95ed10315",
+          "result": {
+            "bytes": 2336525,
+            "sha256": "cd0314a41dfb056b7ed23d66ddaa7c77c3dbf803a663870b05567e27270b81e9",
+            "root": "4c1b59b66cd873bfbf0331a20e938095d0b29a819878ab80ec5a47a95ed10315"
+          },
+          "new_native_objects": 33,
+          "unchanged_objects": 8798,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 225016,
+          "sha256": "bc7931fc0b8087e99fb6aea164cac90645c418a68fa1a1c94f2c37386bf43107",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-26.edit",
+          "native_batch": {
+            "bytes": 173464,
+            "sha256": "1810eb2c24caaf3e7f62df06105b2b1fa54bc0887370ae3781da9684f54070ce",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-26.batch"
+          },
+          "base_root": "4c1b59b66cd873bfbf0331a20e938095d0b29a819878ab80ec5a47a95ed10315",
+          "result_root": "fa2f2f44d5983874fdb73260aae03d777ca15657dff30f3d82dd26251cdb7a52",
+          "result": {
+            "bytes": 2336997,
+            "sha256": "8802d6e7f5586c760bf77de2e7aa04403f52eebb2837ab3f139f368d436e4b22",
+            "root": "fa2f2f44d5983874fdb73260aae03d777ca15657dff30f3d82dd26251cdb7a52"
+          },
+          "new_native_objects": 12,
+          "unchanged_objects": 8822,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 224971,
+          "sha256": "7e0591f3e5efe252e448cfb0e72cb62424aef09793c1417bcec7a0beb4f2a610",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-27.edit",
+          "native_batch": {
+            "bytes": 173533,
+            "sha256": "8f490cab656ca90e9c9b834a6ce1b40ce93f0d5b2da0b001a2ead31441b0f1c0",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-27.batch"
+          },
+          "base_root": "fa2f2f44d5983874fdb73260aae03d777ca15657dff30f3d82dd26251cdb7a52",
+          "result_root": "0aeb441280434a3f1e92a6664851e7db37232ff8e78e7e88a299581e9b8969ec",
+          "result": {
+            "bytes": 2337156,
+            "sha256": "d5168e6eadbb33b6c7549d26a555374010a65e530786cf4dcf489d28b1e5be65",
+            "root": "0aeb441280434a3f1e92a6664851e7db37232ff8e78e7e88a299581e9b8969ec"
+          },
+          "new_native_objects": 10,
+          "unchanged_objects": 8825,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 226164,
+          "sha256": "12bda49fbe737d5045c76bc9b4a827da25696895b2aef769e272c5fd378dd11b",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-28.edit",
+          "native_batch": {
+            "bytes": 174255,
+            "sha256": "212563b368745140e7c042e515f5d3e193c8f9c4260c3b05d966c4722a420f43",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-28.batch"
+          },
+          "base_root": "0aeb441280434a3f1e92a6664851e7db37232ff8e78e7e88a299581e9b8969ec",
+          "result_root": "cc4a7f4006a60ef284512a581b97e194bb19315500d17a54e99ec4111383c001",
+          "result": {
+            "bytes": 2339374,
+            "sha256": "e2c01545ccacbefe9014924bf775229b10d5c88a68b7d547a8094ed83b783167",
+            "root": "cc4a7f4006a60ef284512a581b97e194bb19315500d17a54e99ec4111383c001"
+          },
+          "new_native_objects": 23,
+          "unchanged_objects": 8826,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 234003,
+          "sha256": "c5e457631143b8fca41dcfb8197edce99195622fbfb9d2aee9405f4290ce8c04",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-29.edit",
+          "native_batch": {
+            "bytes": 179530,
+            "sha256": "b1bad79de0f7511b340014d6bb8d25059e6d0f4674a17737ab925bf537ea722f",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-29.batch"
+          },
+          "base_root": "cc4a7f4006a60ef284512a581b97e194bb19315500d17a54e99ec4111383c001",
+          "result_root": "bc043af84964212e2009f403f36f55aa199d76e8550b0b0bee0da56286076135",
+          "result": {
+            "bytes": 2354281,
+            "sha256": "3e54fd8f814cfa3268bd0bf936f877cd1b13f84d393fd551cf9714bd9212d865",
+            "root": "bc043af84964212e2009f403f36f55aa199d76e8550b0b0bee0da56286076135"
+          },
+          "new_native_objects": 101,
+          "unchanged_objects": 8840,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 238980,
+          "sha256": "e5de5c98eb5773c72c64588f7b35211f96049a03a7c10a71b146828f6977567a",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-30.edit",
+          "native_batch": {
+            "bytes": 184804,
+            "sha256": "6fd9c21ba74af0025b3db6f57f957b76c5ff3b83b030c1168e222c651ae8566b",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-30.batch"
+          },
+          "base_root": "bc043af84964212e2009f403f36f55aa199d76e8550b0b0bee0da56286076135",
+          "result_root": "3a2ee0c41bd0bdb6e49d6fef0476619f1f5a7f7a12de15fcf408f626f309947a",
+          "result": {
+            "bytes": 2370045,
+            "sha256": "2113e6b88ba6af5c6e6c20a9a8ebbe969ebadf9b0b294534e46c9e2fc319503c",
+            "root": "3a2ee0c41bd0bdb6e49d6fef0476619f1f5a7f7a12de15fcf408f626f309947a"
+          },
+          "new_native_objects": 104,
+          "unchanged_objects": 8932,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 242116,
+          "sha256": "9fa391d312286b6489daef9247349b9bc1a0364d5b19d153cacae0e14d20bed4",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-31.edit",
+          "native_batch": {
+            "bytes": 190078,
+            "sha256": "357442d7f90f10da90ad588459e582ce15290d4b9b909e11416eeb85c4be200c",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-31.batch"
+          },
+          "base_root": "3a2ee0c41bd0bdb6e49d6fef0476619f1f5a7f7a12de15fcf408f626f309947a",
+          "result_root": "dc82468665c5a0462fec80eca617f62fa2f94271a51d8caae89b97d19fc469ad",
+          "result": {
+            "bytes": 2382004,
+            "sha256": "22a72db951d40216e1ee621cc76bd3484333f9ed872cb003b6e6d3100fef0416",
+            "root": "dc82468665c5a0462fec80eca617f62fa2f94271a51d8caae89b97d19fc469ad"
+          },
+          "new_native_objects": 74,
+          "unchanged_objects": 9027,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 240112,
+          "sha256": "938ab22c98d4d67b3a7232c25aa18576c067ecd06094f294f3c7f9d79e50e250",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-32.edit",
+          "native_batch": {
+            "bytes": 190771,
+            "sha256": "6a1fb1fa80b801d972f5f6cd0bd0d1df1aac13aa097ca0feb2bcc28508b75486",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-32.batch"
+          },
+          "base_root": "dc82468665c5a0462fec80eca617f62fa2f94271a51d8caae89b97d19fc469ad",
+          "result_root": "5f48041a0e2e7bc4de018eb68ce12a5b44cdb414248a43389b9af1d38c24a5b0",
+          "result": {
+            "bytes": 2383625,
+            "sha256": "5b792ef9220d8b878b488b8892b1f162500bd1cbc8005e723237b3805c9cb3fe",
+            "root": "5f48041a0e2e7bc4de018eb68ce12a5b44cdb414248a43389b9af1d38c24a5b0"
+          },
+          "new_native_objects": 19,
+          "unchanged_objects": 9092,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 249753,
+          "sha256": "49a875fd37ec8c3b42143cda6bf9e4fd6b0d8f4d03291e1c66a491838f5a4956",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-33.edit",
+          "native_batch": {
+            "bytes": 200907,
+            "sha256": "1974b70f5a593db5ca00aa0154ee64470b6afa4e2f8decce8c8d4b15691b3166",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-33.batch"
+          },
+          "base_root": "5f48041a0e2e7bc4de018eb68ce12a5b44cdb414248a43389b9af1d38c24a5b0",
+          "result_root": "4415adb90d1cb737bd8cb3dbc5dac3b19688d5a6cccf133e1927c662b7dc9b5a",
+          "result": {
+            "bytes": 2400639,
+            "sha256": "a0ee2c3b19e0ededc5af2f5799dc2b71b75a4c9cbb4417119e310255c5c69a57",
+            "root": "4415adb90d1cb737bd8cb3dbc5dac3b19688d5a6cccf133e1927c662b7dc9b5a"
+          },
+          "new_native_objects": 108,
+          "unchanged_objects": 9102,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 258336,
+          "sha256": "a3a6b19ac5a077547b134fd92172ca4498935beecf98f0b0cb2596dffcb909bc",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-34.edit",
+          "native_batch": {
+            "bytes": 211046,
+            "sha256": "85f07f6cd42e1785462388c2e7a20a9c97bdd8a67e84a1dc6d8b16b285b967b2",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-34.batch"
+          },
+          "base_root": "4415adb90d1cb737bd8cb3dbc5dac3b19688d5a6cccf133e1927c662b7dc9b5a",
+          "result_root": "79158489ff4516c9ab708b1431734858f7d5877af43c797b3c69200f94ed453c",
+          "result": {
+            "bytes": 2421330,
+            "sha256": "938a1b0184ebd8d10acd8e4eaf9f88f3e7f983f6bf528fd57ff7a33f27d35fe4",
+            "root": "79158489ff4516c9ab708b1431734858f7d5877af43c797b3c69200f94ed453c"
+          },
+          "new_native_objects": 122,
+          "unchanged_objects": 9201,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 255937,
+          "sha256": "e7da75809187a481ac3da43ed0e0c71f5e891dfb3157cce345dd786c5058c37a",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-35.edit",
+          "native_batch": {
+            "bytes": 213402,
+            "sha256": "9ffaa4ec8842edfdd26ce79eb034868cdc7e86771927f3ecd128efb1dc8d0ada",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-35.batch"
+          },
+          "base_root": "79158489ff4516c9ab708b1431734858f7d5877af43c797b3c69200f94ed453c",
+          "result_root": "a15fda2803202e4c5c56daee0da2de1a56a03efc1fcf55a52bbe56e7a51febf1",
+          "result": {
+            "bytes": 2425300,
+            "sha256": "7fa38b93447fb54038cdfb1bb8ef056878d6d228f012e3b49343f3753cad44f4",
+            "root": "a15fda2803202e4c5c56daee0da2de1a56a03efc1fcf55a52bbe56e7a51febf1"
+          },
+          "new_native_objects": 31,
+          "unchanged_objects": 9314,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 146781,
+          "sha256": "f287fe4cc2c9cea4221e19b253254ce3ceff3d53d2afb787b04677240a36efe2",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-36.edit",
+          "native_batch": {
+            "bytes": 44667,
+            "sha256": "63f294f187efe332e04d5f5a820c9a4f866d527857d02c1e7feb16d172608613",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-36.batch"
+          },
+          "base_root": "a15fda2803202e4c5c56daee0da2de1a56a03efc1fcf55a52bbe56e7a51febf1",
+          "result_root": "b1ec3dfb85dccaa02d225b215f0527114e4f10faa44f830677412e4d6429b2eb",
+          "result": {
+            "bytes": 2437751,
+            "sha256": "48237f4d046c707b6ad138a3c63828ade8afb119a8aa0198435bdd1cfc6930e4",
+            "root": "b1ec3dfb85dccaa02d225b215f0527114e4f10faa44f830677412e4d6429b2eb"
+          },
+          "new_native_objects": 80,
+          "unchanged_objects": 9336,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 152018,
+          "sha256": "d9e94519acff8eeb4ab4a73c421324427792f4b29ab9907da6ab32d62c17623a",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-37.edit",
+          "native_batch": {
+            "bytes": 49468,
+            "sha256": "af89a4fcc6b4384d6fff6d7f26e38f064cf55c9d4243864bca47f6982ff597d4",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-37.batch"
+          },
+          "base_root": "b1ec3dfb85dccaa02d225b215f0527114e4f10faa44f830677412e4d6429b2eb",
+          "result_root": "ccc29d96517509bc682a4b06ba1d6fe79b6b211660f5b6603877376054569d2b",
+          "result": {
+            "bytes": 2452372,
+            "sha256": "5f76157529c0ccbd6de181c2d2fc0e2ce4b459d7fd613500d69fda9a98c951b4",
+            "root": "ccc29d96517509bc682a4b06ba1d6fe79b6b211660f5b6603877376054569d2b"
+          },
+          "new_native_objects": 96,
+          "unchanged_objects": 9407,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 157600,
+          "sha256": "35901cbf75803fa62008a723e21706c45253bcf1526cf4616ec3649b4e4936da",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-38.edit",
+          "native_batch": {
+            "bytes": 59607,
+            "sha256": "6ebf5e75fdf60503593216f678a106a6bdc5e740b04d1da8a6dae1f16898d0de",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-38.batch"
+          },
+          "base_root": "ccc29d96517509bc682a4b06ba1d6fe79b6b211660f5b6603877376054569d2b",
+          "result_root": "492e627c2144e25063b6b30613313d7c5c7b085920116a26474d0d2f6506a6ac",
+          "result": {
+            "bytes": 2465280,
+            "sha256": "134dc53bb1caea2d343def97ff52269a68a7364714ae196c64b25fb9f7c6758d",
+            "root": "492e627c2144e25063b6b30613313d7c5c7b085920116a26474d0d2f6506a6ac"
+          },
+          "new_native_objects": 57,
+          "unchanged_objects": 9494,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 161832,
+          "sha256": "064f5e60e031b197d3e8d82c5f12d395fdca1476d754295d7427a8ef5f691519",
+          "path": "native/transactions/20261112-jvm/server-jvm-metadata-39.edit",
+          "native_batch": {
+            "bytes": 64966,
+            "sha256": "767b285c19c921198c0253760a63fa24333bc9616ab1ed179e45b5771645da96",
+            "path": "native/transactions/20261112-jvm/server-jvm-metadata-39.batch"
+          },
+          "base_root": "492e627c2144e25063b6b30613313d7c5c7b085920116a26474d0d2f6506a6ac",
+          "result_root": "7b0ebbed3b4afee9867ede157ccfe9695d045d254ce251f5a076e637bd7a1ee5",
+          "result": {
+            "bytes": 2475636,
+            "sha256": "e6fd0d8000fb84fb9a1f6c836d52e08231c30aeadf93f1101a4c7b1aac0716b5",
+            "root": "7b0ebbed3b4afee9867ede157ccfe9695d045d254ce251f5a076e637bd7a1ee5"
+          },
+          "new_native_objects": 66,
+          "unchanged_objects": 9542,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 255859,
+          "sha256": "cc0fb79476642153af267ef9f8758d132fc70542d99e849922c680761bda3d81",
+          "path": "native/transactions/20261112-jvm/server-jvm-arguments-01.edit",
+          "native_batch": {
+            "bytes": 213839,
+            "sha256": "0d93ec406d1d906fc95f47a5d1cedba0a9215f16c96e15e9d45282ffd6e95ab1",
+            "path": "native/transactions/20261112-jvm/server-jvm-arguments-01.batch"
+          },
+          "base_root": "7b0ebbed3b4afee9867ede157ccfe9695d045d254ce251f5a076e637bd7a1ee5",
+          "result_root": "067338f2301025038876c562e36695cf16ff92cf0f116342a50bf55a51410a9c",
+          "result": {
+            "bytes": 2477184,
+            "sha256": "9ad7c291f7eb207835dedae55e02980fcd264c9b41a12d9cf23a9d776a924493",
+            "root": "067338f2301025038876c562e36695cf16ff92cf0f116342a50bf55a51410a9c"
+          },
+          "new_native_objects": 19,
+          "unchanged_objects": 9599,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 214350,
+          "sha256": "427be11c5bdc73abd6afafc74bc3cfb10328595a1e7b8e4007717e0cdf750874",
+          "path": "native/transactions/20261112-jvm/server-jvm-arguments-02.edit",
+          "native_batch": {
+            "bytes": 141066,
+            "sha256": "78f5bbd5b26552342fd86960680d7955cbaac60ff0e9259acbf84411b452b015",
+            "path": "native/transactions/20261112-jvm/server-jvm-arguments-02.batch"
+          },
+          "base_root": "067338f2301025038876c562e36695cf16ff92cf0f116342a50bf55a51410a9c",
+          "result_root": "e70c4d3ddcb89ea97dadc83497bd5b4431aa49c73af36ddf016e4c1291f5f4ca",
+          "result": {
+            "bytes": 2478536,
+            "sha256": "ffcbf00284018a14c3f8fd2ef6473220d6cc52db348ee18cd97607c35d2b86ae",
+            "root": "e70c4d3ddcb89ea97dadc83497bd5b4431aa49c73af36ddf016e4c1291f5f4ca"
+          },
+          "new_native_objects": 21,
+          "unchanged_objects": 9607,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 214663,
+          "sha256": "3e42e6904ab6db9646763b0b0d37ee6cf09f8d24dea7db33d39fd3ad3b2728ec",
+          "path": "native/transactions/20261112-jvm/server-jvm-arguments-03.edit",
+          "native_batch": {
+            "bytes": 141461,
+            "sha256": "1a24b29f6ccadab0bee3d220e3f724ea88fb312ecd9201400a55732c5b6dfb64",
+            "path": "native/transactions/20261112-jvm/server-jvm-arguments-03.batch"
+          },
+          "base_root": "e70c4d3ddcb89ea97dadc83497bd5b4431aa49c73af36ddf016e4c1291f5f4ca",
+          "result_root": "4911c75e6ef09ed8e8d63cd23617ffbd2ffb1e4dd4f96676a96f3101cfa19fe3",
+          "result": {
+            "bytes": 2480174,
+            "sha256": "e14c72d821a63a3550875ff4f098eb45a16147b53608bef12f14e70e924b2b17",
+            "root": "4911c75e6ef09ed8e8d63cd23617ffbd2ffb1e4dd4f96676a96f3101cfa19fe3"
+          },
+          "new_native_objects": 20,
+          "unchanged_objects": 9617,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 160246,
+          "sha256": "0b55878ad484317c6e9f4b36108120742ec449d2ce375207c864f241c1f07c0c",
+          "path": "native/transactions/20261112-jvm/server-jvm-arguments-04.edit",
+          "native_batch": {
+            "bytes": 65411,
+            "sha256": "fe1a389ddcb31f1901b97caccd4ce771d62a215faae5b55989dd6378b96e25da",
+            "path": "native/transactions/20261112-jvm/server-jvm-arguments-04.batch"
+          },
+          "base_root": "4911c75e6ef09ed8e8d63cd23617ffbd2ffb1e4dd4f96676a96f3101cfa19fe3",
+          "result_root": "89cf03d681368a0ec830b9e843c4ef1c0614cc1138ac82196736634832300f7d",
+          "result": {
+            "bytes": 2481726,
+            "sha256": "61e5b2cb7b6b830deab771c6f3973cc8078ed741c8c427bf618807c6a00a246e",
+            "root": "89cf03d681368a0ec830b9e843c4ef1c0614cc1138ac82196736634832300f7d"
+          },
+          "new_native_objects": 19,
+          "unchanged_objects": 9628,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 212976,
+          "sha256": "63fddf66a4d29b0a1b401e0e7cef36272841e9f7e875cca65896266b0be8140b",
+          "path": "native/transactions/20261112-jvm/server-jvm-arguments-05.edit",
+          "native_batch": {
+            "bytes": 137540,
+            "sha256": "bdce99031db208aa4cca6de26d6ca8ddc48051028148e38412f7517467963f1e",
+            "path": "native/transactions/20261112-jvm/server-jvm-arguments-05.batch"
+          },
+          "base_root": "89cf03d681368a0ec830b9e843c4ef1c0614cc1138ac82196736634832300f7d",
+          "result_root": "4f43de5eb706b71094ceaaa64b789d511f69b6560a3de1a8c19b7980ffa1c192",
+          "result": {
+            "bytes": 2482386,
+            "sha256": "a5240da2f3372542ddc20c29951e6cdedc7a267fa523af2828129eb92c120415",
+            "root": "4f43de5eb706b71094ceaaa64b789d511f69b6560a3de1a8c19b7980ffa1c192"
+          },
+          "new_native_objects": 16,
+          "unchanged_objects": 9636,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 213094,
+          "sha256": "b703604da4f48a933ce565a1e35a3230c900039d717cc388524703a6de89d78b",
+          "path": "native/transactions/20261112-jvm/server-jvm-arguments-06.edit",
+          "native_batch": {
+            "bytes": 137730,
+            "sha256": "a31351198e607c8bd75307cc9c9afb703298bf6f987d488d37c37d644e897857",
+            "path": "native/transactions/20261112-jvm/server-jvm-arguments-06.batch"
+          },
+          "base_root": "4f43de5eb706b71094ceaaa64b789d511f69b6560a3de1a8c19b7980ffa1c192",
+          "result_root": "2bb2e8535a6312040d5d93993629af44a5e1efc8e6e07b782ec0934b9df600b9",
+          "result": {
+            "bytes": 2483161,
+            "sha256": "96c8b474039320cccdd409fcc8fff08c34294439a634cffd11b3b12aaf0aea71",
+            "root": "2bb2e8535a6312040d5d93993629af44a5e1efc8e6e07b782ec0934b9df600b9"
+          },
+          "new_native_objects": 15,
+          "unchanged_objects": 9641,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 213088,
+          "sha256": "116e848586e55d47f8583f0336ca0ea353231ccf96f4afc45b906f9397fa8b3d",
+          "path": "native/transactions/20261112-jvm/server-jvm-arguments-07.edit",
+          "native_batch": {
+            "bytes": 137837,
+            "sha256": "8d069865a2c0c7afc5e9c4a80bde5f65305d407f782420c444bf41c42380f4e7",
+            "path": "native/transactions/20261112-jvm/server-jvm-arguments-07.batch"
+          },
+          "base_root": "2bb2e8535a6312040d5d93993629af44a5e1efc8e6e07b782ec0934b9df600b9",
+          "result_root": "002683a7b26605a216c269a2a6292b5678fc9e85971743716f72681407787cbe",
+          "result": {
+            "bytes": 2483476,
+            "sha256": "6da195fa55406ba832991656828ca976cf08d8d94f5b815f2299b6dfaa17d282",
+            "root": "002683a7b26605a216c269a2a6292b5678fc9e85971743716f72681407787cbe"
+          },
+          "new_native_objects": 13,
+          "unchanged_objects": 9645,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        },
+        {
+          "bytes": 213504,
+          "sha256": "d3e7a5b9527d0088f96ab73bc5bfcd807ce0e67c6cd635095ea0d80185856172",
+          "path": "native/transactions/20261112-jvm/server-jvm-arguments-08.edit",
+          "native_batch": {
+            "bytes": 138150,
+            "sha256": "306a1797b33467785a60a23e6f2d3921ea50160af1ad17846ad35dd5ced5a953",
+            "path": "native/transactions/20261112-jvm/server-jvm-arguments-08.batch"
+          },
+          "base_root": "002683a7b26605a216c269a2a6292b5678fc9e85971743716f72681407787cbe",
+          "result_root": "786f4ce73c990a8c97994f0195472c7e6d5fd8ad1fff3ca2870cd5223a6a9ddb",
+          "result": {
+            "bytes": 2484331,
+            "sha256": "6aa149c1b9b0470abf1ac0fb17b4cc2e5698d44f5cfbe104aa0393a5327ba03b",
+            "root": "786f4ce73c990a8c97994f0195472c7e6d5fd8ad1fff3ca2870cd5223a6a9ddb"
+          },
+          "new_native_objects": 16,
+          "unchanged_objects": 9647,
+          "raw_bytes_equal": true,
+          "canonical_bytes_equal": true,
+          "mandatory_native_verify": true
+        }
+      ]
+    }
+  ],
+  "total_records": 49,
+  "packing": "Immutable native-authored objects copied into XAXEDIT1; no foreign canonical graph construction",
+  "fixtures": [
+    {
+      "bytes": 17584,
+      "sha256": "ecb00f285540b81abcfeb12026719fe73277d184375b116da1efc4fae387cdd2",
+      "path": "tests/jvm/wordcount-v0.xax",
+      "root": "91490bfcb3b3efc805b31aaf3df1a0a0af30ea9ea110e8dc424c205ec37d6e8e",
+      "upstream_path": "compiler/benchmarks/r6_xwc/xwc-gen0.xax",
+      "upstream_commit": "745e80150605f3812aa012e6884f6e417d9423b4",
+      "imported_byte_exact": true
+    },
+    {
+      "bytes": 17655,
+      "sha256": "d12c9956e2d8149fd38cc6cdfae851beff02f7ee86fdc1f7f7d241ebb91cfb59",
+      "path": "tests/jvm/wordcount-v1.xax",
+      "root": "ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd",
+      "upstream_path": "compiler/benchmarks/r6_xwc/xwc-gen1.xax",
+      "upstream_commit": "745e80150605f3812aa012e6884f6e417d9423b4",
+      "imported_byte_exact": true
+    }
+  ],
+  "release_ready": false,
+  "full_workspace_alias_gate_closed": false
+}

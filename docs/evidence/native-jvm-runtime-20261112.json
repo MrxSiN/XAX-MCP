@@ -1,0 +1,894 @@
+{
+  "schema": "xax-mcp-jvm-runtime-acceptance-v1",
+  "recorded": "2026-11-12",
+  "scope": "Final canonical JVM server and native Java launcher; bounded explicit snapshot build/execute preview",
+  "binding": [
+    {
+      "path": "native/candidates/20261112-jvm/jvm-launcher-snapshot.xax",
+      "bytes": 161968,
+      "sha256": "adf2161cafc6d9b249aed25d015b1c24a3724d0ce73c3e59bec90c0981e4f186",
+      "root": "d22915a55c25228fdfd13fb534c9616207c014b5c44d69cb7fa3dbd19c20deb2"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/jvm-launcher.prov",
+      "bytes": 268,
+      "sha256": "31644cbf3653c2b8e655f94ba5aea4d5fb1bca7d8768e60c0f5eaafaac439e17"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/jvm-launcher.xax",
+      "bytes": 161690,
+      "sha256": "9bd9919a63fa4835eb7893fb30638d775525ac54e0ad96dce723b320a3cba618",
+      "root": "5c68607f3222ce2903b4e077fee953fc3b90b92d6ff54874f6e1cadb8d7db9f9"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/server-runtime.xax",
+      "bytes": 2005855,
+      "sha256": "89591dcecd3e964247fd6341df916005d685ad6677d84fb6ea90b831d9938873",
+      "root": "5b2146cf62f4f3225672592280fc5fdb04ca26941982a1bbdd1da393510ca28e"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/server-snapshot.xax",
+      "bytes": 2484610,
+      "sha256": "772c374af352f4dde6f98ca34d48c13bad93840f2260f5de61be588069b7ac4d",
+      "root": "0c0c2e4aa44154c4d308c145b0bbd1a473539d2fef1ac14f4b9269cb411f0199"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/server.xax",
+      "bytes": 2484331,
+      "sha256": "6aa149c1b9b0470abf1ac0fb17b4cc2e5698d44f5cfbe104aa0393a5327ba03b",
+      "root": "786f4ce73c990a8c97994f0195472c7e6d5fd8ad1fff3ca2870cd5223a6a9ddb"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/xax-mcp-native.exe",
+      "bytes": 569344,
+      "sha256": "5b66d6d1e56e92ca73439c2eaf66ccf52c91a924b1ea28c2f5e19fc11f00716d"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/xax-mcp-native.prov",
+      "bytes": 268,
+      "sha256": "4078d58665d0028fb54a0e9a5d5a1dc3c540abf04885c50287bce22ce68ee230"
+    },
+    {
+      "path": "native/candidates/20261112-jvm/xax-mcp-sandbox.exe",
+      "bytes": 153088,
+      "sha256": "6ef0f256dd1fc2f68daca439b6bb1e52b1a256cf97948142eb4b5782b352bad2"
+    }
+  ],
+  "dependency": "native/jvm-dependency.json",
+  "features": {
+    "recorded": "2026-11-12",
+    "cases": [
+      {
+        "case": "capabilities_schema_readonly_authority",
+        "tools": 8,
+        "passed": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 0,
+        "bytes": 0,
+        "expected_stdout_hex": "20202020202030202020202020203020202020202020300a",
+        "resource_observations": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 0,
+        "bytes": 1,
+        "expected_stdout_hex": "20202020202030202020202020203120202020202020310a",
+        "resource_observations": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 0,
+        "bytes": 8,
+        "expected_stdout_hex": "20202020202031202020202020203220202020202020380a",
+        "resource_observations": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 0,
+        "bytes": 256,
+        "expected_stdout_hex": "20202020202031202020202020203120202020203235360a",
+        "resource_observations": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 0,
+        "bytes": 16,
+        "expected_stdout_hex": "20202020202031202020202020203120202020202031360a",
+        "resource_observations": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 0,
+        "bytes": 65538,
+        "expected_stdout_hex": "20202020202031202020202020203220202036353533380a",
+        "resource_observations": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 0,
+        "bytes": 65536,
+        "expected_stdout_hex": "20202020323536202020202032353620202036353533360a",
+        "resource_observations": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 0,
+        "bytes": 65537,
+        "expected_stdout_hex": "20202020323536202020202032353620202036353533370a",
+        "resource_observations": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 0,
+        "bytes": 262144,
+        "expected_stdout_hex": "20202031303234202020203130323420203236323134340a",
+        "resource_observations": true
+      },
+      {
+        "case": "nonrepresentable_argument_rejected",
+        "before_jvm": true,
+        "source_preserved": true
+      },
+      {
+        "case": "max_empty_arguments",
+        "version": 0,
+        "count": 64
+      },
+      {
+        "case": "host_limits_and_overrides",
+        "version": 0,
+        "rejections": 8,
+        "source_preserved": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 1,
+        "bytes": 0,
+        "expected_stdout_hex": "20202020202030202020202020203020202020202020300a",
+        "resource_observations": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 1,
+        "bytes": 1,
+        "expected_stdout_hex": "20202020202030202020202020203120202020202020310a",
+        "resource_observations": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 1,
+        "bytes": 8,
+        "expected_stdout_hex": "20202020202031202020202020203220202020202020380a",
+        "resource_observations": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 1,
+        "bytes": 256,
+        "expected_stdout_hex": "20202020202031202020202020203120202020203235360a",
+        "resource_observations": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 1,
+        "bytes": 16,
+        "expected_stdout_hex": "20202020202031202020202020203420202020202031360a",
+        "resource_observations": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 1,
+        "bytes": 65538,
+        "expected_stdout_hex": "20202020202031202020202020203220202036353533380a",
+        "resource_observations": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 1,
+        "bytes": 65536,
+        "expected_stdout_hex": "20202020323536202020202032353620202036353533360a",
+        "resource_observations": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 1,
+        "bytes": 65537,
+        "expected_stdout_hex": "20202020323536202020202032353620202036353533370a",
+        "resource_observations": true
+      },
+      {
+        "case": "native_jvm_byte_input",
+        "version": 1,
+        "bytes": 262144,
+        "expected_stdout_hex": "20202031303234202020203130323420203236323134340a",
+        "resource_observations": true
+      },
+      {
+        "case": "nonrepresentable_argument_rejected",
+        "before_jvm": true,
+        "source_preserved": true
+      },
+      {
+        "case": "max_empty_arguments",
+        "version": 1,
+        "count": 64
+      },
+      {
+        "case": "host_limits_and_overrides",
+        "version": 1,
+        "rejections": 8,
+        "source_preserved": true
+      },
+      {
+        "case": "missing_java",
+        "result": {
+          "ok": false,
+          "error": "launcher_setup_failed"
+        },
+        "source_preserved": true
+      },
+      {
+        "case": "old_compiler_declines_jvm",
+        "result": {
+          "error": {
+            "code": "build_failed",
+            "message": "the native compiler could not build the current store"
+          },
+          "ok": false
+        },
+        "source_preserved": true
+      },
+      {
+        "case": "unresolved_request_declines",
+        "result": {
+          "error": {
+            "code": "build_failed",
+            "message": "the native compiler could not build the current store"
+          },
+          "ok": false
+        },
+        "source_preserved": true
+      },
+      {
+        "case": "windows_snapshot_rejected",
+        "result": {
+          "ok": false,
+          "error": "launcher_setup_failed"
+        },
+        "source_preserved": true
+      }
+    ],
+    "exchanges": 53,
+    "capabilities": {
+      "authority": {
+        "effects_granted": [],
+        "max_request_bytes": 4194304,
+        "rights": [
+          "read"
+        ],
+        "store_roots": 0
+      },
+      "maturity": {
+        "compiler cancellation": "PROTOTYPE (compiler calls; 1 MiB queue; backpressure; confirmed descendant cleanup)",
+        "semantic reference pages": "PROTOTYPE (root-bound; 64 rows; 4 MiB inspection prefix; generic edges; no typed facts)",
+        "construct on Linux": "UNIMPLEMENTED natively",
+        "construct from typed XAXEDIT1": "EXECUTED (Windows native file contract)",
+        "execute on Linux (namespaces, seccomp, rlimits)": "UNIMPLEMENTED natively",
+        "modern protocol 2026-07-28": "PROTOTYPE (native MCP; candidate gates open)",
+        "result (serves artifacts over the wire)": "UNIMPLEMENTED natively",
+        "stdio transport, JSON validation, MCP lifecycle, tool dispatch, host rights": "EXECUTED (native protocol fixtures)",
+        "workspace/query/transaction/build over a host-granted native compiler": "PROTOTYPE (docs/NATIVE.md)",
+        "JVM build and execution": "EXECUTED preview (native JVM-capable compiler; generated JAR verified and executed under a Windows AppContainer/job; wider release gates open)",
+        "mutation of resolved JVM snapshots": "UNIMPLEMENTED in native workspace editor; declines without source publication"
+      },
+      "ok": true,
+      "protocol": {
+        "framing": "newline-delimited JSON-RPC 2.0",
+        "max_json_depth": 64,
+        "max_message_bytes": 4194304,
+        "versions": [
+          "2026-07-28",
+          "2024-11-05",
+          "2025-03-26",
+          "2025-06-18",
+          "2025-11-25"
+        ]
+      },
+      "sandbox": {
+        "available": "Windows AppContainer and one-process job for the host-configured Java 17 platform runtime",
+        "launcher": "xax-mcp-sandbox.exe (native canonical XAX)",
+        "reason": "Explicit execution grant and host-owned XAX_MCP_JAVA required. Fixed VM options precede the fixed -jar artifact; client strings follow it. No network capabilities. The owned JAR gets a temporary AppContainer read grant; runtime installation ACLs are unchanged. Compiler build and native launcher are distinct from the required platform JVM. Broader security and crash acceptance remain open."
+      },
+      "server": {
+        "implementation": "native XAX program (windows-x86_64 PE32+ built from a canonical .xax store)",
+        "name": "xax-mcp",
+        "python_on_request_path": false,
+        "transport": "stdio",
+        "version": "0.10.0+native"
+      },
+      "targets": [
+        {
+          "target": "jvm",
+          "profile": "jvm-classfile-memory-v1",
+          "artifact": "JVM_EXECUTABLE_JAR",
+          "classfile_major": 61,
+          "implementation": "EXECUTED",
+          "toolchain_status": "TESTED",
+          "input_modes": [
+            "construction-constants",
+            "binary-stdin-hex",
+            "arguments-to-generated-JVM-main"
+          ],
+          "result_mode": "raw-u32-exit+separate-stream-hex+resource-observations",
+          "resolved_snapshot_required": true,
+          "snapshot_mutation": false,
+          "xax_startup_argument_reads": false
+        }
+      ],
+      "tools": {
+        "xax_build": "JVM snapshot build preview: byte-stages the current host-authorized, already-resolved canonical snapshot into owned work scratch and invokes the exact JVM-capable native XAX compiler's build command. Native build verifies the complete snapshot and emits an executable JAR and provenance; no canonical parsing, workload computation, Java source generation, javac, Python compiler or interpreter is on the request path. Unresolved request roots decline in this profile. Returns the current canonical root, actual artifact byte count and provenance bytes/hex. This separate JVM preview uses its own immutable tested compiler manifest while the default deployment pin stays unchanged. Snapshot mutation, package/entry selection, result handles and toolchain caching remain unsupported.",
+        "xax_capabilities": "EXECUTED (native)",
+        "xax_construct": "EXECUTED: verified XAXEDIT1 construction and edits through the native compiler; xax-construct-v1 JSON is unsupported Resolved JVM snapshot mutation is not supported by the native editor.",
+        "xax_execute": "JVM executable-JAR preview on Windows: stages only the current authorized resolved canonical snapshot and invokes the exact host-granted native XAX compiler's build command, then the native XAX launcher starts the host-selected Java 17 runtime inside a Windows AppContainer and one-process job. Requires --allow-execute and host-owned XAX_MCP_JAVA. Clients cannot choose the runtime, class path, JAR, executable, file path, environment, JVM options, grants or larger budgets. Optional stdin_hex supplies at most 262144 exact binary bytes followed by physical EOF. args excludes argv[0], is limited to 64 strings and 8192 UTF-16 units, and is passed after the fixed -jar artifact to generated JVM main; the XAX JVM process entry has no startup-argument readers. Arguments must fit Windows-1252; @file/-version stay literal. Other characters decline. Fixed VM options enable class verification, cap Java heap at 64 MiB, bound VM caches, disable attach/performance data and use one active processor. The native job enforces five seconds total CPU, ten seconds wall time, one process, 256 MiB process commit and 1 MiB combined returned output. The child receives OS-derived SystemRoot and container-local LOCALAPPDATA; Java option/classpath environment variables are not inherited. The owned JAR alone gets an AppContainer read grant, restored during normal cleanup. Returns separate exact stream hex, raw process exit, measured wall/user/kernel CPU, peak process commit and stdin_bytes_supplied. Native setup, measurement, budget and cleanup failures fail closed; Java exceptions and Java-heap exhaustion are raw child exits and stderr, not separately classified traps. This profile is device-independent JVM classfile major 61, tested with canonical JVM memory-profile snapshots and Microsoft OpenJDK 17 on Windows. Snapshot mutation, unresolved build requests, JVM startup reads, JNI/registered external tools, other runtimes and cross-platform launchers are not certified. Workspace content integrity, atomic publication, crash/pressure/escape acceptance and promotion remain open.",
+        "xax_query": "EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler",
+        "xax_result": "UNIMPLEMENTED natively: result handles need session state, which the native server lacks",
+        "xax_transaction": "EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler Resolved JVM snapshot mutation is not supported by the native editor.",
+        "xax_workspace": "EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler"
+      },
+      "xax": {
+        "pinned_commit": "745e80150605f3812aa012e6884f6e417d9423b4",
+        "native_file_contract": "xax-native-file-v1",
+        "role": "Separate JVM-preview native Windows compiler; required platform JVM executes the emitted bytecode; no Python request-path helper",
+        "seed_sha256": "e2f68c00a8dee67490929b173469e383853564254ed80b3a7a5e8188d8c50122",
+        "toolchain_status": "TESTED for the JVM executable memory-profile snapshots",
+        "manifest": "native/jvm-dependency.json",
+        "default_deployment_pin_unchanged": true
+      },
+      "execution": {
+        "stdin": "hex bytes + physical EOF",
+        "args": "Windows-1252 strings; other characters decline before JVM launch; no XAX startup reader API",
+        "max_stdin_bytes": 262144,
+        "max_args": 64,
+        "max_argument_utf16_units": 8192,
+        "max_combined_output_bytes": 1048576,
+        "max_cpu_100ns": 50000000,
+        "max_wall_ms": 10000,
+        "max_process_memory_bytes": 268435456,
+        "max_java_heap_bytes": 67108864,
+        "environment": "OS-derived SystemRoot and container-local LOCALAPPDATA; Windows may add TEMP/TMP; Java options and classpath variables are not inherited",
+        "scope": "currently authorized resolved JVM snapshot only",
+        "peak_memory": "sampled native job peak process commit; Java heap is separately capped",
+        "typed_layouts": false,
+        "registered_external_tools": false,
+        "java_exceptions": "raw child exit and stderr"
+      },
+      "jvm": {
+        "runtime": "Microsoft OpenJDK 17.0.20.1+1-LTS, Windows x86-64",
+        "java_exe_sha256": "6db7759259dc79800c5c6014f0ec68961a1fe69c36bb9b2a15a42c3b0c413f6a",
+        "status": "TESTED",
+        "platform_runtime_required": true,
+        "python_on_request_path": false,
+        "java_source_helper_on_request_path": false,
+        "java_heap_limit_bytes": 67108864
+      }
+    },
+    "full_text_structured_equality": true,
+    "source_bytes_preserved": true
+  },
+  "native_fixture_builds": [
+    {
+      "version": 0,
+      "classes": 1,
+      "classfile_major": 61,
+      "jar_bytes": 3254,
+      "double_identical": true
+    },
+    {
+      "version": 1,
+      "classes": 1,
+      "classfile_major": 61,
+      "jar_bytes": 3281,
+      "double_identical": true
+    }
+  ],
+  "reference_comparison": [
+    {
+      "version": 0,
+      "reference": "Explicit Python reference backend, outside the request path",
+      "native_jar_equal": true,
+      "native_provenance_equal": true
+    },
+    {
+      "version": 1,
+      "reference": "Explicit Python reference backend, outside the request path",
+      "native_jar_equal": true,
+      "native_provenance_equal": true
+    }
+  ],
+  "authority_and_mutation": {
+    "recorded": "2026-11-12",
+    "denied_forged_authority_attempts": 18,
+    "exchanges": 35,
+    "snapshot_mutation": {
+      "error": {
+        "code": "transaction_rejected",
+        "message": "the native compiler rejected the transaction record"
+      },
+      "ok": false
+    },
+    "source_preserved": true,
+    "publication_occurred": false
+  },
+  "native_snapshot_mutation": {
+    "status": "UNIMPLEMENTED; native decline",
+    "rule": "WORKSPACE-SUPPORTED-USER",
+    "code": "XAX.WORKSPACE.TOPOLOGY",
+    "source_sha256": "d12c9956e2d8149fd38cc6cdfae851beff02f7ee86fdc1f7f7d241ebb91cfb59",
+    "record_sha256": "3bc6c28588d25e63988a4b5b53379901c1ebc2e25afc0b505d3b38e7d9fb998c",
+    "native_exit": 1
+  },
+  "launcher_oracles": {
+    "recorded": "2026-11-12",
+    "scope": "Independent Java test oracles outside the repository; never a runtime helper or MCP request-path implementation",
+    "oracle_java_sources": [
+      {
+        "name": "ArgvOracle.java",
+        "sha256": "4258c84d1a36bd38cacfd1f1a6a38e26ce469ade85434bd7bee3637632d9f9a6"
+      },
+      {
+        "name": "JVMOracle.java",
+        "sha256": "d061aaf4b53af50c7c4f457419d0f0193e6a0d8acd91d94313c1df18da936a2e"
+      }
+    ],
+    "records": [
+      {
+        "args": [
+          "",
+          "one two",
+          "é€ü",
+          "quote\"",
+          "slash\\",
+          "line\nbreak",
+          "@not-a-file",
+          "-version",
+          "-agentpath:C:/not-an-agent"
+        ],
+        "frame": [
+          0,
+          0,
+          125,
+          1093750,
+          625000,
+          35094528,
+          121,
+          0,
+          1
+        ],
+        "stdout_hex": "0000000900000000000000076f6e652074776f00000007c3a9e282acc3bc0000000671756f74652200000006736c6173685c0000000a6c696e650a627265616b0000000b406e6f742d612d66696c65000000082d76657273696f6e0000001a2d6167656e74706174683a433a2f6e6f742d616e2d6167656e74",
+        "stderr_hex": "",
+        "independent_jvm_main_arguments_equal": true
+      },
+      {
+        "args": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "frame": [
+          0,
+          0,
+          125,
+          781250,
+          781250,
+          35188736,
+          260,
+          0,
+          1
+        ],
+        "stdout_hex": "0000004000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "stderr_hex": "",
+        "independent_jvm_main_arguments_equal": true
+      },
+      {
+        "args": [
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "frame": [
+          0,
+          0,
+          172,
+          1093750,
+          625000,
+          35389440,
+          8200,
+          0,
+          1
+        ],
+        "stdout_hex": "00000001000020006161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161",
+        "stderr_hex": "",
+        "independent_jvm_main_arguments_equal": true
+      },
+      {
+        "args": [
+          "env"
+        ],
+        "frame": [
+          0,
+          0,
+          141,
+          1093750,
+          312500,
+          35373056,
+          6,
+          0,
+          1
+        ],
+        "stdout_hex": "434c45414e0a",
+        "stderr_hex": ""
+      },
+      {
+        "args": [
+          "exit",
+          "66"
+        ],
+        "frame": [
+          66,
+          0,
+          125,
+          781250,
+          625000,
+          35192832,
+          0,
+          0,
+          1
+        ],
+        "stdout_hex": "",
+        "stderr_hex": ""
+      },
+      {
+        "args": [
+          "exit",
+          "-7"
+        ],
+        "frame": [
+          4294967289,
+          0,
+          125,
+          625000,
+          1093750,
+          35287040,
+          0,
+          0,
+          1
+        ],
+        "stdout_hex": "",
+        "stderr_hex": ""
+      },
+      {
+        "args": [
+          "read",
+          "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261112-jvm\\outside-jvm-5b0e232f080f49ab9cb399ae13aae7c7.bin"
+        ],
+        "frame": [
+          0,
+          0,
+          140,
+          937500,
+          1406250,
+          35377152,
+          7,
+          0,
+          1
+        ],
+        "stdout_hex": "44454e4945440a",
+        "stderr_hex": "",
+        "unconfined_positive_control": "ALLOWED"
+      },
+      {
+        "args": [
+          "write",
+          "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261112-jvm\\outside-jvm-5b0e232f080f49ab9cb399ae13aae7c7.bin"
+        ],
+        "frame": [
+          0,
+          0,
+          141,
+          468750,
+          1093750,
+          35241984,
+          7,
+          0,
+          1
+        ],
+        "stdout_hex": "44454e4945440a",
+        "stderr_hex": "",
+        "unconfined_positive_control": "ALLOWED"
+      },
+      {
+        "args": [
+          "network",
+          "63769"
+        ],
+        "frame": [
+          0,
+          0,
+          1187,
+          937500,
+          1093750,
+          38625280,
+          7,
+          0,
+          1
+        ],
+        "stdout_hex": "44454e4945440a",
+        "stderr_hex": "",
+        "unconfined_positive_control": "ALLOWED"
+      },
+      {
+        "args": [
+          "spawn"
+        ],
+        "frame": [
+          0,
+          0,
+          140,
+          1250000,
+          468750,
+          36347904,
+          7,
+          0,
+          1
+        ],
+        "stdout_hex": "44454e4945440a",
+        "stderr_hex": "",
+        "unconfined_positive_control": "ALLOWED"
+      },
+      {
+        "args": [
+          "cpu"
+        ],
+        "frame": [
+          1,
+          8,
+          4969,
+          49218750,
+          781250,
+          35479552,
+          0,
+          0,
+          1
+        ],
+        "stdout_hex": "",
+        "stderr_hex": ""
+      },
+      {
+        "args": [
+          "wall"
+        ],
+        "frame": [
+          1,
+          1,
+          10015,
+          937500,
+          781250,
+          35147776,
+          0,
+          0,
+          1
+        ],
+        "stdout_hex": "",
+        "stderr_hex": ""
+      },
+      {
+        "args": [
+          "flood"
+        ],
+        "frame": [
+          1,
+          4,
+          375,
+          1250000,
+          156250,
+          35344384,
+          0,
+          0,
+          1
+        ],
+        "stdout_hex": "",
+        "stderr_hex": ""
+      },
+      {
+        "args": [
+          "oom"
+        ],
+        "frame": [
+          1,
+          0,
+          156,
+          625000,
+          1093750,
+          85893120,
+          0,
+          110,
+          1
+        ],
+        "stdout_hex": "",
+        "stderr_hex": "457863657074696f6e20696e2074687265616420226d61696e22206a6176612e6c616e672e4f75744f664d656d6f72794572726f723a204a61766120686561702073706163650d0a096174204a564d4f7261636c652e6d61696e284a564d4f7261636c652e6a6176613a39290d0a"
+      }
+    ]
+  },
+  "lifecycle": {
+    "capabilities": 0,
+    "oracle": "Independent foreign test JAR, outside request path",
+    "full_crash_acl_cleanup_gate_closed": false,
+    "successful_metadata_published": false,
+    "appcontainer": 1,
+    "cached_jar_remains": true,
+    "java_pid": 5544,
+    "recorded": "2026-11-12",
+    "jvm_terminated_on_supervisor_death": true,
+    "cleanup_observed_ms": 7,
+    "forced_termination_jar_acl_contains_appcontainer_sid": true
+  },
+  "protocol": {
+    "metadata_exchanges": 25,
+    "whitespace": {
+      "exchanges": 769,
+      "modern_complete_results": 768,
+      "legacy_initializations": 1,
+      "padding_lengths": 16,
+      "trailing_whitespace_forms": 8,
+      "with_and_without_legacy_handshake": true,
+      "source_mutations_requested": false,
+      "passed": true
+    },
+    "semantic_pages": {
+      "exchanges": 169,
+      "cases": [
+        {
+          "case": "seed",
+          "objects": 12,
+          "all_modes": true,
+          "all_limits": true,
+          "stale_root_after_mutation_rejected": true,
+          "workspace_unchanged": true
+        }
+      ],
+      "full_text_structured_equality": true
+    },
+    "query_number_exchanges": 28,
+    "scope": "Shared protocol checks use retained generic request-graph fixtures; this does not establish JVM snapshot mutation",
+    "installed_backend": "Direct native executable, isolated CODEX_HOME and ephemeral session; all eight tools, read-only; no proxy and no global MCP configuration change"
+  },
+  "transcripts": [
+    {
+      "path": "docs/evidence/native-jvm-feature-records-20261112.ndjson.gz",
+      "bytes": 33065,
+      "sha256": "ac31fdc85bb32522f7cdece538e2ada1861a664ef377b3e7c83dc8406fdc32e5"
+    },
+    {
+      "path": "docs/evidence/native-jvm-authority-records-20261112.ndjson.gz",
+      "bytes": 8178,
+      "sha256": "a050e7a61c87ef26a6dd8edc7f56a9a1f7e463d66b4aeddc0aea6f075f940130"
+    },
+    {
+      "path": "docs/evidence/native-jvm-pages-records-20261112.ndjson.gz",
+      "bytes": 6429,
+      "sha256": "025c07cf98e52be6d62018a40734b743f769dbeaae2e6fc61cee3e06db90e35a"
+    },
+    {
+      "path": "docs/evidence/native-jvm-whitespace-records-20261112.ndjson.gz",
+      "bytes": 11015,
+      "sha256": "171ef2c09bf84c6c823f69e7e2fc9b74e60a5d56f6e9b3751442f878209045b9"
+    },
+    {
+      "path": "docs/evidence/native-jvm-codex-client-20261112.json",
+      "bytes": 97478,
+      "sha256": "020923f94f1740cd179c531a621dcddf04b74d934e683af4b7745bd68ba6e582"
+    },
+    {
+      "path": "docs/evidence/native-jvm-metadata-records-20261112.ndjson",
+      "bytes": 64454,
+      "sha256": "a60725cd55f4ce58ee30ac89358c72258919c335512c9f051dec817666d1e3d8"
+    }
+  ],
+  "foreign_test_tools": "Inspection, packing, reference comparison, protocol orchestration and independent Java isolation/argv oracles only; all outside repository and production request path",
+  "development_failures": [
+    {
+      "finding": "Default compiler cannot build the JVM snapshot",
+      "resolution": "Separate immutable JVM compiler pin; default deployment unchanged"
+    },
+    {
+      "finding": "Native snapshot ancestor mutation unsupported",
+      "resolution": "Retain exact-root decline fixture; advertise snapshot mutation false"
+    },
+    {
+      "finding": "Java cannot read staged JAR with initial cache ACL",
+      "resolution": "Native grant on owned copied artifact and normal DACL restoration; no installation ACL edits"
+    },
+    {
+      "finding": "Installed Microsoft Java 17 rejects --disable-@files",
+      "resolution": "Removed; independent oracle proves @file and option-like strings remain literal after fixed -jar"
+    },
+    {
+      "finding": "Java Windows launcher alters non-Windows-1252 args in both confined and direct tests",
+      "resolution": "Native ACP1252 and lossless-conversion check before Java creation; explicit metadata restriction"
+    },
+    {
+      "finding": "Executor retains its private cached artifact",
+      "resolution": "Assert exact cached JAR and traffic cleanup; do not claim empty exec directory"
+    },
+    {
+      "finding": "Forced launcher death retains read ACE on cached artifact",
+      "resolution": "Record open crash ACL/cache cleanup gate; job termination and absent successful result passed"
+    }
+  ],
+  "content_integrity_gate_closed": false,
+  "atomic_publication_gate_closed": false,
+  "full_workspace_alias_gate_closed": false,
+  "independent_escape_review_complete": false,
+  "release_ready": false
+}

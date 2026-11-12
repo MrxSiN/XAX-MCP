@@ -1,0 +1,24 @@
+{
+  "schema": "xax-mcp-jvm-review-v1",
+  "recorded": "2026-11-12",
+  "canonical_source": "All application changes through native exact-root batches; verified immutable objects packed as XAXEDIT1; imported upstream snapshots byte-exact",
+  "records": 49,
+  "all_record_object_counts_at_most_256": true,
+  "unchanged_cids_preserved": true,
+  "foreign_implementation_files_added": false,
+  "independent_foreign_oracles_outside_repository": true,
+  "default_deployment_seed_unchanged": true,
+  "default_gen3_artifacts_unchanged": true,
+  "existing_mcp_configuration_unchanged": true,
+  "user_readme_sha256": "9c662558dc41a6730149c1b1f49f5b062adc4770f575c0e4e0fc743b5b236bcf",
+  "user_readme_excluded": true,
+  "remaining": [
+    "JVM snapshot mutation and unresolved requests",
+    "Non-Windows-1252 arguments and other runtime/platform certification",
+    "Content integrity, upstream handle/identity transport and atomic publication",
+    "JAR cache/ACL cleanup on forced termination",
+    "General pressure/exhaustion, independent escape review and promotion"
+  ],
+  "release_ready": false,
+  "full_mission_complete": false
+}

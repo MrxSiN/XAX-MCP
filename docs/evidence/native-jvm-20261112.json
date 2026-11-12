@@ -1,0 +1,69 @@
+{
+  "schema": "xax-mcp-jvm-acceptance-index-v1",
+  "recorded": "2026-11-12",
+  "state": "EXECUTED explicit JVM snapshot preview; toolchain TESTED; not promoted",
+  "source_checkpoints": {
+    "path": "native/candidates/20261112-jvm/checkpoints.json",
+    "bytes": 3303,
+    "sha256": "20d6c9da1652b4e165f93a885c96f0bfdd48dd450b2d8a1af5913f455480eca6"
+  },
+  "dependency": {
+    "path": "native/jvm-dependency.json",
+    "bytes": 1822,
+    "sha256": "f22ac01f384baf8a0ca0ed2e06860364bc2a2d80a20670d0c710e62b5cb395c7"
+  },
+  "source_replay": {
+    "path": "native/transactions/20261112-jvm/manifest.json",
+    "bytes": 56918,
+    "sha256": "1446c78127bd5a4c197ddfe96055b2f7a8f22e19ee6ba859568679710f232804"
+  },
+  "runtime": {
+    "path": "docs/evidence/native-jvm-runtime-20261112.json",
+    "bytes": 56153,
+    "sha256": "98680ccd5de08d5ff99d7c09a2a09ae8cc188658f93a1f7c75859de4b3fb83a6"
+  },
+  "runtime_inventory": {
+    "path": "docs/evidence/native-jvm-runtime-inventory-20261112.json",
+    "bytes": 18196,
+    "sha256": "62ef91788cab526acfad4daa947fdcdf57dd0bb57022fd60bf7fbcf2bbca9afa"
+  },
+  "clean_package": {
+    "path": "docs/evidence/native-jvm-package-20261112.json",
+    "bytes": 186837,
+    "sha256": "c78654237ed730f53c5397da99bbd54cea8c48579afbfbb9e13be7198985577f"
+  },
+  "target_verification": {
+    "path": "docs/evidence/native-jvm-target-verification-20261112.json",
+    "bytes": 12153,
+    "sha256": "3ddf5f152c7cd55f162df6af140f716eb108832888d7602636a949fcd7f21d4f"
+  },
+  "review": {
+    "path": "docs/evidence/native-jvm-review-20261112.json",
+    "bytes": 1149,
+    "sha256": "89b497fab131689aa184b01655d7d6dd9aaa8b39ceaafe9d2005cf441166da60"
+  },
+  "summary": {
+    "records_replayed": 49,
+    "mandatory_native_verify": true,
+    "programs_double_built": 4,
+    "feature_exchanges_local": 53,
+    "feature_exchanges_fresh_package": 53,
+    "independent_launcher_oracle_cases": 14,
+    "forged_authority_denials": 18,
+    "protocol_exchanges": {
+      "metadata": 25,
+      "whitespace": 769,
+      "semantic_pages": 169,
+      "query_numbers": 28
+    },
+    "installed_backend_tools": 8,
+    "native_snapshot_mutation_declines_without_publication": true,
+    "existing_mcp_connection_unchanged": true
+  },
+  "hosted_ci_executed": false,
+  "content_integrity_gate_closed": false,
+  "atomic_publication_gate_closed": false,
+  "full_workspace_alias_gate_closed": false,
+  "release_ready": false,
+  "full_mission_complete": false
+}

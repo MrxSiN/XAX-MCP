@@ -1,0 +1,1362 @@
+[
+  {
+    "request": {
+      "id": 1,
+      "method": "initialize",
+      "params": {
+        "clientInfo": {
+          "name": "xax_native_acceptance",
+          "version": "2026.11.11"
+        },
+        "capabilities": {
+          "experimentalApi": true
+        }
+      }
+    },
+    "response": {
+      "id": 1,
+      "result": {
+        "userAgent": "Codex Desktop/0.167.0-alpha.4.1 (Windows 10.0.26300; x86_64) dumb (xax_native_acceptance; 2026.11.11)",
+        "codexHome": "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261112-jvm\\protocol\\codex-client-daf82436383444ce81f286b80ae7155c",
+        "platformFamily": "windows",
+        "platformOs": "windows"
+      }
+    }
+  },
+  {
+    "request": {
+      "id": 3,
+      "method": "mcpServerStatus/list",
+      "params": {
+        "threadId": "01a1ceb6-6108-7ba2-9dca-fc84e21d58c6",
+        "serverName": "xax_native_acceptance",
+        "detail": "toolsAndAuthOnly",
+        "limit": 1
+      }
+    },
+    "response": {
+      "id": 3,
+      "result": {
+        "data": [
+          {
+            "name": "xax_native_acceptance",
+            "runtimeStatus": "connected",
+            "pluginId": null,
+            "httpOrigin": null,
+            "serverInfo": {
+              "name": "xax-mcp",
+              "title": "XAX MCP server",
+              "version": "0.10.0+native",
+              "description": null,
+              "icons": null,
+              "websiteUrl": null
+            },
+            "serverCapabilities": {
+              "tools": {
+                "listChanged": false
+              }
+            },
+            "toolListMeta": null,
+            "tools": {
+              "xax_result": {
+                "name": "xax_result",
+                "title": "XAX result",
+                "description": "UNIMPLEMENTED natively; calls fail closed with 'unsupported'. Target contract: fetch a bounded chunk of a large result by opaque handle: execution stdout (res_), a workspace's canonical store bytes (ws_), or a stored diagnostic (diag_). Never returns unbounded data.",
+                "inputSchema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "handle": {
+                      "maxLength": 64,
+                      "minLength": 1,
+                      "pattern": "^[A-Za-z0-9_.@-]+$",
+                      "type": "string"
+                    },
+                    "length": {
+                      "maximum": 65536,
+                      "minimum": 1,
+                      "type": "integer"
+                    },
+                    "offset": {
+                      "maximum": 2147483648,
+                      "minimum": 0,
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "handle"
+                  ],
+                  "type": "object"
+                },
+                "annotations": {
+                  "readOnlyHint": true,
+                  "idempotentHint": true,
+                  "openWorldHint": false
+                },
+                "_meta": {
+                  "xax-mcp/schema": "xax-mcp-tools-v5"
+                }
+              },
+              "xax_execute": {
+                "name": "xax_execute",
+                "title": "XAX JVM execution",
+                "description": "JVM executable-JAR preview on Windows: stages only the current authorized resolved canonical snapshot and invokes the exact host-granted native XAX compiler's build command, then the native XAX launcher starts the host-selected Java 17 runtime inside a Windows AppContainer and one-process job. Requires --allow-execute and host-owned XAX_MCP_JAVA. Clients cannot choose the runtime, class path, JAR, executable, file path, environment, JVM options, grants or larger budgets. Optional stdin_hex supplies at most 262144 exact binary bytes followed by physical EOF. args excludes argv[0], is limited to 64 strings and 8192 UTF-16 units, and is passed after the fixed -jar artifact to generated JVM main; the XAX JVM process entry has no startup-argument readers. Arguments must fit Windows-1252; @file/-version stay literal. Other characters decline. Fixed VM options enable class verification, cap Java heap at 64 MiB, bound VM caches, disable attach/performance data and use one active processor. The native job enforces five seconds total CPU, ten seconds wall time, one process, 256 MiB process commit and 1 MiB combined returned output. The child receives OS-derived SystemRoot and container-local LOCALAPPDATA; Java option/classpath environment variables are not inherited. The owned JAR alone gets an AppContainer read grant, restored during normal cleanup. Returns separate exact stream hex, raw process exit, measured wall/user/kernel CPU, peak process commit and stdin_bytes_supplied. Native setup, measurement, budget and cleanup failures fail closed; Java exceptions and Java-heap exhaustion are raw child exits and stderr, not separately classified traps. This profile is device-independent JVM classfile major 61, tested with canonical JVM memory-profile snapshots and Microsoft OpenJDK 17 on Windows. Snapshot mutation, unresolved build requests, JVM startup reads, JNI/registered external tools, other runtimes and cross-platform launchers are not certified. Workspace content integrity, atomic publication, crash/pressure/escape acceptance and promotion remain open.",
+                "inputSchema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "stdin_hex": {
+                      "type": "string",
+                      "maxLength": 524288,
+                      "pattern": "^(?:[0-9a-fA-F]{2})*$",
+                      "description": "Exact binary stdin as hexadecimal; omitted means empty input. Maximum 262144 decoded bytes."
+                    },
+                    "args": {
+                      "type": "array",
+                      "maxItems": 64,
+                      "items": {
+                        "type": "string",
+                        "maxLength": 8192
+                      },
+                      "description": "Arguments after argv[0]. Empty strings are preserved. Maximum 8192 UTF-16 code units in total; embedded NUL and invalid Unicode are rejected."
+                    }
+                  },
+                  "type": "object"
+                },
+                "annotations": {
+                  "readOnlyHint": false,
+                  "destructiveHint": false,
+                  "openWorldHint": false
+                },
+                "_meta": {
+                  "xax-mcp/schema": "xax-mcp-tools-v5"
+                }
+              },
+              "xax_transaction": {
+                "name": "xax_transaction",
+                "title": "XAX transaction",
+                "description": "Apply an exact-root XAXEDIT1 typed mutation carrier. Native edit stages a candidate; native verify must succeed before atomic publication. Rejection or decline retains the current root. Record is hexadecimal transport, not source. Generation/read-set extensions remain unsupported.",
+                "inputSchema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "record": {
+                      "maxLength": 2097152,
+                      "minLength": 2,
+                      "pattern": "^[0-9A-Fa-f]+$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "record"
+                  ],
+                  "type": "object"
+                },
+                "annotations": {
+                  "readOnlyHint": false,
+                  "destructiveHint": false,
+                  "openWorldHint": false
+                },
+                "_meta": {
+                  "xax-mcp/schema": "xax-mcp-tools-v5"
+                }
+              },
+              "xax_build": {
+                "name": "xax_build",
+                "title": "XAX build",
+                "description": "JVM snapshot build preview: byte-stages the current host-authorized, already-resolved canonical snapshot into owned work scratch and invokes the exact JVM-capable native XAX compiler's build command. Native build verifies the complete snapshot and emits an executable JAR and provenance; no canonical parsing, workload computation, Java source generation, javac, Python compiler or interpreter is on the request path. Unresolved request roots decline in this profile. Returns the current canonical root, actual artifact byte count and provenance bytes/hex. This separate JVM preview uses its own immutable tested compiler manifest while the default deployment pin stays unchanged. Snapshot mutation, package/entry selection, result handles and toolchain caching remain unsupported.",
+                "inputSchema": {
+                  "additionalProperties": false,
+                  "properties": {},
+                  "type": "object"
+                },
+                "annotations": {
+                  "readOnlyHint": false,
+                  "destructiveHint": false,
+                  "idempotentHint": true,
+                  "openWorldHint": false
+                },
+                "_meta": {
+                  "xax-mcp/schema": "xax-mcp-tools-v5"
+                }
+              },
+              "xax_capabilities": {
+                "name": "xax_capabilities",
+                "title": "XAX capabilities",
+                "description": "Server/compiler identity, pinned XAX revision, targets, operations, carrier types, I/O modes, granted rights, sandbox status and honest maturity labels. Call first.",
+                "inputSchema": {
+                  "additionalProperties": false,
+                  "properties": {},
+                  "type": "object"
+                },
+                "annotations": {
+                  "readOnlyHint": true,
+                  "idempotentHint": true,
+                  "openWorldHint": false
+                },
+                "_meta": {
+                  "xax-mcp/schema": "xax-mcp-tools-v5"
+                }
+              },
+              "xax_query": {
+                "name": "xax_query",
+                "title": "XAX semantic reference query",
+                "description": "Inspect public native CIDs, kinds and reference edges. Empty arguments retain the legacy bounded inventory. Select objects, entity, dependencies, users or a one-hop reference neighborhood; repeat selectors with each root-bound cursor. Pages have at most 64 rows. object_kind filters source objects. The typed selection reads at most 4194304 public inspection bytes and reports inventoryComplete=false if truncated; no continuation beyond that prefix. Edges are generic references, not typed calls, operands, signatures or effect facts.",
+                "inputSchema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "select": {
+                      "type": "string",
+                      "enum": [
+                        "objects",
+                        "entity",
+                        "dependencies",
+                        "users",
+                        "neighborhood"
+                      ]
+                    },
+                    "cid": {
+                      "type": "string",
+                      "pattern": "^[0-9A-Fa-f]{64}$"
+                    },
+                    "object_kind": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 65535
+                    },
+                    "limit": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 64,
+                      "default": 16
+                    },
+                    "cursor": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "required": [
+                        "root",
+                        "offset"
+                      ],
+                      "properties": {
+                        "root": {
+                          "type": "string",
+                          "pattern": "^[0-9A-Fa-f]{64}$"
+                        },
+                        "offset": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 4294967295
+                        }
+                      }
+                    }
+                  },
+                  "oneOf": [
+                    {
+                      "maxProperties": 0
+                    },
+                    {
+                      "required": [
+                        "select"
+                      ],
+                      "properties": {
+                        "select": {
+                          "const": "objects"
+                        }
+                      },
+                      "not": {
+                        "required": [
+                          "cid"
+                        ]
+                      }
+                    },
+                    {
+                      "required": [
+                        "select",
+                        "cid"
+                      ],
+                      "properties": {
+                        "select": {
+                          "enum": [
+                            "entity",
+                            "dependencies",
+                            "users",
+                            "neighborhood"
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                "annotations": {
+                  "readOnlyHint": true,
+                  "openWorldHint": false
+                },
+                "_meta": {
+                  "xax-mcp/schema": "xax-mcp-tools-v5"
+                }
+              },
+              "xax_workspace": {
+                "name": "xax_workspace",
+                "title": "XAX workspace",
+                "description": "Describe the single host-granted workspace: canonical root, store byte size and first function identity from bounded native inspection. The OS holds an exclusive directory lease until process exit. No open/close or portable scoped handles.",
+                "inputSchema": {
+                  "additionalProperties": false,
+                  "properties": {},
+                  "type": "object"
+                },
+                "annotations": {
+                  "readOnlyHint": true,
+                  "openWorldHint": false
+                },
+                "_meta": {
+                  "xax-mcp/schema": "xax-mcp-tools-v5"
+                }
+              },
+              "xax_construct": {
+                "name": "xax_construct",
+                "title": "XAX native construction",
+                "description": "Construct a new supported graph with an exact-root XAXEDIT1 typed mutation carrier. Native XAX applies and verifies the staged candidate before publication. The record is hexadecimal transport; canonical semantic state is source. JSON xax-construct-v1 is unsupported.",
+                "inputSchema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "record"
+                  ],
+                  "properties": {
+                    "record": {
+                      "type": "string",
+                      "pattern": "^[0-9A-Fa-f]+$",
+                      "minLength": 2,
+                      "maxLength": 2097152
+                    }
+                  }
+                },
+                "annotations": {
+                  "readOnlyHint": false,
+                  "destructiveHint": false,
+                  "idempotentHint": false,
+                  "openWorldHint": false
+                },
+                "_meta": {
+                  "xax-mcp/schema": "xax-mcp-tools-v5"
+                }
+              }
+            },
+            "toolsError": null,
+            "resources": [],
+            "resourceTemplates": [],
+            "authStatus": "unsupported"
+          }
+        ],
+        "nextCursor": null
+      }
+    }
+  },
+  {
+    "request": {
+      "id": 4,
+      "method": "mcpServer/tool/call",
+      "params": {
+        "threadId": "01a1ceb6-6108-7ba2-9dca-fc84e21d58c6",
+        "server": "xax_native_acceptance",
+        "tool": "xax_capabilities",
+        "arguments": {}
+      }
+    },
+    "response": {
+      "id": 4,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"authority\":{\"effects_granted\":[],\"max_request_bytes\":4194304,\"rights\":[\"read\"],\"store_roots\":0},\"maturity\":{\"compiler cancellation\":\"PROTOTYPE (compiler calls; 1 MiB queue; backpressure; confirmed descendant cleanup)\",\"semantic reference pages\":\"PROTOTYPE (root-bound; 64 rows; 4 MiB inspection prefix; generic edges; no typed facts)\",\"construct on Linux\":\"UNIMPLEMENTED natively\",\"construct from typed XAXEDIT1\":\"EXECUTED (Windows native file contract)\",\"execute on Linux (namespaces, seccomp, rlimits)\":\"UNIMPLEMENTED natively\",\"modern protocol 2026-07-28\":\"PROTOTYPE (native MCP; candidate gates open)\",\"result (serves artifacts over the wire)\":\"UNIMPLEMENTED natively\",\"stdio transport, JSON validation, MCP lifecycle, tool dispatch, host rights\":\"EXECUTED (native protocol fixtures)\",\"workspace/query/transaction/build over a host-granted native compiler\":\"PROTOTYPE (docs/NATIVE.md)\",\"JVM build and execution\":\"EXECUTED preview (native JVM-capable compiler; generated JAR verified and executed under a Windows AppContainer/job; wider release gates open)\",\"mutation of resolved JVM snapshots\":\"UNIMPLEMENTED in native workspace editor; declines without source publication\"},\"ok\":true,\"protocol\":{\"framing\":\"newline-delimited JSON-RPC 2.0\",\"max_json_depth\":64,\"max_message_bytes\":4194304,\"versions\":[\"2026-07-28\",\"2024-11-05\",\"2025-03-26\",\"2025-06-18\",\"2025-11-25\"]},\"sandbox\":{\"available\":\"Windows AppContainer and one-process job for the host-configured Java 17 platform runtime\",\"launcher\":\"xax-mcp-sandbox.exe (native canonical XAX)\",\"reason\":\"Explicit execution grant and host-owned XAX_MCP_JAVA required. Fixed VM options precede the fixed -jar artifact; client strings follow it. No network capabilities. The owned JAR gets a temporary AppContainer read grant; runtime installation ACLs are unchanged. Compiler build and native launcher are distinct from the required platform JVM. Broader security and crash acceptance remain open.\"},\"server\":{\"implementation\":\"native XAX program (windows-x86_64 PE32+ built from a canonical .xax store)\",\"name\":\"xax-mcp\",\"python_on_request_path\":false,\"transport\":\"stdio\",\"version\":\"0.10.0+native\"},\"targets\":[{\"target\":\"jvm\",\"profile\":\"jvm-classfile-memory-v1\",\"artifact\":\"JVM_EXECUTABLE_JAR\",\"classfile_major\":61,\"implementation\":\"EXECUTED\",\"toolchain_status\":\"TESTED\",\"input_modes\":[\"construction-constants\",\"binary-stdin-hex\",\"arguments-to-generated-JVM-main\"],\"result_mode\":\"raw-u32-exit+separate-stream-hex+resource-observations\",\"resolved_snapshot_required\":true,\"snapshot_mutation\":false,\"xax_startup_argument_reads\":false}],\"tools\":{\"xax_build\":\"JVM snapshot build preview: byte-stages the current host-authorized, already-resolved canonical snapshot into owned work scratch and invokes the exact JVM-capable native XAX compiler's build command. Native build verifies the complete snapshot and emits an executable JAR and provenance; no canonical parsing, workload computation, Java source generation, javac, Python compiler or interpreter is on the request path. Unresolved request roots decline in this profile. Returns the current canonical root, actual artifact byte count and provenance bytes/hex. This separate JVM preview uses its own immutable tested compiler manifest while the default deployment pin stays unchanged. Snapshot mutation, package/entry selection, result handles and toolchain caching remain unsupported.\",\"xax_capabilities\":\"EXECUTED (native)\",\"xax_construct\":\"EXECUTED: verified XAXEDIT1 construction and edits through the native compiler; xax-construct-v1 JSON is unsupported Resolved JVM snapshot mutation is not supported by the native editor.\",\"xax_execute\":\"JVM executable-JAR preview on Windows: stages only the current authorized resolved canonical snapshot and invokes the exact host-granted native XAX compiler's build command, then the native XAX launcher starts the host-selected Java 17 runtime inside a Windows AppContainer and one-process job. Requires --allow-execute and host-owned XAX_MCP_JAVA. Clients cannot choose the runtime, class path, JAR, executable, file path, environment, JVM options, grants or larger budgets. Optional stdin_hex supplies at most 262144 exact binary bytes followed by physical EOF. args excludes argv[0], is limited to 64 strings and 8192 UTF-16 units, and is passed after the fixed -jar artifact to generated JVM main; the XAX JVM process entry has no startup-argument readers. Arguments must fit Windows-1252; @file/-version stay literal. Other characters decline. Fixed VM options enable class verification, cap Java heap at 64 MiB, bound VM caches, disable attach/performance data and use one active processor. The native job enforces five seconds total CPU, ten seconds wall time, one process, 256 MiB process commit and 1 MiB combined returned output. The child receives OS-derived SystemRoot and container-local LOCALAPPDATA; Java option/classpath environment variables are not inherited. The owned JAR alone gets an AppContainer read grant, restored during normal cleanup. Returns separate exact stream hex, raw process exit, measured wall/user/kernel CPU, peak process commit and stdin_bytes_supplied. Native setup, measurement, budget and cleanup failures fail closed; Java exceptions and Java-heap exhaustion are raw child exits and stderr, not separately classified traps. This profile is device-independent JVM classfile major 61, tested with canonical JVM memory-profile snapshots and Microsoft OpenJDK 17 on Windows. Snapshot mutation, unresolved build requests, JVM startup reads, JNI/registered external tools, other runtimes and cross-platform launchers are not certified. Workspace content integrity, atomic publication, crash/pressure/escape acceptance and promotion remain open.\",\"xax_query\":\"EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler\",\"xax_result\":\"UNIMPLEMENTED natively: result handles need session state, which the native server lacks\",\"xax_transaction\":\"EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler Resolved JVM snapshot mutation is not supported by the native editor.\",\"xax_workspace\":\"EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler\"},\"xax\":{\"pinned_commit\":\"745e80150605f3812aa012e6884f6e417d9423b4\",\"native_file_contract\":\"xax-native-file-v1\",\"role\":\"Separate JVM-preview native Windows compiler; required platform JVM executes the emitted bytecode; no Python request-path helper\",\"seed_sha256\":\"e2f68c00a8dee67490929b173469e383853564254ed80b3a7a5e8188d8c50122\",\"toolchain_status\":\"TESTED for the JVM executable memory-profile snapshots\",\"manifest\":\"native/jvm-dependency.json\",\"default_deployment_pin_unchanged\":true},\"execution\":{\"stdin\":\"hex bytes + physical EOF\",\"args\":\"Windows-1252 strings; other characters decline before JVM launch; no XAX startup reader API\",\"max_stdin_bytes\":262144,\"max_args\":64,\"max_argument_utf16_units\":8192,\"max_combined_output_bytes\":1048576,\"max_cpu_100ns\":50000000,\"max_wall_ms\":10000,\"max_process_memory_bytes\":268435456,\"max_java_heap_bytes\":67108864,\"environment\":\"OS-derived SystemRoot and container-local LOCALAPPDATA; Windows may add TEMP/TMP; Java options and classpath variables are not inherited\",\"scope\":\"currently authorized resolved JVM snapshot only\",\"peak_memory\":\"sampled native job peak process commit; Java heap is separately capped\",\"typed_layouts\":false,\"registered_external_tools\":false,\"java_exceptions\":\"raw child exit and stderr\"},\"jvm\":{\"runtime\":\"Microsoft OpenJDK 17.0.20.1+1-LTS, Windows x86-64\",\"java_exe_sha256\":\"6db7759259dc79800c5c6014f0ec68961a1fe69c36bb9b2a15a42c3b0c413f6a\",\"status\":\"TESTED\",\"platform_runtime_required\":true,\"python_on_request_path\":false,\"java_source_helper_on_request_path\":false,\"java_heap_limit_bytes\":67108864}}"
+          }
+        ],
+        "structuredContent": {
+          "authority": {
+            "effects_granted": [],
+            "max_request_bytes": 4194304,
+            "rights": [
+              "read"
+            ],
+            "store_roots": 0
+          },
+          "maturity": {
+            "compiler cancellation": "PROTOTYPE (compiler calls; 1 MiB queue; backpressure; confirmed descendant cleanup)",
+            "semantic reference pages": "PROTOTYPE (root-bound; 64 rows; 4 MiB inspection prefix; generic edges; no typed facts)",
+            "construct on Linux": "UNIMPLEMENTED natively",
+            "construct from typed XAXEDIT1": "EXECUTED (Windows native file contract)",
+            "execute on Linux (namespaces, seccomp, rlimits)": "UNIMPLEMENTED natively",
+            "modern protocol 2026-07-28": "PROTOTYPE (native MCP; candidate gates open)",
+            "result (serves artifacts over the wire)": "UNIMPLEMENTED natively",
+            "stdio transport, JSON validation, MCP lifecycle, tool dispatch, host rights": "EXECUTED (native protocol fixtures)",
+            "workspace/query/transaction/build over a host-granted native compiler": "PROTOTYPE (docs/NATIVE.md)",
+            "JVM build and execution": "EXECUTED preview (native JVM-capable compiler; generated JAR verified and executed under a Windows AppContainer/job; wider release gates open)",
+            "mutation of resolved JVM snapshots": "UNIMPLEMENTED in native workspace editor; declines without source publication"
+          },
+          "ok": true,
+          "protocol": {
+            "framing": "newline-delimited JSON-RPC 2.0",
+            "max_json_depth": 64,
+            "max_message_bytes": 4194304,
+            "versions": [
+              "2026-07-28",
+              "2024-11-05",
+              "2025-03-26",
+              "2025-06-18",
+              "2025-11-25"
+            ]
+          },
+          "sandbox": {
+            "available": "Windows AppContainer and one-process job for the host-configured Java 17 platform runtime",
+            "launcher": "xax-mcp-sandbox.exe (native canonical XAX)",
+            "reason": "Explicit execution grant and host-owned XAX_MCP_JAVA required. Fixed VM options precede the fixed -jar artifact; client strings follow it. No network capabilities. The owned JAR gets a temporary AppContainer read grant; runtime installation ACLs are unchanged. Compiler build and native launcher are distinct from the required platform JVM. Broader security and crash acceptance remain open."
+          },
+          "server": {
+            "implementation": "native XAX program (windows-x86_64 PE32+ built from a canonical .xax store)",
+            "name": "xax-mcp",
+            "python_on_request_path": false,
+            "transport": "stdio",
+            "version": "0.10.0+native"
+          },
+          "targets": [
+            {
+              "target": "jvm",
+              "profile": "jvm-classfile-memory-v1",
+              "artifact": "JVM_EXECUTABLE_JAR",
+              "classfile_major": 61,
+              "implementation": "EXECUTED",
+              "toolchain_status": "TESTED",
+              "input_modes": [
+                "construction-constants",
+                "binary-stdin-hex",
+                "arguments-to-generated-JVM-main"
+              ],
+              "result_mode": "raw-u32-exit+separate-stream-hex+resource-observations",
+              "resolved_snapshot_required": true,
+              "snapshot_mutation": false,
+              "xax_startup_argument_reads": false
+            }
+          ],
+          "tools": {
+            "xax_build": "JVM snapshot build preview: byte-stages the current host-authorized, already-resolved canonical snapshot into owned work scratch and invokes the exact JVM-capable native XAX compiler's build command. Native build verifies the complete snapshot and emits an executable JAR and provenance; no canonical parsing, workload computation, Java source generation, javac, Python compiler or interpreter is on the request path. Unresolved request roots decline in this profile. Returns the current canonical root, actual artifact byte count and provenance bytes/hex. This separate JVM preview uses its own immutable tested compiler manifest while the default deployment pin stays unchanged. Snapshot mutation, package/entry selection, result handles and toolchain caching remain unsupported.",
+            "xax_capabilities": "EXECUTED (native)",
+            "xax_construct": "EXECUTED: verified XAXEDIT1 construction and edits through the native compiler; xax-construct-v1 JSON is unsupported Resolved JVM snapshot mutation is not supported by the native editor.",
+            "xax_execute": "JVM executable-JAR preview on Windows: stages only the current authorized resolved canonical snapshot and invokes the exact host-granted native XAX compiler's build command, then the native XAX launcher starts the host-selected Java 17 runtime inside a Windows AppContainer and one-process job. Requires --allow-execute and host-owned XAX_MCP_JAVA. Clients cannot choose the runtime, class path, JAR, executable, file path, environment, JVM options, grants or larger budgets. Optional stdin_hex supplies at most 262144 exact binary bytes followed by physical EOF. args excludes argv[0], is limited to 64 strings and 8192 UTF-16 units, and is passed after the fixed -jar artifact to generated JVM main; the XAX JVM process entry has no startup-argument readers. Arguments must fit Windows-1252; @file/-version stay literal. Other characters decline. Fixed VM options enable class verification, cap Java heap at 64 MiB, bound VM caches, disable attach/performance data and use one active processor. The native job enforces five seconds total CPU, ten seconds wall time, one process, 256 MiB process commit and 1 MiB combined returned output. The child receives OS-derived SystemRoot and container-local LOCALAPPDATA; Java option/classpath environment variables are not inherited. The owned JAR alone gets an AppContainer read grant, restored during normal cleanup. Returns separate exact stream hex, raw process exit, measured wall/user/kernel CPU, peak process commit and stdin_bytes_supplied. Native setup, measurement, budget and cleanup failures fail closed; Java exceptions and Java-heap exhaustion are raw child exits and stderr, not separately classified traps. This profile is device-independent JVM classfile major 61, tested with canonical JVM memory-profile snapshots and Microsoft OpenJDK 17 on Windows. Snapshot mutation, unresolved build requests, JVM startup reads, JNI/registered external tools, other runtimes and cross-platform launchers are not certified. Workspace content integrity, atomic publication, crash/pressure/escape acceptance and promotion remain open.",
+            "xax_query": "EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler",
+            "xax_result": "UNIMPLEMENTED natively: result handles need session state, which the native server lacks",
+            "xax_transaction": "EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler Resolved JVM snapshot mutation is not supported by the native editor.",
+            "xax_workspace": "EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler"
+          },
+          "xax": {
+            "pinned_commit": "745e80150605f3812aa012e6884f6e417d9423b4",
+            "native_file_contract": "xax-native-file-v1",
+            "role": "Separate JVM-preview native Windows compiler; required platform JVM executes the emitted bytecode; no Python request-path helper",
+            "seed_sha256": "e2f68c00a8dee67490929b173469e383853564254ed80b3a7a5e8188d8c50122",
+            "toolchain_status": "TESTED for the JVM executable memory-profile snapshots",
+            "manifest": "native/jvm-dependency.json",
+            "default_deployment_pin_unchanged": true
+          },
+          "execution": {
+            "stdin": "hex bytes + physical EOF",
+            "args": "Windows-1252 strings; other characters decline before JVM launch; no XAX startup reader API",
+            "max_stdin_bytes": 262144,
+            "max_args": 64,
+            "max_argument_utf16_units": 8192,
+            "max_combined_output_bytes": 1048576,
+            "max_cpu_100ns": 50000000,
+            "max_wall_ms": 10000,
+            "max_process_memory_bytes": 268435456,
+            "max_java_heap_bytes": 67108864,
+            "environment": "OS-derived SystemRoot and container-local LOCALAPPDATA; Windows may add TEMP/TMP; Java options and classpath variables are not inherited",
+            "scope": "currently authorized resolved JVM snapshot only",
+            "peak_memory": "sampled native job peak process commit; Java heap is separately capped",
+            "typed_layouts": false,
+            "registered_external_tools": false,
+            "java_exceptions": "raw child exit and stderr"
+          },
+          "jvm": {
+            "runtime": "Microsoft OpenJDK 17.0.20.1+1-LTS, Windows x86-64",
+            "java_exe_sha256": "6db7759259dc79800c5c6014f0ec68961a1fe69c36bb9b2a15a42c3b0c413f6a",
+            "status": "TESTED",
+            "platform_runtime_required": true,
+            "python_on_request_path": false,
+            "java_source_helper_on_request_path": false,
+            "java_heap_limit_bytes": 67108864
+          }
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "request": {
+      "id": 5,
+      "method": "mcpServer/tool/call",
+      "params": {
+        "threadId": "01a1ceb6-6108-7ba2-9dca-fc84e21d58c6",
+        "server": "xax_native_acceptance",
+        "tool": "xax_workspace",
+        "arguments": {}
+      }
+    },
+    "response": {
+      "id": 5,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"bytes\":17655,\"ok\":true,\"root\":\"ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd\",\"workspace\":\"ws_0\",\"function\":\"195cbb39d12e33be39ce79ca79fddc9c25e0a8b0df5f0543f7922501b07ef542\",\"inspection\":{\"format\":\"xax-native-file-v1\",\"objects\":[{\"cid\":\"042579bd95ad4ced0b763db8f68a263e21d4a4b06f3b452fe0cc3eafcbc60457\",\"kind\":5,\"references\":[\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\"]},{\"cid\":\"0a6a7c0f24546dd380d70c7f612c90222d65758f2abf85d867ec410486f0ffbd\",\"kind\":7,\"references\":[\"042579bd95ad4ced0b763db8f68a263e21d4a4b06f3b452fe0cc3eafcbc60457\",\"19e2d6a55b54ab8e4d827f52d765e6de3dce9e936efdf9f11e40f36c3df6106a\",\"1dc8291092887425398c1223f0319ac283ab41e753395f6c390751d5e63e837a\",\"24394b7c1a5d5415a2c1e8249f987bd86da5b6ba63e1708c0d209564795de569\",\"2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a\",\"38c477a5ef233bfc59d2925206c2cb683a5acb926e0f70eebde2d469a078e0b3\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\",\"9d6be71a8d8652b26dc58688e0504ba596f7fda82d54e3e582262675e3e1b05e\",\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\",\"d1a1a6dea529aaeaf5137fd225cb9a949344855bd5d63d5ee8a944ed0cb7eb97\",\"e6b0c92b5c583840550533a278df62e0eb67109ee57f1405b6210ec6ffc76624\",\"ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29\"]},{\"cid\":\"13a22cd10903d2aeb6717b082416ded6ae9623fbdb29042ff07abb50c23bd24d\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"15264515d69f8d9ed3287f17674e1d0e87809fd366832b905d9423121ec62540\",\"kind\":10,\"references\":[]},{\"cid\":\"16b9542a9e6247e6e81c68a05319bd24035549a6a5068dc545cead6e6b406712\",\"kind\":5,\"references\":[\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\"]},{\"cid\":\"195cbb39d12e33be39ce79ca79fddc9c25e0a8b0df5f0543f7922501b07ef542\",\"kind\":3,\"references\":[\"2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a\",\"7a388d63b6a8ebfaa5e51cef264f371bef492638e6a0963eb2faa7bf51e29dd7\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]},{\"cid\":\"19e2d6a55b54ab8e4d827f52d765e6de3dce9e936efdf9f11e40f36c3df6106a\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"1dc8291092887425398c1223f0319ac283ab41e753395f6c390751d5e63e837a\",\"kind\":5,\"references\":[\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\"]},{\"cid\":\"24394b7c1a5d5415a2c1e8249f987bd86da5b6ba63e1708c0d209564795de569\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"26129d1e98c9323abca107f1b50fc369ca4134b9b26aa4687e41fdcbcf3e0713\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"2a29e3a864c05c980a44324ab0cbeb24f604a16402276ae6780553adbdda730a\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a\",\"kind\":4,\"references\":[]},{\"cid\":\"2d73f488e3cf9db6998fede88ee84339482f1e1d2a776c0e85f75c955d201a8e\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"304759a5e7872ab56a834659a51be73c7e32d2d964f29681c9befb76ec2a755b\",\"kind\":5,\"references\":[\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\"]},{\"cid\":\"30871c4bd4825a5ada065a26841557efbac48ce8df643c9d31649f17b0676018\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"312bf857d1439fcd4525042de0f84984f214c6eba75916c505a53088df60afe1\",\"kind\":5,\"references\":[\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\"]},{\"cid\":\"33fff6787472c166586dfa8f485eb0c626fae0bae05657084849d0ef4a5f4c3b\",\"kind\":7,\"references\":[\"13a22cd10903d2aeb6717b082416ded6ae9623fbdb29042ff07abb50c23bd24d\",\"16b9542a9e6247e6e81c68a05319bd24035549a6a5068dc545cead6e6b406712\",\"19e2d6a55b54ab8e4d827f52d765e6de3dce9e936efdf9f11e40f36c3df6106a\",\"24394b7c1a5d5415a2c1e8249f987bd86da5b6ba63e1708c0d209564795de569\",\"2a29e3a864c05c980a44324ab0cbeb24f604a16402276ae6780553adbdda730a\",\"2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a\",\"2d73f488e3cf9db6998fede88ee84339482f1e1d2a776c0e85f75c955d201a8e\",\"304759a5e7872ab56a834659a51be73c7e32d2d964f29681c9befb76ec2a755b\",\"30871c4bd4825a5ada065a26841557efbac48ce8df643c9d31649f17b0676018\",\"312bf857d1439fcd4525042de0f84984f214c6eba75916c505a53088df60afe1\",\"35923597ce906c4c2f9df75fc0818f768c33e933aaab08187f7e29f4a9c8aca3\",\"38c477a5ef233bfc59d2925206c2cb683a5acb926e0f70eebde2d469a078e0b3\",\"3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c\",\"4dd90f008e0a88b1d38b1b8810bc1d5ef9ab65a629f1e947b651896cbe6b4b11\",\"610b5d221fa3dd6589b929084f249dd61ac9e623bace066b879a05be968088db\",\"6513e86a2e6850fa86ee162879ff0a04c7e42be3e574c7edb712eb3027ddc4c7\",\"66d2f2f810ef8d29dfa584b39690c7321f91d4304028e46f03fb9c4725ec0a50\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"72086a8464ef68615619f3bc9b3015f6323b5cc1af0bf6b15b2c97464d99e3f3\",\"781a2826e5ea2b0a4d6a3735e3345f03dd685a40353309a3b14df2690282ea89\",\"7c6927b1e120055116bfd90877c3cba0398488412cad8b2dfd059c5ea603816f\",\"803a838b469d814e0de9508a79795140bb550282665200e945dbfbebb5005cca\",\"832b276c517e35bcdd5f92a98de2697ac56632a97fdda237166db52935546457\",\"850f3d7ee3d35344e7efea7a0d2ac3eb32939a1f104d90fe84cfa221db81985c\",\"88a8bc73c98d8b076a7a64fb421c16389703f5a26fe721dd762ea930fd2dcffd\",\"8bc9d4f89318de53cd9d9cf2edabbc6ec1e9d6441285ece4bf158aef693c0761\",\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\",\"933b152d7a3ae1cbd182fd6ece7825ad5a2536c7395b404382763b99acb94833\",\"9d6be71a8d8652b26dc58688e0504ba596f7fda82d54e3e582262675e3e1b05e\",\"a3809b3fcbca15bd1bff7781d57470414328ff909dea35d7c6d0c0938a0a1dfb\",\"a64e7f498523fd684d42380866fc4af9ac06b50441dd25e1aa31b28f3cb43760\",\"adfe3678981bc2814a1a8a3bdeb579f29a4c20ef429ff331a60cedb66b1eac79\",\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"d1a1a6dea529aaeaf5137fd225cb9a949344855bd5d63d5ee8a944ed0cb7eb97\",\"dcc259733de86ee959bbcb9c552f17203a79d8e3ec75e4543c21886a9b1da73e\",\"de7c8b99001018818c3f4d579ca2074b56729cd793b5a512032f3e64be4b209a\",\"df9fa5909122b512b9ff5ffe5007dceac1f159567c57571e4f0d870dcb817365\",\"e495d16a686a737ded68b61d4a245a6ca6c16f91bc1cfd788861f3f9eae703f6\",\"e51a5d6a31e98f89b34d94b399c657c02305abec5e319d0286884015dcc84f9a\",\"e6b0c92b5c583840550533a278df62e0eb67109ee57f1405b6210ec6ffc76624\",\"e6ce1205f4a7e400d8b54297ef06db71368448d4cdd2d4d6c84fa128e264f75e\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"ea17cba58061dd2039a9abc7e96c94e30020f58e9d781a3683449d349ac13d71\",\"ec41c45f88e6a724ada1066713fd6914bedad3b127d4c317f240557f5fdf72a4\",\"ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29\",\"f0ee74729739b0c9310163fea92d7f958c5d4b6941ff3d0dda0fea6c01404123\",\"f5a6fa71eef2797b87f831931cd1b2b75963a24afd59b39dfa4d45229e5996a8\",\"f74e09ab5a5278b34939370966dd5faf73f97e84797760cb07e3224db2a99b09\",\"f9af357d7d6c65ca31b2da56531cb7e8becc1ca790f36fc5a4b8e502801c778b\",\"fac32d71e8336d5937cf1f24bb72f11dcbe198c89152ed017f52c328682ff5ee\",\"fe7627347c77181e6c337054b856eecc24ab08ce0443065ae59b91c092e8f620\"]},{\"cid\":\"35923597ce906c4c2f9df75fc0818f768c33e933aaab08187f7e29f4a9c8aca3\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"38c477a5ef233bfc59d2925206c2cb683a5acb926e0f70eebde2d469a078e0b3\",\"kind\":5,\"references\":[\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\"]},{\"cid\":\"3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c\",\"kind\":4,\"references\":[]},{\"cid\":\"4dd90f008e0a88b1d38b1b8810bc1d5ef9ab65a629f1e947b651896cbe6b4b11\",\"kind\":6,\"references\":[]},{\"cid\":\"610b5d221fa3dd6589b929084f249dd61ac9e623bace066b879a05be968088db\",\"kind\":5,\"references\":[\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\"]},{\"cid\":\"6513e86a2e6850fa86ee162879ff0a04c7e42be3e574c7edb712eb3027ddc4c7\",\"kind\":5,\"references\":[\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\"]},{\"cid\":\"66d2f2f810ef8d29dfa584b39690c7321f91d4304028e46f03fb9c4725ec0a50\",\"kind\":5,\"references\":[\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\"]},{\"cid\":\"6de35e25e14ddfc8593c7a868f67d41df60d66fd47af58dea3c0f1a8f02521ba\",\"kind\":6,\"references\":[]},{\"cid\":\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"kind\":4,\"references\":[]},{\"cid\":\"72086a8464ef68615619f3bc9b3015f6323b5cc1af0bf6b15b2c97464d99e3f3\",\"kind\":5,\"references\":[\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\"]},{\"cid\":\"7496f3ffe90f1c91130e8793bff778ad6bdf5aa4b1bc3f78a1d578b017690a8c\",\"kind\":3,\"references\":[\"2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a\",\"33fff6787472c166586dfa8f485eb0c626fae0bae05657084849d0ef4a5f4c3b\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\"]},{\"cid\":\"7793504951e8a626aa1eae5debf06cd36c54ff03077763de2b06f21e4494ce41\",\"kind\":7,\"references\":[\"13a22cd10903d2aeb6717b082416ded6ae9623fbdb29042ff07abb50c23bd24d\",\"16b9542a9e6247e6e81c68a05319bd24035549a6a5068dc545cead6e6b406712\",\"19e2d6a55b54ab8e4d827f52d765e6de3dce9e936efdf9f11e40f36c3df6106a\",\"24394b7c1a5d5415a2c1e8249f987bd86da5b6ba63e1708c0d209564795de569\",\"26129d1e98c9323abca107f1b50fc369ca4134b9b26aa4687e41fdcbcf3e0713\",\"2a29e3a864c05c980a44324ab0cbeb24f604a16402276ae6780553adbdda730a\",\"2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a\",\"2d73f488e3cf9db6998fede88ee84339482f1e1d2a776c0e85f75c955d201a8e\",\"3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"850f3d7ee3d35344e7efea7a0d2ac3eb32939a1f104d90fe84cfa221db81985c\",\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\",\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\",\"daeee3457dffde2e60a93bb4e7375c96f06746649af348c78671765e864b925f\",\"e6b0c92b5c583840550533a278df62e0eb67109ee57f1405b6210ec6ffc76624\",\"ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29\",\"fe7627347c77181e6c337054b856eecc24ab08ce0443065ae59b91c092e8f620\"]},{\"cid\":\"781a2826e5ea2b0a4d6a3735e3345f03dd685a40353309a3b14df2690282ea89\",\"kind\":3,\"references\":[\"0a6a7c0f24546dd380d70c7f612c90222d65758f2abf85d867ec410486f0ffbd\",\"2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\",\"d1a1a6dea529aaeaf5137fd225cb9a949344855bd5d63d5ee8a944ed0cb7eb97\",\"ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29\"]},{\"cid\":\"7a388d63b6a8ebfaa5e51cef264f371bef492638e6a0963eb2faa7bf51e29dd7\",\"kind\":7,\"references\":[\"16b9542a9e6247e6e81c68a05319bd24035549a6a5068dc545cead6e6b406712\",\"19e2d6a55b54ab8e4d827f52d765e6de3dce9e936efdf9f11e40f36c3df6106a\",\"24394b7c1a5d5415a2c1e8249f987bd86da5b6ba63e1708c0d209564795de569\",\"2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a\",\"3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c\",\"4dd90f008e0a88b1d38b1b8810bc1d5ef9ab65a629f1e947b651896cbe6b4b11\",\"6de35e25e14ddfc8593c7a868f67d41df60d66fd47af58dea3c0f1a8f02521ba\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"781a2826e5ea2b0a4d6a3735e3345f03dd685a40353309a3b14df2690282ea89\",\"7c6927b1e120055116bfd90877c3cba0398488412cad8b2dfd059c5ea603816f\",\"850f3d7ee3d35344e7efea7a0d2ac3eb32939a1f104d90fe84cfa221db81985c\",\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\",\"933b152d7a3ae1cbd182fd6ece7825ad5a2536c7395b404382763b99acb94833\",\"a2fd391aaf1a1ca32495673d8d8eac122be9ce2e3e4835b456fd593fcb58a462\",\"adfe3678981bc2814a1a8a3bdeb579f29a4c20ef429ff331a60cedb66b1eac79\",\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"d1a1a6dea529aaeaf5137fd225cb9a949344855bd5d63d5ee8a944ed0cb7eb97\",\"dcc259733de86ee959bbcb9c552f17203a79d8e3ec75e4543c21886a9b1da73e\",\"de7c8b99001018818c3f4d579ca2074b56729cd793b5a512032f3e64be4b209a\",\"df9fa5909122b512b9ff5ffe5007dceac1f159567c57571e4f0d870dcb817365\",\"e6b0c92b5c583840550533a278df62e0eb67109ee57f1405b6210ec6ffc76624\",\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"ea17cba58061dd2039a9abc7e96c94e30020f58e9d781a3683449d349ac13d71\",\"ec41c45f88e6a724ada1066713fd6914bedad3b127d4c317f240557f5fdf72a4\",\"ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29\",\"f5a6fa71eef2797b87f831931cd1b2b75963a24afd59b39dfa4d45229e5996a8\",\"f615ad96e3f3b84a7bfab041dde4598988ff2ff45d2c382c57a507016ef60f6b\",\"fac32d71e8336d5937cf1f24bb72f11dcbe198c89152ed017f52c328682ff5ee\",\"fe7627347c77181e6c337054b856eecc24ab08ce0443065ae59b91c092e8f620\"]},{\"cid\":\"7c47ed4321a4072e452ebba3b27cea1cc97cce467fa4b838e4cfa7980dae83b1\",\"kind\":6,\"references\":[]},{\"cid\":\"7c6927b1e120055116bfd90877c3cba0398488412cad8b2dfd059c5ea603816f\",\"kind\":5,\"references\":[\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\"]},{\"cid\":\"803a838b469d814e0de9508a79795140bb550282665200e945dbfbebb5005cca\",\"kind\":5,\"references\":[\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\"]},{\"cid\":\"832b276c517e35bcdd5f92a98de2697ac56632a97fdda237166db52935546457\",\"kind\":5,\"references\":[\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\"]},{\"cid\":\"850f3d7ee3d35344e7efea7a0d2ac3eb32939a1f104d90fe84cfa221db81985c\",\"kind\":5,\"references\":[\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\"]},{\"cid\":\"88a8bc73c98d8b076a7a64fb421c16389703f5a26fe721dd762ea930fd2dcffd\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"8bc9d4f89318de53cd9d9cf2edabbc6ec1e9d6441285ece4bf158aef693c0761\",\"kind\":5,\"references\":[\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\"]},{\"cid\":\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\",\"kind\":4,\"references\":[]},{\"cid\":\"933b152d7a3ae1cbd182fd6ece7825ad5a2536c7395b404382763b99acb94833\",\"kind\":4,\"references\":[]},{\"cid\":\"9d6be71a8d8652b26dc58688e0504ba596f7fda82d54e3e582262675e3e1b05e\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"kind\":10,\"references\":[]},{\"cid\":\"a2fd391aaf1a1ca32495673d8d8eac122be9ce2e3e4835b456fd593fcb58a462\",\"kind\":6,\"references\":[]},{\"cid\":\"a3809b3fcbca15bd1bff7781d57470414328ff909dea35d7c6d0c0938a0a1dfb\",\"kind\":5,\"references\":[\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\"]},{\"cid\":\"a64e7f498523fd684d42380866fc4af9ac06b50441dd25e1aa31b28f3cb43760\",\"kind\":5,\"references\":[\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\"]},{\"cid\":\"ab2fbba4da933f08da76cedb9f777ca386040980b1d00cbe4f66d60eec3485a2\",\"kind\":9,\"references\":[\"195cbb39d12e33be39ce79ca79fddc9c25e0a8b0df5f0543f7922501b07ef542\",\"7496f3ffe90f1c91130e8793bff778ad6bdf5aa4b1bc3f78a1d578b017690a8c\",\"cd2970b520d1e6a55c4bafe31c83fb9ef275855de46796ad695a8979b033b431\"]},{\"cid\":\"ac033bed6ebe28c1ac3cb8997d7d9e58be86ffcfe1613d041491df11bc3f7d07\",\"kind\":10,\"references\":[\"7c47ed4321a4072e452ebba3b27cea1cc97cce467fa4b838e4cfa7980dae83b1\",\"9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e\",\"ab2fbba4da933f08da76cedb9f777ca386040980b1d00cbe4f66d60eec3485a2\"]},{\"cid\":\"adfe3678981bc2814a1a8a3bdeb579f29a4c20ef429ff331a60cedb66b1eac79\",\"kind\":5,\"references\":[\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\"]},{\"cid\":\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\",\"kind\":4,\"references\":[]},{\"cid\":\"c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567\",\"kind\":4,\"references\":[]},{\"cid\":\"cd2970b520d1e6a55c4bafe31c83fb9ef275855de46796ad695a8979b033b431\",\"kind\":2,\"references\":[\"195cbb39d12e33be39ce79ca79fddc9c25e0a8b0df5f0543f7922501b07ef542\",\"7496f3ffe90f1c91130e8793bff778ad6bdf5aa4b1bc3f78a1d578b017690a8c\",\"781a2826e5ea2b0a4d6a3735e3345f03dd685a40353309a3b14df2690282ea89\",\"de7c8b99001018818c3f4d579ca2074b56729cd793b5a512032f3e64be4b209a\",\"f5a6fa71eef2797b87f831931cd1b2b75963a24afd59b39dfa4d45229e5996a8\"]},{\"cid\":\"d1a1a6dea529aaeaf5137fd225cb9a949344855bd5d63d5ee8a944ed0cb7eb97\",\"kind\":4,\"references\":[]},{\"cid\":\"daeee3457dffde2e60a93bb4e7375c96f06746649af348c78671765e864b925f\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"dcc259733de86ee959bbcb9c552f17203a79d8e3ec75e4543c21886a9b1da73e\",\"kind\":6,\"references\":[]},{\"cid\":\"de7c8b99001018818c3f4d579ca2074b56729cd793b5a512032f3e64be4b209a\",\"kind\":3,\"references\":[\"2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a\",\"3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\",\"ed435b15bdda977c3986ab7e51f4095ec76145c6f745c9759261fa49f3f9c132\",\"ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29\"]},{\"cid\":\"df9fa5909122b512b9ff5ffe5007dceac1f159567c57571e4f0d870dcb817365\",\"kind\":6,\"references\":[]},{\"cid\":\"e495d16a686a737ded68b61d4a245a6ca6c16f91bc1cfd788861f3f9eae703f6\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"e51a5d6a31e98f89b34d94b399c657c02305abec5e319d0286884015dcc84f9a\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"e6b0c92b5c583840550533a278df62e0eb67109ee57f1405b6210ec6ffc76624\",\"kind\":4,\"references\":[]},{\"cid\":\"e6ce1205f4a7e400d8b54297ef06db71368448d4cdd2d4d6c84fa128e264f75e\",\"kind\":5,\"references\":[\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\"]},{\"cid\":\"ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b\",\"kind\":4,\"references\":[]},{\"cid\":\"ea17cba58061dd2039a9abc7e96c94e30020f58e9d781a3683449d349ac13d71\",\"kind\":5,\"references\":[\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\"]},{\"cid\":\"ec41c45f88e6a724ada1066713fd6914bedad3b127d4c317f240557f5fdf72a4\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"ed435b15bdda977c3986ab7e51f4095ec76145c6f745c9759261fa49f3f9c132\",\"kind\":7,\"references\":[\"19e2d6a55b54ab8e4d827f52d765e6de3dce9e936efdf9f11e40f36c3df6106a\",\"24394b7c1a5d5415a2c1e8249f987bd86da5b6ba63e1708c0d209564795de569\",\"2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a\",\"3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"7c6927b1e120055116bfd90877c3cba0398488412cad8b2dfd059c5ea603816f\",\"8bc9d4f89318de53cd9d9cf2edabbc6ec1e9d6441285ece4bf158aef693c0761\",\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\",\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\",\"e6b0c92b5c583840550533a278df62e0eb67109ee57f1405b6210ec6ffc76624\",\"ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29\"]},{\"cid\":\"ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29\",\"kind\":4,\"references\":[\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\"]},{\"cid\":\"ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd\",\"kind\":10,\"references\":[\"15264515d69f8d9ed3287f17674e1d0e87809fd366832b905d9423121ec62540\",\"ab2fbba4da933f08da76cedb9f777ca386040980b1d00cbe4f66d60eec3485a2\",\"ac033bed6ebe28c1ac3cb8997d7d9e58be86ffcfe1613d041491df11bc3f7d07\"]},{\"cid\":\"f0ee74729739b0c9310163fea92d7f958c5d4b6941ff3d0dda0fea6c01404123\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"f5a6fa71eef2797b87f831931cd1b2b75963a24afd59b39dfa4d45229e5996a8\",\"kind\":3,\"references\":[\"2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a\",\"3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c\",\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\",\"7793504951e8a626aa1eae5debf06cd36c54ff03077763de2b06f21e4494ce41\",\"8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52\",\"ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29\"]},{\"cid\":\"f615ad96e3f3b84a7bfab041dde4598988ff2ff45d2c382c57a507016ef60f6b\",\"kind\":4,\"references\":[\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\"]},{\"cid\":\"f74e09ab5a5278b34939370966dd5faf73f97e84797760cb07e3224db2a99b09\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]},{\"cid\":\"f9af357d7d6c65ca31b2da56531cb7e8becc1ca790f36fc5a4b8e502801c778b\",\"kind\":5,\"references\":[\"bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d\"]},{\"cid\":\"fac32d71e8336d5937cf1f24bb72f11dcbe198c89152ed017f52c328682ff5ee\",\"kind\":6,\"references\":[]},{\"cid\":\"fe7627347c77181e6c337054b856eecc24ab08ce0443065ae59b91c092e8f620\",\"kind\":5,\"references\":[\"70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c\"]}],\"complete\":true}}"
+          }
+        ],
+        "structuredContent": {
+          "bytes": 17655,
+          "ok": true,
+          "root": "ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd",
+          "workspace": "ws_0",
+          "function": "195cbb39d12e33be39ce79ca79fddc9c25e0a8b0df5f0543f7922501b07ef542",
+          "inspection": {
+            "format": "xax-native-file-v1",
+            "objects": [
+              {
+                "cid": "042579bd95ad4ced0b763db8f68a263e21d4a4b06f3b452fe0cc3eafcbc60457",
+                "kind": 5,
+                "references": [
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52"
+                ]
+              },
+              {
+                "cid": "0a6a7c0f24546dd380d70c7f612c90222d65758f2abf85d867ec410486f0ffbd",
+                "kind": 7,
+                "references": [
+                  "042579bd95ad4ced0b763db8f68a263e21d4a4b06f3b452fe0cc3eafcbc60457",
+                  "19e2d6a55b54ab8e4d827f52d765e6de3dce9e936efdf9f11e40f36c3df6106a",
+                  "1dc8291092887425398c1223f0319ac283ab41e753395f6c390751d5e63e837a",
+                  "24394b7c1a5d5415a2c1e8249f987bd86da5b6ba63e1708c0d209564795de569",
+                  "2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a",
+                  "38c477a5ef233bfc59d2925206c2cb683a5acb926e0f70eebde2d469a078e0b3",
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52",
+                  "9d6be71a8d8652b26dc58688e0504ba596f7fda82d54e3e582262675e3e1b05e",
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d",
+                  "d1a1a6dea529aaeaf5137fd225cb9a949344855bd5d63d5ee8a944ed0cb7eb97",
+                  "e6b0c92b5c583840550533a278df62e0eb67109ee57f1405b6210ec6ffc76624",
+                  "ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29"
+                ]
+              },
+              {
+                "cid": "13a22cd10903d2aeb6717b082416ded6ae9623fbdb29042ff07abb50c23bd24d",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "15264515d69f8d9ed3287f17674e1d0e87809fd366832b905d9423121ec62540",
+                "kind": 10,
+                "references": []
+              },
+              {
+                "cid": "16b9542a9e6247e6e81c68a05319bd24035549a6a5068dc545cead6e6b406712",
+                "kind": 5,
+                "references": [
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52"
+                ]
+              },
+              {
+                "cid": "195cbb39d12e33be39ce79ca79fddc9c25e0a8b0df5f0543f7922501b07ef542",
+                "kind": 3,
+                "references": [
+                  "2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a",
+                  "7a388d63b6a8ebfaa5e51cef264f371bef492638e6a0963eb2faa7bf51e29dd7",
+                  "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                  "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                ]
+              },
+              {
+                "cid": "19e2d6a55b54ab8e4d827f52d765e6de3dce9e936efdf9f11e40f36c3df6106a",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "1dc8291092887425398c1223f0319ac283ab41e753395f6c390751d5e63e837a",
+                "kind": 5,
+                "references": [
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52"
+                ]
+              },
+              {
+                "cid": "24394b7c1a5d5415a2c1e8249f987bd86da5b6ba63e1708c0d209564795de569",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "26129d1e98c9323abca107f1b50fc369ca4134b9b26aa4687e41fdcbcf3e0713",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "2a29e3a864c05c980a44324ab0cbeb24f604a16402276ae6780553adbdda730a",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a",
+                "kind": 4,
+                "references": []
+              },
+              {
+                "cid": "2d73f488e3cf9db6998fede88ee84339482f1e1d2a776c0e85f75c955d201a8e",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "304759a5e7872ab56a834659a51be73c7e32d2d964f29681c9befb76ec2a755b",
+                "kind": 5,
+                "references": [
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d"
+                ]
+              },
+              {
+                "cid": "30871c4bd4825a5ada065a26841557efbac48ce8df643c9d31649f17b0676018",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "312bf857d1439fcd4525042de0f84984f214c6eba75916c505a53088df60afe1",
+                "kind": 5,
+                "references": [
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d"
+                ]
+              },
+              {
+                "cid": "33fff6787472c166586dfa8f485eb0c626fae0bae05657084849d0ef4a5f4c3b",
+                "kind": 7,
+                "references": [
+                  "13a22cd10903d2aeb6717b082416ded6ae9623fbdb29042ff07abb50c23bd24d",
+                  "16b9542a9e6247e6e81c68a05319bd24035549a6a5068dc545cead6e6b406712",
+                  "19e2d6a55b54ab8e4d827f52d765e6de3dce9e936efdf9f11e40f36c3df6106a",
+                  "24394b7c1a5d5415a2c1e8249f987bd86da5b6ba63e1708c0d209564795de569",
+                  "2a29e3a864c05c980a44324ab0cbeb24f604a16402276ae6780553adbdda730a",
+                  "2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a",
+                  "2d73f488e3cf9db6998fede88ee84339482f1e1d2a776c0e85f75c955d201a8e",
+                  "304759a5e7872ab56a834659a51be73c7e32d2d964f29681c9befb76ec2a755b",
+                  "30871c4bd4825a5ada065a26841557efbac48ce8df643c9d31649f17b0676018",
+                  "312bf857d1439fcd4525042de0f84984f214c6eba75916c505a53088df60afe1",
+                  "35923597ce906c4c2f9df75fc0818f768c33e933aaab08187f7e29f4a9c8aca3",
+                  "38c477a5ef233bfc59d2925206c2cb683a5acb926e0f70eebde2d469a078e0b3",
+                  "3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c",
+                  "4dd90f008e0a88b1d38b1b8810bc1d5ef9ab65a629f1e947b651896cbe6b4b11",
+                  "610b5d221fa3dd6589b929084f249dd61ac9e623bace066b879a05be968088db",
+                  "6513e86a2e6850fa86ee162879ff0a04c7e42be3e574c7edb712eb3027ddc4c7",
+                  "66d2f2f810ef8d29dfa584b39690c7321f91d4304028e46f03fb9c4725ec0a50",
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                  "72086a8464ef68615619f3bc9b3015f6323b5cc1af0bf6b15b2c97464d99e3f3",
+                  "781a2826e5ea2b0a4d6a3735e3345f03dd685a40353309a3b14df2690282ea89",
+                  "7c6927b1e120055116bfd90877c3cba0398488412cad8b2dfd059c5ea603816f",
+                  "803a838b469d814e0de9508a79795140bb550282665200e945dbfbebb5005cca",
+                  "832b276c517e35bcdd5f92a98de2697ac56632a97fdda237166db52935546457",
+                  "850f3d7ee3d35344e7efea7a0d2ac3eb32939a1f104d90fe84cfa221db81985c",
+                  "88a8bc73c98d8b076a7a64fb421c16389703f5a26fe721dd762ea930fd2dcffd",
+                  "8bc9d4f89318de53cd9d9cf2edabbc6ec1e9d6441285ece4bf158aef693c0761",
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52",
+                  "933b152d7a3ae1cbd182fd6ece7825ad5a2536c7395b404382763b99acb94833",
+                  "9d6be71a8d8652b26dc58688e0504ba596f7fda82d54e3e582262675e3e1b05e",
+                  "a3809b3fcbca15bd1bff7781d57470414328ff909dea35d7c6d0c0938a0a1dfb",
+                  "a64e7f498523fd684d42380866fc4af9ac06b50441dd25e1aa31b28f3cb43760",
+                  "adfe3678981bc2814a1a8a3bdeb579f29a4c20ef429ff331a60cedb66b1eac79",
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d",
+                  "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                  "d1a1a6dea529aaeaf5137fd225cb9a949344855bd5d63d5ee8a944ed0cb7eb97",
+                  "dcc259733de86ee959bbcb9c552f17203a79d8e3ec75e4543c21886a9b1da73e",
+                  "de7c8b99001018818c3f4d579ca2074b56729cd793b5a512032f3e64be4b209a",
+                  "df9fa5909122b512b9ff5ffe5007dceac1f159567c57571e4f0d870dcb817365",
+                  "e495d16a686a737ded68b61d4a245a6ca6c16f91bc1cfd788861f3f9eae703f6",
+                  "e51a5d6a31e98f89b34d94b399c657c02305abec5e319d0286884015dcc84f9a",
+                  "e6b0c92b5c583840550533a278df62e0eb67109ee57f1405b6210ec6ffc76624",
+                  "e6ce1205f4a7e400d8b54297ef06db71368448d4cdd2d4d6c84fa128e264f75e",
+                  "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                  "ea17cba58061dd2039a9abc7e96c94e30020f58e9d781a3683449d349ac13d71",
+                  "ec41c45f88e6a724ada1066713fd6914bedad3b127d4c317f240557f5fdf72a4",
+                  "ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29",
+                  "f0ee74729739b0c9310163fea92d7f958c5d4b6941ff3d0dda0fea6c01404123",
+                  "f5a6fa71eef2797b87f831931cd1b2b75963a24afd59b39dfa4d45229e5996a8",
+                  "f74e09ab5a5278b34939370966dd5faf73f97e84797760cb07e3224db2a99b09",
+                  "f9af357d7d6c65ca31b2da56531cb7e8becc1ca790f36fc5a4b8e502801c778b",
+                  "fac32d71e8336d5937cf1f24bb72f11dcbe198c89152ed017f52c328682ff5ee",
+                  "fe7627347c77181e6c337054b856eecc24ab08ce0443065ae59b91c092e8f620"
+                ]
+              },
+              {
+                "cid": "35923597ce906c4c2f9df75fc0818f768c33e933aaab08187f7e29f4a9c8aca3",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "38c477a5ef233bfc59d2925206c2cb683a5acb926e0f70eebde2d469a078e0b3",
+                "kind": 5,
+                "references": [
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d"
+                ]
+              },
+              {
+                "cid": "3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c",
+                "kind": 4,
+                "references": []
+              },
+              {
+                "cid": "4dd90f008e0a88b1d38b1b8810bc1d5ef9ab65a629f1e947b651896cbe6b4b11",
+                "kind": 6,
+                "references": []
+              },
+              {
+                "cid": "610b5d221fa3dd6589b929084f249dd61ac9e623bace066b879a05be968088db",
+                "kind": 5,
+                "references": [
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d"
+                ]
+              },
+              {
+                "cid": "6513e86a2e6850fa86ee162879ff0a04c7e42be3e574c7edb712eb3027ddc4c7",
+                "kind": 5,
+                "references": [
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52"
+                ]
+              },
+              {
+                "cid": "66d2f2f810ef8d29dfa584b39690c7321f91d4304028e46f03fb9c4725ec0a50",
+                "kind": 5,
+                "references": [
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d"
+                ]
+              },
+              {
+                "cid": "6de35e25e14ddfc8593c7a868f67d41df60d66fd47af58dea3c0f1a8f02521ba",
+                "kind": 6,
+                "references": []
+              },
+              {
+                "cid": "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                "kind": 4,
+                "references": []
+              },
+              {
+                "cid": "72086a8464ef68615619f3bc9b3015f6323b5cc1af0bf6b15b2c97464d99e3f3",
+                "kind": 5,
+                "references": [
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d"
+                ]
+              },
+              {
+                "cid": "7496f3ffe90f1c91130e8793bff778ad6bdf5aa4b1bc3f78a1d578b017690a8c",
+                "kind": 3,
+                "references": [
+                  "2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a",
+                  "33fff6787472c166586dfa8f485eb0c626fae0bae05657084849d0ef4a5f4c3b",
+                  "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                  "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b"
+                ]
+              },
+              {
+                "cid": "7793504951e8a626aa1eae5debf06cd36c54ff03077763de2b06f21e4494ce41",
+                "kind": 7,
+                "references": [
+                  "13a22cd10903d2aeb6717b082416ded6ae9623fbdb29042ff07abb50c23bd24d",
+                  "16b9542a9e6247e6e81c68a05319bd24035549a6a5068dc545cead6e6b406712",
+                  "19e2d6a55b54ab8e4d827f52d765e6de3dce9e936efdf9f11e40f36c3df6106a",
+                  "24394b7c1a5d5415a2c1e8249f987bd86da5b6ba63e1708c0d209564795de569",
+                  "26129d1e98c9323abca107f1b50fc369ca4134b9b26aa4687e41fdcbcf3e0713",
+                  "2a29e3a864c05c980a44324ab0cbeb24f604a16402276ae6780553adbdda730a",
+                  "2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a",
+                  "2d73f488e3cf9db6998fede88ee84339482f1e1d2a776c0e85f75c955d201a8e",
+                  "3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c",
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                  "850f3d7ee3d35344e7efea7a0d2ac3eb32939a1f104d90fe84cfa221db81985c",
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52",
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d",
+                  "daeee3457dffde2e60a93bb4e7375c96f06746649af348c78671765e864b925f",
+                  "e6b0c92b5c583840550533a278df62e0eb67109ee57f1405b6210ec6ffc76624",
+                  "ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29",
+                  "fe7627347c77181e6c337054b856eecc24ab08ce0443065ae59b91c092e8f620"
+                ]
+              },
+              {
+                "cid": "781a2826e5ea2b0a4d6a3735e3345f03dd685a40353309a3b14df2690282ea89",
+                "kind": 3,
+                "references": [
+                  "0a6a7c0f24546dd380d70c7f612c90222d65758f2abf85d867ec410486f0ffbd",
+                  "2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a",
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52",
+                  "d1a1a6dea529aaeaf5137fd225cb9a949344855bd5d63d5ee8a944ed0cb7eb97",
+                  "ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29"
+                ]
+              },
+              {
+                "cid": "7a388d63b6a8ebfaa5e51cef264f371bef492638e6a0963eb2faa7bf51e29dd7",
+                "kind": 7,
+                "references": [
+                  "16b9542a9e6247e6e81c68a05319bd24035549a6a5068dc545cead6e6b406712",
+                  "19e2d6a55b54ab8e4d827f52d765e6de3dce9e936efdf9f11e40f36c3df6106a",
+                  "24394b7c1a5d5415a2c1e8249f987bd86da5b6ba63e1708c0d209564795de569",
+                  "2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a",
+                  "3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c",
+                  "4dd90f008e0a88b1d38b1b8810bc1d5ef9ab65a629f1e947b651896cbe6b4b11",
+                  "6de35e25e14ddfc8593c7a868f67d41df60d66fd47af58dea3c0f1a8f02521ba",
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                  "781a2826e5ea2b0a4d6a3735e3345f03dd685a40353309a3b14df2690282ea89",
+                  "7c6927b1e120055116bfd90877c3cba0398488412cad8b2dfd059c5ea603816f",
+                  "850f3d7ee3d35344e7efea7a0d2ac3eb32939a1f104d90fe84cfa221db81985c",
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52",
+                  "933b152d7a3ae1cbd182fd6ece7825ad5a2536c7395b404382763b99acb94833",
+                  "a2fd391aaf1a1ca32495673d8d8eac122be9ce2e3e4835b456fd593fcb58a462",
+                  "adfe3678981bc2814a1a8a3bdeb579f29a4c20ef429ff331a60cedb66b1eac79",
+                  "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                  "d1a1a6dea529aaeaf5137fd225cb9a949344855bd5d63d5ee8a944ed0cb7eb97",
+                  "dcc259733de86ee959bbcb9c552f17203a79d8e3ec75e4543c21886a9b1da73e",
+                  "de7c8b99001018818c3f4d579ca2074b56729cd793b5a512032f3e64be4b209a",
+                  "df9fa5909122b512b9ff5ffe5007dceac1f159567c57571e4f0d870dcb817365",
+                  "e6b0c92b5c583840550533a278df62e0eb67109ee57f1405b6210ec6ffc76624",
+                  "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                  "ea17cba58061dd2039a9abc7e96c94e30020f58e9d781a3683449d349ac13d71",
+                  "ec41c45f88e6a724ada1066713fd6914bedad3b127d4c317f240557f5fdf72a4",
+                  "ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29",
+                  "f5a6fa71eef2797b87f831931cd1b2b75963a24afd59b39dfa4d45229e5996a8",
+                  "f615ad96e3f3b84a7bfab041dde4598988ff2ff45d2c382c57a507016ef60f6b",
+                  "fac32d71e8336d5937cf1f24bb72f11dcbe198c89152ed017f52c328682ff5ee",
+                  "fe7627347c77181e6c337054b856eecc24ab08ce0443065ae59b91c092e8f620"
+                ]
+              },
+              {
+                "cid": "7c47ed4321a4072e452ebba3b27cea1cc97cce467fa4b838e4cfa7980dae83b1",
+                "kind": 6,
+                "references": []
+              },
+              {
+                "cid": "7c6927b1e120055116bfd90877c3cba0398488412cad8b2dfd059c5ea603816f",
+                "kind": 5,
+                "references": [
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52"
+                ]
+              },
+              {
+                "cid": "803a838b469d814e0de9508a79795140bb550282665200e945dbfbebb5005cca",
+                "kind": 5,
+                "references": [
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d"
+                ]
+              },
+              {
+                "cid": "832b276c517e35bcdd5f92a98de2697ac56632a97fdda237166db52935546457",
+                "kind": 5,
+                "references": [
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d"
+                ]
+              },
+              {
+                "cid": "850f3d7ee3d35344e7efea7a0d2ac3eb32939a1f104d90fe84cfa221db81985c",
+                "kind": 5,
+                "references": [
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52"
+                ]
+              },
+              {
+                "cid": "88a8bc73c98d8b076a7a64fb421c16389703f5a26fe721dd762ea930fd2dcffd",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "8bc9d4f89318de53cd9d9cf2edabbc6ec1e9d6441285ece4bf158aef693c0761",
+                "kind": 5,
+                "references": [
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d"
+                ]
+              },
+              {
+                "cid": "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52",
+                "kind": 4,
+                "references": []
+              },
+              {
+                "cid": "933b152d7a3ae1cbd182fd6ece7825ad5a2536c7395b404382763b99acb94833",
+                "kind": 4,
+                "references": []
+              },
+              {
+                "cid": "9d6be71a8d8652b26dc58688e0504ba596f7fda82d54e3e582262675e3e1b05e",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                "kind": 10,
+                "references": []
+              },
+              {
+                "cid": "a2fd391aaf1a1ca32495673d8d8eac122be9ce2e3e4835b456fd593fcb58a462",
+                "kind": 6,
+                "references": []
+              },
+              {
+                "cid": "a3809b3fcbca15bd1bff7781d57470414328ff909dea35d7c6d0c0938a0a1dfb",
+                "kind": 5,
+                "references": [
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52"
+                ]
+              },
+              {
+                "cid": "a64e7f498523fd684d42380866fc4af9ac06b50441dd25e1aa31b28f3cb43760",
+                "kind": 5,
+                "references": [
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d"
+                ]
+              },
+              {
+                "cid": "ab2fbba4da933f08da76cedb9f777ca386040980b1d00cbe4f66d60eec3485a2",
+                "kind": 9,
+                "references": [
+                  "195cbb39d12e33be39ce79ca79fddc9c25e0a8b0df5f0543f7922501b07ef542",
+                  "7496f3ffe90f1c91130e8793bff778ad6bdf5aa4b1bc3f78a1d578b017690a8c",
+                  "cd2970b520d1e6a55c4bafe31c83fb9ef275855de46796ad695a8979b033b431"
+                ]
+              },
+              {
+                "cid": "ac033bed6ebe28c1ac3cb8997d7d9e58be86ffcfe1613d041491df11bc3f7d07",
+                "kind": 10,
+                "references": [
+                  "7c47ed4321a4072e452ebba3b27cea1cc97cce467fa4b838e4cfa7980dae83b1",
+                  "9e3dd6a9aa3ff407ed694b8705c82fcc13c472b818f189a1a45a7825ac1a967e",
+                  "ab2fbba4da933f08da76cedb9f777ca386040980b1d00cbe4f66d60eec3485a2"
+                ]
+              },
+              {
+                "cid": "adfe3678981bc2814a1a8a3bdeb579f29a4c20ef429ff331a60cedb66b1eac79",
+                "kind": 5,
+                "references": [
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52"
+                ]
+              },
+              {
+                "cid": "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d",
+                "kind": 4,
+                "references": []
+              },
+              {
+                "cid": "c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567",
+                "kind": 4,
+                "references": []
+              },
+              {
+                "cid": "cd2970b520d1e6a55c4bafe31c83fb9ef275855de46796ad695a8979b033b431",
+                "kind": 2,
+                "references": [
+                  "195cbb39d12e33be39ce79ca79fddc9c25e0a8b0df5f0543f7922501b07ef542",
+                  "7496f3ffe90f1c91130e8793bff778ad6bdf5aa4b1bc3f78a1d578b017690a8c",
+                  "781a2826e5ea2b0a4d6a3735e3345f03dd685a40353309a3b14df2690282ea89",
+                  "de7c8b99001018818c3f4d579ca2074b56729cd793b5a512032f3e64be4b209a",
+                  "f5a6fa71eef2797b87f831931cd1b2b75963a24afd59b39dfa4d45229e5996a8"
+                ]
+              },
+              {
+                "cid": "d1a1a6dea529aaeaf5137fd225cb9a949344855bd5d63d5ee8a944ed0cb7eb97",
+                "kind": 4,
+                "references": []
+              },
+              {
+                "cid": "daeee3457dffde2e60a93bb4e7375c96f06746649af348c78671765e864b925f",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "dcc259733de86ee959bbcb9c552f17203a79d8e3ec75e4543c21886a9b1da73e",
+                "kind": 6,
+                "references": []
+              },
+              {
+                "cid": "de7c8b99001018818c3f4d579ca2074b56729cd793b5a512032f3e64be4b209a",
+                "kind": 3,
+                "references": [
+                  "2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a",
+                  "3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c",
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52",
+                  "ed435b15bdda977c3986ab7e51f4095ec76145c6f745c9759261fa49f3f9c132",
+                  "ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29"
+                ]
+              },
+              {
+                "cid": "df9fa5909122b512b9ff5ffe5007dceac1f159567c57571e4f0d870dcb817365",
+                "kind": 6,
+                "references": []
+              },
+              {
+                "cid": "e495d16a686a737ded68b61d4a245a6ca6c16f91bc1cfd788861f3f9eae703f6",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "e51a5d6a31e98f89b34d94b399c657c02305abec5e319d0286884015dcc84f9a",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "e6b0c92b5c583840550533a278df62e0eb67109ee57f1405b6210ec6ffc76624",
+                "kind": 4,
+                "references": []
+              },
+              {
+                "cid": "e6ce1205f4a7e400d8b54297ef06db71368448d4cdd2d4d6c84fa128e264f75e",
+                "kind": 5,
+                "references": [
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d"
+                ]
+              },
+              {
+                "cid": "ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b",
+                "kind": 4,
+                "references": []
+              },
+              {
+                "cid": "ea17cba58061dd2039a9abc7e96c94e30020f58e9d781a3683449d349ac13d71",
+                "kind": 5,
+                "references": [
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52"
+                ]
+              },
+              {
+                "cid": "ec41c45f88e6a724ada1066713fd6914bedad3b127d4c317f240557f5fdf72a4",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "ed435b15bdda977c3986ab7e51f4095ec76145c6f745c9759261fa49f3f9c132",
+                "kind": 7,
+                "references": [
+                  "19e2d6a55b54ab8e4d827f52d765e6de3dce9e936efdf9f11e40f36c3df6106a",
+                  "24394b7c1a5d5415a2c1e8249f987bd86da5b6ba63e1708c0d209564795de569",
+                  "2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a",
+                  "3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c",
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                  "7c6927b1e120055116bfd90877c3cba0398488412cad8b2dfd059c5ea603816f",
+                  "8bc9d4f89318de53cd9d9cf2edabbc6ec1e9d6441285ece4bf158aef693c0761",
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52",
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d",
+                  "e6b0c92b5c583840550533a278df62e0eb67109ee57f1405b6210ec6ffc76624",
+                  "ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29"
+                ]
+              },
+              {
+                "cid": "ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29",
+                "kind": 4,
+                "references": [
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d"
+                ]
+              },
+              {
+                "cid": "ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd",
+                "kind": 10,
+                "references": [
+                  "15264515d69f8d9ed3287f17674e1d0e87809fd366832b905d9423121ec62540",
+                  "ab2fbba4da933f08da76cedb9f777ca386040980b1d00cbe4f66d60eec3485a2",
+                  "ac033bed6ebe28c1ac3cb8997d7d9e58be86ffcfe1613d041491df11bc3f7d07"
+                ]
+              },
+              {
+                "cid": "f0ee74729739b0c9310163fea92d7f958c5d4b6941ff3d0dda0fea6c01404123",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "f5a6fa71eef2797b87f831931cd1b2b75963a24afd59b39dfa4d45229e5996a8",
+                "kind": 3,
+                "references": [
+                  "2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a",
+                  "3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c",
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c",
+                  "7793504951e8a626aa1eae5debf06cd36c54ff03077763de2b06f21e4494ce41",
+                  "8c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52",
+                  "ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29"
+                ]
+              },
+              {
+                "cid": "f615ad96e3f3b84a7bfab041dde4598988ff2ff45d2c382c57a507016ef60f6b",
+                "kind": 4,
+                "references": [
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d"
+                ]
+              },
+              {
+                "cid": "f74e09ab5a5278b34939370966dd5faf73f97e84797760cb07e3224db2a99b09",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              },
+              {
+                "cid": "f9af357d7d6c65ca31b2da56531cb7e8becc1ca790f36fc5a4b8e502801c778b",
+                "kind": 5,
+                "references": [
+                  "bde1d3a507d1213c65b51c2a97f8f3259142fa8be649ad26b9ced2d18c5c410d"
+                ]
+              },
+              {
+                "cid": "fac32d71e8336d5937cf1f24bb72f11dcbe198c89152ed017f52c328682ff5ee",
+                "kind": 6,
+                "references": []
+              },
+              {
+                "cid": "fe7627347c77181e6c337054b856eecc24ab08ce0443065ae59b91c092e8f620",
+                "kind": 5,
+                "references": [
+                  "70bc721413a0e348b918104f74735b38a2f0fa24d6faaf4597eff803ef931a6c"
+                ]
+              }
+            ],
+            "complete": true
+          }
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "request": {
+      "id": 6,
+      "method": "mcpServer/tool/call",
+      "params": {
+        "threadId": "01a1ceb6-6108-7ba2-9dca-fc84e21d58c6",
+        "server": "xax_native_acceptance",
+        "tool": "xax_query",
+        "arguments": {
+          "select": "objects",
+          "limit": 1
+        }
+      }
+    },
+    "response": {
+      "id": 6,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"ok\":true,\"root\":\"ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd\",\"selection\":\"objects\",\"rows\":[{\"cid\":\"042579bd95ad4ced0b763db8f68a263e21d4a4b06f3b452fe0cc3eafcbc60457\",\"kind\":5,\"referenceCount\":1}],\"nextCursor\":{\"root\":\"ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd\",\"offset\":1},\"inventoryComplete\":true,\"complete\":false}"
+          }
+        ],
+        "structuredContent": {
+          "ok": true,
+          "root": "ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd",
+          "selection": "objects",
+          "rows": [
+            {
+              "cid": "042579bd95ad4ced0b763db8f68a263e21d4a4b06f3b452fe0cc3eafcbc60457",
+              "kind": 5,
+              "referenceCount": 1
+            }
+          ],
+          "nextCursor": {
+            "root": "ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd",
+            "offset": 1
+          },
+          "inventoryComplete": true,
+          "complete": false
+        },
+        "isError": false
+      }
+    }
+  },
+  {
+    "request": {
+      "id": 7,
+      "method": "mcpServer/tool/call",
+      "params": {
+        "threadId": "01a1ceb6-6108-7ba2-9dca-fc84e21d58c6",
+        "server": "xax_native_acceptance",
+        "tool": "xax_construct",
+        "arguments": {}
+      }
+    },
+    "response": {
+      "id": 7,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"error\":{\"code\":\"denied_capability\",\"message\":\"this server was not granted the 'mutate' right by its host configuration\",\"repair\":[\"the host owner may add --grant mutate to the server launch command\"]},\"ok\":false}"
+          }
+        ],
+        "structuredContent": {
+          "error": {
+            "code": "denied_capability",
+            "message": "this server was not granted the 'mutate' right by its host configuration",
+            "repair": [
+              "the host owner may add --grant mutate to the server launch command"
+            ]
+          },
+          "ok": false
+        },
+        "isError": true
+      }
+    }
+  },
+  {
+    "request": {
+      "id": 8,
+      "method": "mcpServer/tool/call",
+      "params": {
+        "threadId": "01a1ceb6-6108-7ba2-9dca-fc84e21d58c6",
+        "server": "xax_native_acceptance",
+        "tool": "xax_transaction",
+        "arguments": {}
+      }
+    },
+    "response": {
+      "id": 8,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"error\":{\"code\":\"denied_capability\",\"message\":\"this server was not granted the 'mutate' right by its host configuration\",\"repair\":[\"the host owner may add --grant mutate to the server launch command\"]},\"ok\":false}"
+          }
+        ],
+        "structuredContent": {
+          "error": {
+            "code": "denied_capability",
+            "message": "this server was not granted the 'mutate' right by its host configuration",
+            "repair": [
+              "the host owner may add --grant mutate to the server launch command"
+            ]
+          },
+          "ok": false
+        },
+        "isError": true
+      }
+    }
+  },
+  {
+    "request": {
+      "id": 9,
+      "method": "mcpServer/tool/call",
+      "params": {
+        "threadId": "01a1ceb6-6108-7ba2-9dca-fc84e21d58c6",
+        "server": "xax_native_acceptance",
+        "tool": "xax_build",
+        "arguments": {}
+      }
+    },
+    "response": {
+      "id": 9,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"error\":{\"code\":\"denied_capability\",\"message\":\"this server was not granted the 'build' right by its host configuration\",\"repair\":[\"the host owner may add --grant build to the server launch command\"]},\"ok\":false}"
+          }
+        ],
+        "structuredContent": {
+          "error": {
+            "code": "denied_capability",
+            "message": "this server was not granted the 'build' right by its host configuration",
+            "repair": [
+              "the host owner may add --grant build to the server launch command"
+            ]
+          },
+          "ok": false
+        },
+        "isError": true
+      }
+    }
+  },
+  {
+    "request": {
+      "id": 10,
+      "method": "mcpServer/tool/call",
+      "params": {
+        "threadId": "01a1ceb6-6108-7ba2-9dca-fc84e21d58c6",
+        "server": "xax_native_acceptance",
+        "tool": "xax_execute",
+        "arguments": {}
+      }
+    },
+    "response": {
+      "id": 10,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"error\":{\"code\":\"denied_capability\",\"message\":\"this server was not granted the 'execute' right by its host configuration\",\"repair\":[\"the host owner may add --allow-execute to the server launch command\"]},\"ok\":false}"
+          }
+        ],
+        "structuredContent": {
+          "error": {
+            "code": "denied_capability",
+            "message": "this server was not granted the 'execute' right by its host configuration",
+            "repair": [
+              "the host owner may add --allow-execute to the server launch command"
+            ]
+          },
+          "ok": false
+        },
+        "isError": true
+      }
+    }
+  },
+  {
+    "request": {
+      "id": 11,
+      "method": "mcpServer/tool/call",
+      "params": {
+        "threadId": "01a1ceb6-6108-7ba2-9dca-fc84e21d58c6",
+        "server": "xax_native_acceptance",
+        "tool": "xax_result",
+        "arguments": {
+          "handle": "unknown"
+        }
+      }
+    },
+    "response": {
+      "id": 11,
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\"error\":{\"code\":\"unsupported\",\"message\":\"xax_result is not implemented by the native XAX server: result handles need session state, which the native server does not implement yet; it fails closed (docs/NATIVE.md)\"},\"ok\":false}"
+          }
+        ],
+        "structuredContent": {
+          "error": {
+            "code": "unsupported",
+            "message": "xax_result is not implemented by the native XAX server: result handles need session state, which the native server does not implement yet; it fails closed (docs/NATIVE.md)"
+          },
+          "ok": false
+        },
+        "isError": true
+      }
+    }
+  }
+]

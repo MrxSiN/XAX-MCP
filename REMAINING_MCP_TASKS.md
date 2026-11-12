@@ -4,6 +4,37 @@ The resumed control-preview acceptance increment is complete. This is an
 experimental acceptance result, not promotion or production release readiness.
 The paused 2026-11-11 handoff remains in Git history at `1850dd7`.
 
+## JVM increment completed before broader security work
+
+- [x] Added an explicit native JVM snapshot build/execute preview. Canonical XAX
+  snapshots produce executable JARs with the separately pinned native compiler;
+  a native Windows supervisor runs the host-controlled Java runtime in an
+  AppContainer and one-process job. No foreign implementation entered the request path.
+- [x] Verified final capabilities report target `jvm`, implementation `EXECUTED`
+  and toolchain `TESTED`, with no untested label. The exact compiler and Microsoft
+  Java 17 runtime identities are recorded in `native/jvm-dependency.json` and
+  the runtime inventory; the default deployment pin is unchanged.
+- [x] Passed 53 final MCP feature exchanges, 18 forged-authority denials,
+  independent JVM argument/isolation/budget/lifecycle oracles, protocol/paging
+  checks and direct installed read-only backend calls to all eight tools.
+- [x] Replayed all 49 new native records with mandatory verification and rebuilt
+  four programs twice in a fresh empty-PATH package with paths containing spaces.
+  Repeated feature and client gates; all packaged bytes stayed unchanged.
+
+See [the JVM acceptance index](docs/evidence/native-jvm-20261112.json), explicit
+[target verification](docs/evidence/native-jvm-target-verification-20261112.json)
+and [contract](docs/NATIVE_JVM_20261112.md). Build/execute requires already resolved
+memory-profile snapshots. Snapshot mutation and unresolved build requests decline;
+the native mutation rejection preserves the source. Arguments must fit
+Windows-1252; lossy arguments decline before Java creation, while binary stdin
+supports all bytes. Forced termination can retain the owned cached JAR's read ACL.
+The preview branches from Android and does not combine the separate inspection pin.
+
+The user's existing MCP connection setup remains unchanged. JVM is implemented and
+its exact scoped toolchain is tested in the separate preview. Content integrity,
+atomic publication, broader workspace aliases and security gates below remain open
+and are the next priority. No default promotion or release readiness is claimed.
+
 ## Android increment completed
 
 - [x] Built Android ARM64 static artifacts with the retained compiler and executed
@@ -21,9 +52,9 @@ static ELF only, staging-interruption cleanup and workspace aliases remain open.
 The control preview and default Gen3 remain unchanged. A fresh
 [target/toolchain verification](docs/evidence/native-android-target-verification-20261112.json)
 passed before further alias work: Android ARM64 is implemented and its exact seed
-is tested for this profile. JVM is not exposed; the active desktop connection
-remains the separate Windows-only preview. Continue with workspace alias races
-and broader capability/security acceptance.
+is tested for this profile. At that milestone JVM was not exposed; the active
+desktop connection remains the separate Windows-only preview. The later JVM
+increment above is separate from both this Android source and that connection.
 
 ## Bounded alias/security increment completed
 
@@ -38,7 +69,7 @@ and broader capability/security acceptance.
 - [x] Added and locally executed a CI step replaying 57 new records and double
   building thirteen native programs. Hosted acceptance is a separate gate.
 - [x] Reconfirmed Android query/build/device execution after the change. Android
-  static-profile toolchain status is tested; JVM is not exposed. At the user's
+  static-profile toolchain status is tested; that source does not expose JVM. At the user's
   request, existing active MCP connection setup remains unchanged.
 
 See [the inspection-pin evidence](docs/evidence/native-inspection-pins-20261112.json)
@@ -77,6 +108,8 @@ the user's working README edit remains intact and excluded from the increment.
 
 ## Current source and toolchain
 
+The JVM preview uses `native/candidates/20261112-jvm/checkpoints.json` and its own
+immutable `native/jvm-dependency.json`. It does not repin the default deployment.
 The separate Android and inspection-pin canonical sources and artifacts are bound
 by `native/candidates/20261112-android/checkpoints.json` and
 `native/candidates/20261112-read-pins/checkpoints.json`. Neither is selected as
@@ -135,8 +168,8 @@ PowerShell invocation; use the separate pinned copy for this deployment.
 - [ ] Complete exhaustive pressure/exhaustion, crash/cleanup and independent
   escape/security acceptance. The pinned deployment compiler's self-hosting
   and production readiness are not established by this increment.
-- [ ] Run/verify hosted CI for the new Android/inspection-pin workflow step and
-  satisfy promotion gates before selecting a preview
+- [ ] Run/verify hosted CI for the Android/inspection-pin workflow step and separate
+  JVM build/replay job, then satisfy promotion gates before selecting a preview
   as the default. Desktop acceptance here covers the configured read-only path;
   writable desktop execution requires separate acceptance.
 

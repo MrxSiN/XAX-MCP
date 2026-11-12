@@ -347,3 +347,82 @@ jobs:
             build/timeout-sandbox/sandbox-result.bin
             build/timeout-sandbox/sandbox-out.bin
             build/timeout-sandbox/sandbox-err.bin
+
+  windows-jvm:
+    runs-on: windows-2022
+    timeout-minutes: 45
+    env:
+      XAXC: ${{ github.workspace }}/.xax-jvm-upstream/compiler/bootstrap/windows/xaxc-windows-x86_64.exe
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check out the separate immutable JVM compiler
+        uses: actions/checkout@v4
+        with:
+          repository: MrxSiN/XAX
+          ref: 745e80150605f3812aa012e6884f6e417d9423b4
+          path: .xax-jvm-upstream
+
+      # Build/replay acceptance only. Runtime isolation uses the separately
+      # inventoried Microsoft Java 17 installation in local evidence.
+      - name: Replay JVM sources and rebuild native launchers and JARs
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+          $compiler=$env:XAXC
+          $dependency=Get-Content native/jvm-dependency.json -Raw|ConvertFrom-Json
+          if((Get-FileHash -LiteralPath $compiler).Hash.ToLowerInvariant()-ne$dependency.seed_sha256){throw 'Wrong JVM compiler seed'}
+          $manifest=Get-Content native/transactions/20261112-jvm/manifest.json -Raw|ConvertFrom-Json -Depth 80
+          New-Item -ItemType Directory -Force build/jvm/replay,build/jvm/rebuild | Out-Null
+          function Native([string[]]$Arguments){& $compiler @Arguments;if($LASTEXITCODE-ne0){throw "Native JVM compiler declined: $($Arguments[0]) ($LASTEXITCODE)"}}
+          function Identity($Row){if((Get-FileHash -LiteralPath $Row.path).Hash.ToLowerInvariant()-ne$Row.sha256-or(Get-Item -LiteralPath $Row.path).Length-ne$Row.bytes){throw "Identity differs: $($Row.path)"}}
+          $count=0
+          foreach($group in $manifest.groups){
+           Identity $group.base
+           $current="build/jvm/replay/$($group.name).current.xax";Copy-Item -LiteralPath $group.base.path -Destination $current -Force
+           foreach($record in $group.records){
+            Identity $record;Identity $record.native_batch
+            $next="build/jvm/replay/$($group.name).next.xax"
+            Native @('edit',$current,$record.path,$next)
+            Native @('verify',$next,'build/jvm/replay/verify.diag')
+            if((Get-FileHash -LiteralPath $next).Hash.ToLowerInvariant()-ne$record.result.sha256){throw 'JVM intermediate replay differs'}
+            Move-Item -LiteralPath $next -Destination $current -Force
+            $count++;Write-Output "Verified JVM source record $count"
+           }
+           Identity $group.final
+           if((Get-FileHash -LiteralPath $current).Hash.ToLowerInvariant()-ne$group.final.sha256){throw 'JVM final replay differs'}
+          }
+          if($count-ne49){throw 'Incomplete JVM replay'}
+          $checkpoint=Get-Content native/candidates/20261112-jvm/checkpoints.json -Raw|ConvertFrom-Json
+          foreach($item in $checkpoint.artifacts){Identity $item}
+          $candidate='native/candidates/20261112-jvm'
+          foreach($program in @(@{name='server';source="$candidate/server.xax";snapshot="$candidate/server-snapshot.xax";exe="$candidate/xax-mcp-native.exe";prov="$candidate/xax-mcp-native.prov"},@{name='launcher';source="$candidate/jvm-launcher.xax";snapshot="$candidate/jvm-launcher-snapshot.xax";exe="$candidate/xax-mcp-sandbox.exe";prov="$candidate/jvm-launcher.prov"})){
+           $snapshot="build/jvm/rebuild/$($program.name)-snapshot.xax"
+           Native @('verify',$program.source,'build/jvm/rebuild/source.diag');Native @('resolve',$program.source,$snapshot)
+           if((Get-FileHash -LiteralPath $snapshot).Hash-ne(Get-FileHash -LiteralPath $program.snapshot).Hash){throw 'JVM host snapshot differs'}
+           foreach($attempt in 1..2){
+            $exe="build/jvm/rebuild/$($program.name)-$attempt.exe";$prov="build/jvm/rebuild/$($program.name)-$attempt.prov"
+            Native @('build',$snapshot,$exe,$prov)
+            if((Get-FileHash -LiteralPath $exe).Hash-ne(Get-FileHash -LiteralPath $program.exe).Hash-or(Get-FileHash -LiteralPath $prov).Hash-ne(Get-FileHash -LiteralPath $program.prov).Hash){throw 'JVM native rebuild differs'}
+           }
+          }
+          $fixtures=Get-Content tests/jvm/manifest.json -Raw|ConvertFrom-Json -Depth 80
+          foreach($fixture in $fixtures.fixtures){
+           Identity $fixture.source;Identity $fixture.jar;Identity $fixture.provenance
+           Native @('verify',$fixture.source.path,'build/jvm/rebuild/fixture.diag')
+           foreach($attempt in 1..2){
+            $jar="build/jvm/rebuild/wordcount-v$($fixture.version)-$attempt.jar";$prov="build/jvm/rebuild/wordcount-v$($fixture.version)-$attempt.prov"
+            Native @('build',$fixture.source.path,$jar,$prov)
+            if((Get-FileHash -LiteralPath $jar).Hash.ToLowerInvariant()-ne$fixture.jar.sha256-or(Get-FileHash -LiteralPath $prov).Hash.ToLowerInvariant()-ne$fixture.provenance.sha256){throw 'JVM JAR or provenance differs'}
+            $zip=[IO.Compression.ZipFile]::OpenRead((Join-Path $PWD $jar))
+            try{$classes=@($zip.Entries|Where-Object FullName -Like '*.class');if($classes.Count-ne1){throw 'Wrong JVM class count'};foreach($entry in $classes){$stream=$entry.Open();try{$header=[byte[]]::new(8);if($stream.Read($header,0,8)-ne8-or$header[0]-ne202-or$header[1]-ne254-or$header[2]-ne186-or$header[3]-ne190-or$header[6]*256+$header[7]-ne61){throw 'Wrong JVM classfile'}}finally{$stream.Dispose()}}}finally{$zip.Dispose()}
+           }
+          }
+          Identity $fixtures.mutation_negative.record
+          & $compiler edit $fixtures.mutation_negative.base.path $fixtures.mutation_negative.record.path build/jvm/replay/declined-snapshot.out
+          if($LASTEXITCODE-ne1-or(Get-Content build/jvm/replay/declined-snapshot.out -Raw)-notmatch'XAX.WORKSPACE.TOPOLOGY'){throw 'Snapshot mutation boundary differs'}
+          @{records=$count;programs_double_built=4;compiler_sha256=$dependency.seed_sha256;runtime_execution='Separate exact local Java runtime evidence';release_ready=$false}|ConvertTo-Json|Set-Content build/jvm/summary.json -Encoding utf8NoBOM
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: native-jvm-build-evidence
+          path: build/jvm/summary.json

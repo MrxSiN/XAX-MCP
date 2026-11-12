@@ -1,0 +1,75 @@
+{
+  "schema": "xax-mcp-jvm-fixtures-v1",
+  "recorded": "2026-11-12",
+  "dependency": "native/jvm-dependency.json",
+  "fixtures": [
+    {
+      "version": 0,
+      "source": {
+        "path": "tests/jvm/wordcount-v0.xax",
+        "bytes": 17584,
+        "sha256": "ecb00f285540b81abcfeb12026719fe73277d184375b116da1efc4fae387cdd2",
+        "root": "91490bfcb3b3efc805b31aaf3df1a0a0af30ea9ea110e8dc424c205ec37d6e8e"
+      },
+      "jar": {
+        "path": "tests/jvm/wordcount-v0.jar",
+        "bytes": 3254,
+        "sha256": "d3ba613054045f4cd9086c9bab4dcb28bb33d6ee87c1cf8eb01bbea09fec73ef"
+      },
+      "provenance": {
+        "path": "tests/jvm/wordcount-v0.prov",
+        "bytes": 268,
+        "sha256": "aa9b827ef8ebc3fb0ea015ac479f6ebe0e5a95943a0ff706b1e950aa3e76edf1"
+      },
+      "upstream_path": "compiler/benchmarks/r6_xwc/xwc-gen0.xax",
+      "byte_exact_import": true,
+      "classes": 1,
+      "classfile_major": 61,
+      "behavior": "Counts LF, words and raw bytes; v0 ASCII word bytes, v1 additionally high bytes; independent oracle recorded in acceptance"
+    },
+    {
+      "version": 1,
+      "source": {
+        "path": "tests/jvm/wordcount-v1.xax",
+        "bytes": 17655,
+        "sha256": "d12c9956e2d8149fd38cc6cdfae851beff02f7ee86fdc1f7f7d241ebb91cfb59",
+        "root": "ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd"
+      },
+      "jar": {
+        "path": "tests/jvm/wordcount-v1.jar",
+        "bytes": 3281,
+        "sha256": "881f10987a89920789278744e64d19c737cddbf78dbafb43423d524124859f11"
+      },
+      "provenance": {
+        "path": "tests/jvm/wordcount-v1.prov",
+        "bytes": 268,
+        "sha256": "de0f8fb613dded3fb90328b156a14bef032debe03943439e60e7dbc6b24bcf43"
+      },
+      "upstream_path": "compiler/benchmarks/r6_xwc/xwc-gen1.xax",
+      "byte_exact_import": true,
+      "classes": 1,
+      "classfile_major": 61,
+      "behavior": "Counts LF, words and raw bytes; v0 ASCII word bytes, v1 additionally high bytes; independent oracle recorded in acceptance"
+    }
+  ],
+  "mutation_negative": {
+    "record": {
+      "path": "tests/jvm/snapshot-mutation-decline.edit",
+      "bytes": 82,
+      "sha256": "3bc6c28588d25e63988a4b5b53379901c1ebc2e25afc0b505d3b38e7d9fb998c"
+    },
+    "base": {
+      "path": "tests/jvm/wordcount-v1.xax",
+      "bytes": 17655,
+      "sha256": "d12c9956e2d8149fd38cc6cdfae851beff02f7ee86fdc1f7f7d241ebb91cfb59",
+      "root": "ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd"
+    },
+    "native_exit": 1,
+    "diagnostic": "XAX.WORKSPACE.TOPOLOGY",
+    "rule": "WORKSPACE-SUPPORTED-USER",
+    "implemented": false,
+    "source_preserved": true
+  },
+  "fixture_source": "Canonical upstream XAX snapshots imported byte-exact; no handwritten Java application or helper",
+  "test_oracles": "Independent reference backend and temporary Java probes outside the repository and request path"
+}

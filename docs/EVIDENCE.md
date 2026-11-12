@@ -1,5 +1,24 @@
 # Evidence and claim labels
 
+## 2026-11-12 — JVM snapshot build and execution preview
+
+The [JVM acceptance index](evidence/native-jvm-20261112.json) binds native source,
+49 exact-root records, two canonical upstream JVM fixtures and deterministic native
+host/JAR builds to actual execution on the inventoried Microsoft Java 17 runtime.
+[Final runtime acceptance](evidence/native-jvm-runtime-20261112.json), a
+[fresh empty-PATH package](evidence/native-jvm-package-20261112.json), independent
+argument/isolation/budget/lifecycle oracles and all eight direct installed read-only
+backend calls passed. [Target verification](evidence/native-jvm-target-verification-20261112.json)
+confirms `jvm` is implemented and its separately pinned toolchain is `TESTED`, with
+no untested label in final capabilities.
+
+The [contract](NATIVE_JVM_20261112.md) limits this to resolved memory-profile
+snapshots. Snapshot mutation declines without publication; Windows-1252 argument
+limits, cached-JAR crash ACL cleanup and broader integrity/publication/security
+gates remain explicit. This preview does not combine the inspection pin, change
+the default compiler or active MCP connection, or establish release readiness.
+The exact CI step passed locally; no hosted result is claimed by this record.
+
 ## 2026-11-12 — bounded inspection output-name pins
 
 The [new evidence](evidence/native-inspection-pins-20261112.json) records one native
