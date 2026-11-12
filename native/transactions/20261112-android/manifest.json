@@ -1,0 +1,1289 @@
+{
+  "schema": "xax-mcp-native-android-replay-v1",
+  "recorded": "2026-11-12",
+  "deployment_pin": "native/xax-dependency.json",
+  "windows_seed": {
+    "bytes": 11876864,
+    "sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79"
+  },
+  "native_authoring_seed": {
+    "bytes": 31959040,
+    "sha256": "e2f68c00a8dee67490929b173469e383853564254ed80b3a7a5e8188d8c50122"
+  },
+  "packing": "Immutable native-authored objects copied into XAXEDIT1 carriers; no foreign canonical graph generation",
+  "records": [
+    {
+      "bytes": 2171,
+      "sha256": "73a519bb6ac24a9c0e448907d860737f9f67c476d207f0db686a9b017d6ab6d1",
+      "path": "native/transactions/20261112-android/hello-arm64.edit",
+      "group": "fixtures",
+      "base_root": "30ff6355796acd6609f869df701239691c2c69682b9d3018895cc84797aa76d9",
+      "result_root": "f1e8350d196fcd707004b0a6cf0db70c96c6250dc4b4201263b3b0a4e93954ce",
+      "new_native_objects": 15,
+      "unchanged_objects": 17,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": false,
+      "result_source": {
+        "bytes": 5433,
+        "sha256": "bbab8cb719614bd0bad4d427eec15ef205cefe8d338f1792e925ce1092dcc875",
+        "path": "tests/android/hello-arm64.xax"
+      },
+      "native_batch": {
+        "bytes": 2228,
+        "sha256": "79a76df3cf2b3174d147ba8de0dfe4feb5988bd3795098844cceff341aff909d",
+        "path": "native/transactions/20261112-android/hello-arm64.batch"
+      }
+    },
+    {
+      "bytes": 2687,
+      "sha256": "85db5fca8e5931c24a42a49b2ffc611af927f82482cacf57521d187e83d38994",
+      "path": "native/transactions/20261112-android/binary-echo.edit",
+      "group": "fixtures",
+      "base_root": "30ff6355796acd6609f869df701239691c2c69682b9d3018895cc84797aa76d9",
+      "result_root": "b98c60276ea8e54ff01b9a8d913c9867098604de13d390e3bee65e3fbde4f4fe",
+      "new_native_objects": 11,
+      "unchanged_objects": 21,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": false,
+      "result_source": {
+        "bytes": 6364,
+        "sha256": "4550983fb2f32dc57e10afa80a764806a6a629f6ed996514578654452f35b4ce",
+        "path": "tests/android/binary-echo.xax"
+      },
+      "native_batch": {
+        "bytes": 3770,
+        "sha256": "2f7b8e32b84e1996b71e0b4224da30fe08c46e39884da531aca969f8a6928e78",
+        "path": "native/transactions/20261112-android/binary-echo.batch"
+      }
+    },
+    {
+      "bytes": 733,
+      "sha256": "1cc2f1b86e85fed0612d241d6d215a486a56c079c7bd89b5094a55bcec97b3e4",
+      "path": "native/transactions/20261112-android/cpu-loop.edit",
+      "group": "fixtures",
+      "base_root": "30ff6355796acd6609f869df701239691c2c69682b9d3018895cc84797aa76d9",
+      "result_root": "01b6c583c8d32e060536115ecaa62af0bdba4bcb2dbf9d1ccce7ce77d61a2390",
+      "new_native_objects": 5,
+      "unchanged_objects": 6,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": false,
+      "result_source": {
+        "bytes": 1575,
+        "sha256": "216bba05d56a6470c29dd209f75764fb5b0479fbdc005cc7f12360c60a51f033",
+        "path": "tests/android/cpu-loop.xax"
+      },
+      "native_batch": {
+        "bytes": 803,
+        "sha256": "944eb2e36c712497c72eceb66fd6971cfd0d8360f16e1adacc4fa132bfb174ce",
+        "path": "native/transactions/20261112-android/cpu-loop.batch"
+      }
+    },
+    {
+      "bytes": 1782,
+      "sha256": "7f52047fe7a06e5bed71f195327820d410aa28ccd81814d5d04aa97391693cdb",
+      "path": "native/transactions/20261112-android/wall-sleep.edit",
+      "group": "fixtures",
+      "base_root": "30ff6355796acd6609f869df701239691c2c69682b9d3018895cc84797aa76d9",
+      "result_root": "9107448921a45e416efef01ee288de19f5a8bbebb0d1b33ee6e11a7e86ce7ae2",
+      "new_native_objects": 9,
+      "unchanged_objects": 14,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": false,
+      "result_source": {
+        "bytes": 4026,
+        "sha256": "4480128f497f0a136a24da93edfa445f70b7ed84649c0292f0e277da7978336e",
+        "path": "tests/android/wall-sleep.xax"
+      },
+      "native_batch": {
+        "bytes": 2346,
+        "sha256": "d9bb1243ccfe5fbd0e36a3819b515d7ee9c46b2d6fb8def16356b151534cc587",
+        "path": "native/transactions/20261112-android/wall-sleep.batch"
+      }
+    },
+    {
+      "bytes": 1254,
+      "sha256": "d47408744208952604803e2e56f0abc767d556912b82d61060e13c16d9836f1e",
+      "path": "native/transactions/20261112-android/output-flood.edit",
+      "group": "fixtures",
+      "base_root": "30ff6355796acd6609f869df701239691c2c69682b9d3018895cc84797aa76d9",
+      "result_root": "385b9e4d8ddef94e49de56a2dc8ab25cdf4cb271bae8358e486aa311e89700e3",
+      "new_native_objects": 6,
+      "unchanged_objects": 17,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": false,
+      "result_source": {
+        "bytes": 3779,
+        "sha256": "fcc09d4b1eab757f7609ad213f24ccdec5d33fac9cd50b1aecd1d65cb4b39f6c",
+        "path": "tests/android/output-flood.xax"
+      },
+      "native_batch": {
+        "bytes": 1311,
+        "sha256": "390415577dba02636691a5cfbabdf4637292f68616a582b96807fc9d527b5241",
+        "path": "native/transactions/20261112-android/output-flood.batch"
+      }
+    },
+    {
+      "bytes": 1308,
+      "sha256": "ca98f5c0797cc7856f3c5ea4ae3a0a5bb355fbaa39d00c765b7b45fbf5905c82",
+      "path": "native/transactions/20261112-android/socket-denied.edit",
+      "group": "fixtures",
+      "base_root": "30ff6355796acd6609f869df701239691c2c69682b9d3018895cc84797aa76d9",
+      "result_root": "ab626bc6064065e414ae2e521134bdf5fbbf434e6779fc04f60b84f1a597bf9e",
+      "new_native_objects": 6,
+      "unchanged_objects": 12,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": false,
+      "result_source": {
+        "bytes": 2930,
+        "sha256": "78b45fe6e3ea16aa8fa2f2c7ee30692dc42e607171e64290fea9d9cc7a2826b5",
+        "path": "tests/android/socket-denied.xax"
+      },
+      "native_batch": {
+        "bytes": 1577,
+        "sha256": "7f959d6406ae004142b5eb548829f0f248a88d57a6a04b91e17de4040f1ab9e9",
+        "path": "native/transactions/20261112-android/socket-denied.batch"
+      }
+    },
+    {
+      "bytes": 1313,
+      "sha256": "7b463d6190086477f4506b1af63445edfa86408c3ddbc33f7ae84d9708b75473",
+      "path": "native/transactions/20261112-android/clone-denied.edit",
+      "group": "fixtures",
+      "base_root": "30ff6355796acd6609f869df701239691c2c69682b9d3018895cc84797aa76d9",
+      "result_root": "227e860ef87e54b2d899b717cc5c77c41ffdac22b210e32e0bdaec5402bf4aa9",
+      "new_native_objects": 6,
+      "unchanged_objects": 12,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": false,
+      "result_source": {
+        "bytes": 2936,
+        "sha256": "b44909d72b69e84eaa5acec5c2d03763da1258eeba042346d331c1e9034c89a2",
+        "path": "tests/android/clone-denied.xax"
+      },
+      "native_batch": {
+        "bytes": 1587,
+        "sha256": "3ea84ef90f2b1e2a68970c043183e7b5ab0398279d1cfe349dee228922fbd63c",
+        "path": "native/transactions/20261112-android/clone-denied.batch"
+      }
+    },
+    {
+      "bytes": 1308,
+      "sha256": "b0150c88c9d1492807ea7d7ffb6e5a1c860052b374c8ae1a4357094528dbd20f",
+      "path": "native/transactions/20261112-android/exec-denied.edit",
+      "group": "fixtures",
+      "base_root": "30ff6355796acd6609f869df701239691c2c69682b9d3018895cc84797aa76d9",
+      "result_root": "bd844ee580196f1cdd9cef1195e9d5046df6307415975391cea928066f3e338a",
+      "new_native_objects": 6,
+      "unchanged_objects": 12,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": false,
+      "result_source": {
+        "bytes": 2930,
+        "sha256": "360389a1c7dc008a01f5be7a527810d0b20193a39a43045a606d92ecc91d33d8",
+        "path": "tests/android/exec-denied.xax"
+      },
+      "native_batch": {
+        "bytes": 1577,
+        "sha256": "0f47e9a69d1ef35b21b053013a02bc083a90df02962fbb25cc13551d7379e473",
+        "path": "native/transactions/20261112-android/exec-denied.batch"
+      }
+    },
+    {
+      "bytes": 1302,
+      "sha256": "eb1b8b66752822125fd7c07150c94aa9c9b1c5811ecebf647d0fa9b4e7d4574c",
+      "path": "native/transactions/20261112-android/sigreturn-denied.edit",
+      "group": "fixtures",
+      "base_root": "30ff6355796acd6609f869df701239691c2c69682b9d3018895cc84797aa76d9",
+      "result_root": "2942850a755db384d585361b1b3ab82a2b773ce3cb91eac9827c6623178c545f",
+      "new_native_objects": 6,
+      "unchanged_objects": 12,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": false,
+      "result_source": {
+        "bytes": 2924,
+        "sha256": "c623b8e29e7debcd138f2a5737a1c8cea976429854b555f66e9cf0eab934982e",
+        "path": "tests/android/sigreturn-denied.xax"
+      },
+      "native_batch": {
+        "bytes": 1565,
+        "sha256": "047c4bb00f7247cdeac7f493dc14ade83a950ad979a6c7a1542344658a308243",
+        "path": "native/transactions/20261112-android/sigreturn-denied.batch"
+      }
+    },
+    {
+      "bytes": 33026,
+      "sha256": "1adbcb96360845311658d6112d47c45a840fc3b71284862297b05d81b049bcfc",
+      "path": "native/transactions/20261112-android/android-runner-core.edit",
+      "group": "runner",
+      "base_root": "30ff6355796acd6609f869df701239691c2c69682b9d3018895cc84797aa76d9",
+      "result_root": "5171c4afe171312fe6666acabf17ca757f9562bf81f0322cb6a373653c175b2f",
+      "new_native_objects": 223,
+      "unchanged_objects": 22,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 51008,
+        "sha256": "9be1b021f4e8ae38ef544dd8a2b970866a189852bd11ed449f321e3e02ea484f",
+        "path": "native/candidates/20261112-android/android-runner-core.xax"
+      },
+      "native_batch": {
+        "bytes": 40884,
+        "sha256": "d0c82c6acbabc2b92897b12c30eb3cdb4f5103004fe909caf1f14399e95e9b82",
+        "path": "native/transactions/20261112-android/android-runner-core.batch"
+      }
+    },
+    {
+      "bytes": 26976,
+      "sha256": "fde0f285ad18f9297ef95c4f4075de03f4f8013b8916701d2047f29adc290e42",
+      "path": "native/transactions/20261112-android/android-runner.edit",
+      "group": "runner",
+      "base_root": "5171c4afe171312fe6666acabf17ca757f9562bf81f0322cb6a373653c175b2f",
+      "result_root": "9ef188f78fdbd22a9b40c6d0b27a7c041a546cd83c3b386360a8e946f4b60ae5",
+      "new_native_objects": 67,
+      "unchanged_objects": 238,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": false,
+      "result_source": {
+        "bytes": 64468,
+        "sha256": "153e3b81ea89370ee39b412d935e89ad0a996293b664857f264da3220e87389f",
+        "path": "native/candidates/20261112-android/android-runner.xax"
+      },
+      "native_batch": {
+        "bytes": 51629,
+        "sha256": "eb1e394e8e2c49e30f5c838618252d14f0894c15db2a5a1fd4f8742c91721e00",
+        "path": "native/transactions/20261112-android/android-runner.batch"
+      }
+    },
+    {
+      "bytes": 28254,
+      "sha256": "7a27fda81cd83cd2a2dc864eb8b43f5aa015151ff6530ea6c3fea50482f66723",
+      "path": "native/transactions/20261112-android/adb-host-stage-0.edit",
+      "group": "host",
+      "base_root": "5c8f5c28b78cae3f179a4f1ed072716846e46e968c3a23ed660c70638e4d4410",
+      "result_root": "f701ba37a4f62a40387b822f5a1f84982696de5c915c6874c6e830392ca577d6",
+      "new_native_objects": 141,
+      "unchanged_objects": 15,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 39821,
+        "sha256": "ac35c2ac855b0fc890a0d752eed55d5b11cca35cc37a6cb8f820be925138ea26",
+        "path": "native/candidates/20261112-android/adb-host-stage-0.xax"
+      },
+      "native_batch": {
+        "bytes": 39971,
+        "sha256": "02c3f2b147ea795164e8d3e9063afdf8b8f5d2ce29dececbf39f08de1d455a01",
+        "path": "native/transactions/20261112-android/adb-host-stage-0.batch"
+      }
+    },
+    {
+      "bytes": 23488,
+      "sha256": "22a90ff5e3bc34b78d9de77c6db97080491a77e3bf2c0b6abc4477235f47e5be",
+      "path": "native/transactions/20261112-android/adb-host-stage-4096.edit",
+      "group": "host",
+      "base_root": "f701ba37a4f62a40387b822f5a1f84982696de5c915c6874c6e830392ca577d6",
+      "result_root": "58729ae365873d5bc25876fca3cd384ab3227437c98d62286725aa7c003adba4",
+      "new_native_objects": 170,
+      "unchanged_objects": 151,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 67672,
+        "sha256": "03b07fb58afe9955cc6f5531e031e4db43b26a5b22d402a09ac461287c466d41",
+        "path": "native/candidates/20261112-android/adb-host-stage-4096.xax"
+      },
+      "native_batch": {
+        "bytes": 52178,
+        "sha256": "76e5ccfc05b6527f3771ec538679e28c0ed8f59f5be4a5a3f75d441dae2c10e1",
+        "path": "native/transactions/20261112-android/adb-host-stage-4096.batch"
+      }
+    },
+    {
+      "bytes": 27558,
+      "sha256": "202a8d936287296b4db760945c4156c323123a5cc72fbcb02a96a70368bc2552",
+      "path": "native/transactions/20261112-android/adb-host.edit",
+      "group": "host",
+      "base_root": "58729ae365873d5bc25876fca3cd384ab3227437c98d62286725aa7c003adba4",
+      "result_root": "834946bb3371d0b0eafae13e2c13448d7aa76e36fd9e2e4498f0299245ac7ec1",
+      "new_native_objects": 114,
+      "unchanged_objects": 316,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": false,
+      "result_source": {
+        "bytes": 86404,
+        "sha256": "19de72b4ff0b438dd4d8b84b26f71cbec6391c20913b6556dffadd93e4ab3ca4",
+        "path": "native/candidates/20261112-android/adb-host.xax"
+      },
+      "native_batch": {
+        "bytes": 59675,
+        "sha256": "ad51b22b32441f14e69cf99e0288388e9c5c6e85e6035f7a58e2b7f4e17967cc",
+        "path": "native/transactions/20261112-android/adb-host.batch"
+      }
+    },
+    {
+      "bytes": 163632,
+      "sha256": "80e6ec06c31950d407cb5af226c101b24a328f68f63c178974e1cc7c2a3ea100",
+      "path": "native/transactions/20261112-android/server-android-01.edit",
+      "group": "server",
+      "base_root": "2e8497012a44db978ff71c768243b6c5b66c1f5f75a0ae7bd85c856118745612",
+      "result_root": "a865ae8fef7a39392bf86b1fe23204ab8484a8f9da00d6b167641451d5658511",
+      "new_native_objects": 11,
+      "unchanged_objects": 5432,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1731881,
+        "sha256": "e5d351413d2a2e478fdb5c3f18f2b43464a500fe9cfefa27f3bf44029d23db01"
+      },
+      "native_batch": {
+        "bytes": 69941,
+        "sha256": "a095b34b0286a018e676afd5b88406c4697941b247fc900751ab73ff65006760",
+        "path": "native/transactions/20261112-android/server-android-01.batch"
+      }
+    },
+    {
+      "bytes": 165951,
+      "sha256": "b3dbd3400af5cdc656f4da4036cd121a4f852b32e0dc7b9bb4141a723415b208",
+      "path": "native/transactions/20261112-android/server-android-02.edit",
+      "group": "server",
+      "base_root": "a865ae8fef7a39392bf86b1fe23204ab8484a8f9da00d6b167641451d5658511",
+      "result_root": "cfcf715b3c9afa60081360422f9671119d7514e489dc3b99c143029330384298",
+      "new_native_objects": 34,
+      "unchanged_objects": 5432,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1735810,
+        "sha256": "b9a6b0a531ef1c1188ac95432c62617f29ae5253329a6ec45ad2f64b49980fb3"
+      },
+      "native_batch": {
+        "bytes": 72633,
+        "sha256": "d001e4ce4ac23ef164a2fde6bf589480919a1d5c0d0a00b67c08c35597265858",
+        "path": "native/transactions/20261112-android/server-android-02.batch"
+      }
+    },
+    {
+      "bytes": 169553,
+      "sha256": "564d6c0e4b1ee94dde01348d7a06116995c091295da424cb2efb812662ec58ee",
+      "path": "native/transactions/20261112-android/server-android-03.edit",
+      "group": "server",
+      "base_root": "cfcf715b3c9afa60081360422f9671119d7514e489dc3b99c143029330384298",
+      "result_root": "da24033b62fc2d885002267e851633ca98c28ec8a23d7dd3cc0cb436713a822a",
+      "new_native_objects": 62,
+      "unchanged_objects": 5455,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1744053,
+        "sha256": "133d4b586f493c69cadae57296fb8709c26c1c22d1c3b4aee4b2dcde128d37ac"
+      },
+      "native_batch": {
+        "bytes": 75301,
+        "sha256": "846dda930a730529836c039ebd22ab84012a1a20fd5253d58c478bd45241d89c",
+        "path": "native/transactions/20261112-android/server-android-03.batch"
+      }
+    },
+    {
+      "bytes": 171453,
+      "sha256": "98b89b361eb0c4b43b0d9360c028dc1cd13885facb628c16f683aa374ced1106",
+      "path": "native/transactions/20261112-android/server-android-04.edit",
+      "group": "server",
+      "base_root": "da24033b62fc2d885002267e851633ca98c28ec8a23d7dd3cc0cb436713a822a",
+      "result_root": "9503f3cfab9157242c26ea48995b5e3f43cdbb3fd3d3569336420b04da924046",
+      "new_native_objects": 55,
+      "unchanged_objects": 5506,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1751292,
+        "sha256": "5dbf18dbc4b6ba983e86fd4f7a865834583d8107fd7954f0efa3613fce9cd2a7"
+      },
+      "native_batch": {
+        "bytes": 77951,
+        "sha256": "21fae07acc4f650e4ae78862e93b7bb0a5c8a2f2fff21f9a83a50b3af0e237ba",
+        "path": "native/transactions/20261112-android/server-android-04.batch"
+      }
+    },
+    {
+      "bytes": 171563,
+      "sha256": "3500a412f268fd8608122b99151ad8df6f7b3a549bc109129971a3b62cf0c9d9",
+      "path": "native/transactions/20261112-android/server-android-05.edit",
+      "group": "server",
+      "base_root": "9503f3cfab9157242c26ea48995b5e3f43cdbb3fd3d3569336420b04da924046",
+      "result_root": "6be085427b6a2498a42d151d9d86da9311e9f2d52697e69a65c090467e45683e",
+      "new_native_objects": 22,
+      "unchanged_objects": 5550,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1754152,
+        "sha256": "2d4e3aeeef226e6dd4385bb59a1ffc53400fd2073cbd8b2ef4a485fd04e33b6c"
+      },
+      "native_batch": {
+        "bytes": 80163,
+        "sha256": "99b8c08e7bd64b010c07c1d189ba9963a80dadecc831d3a1685546d2e670d354",
+        "path": "native/transactions/20261112-android/server-android-05.batch"
+      }
+    },
+    {
+      "bytes": 144814,
+      "sha256": "8df25f716bd45a1209743bdea2bb4fc12d2f5da0a959b5d9e0248d647b0b47ea",
+      "path": "native/transactions/20261112-android/server-android-06.edit",
+      "group": "server",
+      "base_root": "6be085427b6a2498a42d151d9d86da9311e9f2d52697e69a65c090467e45683e",
+      "result_root": "543a9e39a048360e41b87eb8d7cb2e2968c56cdbc0e7d4551fe847c3a0ae71fc",
+      "new_native_objects": 59,
+      "unchanged_objects": 5561,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1762167,
+        "sha256": "6c828785f40e55a1d96dd54acdbcb7330f49d2addcbb069766c9c3b33af3c512"
+      },
+      "native_batch": {
+        "bytes": 43650,
+        "sha256": "1608f35708dba2b832c464545dbf0f56665cb0de58c7488ee0a1c89d5310f679",
+        "path": "native/transactions/20261112-android/server-android-06.batch"
+      }
+    },
+    {
+      "bytes": 147768,
+      "sha256": "b93c2c5f3b4154d30b7389f26a3591d33db7e973a937b90a0db7a3201013cea5",
+      "path": "native/transactions/20261112-android/server-android-07.edit",
+      "group": "server",
+      "base_root": "543a9e39a048360e41b87eb8d7cb2e2968c56cdbc0e7d4551fe847c3a0ae71fc",
+      "result_root": "db06f2cc9d597171e8050146a23f4dee204c8c19020116af51d2028b76639135",
+      "new_native_objects": 69,
+      "unchanged_objects": 5609,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1771341,
+        "sha256": "9a66687170c4b442a6b7d8b2c5bbdb9fd87570de3f145933af7dd7212478dc62"
+      },
+      "native_batch": {
+        "bytes": 46364,
+        "sha256": "5eea706dfe87dc2a2557af47f33a6cc0a13c1908a5c3efee9fefa060776d7185",
+        "path": "native/transactions/20261112-android/server-android-07.batch"
+      }
+    },
+    {
+      "bytes": 150180,
+      "sha256": "4e204e84172830281c9125cbe01ea215dd566874b46f9a28da031eea750d5fb0",
+      "path": "native/transactions/20261112-android/server-android-08.edit",
+      "group": "server",
+      "base_root": "db06f2cc9d597171e8050146a23f4dee204c8c19020116af51d2028b76639135",
+      "result_root": "11a890f3c82040dff9cdbb86a2722c5e1ecbd8c7c4e03180ed223281d21e9c02",
+      "new_native_objects": 67,
+      "unchanged_objects": 5667,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1780281,
+        "sha256": "9dfdb6fe53c49d5a060596eb3d5d3220cdfd848ae58a8661697efd9092841622"
+      },
+      "native_batch": {
+        "bytes": 49078,
+        "sha256": "ac16160cc5a77ae16b4a37032cbd3605ae744d7631ac279a49e319585ca96a5d",
+        "path": "native/transactions/20261112-android/server-android-08.batch"
+      }
+    },
+    {
+      "bytes": 150401,
+      "sha256": "6f8203b84305f72b7d1e4451fd40862157c32de7eea85f51f75266c3d10a26c8",
+      "path": "native/transactions/20261112-android/server-android-09.edit",
+      "group": "server",
+      "base_root": "11a890f3c82040dff9cdbb86a2722c5e1ecbd8c7c4e03180ed223281d21e9c02",
+      "result_root": "fc640e38e1cac78bc1f32a51a2a976960414a99a82a81d2caf5eba16606776da",
+      "new_native_objects": 37,
+      "unchanged_objects": 5723,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1784844,
+        "sha256": "0c0af7de2e4e40e005b80cc18fb8251f6c96cc64cf8c9c90feb2582463930b89"
+      },
+      "native_batch": {
+        "bytes": 51736,
+        "sha256": "55fe53ac3a77b9b63e5a4551ab386829e352b089c26f8f592b1e74a35c94793b",
+        "path": "native/transactions/20261112-android/server-android-09.batch"
+      }
+    },
+    {
+      "bytes": 149442,
+      "sha256": "80cacc9476921e63e8e0c4e322c5e26b611dd2251cb420e26b5c93fc1d36da78",
+      "path": "native/transactions/20261112-android/server-android-10.edit",
+      "group": "server",
+      "base_root": "fc640e38e1cac78bc1f32a51a2a976960414a99a82a81d2caf5eba16606776da",
+      "result_root": "0966552255ea972cd0e4aeb21da45a3aba7a596d42045c6a6aa8b985cd366e34",
+      "new_native_objects": 12,
+      "unchanged_objects": 5749,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1785123,
+        "sha256": "5e7be9a35514c068974c97ceab0abdad622706fd59b31939d34e842d16293ef7"
+      },
+      "native_batch": {
+        "bytes": 52345,
+        "sha256": "1ec984f8b2f5eb61f015e91aa4b607633b2ed1f12dea7eefb012c2a7033af023",
+        "path": "native/transactions/20261112-android/server-android-10.batch"
+      }
+    },
+    {
+      "bytes": 160988,
+      "sha256": "d38d8d1f51a3e552d5e3ae45439c1167b1714c760dde0e07afec4364d43098c6",
+      "path": "native/transactions/20261112-android/server-android-11.edit",
+      "group": "server",
+      "base_root": "0966552255ea972cd0e4aeb21da45a3aba7a596d42045c6a6aa8b985cd366e34",
+      "result_root": "9818b83895b67136f5357eb2a4f8eb818b4fca3f889fc9a91c6f8f34f9a54a17",
+      "new_native_objects": 101,
+      "unchanged_objects": 5750,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1803008,
+        "sha256": "8dbd6f16d98cd3e9342aee1a88c70c8076ae457c15e921b153e4b5dc33c38a04"
+      },
+      "native_batch": {
+        "bytes": 62483,
+        "sha256": "14291a4f28ff0d138eca5e89eeeb4e3ec1aeb5f8d06ecd495b70ee2d8556dc14",
+        "path": "native/transactions/20261112-android/server-android-11.batch"
+      }
+    },
+    {
+      "bytes": 165829,
+      "sha256": "3ff10fafc728ca503da724c675ea8f51da7224ce0d32009abaa02b0961cf1ebc",
+      "path": "native/transactions/20261112-android/server-android-12.edit",
+      "group": "server",
+      "base_root": "9818b83895b67136f5357eb2a4f8eb818b4fca3f889fc9a91c6f8f34f9a54a17",
+      "result_root": "bc88d70d42820d57e89bfeed0a7773d62e220e932fbc5b69e1f76419923bf532",
+      "new_native_objects": 94,
+      "unchanged_objects": 5840,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1817541,
+        "sha256": "821d3fe2c862da0a11b0043310a01d91e533c48a4bbcdf41c9a9a1e67fb9f861"
+      },
+      "native_batch": {
+        "bytes": 69580,
+        "sha256": "51e2270470ffb6b08112a10c7f1ec68ee3eb5776463a17f40f47733c471a3a18",
+        "path": "native/transactions/20261112-android/server-android-12.batch"
+      }
+    },
+    {
+      "bytes": 163925,
+      "sha256": "36166a7b1cdec8b3316e575b2215e3575016daa2c7bb7c4c4e1b6f101a3534f1",
+      "path": "native/transactions/20261112-android/server-android-13.edit",
+      "group": "server",
+      "base_root": "bc88d70d42820d57e89bfeed0a7773d62e220e932fbc5b69e1f76419923bf532",
+      "result_root": "3041e3d3d1d1de56a209c2109e0eb65f2d82ea530f4daf7fe9d433678c676a21",
+      "new_native_objects": 16,
+      "unchanged_objects": 5923,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1818573,
+        "sha256": "7437c491d43d63875eaf0bbebc237416a2085cbb3d3caaa514157dd92db7b6c4"
+      },
+      "native_batch": {
+        "bytes": 73307,
+        "sha256": "8a712a58653ce49b734de96e52df880d6dc4e87ef3227ce5ca4b9aa03176ea5a",
+        "path": "native/transactions/20261112-android/server-android-13.batch"
+      }
+    },
+    {
+      "bytes": 167913,
+      "sha256": "f3daf08d0a4b0acadd35d5d1815233632ae046d2802577fde28fd9f6fe80452e",
+      "path": "native/transactions/20261112-android/server-android-14.edit",
+      "group": "server",
+      "base_root": "3041e3d3d1d1de56a209c2109e0eb65f2d82ea530f4daf7fe9d433678c676a21",
+      "result_root": "3356928cee1f02a4a8cc512a525b884d3dd75a5051a4ae6233c2772ef60fa1d6",
+      "new_native_objects": 54,
+      "unchanged_objects": 5928,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1825796,
+        "sha256": "6443a405fbe5899ce7bb42a79bad5e172df92e493d83eedd4d30b99ac1d91003"
+      },
+      "native_batch": {
+        "bytes": 76000,
+        "sha256": "2324117bc16f19a9e1987fc937bb92751f68439572909c138ab484d1e4d82168",
+        "path": "native/transactions/20261112-android/server-android-14.batch"
+      }
+    },
+    {
+      "bytes": 170616,
+      "sha256": "0fd015101496161aaba7890cc66f74c9ca35b35f159fdc77a4fd3030e49e9c5e",
+      "path": "native/transactions/20261112-android/server-android-15.edit",
+      "group": "server",
+      "base_root": "3356928cee1f02a4a8cc512a525b884d3dd75a5051a4ae6233c2772ef60fa1d6",
+      "result_root": "779b559c770946dea6ff1cccc6dde42d04b588f66981f2d7c4444b286d13a45b",
+      "new_native_objects": 62,
+      "unchanged_objects": 5971,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1834008,
+        "sha256": "ca7c97690a6bccc1513b5c0c677a8d3dcbf1d8fc7b8741c22ef8e2f7da516c23"
+      },
+      "native_batch": {
+        "bytes": 78669,
+        "sha256": "ca87a2b4282462dff2ef7ac46233dbe716721ff39a0d58f8477492dc04ea4b2e",
+        "path": "native/transactions/20261112-android/server-android-15.batch"
+      }
+    },
+    {
+      "bytes": 172788,
+      "sha256": "b8a5a58c006ba8b45dc7f5ce40b5bb7be983e956c730c24df5abfd40f49baa61",
+      "path": "native/transactions/20261112-android/server-android-16.edit",
+      "group": "server",
+      "base_root": "779b559c770946dea6ff1cccc6dde42d04b588f66981f2d7c4444b286d13a45b",
+      "result_root": "a070b12b8a6891d6f94d2f42d9dd2f444d89b526d99393af6be13de34d29ef71",
+      "new_native_objects": 56,
+      "unchanged_objects": 6022,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1841621,
+        "sha256": "bd6b52f9b2cdcb19e332002b7ff47fef9ff5757f7549c031464ee8878e25b08e"
+      },
+      "native_batch": {
+        "bytes": 81318,
+        "sha256": "8d9479109d6d84673025b9a6bc4346f5f7fe492473e697216d81fce2c5180f26",
+        "path": "native/transactions/20261112-android/server-android-16.batch"
+      }
+    },
+    {
+      "bytes": 172612,
+      "sha256": "905354afebe37386f70c55e48f4289df50041c948aa5f94843caf88f23defa9d",
+      "path": "native/transactions/20261112-android/server-android-17.edit",
+      "group": "server",
+      "base_root": "a070b12b8a6891d6f94d2f42d9dd2f444d89b526d99393af6be13de34d29ef71",
+      "result_root": "0589bec52498d251eb42734d78eb91fe465c77ff6d7637ae8877fb6ef7a076a6",
+      "new_native_objects": 25,
+      "unchanged_objects": 6067,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1844451,
+        "sha256": "e34283bcf38494364567484f0e74a6eacff09e0f10b7115c87c501aca8ca07e6"
+      },
+      "native_batch": {
+        "bytes": 84126,
+        "sha256": "a21e77a3256a6a8c3d1db9f06460c12ac67e720126c1da385cb687203974399e",
+        "path": "native/transactions/20261112-android/server-android-17.batch"
+      }
+    },
+    {
+      "bytes": 144845,
+      "sha256": "88420d99f45d71b0b6a2da847980234802b65aced06812ea4c15902beb0d8e81",
+      "path": "native/transactions/20261112-android/server-android-18.edit",
+      "group": "server",
+      "base_root": "0589bec52498d251eb42734d78eb91fe465c77ff6d7637ae8877fb6ef7a076a6",
+      "result_root": "a7c893042ce678e6b1efed3744fe675545d3d7740756c27cd8d47db7d809b317",
+      "new_native_objects": 50,
+      "unchanged_objects": 6081,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1851336,
+        "sha256": "df38030df5ca1ba4f5b1f0f19c229e2c1f01084c9913b3c3f9a7bf77f342ffb3"
+      },
+      "native_batch": {
+        "bytes": 44621,
+        "sha256": "8f1fbbfb3fe52e02af2fb77319e820987d973d2378a8c8455f31a48b05cae611",
+        "path": "native/transactions/20261112-android/server-android-18.batch"
+      }
+    },
+    {
+      "bytes": 147932,
+      "sha256": "b5b83c360c2f169b6af2d19e9b2f43188738e9d3a68bfb097a756d9ed4ce1550",
+      "path": "native/transactions/20261112-android/server-android-19.edit",
+      "group": "server",
+      "base_root": "a7c893042ce678e6b1efed3744fe675545d3d7740756c27cd8d47db7d809b317",
+      "result_root": "da6612e7f4741f53844716a81d4889dc164f3f074de7c443d287cb0a55a7af0c",
+      "new_native_objects": 63,
+      "unchanged_objects": 6120,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1859817,
+        "sha256": "cfb88efeadc963e580a5ac082233db3ae6b1b8222777fedb4f394d4acf620a1c"
+      },
+      "native_batch": {
+        "bytes": 47337,
+        "sha256": "670edc57a18c852a86bf27d57281f8dd66f3a8fb4200aa9b42aa015c59a1910e",
+        "path": "native/transactions/20261112-android/server-android-19.batch"
+      }
+    },
+    {
+      "bytes": 150475,
+      "sha256": "2431437be71197d82ec0fce1c08305c0d3e6a2ee30a785c265b394b633467625",
+      "path": "native/transactions/20261112-android/server-android-20.edit",
+      "group": "server",
+      "base_root": "da6612e7f4741f53844716a81d4889dc164f3f074de7c443d287cb0a55a7af0c",
+      "result_root": "8aaf076e7e1980257a26244b8e5038874556126cf1635f69a217685a72c31a55",
+      "new_native_objects": 66,
+      "unchanged_objects": 6172,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1868550,
+        "sha256": "095313adddb616555cae96150e4e3a9019b59b23c68d45ce0f0118d9917ee5a6"
+      },
+      "native_batch": {
+        "bytes": 50051,
+        "sha256": "2b8a1dcc558a780300f901977ef911355d07fee420b2f84614f8431f6f8d71fa",
+        "path": "native/transactions/20261112-android/server-android-20.batch"
+      }
+    },
+    {
+      "bytes": 148439,
+      "sha256": "c5ec3932a5433f6d598eab98313790b2e5112fa7d446a16dca4b3bc6ba7d89a8",
+      "path": "native/transactions/20261112-android/server-android-21.edit",
+      "group": "server",
+      "base_root": "8aaf076e7e1980257a26244b8e5038874556126cf1635f69a217685a72c31a55",
+      "result_root": "6237fcf9c402123a96e93a079f09383143ccd4803aa9097f7bb9f957a2a00e9f",
+      "new_native_objects": 11,
+      "unchanged_objects": 6227,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1868990,
+        "sha256": "9f0a248b8269003fa06402bcbe85b6bf0a8dc41df71b841eb8da874a70621b6c"
+      },
+      "native_batch": {
+        "bytes": 52713,
+        "sha256": "c02ac8dc2cc20a03b7e1d954fdb84aef1cc16fb515a3ea97a7ded0fcacc4e084",
+        "path": "native/transactions/20261112-android/server-android-21.batch"
+      }
+    },
+    {
+      "bytes": 148730,
+      "sha256": "3e6dfa5f4202d4fbdedcfb04931be6fa9d2b99110800e4c98a91a8b3b7868d07",
+      "path": "native/transactions/20261112-android/server-android-22.edit",
+      "group": "server",
+      "base_root": "6237fcf9c402123a96e93a079f09383143ccd4803aa9097f7bb9f957a2a00e9f",
+      "result_root": "5aab6368cb0a94a0e8120505fb68fc0e53a6378c62609781022f51253e432ec6",
+      "new_native_objects": 12,
+      "unchanged_objects": 6227,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1869350,
+        "sha256": "302a8bf167fcf5aac7eec99a38ea64f14f3acbb1a335fc24fa472c9826f9b3e7"
+      },
+      "native_batch": {
+        "bytes": 53815,
+        "sha256": "08bbdd0577c110f024860dd2ae275f6b52b90fe8790a119bf6c9e03f21c8e11c",
+        "path": "native/transactions/20261112-android/server-android-22.batch"
+      }
+    },
+    {
+      "bytes": 158520,
+      "sha256": "3f222b5b263d1ad2117561862a4797262a30ecbacf216642ff724583ce00e0d6",
+      "path": "native/transactions/20261112-android/server-android-23.edit",
+      "group": "server",
+      "base_root": "5aab6368cb0a94a0e8120505fb68fc0e53a6378c62609781022f51253e432ec6",
+      "result_root": "145b4bfb57d609b083204dec1f08170363a2f5078beeb8f3d02ee7c52dee1b59",
+      "new_native_objects": 67,
+      "unchanged_objects": 6228,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1883099,
+        "sha256": "ea5b1487d45da222494e52cd42e181812e88e94a1389d378aaca4f0376899b9b"
+      },
+      "native_batch": {
+        "bytes": 63952,
+        "sha256": "1b7091a28b32782e0bd3e2c83e85ab0a6ff2fdaa904a7047d2a5844121d3c557",
+        "path": "native/transactions/20261112-android/server-android-23.batch"
+      }
+    },
+    {
+      "bytes": 163431,
+      "sha256": "42e3ead7bac9bd0700496f0d8ad5f9301d23c03f81108b357460d2dfc75152c3",
+      "path": "native/transactions/20261112-android/server-android-24.edit",
+      "group": "server",
+      "base_root": "145b4bfb57d609b083204dec1f08170363a2f5078beeb8f3d02ee7c52dee1b59",
+      "result_root": "605e97024d1c939dc29437b6bd59335e6a2d56798b67dad2fa61e94b7d1e34e9",
+      "new_native_objects": 59,
+      "unchanged_objects": 6284,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1893890,
+        "sha256": "d9fdc16d32b5d14c509f89d2d65bd49f56462082e23ac2e45f27529a7f46e00d"
+      },
+      "native_batch": {
+        "bytes": 71058,
+        "sha256": "3e102cdc9f63a289d82c6b04d2c88e67fc0cfd1345301b59d397c44660ee7035",
+        "path": "native/transactions/20261112-android/server-android-24.batch"
+      }
+    },
+    {
+      "bytes": 206852,
+      "sha256": "426f1e79d319f634a47426debf64738f933b861a0dfc2f7e7d2c44fd04e8e7bb",
+      "path": "native/transactions/20261112-android/server-android-25.edit",
+      "group": "server",
+      "base_root": "605e97024d1c939dc29437b6bd59335e6a2d56798b67dad2fa61e94b7d1e34e9",
+      "result_root": "ffbe520518dfd0e47176effee76cbcc0dffb7ce641e38c955d9fcd5fcd61e9da",
+      "new_native_objects": 11,
+      "unchanged_objects": 6334,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1894209,
+        "sha256": "c53a338ddeac2e688b6f28ce5caa6ac973e1a430dbc3909b075338a4e5efcd78"
+      },
+      "native_batch": {
+        "bytes": 149662,
+        "sha256": "e2e5edb89e72fac25f100bb6a180760719a76f2f804ba13f1382676f0d66f28a",
+        "path": "native/transactions/20261112-android/server-android-25.batch"
+      }
+    },
+    {
+      "bytes": 206853,
+      "sha256": "afd2b8a840a1bb24ddfe785a770c804434242dc5100fe7378dfda3b44633ea93",
+      "path": "native/transactions/20261112-android/server-android-26.edit",
+      "group": "server",
+      "base_root": "ffbe520518dfd0e47176effee76cbcc0dffb7ce641e38c955d9fcd5fcd61e9da",
+      "result_root": "a68d5ec7f17a30c5577e8e409a1fed17c76fdd077cc4c325a845929e368a51b8",
+      "new_native_objects": 10,
+      "unchanged_objects": 6336,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1894366,
+        "sha256": "9db97c5a0a94dc051712e6ac7fe35f4384ad10f73466b60601b4d08bfa9b7afe"
+      },
+      "native_batch": {
+        "bytes": 149731,
+        "sha256": "f507f1d37f2d998c5197d9e6cb8e44a7bd16ab0421806fa8c0c0a1aaf85f2158",
+        "path": "native/transactions/20261112-android/server-android-26.batch"
+      }
+    },
+    {
+      "bytes": 206900,
+      "sha256": "d49c5d5948caed0c44a28fc2ce135337475583712e666e9b6fb85002ba5ff6f3",
+      "path": "native/transactions/20261112-android/server-android-27.edit",
+      "group": "server",
+      "base_root": "a68d5ec7f17a30c5577e8e409a1fed17c76fdd077cc4c325a845929e368a51b8",
+      "result_root": "39000eec7c2fc98ad1fd99ef0a1937e397553f637af9f658ff29d1f7d4f34bb0",
+      "new_native_objects": 10,
+      "unchanged_objects": 6337,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1894532,
+        "sha256": "d6d71a5857d98efd78cafe67254e8bad520e06668a6cc83c54b15ed97dc44337"
+      },
+      "native_batch": {
+        "bytes": 149797,
+        "sha256": "f80c6a62301fc66d89875ae6d72a7d33f918af9a92b2649eb5baf104a338b848",
+        "path": "native/transactions/20261112-android/server-android-27.batch"
+      }
+    },
+    {
+      "bytes": 206946,
+      "sha256": "fdcdb960d543a8bce44693c1b0eb8063e41e92c2322dadbad8e9b39d367e5266",
+      "path": "native/transactions/20261112-android/server-android-28.edit",
+      "group": "server",
+      "base_root": "39000eec7c2fc98ad1fd99ef0a1937e397553f637af9f658ff29d1f7d4f34bb0",
+      "result_root": "47983f9bf4a14f9e1e1d2b698026470d0f0b092b3f3677ecd32aff1d11e3ea71",
+      "new_native_objects": 10,
+      "unchanged_objects": 6338,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1894689,
+        "sha256": "99da7570fba59f171938ddf5e7b66b4106b3e7297fb698008dbbeb2fb36759ec"
+      },
+      "native_batch": {
+        "bytes": 149865,
+        "sha256": "120f2d8d94e0423415bf0e1de892f381faeb18ff0d3c3064a496bb2b0dd58837",
+        "path": "native/transactions/20261112-android/server-android-28.batch"
+      }
+    },
+    {
+      "bytes": 206992,
+      "sha256": "5ee2f8bc4b1440f59279907655c97d4a044b9594befb3edc8d148f2b4917743b",
+      "path": "native/transactions/20261112-android/server-android-29.edit",
+      "group": "server",
+      "base_root": "47983f9bf4a14f9e1e1d2b698026470d0f0b092b3f3677ecd32aff1d11e3ea71",
+      "result_root": "247427be44233e7f32987b7d3140622f1e13285f6e420775410a0f3211477e20",
+      "new_native_objects": 10,
+      "unchanged_objects": 6339,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1894850,
+        "sha256": "6a4eebea4397cc9366b9b6f4ab6bf8bd5154125bc8fd000871e7fdb8b83cc00a"
+      },
+      "native_batch": {
+        "bytes": 149932,
+        "sha256": "4b0996fa12777f1372878f0e94bb4b503fe8d913e0b510753bb3a50cacf97e1d",
+        "path": "native/transactions/20261112-android/server-android-29.batch"
+      }
+    },
+    {
+      "bytes": 206961,
+      "sha256": "a260561b50aa7cf078094775e964ff709313e7817891e8c53023a2c56aefeee9",
+      "path": "native/transactions/20261112-android/server-android-30.edit",
+      "group": "server",
+      "base_root": "247427be44233e7f32987b7d3140622f1e13285f6e420775410a0f3211477e20",
+      "result_root": "40d08d66988cd5a1e9f2b2188532c771e65f61bdee164572afcc4ac422fc075b",
+      "new_native_objects": 9,
+      "unchanged_objects": 6340,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1894864,
+        "sha256": "99b0f6077721d50a490fba0e8e0fe3dcb4097ed07e40440d5538122dfa4aa1a3"
+      },
+      "native_batch": {
+        "bytes": 149999,
+        "sha256": "acaf3fc9771ad387aee2527e00fdd01fc978bea62bf5a11858f708095e5a31c3",
+        "path": "native/transactions/20261112-android/server-android-30.batch"
+      }
+    },
+    {
+      "bytes": 211093,
+      "sha256": "81ed4c5487b02278d68073eefc2084e97ab654232ae25608c592beb6439659ad",
+      "path": "native/transactions/20261112-android/server-android-31.edit",
+      "group": "server",
+      "base_root": "40d08d66988cd5a1e9f2b2188532c771e65f61bdee164572afcc4ac422fc075b",
+      "result_root": "d06a2bdd0b0a11a6484f42d4d59fc8810a5342c2e659c3045e84bb09408d1066",
+      "new_native_objects": 52,
+      "unchanged_objects": 6340,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1902006,
+        "sha256": "9d23db4f3048a670d19ea611177349e0326a304e2b1a9e1531cd2708533f9e49"
+      },
+      "native_batch": {
+        "bytes": 152526,
+        "sha256": "9098f677a64dc522e445010a46224296720bb46be1b7ecbea30260dc15c051bf",
+        "path": "native/transactions/20261112-android/server-android-31.batch"
+      }
+    },
+    {
+      "bytes": 214297,
+      "sha256": "4728cefb17723cdaf55f22130e411dce57453af794f1bffc983f8769924536de",
+      "path": "native/transactions/20261112-android/server-android-32.edit",
+      "group": "server",
+      "base_root": "d06a2bdd0b0a11a6484f42d4d59fc8810a5342c2e659c3045e84bb09408d1066",
+      "result_root": "afa56149bd1e4debaeabd44c6b41f24266f7bde9ba41c77cc6743e60fe5523ee",
+      "new_native_objects": 69,
+      "unchanged_objects": 6383,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1911345,
+        "sha256": "8d5f4ea6386aa21c92f4b618364c474ba2dd78f4362a658ef2cfa0e93f0ef7b8"
+      },
+      "native_batch": {
+        "bytes": 155175,
+        "sha256": "780e2b0b372dce019ed1e22c58df0c25f350cd49ad25913a93ad363336832e10",
+        "path": "native/transactions/20261112-android/server-android-32.batch"
+      }
+    },
+    {
+      "bytes": 215753,
+      "sha256": "08c3740397bd2eb706696c04c4326dd3407652fa8a99ee41894ae922595da150",
+      "path": "native/transactions/20261112-android/server-android-33.edit",
+      "group": "server",
+      "base_root": "afa56149bd1e4debaeabd44c6b41f24266f7bde9ba41c77cc6743e60fe5523ee",
+      "result_root": "7acb78ada7df08e4a078ec98b27e3800fdd9e943e09383152eaf36c2527505cc",
+      "new_native_objects": 55,
+      "unchanged_objects": 6443,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1918721,
+        "sha256": "96a65dedc526680c75cb27ddc707fc91d25330d81e5b24a7e4572b9e98b019e7"
+      },
+      "native_batch": {
+        "bytes": 157826,
+        "sha256": "10fa32c3b22282fef8fcd72f01f576e524d9a72a014bdeb7c7af7d7c9407c7e6",
+        "path": "native/transactions/20261112-android/server-android-33.batch"
+      }
+    },
+    {
+      "bytes": 218008,
+      "sha256": "af5742b1ac3d3333e7488f9d16c4b1824c3ba684a6018163abd15c2de59889e9",
+      "path": "native/transactions/20261112-android/server-android-34.edit",
+      "group": "server",
+      "base_root": "7acb78ada7df08e4a078ec98b27e3800fdd9e943e09383152eaf36c2527505cc",
+      "result_root": "33536a43662ee8dc9834feab7249f0225d78595f3f3dadea273ed3b3946f39be",
+      "new_native_objects": 58,
+      "unchanged_objects": 6489,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1926528,
+        "sha256": "1f871b13ee087c0274c7f35146007c6d00f48085c27f3b062a4d46ff5a899f3b"
+      },
+      "native_batch": {
+        "bytes": 160476,
+        "sha256": "9ee26dd898efa315865949abdd5426a1f12c06c6c13bece340a6d56bbec6497d",
+        "path": "native/transactions/20261112-android/server-android-34.batch"
+      }
+    },
+    {
+      "bytes": 227614,
+      "sha256": "38a28aa91bc3914df33554d8f6698a78d2c8fc05bdc641d80c7499d0ba9e4215",
+      "path": "native/transactions/20261112-android/server-android-35.edit",
+      "group": "server",
+      "base_root": "33536a43662ee8dc9834feab7249f0225d78595f3f3dadea273ed3b3946f39be",
+      "result_root": "fd16e70fbc7619d992b6a3cec91d2cf2e29817750e44aa077b5a94518aa997a5",
+      "new_native_objects": 119,
+      "unchanged_objects": 6538,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1945987,
+        "sha256": "957a3e012d841296ec80963796c8c426bc49539d93f8400086a51512787fd6b5"
+      },
+      "native_batch": {
+        "bytes": 170613,
+        "sha256": "50359865dfc6f5f782306de17c3805657b5589dd2ff1d2aa3d137e4f644e3939",
+        "path": "native/transactions/20261112-android/server-android-35.batch"
+      }
+    },
+    {
+      "bytes": 225813,
+      "sha256": "5c94064e93294bece5602abeb9b6bc9c7137ad65764f2ccc90d16f7290ff066e",
+      "path": "native/transactions/20261112-android/server-android-36.edit",
+      "group": "server",
+      "base_root": "fd16e70fbc7619d992b6a3cec91d2cf2e29817750e44aa077b5a94518aa997a5",
+      "result_root": "3262b5800bcade9ae24f0e8f90c4cc928d387397e351196ab2069f59e0ab7209",
+      "new_native_objects": 34,
+      "unchanged_objects": 6648,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1950632,
+        "sha256": "0d9de492103792ea3aff05419d0283754fadc2f3168f58324a5de14f3e12bca1"
+      },
+      "native_batch": {
+        "bytes": 173311,
+        "sha256": "520fe3ff6c458105787bcbe4d4d8a7ec0d0c1d7fe8db521f30d562527c413af3",
+        "path": "native/transactions/20261112-android/server-android-36.batch"
+      }
+    },
+    {
+      "bytes": 121123,
+      "sha256": "474a9ce4575a186f8248c1b7afcab176741cc08deb3d29a328e8076fc6089b5c",
+      "path": "native/transactions/20261112-android/server-android-37.edit",
+      "group": "server",
+      "base_root": "3262b5800bcade9ae24f0e8f90c4cc928d387397e351196ab2069f59e0ab7209",
+      "result_root": "8c46d147f36de41d3e59641b7942e3225cf0ead1584e331af491a0a17202b110",
+      "new_native_objects": 48,
+      "unchanged_objects": 6673,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1957083,
+        "sha256": "db2f11855761159e660068a9824b9eed9c01eb3822e3a3d074dcaaa8d91608d7"
+      },
+      "native_batch": {
+        "bytes": 14396,
+        "sha256": "243f57aa560cecc40ddde3ac9f712867a751eb5c3b5d2b533481709f0871b952",
+        "path": "native/transactions/20261112-android/server-android-37.batch"
+      }
+    },
+    {
+      "bytes": 120696,
+      "sha256": "3382bc4ef1362b3601de8f466896eb48c99b977f019aa6c342d263824b9633cb",
+      "path": "native/transactions/20261112-android/server-android-38.edit",
+      "group": "server",
+      "base_root": "8c46d147f36de41d3e59641b7942e3225cf0ead1584e331af491a0a17202b110",
+      "result_root": "c046878dba085051bd449fdc627cbb608d619a2caaea4e98972182ca8676c7df",
+      "new_native_objects": 25,
+      "unchanged_objects": 6712,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1959531,
+        "sha256": "3c1f86b4abc9593b051a98bad2db8a0cbd131a8bd809588c5e7ff3bc04ec8655"
+      },
+      "native_batch": {
+        "bytes": 15076,
+        "sha256": "da4ce973e0153ae04aee0a3dcefff54bea7eda8733459b377b83e40de19556f8",
+        "path": "native/transactions/20261112-android/server-android-38.batch"
+      }
+    },
+    {
+      "bytes": 130355,
+      "sha256": "8026edf3a40d862609ef32bef0d638aae3bc3ab6f82c7a75ba051eda09ee8bb7",
+      "path": "native/transactions/20261112-android/server-android-39.edit",
+      "group": "server",
+      "base_root": "c046878dba085051bd449fdc627cbb608d619a2caaea4e98972182ca8676c7df",
+      "result_root": "1121371fe585529c394bd4ab0af4aa7e8deb320c0929a49a30577dc30acdfd18",
+      "new_native_objects": 73,
+      "unchanged_objects": 6728,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1974382,
+        "sha256": "2d95dee85caf274a988d5ff0d42d5ecbda26a669eb911f1b6bdde3d0386a9f18"
+      },
+      "native_batch": {
+        "bytes": 24655,
+        "sha256": "3d677067111243130069b39b88e8003d6e154e71aff04026fedcfb70999c2382",
+        "path": "native/transactions/20261112-android/server-android-39.batch"
+      }
+    },
+    {
+      "bytes": 137786,
+      "sha256": "f67f561a2155802b9688af1e4d02756b1081ec535c13b8324d0b9d8d10cac524",
+      "path": "native/transactions/20261112-android/server-android-40.edit",
+      "group": "server",
+      "base_root": "1121371fe585529c394bd4ab0af4aa7e8deb320c0929a49a30577dc30acdfd18",
+      "result_root": "0f07f97012be516df23967b861755c673f4d41c431b9dbbb1646fc96703a0058",
+      "new_native_objects": 73,
+      "unchanged_objects": 6792,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 1988917,
+        "sha256": "cd3cbf5b75b1ab14110346f362fa46e112d052ff0c82141bd39b69932fa19e5e"
+      },
+      "native_batch": {
+        "bytes": 34280,
+        "sha256": "ee0260b963211d3641d94fe6d5be2046496d9061869a95c93b0cfa35b4b09667",
+        "path": "native/transactions/20261112-android/server-android-40.batch"
+      }
+    },
+    {
+      "bytes": 141954,
+      "sha256": "e74e97074eca1c0bc89849bf2dffaec2be472cf63b5612463536f3d9f3e01fce",
+      "path": "native/transactions/20261112-android/server-android-41.edit",
+      "group": "server",
+      "base_root": "0f07f97012be516df23967b861755c673f4d41c431b9dbbb1646fc96703a0058",
+      "result_root": "e74ba8d6a74c48f4820771eadef61b2cada0a4250350d5249c0dbfa68e2d5bc2",
+      "new_native_objects": 71,
+      "unchanged_objects": 6856,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": true,
+      "result_source": {
+        "bytes": 2000049,
+        "sha256": "30063dd25b6d33a8db181343b11b6d1dbc4249997e749a4888d9a0a2fc59ac0d"
+      },
+      "native_batch": {
+        "bytes": 39783,
+        "sha256": "a9355533e7a8635565d5d40d593d1c4cfafc21b08e1d72fae7bcd2c46818d28e",
+        "path": "native/transactions/20261112-android/server-android-41.batch"
+      }
+    },
+    {
+      "bytes": 235833,
+      "sha256": "733f4523c7ce88a86c5affc1ed007129a151f7e7eddfc4c8a8ad503c2374eeb9",
+      "path": "native/transactions/20261112-android/server-android-42-quoted-paths.edit",
+      "group": "server",
+      "base_root": "e74ba8d6a74c48f4820771eadef61b2cada0a4250350d5249c0dbfa68e2d5bc2",
+      "result_root": "3d3630dbb0f69d102a34c201047907052f13bf1a9d55869c8b1288c75ba6d7a3",
+      "new_native_objects": 33,
+      "unchanged_objects": 6908,
+      "raw_bytes_equal": true,
+      "mandatory_native_verify": true,
+      "construction_intermediate": false,
+      "result_source": {
+        "bytes": 2004476,
+        "sha256": "be01eaf79b20f457e65819428095bfc4067d29fbc9c866ab2c13f46c3bbc9dd1",
+        "path": "native/candidates/20261112-android/server.xax"
+      },
+      "native_batch": {
+        "bytes": 10498,
+        "sha256": "2d79e6534991f42b5cc9fa6504b2170219475ce758e82db9956f195a32a89c5b",
+        "path": "native/transactions/20261112-android/server-android-42-quoted-paths.batch"
+      }
+    }
+  ],
+  "release_ready": false,
+  "full_mission_complete": false,
+  "groups": {
+    "fixtures": {
+      "base": "tests/android/base-request.xax",
+      "independent_records": true
+    },
+    "runner": {
+      "base": "tests/android/base-request.xax",
+      "final": "native/candidates/20261112-android/android-runner.xax"
+    },
+    "host": {
+      "base": "tests/security/memory-commit/memory-low.xax",
+      "final": "native/candidates/20261112-android/adb-host.xax"
+    },
+    "server": {
+      "base": "native/candidates/20261111-control/server.xax",
+      "final": "native/candidates/20261112-android/server.xax"
+    }
+  },
+  "imported_android_base": {
+    "path": "tests/android/base-request.xax",
+    "upstream_path": "compiler/integration/bfx/bbc-android-arm64.xax",
+    "upstream_commit": "745e80150605f3812aa012e6884f6e417d9423b4",
+    "root": "30ff6355796acd6609f869df701239691c2c69682b9d3018895cc84797aa76d9"
+  }
+}

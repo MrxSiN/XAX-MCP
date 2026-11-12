@@ -4,7 +4,24 @@ The resumed control-preview acceptance increment is complete. This is an
 experimental acceptance result, not promotion or production release readiness.
 The paused 2026-11-11 handoff remains in Git history at `1850dd7`.
 
-## Completed increment
+## Android increment completed
+
+- [x] Built Android ARM64 static artifacts with the retained compiler and executed
+  them through host-controlled ADB on the connected authorized Pixel 8 Pro.
+- [x] Added native Windows ADB broker and native Android supervisor, exact bounded
+  stdin/argv/streams, syscall and resource enforcement, and worker lifecycle tests.
+- [x] Replayed 56 new native transactions and rebuilt twelve programs twice in a
+  fresh extracted package with empty PATH and Windows paths containing spaces.
+- [x] Passed protocol, authority, metadata, whitespace, public paging and installed
+  read-only backend gates against the Android server.
+
+See [the Android evidence](docs/evidence/native-android-20261112.json) and
+[contract](docs/NATIVE_ANDROID_20261112.md). This is a separate explicit preview;
+static ELF only, staging-interruption cleanup and workspace aliases remain open.
+The control preview and default Gen3 remain unchanged. Continue next with workspace
+alias races and broader capability/security acceptance.
+
+## Prior completed increment
 
 - [x] Completed the append-only historical evidence export with actual source
   milestone bindings; preserved all existing evidence.

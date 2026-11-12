@@ -245,5 +245,16 @@
     "candidate_promoted": false,
     "release_ready": false,
     "full_mission_complete": false
+  },
+  "android_arm64_preview": {
+    "recorded": "2026-11-12",
+    "state": "EXECUTED explicit preview; not selected by default deployment",
+    "checkpoints": "native/candidates/20261112-android/checkpoints.json",
+    "evidence": "docs/evidence/native-android-20261112.json",
+    "host": "windows-x86_64",
+    "device_target": "android-arm64",
+    "deployment_pin_unchanged": true,
+    "release_ready": false,
+    "workspace_alias_gate_closed": false
   }
 }

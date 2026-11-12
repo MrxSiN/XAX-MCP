@@ -1,0 +1,85 @@
+{
+  "schema": "xax-mcp-native-android-checkpoints-v1",
+  "recorded": "2026-11-12",
+  "state": "EXECUTED explicit preview; not default deployment",
+  "default_source": "native/xax-mcp-native-gen3.xax",
+  "deployment_pin_unchanged": true,
+  "release_ready": false,
+  "full_mission_complete": false,
+  "artifacts": [
+    {
+      "bytes": 2004476,
+      "sha256": "be01eaf79b20f457e65819428095bfc4067d29fbc9c866ab2c13f46c3bbc9dd1",
+      "path": "native/candidates/20261112-android/server.xax",
+      "root": "3d3630dbb0f69d102a34c201047907052f13bf1a9d55869c8b1288c75ba6d7a3"
+    },
+    {
+      "bytes": 2004755,
+      "sha256": "0d112df35e269ad62cb2b65029d3e20a95e2ec3187a97a96f7ed62bc69902c2b",
+      "path": "native/candidates/20261112-android/server-snapshot.xax",
+      "root": "12175e8780f296e151eb875927cbb8874a7224cd0586fb94fee19af05b296a39"
+    },
+    {
+      "bytes": 538624,
+      "sha256": "42dca3d53a8a3fcf963f3207331e24ab6b3006529aa4dc722f49d1c8ca7bbaf6",
+      "path": "native/candidates/20261112-android/xax-mcp-native.exe"
+    },
+    {
+      "bytes": 268,
+      "sha256": "379bfb5efa9bf97a015b34f14a00a049705080bf3c8834958e9a64ad9021eb20",
+      "path": "native/candidates/20261112-android/xax-mcp-native.prov"
+    },
+    {
+      "bytes": 86404,
+      "sha256": "19de72b4ff0b438dd4d8b84b26f71cbec6391c20913b6556dffadd93e4ab3ca4",
+      "path": "native/candidates/20261112-android/adb-host.xax",
+      "root": "834946bb3371d0b0eafae13e2c13448d7aa76e36fd9e2e4498f0299245ac7ec1"
+    },
+    {
+      "bytes": 86682,
+      "sha256": "de494a6fc6747fbaa90dfbd5ab05e071f5a76d1856aa57f0864874efd8f923f4",
+      "path": "native/candidates/20261112-android/adb-host-snapshot.xax",
+      "root": "f731c0e45446e9991da74666a74d1d467e57e160669c811d3515b9e37909ec5c"
+    },
+    {
+      "bytes": 9728,
+      "sha256": "252afeeb4b2ee86b92d0a153ed4e9c813f50384cbb83a86e5a46f6207c2f975b",
+      "path": "native/candidates/20261112-android/xax-mcp-sandbox.exe"
+    },
+    {
+      "bytes": 268,
+      "sha256": "b64a2ba70d4b5e9eb45ef7ec8efe62cc5be130bb06b233b5fab2dd826504822b",
+      "path": "native/candidates/20261112-android/adb-host.prov"
+    },
+    {
+      "bytes": 64468,
+      "sha256": "153e3b81ea89370ee39b412d935e89ad0a996293b664857f264da3220e87389f",
+      "path": "native/candidates/20261112-android/android-runner.xax",
+      "root": "9ef188f78fdbd22a9b40c6d0b27a7c041a546cd83c3b386360a8e946f4b60ae5"
+    },
+    {
+      "bytes": 64747,
+      "sha256": "4273ed6b851eb7423370d478f12c61fbd986ef01ce9ee5f078c7f6996b232a92",
+      "path": "native/candidates/20261112-android/android-runner-snapshot.xax",
+      "root": "e5c3a5eda463c093b344b2ee126ca4710ddcccecacc67a4c31ddd28bf292d18d"
+    },
+    {
+      "bytes": 5732,
+      "sha256": "1406ac92bc61826445a9223357f5c7f65cab25b7512bba60a13f04b7547ba30b",
+      "path": "native/candidates/20261112-android/android-runner"
+    },
+    {
+      "bytes": 268,
+      "sha256": "359f3058315444228bd0d001f4624cd3a3130d8855a835a1f684416298c85209",
+      "path": "native/candidates/20261112-android/android-runner.prov"
+    }
+  ],
+  "transactions": "native/transactions/20261112-android/manifest.json",
+  "tools_schema": "schemas/tools-v4.json",
+  "contract": "docs/NATIVE_ANDROID_20261112.md",
+  "construction_only": [
+    "android-runner-core.xax",
+    "adb-host-stage-0.xax",
+    "adb-host-stage-4096.xax"
+  ]
+}

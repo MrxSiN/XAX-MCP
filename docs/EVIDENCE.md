@@ -1,5 +1,15 @@
 # Evidence and claim labels
 
+## 2026-11-12 — Android ARM64 execution preview
+
+The [Android acceptance index](evidence/native-android-20261112.json) binds the
+Windows server, native ADB broker and native device supervisor to actual connected
+device execution, exact binary stdin/argv/streams, resource and syscall limits,
+worker cancellation/death, native replay and a fresh empty-PATH package. The
+[contract](NATIVE_ANDROID_20261112.md) records static ELF admission and remaining
+staging-cleanup, workspace-alias and broader release gates. Gen3, the compiler pin
+and the active read-only desktop preview remain unchanged.
+
 ## 2026-11-12 — control preview final-source acceptance, not deployed
 
 The [acceptance index](evidence/native-control-20261112.json) binds the native

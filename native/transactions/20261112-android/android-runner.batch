@@ -1,0 +1,1076 @@
+R 30ff6355796acd6609f869df701239691c2c69682b9d3018895cc84797aa76d9
+F0
+define @buffer_view
+object 4 0x048102010480800400
+end
+define @openat
+object 6 0xd502666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e75782035363a31383434363734343037333730393535313531362c24302c24312c2432058c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @read
+object 6 0xb702666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e7578023633058c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @write
+object 6 0xb702666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e7578023634058c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @lseek
+object 6 0xb702666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e7578023632058c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @close
+object 6 0xf701666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e7578023537038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @pipe2
+object 6 0x8102666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e75780c35393a24302c353234323838038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @clock
+object 6 0xfd01666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e7578083131333a312c2430038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @getpid
+object 6 0xd801666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e75780331373202ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @getppid
+object 6 0xd801666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e75780331373302ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @clone
+object 6 0xe301666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e75780e3232303a31372c302c302c302c3002ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @prctl
+object 6 0xc502666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e7578103136373a24302c24312c24322c302c30058c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @dup3
+object 6 0xb702666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e7578023234058c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @prlimit
+object 6 0xa202666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e75780d3236313a302c24302c24312c30048c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @setitimer
+object 6 0xff01666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e75780a3130333a302c24302c30038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @execveat
+object 6 0xe902666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e7578143238313a24302c24312c24322c24332c34303936068c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @wait4
+object 6 0xc302666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e75780e3236303a24302c24312c302c2432058c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @sigmask
+object 6 0x8102666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e75780c3133353a322c24302c302c38038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @sigaction
+object 6 0xa202666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e75780d3133343a24302c24312c302c38048c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @getcwd
+object 6 0xff01666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e75780a31373a24302c34303936038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @unlink
+object 6 0xb202666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e75781d33353a31383434363734343037333730393535313531362c24302c2431048c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b528c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a038c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b52ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+end
+define @free
+object 6 0xe401666f726569676e2d66756e6374696f6e2d7631186c696e75782d616172636836342d73797363616c6c2d7631056c696e75780c3231353a24302c363535333603ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d293f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a028c19ff215f417b48484c90f25f7bbb2482d1efe6743c38f9f5fefe7b48684b522b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a020001
+end
+define @stream_file
+(T5,T7,T2,T1,T4,T4)->(T3,T5,T7,T2,T1)
+B0(P0:T5,P1:T7,P2:T2,P3:T1,P4:T4,P5:T4)
+N0 pointer.address P0 -> T4 [1]
+N1 constant 40960 -> T4
+N2 add.wrap N0 N1 -> T4
+N3 constant 0 -> T4
+N4 constant 8192 -> T4
+N5 constant 1 -> T4
+N6 constant 18446744073709551612 -> T4
+N7 constant 0 -> T3
+N8 constant 1 -> T3
+br B1(P2,P3,P5,P0,P1)
+B1(P6:T2,P7:T1,P8:T4,P9:T5,P10:T7)
+N9 int.compare P8 N3 -> T8 [1]
+cbr N9 B9(P6,P7,N7,P9,P10) B2(P6,P7,P8,P9,P10)
+B2(P11:T2,P12:T1,P13:T4,P14:T5,P15:T7)
+N10 int.compare P13 N4 -> T8 [3]
+cbr N10 B3(P11,P12,P13,P13,P14,P15) B3(P11,P12,P13,N4,P14,P15)
+B3(P16:T2,P17:T1,P18:T4,P19:T4,P20:T5,P21:T7)
+N11 call.foreign entity=@read P4 N2 P19 P17 P16 -> T4,T1,T2
+N12 int.compare N11 N6 -> T8 [1]
+cbr N12 B1(N11.R2,N11.R1,P18,P20,P21) B4(N11.R2,N11.R1,P18,P19,N11,P20,P21)
+B4(P22:T2,P23:T1,P24:T4,P25:T4,P26:T4,P27:T5,P28:T7)
+N13 int.compare P26 N3 -> T8 [5]
+N14 int.compare P26 P25 -> T8 [4]
+N15 bit.and N13 N14 -> T8
+cbr N15 B5(P22,P23,P24,P26,N3,P27,P28) B9(P22,P23,N8,P27,P28)
+B5(P29:T2,P30:T1,P31:T4,P32:T4,P33:T4,P34:T5,P35:T7)
+N16 int.compare P33 P32 -> T8 [1]
+cbr N16 B8(P29,P30,P31,P32,P34,P35) B6(P29,P30,P31,P32,P33,P34,P35)
+B6(P36:T2,P37:T1,P38:T4,P39:T4,P40:T4,P41:T5,P42:T7)
+N17 add.wrap N2 P40 -> T4
+N18 sub.wrap P39 P40 -> T4
+N19 call.foreign entity=@write N5 N17 N18 P37 P36 -> T4,T1,T2
+N20 int.compare N19 N6 -> T8 [1]
+cbr N20 B5(N19.R2,N19.R1,P38,P39,P40,P41,P42) B7(N19.R2,N19.R1,P38,P39,P40,N19,N18,P41,P42)
+B7(P43:T2,P44:T1,P45:T4,P46:T4,P47:T4,P48:T4,P49:T4,P50:T5,P51:T7)
+N21 int.compare P48 N3 -> T8 [5]
+N22 int.compare P48 P49 -> T8 [4]
+N23 bit.and N21 N22 -> T8
+N24 add.wrap P47 P48 -> T4
+cbr N23 B5(P43,P44,P45,P46,N24,P50,P51) B9(P43,P44,N8,P50,P51)
+B8(P52:T2,P53:T1,P54:T4,P55:T4,P56:T5,P57:T7)
+N25 sub.wrap P54 P55 -> T4
+br B1(P52,P53,N25,P56,P57)
+B9(P58:T2,P59:T1,P60:T3,P61:T5,P62:T7)
+ret P60 P61 P62 P58 P59
+T0 form3 c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567
+T1 form3 ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T6 form4 933b152d7a3ae1cbd182fd6ece7825ad5a2536c7395b404382763b99acb94833
+T7 form4 3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c
+T8 bits1
+T9 bits8
+end
+define @validate_image
+(T5,T7,T2,T1,T4)->(T3,T5,T7,T2,T1)
+B0(P0:T5,P1:T7,P2:T2,P3:T1,P4:T4)
+N0 pointer.address P0 -> T4 [1]
+N1 constant 35200 -> T4
+N2 add.wrap N0 N1 -> T4
+N3 constant 176 -> T4
+N4 call.foreign entity=@read P4 N2 N3 P3 P2 -> T4,T1,T2
+N5 constant 0 -> T4
+N6 constant 2 -> T4
+N7 call.foreign entity=@lseek P4 N5 N6 N4.R1 N4.R2 -> T4,T1,T2
+N8 int.compare N4 N3 -> T8 [1]
+N9 int.compare N7 N3 -> T8 [6]
+N10 constant 16777216 -> T4
+N11 int.compare N7 N10 -> T8 [4]
+N12 bit.and N8 N9 -> T8
+N13 bit.and N12 N11 -> T8
+N14 constant 35200 -> T3
+N15 checked.load.bits.le P0 N14 N7.R2 -> T3,T2 [4,1]
+N16 constant 1179403647 -> T3
+N17 int.compare N15 N16 -> T8 [1]
+N18 bit.and N13 N17 -> T8
+N19 constant 35204 -> T3
+N20 checked.load.bits.le P0 N19 N15.R1 -> T3,T2 [4,1]
+N21 constant 65794 -> T3
+N22 int.compare N20 N21 -> T8 [1]
+N23 bit.and N18 N22 -> T8
+N24 constant 35216 -> T3
+N25 checked.load.bits.le P0 N24 N20.R1 -> T3,T2 [4,1]
+N26 constant 11993090 -> T3
+N27 int.compare N25 N26 -> T8 [1]
+N28 bit.and N23 N27 -> T8
+N29 constant 35220 -> T3
+N30 checked.load.bits.le P0 N29 N25.R1 -> T3,T2 [4,1]
+N31 constant 1 -> T3
+N32 int.compare N30 N31 -> T8 [1]
+N33 bit.and N28 N32 -> T8
+N34 constant 35232 -> T3
+N35 checked.load.bits.le P0 N34 N30.R1 -> T4,T2 [8,1]
+N36 constant 64 -> T4
+N37 int.compare N35 N36 -> T8 [1]
+N38 bit.and N33 N37 -> T8
+N39 constant 35240 -> T3
+N40 checked.load.bits.le P0 N39 N35.R1 -> T4,T2 [8,1]
+N41 constant 0 -> T4
+N42 int.compare N40 N41 -> T8 [1]
+N43 bit.and N38 N42 -> T8
+N44 constant 35252 -> T3
+N45 checked.load.bits.le P0 N44 N40.R1 -> T3,T2 [4,1]
+N46 constant 3670080 -> T3
+N47 int.compare N45 N46 -> T8 [1]
+N48 bit.and N43 N47 -> T8
+N49 constant 35256 -> T3
+N50 checked.load.bits.le P0 N49 N45.R1 -> T3,T2 [4,1]
+N51 constant 4194306 -> T3
+N52 int.compare N50 N51 -> T8 [1]
+N53 bit.and N48 N52 -> T8
+N54 constant 35260 -> T3
+N55 checked.load.bits.le P0 N54 N50.R1 -> T3,T2 [4,1]
+N56 constant 0 -> T3
+N57 int.compare N55 N56 -> T8 [1]
+N58 bit.and N53 N57 -> T8
+N59 constant 35264 -> T3
+N60 checked.load.bits.le P0 N59 N55.R1 -> T3,T2 [4,1]
+N61 constant 1 -> T3
+N62 int.compare N60 N61 -> T8 [1]
+N63 bit.and N58 N62 -> T8
+N64 constant 35268 -> T3
+N65 checked.load.bits.le P0 N64 N60.R1 -> T3,T2 [4,1]
+N66 constant 5 -> T3
+N67 int.compare N65 N66 -> T8 [1]
+N68 bit.and N63 N67 -> T8
+N69 constant 35272 -> T3
+N70 checked.load.bits.le P0 N69 N65.R1 -> T4,T2 [8,1]
+N71 constant 0 -> T4
+N72 int.compare N70 N71 -> T8 [1]
+N73 bit.and N68 N72 -> T8
+N74 constant 35280 -> T3
+N75 checked.load.bits.le P0 N74 N70.R1 -> T4,T2 [8,1]
+N76 constant 4194304 -> T4
+N77 int.compare N75 N76 -> T8 [1]
+N78 bit.and N73 N77 -> T8
+N79 constant 35288 -> T3
+N80 checked.load.bits.le P0 N79 N75.R1 -> T4,T2 [8,1]
+N81 constant 4194304 -> T4
+N82 int.compare N80 N81 -> T8 [1]
+N83 bit.and N78 N82 -> T8
+N84 constant 35296 -> T3
+N85 checked.load.bits.le P0 N84 N80.R1 -> T4,T2 [8,1]
+N86 add.wrap N7 N5 -> T4
+N87 int.compare N85 N86 -> T8 [1]
+N88 bit.and N83 N87 -> T8
+N89 constant 35304 -> T3
+N90 checked.load.bits.le P0 N89 N85.R1 -> T4,T2 [8,1]
+N91 add.wrap N7 N5 -> T4
+N92 int.compare N90 N91 -> T8 [1]
+N93 bit.and N88 N92 -> T8
+N94 constant 35312 -> T3
+N95 checked.load.bits.le P0 N94 N90.R1 -> T4,T2 [8,1]
+N96 constant 65536 -> T4
+N97 int.compare N95 N96 -> T8 [1]
+N98 bit.and N93 N97 -> T8
+N99 constant 35320 -> T3
+N100 checked.load.bits.le P0 N99 N95.R1 -> T3,T2 [4,1]
+N101 constant 1685382481 -> T3
+N102 int.compare N100 N101 -> T8 [1]
+N103 bit.and N98 N102 -> T8
+N104 constant 35324 -> T3
+N105 checked.load.bits.le P0 N104 N100.R1 -> T3,T2 [4,1]
+N106 constant 6 -> T3
+N107 int.compare N105 N106 -> T8 [1]
+N108 bit.and N103 N107 -> T8
+N109 constant 35328 -> T3
+N110 checked.load.bits.le P0 N109 N105.R1 -> T4,T2 [8,1]
+N111 constant 0 -> T4
+N112 int.compare N110 N111 -> T8 [1]
+N113 bit.and N108 N112 -> T8
+N114 constant 35336 -> T3
+N115 checked.load.bits.le P0 N114 N110.R1 -> T4,T2 [8,1]
+N116 constant 0 -> T4
+N117 int.compare N115 N116 -> T8 [1]
+N118 bit.and N113 N117 -> T8
+N119 constant 35344 -> T3
+N120 checked.load.bits.le P0 N119 N115.R1 -> T4,T2 [8,1]
+N121 constant 0 -> T4
+N122 int.compare N120 N121 -> T8 [1]
+N123 bit.and N118 N122 -> T8
+N124 constant 35352 -> T3
+N125 checked.load.bits.le P0 N124 N120.R1 -> T4,T2 [8,1]
+N126 constant 0 -> T4
+N127 int.compare N125 N126 -> T8 [1]
+N128 bit.and N123 N127 -> T8
+N129 constant 35360 -> T3
+N130 checked.load.bits.le P0 N129 N125.R1 -> T4,T2 [8,1]
+N131 constant 0 -> T4
+N132 int.compare N130 N131 -> T8 [1]
+N133 bit.and N128 N132 -> T8
+N134 constant 35368 -> T3
+N135 checked.load.bits.le P0 N134 N130.R1 -> T4,T2 [8,1]
+N136 constant 16 -> T4
+N137 int.compare N135 N136 -> T8 [1]
+N138 bit.and N133 N137 -> T8
+N139 constant 35224 -> T3
+N140 checked.load.bits.le P0 N139 N135.R1 -> T4,T2 [8,1]
+N141 constant 4194304 -> T4
+N142 add.wrap N141 N3 -> T4
+N143 add.wrap N141 N7 -> T4
+N144 int.compare N140 N142 -> T8 [6]
+N145 int.compare N140 N143 -> T8 [3]
+N146 bit.and N144 N145 -> T8
+N147 bit.and N138 N146 -> T8
+N148 int.zero.extend N147 -> T3
+N149 constant 1 -> T3
+N150 sub.wrap N149 N148 -> T3
+ret N150 P0 P1 N140.R1 N7.R1
+T0 form3 c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567
+T1 form3 ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T6 form4 933b152d7a3ae1cbd182fd6ece7825ad5a2536c7395b404382763b99acb94833
+T7 form4 3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c
+T8 bits1
+T9 bits8
+end
+define @seal_workspace
+(T5,T7,T2,T1)->(T3,T5,T7,T2,T1)
+B0(P0:T5,P1:T7,P2:T2,P3:T1)
+N0 pointer.address P0 -> T4 [1]
+N1 constant 36000 -> T4
+N2 add.wrap N0 N1 -> T4
+N3 call.foreign entity=@getcwd N2 P3 P2 -> T4,T1,T2
+N4 constant 57 -> T4
+N5 int.compare N3 N4 -> T8 [1]
+N6 constant 36000 -> T3
+N7 checked.load.bits.le P0 N6 N3.R2 -> T4,T2 [8,1]
+N8 constant 8028844331305624623 -> T4
+N9 int.compare N7 N8 -> T8 [1]
+N10 bit.and N5 N9 -> T8
+N11 constant 36008 -> T3
+N12 checked.load.bits.le P0 N11 N7.R1 -> T4,T2 [8,1]
+N13 constant 3418352462953472355 -> T4
+N14 int.compare N12 N13 -> T8 [1]
+N15 bit.and N10 N14 -> T8
+N16 constant 36016 -> T3
+N17 checked.load.bits.le P0 N16 N12.R1 -> T4,T2 [8,1]
+N18 constant 3274226249663799672 -> T4
+N19 int.compare N17 N18 -> T8 [1]
+N20 bit.and N15 N19 -> T8
+N21 constant 0 -> T3
+N22 constant 1 -> T3
+cbr N20 B1(N3.R1,N17.R1,N21,P0,P1) B4(N22,N3.R1,N17.R1,P0,P1)
+B1(P4:T1,P5:T2,P6:T3,P7:T5,P8:T7)
+N23 constant 32 -> T3
+N24 int.compare P6 N23 -> T8 [3]
+cbr N24 B2(P4,P5,P6,P7,P8) B3(P4,P5,P7,P8)
+B2(P9:T1,P10:T2,P11:T3,P12:T5,P13:T7)
+N25 constant 36024 -> T3
+N26 add.wrap N25 P11 -> T3
+N27 checked.load.bits.le P12 N26 P10 -> T9,T2 [1,1]
+N28 constant 48 -> T9
+N29 constant 57 -> T9
+N30 constant 97 -> T9
+N31 constant 102 -> T9
+N32 int.compare N27 N28 -> T8 [6]
+N33 int.compare N27 N29 -> T8 [4]
+N34 int.compare N27 N30 -> T8 [6]
+N35 int.compare N27 N31 -> T8 [4]
+N36 bit.and N32 N33 -> T8
+N37 bit.and N34 N35 -> T8
+N38 bit.or N36 N37 -> T8
+N39 add.wrap P11 N22 -> T3
+cbr N38 B1(P9,N27.R1,N39,P12,P13) B4(N22,P9,N27.R1,P12,P13)
+B3(P14:T1,P15:T2,P16:T5,P17:T7)
+N40 constant 0 -> T4
+N41 add.wrap N0 N40 -> T4
+N42 constant 0 -> T4
+N43 call.foreign entity=@unlink N41 N42 P14 P15 -> T4,T1,T2
+N44 constant 16 -> T4
+N45 add.wrap N0 N44 -> T4
+N46 constant 0 -> T4
+N47 call.foreign entity=@unlink N45 N46 N43.R1 N43.R2 -> T4,T1,T2
+N48 bit.or N43 N47 -> T4
+N49 constant 32 -> T4
+N50 add.wrap N0 N49 -> T4
+N51 constant 0 -> T4
+N52 call.foreign entity=@unlink N50 N51 N47.R1 N47.R2 -> T4,T1,T2
+N53 bit.or N48 N52 -> T4
+N54 constant 48 -> T4
+N55 add.wrap N0 N54 -> T4
+N56 constant 0 -> T4
+N57 call.foreign entity=@unlink N55 N56 N52.R1 N52.R2 -> T4,T1,T2
+N58 bit.or N53 N57 -> T4
+N59 constant 64 -> T4
+N60 add.wrap N0 N59 -> T4
+N61 constant 0 -> T4
+N62 call.foreign entity=@unlink N60 N61 N57.R1 N57.R2 -> T4,T1,T2
+N63 bit.or N58 N62 -> T4
+N64 constant 80 -> T4
+N65 add.wrap N0 N64 -> T4
+N66 constant 0 -> T4
+N67 call.foreign entity=@unlink N65 N66 N62.R1 N62.R2 -> T4,T1,T2
+N68 bit.or N63 N67 -> T4
+N69 constant 512 -> T4
+N70 call.foreign entity=@unlink N2 N69 N67.R1 N67.R2 -> T4,T1,T2
+N71 bit.or N68 N70 -> T4
+N72 constant 0 -> T4
+N73 int.compare N71 N72 -> T8 [1]
+N74 int.zero.extend N73 -> T3
+N75 sub.wrap N22 N74 -> T3
+br B4(N75,N70.R1,N70.R2,P16,P17)
+B4(P18:T3,P19:T1,P20:T2,P21:T5,P22:T7)
+ret P18 P21 P22 P20 P19
+T0 form3 c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567
+T1 form3 ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T6 form4 933b152d7a3ae1cbd182fd6ece7825ad5a2536c7395b404382763b99acb94833
+T7 form4 3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c
+T8 bits1
+T9 bits8
+end
+define @android_runner
+(T0,T1,T2,T2,T2)->(T3,T0,T1,T2,T2,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T2,P4:T2)
+N0 constant 65536 -> T4
+N1 call.foreign entity=4d28820df3ffa4160a61ad07f14349a69dfb3eb590c1a09ac081d32d90b9cfa2 N0 P2 -> T5,T6,T2
+N2 heap.view N1 N1.R1 N1.R2 -> T5,T7,T2 [65536,1]
+N3 pointer.address N2 -> T4 [1]
+N4 constant 0 -> T3
+N5 constant 8386654023577793121 -> T4
+N6 checked.store.bits.le N2 N4 N5 N2.R2 -> T2 [8,1]
+N7 constant 8 -> T3
+N8 constant 0 -> T4
+N9 checked.store.bits.le N2 N7 N8 N6 -> T2 [8,1]
+N10 constant 16 -> T3
+N11 constant 7593682973449548915 -> T4
+N12 checked.store.bits.le N2 N10 N11 N9 -> T2 [8,1]
+N13 constant 24 -> T3
+N14 constant 110 -> T4
+N15 checked.store.bits.le N2 N13 N14 N12 -> T2 [8,1]
+N16 constant 32 -> T3
+N17 constant 15891441060901473 -> T4
+N18 checked.store.bits.le N2 N16 N17 N15 -> T2 [8,1]
+N19 constant 40 -> T3
+N20 constant 0 -> T4
+N21 checked.store.bits.le N2 N19 N20 N18 -> T2 [8,1]
+N22 constant 48 -> T3
+N23 constant 7074720112374477939 -> T4
+N24 checked.store.bits.le N2 N22 N23 N21 -> T2 [8,1]
+N25 constant 56 -> T3
+N26 constant 28265 -> T4
+N27 checked.store.bits.le N2 N25 N26 N24 -> T2 [8,1]
+N28 constant 64 -> T3
+N29 constant 7074717900298548339 -> T4
+N30 checked.store.bits.le N2 N28 N29 N27 -> T2 [8,1]
+N31 constant 72 -> T3
+N32 constant 28265 -> T4
+N33 checked.store.bits.le N2 N31 N32 N30 -> T2 [8,1]
+N34 constant 80 -> T3
+N35 constant 125779969996146 -> T4
+N36 checked.store.bits.le N2 N34 N35 N33 -> T2 [8,1]
+N37 constant 88 -> T3
+N38 constant 0 -> T4
+N39 checked.store.bits.le N2 N37 N38 N36 -> T2 [8,1]
+N40 constant 96 -> T3
+N41 constant 7311705245014258288 -> T4
+N42 checked.store.bits.le N2 N40 N41 N39 -> T2 [8,1]
+N43 constant 104 -> T3
+N44 constant 0 -> T4
+N45 checked.store.bits.le N2 N43 N44 N42 -> T2 [8,1]
+N46 constant 112 -> T3
+N47 constant 0 -> T4
+N48 checked.store.bits.le N2 N46 N47 N45 -> T2 [8,1]
+N49 constant 120 -> T3
+N50 constant 0 -> T4
+N51 checked.store.bits.le N2 N49 N50 N48 -> T2 [8,1]
+N52 constant 128 -> T3
+N53 constant 0 -> T4
+N54 checked.store.bits.le N2 N52 N53 N51 -> T2 [8,1]
+N55 constant 136 -> T3
+N56 constant 0 -> T4
+N57 checked.store.bits.le N2 N55 N56 N54 -> T2 [8,1]
+N58 constant 144 -> T3
+N59 constant 0 -> T4
+N60 checked.store.bits.le N2 N58 N59 N57 -> T2 [8,1]
+N61 constant 152 -> T3
+N62 constant 0 -> T4
+N63 checked.store.bits.le N2 N61 N62 N60 -> T2 [8,1]
+N64 constant 160 -> T3
+N65 constant 0 -> T4
+N66 checked.store.bits.le N2 N64 N65 N63 -> T2 [8,1]
+N67 constant 168 -> T3
+N68 constant 0 -> T4
+N69 checked.store.bits.le N2 N67 N68 N66 -> T2 [8,1]
+N70 constant 176 -> T3
+N71 constant 0 -> T4
+N72 checked.store.bits.le N2 N70 N71 N69 -> T2 [8,1]
+N73 constant 184 -> T3
+N74 constant 0 -> T4
+N75 checked.store.bits.le N2 N73 N74 N72 -> T2 [8,1]
+N76 constant 192 -> T3
+N77 constant 0 -> T4
+N78 checked.store.bits.le N2 N76 N77 N75 -> T2 [8,1]
+N79 constant 200 -> T3
+N80 constant 0 -> T4
+N81 checked.store.bits.le N2 N79 N80 N78 -> T2 [8,1]
+N82 constant 208 -> T3
+N83 constant 0 -> T4
+N84 checked.store.bits.le N2 N82 N83 N81 -> T2 [8,1]
+N85 constant 216 -> T3
+N86 constant 0 -> T4
+N87 checked.store.bits.le N2 N85 N86 N84 -> T2 [8,1]
+N88 constant 224 -> T3
+N89 constant 0 -> T4
+N90 checked.store.bits.le N2 N88 N89 N87 -> T2 [8,1]
+N91 constant 232 -> T3
+N92 constant 0 -> T4
+N93 checked.store.bits.le N2 N91 N92 N90 -> T2 [8,1]
+N94 constant 240 -> T3
+N95 constant 0 -> T4
+N96 checked.store.bits.le N2 N94 N95 N93 -> T2 [8,1]
+N97 constant 248 -> T3
+N98 constant 0 -> T4
+N99 checked.store.bits.le N2 N97 N98 N96 -> T2 [8,1]
+N100 constant 256 -> T3
+N101 constant 5 -> T4
+N102 checked.store.bits.le N2 N100 N101 N99 -> T2 [8,1]
+N103 constant 264 -> T3
+N104 constant 6 -> T4
+N105 checked.store.bits.le N2 N103 N104 N102 -> T2 [8,1]
+N106 constant 272 -> T3
+N107 constant 268435456 -> T4
+N108 checked.store.bits.le N2 N106 N107 N105 -> T2 [8,1]
+N109 constant 280 -> T3
+N110 constant 268435456 -> T4
+N111 checked.store.bits.le N2 N109 N110 N108 -> T2 [8,1]
+N112 constant 288 -> T3
+N113 constant 1048577 -> T4
+N114 checked.store.bits.le N2 N112 N113 N111 -> T2 [8,1]
+N115 constant 296 -> T3
+N116 constant 1048577 -> T4
+N117 checked.store.bits.le N2 N115 N116 N114 -> T2 [8,1]
+N118 constant 304 -> T3
+N119 constant 0 -> T4
+N120 checked.store.bits.le N2 N118 N119 N117 -> T2 [8,1]
+N121 constant 312 -> T3
+N122 constant 0 -> T4
+N123 checked.store.bits.le N2 N121 N122 N120 -> T2 [8,1]
+N124 constant 320 -> T3
+N125 constant 0 -> T4
+N126 checked.store.bits.le N2 N124 N125 N123 -> T2 [8,1]
+N127 constant 328 -> T3
+N128 constant 0 -> T4
+N129 checked.store.bits.le N2 N127 N128 N126 -> T2 [8,1]
+N130 constant 336 -> T3
+N131 constant 10 -> T4
+N132 checked.store.bits.le N2 N130 N131 N129 -> T2 [8,1]
+N133 constant 344 -> T3
+N134 constant 0 -> T4
+N135 checked.store.bits.le N2 N133 N134 N132 -> T2 [8,1]
+N136 constant 34500 -> T3
+N137 constant 17179869216 -> T4
+N138 checked.store.bits.le N2 N136 N137 N135 -> T2 [8,1]
+N139 constant 34508 -> T3
+N140 constant 13835058841261244437 -> T4
+N141 checked.store.bits.le N2 N139 N140 N138 -> T2 [8,1]
+N142 constant 34516 -> T3
+N143 constant 9223372036854775814 -> T4
+N144 checked.store.bits.le N2 N142 N143 N141 -> T2 [8,1]
+N145 constant 34524 -> T3
+N146 constant 32 -> T4
+N147 checked.store.bits.le N2 N145 N146 N144 -> T2 [8,1]
+N148 constant 34532 -> T3
+N149 constant 270650048533 -> T4
+N150 checked.store.bits.le N2 N148 N149 N147 -> T2 [8,1]
+N151 constant 34540 -> T3
+N152 constant 68719476768 -> T4
+N153 checked.store.bits.le N2 N151 N152 N150 -> T2 [8,1]
+N154 constant 34548 -> T3
+N155 constant 16777237 -> T4
+N156 checked.store.bits.le N2 N154 N155 N153 -> T2 [8,1]
+N157 constant 34556 -> T3
+N158 constant 9223090561878065158 -> T4
+N159 checked.store.bits.le N2 N157 N158 N156 -> T2 [8,1]
+N160 constant 34564 -> T3
+N161 constant 9223372036854775814 -> T4
+N162 checked.store.bits.le N2 N160 N161 N159 -> T2 [8,1]
+N163 constant 34572 -> T3
+N164 constant 274978570261 -> T4
+N165 checked.store.bits.le N2 N163 N164 N162 -> T2 [8,1]
+N166 constant 34580 -> T3
+N167 constant 68719476768 -> T4
+N168 checked.store.bits.le N2 N166 N167 N165 -> T2 [8,1]
+N169 constant 34588 -> T3
+N170 constant 4295163925 -> T4
+N171 checked.store.bits.le N2 N169 N170 N168 -> T2 [8,1]
+N172 constant 34596 -> T3
+N173 constant 8590065685 -> T4
+N174 checked.store.bits.le N2 N172 N173 N171 -> T2 [8,1]
+N175 constant 34604 -> T3
+N176 constant 65557 -> T4
+N177 checked.store.bits.le N2 N175 N176 N174 -> T2 [8,1]
+N178 constant 34612 -> T3
+N179 constant 9223372036854775814 -> T4
+N180 checked.store.bits.le N2 N178 N179 N177 -> T2 [8,1]
+N181 constant 34620 -> T3
+N182 constant 9223090561878065158 -> T4
+N183 checked.store.bits.le N2 N181 N182 N180 -> T2 [8,1]
+N184 constant 34628 -> T3
+N185 constant 1206952919061 -> T4
+N186 checked.store.bits.le N2 N184 N185 N183 -> T2 [8,1]
+N187 constant 34636 -> T3
+N188 constant 68719476768 -> T4
+N189 checked.store.bits.le N2 N187 N188 N186 -> T2 [8,1]
+N190 constant 34644 -> T3
+N191 constant 16777237 -> T4
+N192 checked.store.bits.le N2 N190 N191 N189 -> T2 [8,1]
+N193 constant 34652 -> T3
+N194 constant 9223090561878065158 -> T4
+N195 checked.store.bits.le N2 N193 N194 N192 -> T2 [8,1]
+N196 constant 34660 -> T3
+N197 constant 9223372036854775814 -> T4
+N198 checked.store.bits.le N2 N196 N197 N195 -> T2 [8,1]
+N199 constant 34668 -> T3
+N200 constant 399448735765 -> T4
+N201 checked.store.bits.le N2 N199 N200 N198 -> T2 [8,1]
+N202 constant 34676 -> T3
+N203 constant 9223090561878065158 -> T4
+N204 checked.store.bits.le N2 N202 N203 N201 -> T2 [8,1]
+N205 constant 34684 -> T3
+N206 constant 403743703061 -> T4
+N207 checked.store.bits.le N2 N205 N206 N204 -> T2 [8,1]
+N208 constant 34692 -> T3
+N209 constant 9223090561878065158 -> T4
+N210 checked.store.bits.le N2 N208 N209 N207 -> T2 [8,1]
+N211 constant 34700 -> T3
+N212 constant 919139778581 -> T4
+N213 checked.store.bits.le N2 N211 N212 N210 -> T2 [8,1]
+N214 constant 34708 -> T3
+N215 constant 9223090561878065158 -> T4
+N216 checked.store.bits.le N2 N214 N215 N213 -> T2 [8,1]
+N217 constant 34716 -> T3
+N218 constant 923434745877 -> T4
+N219 checked.store.bits.le N2 N217 N218 N216 -> T2 [8,1]
+N220 constant 34724 -> T3
+N221 constant 9223090561878065158 -> T4
+N222 checked.store.bits.le N2 N220 N221 N219 -> T2 [8,1]
+N223 constant 34732 -> T3
+N224 constant 953499516949 -> T4
+N225 checked.store.bits.le N2 N223 N224 N222 -> T2 [8,1]
+N226 constant 34740 -> T3
+N227 constant 9223090561878065158 -> T4
+N228 checked.store.bits.le N2 N226 N227 N225 -> T2 [8,1]
+N229 constant 34748 -> T3
+N230 constant 970679386133 -> T4
+N231 checked.store.bits.le N2 N229 N230 N228 -> T2 [8,1]
+N232 constant 34756 -> T3
+N233 constant 9223090561878065158 -> T4
+N234 checked.store.bits.le N2 N232 N233 N231 -> T2 [8,1]
+N235 constant 34764 -> T3
+N236 constant 1000744157205 -> T4
+N237 checked.store.bits.le N2 N235 N236 N234 -> T2 [8,1]
+N238 constant 34772 -> T3
+N239 constant 9223090561878065158 -> T4
+N240 checked.store.bits.le N2 N238 N239 N237 -> T2 [8,1]
+N241 constant 34780 -> T3
+N242 constant 485348081685 -> T4
+N243 checked.store.bits.le N2 N241 N242 N240 -> T2 [8,1]
+N244 constant 34788 -> T3
+N245 constant 9223090561878065158 -> T4
+N246 checked.store.bits.le N2 N244 N245 N243 -> T2 [8,1]
+N247 constant 34796 -> T3
+N248 constant 433808474133 -> T4
+N249 checked.store.bits.le N2 N247 N248 N246 -> T2 [8,1]
+N250 constant 34804 -> T3
+N251 constant 9223090561878065158 -> T4
+N252 checked.store.bits.le N2 N250 N251 N249 -> T2 [8,1]
+N253 constant 34812 -> T3
+N254 constant 532592721941 -> T4
+N255 checked.store.bits.le N2 N253 N254 N252 -> T2 [8,1]
+N256 constant 34820 -> T3
+N257 constant 9223090561878065158 -> T4
+N258 checked.store.bits.le N2 N256 N257 N255 -> T2 [8,1]
+N259 constant 34828 -> T3
+N260 constant 9223372036854775814 -> T4
+N261 checked.store.bits.le N2 N259 N260 N258 -> T2 [8,1]
+N262 constant 35000 -> T3
+N263 constant 42 -> T4
+N264 checked.store.bits.le N2 N262 N263 N261 -> T2 [8,1]
+N265 constant 35008 -> T3
+N266 constant 0 -> T4
+N267 checked.store.bits.le N2 N265 N266 N264 -> T2 [8,1]
+N268 constant 34500 -> T4
+N269 add.wrap N3 N268 -> T4
+N270 constant 35008 -> T3
+N271 checked.store.bits.le N2 N270 N269 N267 -> T2 [8,1]
+N272 constant 0 -> T4
+N273 constant 655360 -> T4
+N274 call.foreign entity=@openat N3 N273 N272 P1 N271 -> T4,T1,T2
+N275 constant 16 -> T4
+N276 add.wrap N3 N275 -> T4
+N277 call.foreign entity=@openat N276 N273 N272 N274.R1 N274.R2 -> T4,T1,T2
+N278 constant 48 -> T4
+N279 add.wrap N3 N278 -> T4
+N280 constant 655554 -> T4
+N281 constant 384 -> T4
+N282 call.foreign entity=@openat N279 N280 N281 N277.R1 N277.R2 -> T4,T1,T2
+N283 constant 64 -> T4
+N284 add.wrap N3 N283 -> T4
+N285 call.foreign entity=@openat N284 N280 N281 N282.R1 N282.R2 -> T4,T1,T2
+N286 constant 32 -> T4
+N287 add.wrap N3 N286 -> T4
+N288 call.foreign entity=@openat N287 N273 N272 N285.R1 N285.R2 -> T4,T1,T2
+N289 int.compare N274 N283 -> T8 [3]
+N290 int.compare N277 N283 -> T8 [3]
+N291 int.compare N282 N283 -> T8 [3]
+N292 int.compare N285 N283 -> T8 [3]
+N293 int.compare N288 N283 -> T8 [3]
+N294 bit.and N289 N290 -> T8
+N295 bit.and N291 N292 -> T8
+N296 bit.and N294 N295 -> T8
+N297 bit.and N296 N293 -> T8
+N298 constant 255 -> T3
+cbr N297 B1(N288.R1,N288.R2,N2,N2.R1,P0,P3,P4) B30(N298,N288.R1,N288.R2,N2,N2.R1,P0,P3,P4)
+B1(P5:T1,P6:T2,P7:T5,P8:T7,P9:T0,P10:T2,P11:T2)
+N299 constant 512 -> T4
+N300 add.wrap N3 N299 -> T4
+N301 constant 32768 -> T4
+N302 call.foreign entity=@read N288 N300 N301 P5 P6 -> T4,T1,T2
+N303 constant 4 -> T4
+N304 int.compare N302 N303 -> T8 [6]
+N305 int.compare N302 N301 -> T8 [4]
+N306 bit.and N304 N305 -> T8
+cbr N306 B2(N302.R1,N302.R2,P7,P8,P9,P10,P11) B30(N298,N302.R1,N302.R2,P7,P8,P9,P10,P11)
+B2(P12:T1,P13:T2,P14:T5,P15:T7,P16:T0,P17:T2,P18:T2)
+N307 constant 512 -> T3
+N308 checked.load.bits.le P14 N307 P13 -> T3,T2 [4,1]
+N309 constant 64 -> T3
+N310 int.compare N308 N309 -> T8 [4]
+N311 constant 40096 -> T3
+N312 constant 96 -> T4
+N313 add.wrap N3 N312 -> T4
+N314 checked.store.bits.le P14 N311 N313 N308.R1 -> T2 [8,1]
+N315 constant 4 -> T3
+N316 constant 0 -> T3
+cbr N310 B3(P12,N314,N315,N316,P14,P15,P16,P17,P18) B30(N298,P12,N314,P14,P15,P16,P17,P18)
+B3(P19:T1,P20:T2,P21:T3,P22:T3,P23:T5,P24:T7,P25:T0,P26:T2,P27:T2)
+N317 int.compare P22 N308 -> T8 [3]
+cbr N317 B4(P19,P20,P21,P22,P23,P24,P25,P26,P27) B8(P19,P20,P21,P22,P23,P24,P25,P26,P27)
+B4(P28:T1,P29:T2,P30:T3,P31:T3,P32:T5,P33:T7,P34:T0,P35:T2,P36:T2)
+N318 int.zero.extend P30 -> T4
+N319 int.compare N318 N302 -> T8 [3]
+cbr N319 B5(P28,P29,P30,P31,P32,P33,P34,P35,P36) B30(N298,P28,P29,P32,P33,P34,P35,P36)
+B5(P37:T1,P38:T2,P39:T3,P40:T3,P41:T5,P42:T7,P43:T0,P44:T2,P45:T2)
+N320 constant 512 -> T4
+N321 int.zero.extend P39 -> T4
+N322 add.wrap N320 N321 -> T4
+N323 add.wrap N3 N322 -> T4
+N324 constant 1 -> T3
+N325 add.wrap P40 N324 -> T3
+N326 constant 8 -> T3
+N327 mul.wrap N325 N326 -> T3
+N328 add.wrap N311 N327 -> T3
+N329 checked.store.bits.le P41 N328 N323 P38 -> T2 [8,1]
+br B6(P37,N329,P39,P40,P41,P42,P43,P44,P45)
+B6(P46:T1,P47:T2,P48:T3,P49:T3,P50:T5,P51:T7,P52:T0,P53:T2,P54:T2)
+N330 int.zero.extend P48 -> T4
+N331 int.compare N330 N302 -> T8 [3]
+cbr N331 B7(P46,P47,P48,P49,P50,P51,P52,P53,P54) B30(N298,P46,P47,P50,P51,P52,P53,P54)
+B7(P55:T1,P56:T2,P57:T3,P58:T3,P59:T5,P60:T7,P61:T0,P62:T2,P63:T2)
+N332 constant 512 -> T3
+N333 add.wrap N332 P57 -> T3
+N334 checked.load.bits.le P59 N333 P56 -> T9,T2 [1,1]
+N335 constant 0 -> T9
+N336 int.compare N334 N335 -> T8 [1]
+N337 constant 1 -> T3
+N338 add.wrap P57 N337 -> T3
+N339 add.wrap P58 N337 -> T3
+cbr N336 B3(P55,N334.R1,N338,N339,P59,P60,P61,P62,P63) B6(P55,N334.R1,N338,P58,P59,P60,P61,P62,P63)
+B8(P64:T1,P65:T2,P66:T3,P67:T3,P68:T5,P69:T7,P70:T0,P71:T2,P72:T2)
+N340 int.zero.extend P66 -> T4
+N341 int.compare N340 N302 -> T8 [1]
+N342 constant 1 -> T3
+N343 add.wrap P67 N342 -> T3
+N344 constant 8 -> T3
+N345 mul.wrap N343 N344 -> T3
+N346 add.wrap N311 N345 -> T3
+N347 constant 0 -> T4
+N348 checked.store.bits.le P68 N346 N347 P65 -> T2 [8,1]
+cbr N341 B9(P64,N348,P68,P69,P70,P71,P72) B30(N298,P64,N348,P68,P69,P70,P71,P72)
+B9(P73:T1,P74:T2,P75:T5,P76:T7,P77:T0,P78:T2,P79:T2)
+N349 call.direct entity=@validate_image P75 P76 P74 P73 N274 -> T3,T5,T7,T2,T1
+N350 constant 0 -> T3
+N351 int.compare N349 N350 -> T8 [1]
+cbr N351 B10(N349.R4,N349.R3,N349.R1,N349.R2,P77,P78,P79) B30(N298,N349.R4,N349.R3,N349.R1,N349.R2,P77,P78,P79)
+B10(P80:T1,P81:T2,P82:T5,P83:T7,P84:T0,P85:T2,P86:T2)
+N352 constant 2 -> T4
+N353 call.foreign entity=@lseek N277 N272 N352 P80 P81 -> T4,T1,T2
+N354 constant 262144 -> T4
+N355 int.compare N353 N354 -> T8 [4]
+N356 call.foreign entity=@lseek N277 N272 N272 N353.R1 N353.R2 -> T4,T1,T2
+N357 constant 34300 -> T4
+N358 add.wrap N3 N357 -> T4
+N359 call.foreign entity=@pipe2 N358 N356.R1 N356.R2 -> T4,T1,T2
+N360 int.compare N359 N272 -> T8 [1]
+N361 bit.and N355 N360 -> T8
+N362 constant 34300 -> T3
+N363 checked.load.bits.le P82 N362 N359.R2 -> T3,T2 [4,1]
+N364 constant 34304 -> T3
+N365 checked.load.bits.le P82 N364 N363.R1 -> T3,T2 [4,1]
+N366 int.zero.extend N363 -> T4
+N367 int.zero.extend N365 -> T4
+cbr N361 B11(N359.R1,N365.R1,P82,P83,P84,P85,P86) B30(N298,N359.R1,N365.R1,P82,P83,P84,P85,P86)
+B11(P87:T1,P88:T2,P89:T5,P90:T7,P91:T0,P92:T2,P93:T2)
+N368 call.direct entity=@seal_workspace P89 P90 P88 P87 -> T3,T5,T7,T2,T1
+N369 constant 0 -> T3
+N370 int.compare N368 N369 -> T8 [1]
+cbr N370 B12(N368.R4,N368.R3,N368.R1,N368.R2,P91,P92,P93) B30(N298,N368.R4,N368.R3,N368.R1,N368.R2,P91,P92,P93)
+B12(P94:T1,P95:T2,P96:T5,P97:T7,P98:T0,P99:T2,P100:T2)
+N371 constant 34200 -> T4
+N372 add.wrap N3 N371 -> T4
+N373 call.foreign entity=@clock N372 P94 P95 -> T4,T1,T2
+N374 call.foreign entity=@getpid N373.R1 N373.R2 -> T4,T1,T2
+N375 call.foreign entity=@clone N374.R1 N374.R2 -> T4,T1,T2
+N376 int.compare N375 N272 -> T8 [1]
+cbr N376 B13(N375.R1,N375.R2,P96,P97,P98,P99,P100) B23(N375.R1,N375.R2,P96,P97,P98,P99,P100)
+B13(P101:T1,P102:T2,P103:T5,P104:T7,P105:T0,P106:T2,P107:T2)
+N377 constant 1 -> T4
+N378 constant 9 -> T4
+N379 call.foreign entity=@prctl N377 N378 N272 P101 P102 -> T4,T1,T2
+N380 call.foreign entity=@getppid N379.R1 N379.R2 -> T4,T1,T2
+N381 int.compare N380 N374 -> T8 [1]
+N382 int.compare N379 N272 -> T8 [1]
+N383 bit.and N381 N382 -> T8
+cbr N383 B14(N380.R1,N380.R2,P103,P104,P105,P106,P107) B22(N380.R1,N380.R2,P103,P104,P105,P106,P107)
+B14(P108:T1,P109:T2,P110:T5,P111:T7,P112:T0,P113:T2,P114:T2)
+N384 call.foreign entity=@dup3 N277 N272 N272 P108 P109 -> T4,T1,T2
+N385 constant 1 -> T4
+N386 call.foreign entity=@dup3 N282 N385 N272 N384.R1 N384.R2 -> T4,T1,T2
+N387 constant 2 -> T4
+N388 call.foreign entity=@dup3 N285 N387 N272 N386.R1 N386.R2 -> T4,T1,T2
+N389 int.compare N384 N272 -> T8 [1]
+N390 int.compare N386 N385 -> T8 [1]
+N391 int.compare N388 N387 -> T8 [1]
+N392 bit.and N389 N390 -> T8
+N393 bit.and N392 N391 -> T8
+N394 constant 3 -> T4
+cbr N393 B15(N388.R1,N388.R2,N394,P110,P111,P112,P113,P114) B22(N388.R1,N388.R2,P110,P111,P112,P113,P114)
+B15(P115:T1,P116:T2,P117:T4,P118:T5,P119:T7,P120:T0,P121:T2,P122:T2)
+N395 constant 64 -> T4
+N396 int.compare P117 N395 -> T8 [3]
+cbr N396 B16(P115,P116,P117,P118,P119,P120,P121,P122) B19(P115,P116,P118,P119,P120,P121,P122)
+B16(P123:T1,P124:T2,P125:T4,P126:T5,P127:T7,P128:T0,P129:T2,P130:T2)
+N397 int.compare P125 N274 -> T8 [1]
+N398 int.compare P125 N367 -> T8 [1]
+N399 bit.or N397 N398 -> T8
+cbr N399 B18(P123,P124,P125,P126,P127,P128,P129,P130) B17(P123,P124,P125,P126,P127,P128,P129,P130)
+B17(P131:T1,P132:T2,P133:T4,P134:T5,P135:T7,P136:T0,P137:T2,P138:T2)
+N400 call.foreign entity=@close P133 P131 P132 -> T4,T1,T2
+br B18(N400.R1,N400.R2,P133,P134,P135,P136,P137,P138)
+B18(P139:T1,P140:T2,P141:T4,P142:T5,P143:T7,P144:T0,P145:T2,P146:T2)
+N401 constant 1 -> T4
+N402 add.wrap P141 N401 -> T4
+br B15(P139,P140,N402,P142,P143,P144,P145,P146)
+B19(P147:T1,P148:T2,P149:T5,P150:T7,P151:T0,P152:T2,P153:T2)
+N403 constant 34400 -> T4
+N404 add.wrap N3 N403 -> T4
+N405 call.foreign entity=@sigmask N404 P147 P148 -> T4,T1,T2
+N406 constant 14 -> T4
+N407 call.foreign entity=@sigaction N406 N404 N405.R1 N405.R2 -> T4,T1,T2
+N408 constant 24 -> T4
+N409 call.foreign entity=@sigaction N408 N404 N407.R1 N407.R2 -> T4,T1,T2
+N410 constant 25 -> T4
+N411 call.foreign entity=@sigaction N410 N404 N409.R1 N409.R2 -> T4,T1,T2
+N412 constant 256 -> T4
+N413 add.wrap N3 N412 -> T4
+N414 call.foreign entity=@prlimit N272 N413 N411.R1 N411.R2 -> T4,T1,T2
+N415 constant 272 -> T4
+N416 add.wrap N3 N415 -> T4
+N417 constant 9 -> T4
+N418 call.foreign entity=@prlimit N417 N416 N414.R1 N414.R2 -> T4,T1,T2
+N419 constant 288 -> T4
+N420 add.wrap N3 N419 -> T4
+N421 constant 1 -> T4
+N422 call.foreign entity=@prlimit N421 N420 N418.R1 N418.R2 -> T4,T1,T2
+N423 constant 304 -> T4
+N424 add.wrap N3 N423 -> T4
+N425 constant 4 -> T4
+N426 call.foreign entity=@prlimit N425 N424 N422.R1 N422.R2 -> T4,T1,T2
+N427 constant 320 -> T4
+N428 add.wrap N3 N427 -> T4
+N429 call.foreign entity=@setitimer N428 N426.R1 N426.R2 -> T4,T1,T2
+N430 constant 38 -> T4
+N431 call.foreign entity=@prctl N430 N421 N272 N429.R1 N429.R2 -> T4,T1,T2
+N432 bit.or N414 N418 -> T4
+N433 bit.or N422 N426 -> T4
+N434 bit.or N429 N431 -> T4
+N435 bit.or N432 N433 -> T4
+N436 bit.or N435 N434 -> T4
+N437 bit.or N405 N407 -> T4
+N438 bit.or N409 N411 -> T4
+N439 bit.or N437 N438 -> T4
+N440 bit.or N436 N439 -> T4
+N441 int.compare N440 N272 -> T8 [1]
+cbr N441 B20(N431.R1,N431.R2,P149,P150,P151,P152,P153) B22(N431.R1,N431.R2,P149,P150,P151,P152,P153)
+B20(P154:T1,P155:T2,P156:T5,P157:T7,P158:T0,P159:T2,P160:T2)
+N442 constant 34608 -> T3
+N443 checked.store.bits.le P156 N442 N365 P155 -> T2 [4,1]
+N444 constant 34648 -> T3
+N445 int.truncate N274 -> T3
+N446 checked.store.bits.le P156 N444 N445 N443 -> T2 [4,1]
+N447 constant 22 -> T4
+N448 constant 2 -> T4
+N449 constant 35000 -> T4
+N450 add.wrap N3 N449 -> T4
+N451 call.foreign entity=@prctl N447 N448 N450 P154 N446 -> T4,T1,T2
+N452 int.compare N451 N272 -> T8 [1]
+cbr N452 B21(N451.R1,N451.R2,P156,P157,P158,P159,P160) B22(N451.R1,N451.R2,P156,P157,P158,P159,P160)
+B21(P161:T1,P162:T2,P163:T5,P164:T7,P165:T0,P166:T2,P167:T2)
+N453 constant 112 -> T4
+N454 add.wrap N3 N453 -> T4
+N455 constant 40096 -> T4
+N456 add.wrap N3 N455 -> T4
+N457 constant 34400 -> T4
+N458 add.wrap N3 N457 -> T4
+N459 call.foreign entity=@execveat N274 N454 N456 N458 P161 P162 -> T4,T1,T2
+br B22(N459.R1,N459.R2,P163,P164,P165,P166,P167)
+B22(P168:T1,P169:T2,P170:T5,P171:T7,P172:T0,P173:T2,P174:T2)
+N460 constant 34000 -> T4
+N461 add.wrap N3 N460 -> T4
+N462 constant 8 -> T4
+N463 call.foreign entity=@write N367 N461 N462 P168 P169 -> T4,T1,T2
+br B30(N298,N463.R1,N463.R2,P170,P171,P172,P173,P174)
+B23(P175:T1,P176:T2,P177:T5,P178:T7,P179:T0,P180:T2,P181:T2)
+N464 call.foreign entity=@close N367 P175 P176 -> T4,T1,T2
+N465 constant 34000 -> T4
+N466 add.wrap N3 N465 -> T4
+N467 constant 34016 -> T4
+N468 add.wrap N3 N467 -> T4
+br B24(N464.R1,N464.R2,P177,P178,P179,P180,P181)
+B24(P182:T1,P183:T2,P184:T5,P185:T7,P186:T0,P187:T2,P188:T2)
+N469 call.foreign entity=@wait4 N375 N466 N468 P182 P183 -> T4,T1,T2
+N470 constant 18446744073709551612 -> T4
+N471 int.compare N469 N470 -> T8 [1]
+cbr N471 B24(N469.R1,N469.R2,P184,P185,P186,P187,P188) B25(N469.R1,N469.R2,P184,P185,P186,P187,P188)
+B25(P189:T1,P190:T2,P191:T5,P192:T7,P193:T0,P194:T2,P195:T2)
+N472 int.compare N469 N375 -> T8 [1]
+N473 constant 34216 -> T4
+N474 add.wrap N3 N473 -> T4
+N475 call.foreign entity=@clock N474 P189 P190 -> T4,T1,T2
+N476 constant 8 -> T4
+N477 call.foreign entity=@read N366 N466 N476 N475.R1 N475.R2 -> T4,T1,T2
+N478 int.compare N477 N272 -> T8 [1]
+N479 int.compare N475 N272 -> T8 [1]
+N480 bit.and N472 N478 -> T8
+N481 bit.and N480 N479 -> T8
+N482 int.compare N373 N272 -> T8 [1]
+N483 bit.and N481 N482 -> T8
+cbr N483 B26(N477.R1,N477.R2,P191,P192,P193,P194,P195) B30(N298,N477.R1,N477.R2,P191,P192,P193,P194,P195)
+B26(P196:T1,P197:T2,P198:T5,P199:T7,P200:T0,P201:T2,P202:T2)
+N484 constant 34000 -> T3
+N485 checked.load.bits.le P198 N484 P197 -> T3,T2 [4,1]
+N486 constant 127 -> T3
+N487 bit.and N485 N486 -> T3
+N488 constant 0 -> T3
+N489 int.compare N487 N488 -> T8 [1]
+N490 rotate.right N485 -> T3 [8]
+N491 constant 255 -> T3
+N492 bit.and N490 N491 -> T3
+N493 constant 128 -> T3
+N494 add.wrap N487 N493 -> T3
+cbr N489 B27(P196,N485.R1,N492,P198,P199,P200,P201,P202) B27(P196,N485.R1,N494,P198,P199,P200,P201,P202)
+B27(P203:T1,P204:T2,P205:T3,P206:T5,P207:T7,P208:T0,P209:T2,P210:T2)
+N495 constant 2 -> T4
+N496 call.foreign entity=@lseek N282 N272 N495 P203 P204 -> T4,T1,T2
+N497 call.foreign entity=@lseek N285 N272 N495 N496.R1 N496.R2 -> T4,T1,T2
+N498 constant 34016 -> T3
+N499 checked.load.bits.le P206 N498 N497.R2 -> T4,T2 [8,1]
+N500 constant 34024 -> T3
+N501 checked.load.bits.le P206 N500 N499.R1 -> T4,T2 [8,1]
+N502 constant 34032 -> T3
+N503 checked.load.bits.le P206 N502 N501.R1 -> T4,T2 [8,1]
+N504 constant 34040 -> T3
+N505 checked.load.bits.le P206 N504 N503.R1 -> T4,T2 [8,1]
+N506 constant 1000000 -> T4
+N507 add.wrap N499 N503 -> T4
+N508 mul.wrap N507 N506 -> T4
+N509 add.wrap N501 N505 -> T4
+N510 add.wrap N508 N509 -> T4
+N511 constant 5000000 -> T4
+N512 int.compare N510 N511 -> T8 [6]
+N513 add.wrap N496 N497 -> T4
+N514 constant 1048576 -> T4
+N515 int.compare N513 N514 -> T8 [5]
+N516 constant 14 -> T3
+N517 int.compare N487 N516 -> T8 [1]
+N518 constant 24 -> T3
+N519 int.compare N487 N518 -> T8 [1]
+N520 constant 9 -> T3
+N521 int.compare N487 N520 -> T8 [1]
+N522 bit.and N521 N512 -> T8
+N523 bit.or N519 N522 -> T8
+N524 constant 25 -> T3
+N525 int.compare N487 N524 -> T8 [1]
+N526 bit.or N515 N525 -> T8
+N527 int.zero.extend N517 -> T3
+N528 int.zero.extend N523 -> T3
+N529 constant 8 -> T3
+N530 mul.wrap N528 N529 -> T3
+N531 int.zero.extend N526 -> T3
+N532 constant 4 -> T3
+N533 mul.wrap N531 N532 -> T3
+N534 bit.or N527 N530 -> T3
+N535 bit.or N534 N533 -> T3
+N536 int.compare N535 N488 -> T8 [1]
+cbr N536 B28(N497.R1,N505.R1,P205,N535,N496,N497,P206,P207,P208,P209,P210) B28(N497.R1,N505.R1,P205,N535,N272,N272,P206,P207,P208,P209,P210)
+B28(P211:T1,P212:T2,P213:T3,P214:T3,P215:T4,P216:T4,P217:T5,P218:T7,P219:T0,P220:T2,P221:T2)
+N537 constant 34200 -> T3
+N538 checked.load.bits.le P217 N537 P212 -> T4,T2 [8,1]
+N539 constant 34208 -> T3
+N540 checked.load.bits.le P217 N539 N538.R1 -> T4,T2 [8,1]
+N541 constant 34216 -> T3
+N542 checked.load.bits.le P217 N541 N540.R1 -> T4,T2 [8,1]
+N543 constant 34224 -> T3
+N544 checked.load.bits.le P217 N543 N542.R1 -> T4,T2 [8,1]
+N545 constant 1000000000 -> T4
+N546 mul.wrap N538 N545 -> T4
+N547 add.wrap N546 N540 -> T4
+N548 mul.wrap N542 N545 -> T4
+N549 add.wrap N548 N544 -> T4
+N550 sub.wrap N549 N547 -> T4
+N551 constant 1000000 -> T4
+N552 udiv N550 N551 -> T4
+N553 constant 34016 -> T3
+N554 checked.load.bits.le P217 N553 N544.R1 -> T4,T2 [8,1]
+N555 constant 34024 -> T3
+N556 checked.load.bits.le P217 N555 N554.R1 -> T4,T2 [8,1]
+N557 constant 34032 -> T3
+N558 checked.load.bits.le P217 N557 N556.R1 -> T4,T2 [8,1]
+N559 constant 34040 -> T3
+N560 checked.load.bits.le P217 N559 N558.R1 -> T4,T2 [8,1]
+N561 constant 34048 -> T3
+N562 checked.load.bits.le P217 N561 N560.R1 -> T4,T2 [8,1]
+N563 constant 10000000 -> T4
+N564 constant 10 -> T4
+N565 mul.wrap N554 N563 -> T4
+N566 mul.wrap N556 N564 -> T4
+N567 add.wrap N565 N566 -> T4
+N568 mul.wrap N558 N563 -> T4
+N569 mul.wrap N560 N564 -> T4
+N570 add.wrap N568 N569 -> T4
+N571 constant 1024 -> T4
+N572 mul.wrap N562 N571 -> T4
+N573 constant 35100 -> T3
+N574 checked.store.bits.le P217 N573 P213 N562.R1 -> T2 [4,1]
+N575 constant 35104 -> T3
+N576 checked.store.bits.le P217 N575 P214 N574 -> T2 [4,1]
+N577 constant 35108 -> T3
+N578 checked.store.bits.le P217 N577 N552 N576 -> T2 [8,1]
+N579 constant 35116 -> T3
+N580 checked.store.bits.le P217 N579 N567 N578 -> T2 [8,1]
+N581 constant 35124 -> T3
+N582 checked.store.bits.le P217 N581 N570 N580 -> T2 [8,1]
+N583 constant 35132 -> T3
+N584 checked.store.bits.le P217 N583 N572 N582 -> T2 [8,1]
+N585 constant 35140 -> T3
+N586 checked.store.bits.le P217 N585 P215 N584 -> T2 [8,1]
+N587 constant 35148 -> T3
+N588 checked.store.bits.le P217 N587 P216 N586 -> T2 [8,1]
+N589 constant 35156 -> T3
+N590 constant 1 -> T4
+N591 checked.store.bits.le P217 N589 N590 N588 -> T2 [8,1]
+
+N592 constant 35100 -> T4
+N593 add.wrap N3 N592 -> T4
+N594 constant 64 -> T4
+N595 constant 1 -> T4
+N596 call.foreign entity=@write N595 N593 N594 P211 N591 -> T4,T1,T2
+N597 int.compare N596 N594 -> T8 [1]
+cbr N597 B29(N596.R1,N596.R2,P215,P216,P217,P218,P219,P220,P221) B30(N298,N596.R1,N596.R2,P217,P218,P219,P220,P221)
+B29(P222:T1,P223:T2,P224:T4,P225:T4,P226:T5,P227:T7,P228:T0,P229:T2,P230:T2)
+N598 call.foreign entity=@lseek N282 N272 N272 P222 P223 -> T4,T1,T2
+N599 call.direct entity=@stream_file P226 P227 N598.R2 N598.R1 N282 P224 -> T3,T5,T7,T2,T1
+N600 call.foreign entity=@lseek N285 N272 N272 N599.R4 N599.R3 -> T4,T1,T2
+N601 call.direct entity=@stream_file N599.R1 N599.R2 N600.R2 N600.R1 N285 P225 -> T3,T5,T7,T2,T1
+N602 bit.or N599 N601 -> T3
+N603 call.foreign entity=@free N601.R1 N601.R2 N601.R3 -> T4,T2
+N604 call.foreign entity=e4daa31fcb0b01f5c96b3ef526d5191b0318f4f4713ed79e42a98fcbc64100d3 N602 N601.R4 -> T1
+ret N602 P228 N604 N603.R1 P229 P230
+B30(P231:T3,P232:T1,P233:T2,P234:T5,P235:T7,P236:T0,P237:T2,P238:T2)
+N605 call.foreign entity=@free P234 P235 P233 -> T4,T2
+N606 call.foreign entity=e4daa31fcb0b01f5c96b3ef526d5191b0318f4f4713ed79e42a98fcbc64100d3 P231 P232 -> T1
+ret P231 P236 N606 N605.R1 P237 P238
+T0 form3 c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567
+T1 form3 ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T6 form4 933b152d7a3ae1cbd182fd6ece7825ad5a2536c7395b404382763b99acb94833
+T7 form4 3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c
+T8 bits1
+T9 bits8
+end
+replace F0 @android_runner

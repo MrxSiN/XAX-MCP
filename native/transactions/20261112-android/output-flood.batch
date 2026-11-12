@@ -1,0 +1,32 @@
+R 30ff6355796acd6609f869df701239691c2c69682b9d3018895cc84797aa76d9
+F0
+define @view
+object 4 0x048102010480800400
+end
+define @probe
+(T0,T1,T2,T2,T2)->(T3,T0,T1,T2,T2,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T2,P4:T2)
+N0 constant 65536 -> T4
+N1 call.foreign entity=4d28820df3ffa4160a61ad07f14349a69dfb3eb590c1a09ac081d32d90b9cfa2 N0 P2 -> T5,T6,T2
+N2 heap.view N1 N1.R1 N1.R2 -> T5,T7,T2 [65536,1]
+N3 pointer.address N2 -> T4 [1]
+N4 constant 0 -> T4
+N5 constant 0 -> T3
+N6 constant 1 -> T3
+br B1(P0,P1,N2.R2,N2.R1,N2,P3,P4)
+B1(P5:T0,P6:T1,P7:T2,P8:T7,P9:T5,P10:T2,P11:T2)
+N7 pointer.rebase P9 N3 -> T9 [1]
+N8 call.foreign entity=8019fd39021631618d21a1cda7c564ffd411e475924c6e4c7bb43852ad9519da N6 N7 N0 P5 P7 -> T4,T0,T2
+br B1(N8.R1,P6,N8.R2,P8,P9,P10,P11)
+T0 form3 c0bccc4581f6497319c020d4f090f292851eaca295e91a3814668574aa3ec567
+T1 form3 ea03b918f20d0a81a33884ee817f029b0acdbece68ae2d7bd3eeb935ccf3485b
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T6 form4 933b152d7a3ae1cbd182fd6ece7825ad5a2536c7395b404382763b99acb94833
+T7 form4 3f5c8e3779860667ed838f1c7bb30d71b46ddd4f748ba76b5572e95efbed172c
+T8 bits1
+T9 form2 f615ad96e3f3b84a7bfab041dde4598988ff2ff45d2c382c57a507016ef60f6b
+end
+replace F0 @probe

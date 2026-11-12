@@ -1,0 +1,15 @@
+{
+  "recorded": "2026-11-12",
+  "status": "Discarded development attempts, not acceptance",
+  "attempts": [
+    "Initial hello output length and byte-type errors corrected before acceptance",
+    "Native Windows spawn argv required explicit quoting for ADB and compiler/launcher paths",
+    "Native quotation helper effect and borrowed-result ABI errors rejected before accepted builds",
+    "Maximum-argument pointer table overlapped supervisor status memory; relocated before 64-argument acceptance",
+    "Hard CPU limit initially yielded raw SIGKILL below rounded CPU threshold; default SIGXCPU with a hard backup now classifies correctly",
+    "Kernel child-list pseudo-file absent on this device; independent argv oracle uses ps PPID and real proc cmdline",
+    "One cleanup assertion overlapped another test staging invocation; final device suite rerun alone",
+    "Cancellation test originally waited for a deliberately suppressed response; corrected to test next-request recovery"
+  ],
+  "foreign_authoring_and_test_utilities": "C:\\Users\\User\\.codex\\scratch\\xax-mcp-20261112-android"
+}

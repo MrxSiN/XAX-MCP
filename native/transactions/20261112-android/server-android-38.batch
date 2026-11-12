@@ -1,0 +1,413 @@
+R 8c46d147f36de41d3e59641b7942e3225cf0ead1584e331af491a0a17202b110
+F0
+define @rewritten_literal
+(T0,T1,T2,T3)->(T3,T0,T1,T2)
+B0(P0:T0,P1:T1,P2:T2,P3:T3)
+N0 constant 0 -> T3
+N1 add.wrap P3 N0 -> T3
+N2 constant 8389209344368058924 -> T4
+N3 checked.store.bits.le P0 N1 N2 P2 -> T2 [8,1]
+N4 constant 8 -> T3
+N5 add.wrap P3 N4 -> T3
+N6 constant 7021218897478760994 -> T4
+N7 checked.store.bits.le P0 N5 N6 N3 -> T2 [8,1]
+N8 constant 16 -> T3
+N9 add.wrap P3 N8 -> T3
+N10 constant 8315168235715324258 -> T4
+N11 checked.store.bits.le P0 N9 N10 N7 -> T2 [8,1]
+N12 constant 24 -> T3
+N13 add.wrap P3 N12 -> T3
+N14 constant 7813586423096490530 -> T4
+N15 checked.store.bits.le P0 N13 N14 N11 -> T2 [8,1]
+N16 constant 32 -> T3
+N17 add.wrap P3 N16 -> T3
+N18 constant 8316297082268426867 -> T4
+N19 checked.store.bits.le P0 N17 N18 N15 -> T2 [8,1]
+N20 constant 40 -> T3
+N21 add.wrap P3 N20 -> T3
+N22 constant 7234302100218856308 -> T4
+N23 checked.store.bits.le P0 N21 N22 N19 -> T2 [8,1]
+N24 constant 48 -> T3
+N25 add.wrap P3 N24 -> T3
+N26 constant 9035755136716519970 -> T4
+N27 checked.store.bits.le P0 N25 N26 N23 -> T2 [8,1]
+N28 constant 56 -> T3
+N29 add.wrap P3 N28 -> T3
+N30 constant 8247343735669664893 -> T4
+N31 checked.store.bits.le P0 N29 N30 N27 -> T2 [8,1]
+N32 constant 64 -> T3
+N33 add.wrap P3 N32 -> T3
+N34 constant 2482449244400935797 -> T4
+N35 checked.store.bits.le P0 N33 N34 N31 -> T2 [8,1]
+N36 constant 72 -> T3
+N37 add.wrap P3 N36 -> T3
+N38 constant 8656037696550150714 -> T4
+N39 checked.store.bits.le P0 N37 N38 N35 -> T2 [8,1]
+N40 constant 80 -> T3
+N41 add.wrap P3 N40 -> T3
+N42 constant 7089070852039211105 -> T4
+N43 checked.store.bits.le P0 N41 N42 N39 -> T2 [8,1]
+N44 constant 88 -> T3
+N45 add.wrap P3 N44 -> T3
+N46 constant 2338324135134456937 -> T4
+N47 checked.store.bits.le P0 N45 N46 N43 -> T2 [8,1]
+N48 constant 96 -> T3
+N49 add.wrap P3 N48 -> T3
+N50 constant 4836917077483874662 -> T4
+N51 constant 6061896176128649574 -> T4
+N52 checked.store.bits.le P0 N49 N51 N47 -> T2 [8,1]
+N53 constant 104 -> T3
+N54 add.wrap P3 N53 -> T3
+N55 constant 8386676065534439023 -> T4
+N56 constant 7813877729219275112 -> T4
+N57 checked.store.bits.le P0 N54 N56 N52 -> T2 [8,1]
+N58 constant 112 -> T3
+N59 add.wrap P3 N58 -> T3
+N60 constant 7594306061451813152 -> T4
+N61 constant 7310028429870064489 -> T4
+N62 checked.store.bits.le P0 N59 N61 N57 -> T2 [8,1]
+N63 constant 120 -> T3
+N64 add.wrap P3 N63 -> T3
+N65 constant 8367802956849291380 -> T4
+N66 constant 7310315402454985078 -> T4
+N67 checked.store.bits.le P0 N64 N66 N62 -> T2 [8,1]
+N68 constant 128 -> T3
+N69 add.wrap P3 N68 -> T3
+N70 constant 6359461044970418297 -> T4
+N71 constant 7598805596898402419 -> T4
+N72 checked.store.bits.le P0 N69 N71 N67 -> T2 [8,1]
+N73 constant 136 -> T3
+N74 add.wrap P3 N73 -> T3
+N75 constant 7309940541415310405 -> T4
+N76 constant 8026661834593428854 -> T4
+N77 checked.store.bits.le P0 N74 N76 N72 -> T2 [8,1]
+N78 constant 144 -> T3
+N79 add.wrap P3 N78 -> T3
+N80 constant 8241977783840042851 -> T4
+N81 constant 8295718763603456887 -> T4
+N82 checked.store.bits.le P0 N79 N81 N77 -> T2 [8,1]
+N83 constant 152 -> T3
+N84 add.wrap P3 N83 -> T3
+N85 constant 6061896171816053106 -> T4
+N86 constant 8367736977494536805 -> T4
+N87 checked.store.bits.le P0 N84 N86 N82 -> T2 [8,1]
+N88 constant 160 -> T3
+N89 add.wrap P3 N88 -> T3
+N90 constant 7311156825131345256 -> T4
+N91 constant 7018969345319527784 -> T4
+N92 checked.store.bits.le P0 N89 N91 N87 -> T2 [8,1]
+N93 constant 168 -> T3
+N94 add.wrap P3 N93 -> T3
+N95 constant 7308057374787969138 -> T4
+N96 constant 7956013501152323438 -> T4
+N97 checked.store.bits.le P0 N94 N96 N92 -> T2 [8,1]
+N98 constant 176 -> T3
+N99 add.wrap P3 N98 -> T3
+N100 constant 7234309796934983795 -> T4
+N101 constant 8101253776245286254 -> T4
+N102 checked.store.bits.le P0 N99 N101 N97 -> T2 [8,1]
+N103 constant 184 -> T3
+N104 add.wrap P3 N103 -> T3
+N105 constant 2334402177157656096 -> T4
+N106 constant 7020584244387081321 -> T4
+N107 checked.store.bits.le P0 N104 N106 N102 -> T2 [8,1]
+N108 constant 192 -> T3
+N109 add.wrap P3 N108 -> T3
+N110 constant 8388346166451388760 -> T4
+N111 constant 6359461044988307828 -> T4
+N112 checked.store.bits.le P0 N109 N111 N107 -> T2 [8,1]
+N113 constant 200 -> T3
+N114 add.wrap P3 N113 -> T3
+N115 constant 7594873761656348716 -> T4
+N116 constant 7598243412017692960 -> T4
+N117 checked.store.bits.le P0 N114 N116 N112 -> T2 [8,1]
+N118 constant 208 -> T3
+N119 add.wrap P3 N118 -> T3
+N120 constant 8295742012915741541 -> T4
+N121 constant 2334111870319159140 -> T4
+N122 checked.store.bits.le P0 N119 N121 N117 -> T2 [8,1]
+N123 constant 216 -> T3
+N124 add.wrap P3 N123 -> T3
+N125 constant 7017488259943457140 -> T4
+N126 constant 4692862370969837934 -> T4
+N127 checked.store.bits.le P0 N124 N126 N122 -> T2 [8,1]
+N128 constant 224 -> T3
+N129 add.wrap P3 N128 -> T3
+N130 constant 2334399943506748526 -> T4
+N131 constant 4692861215724168302 -> T4
+N132 checked.store.bits.le P0 N129 N131 N127 -> T2 [8,1]
+N133 constant 232 -> T3
+N134 add.wrap P3 N133 -> T3
+N135 constant 8749489599637909089 -> T4
+N136 constant 8103509686675197266 -> T4
+N137 checked.store.bits.le P0 N134 N136 N132 -> T2 [8,1]
+N138 constant 240 -> T3
+N139 add.wrap P3 N138 -> T3
+N140 constant 8462299358348997664 -> T4
+N141 constant 3346860014570992229 -> T4
+N142 checked.store.bits.le P0 N139 N141 N137 -> T2 [8,1]
+N143 constant 248 -> T3
+N144 add.wrap P3 N143 -> T3
+N145 constant 2338324130822712418 -> T4
+N146 constant 8223683336367063584 -> T4
+N147 checked.store.bits.le P0 N144 N146 N142 -> T2 [8,1]
+N148 constant 256 -> T3
+N149 add.wrap P3 N148 -> T3
+N150 constant 7811903955519042665 -> T4
+N151 constant 2338340670507676005 -> T4
+N152 checked.store.bits.le P0 N149 N151 N147 -> T2 [8,1]
+N153 constant 264 -> T3
+N154 add.wrap P3 N153 -> T3
+N155 constant 7308057374787969124 -> T4
+N156 constant 8367816077906568563 -> T4
+N157 checked.store.bits.le P0 N154 N156 N152 -> T2 [8,1]
+N158 constant 272 -> T3
+N159 add.wrap P3 N158 -> T3
+N160 constant 7311146993654308979 -> T4
+N161 constant 7953747407922619752 -> T4
+N162 checked.store.bits.le P0 N159 N161 N157 -> T2 [8,1]
+N163 constant 280 -> T3
+N164 add.wrap P3 N163 -> T3
+N165 constant 7311150271015776800 -> T4
+N166 constant 8367807273189863023 -> T4
+N167 checked.store.bits.le P0 N164 N166 N162 -> T2 [8,1]
+N168 constant 288 -> T3
+N169 add.wrap P3 N168 -> T3
+N170 constant 2318901274930930223 -> T4
+N171 constant 7142774380113130081 -> T4
+N172 checked.store.bits.le P0 N169 N171 N167 -> T2 [8,1]
+N173 constant 296 -> T3
+N174 add.wrap P3 N173 -> T3
+N175 constant 2334400029389060165 -> T4
+N176 constant 8241904477505153388 -> T4
+N177 checked.store.bits.le P0 N174 N176 N172 -> T2 [8,1]
+N178 constant 304 -> T3
+N179 add.wrap P3 N178 -> T3
+N180 constant 8315178084276987250 -> T4
+N181 constant 2338340649032316263 -> T4
+N182 checked.store.bits.le P0 N179 N181 N177 -> T2 [8,1]
+N183 constant 312 -> T3
+N184 add.wrap P3 N183 -> T3
+N185 constant 8606216625670925600 -> T4
+N186 constant 8295758535559373155 -> T4
+N187 checked.store.bits.le P0 N184 N186 N182 -> T2 [8,1]
+N188 constant 320 -> T3
+N189 add.wrap P3 N188 -> T3
+N190 constant 7310597164893758765 -> T4
+N191 constant 7021147503326489701 -> T4
+N192 checked.store.bits.le P0 N189 N191 N187 -> T2 [8,1]
+N193 constant 328 -> T3
+N194 add.wrap P3 N193 -> T3
+N195 constant 7307218077881360672 -> T4
+N196 constant 8531335158470764660 -> T4
+N197 checked.store.bits.le P0 N194 N196 N192 -> T2 [8,1]
+N198 constant 336 -> T3
+N199 add.wrap P3 N198 -> T3
+N200 constant 2338053341724369769 -> T4
+N201 checked.store.bits.le P0 N199 N200 N197 -> T2 [8,1]
+N202 constant 344 -> T3
+N203 add.wrap P3 N202 -> T3
+N204 constant 7022359143129313345 -> T4
+N205 constant 4692801884995415924 -> T4
+N206 checked.store.bits.le P0 N203 N205 N201 -> T2 [8,1]
+N207 constant 352 -> T3
+N208 add.wrap P3 N207 -> T3
+N209 constant 7093004690147077737 -> T4
+N210 constant 4692861215724168302 -> T4
+N211 checked.store.bits.le P0 N208 N210 N206 -> T2 [8,1]
+N212 constant 360 -> T3
+N213 add.wrap P3 N212 -> T3
+N214 constant 7307199721475501088 -> T4
+N215 constant 7022364301129567570 -> T4
+N216 checked.store.bits.le P0 N213 N215 N211 -> T2 [8,1]
+N217 constant 368 -> T3
+N218 add.wrap P3 N217 -> T3
+N219 constant 7304689480640769650 -> T4
+N220 constant 2325630117581384052 -> T4
+N221 checked.store.bits.le P0 N218 N220 N216 -> T2 [8,1]
+N222 constant 376 -> T3
+N223 add.wrap P3 N222 -> T3
+N224 constant 6998705371793810808 -> T4
+N225 constant 4212947480060719728 -> T4
+N226 checked.store.bits.le P0 N223 N225 N221 -> T2 [8,1]
+N227 constant 384 -> T3
+N228 add.wrap P3 N227 -> T3
+N229 constant 8007527081403835235 -> T4
+N230 constant 2338323048323965472 -> T4
+N231 checked.store.bits.le P0 N228 N230 N226 -> T2 [8,1]
+N232 constant 392 -> T3
+N233 add.wrap P3 N232 -> T3
+N234 constant 2336349433641923696 -> T4
+N235 constant 7307218078233554543 -> T4
+N236 checked.store.bits.le P0 N233 N235 N231 -> T2 [8,1]
+N237 constant 400 -> T3
+N238 add.wrap P3 N237 -> T3
+N239 constant 7307195323227862131 -> T4
+N240 constant 8389754698058785568 -> T4
+N241 checked.store.bits.le P0 N238 N240 N236 -> T2 [8,1]
+N242 constant 408 -> T3
+N243 add.wrap P3 N242 -> T3
+N244 constant 8241904408785395832 -> T4
+N245 constant 7598258015748579616 -> T4
+N246 checked.store.bits.le P0 N243 N245 N241 -> T2 [8,1]
+N247 constant 416 -> T3
+N248 add.wrap P3 N247 -> T3
+N249 constant 7810218554650817383 -> T4
+N250 constant 8029462264021280122 -> T4
+N251 checked.store.bits.le P0 N248 N250 N246 -> T2 [8,1]
+N252 constant 424 -> T3
+N253 add.wrap P3 N252 -> T3
+N254 constant 8241904421670839413 -> T4
+N255 constant 7309940795038198126 -> T4
+N256 checked.store.bits.le P0 N253 N255 N251 -> T2 [8,1]
+N257 constant 432 -> T3
+N258 add.wrap P3 N257 -> T3
+N259 constant 2322495513059620455 -> T4
+N260 constant 7953674101437330801 -> T4
+N261 checked.store.bits.le P0 N258 N260 N256 -> T2 [8,1]
+N262 constant 440 -> T3
+N263 add.wrap P3 N262 -> T3
+N264 constant 2338334069411308914 -> T4
+N265 constant 7575181491491184740 -> T4
+N266 checked.store.bits.le P0 N263 N265 N261 -> T2 [8,1]
+N267 constant 448 -> T3
+N268 add.wrap P3 N267 -> T3
+N269 constant 7310222304408074341 -> T4
+N270 constant 7379557499027878772 -> T4
+N271 checked.store.bits.le P0 N268 N270 N266 -> T2 [8,1]
+N272 constant 456 -> T3
+N273 add.wrap P3 N272 -> T3
+N274 constant 7070762965497176432 -> T4
+N275 constant 8367809531219305313 -> T4
+N276 checked.store.bits.le P0 N273 N275 N271 -> T2 [8,1]
+N277 constant 464 -> T3
+N278 add.wrap P3 N277 -> T3
+N279 constant 7310033182989317241 -> T4
+N280 constant 3275369751330710888 -> T4
+N281 checked.store.bits.le P0 N278 N280 N276 -> T2 [8,1]
+N282 constant 472 -> T3
+N283 add.wrap P3 N282 -> T3
+N284 constant 7595429761396206945 -> T4
+N285 constant 7234316346692756851 -> T4
+N286 checked.store.bits.le P0 N283 N285 N281 -> T2 [8,1]
+N287 constant 480 -> T3
+N288 add.wrap P3 N287 -> T3
+N289 constant 2338610072325743724 -> T4
+N290 constant 8531335158836773152 -> T4
+N291 checked.store.bits.le P0 N288 N290 N286 -> T2 [8,1]
+N292 constant 488 -> T3
+N293 add.wrap P3 N292 -> T3
+N294 constant 8314037906471939681 -> T4
+N295 constant 8030595933524026217 -> T4
+N296 checked.store.bits.le P0 N293 N295 N291 -> T2 [8,1]
+N297 constant 496 -> T3
+N298 add.wrap P3 N297 -> T3
+N299 constant 8315177770458378869 -> T4
+N300 constant 7598805596898879349 -> T4
+N301 checked.store.bits.le P0 N298 N300 N296 -> T2 [8,1]
+N302 constant 504 -> T3
+N303 add.wrap P3 N302 -> T3
+N304 constant 2318917737439720815 -> T4
+N305 constant 6278114918229108086 -> T4
+N306 checked.store.bits.le P0 N303 N305 N301 -> T2 [8,1]
+N307 constant 512 -> T3
+N308 add.wrap P3 N307 -> T3
+N309 constant 7959953107418574664 -> T4
+N310 constant 6998720777740906089 -> T4
+N311 checked.store.bits.le P0 N308 N310 N306 -> T2 [8,1]
+N312 constant 520 -> T3
+N313 add.wrap P3 N312 -> T3
+N314 constant 7236850772479075429 -> T4
+N315 constant 8030591510256837742 -> T4
+N316 checked.store.bits.le P0 N313 N315 N311 -> T2 [8,1]
+N317 constant 528 -> T3
+N318 add.wrap P3 N317 -> T3
+N319 constant 8026294576625033331 -> T4
+N320 constant 7164793118479377513 -> T4
+N321 checked.store.bits.le P0 N318 N320 N316 -> T2 [8,1]
+N322 constant 536 -> T3
+N323 add.wrap P3 N322 -> T3
+N324 constant 7954884599231374958 -> T4
+N325 constant 7300933329798456680 -> T4
+N326 checked.store.bits.le P0 N323 N325 N321 -> T2 [8,1]
+N327 constant 544 -> T3
+N328 add.wrap P3 N327 -> T3
+N329 constant 3348827028104224884 -> T4
+N330 constant 3251725810509903217 -> T4
+N331 checked.store.bits.le P0 N328 N330 N326 -> T2 [8,1]
+N332 constant 552 -> T3
+N333 add.wrap P3 N332 -> T3
+N334 constant 7810763972418686496 -> T4
+N335 constant 7290614692226818349 -> T4
+N336 checked.store.bits.le P0 N333 N335 N331 -> T2 [8,1]
+N337 constant 560 -> T3
+N338 add.wrap P3 N337 -> T3
+N339 constant 8243122710530501740 -> T4
+N340 constant 8079569282362729848 -> T4
+N341 checked.store.bits.le P0 N338 N340 N336 -> T2 [8,1]
+N342 constant 568 -> T3
+N343 add.wrap P3 N342 -> T3
+N344 constant 8007525917534810736 -> T4
+N345 constant 8391173023733085548 -> T4
+N346 checked.store.bits.le P0 N343 N345 N341 -> T2 [8,1]
+N347 constant 576 -> T3
+N348 add.wrap P3 N347 -> T3
+N349 constant 8656004586412843122 -> T4
+N350 constant 6350185861400194861 -> T4
+N351 checked.store.bits.le P0 N348 N350 N346 -> T2 [8,1]
+N352 constant 584 -> T3
+N353 add.wrap P3 N352 -> T3
+N354 constant 8391171955405715553 -> T4
+N355 constant 4710571985243953217 -> T4
+N356 checked.store.bits.le P0 N353 N355 N351 -> T2 [8,1]
+N357 constant 592 -> T3
+N358 add.wrap P3 N357 -> T3
+N359 constant 2319765220670797170 -> T4
+N360 constant 6350185899831083588 -> T4
+N361 checked.store.bits.le P0 N358 N360 N356 -> T2 [8,1]
+N362 constant 600 -> T3
+N363 add.wrap P3 N362 -> T3
+N364 constant 2338042638598628708 -> T4
+N365 constant 4710571985243953217 -> T4
+N366 checked.store.bits.le P0 N363 N365 N361 -> T2 [8,1]
+N367 constant 608 -> T3
+N368 add.wrap P3 N367 -> T3
+N369 constant 7738135660106375526 -> T4
+N370 constant 6007595509589623886 -> T4
+N371 checked.store.bits.le P0 N368 N370 N366 -> T2 [8,1]
+N372 constant 616 -> T3
+N373 add.wrap P3 N372 -> T3
+N374 constant 8390050456749744686 -> T4
+N375 constant 7142774207708484165 -> T4
+N376 checked.store.bits.le P0 N373 N375 N371 -> T2 [8,1]
+N377 constant 624 -> T3
+N378 add.wrap P3 N377 -> T3
+N379 constant 8318822883567559535 -> T4
+N380 constant 7142835952915147116 -> T4
+N381 checked.store.bits.le P0 N378 N380 N376 -> T2 [8,1]
+N382 constant 632 -> T3
+N383 add.wrap P3 N382 -> T3
+N384 constant 577662825 -> T3
+N385 constant 1869508193 -> T3
+N386 checked.store.bits.le P0 N383 N385 N381 -> T2 [4,1]
+N387 constant 636 -> T3
+N388 add.wrap P3 N387 -> T3
+N389 constant 8762 -> T5
+N390 constant 8308 -> T5
+N391 checked.store.bits.le P0 N388 N390 N386 -> T2 [2,1]
+N392 constant 638 -> T3
+N393 constant 638 -> T3
+N394 constant 638 -> T3
+N395 add.wrap P3 N394 -> T3
+
+ret N395 P0 P1 N391
+T0 form2 ed7f465bd391df681fba3366051d89f1cf6dbd0fa4983971d7bb14a55f889d29
+T1 form4 90131901056757316b5096155d259696ddb062b0168afd8aa30e80668f40fed3
+T2 form3 2b2704e5644b2a600cc1c05f91f133f54c03637cddb3aaf658a635fff068bd0a
+T3 bits32
+T4 bits64
+T5 bits16
+
+
+end
+replace F53 @rewritten_literal
