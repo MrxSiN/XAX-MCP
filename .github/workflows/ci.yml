@@ -368,6 +368,11 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference='Stop'
+          trap {
+           $message=$_.Exception.Message.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A')
+           Write-Output "::error title=JVM replay and rebuild::$message"
+           exit 1
+          }
           $compiler=$env:XAXC
           $dependency=Get-Content native/jvm-dependency.json -Raw|ConvertFrom-Json
           if((Get-FileHash -LiteralPath $compiler).Hash.ToLowerInvariant()-ne$dependency.seed_sha256){throw 'Wrong JVM compiler seed'}
@@ -420,6 +425,9 @@ jobs:
           Identity $fixtures.mutation_negative.record
           & $compiler edit $fixtures.mutation_negative.base.path $fixtures.mutation_negative.record.path build/jvm/replay/declined-snapshot.out
           if($LASTEXITCODE-ne1-or(Get-Content build/jvm/replay/declined-snapshot.out -Raw)-notmatch'XAX.WORKSPACE.TOPOLOGY'){throw 'Snapshot mutation boundary differs'}
+          # The decline above is expected and verified. GitHub's pwsh wrapper
+          # otherwise exits with this native test's nonzero LASTEXITCODE.
+          $global:LASTEXITCODE=0
           @{records=$count;programs_double_built=4;compiler_sha256=$dependency.seed_sha256;runtime_execution='Separate exact local Java runtime evidence';release_ready=$false}|ConvertTo-Json|Set-Content build/jvm/summary.json -Encoding utf8NoBOM
 
       - uses: actions/upload-artifact@v4

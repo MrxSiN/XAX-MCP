@@ -1,0 +1,28 @@
+{
+  "schema": "xax-mcp-jvm-ci-wrapper-v1",
+  "recorded": "2026-11-12",
+  "failed_run": "https://github.com/MrxSiN/XAX-MCP/actions/runs/43179628463",
+  "implementation_commit": "9fa19333ff29a43d7b7a2b87e33d428fef491515",
+  "windows_native_job": "success",
+  "windows_jvm_job": "failure",
+  "hosted_log_access": "Public API denied download; available Git credential not accepted by log API; browser view unavailable",
+  "diagnosis": "The final expected native mutation decline leaves LASTEXITCODE=1. GitHub pwsh wrapper propagates that status even after the PowerShell assertions succeed. This defect necessarily fails an otherwise passing step; exact original hosted stopping point was not observed.",
+  "local_reproduction": [
+    {
+      "reset_after_verified_decline": false,
+      "wrapper_exit": 1,
+      "native_decline": "XAX.WORKSPACE.TOPOLOGY",
+      "stdout": "Expected native decline was verified\r\n"
+    },
+    {
+      "reset_after_verified_decline": true,
+      "wrapper_exit": 0,
+      "native_decline": "XAX.WORKSPACE.TOPOLOGY",
+      "stdout": "Expected native decline was verified\r\n"
+    }
+  ],
+  "repair": "Reset LASTEXITCODE only after asserting native exit 1 and the expected topology diagnostic; emit a bounded escaped CI error annotation on unexpected failures",
+  "native_source_or_artifacts_changed": false,
+  "hosted_repair_acceptance_pending": true,
+  "release_ready": false
+}
