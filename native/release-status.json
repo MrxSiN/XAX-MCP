@@ -293,6 +293,7 @@
     "release_ready": false,
     "hosted_build_replay_checked": true,
     "hosted_jvm_runtime_checked": false,
-    "hosted_evidence": "docs/evidence/native-jvm-hosted-20261112.json"
+    "hosted_evidence": "docs/evidence/native-jvm-hosted-20261112.json",
+    "hosted_workflow_identity": "docs/evidence/native-jvm-hosted-workflow-identity-20261112.json"
   }
 }

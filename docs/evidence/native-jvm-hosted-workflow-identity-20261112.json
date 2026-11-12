@@ -1,0 +1,33 @@
+{
+  "schema": "xax-mcp-hosted-workflow-identity-v1",
+  "recorded": "2026-11-12",
+  "supplements": "docs/evidence/native-jvm-hosted-20261112.json",
+  "accepted_run": {
+    "id": 43181133633,
+    "url": "https://github.com/MrxSiN/XAX-MCP/actions/runs/43181133633",
+    "implementation_commit": "bb57b3874562724aa6cf3708d89330712a07a48a",
+    "conclusion": "success",
+    "created_at": "2026-11-12T08:13:06Z",
+    "updated_at": "2026-11-12T08:19:43Z"
+  },
+  "scope": "Clarifies that the prior workflow field identifies Windows working-copy bytes; exact accepted Git blob identity is recorded separately here",
+  "workflow_path": ".github/workflows/ci.yml",
+  "working_copy": {
+    "bytes": 38627,
+    "sha256": "7c80522a36baaf478b6acfb725fc63f37c20c28c6129ec89a1001170b85fa872",
+    "crlf_count": 436
+  },
+  "accepted_git_blob": {
+    "commit": "bb57b3874562724aa6cf3708d89330712a07a48a",
+    "git_object_id": "244d88ebd63411e405dbd7054ed0bab5d0db6156",
+    "bytes": 38191,
+    "sha256": "67e94133bc6d644b99388e0f8494b0c908f7d3947f5ae3e6dda810f8916dfe62",
+    "line_endings": "LF"
+  },
+  "raw_workflow_byte_equality": false,
+  "contents_equal_after_crlf_to_lf_normalization": true,
+  "all_native_source_and_artifact_bindings_exact": true,
+  "prior_evidence_preserved": true,
+  "native_source_or_workflow_changed": false,
+  "release_ready": false
+}

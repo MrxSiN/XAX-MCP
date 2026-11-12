@@ -35,6 +35,9 @@ builds, classfile checks and expected mutation decline. The
 [initial wrapper failure and repair](evidence/native-jvm-ci-wrapper-20261112.json)
 remain separate evidence. Hosted execution of Java or an Android device is not
 claimed; their runtime acceptance is local and independently bound.
+The [workflow identity supplement](evidence/native-jvm-hosted-workflow-identity-20261112.json)
+distinguishes the Windows CRLF working-copy hash from the accepted LF Git blob;
+newline-normalized contents agree and all native artifact bindings are byte-exact.
 
 ## 2026-11-12 — bounded inspection output-name pins
 
