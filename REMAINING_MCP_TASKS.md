@@ -22,8 +22,9 @@ The paused 2026-11-11 handoff remains in Git history at `1850dd7`.
   the fresh native-only archive repeated the exact CI step, ten double-build
   cases, runtime and protocol checks with empty PATH and paths containing spaces.
   All packaged bytes stayed unchanged; the user's README edit was excluded.
-- [ ] Observe the new hosted JVM mutation replay job after the implementation
-  push; hosted execution of the local inventoried Java runtime is not claimed.
+- [x] Passed all three hosted implementation-commit CI jobs, including the new
+  JVM mutation replay/build job. See [hosted acceptance](docs/evidence/native-jvm-mutation-hosted-20261113.json).
+  Hosted execution of the local inventoried Java runtime is not claimed.
 
 See [mutation acceptance](docs/evidence/native-jvm-mutation-20261113.json),
 [target/toolchain verification](docs/evidence/native-jvm-mutation-target-verification-20261113.json)

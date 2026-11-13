@@ -316,6 +316,8 @@
     "atomic_publication_gate_closed": false,
     "full_workspace_alias_gate_closed": false,
     "release_ready": false,
-    "hosted_build_replay_checked": false
+    "hosted_build_replay_checked": true,
+    "hosted_runtime_checked": false,
+    "hosted_evidence": "docs/evidence/native-jvm-mutation-hosted-20261113.json"
   }
 }

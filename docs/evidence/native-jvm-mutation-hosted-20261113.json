@@ -1,0 +1,228 @@
+{
+  "schema": "xax-mcp-jvm-mutation-hosted-acceptance-v1",
+  "recorded": "2026-11-13",
+  "run": {
+    "id": 43414288646,
+    "url": "https://github.com/MrxSiN/XAX-MCP/actions/runs/43414288646",
+    "implementation_commit": "977339aa10394fb88bde52d19a75d90c52ceaf01",
+    "conclusion": "success",
+    "created_at": "2026-11-13T11:05:59Z",
+    "updated_at": "2026-11-13T11:13:29Z"
+  },
+  "jobs": [
+    {
+      "id": 131848154243,
+      "name": "windows-native",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check out the immutable XAX native dependency independently",
+          "conclusion": "success"
+        },
+        {
+          "name": "Replay semantic transactions and rebuild native programs twice",
+          "conclusion": "success"
+        },
+        {
+          "name": "Replay read-only STDIO protocol golden responses",
+          "conclusion": "success"
+        },
+        {
+          "name": "Construct, build, confine, reject invalid requests and isolate clients",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify native sandbox timeout enforcement",
+          "conclusion": "success"
+        },
+        {
+          "name": "Replay and rebuild Android and inspection-pin previews",
+          "conclusion": "success"
+        },
+        {
+          "name": "Assemble the native-only Windows preview package",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Check out the immutable XAX native dependency independently",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 131848154593,
+      "name": "windows-jvm",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check out the separate immutable JVM compiler",
+          "conclusion": "success"
+        },
+        {
+          "name": "Replay JVM sources and rebuild native launchers and JARs",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Check out the separate immutable JVM compiler",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 131848154646,
+      "name": "windows-jvm-mutation",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check out the immutable JVM mutation compiler",
+          "conclusion": "success"
+        },
+        {
+          "name": "Replay JVM mutation sources and rebuild changed programs",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Check out the immutable JVM mutation compiler",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "mutation_source_binding": [
+    {
+      "path": "native/candidates/20261113-jvm-mutation/jvm-launcher-snapshot.xax",
+      "bytes": 161968,
+      "sha256": "adf2161cafc6d9b249aed25d015b1c24a3724d0ce73c3e59bec90c0981e4f186",
+      "root": "d22915a55c25228fdfd13fb534c9616207c014b5c44d69cb7fa3dbd19c20deb2"
+    },
+    {
+      "path": "native/candidates/20261113-jvm-mutation/jvm-launcher.prov",
+      "bytes": 268,
+      "sha256": "31644cbf3653c2b8e655f94ba5aea4d5fb1bca7d8768e60c0f5eaafaac439e17"
+    },
+    {
+      "path": "native/candidates/20261113-jvm-mutation/jvm-launcher.xax",
+      "bytes": 161690,
+      "sha256": "9bd9919a63fa4835eb7893fb30638d775525ac54e0ad96dce723b320a3cba618",
+      "root": "5c68607f3222ce2903b4e077fee953fc3b90b92d6ff54874f6e1cadb8d7db9f9"
+    },
+    {
+      "path": "native/candidates/20261113-jvm-mutation/server-snapshot.xax",
+      "bytes": 2976381,
+      "sha256": "8fe6856abd15e41c63871b5aa9244ff9d19dc9fcf4f2b680207588a87a9321ff",
+      "root": "90313a52d73e5948dc7075274240ddd1ab9ed74534211872dc9f7e7d1dbac0ef"
+    },
+    {
+      "path": "native/candidates/20261113-jvm-mutation/server.xax",
+      "bytes": 2976102,
+      "sha256": "025b6119798adb6bc405113d2a93e92c365680568fe3753ea704d287fb25da88",
+      "root": "1252d97153e66091a1e2fd8627f7c513c187d0c9b37c6a9e56c57fa1738a8446"
+    },
+    {
+      "path": "native/candidates/20261113-jvm-mutation/xax-mcp-native.exe",
+      "bytes": 606208,
+      "sha256": "d64d5411e9cc2b899f3c174edf18bd1f5e757bdbc409b309822ecf49709a68d6"
+    },
+    {
+      "path": "native/candidates/20261113-jvm-mutation/xax-mcp-native.prov",
+      "bytes": 268,
+      "sha256": "3e3444e8eeb13e3c8af5efdc89536814bb98bf8ed75f1ba0e2e31a28123fda5f"
+    },
+    {
+      "path": "native/candidates/20261113-jvm-mutation/xax-mcp-sandbox.exe",
+      "bytes": 153088,
+      "sha256": "6ef0f256dd1fc2f68daca439b6bb1e52b1a256cf97948142eb4b5782b352bad2"
+    }
+  ],
+  "dependency": {
+    "path": "native/jvm-mutation-dependency.json",
+    "bytes": 2146,
+    "sha256": "67fabc520076c93c20cef75e0439285adf808cb6a5d836d638bf0b2a009e2070"
+  },
+  "source_records": {
+    "path": "native/transactions/20261113-jvm-mutation/manifest.json",
+    "bytes": 53529,
+    "sha256": "1a7dc5bd37565ec81f0eabe95bae161d09d78bca074178ce78a75a5ab50e6ee3"
+  },
+  "workflow": {
+    "path": ".github/workflows/ci.yml",
+    "git_blob_sha256": "2aa26b60e574535b43c4762202a0c057243bfc3245c2d06f70d735b7d0711c23",
+    "working_copy_sha256": "33c41e3555111893097b2c2a20f4e6dfbe3dbe8df2bfb6ec7e31a70fec3e89b3",
+    "newline_normalized_equal": true,
+    "description": "Workflow checkout LF/CRLF differences are distinguished from byte-exact native artifact bindings"
+  },
+  "native_mutation_records_replayed": 47,
+  "build_cases_double_built": 10,
+  "jar_classfile_major": 61,
+  "mutation_stale_and_invalid_verification_gates_checked": true,
+  "default_windows_and_prior_jvm_jobs_passed": true,
+  "scope": "Hosted native source replay and deterministic builds only; the exact local Java runtime and Android device are separately bound",
+  "local_runtime_and_package": "docs/evidence/native-jvm-mutation-20261113.json",
+  "existing_mcp_configuration_unchanged": true,
+  "release_ready": false,
+  "full_mission_complete": false
+}

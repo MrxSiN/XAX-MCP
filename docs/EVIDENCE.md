@@ -14,7 +14,9 @@ runtime checks with empty PATH and unchanged packaged bytes. Existing desktop
 configuration, default Gen3 and historical previews remain unchanged. This does
 not close content-integrity, atomic-publication, workspace-alias or wider security
 gates and does not promote a release. Hosted build/replay observation is separate
-from local acceptance and from the exact local Java runtime.
+from local acceptance and from the exact local Java runtime. All three
+[implementation-commit hosted jobs](evidence/native-jvm-mutation-hosted-20261113.json)
+subsequently passed; native artifact bindings are byte-exact.
 
 ## 2026-11-12 — post-JVM inspection stream feasibility
 
