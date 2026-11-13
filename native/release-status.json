@@ -295,5 +295,27 @@
     "hosted_jvm_runtime_checked": false,
     "hosted_evidence": "docs/evidence/native-jvm-hosted-20261112.json",
     "hosted_workflow_identity": "docs/evidence/native-jvm-hosted-workflow-identity-20261112.json"
+  },
+  "jvm_mutation_preview": {
+    "recorded": "2026-11-13",
+    "state": "EXECUTED explicit unsigned JVM mutation preview; not default deployment",
+    "checkpoints": "native/candidates/20261113-jvm-mutation/checkpoints.json",
+    "dependency": "native/jvm-mutation-dependency.json",
+    "evidence": "docs/evidence/native-jvm-mutation-20261113.json",
+    "target_verification": "docs/evidence/native-jvm-mutation-target-verification-20261113.json",
+    "implementation_status": "EXECUTED",
+    "toolchain_status": "TESTED",
+    "snapshot_mutation": true,
+    "positive_mutation_cases": 8,
+    "typed_operation_kinds": 9,
+    "clean_package_checked": true,
+    "installed_codex_backend_readonly_tested": true,
+    "existing_mcp_connection_unchanged": true,
+    "default_deployment_pin_unchanged": true,
+    "content_integrity_gate_closed": false,
+    "atomic_publication_gate_closed": false,
+    "full_workspace_alias_gate_closed": false,
+    "release_ready": false,
+    "hosted_build_replay_checked": false
   }
 }

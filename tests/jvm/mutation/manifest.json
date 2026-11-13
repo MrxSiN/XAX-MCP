@@ -1,0 +1,367 @@
+{
+  "schema": "xax-mcp-jvm-mutation-fixtures-v1",
+  "recorded": "2026-11-13",
+  "dependency": "native/jvm-mutation-dependency.json",
+  "base": {
+    "path": "tests/jvm/wordcount-v1.xax",
+    "bytes": 17655,
+    "sha256": "d12c9956e2d8149fd38cc6cdfae851beff02f7ee86fdc1f7f7d241ebb91cfb59",
+    "root": "ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd"
+  },
+  "fixtures": [
+    {
+      "name": "count_semicolons",
+      "operation": "SetConstant",
+      "base": {
+        "path": "tests/jvm/wordcount-v1.xax",
+        "bytes": 17655,
+        "sha256": "d12c9956e2d8149fd38cc6cdfae851beff02f7ee86fdc1f7f7d241ebb91cfb59",
+        "root": "ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd"
+      },
+      "record": {
+        "path": "tests/jvm/mutation/count_semicolons.edit",
+        "bytes": 78,
+        "sha256": "7fee4607af22a2aee784d766b0aaada40eb83e34c60f55599d5d91db69bcd612"
+      },
+      "source": {
+        "path": "tests/jvm/mutation/count_semicolons.xax",
+        "bytes": 17762,
+        "sha256": "d6539c359a38b2d0eacac67bbf2dc02b146720fcf93551ab97ecd2109e2dee14",
+        "root": "4b08d23a73b72f4f17cee6035990f4507615562bd0ee7d0e9a95bb858e4b2d70"
+      },
+      "jar": {
+        "path": "tests/jvm/mutation/count_semicolons.jar",
+        "bytes": 3281,
+        "sha256": "32ab044f8f15e034ce6ff21dfd4146eea2e0ffb3bfc329a1cd232b4605e0e928"
+      },
+      "provenance": {
+        "path": "tests/jvm/mutation/count_semicolons.prov",
+        "bytes": 268,
+        "sha256": "8a44564ecc4cfa821f7fa385b5eadf7e8fe4bb0f03399689526f87c7cf0dddae"
+      },
+      "input_hex": "6f6e653b74776f3b746872656520666f75720a",
+      "expected_stdout_hex": "20202020202032202020202020203220202020202031390a"
+    },
+    {
+      "name": "zero_line_accumulator",
+      "operation": "SetOperation",
+      "base": {
+        "path": "tests/jvm/wordcount-v1.xax",
+        "bytes": 17655,
+        "sha256": "d12c9956e2d8149fd38cc6cdfae851beff02f7ee86fdc1f7f7d241ebb91cfb59",
+        "root": "ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd"
+      },
+      "record": {
+        "path": "tests/jvm/mutation/zero_line_accumulator.edit",
+        "bytes": 78,
+        "sha256": "b1912667b97c1c6cc51fd50d3514bc361be0631831a95ec4f0ce9bdd85104073"
+      },
+      "source": {
+        "path": "tests/jvm/mutation/zero_line_accumulator.xax",
+        "bytes": 17656,
+        "sha256": "835999738936bfc67532522b69a2a9783e7f525377b55b2b9d5f7b046b340b30",
+        "root": "2007ffe4b45a704c3fa8e46ae1755627919f45c83945c2105811c1303862f785"
+      },
+      "jar": {
+        "path": "tests/jvm/mutation/zero_line_accumulator.jar",
+        "bytes": 3281,
+        "sha256": "2cb637e61980afae796dbc3239549b3c0c1ea5b20c96957f9bac11ab5f50f93f"
+      },
+      "provenance": {
+        "path": "tests/jvm/mutation/zero_line_accumulator.prov",
+        "bytes": 268,
+        "sha256": "a7eb7fe0e50a25ca1900cf62c613508d150b4419aea691ea3d4b610aa7176822"
+      },
+      "input_hex": "6f6e653b74776f3b746872656520666f75720a",
+      "expected_stdout_hex": "20202020202030202020202020203220202020202031390a"
+    },
+    {
+      "name": "replace_accumulator_use",
+      "operation": "ReplaceUse",
+      "base": {
+        "path": "tests/jvm/wordcount-v1.xax",
+        "bytes": 17655,
+        "sha256": "d12c9956e2d8149fd38cc6cdfae851beff02f7ee86fdc1f7f7d241ebb91cfb59",
+        "root": "ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd"
+      },
+      "record": {
+        "path": "tests/jvm/mutation/replace_accumulator_use.edit",
+        "bytes": 84,
+        "sha256": "1094b6e27f89c96e05e8e7ab427f5c6b9a02762a49e9d5a8c5d34c05fa7fdd4e"
+      },
+      "source": {
+        "path": "tests/jvm/mutation/replace_accumulator_use.xax",
+        "bytes": 17656,
+        "sha256": "82667c27ecf84bb30e194693e46f155b9458c2fdc8205034696112e662d2239d",
+        "root": "7bcde82c4ebe11559c1d6717f8959a81ff3613c1a02f47afa16337282b80a0d4"
+      },
+      "jar": {
+        "path": "tests/jvm/mutation/replace_accumulator_use.jar",
+        "bytes": 3279,
+        "sha256": "9c02ba9b7ea0d06f35e875d954a744d8f016d1154c2dfa929ae6cf40bc53fb09"
+      },
+      "provenance": {
+        "path": "tests/jvm/mutation/replace_accumulator_use.prov",
+        "bytes": 268,
+        "sha256": "4e4d5f7d1d4eafba73188276c429d4acdf4f17c3150416a422bc8e3bcfd1a828"
+      },
+      "input_hex": "6f6e653b74776f3b746872656520666f75720a",
+      "expected_stdout_hex": "20202020202032202020202020203220202020202031390a"
+    },
+    {
+      "name": "insert_rebind",
+      "operation": "InsertPureNode and ReplaceUse",
+      "base": {
+        "path": "tests/jvm/wordcount-v1.xax",
+        "bytes": 17655,
+        "sha256": "d12c9956e2d8149fd38cc6cdfae851beff02f7ee86fdc1f7f7d241ebb91cfb59",
+        "root": "ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd"
+      },
+      "record": {
+        "path": "tests/jvm/mutation/insert_rebind.edit",
+        "bytes": 157,
+        "sha256": "f41faaae2b5b5d05f9a1fced318adf9235db58d92e19e9ebe9dbe6092dc14729"
+      },
+      "source": {
+        "path": "tests/jvm/mutation/insert_rebind.xax",
+        "bytes": 17800,
+        "sha256": "ed9e0a2f06184128f658066d7c66a54c843727160bf4c1a20bfb6c04d5d0a4c9",
+        "root": "bb17a7daaeebfd7cb8c75bbdfe86963e25f9aeaa72d89464e5d13729c62ae941"
+      },
+      "jar": {
+        "path": "tests/jvm/mutation/insert_rebind.jar",
+        "bytes": 3281,
+        "sha256": "27318c52ee2789afd2d2009db2de4d22e5c3d9084c090d5af9e53b0f54b2bda1"
+      },
+      "provenance": {
+        "path": "tests/jvm/mutation/insert_rebind.prov",
+        "bytes": 268,
+        "sha256": "4e68c52f31e699327a8f215651e1f8cc6260cd10b11735d6f336b1742e580973"
+      },
+      "input_hex": "6f6e653b74776f3b746872656520666f75720a",
+      "expected_stdout_hex": "20202020202032202020202020203220202020202031390a"
+    },
+    {
+      "name": "insert_reconnect_edge",
+      "operation": "InsertPureNode, DisconnectEdgeArgument and ConnectEdgeArgument",
+      "base": {
+        "path": "tests/jvm/wordcount-v1.xax",
+        "bytes": 17655,
+        "sha256": "d12c9956e2d8149fd38cc6cdfae851beff02f7ee86fdc1f7f7d241ebb91cfb59",
+        "root": "ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd"
+      },
+      "record": {
+        "path": "tests/jvm/mutation/insert_reconnect_edge.edit",
+        "bytes": 193,
+        "sha256": "131710fcc536ed28be61417a2fa51c6ed5709626f9cc6985076dc296e26e5802"
+      },
+      "source": {
+        "path": "tests/jvm/mutation/insert_reconnect_edge.xax",
+        "bytes": 17692,
+        "sha256": "2e20725bd547cc72d73ea0c25aaad1abc6816647b015950cfdf70e63976179bd",
+        "root": "e28b4a46ab8f84d023252c0a8a46c05c8c942703deb484a4f5d8739e29080389"
+      },
+      "jar": {
+        "path": "tests/jvm/mutation/insert_reconnect_edge.jar",
+        "bytes": 3281,
+        "sha256": "316e01a8cfb9e2bc6df1f77b58208b56d212b74eb317f8a877b36c82634ae749"
+      },
+      "provenance": {
+        "path": "tests/jvm/mutation/insert_reconnect_edge.prov",
+        "bytes": 268,
+        "sha256": "341642cea341d3fd335b15428b3e80f2079e7349e73682986b30a9473a03be93"
+      },
+      "input_hex": "6f6e653b74776f3b746872656520666f75720a",
+      "expected_stdout_hex": "20202020202032202020202020203220202020202031390a"
+    },
+    {
+      "name": "delete_unused",
+      "operation": "DeleteNode",
+      "base": {
+        "path": "tests/jvm/mutation/insert_rebind.xax",
+        "bytes": 17800,
+        "sha256": "ed9e0a2f06184128f658066d7c66a54c843727160bf4c1a20bfb6c04d5d0a4c9",
+        "root": "bb17a7daaeebfd7cb8c75bbdfe86963e25f9aeaa72d89464e5d13729c62ae941"
+      },
+      "record": {
+        "path": "tests/jvm/mutation/delete_unused.edit",
+        "bytes": 76,
+        "sha256": "4c7eb44fbf10e54ef0aec3734019ed9222865610a99f144a9b2f1e104519b055"
+      },
+      "source": {
+        "path": "tests/jvm/mutation/delete_unused.xax",
+        "bytes": 17762,
+        "sha256": "c713a1b87bd4446cba5890eaab50ac0605b1d12cf6444073935e2a5514b2897b",
+        "root": "59704882902044fa063112f432d93cd57bc22c6b69e557b4a94562b382f96953"
+      },
+      "jar": {
+        "path": "tests/jvm/mutation/delete_unused.jar",
+        "bytes": 3281,
+        "sha256": "fa69a3c9cc5a51055d138b3e364947f0c041d719b69822e1424fb094e2fdc605"
+      },
+      "provenance": {
+        "path": "tests/jvm/mutation/delete_unused.prov",
+        "bytes": 268,
+        "sha256": "16a0f933ef6c49634ede6879d46940b3a3400ba9931960bf884ac4d81fa49f20"
+      },
+      "input_hex": "6f6e653b74776f3b746872656520666f75720a",
+      "expected_stdout_hex": "20202020202032202020202020203220202020202031390a"
+    },
+    {
+      "name": "widen_unused_type",
+      "operation": "SetResultType",
+      "base": {
+        "path": "tests/jvm/mutation/insert_rebind.xax",
+        "bytes": 17800,
+        "sha256": "ed9e0a2f06184128f658066d7c66a54c843727160bf4c1a20bfb6c04d5d0a4c9",
+        "root": "bb17a7daaeebfd7cb8c75bbdfe86963e25f9aeaa72d89464e5d13729c62ae941"
+      },
+      "record": {
+        "path": "tests/jvm/mutation/widen_unused_type.edit",
+        "bytes": 141,
+        "sha256": "64458436ccdb43c27f4cc48d182aa2e4729db0952b5c266b2ef65a5d19729a66"
+      },
+      "source": {
+        "path": "tests/jvm/mutation/widen_unused_type.xax",
+        "bytes": 17799,
+        "sha256": "8c74f7b8cc1d98fd911d1870066ff6fc24be2c9c63edbab5ec5ab4db9b830d7d",
+        "root": "d0d9361884d2fffb93a375c9ea4a9a7912966d04a00215561d9ffa01c1009b4e"
+      },
+      "jar": {
+        "path": "tests/jvm/mutation/widen_unused_type.jar",
+        "bytes": 3281,
+        "sha256": "98859e7c94abb891ddd303700f0d165394853931e9c68c32d70e4bb140a24831"
+      },
+      "provenance": {
+        "path": "tests/jvm/mutation/widen_unused_type.prov",
+        "bytes": 268,
+        "sha256": "52755085003363023378a838e731daf3f7b36590b12ea8a8edfafce455e61a85"
+      },
+      "input_hex": "6f6e653b74776f3b746872656520666f75720a",
+      "expected_stdout_hex": "20202020202032202020202020203220202020202031390a"
+    },
+    {
+      "name": "replace_snapshot_references",
+      "operation": "ReplaceReference with native-authored supplied objects",
+      "base": {
+        "path": "tests/jvm/wordcount-v1.xax",
+        "bytes": 17655,
+        "sha256": "d12c9956e2d8149fd38cc6cdfae851beff02f7ee86fdc1f7f7d241ebb91cfb59",
+        "root": "ee6bd8e3321de04cb5f3b7c2db31634385d77222e641186afdf8866676b6d1fd"
+      },
+      "record": {
+        "path": "tests/jvm/mutation/replace_snapshot_references.edit",
+        "bytes": 6652,
+        "sha256": "3c194ff59b38953a13219edf5558630e4a3624e5d0cfbd12c4fcb2893e248fee"
+      },
+      "source": {
+        "path": "tests/jvm/mutation/replace_snapshot_references.xax",
+        "bytes": 17762,
+        "sha256": "d6539c359a38b2d0eacac67bbf2dc02b146720fcf93551ab97ecd2109e2dee14",
+        "root": "4b08d23a73b72f4f17cee6035990f4507615562bd0ee7d0e9a95bb858e4b2d70"
+      },
+      "jar": {
+        "path": "tests/jvm/mutation/replace_snapshot_references.jar",
+        "bytes": 3281,
+        "sha256": "32ab044f8f15e034ce6ff21dfd4146eea2e0ffb3bfc329a1cd232b4605e0e928"
+      },
+      "provenance": {
+        "path": "tests/jvm/mutation/replace_snapshot_references.prov",
+        "bytes": 268,
+        "sha256": "8a44564ecc4cfa821f7fa385b5eadf7e8fe4bb0f03399689526f87c7cf0dddae"
+      },
+      "input_hex": "6f6e653b74776f3b746872656520666f75720a",
+      "expected_stdout_hex": "20202020202032202020202020203220202020202031390a"
+    }
+  ],
+  "rejections": [
+    {
+      "name": "wrong_type",
+      "record": {
+        "path": "tests/jvm/mutation/wrong_type.edit",
+        "bytes": 141,
+        "sha256": "f99e0b89168895c613f8e8e26bf608ee8c2d8f34952f31ad4c2b4f4d0f7a7c1e"
+      },
+      "native_edit_exit": 0,
+      "native_verify_exit": 1,
+      "published": false,
+      "source_preserved": true
+    },
+    {
+      "name": "delete_live_node",
+      "record": {
+        "path": "tests/jvm/mutation/delete_live_node.edit",
+        "bytes": 76,
+        "sha256": "988101fa78885d933806c1e44166cd3c2d6c7122d42cd0ec7dab71ba2cad9c85"
+      },
+      "native_edit_exit": 1,
+      "native_verify_exit": null,
+      "published": false,
+      "source_preserved": true
+    },
+    {
+      "name": "unconnected_edge",
+      "record": {
+        "path": "tests/jvm/mutation/unconnected_edge.edit",
+        "bytes": 81,
+        "sha256": "9fd376a5f52b710783bd8813d7f13e1dc6e834e2f54fa75078dca38c937a8c71"
+      },
+      "native_edit_exit": 0,
+      "native_verify_exit": 1,
+      "published": false,
+      "source_preserved": true
+    },
+    {
+      "name": "wrong_precondition",
+      "record": {
+        "path": "tests/jvm/mutation/wrong_precondition.edit",
+        "bytes": 78,
+        "sha256": "86f1a79fd5948322141fa4be89fcb1310afb30814cfaed5f0844353149bd2fec"
+      },
+      "native_edit_exit": 1,
+      "native_verify_exit": null,
+      "published": false,
+      "source_preserved": true
+    },
+    {
+      "name": "out_of_range",
+      "record": {
+        "path": "tests/jvm/mutation/out_of_range.edit",
+        "bytes": 79,
+        "sha256": "19db1a34d7caebb7b810409db5aae26c805d073ab0f88f8b344978e403f10bd0"
+      },
+      "native_edit_exit": 1,
+      "native_verify_exit": null,
+      "published": false,
+      "source_preserved": true
+    },
+    {
+      "name": "unknown_node",
+      "record": {
+        "path": "tests/jvm/mutation/unknown_node.edit",
+        "bytes": 79,
+        "sha256": "af33cd0557912b306eb89b177f8914b917511f8f2fba90e02d155b5486981e2d"
+      },
+      "native_edit_exit": 1,
+      "native_verify_exit": null,
+      "published": false,
+      "source_preserved": true
+    },
+    {
+      "name": "truncated",
+      "record": {
+        "path": "tests/jvm/mutation/truncated.edit",
+        "bytes": 40,
+        "sha256": "e51fa0d834d51de6aeb0786480c29069b35b288e11a13eb09913ea1a370c841e"
+      },
+      "native_edit_exit": 1,
+      "native_verify_exit": null,
+      "published": false,
+      "source_preserved": true
+    }
+  ],
+  "source": "Canonical snapshots produced by native exact-root XAXEDIT1 mutation and mandatory native verification; no foreign application graph generation",
+  "oracles": "Independent reference canonical bytes, double identical native JAR/provenance builds, actual verified Java output; external harnesses remain outside repository",
+  "signed_packages": "Changing a signed package rejects; signatures are not rewritten",
+  "release_ready": false
+}

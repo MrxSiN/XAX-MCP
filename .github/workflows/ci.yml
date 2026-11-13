@@ -434,3 +434,92 @@ jobs:
         with:
           name: native-jvm-build-evidence
           path: build/jvm/summary.json
+
+  windows-jvm-mutation:
+    runs-on: windows-2022
+    timeout-minutes: 45
+    env:
+      XAXC: ${{ github.workspace }}/.xax-jvm-mutation-upstream/compiler/bootstrap/windows/xaxc-windows-x86_64.exe
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check out the immutable JVM mutation compiler
+        uses: actions/checkout@v4
+        with:
+          repository: MrxSiN/XAX
+          ref: 02030f9ee1db7c2c7ead01ff0e20f17087a5fde3
+          path: .xax-jvm-mutation-upstream
+
+      # Java isolation and behavior use the separately inventoried local runtime.
+      - name: Replay JVM mutation sources and rebuild changed programs
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+          trap {
+           $message=$_.Exception.Message.Replace('%','%25').Replace("`r",'%0D').Replace("`n",'%0A')
+           Write-Output "::error title=JVM mutation replay and rebuild::$message"
+           exit 1
+          }
+          $compiler=$env:XAXC
+          $dependency=Get-Content native/jvm-mutation-dependency.json -Raw|ConvertFrom-Json
+          if((Get-FileHash -LiteralPath $compiler).Hash.ToLowerInvariant()-ne$dependency.seed_sha256){throw 'Wrong JVM mutation compiler'}
+          function Native([string[]]$Arguments){& $compiler @Arguments;if($LASTEXITCODE-ne0){throw "Native mutation compiler failed: $($Arguments[0]) ($LASTEXITCODE)"}}
+          function Identity($Row){if((Get-FileHash -LiteralPath $Row.path).Hash.ToLowerInvariant()-ne$Row.sha256-or(Get-Item -LiteralPath $Row.path).Length-ne$Row.bytes){throw "Identity differs: $($Row.path)"}}
+          function Same([string]$A,[string]$B){if((Get-FileHash -LiteralPath $A).Hash-ne(Get-FileHash -LiteralPath $B).Hash){throw "Bytes differ: $A"}}
+          New-Item -ItemType Directory -Force build/jvm-mutation/replay,build/jvm-mutation/rebuild | Out-Null
+          $manifest=Get-Content native/transactions/20261113-jvm-mutation/manifest.json -Raw|ConvertFrom-Json -Depth 80
+          $count=0
+          foreach($group in $manifest.groups){
+           Identity $group.base
+           $current="build/jvm-mutation/replay/$($group.name).current.xax";Copy-Item -LiteralPath $group.base.path -Destination $current
+           foreach($record in $group.records){
+            Identity $record;Identity $record.native_batch
+            $next="build/jvm-mutation/replay/$($group.name).next.xax"
+            Native @('edit',$current,$record.path,$next);Native @('verify',$next,'build/jvm-mutation/replay/verify.diag')
+            if((Get-FileHash -LiteralPath $next).Hash.ToLowerInvariant()-ne$record.result.sha256){throw 'Mutation intermediate replay differs'}
+            Move-Item -LiteralPath $next -Destination $current -Force
+            $count++
+           }
+           Identity $group.final;Same $current $group.final.path
+          }
+          if($count-ne$manifest.total_records){throw 'Incomplete mutation replay'}
+          $candidate='native/candidates/20261113-jvm-mutation'
+          foreach($program in @(@{name='server';source="$candidate/server.xax";snapshot="$candidate/server-snapshot.xax";exe="$candidate/xax-mcp-native.exe";prov="$candidate/xax-mcp-native.prov"},@{name='launcher';source="$candidate/jvm-launcher.xax";snapshot="$candidate/jvm-launcher-snapshot.xax";exe="$candidate/xax-mcp-sandbox.exe";prov="$candidate/jvm-launcher.prov"})){
+           $snapshot="build/jvm-mutation/rebuild/$($program.name)-snapshot.xax"
+           Native @('verify',$program.source,'build/jvm-mutation/rebuild/source.diag');Native @('resolve',$program.source,$snapshot);Same $snapshot $program.snapshot
+           foreach($attempt in 1..2){
+            $exe="build/jvm-mutation/rebuild/$($program.name)-$attempt.exe";$prov="build/jvm-mutation/rebuild/$($program.name)-$attempt.prov"
+            Native @('build',$snapshot,$exe,$prov);Same $exe $program.exe;Same $prov $program.prov
+           }
+          }
+          $fixtures=Get-Content tests/jvm/mutation/manifest.json -Raw|ConvertFrom-Json -Depth 80
+          Identity $fixtures.base
+          foreach($fixture in $fixtures.fixtures){
+           Identity $fixture.base;Identity $fixture.record;Identity $fixture.source;Identity $fixture.jar;Identity $fixture.provenance
+           $source="build/jvm-mutation/rebuild/$($fixture.name).xax"
+           Native @('edit',$fixture.base.path,$fixture.record.path,$source);Native @('verify',$source,'build/jvm-mutation/rebuild/fixture.diag');Same $source $fixture.source.path
+           foreach($attempt in 1..2){
+            $jar="build/jvm-mutation/rebuild/$($fixture.name)-$attempt.jar";$prov="build/jvm-mutation/rebuild/$($fixture.name)-$attempt.prov"
+            Native @('build',$source,$jar,$prov);Same $jar $fixture.jar.path;Same $prov $fixture.provenance.path
+           }
+           & $compiler edit $source $fixture.record.path build/jvm-mutation/replay/stale.out
+           if($LASTEXITCODE-ne1){throw 'Stale mutation was not rejected'}
+           Same $source $fixture.source.path
+          }
+          foreach($negative in $fixtures.rejections){
+           Identity $negative.record
+           $out='build/jvm-mutation/replay/rejected.out'
+           & $compiler edit $fixtures.base.path $negative.record.path $out
+           if($LASTEXITCODE-ne$negative.native_edit_exit){throw 'Mutation rejection edit boundary differs'}
+           if($negative.native_edit_exit-eq0){& $compiler verify $out build/jvm-mutation/replay/rejected.diag;if($LASTEXITCODE-ne1){throw 'Invalid candidate passed verification'}}
+           Identity $fixtures.base
+          }
+          $checkpoint=Get-Content "$candidate/checkpoints.json" -Raw|ConvertFrom-Json
+          foreach($item in $checkpoint.artifacts){Identity $item}
+          # All expected native rejection statuses above have been asserted.
+          $global:LASTEXITCODE=0
+          @{records=$count;build_cases_double_built=(2+$fixtures.fixtures.Count);compiler_sha256=$dependency.seed_sha256;runtime_execution='Separate exact local Java runtime evidence';release_ready=$false}|ConvertTo-Json|Set-Content build/jvm-mutation/summary.json -Encoding utf8NoBOM
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: native-jvm-mutation-build-evidence
+          path: build/jvm-mutation/summary.json

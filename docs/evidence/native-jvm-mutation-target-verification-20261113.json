@@ -1,0 +1,164 @@
+{
+  "schema": "xax-mcp-jvm-mutation-target-verification-v1",
+  "recorded": "2026-11-13",
+  "target": "jvm",
+  "profile": "jvm-classfile-memory-v1",
+  "implemented": true,
+  "implementation_status": "EXECUTED",
+  "toolchain_status": "TESTED",
+  "snapshot_mutation": true,
+  "positive_cases": 8,
+  "operation_kinds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "capabilities": {
+    "authority": {
+      "effects_granted": [],
+      "max_request_bytes": 4194304,
+      "rights": [
+        "read"
+      ],
+      "store_roots": 0
+    },
+    "maturity": {
+      "compiler cancellation": "PROTOTYPE (compiler calls; 1 MiB queue; backpressure; confirmed descendant cleanup)",
+      "semantic reference pages": "PROTOTYPE (root-bound; 64 rows; 4 MiB inspection prefix; generic edges; no typed facts)",
+      "construct on Linux": "UNIMPLEMENTED natively",
+      "construct from typed XAXEDIT1": "EXECUTED (Windows native file contract)",
+      "execute on Linux (namespaces, seccomp, rlimits)": "UNIMPLEMENTED natively",
+      "modern protocol 2026-07-28": "PROTOTYPE (native MCP; candidate gates open)",
+      "result (serves artifacts over the wire)": "UNIMPLEMENTED natively",
+      "stdio transport, JSON validation, MCP lifecycle, tool dispatch, host rights": "EXECUTED (native protocol fixtures)",
+      "workspace/query/transaction/build over a host-granted native compiler": "PROTOTYPE (docs/NATIVE.md)",
+      "JVM build and execution": "EXECUTED preview (native JVM-capable compiler; generated JAR verified and executed under a Windows AppContainer/job; wider release gates open)",
+      "mutation of resolved JVM snapshots": "EXECUTED preview: native exact-root records, canonical ancestry rebuilding, verification, semantic JVM behavior and rejection/source-preservation checks; unsigned packages only"
+    },
+    "ok": true,
+    "protocol": {
+      "framing": "newline-delimited JSON-RPC 2.0",
+      "max_json_depth": 64,
+      "max_message_bytes": 4194304,
+      "versions": [
+        "2026-07-28",
+        "2024-11-05",
+        "2025-03-26",
+        "2025-06-18",
+        "2025-11-25"
+      ]
+    },
+    "sandbox": {
+      "available": "Windows AppContainer and one-process job for the host-configured Java 17 platform runtime",
+      "launcher": "xax-mcp-sandbox.exe (native canonical XAX)",
+      "reason": "Explicit execution grant and host-owned XAX_MCP_JAVA required. Fixed VM options precede the fixed -jar artifact; client strings follow it. No network capabilities. The owned JAR gets a temporary AppContainer read grant; runtime installation ACLs are unchanged. Compiler build and native launcher are distinct from the required platform JVM. Broader security and crash acceptance remain open."
+    },
+    "server": {
+      "implementation": "native XAX program (windows-x86_64 PE32+ built from a canonical .xax store)",
+      "name": "xax-mcp",
+      "python_on_request_path": false,
+      "transport": "stdio",
+      "version": "0.11.0+native"
+    },
+    "targets": [
+      {
+        "target": "jvm",
+        "profile": "jvm-classfile-memory-v1",
+        "artifact": "JVM_EXECUTABLE_JAR",
+        "classfile_major": 61,
+        "implementation": "EXECUTED",
+        "toolchain_status": "TESTED",
+        "input_modes": [
+          "construction-constants",
+          "binary-stdin-hex",
+          "arguments-to-generated-JVM-main"
+        ],
+        "result_mode": "raw-u32-exit+separate-stream-hex+resource-observations",
+        "resolved_snapshot_required": true,
+        "snapshot_mutation": true,
+        "xax_startup_argument_reads": false
+      }
+    ],
+    "tools": {
+      "xax_build": "JVM snapshot build preview: byte-stages the current host-authorized, already-resolved canonical snapshot into owned work scratch and invokes the exact JVM-capable native XAX compiler's build command. Native build verifies the complete snapshot and emits an executable JAR and provenance; no canonical parsing, workload computation, Java source generation, javac, Python compiler or interpreter is on the request path. Unresolved request roots decline in this profile. Returns the current canonical root, actual artifact byte count and provenance bytes/hex. This separate JVM preview uses its own immutable tested compiler manifest while the default deployment pin stays unchanged. package/entry selection, result handles and toolchain caching remain unsupported. Native exact-root XAXEDIT1 mutations of unsigned resolved JVM memory-profile snapshots are supported through the separately pinned tested compiler. The native editor rebuilds the reachable package, request and snapshot, then mandatory verification precedes publication. Signed-package changes, recursion-group users, signature/provenance rewriting and unresolved requests remain outside this mutation profile.",
+      "xax_capabilities": "EXECUTED (native)",
+      "xax_construct": "Construct a new supported graph with an exact-root XAXEDIT1 typed mutation carrier. Native XAX applies and verifies the staged candidate before publication. The record is hexadecimal transport; canonical semantic state is source. JSON xax-construct-v1 is unsupported. Native exact-root XAXEDIT1 mutations of unsigned resolved JVM memory-profile snapshots are supported through the separately pinned tested compiler. The native editor rebuilds the reachable package, request and snapshot, then mandatory verification precedes publication. Signed-package changes, recursion-group users, signature/provenance rewriting and unresolved requests remain outside this mutation profile.",
+      "xax_execute": "JVM executable-JAR preview on Windows: stages only the current authorized resolved canonical snapshot and invokes the exact host-granted native XAX compiler's build command, then the native XAX launcher starts the host-selected Java 17 runtime inside a Windows AppContainer and one-process job. Requires --allow-execute and host-owned XAX_MCP_JAVA. Clients cannot choose the runtime, class path, JAR, executable, file path, environment, JVM options, grants or larger budgets. Optional stdin_hex supplies at most 262144 exact binary bytes followed by physical EOF. args excludes argv[0], is limited to 64 strings and 8192 UTF-16 units, and is passed after the fixed -jar artifact to generated JVM main; the XAX JVM process entry has no startup-argument readers. Arguments must fit Windows-1252; @file/-version stay literal. Other characters decline. Fixed VM options enable class verification, cap Java heap at 64 MiB, bound VM caches, disable attach/performance data and use one active processor. The native job enforces five seconds total CPU, ten seconds wall time, one process, 256 MiB process commit and 1 MiB combined returned output. The child receives OS-derived SystemRoot and container-local LOCALAPPDATA; Java option/classpath environment variables are not inherited. The owned JAR alone gets an AppContainer read grant, restored during normal cleanup. Returns separate exact stream hex, raw process exit, measured wall/user/kernel CPU, peak process commit and stdin_bytes_supplied. Native setup, measurement, budget and cleanup failures fail closed; Java exceptions and Java-heap exhaustion are raw child exits and stderr, not separately classified traps. This profile is device-independent JVM classfile major 61, tested with canonical JVM memory-profile snapshots and Microsoft OpenJDK 17 on Windows. unresolved build requests, JVM startup reads, JNI/registered external tools, other runtimes and cross-platform launchers are not certified. Workspace content integrity, atomic publication, crash/pressure/escape acceptance and promotion remain open. Native exact-root XAXEDIT1 mutations of unsigned resolved JVM memory-profile snapshots are supported through the separately pinned tested compiler. The native editor rebuilds the reachable package, request and snapshot, then mandatory verification precedes publication. Signed-package changes, recursion-group users, signature/provenance rewriting and unresolved requests remain outside this mutation profile.",
+      "xax_query": "EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler",
+      "xax_result": "UNIMPLEMENTED natively: result handles need session state, which the native server lacks",
+      "xax_transaction": "Apply an exact-root XAXEDIT1 typed mutation carrier. Native edit stages a candidate; native verify must succeed before native publication. Rejection or decline retains the current root. Record is hexadecimal transport, not source. Generation/read-set extensions remain unsupported. Native exact-root XAXEDIT1 mutations of unsigned resolved JVM memory-profile snapshots are supported through the separately pinned tested compiler. The native editor rebuilds the reachable package, request and snapshot, then mandatory verification precedes publication. Signed-package changes, recursion-group users, signature/provenance rewriting and unresolved requests remain outside this mutation profile.",
+      "xax_workspace": "EXECUTED against the host-granted native XAX compiler (XAX_MCP_COMPILER/XAX_MCP_WORK/XAX_MCP_STORE); fails closed with denied_capability when the host grants no compiler"
+    },
+    "xax": {
+      "pinned_commit": "02030f9ee1db7c2c7ead01ff0e20f17087a5fde3",
+      "native_file_contract": "xax-native-file-v1",
+      "role": "Separate JVM-preview native Windows compiler; required platform JVM executes the emitted bytecode; no Python request-path helper",
+      "seed_sha256": "9779c7938b092b6a1b64bd97ff4950a0e5858f43e0f95040e5ea0d33c2319cd0",
+      "toolchain_status": "TESTED for native JVM snapshot mutation, executable JAR build and Java 17 Windows execution",
+      "manifest": "native/jvm-mutation-dependency.json",
+      "default_deployment_pin_unchanged": true
+    },
+    "execution": {
+      "stdin": "hex bytes + physical EOF",
+      "args": "Windows-1252 strings; other characters decline before JVM launch; no XAX startup reader API",
+      "max_stdin_bytes": 262144,
+      "max_args": 64,
+      "max_argument_utf16_units": 8192,
+      "max_combined_output_bytes": 1048576,
+      "max_cpu_100ns": 50000000,
+      "max_wall_ms": 10000,
+      "max_process_memory_bytes": 268435456,
+      "max_java_heap_bytes": 67108864,
+      "environment": "OS-derived SystemRoot and container-local LOCALAPPDATA; Windows may add TEMP/TMP; Java options and classpath variables are not inherited",
+      "scope": "currently authorized resolved JVM snapshot only",
+      "peak_memory": "sampled native job peak process commit; Java heap is separately capped",
+      "typed_layouts": false,
+      "registered_external_tools": false,
+      "java_exceptions": "raw child exit and stderr"
+    },
+    "jvm": {
+      "runtime": "Microsoft OpenJDK 17.0.20.1+1-LTS, Windows x86-64",
+      "java_exe_sha256": "6db7759259dc79800c5c6014f0ec68961a1fe69c36bb9b2a15a42c3b0c413f6a",
+      "status": "TESTED",
+      "platform_runtime_required": true,
+      "python_on_request_path": false,
+      "java_source_helper_on_request_path": false,
+      "java_heap_limit_bytes": 67108864
+    },
+    "mutation": {
+      "carrier": "XAXEDIT1",
+      "exact_root_required": true,
+      "mandatory_native_verify": true,
+      "signed_package_changes": false,
+      "recursion_group_users": false,
+      "signature_or_provenance_rewriting": false,
+      "collection_collisions": "reject with WORKSPACE-REBUILD-DISTINCT",
+      "metadata": "resolver identity, trust-policy role and external digests preserved"
+    }
+  },
+  "server_sha256": "d64d5411e9cc2b899f3c174edf18bd1f5e757bdbc409b309822ecf49709a68d6",
+  "dependency": "native/jvm-mutation-dependency.json",
+  "runtime_acceptance": {
+    "path": "docs/evidence/native-jvm-mutation-runtime-20261113.json",
+    "sha256": "d1e3f524cf570071dde18ac2fcdaae2353b2e601dfa2499415eddf91e2ceec5e",
+    "bytes": 210480
+  },
+  "clean_package": {
+    "path": "docs/evidence/native-jvm-mutation-package-20261113.json",
+    "sha256": "22ef655f756e7fc40b6f64d4d5988d99fa1d188b05421133271e874a499b960e",
+    "bytes": 336259
+  },
+  "installed_client": {
+    "path": "docs/evidence/native-jvm-mutation-codex-client-20261113.json",
+    "sha256": "ad25469cd7a16955c3bf5565f95a927f10927baf57d08600a6b36a837d1920b1",
+    "bytes": 106855
+  },
+  "existing_connection_unchanged": true,
+  "release_ready": false
+}

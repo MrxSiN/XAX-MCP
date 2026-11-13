@@ -1,0 +1,68 @@
+{
+  "schema": "xax-mcp-jvm-mutation-checkpoints-v1",
+  "recorded": "2026-11-13",
+  "state": "EXECUTED explicit unsigned JVM snapshot mutation preview; not promoted",
+  "artifacts": [
+    {
+      "path": "native/candidates/20261113-jvm-mutation/jvm-launcher-snapshot.xax",
+      "bytes": 161968,
+      "sha256": "adf2161cafc6d9b249aed25d015b1c24a3724d0ce73c3e59bec90c0981e4f186",
+      "root": "d22915a55c25228fdfd13fb534c9616207c014b5c44d69cb7fa3dbd19c20deb2"
+    },
+    {
+      "path": "native/candidates/20261113-jvm-mutation/jvm-launcher.prov",
+      "bytes": 268,
+      "sha256": "31644cbf3653c2b8e655f94ba5aea4d5fb1bca7d8768e60c0f5eaafaac439e17"
+    },
+    {
+      "path": "native/candidates/20261113-jvm-mutation/jvm-launcher.xax",
+      "bytes": 161690,
+      "sha256": "9bd9919a63fa4835eb7893fb30638d775525ac54e0ad96dce723b320a3cba618",
+      "root": "5c68607f3222ce2903b4e077fee953fc3b90b92d6ff54874f6e1cadb8d7db9f9"
+    },
+    {
+      "path": "native/candidates/20261113-jvm-mutation/server-snapshot.xax",
+      "bytes": 2976381,
+      "sha256": "8fe6856abd15e41c63871b5aa9244ff9d19dc9fcf4f2b680207588a87a9321ff",
+      "root": "90313a52d73e5948dc7075274240ddd1ab9ed74534211872dc9f7e7d1dbac0ef"
+    },
+    {
+      "path": "native/candidates/20261113-jvm-mutation/server.xax",
+      "bytes": 2976102,
+      "sha256": "025b6119798adb6bc405113d2a93e92c365680568fe3753ea704d287fb25da88",
+      "root": "1252d97153e66091a1e2fd8627f7c513c187d0c9b37c6a9e56c57fa1738a8446"
+    },
+    {
+      "path": "native/candidates/20261113-jvm-mutation/xax-mcp-native.exe",
+      "bytes": 606208,
+      "sha256": "d64d5411e9cc2b899f3c174edf18bd1f5e757bdbc409b309822ecf49709a68d6"
+    },
+    {
+      "path": "native/candidates/20261113-jvm-mutation/xax-mcp-native.prov",
+      "bytes": 268,
+      "sha256": "3e3444e8eeb13e3c8af5efdc89536814bb98bf8ed75f1ba0e2e31a28123fda5f"
+    },
+    {
+      "path": "native/candidates/20261113-jvm-mutation/xax-mcp-sandbox.exe",
+      "bytes": 153088,
+      "sha256": "6ef0f256dd1fc2f68daca439b6bb1e52b1a256cf97948142eb4b5782b352bad2"
+    }
+  ],
+  "transactions": "native/transactions/20261113-jvm-mutation/manifest.json",
+  "dependency": "native/jvm-mutation-dependency.json",
+  "tools_schema": "schemas/tools-v6.json",
+  "evidence": "docs/evidence/native-jvm-mutation-20261113.json",
+  "construction_scope": "Intermediate transaction results are construction states, not accepted launch sources. Acceptance applies only to final server.xax, server-snapshot.xax and matching native binaries.",
+  "required_launch_profile": "Fresh trusted work directory; host-controlled exact compiler, current resolved JVM source and Java runtime; --allow-execute; mutation rights independently host controlled",
+  "implementation_status": "EXECUTED",
+  "toolchain_status": "TESTED",
+  "snapshot_mutation": true,
+  "default_gen3_unchanged": true,
+  "existing_mcp_configuration_unchanged": true,
+  "inspection_output_pin_combined": false,
+  "content_integrity_gate_closed": false,
+  "atomic_publication_gate_closed": false,
+  "full_workspace_alias_gate_closed": false,
+  "release_ready": false,
+  "full_mission_complete": false
+}

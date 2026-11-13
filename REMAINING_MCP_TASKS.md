@@ -1,10 +1,45 @@
-# MCP continuation — updated 2026-11-12
+# MCP continuation — updated 2026-11-13
 
 The resumed control-preview acceptance increment is complete. This is an
 experimental acceptance result, not promotion or production release readiness.
 The paused 2026-11-11 handoff remains in Git history at `1850dd7`.
 
-## JVM increment completed before broader security work
+## JVM mutation increment — 2026-11-13
+
+- [x] Extended the native editor upstream through paired exact-root ledger
+  transactions after integrating the concurrent edge-copy fix. Rebuilt native
+  Linux/Windows compiler fixed points and BBC, with signed/trusted-resolution,
+  canonical collection/metadata and repository consistency checks.
+- [x] Added a separate JVM mutation preview with all nine existing typed
+  operation kinds. Eight positive cases, 91 mutation/authority exchanges,
+  53 JVM feature exchanges, independent launcher controls and 991 protocol,
+  whitespace, paging and numeric checks passed. All eight tools passed direct
+  installed-client read-only calls without changing the existing connection.
+- [x] Verified capabilities report JVM implementation `EXECUTED`, mutation
+  enabled and toolchain `TESTED`. The exact separately pinned dependency and
+  final native source/artifacts are bound by the new manifests and evidence.
+- [x] Replayed 47 native source records with mandatory verification;
+  the fresh native-only archive repeated the exact CI step, ten double-build
+  cases, runtime and protocol checks with empty PATH and paths containing spaces.
+  All packaged bytes stayed unchanged; the user's README edit was excluded.
+- [ ] Observe the new hosted JVM mutation replay job after the implementation
+  push; hosted execution of the local inventoried Java runtime is not claimed.
+
+See [mutation acceptance](docs/evidence/native-jvm-mutation-20261113.json),
+[target/toolchain verification](docs/evidence/native-jvm-mutation-target-verification-20261113.json)
+and [the contract](docs/NATIVE_JVM_MUTATION_20261113.md). Native verification
+rejects type-invalid staged candidates before publication. Signed-package changes,
+recursion-group users, signature/provenance rewriting and unresolved build requests
+remain outside this profile. Content integrity, atomic publication, broader aliases,
+crash ACL/cache cleanup and wider security gates remain open.
+
+This preview is separate from the earlier JVM build/execute preview below. Its
+dependency is `native/jvm-mutation-dependency.json`; its checkpoints are
+`native/candidates/20261113-jvm-mutation/checkpoints.json`. The user's existing
+MCP configuration, old preview identities, default Gen3 pin and false readiness
+flags remain unchanged.
+
+## Earlier JVM build/execute increment — 2026-11-12
 
 - [x] Added an explicit native JVM snapshot build/execute preview. Canonical XAX
   snapshots produce executable JARs with the separately pinned native compiler;
@@ -111,7 +146,9 @@ the user's working README edit remains intact and excluded from the increment.
 
 ## Current source and toolchain
 
-The JVM preview uses `native/candidates/20261112-jvm/checkpoints.json` and its own
+The current mutation preview uses `native/candidates/20261113-jvm-mutation/checkpoints.json`
+and `native/jvm-mutation-dependency.json`. The earlier JVM build/execute preview
+uses `native/candidates/20261112-jvm/checkpoints.json` and its own
 immutable `native/jvm-dependency.json`. It does not repin the default deployment.
 The separate Android and inspection-pin canonical sources and artifacts are bound
 by `native/candidates/20261112-android/checkpoints.json` and
@@ -129,10 +166,10 @@ The default server remains Gen3, root
 `release_ready`, `full_mission_complete` and candidate promotion remain false.
 The deployment dependency is unchanged in `native/xax-dependency.json`.
 
-`D:\GitHub\XAX` was pulled to `745e80150605f3812aa012e6884f6e417d9423b4`
-and is clean. The updated upstream Windows compiler is a different seed and is
-not certified for this deployment. Before updating it, the original pinned
-compiler was retained at:
+The 2026-11-12 acceptance pulled `D:\GitHub\XAX` to
+`745e80150605f3812aa012e6884f6e417d9423b4`. The mutation increment follows its
+own newer immutable dependency; this older compiler relocation record is historical.
+The default deployment continues to use its original pinned compiler, retained at:
 
 ```text
 C:\Users\User\.codex\scratch\xax-mcp-20261112\toolchain\xaxc-windows-x86_64.exe

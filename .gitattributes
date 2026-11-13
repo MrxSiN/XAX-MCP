@@ -62,3 +62,9 @@ tests/jvm/*.jar binary
 tests/jvm/*.prov binary
 tests/jvm/*.edit binary
 tests/jvm/*.json -text whitespace=cr-at-eol
+native/transactions/20261113-jvm-mutation/*.batch -text whitespace=cr-at-eol
+tests/jvm/mutation/*.xax binary
+tests/jvm/mutation/*.jar binary
+tests/jvm/mutation/*.prov binary
+tests/jvm/mutation/*.edit binary
+tests/jvm/mutation/*.json -text whitespace=cr-at-eol

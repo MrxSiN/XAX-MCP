@@ -1,5 +1,21 @@
 # Evidence and claim labels
 
+## 2026-11-13 — native JVM mutation preview
+
+[Acceptance](evidence/native-jvm-mutation-20261113.json) binds native exact-root
+editing of unsigned resolved JVM snapshots, all nine typed operation kinds,
+mandatory verification and changed generated-program behavior. Eight positive
+cases, 91 mutation/authority exchanges, 53 JVM feature exchanges, independent
+launcher controls and protocol/paging checks passed. The separately pinned
+compiler and target report `EXECUTED` / `TESTED` in actual capabilities; see
+[target verification](evidence/native-jvm-mutation-target-verification-20261113.json).
+The fresh native-only archive repeated source replay, deterministic builds and
+runtime checks with empty PATH and unchanged packaged bytes. Existing desktop
+configuration, default Gen3 and historical previews remain unchanged. This does
+not close content-integrity, atomic-publication, workspace-alias or wider security
+gates and does not promote a release. Hosted build/replay observation is separate
+from local acceptance and from the exact local Java runtime.
+
 ## 2026-11-12 — post-JVM inspection stream feasibility
 
 After JVM acceptance, [external transport probes](evidence/native-inspection-stream-probe-20261112.json)

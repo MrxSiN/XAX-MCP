@@ -1,0 +1,30 @@
+{
+  "schema": "xax-mcp-jvm-mutation-review-v1",
+  "recorded": "2026-11-13",
+  "reviewed": [
+    "native exact-root authoring and paired upstream ledger evolution",
+    "native verification before source publication including edit-success/verify-rejection",
+    "all nine typed operation kinds, stale/zero roots and source preservation",
+    "immutable separately tested compiler and actual capabilities/schema equality",
+    "native-only artifact/source replay and fresh empty-PATH package",
+    "actual Java output, launch controls, normal cleanup and unchanged existing connection"
+  ],
+  "compiler_sha256": "9779c7938b092b6a1b64bd97ff4950a0e5858f43e0f95040e5ea0d33c2319cd0",
+  "source_records": 47,
+  "native_compiler_self_build_reproduced": true,
+  "foreign_application_implementation_added": false,
+  "default_pin_changed": false,
+  "readme_user_edit_included": false,
+  "independent_security_acceptance_complete": false,
+  "known_open": [
+    "content integrity",
+    "atomic publication",
+    "full workspace and DOS aliases",
+    "forced-death JAR ACL/cache cleanup",
+    "exhaustive pressure/escape/security acceptance",
+    "unresolved build requests",
+    "recursion-group users",
+    "signature/provenance rewriting"
+  ],
+  "release_ready": false
+}

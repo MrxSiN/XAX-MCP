@@ -76,3 +76,16 @@ Historical evidence: local acceptance and clean-package records plus hosted run
 41314738774 at implementation commit `1e584cdfb00fe3230855b82b92eda3c63a50e807`.
 See `docs/EVIDENCE.md` and ADR-0011. Passing CI and uploaded preview artifacts do
 not change `release_ready` or full CUM prepare to true.
+
+The 20261113 JVM mutation preview is a separate native increment. Read
+`docs/NATIVE_JVM_MUTATION_20261113.md`, `native/jvm-mutation-dependency.json` and
+`native/candidates/20261113-jvm-mutation/checkpoints.json`. Its exact compiler is
+independently rebuilt and tested for all nine existing XAXEDIT1 operation kinds on
+unsigned resolved JVM snapshots. Mandatory native verification must precede source
+publication, including when native edit succeeds on an invalid staged candidate.
+Signed-package changes, recursion-group users, signature/provenance rewriting and
+unresolved build requests remain outside the profile. Keep the earlier preview,
+default dependency and existing desktop setup unchanged. Content integrity,
+atomic publication, broader alias/security gates and crash ACL/cache cleanup stay
+open; this source does not combine the inspection-output pin or promote a release.
+New acceptance is `docs/evidence/native-jvm-mutation-20261113.json`.

@@ -1,0 +1,62 @@
+{
+  "schema": "xax-mcp-native-jvm-mutation-evidence-v1",
+  "recorded": "2026-11-13",
+  "state": "EXECUTED explicit JVM mutation preview; not promoted",
+  "implementation_status": "EXECUTED",
+  "toolchain_status": "TESTED",
+  "snapshot_mutation": true,
+  "operation_kinds": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "positive_native_mcp_cases": 8,
+  "mutation_exchanges": 91,
+  "jvm_feature_exchanges": 53,
+  "source_records": 47,
+  "native_replay": "native/transactions/20261113-jvm-mutation/manifest.json",
+  "checkpoint": "native/candidates/20261113-jvm-mutation/checkpoints.json",
+  "dependency": "native/jvm-mutation-dependency.json",
+  "runtime": {
+    "path": "docs/evidence/native-jvm-mutation-runtime-20261113.json",
+    "sha256": "d1e3f524cf570071dde18ac2fcdaae2353b2e601dfa2499415eddf91e2ceec5e",
+    "bytes": 210480
+  },
+  "package": {
+    "path": "docs/evidence/native-jvm-mutation-package-20261113.json",
+    "sha256": "22ef655f756e7fc40b6f64d4d5988d99fa1d188b05421133271e874a499b960e",
+    "bytes": 336259
+  },
+  "target_verification": {
+    "path": "docs/evidence/native-jvm-mutation-target-verification-20261113.json",
+    "sha256": "54cc6c829393ebf7ba43a176e30da4766897857c86fc00bf1ba4c705813e1890",
+    "bytes": 12581
+  },
+  "installed_client": {
+    "path": "docs/evidence/native-jvm-mutation-codex-client-20261113.json",
+    "sha256": "ad25469cd7a16955c3bf5565f95a927f10927baf57d08600a6b36a837d1920b1",
+    "bytes": 106855
+  },
+  "review": {
+    "path": "docs/evidence/native-jvm-mutation-review-20261113.json",
+    "sha256": "c1127a24fb9b85b2539a62461ff569d479563f27289bc04d035ddc7594c82f7c",
+    "bytes": 1291
+  },
+  "default_gen3_unchanged": true,
+  "existing_mcp_configuration_unchanged": true,
+  "inspection_output_pin_combined": false,
+  "content_integrity_gate_closed": false,
+  "atomic_publication_gate_closed": false,
+  "full_workspace_alias_gate_closed": false,
+  "release_ready": false,
+  "full_mission_complete": false,
+  "hosted_build_replay_checked": false,
+  "hosted_runtime_checked": false,
+  "hosted_state": "Separate post-push CI observation required; runtime acceptance is local to the exact inventoried Java installation"
+}
