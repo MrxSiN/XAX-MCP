@@ -329,7 +329,7 @@
     "transactions": "native/transactions/20261115-android-libxposed/manifest.json",
     "dependency": "native/xax-dependency.json",
     "previous_pin": "native/preview-20261112-dependency.json",
-    "acceptance": "tests/android-libxposed/check.ps1",
+    "acceptance": ".github/workflows/ci.yml windows-native step: Build, construct and rebuild a libxposed module through the native server",
     "evidence": "docs/evidence/native-android-libxposed-20261115.json",
     "re_recorded_with_new_pin": [
       "native/xax-mcp-native.exe",

@@ -48,7 +48,7 @@
   },
   "acceptance": {
     "status": "EXECUTED",
-    "command": "XAXC=<acd4046 seed> powershell -File tests/android-libxposed/check.ps1",
+    "command": "XAXC=<acd4046 seed> powershell -File <the run block of the windows-native step 'Build, construct and rebuild a libxposed module through the native server', extracted from .github/workflows/ci.yml> (earlier runs used the same script as tests/android-libxposed/check.ps1)",
     "output": "android-libxposed: 4 records replayed; build, construct, rebuild, stale rejection and capabilities match",
     "checks": [
       "replay of the 4 records from gen3 equals gen4",
@@ -59,7 +59,7 @@
       "xax_capabilities: one android-libxposed target with execute false, pinned_commit acd4046..., text and structured content agree"
     ],
     "execute": "xax_execute with --allow-execute on module-v7.xax (gen3) returns ok false, error launcher_setup_failed (an APK is not a Windows executable)",
-    "hosted_ci": "NOT RUN at recording time; check.ps1 is a step of the windows-native job"
+    "hosted_ci": "NOT RUN at recording time; the check is a step of the windows-native job"
   },
   "structure": {
     "status": "EXECUTED (host tools, outside the request path)",
@@ -88,7 +88,7 @@
       "adb uninstall org.example.module: Success"
     ],
     "not_run": "The module was not activated or scoped. Its entry is empty and the scope com.example is not installed, so no hook ran on the device",
-    "note": "The installed APK has the same bytes as gen4's build (check.ps1 compares it with tests/android-libxposed/module-v8.apk)"
+    "note": "The installed APK has the same bytes as gen4's build (the CI step compares it with tests/android-libxposed/module-v8.apk)"
   },
   "not_claimed": [
     "JSON xax-construct-v1 construction",

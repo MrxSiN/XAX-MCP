@@ -57,8 +57,8 @@ module, set `XAX_MCP_STORE` to an android-libxposed build request, for example
 `xax_execute` cannot run an APK. It builds the APK, then fails with
 `launcher_setup_failed`. Signing and installing an APK are up to the host.
 
-`tests/android-libxposed/check.ps1` replays the four records and runs the module
-session through the deployed server. It is a step of the `windows-native` CI job.
+The `windows-native` CI step "Build, construct and rebuild a libxposed module through the native server" replays
+the four records and runs the module session through the deployed server.
 
 ## Known gaps
 

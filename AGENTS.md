@@ -93,7 +93,7 @@ New acceptance is `docs/evidence/native-jvm-mutation-20261113.json`.
 <!-- ecosystem-policy v1 (2026-11-13): identical in every MrxSiN first-party repository. Change it everywhere in one coordinated set of PRs, never in one repository alone. -->
 Since 2026-11-15 the default server is gen4: gen3 plus a native capability transaction, built with the XAX pin in
 `native/xax-dependency.json`. It builds and edits libxposed module APKs and reports the `android-libxposed` target;
-`tests/android-libxposed/check.ps1` checks it against XAX's own builds byte for byte. The 20261112 Android ARM64 and
+the `windows-native` CI step for `tests/android-libxposed/` checks it against XAX's own builds byte for byte. The 20261112 Android ARM64 and
 inspection-pin previews keep their original compiler in `native/preview-20261112-dependency.json`. Release flags stay
 false. Read `docs/NATIVE_ANDROID_LIBXPOSED_20261115.md`.
 
