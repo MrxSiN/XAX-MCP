@@ -21,5 +21,5 @@
   "edited": {"path": "tests/android-libxposed/module-v8.xax", "bytes": 2089, "sha256": "0f3a9be8756de54b75a5eeeaa95e4b03df46a1a36007565dc837b88c9386e271",
              "root": "7f6aec5dd2c3bdf59996a133e4f312a8974818e8b6e49ea6cfd77341e6461ab6", "note": "The same request built by xax_construct with version_code 8"},
   "edited_apk": {"path": "tests/android-libxposed/module-v8.apk", "bytes": 2775, "sha256": "03319c97f0b85723bd14ca498a7f6ac8694461e8cfeadfd3e07d79c5e1cbb942"},
-  "session": {"path": "tests/android-libxposed/session.requests.ndjson", "bytes": 2148, "sha256": "d70ecf0f879f26b7ef55232a3067d6433a75ecd6074be47d94a4bcc96f0f881f"}
+  "session": {"path": "tests/android-libxposed/session.requests.ndjson", "bytes": 2247, "sha256": "d93d513a56b210544c0267ad3c31dd2f7e27cc58984d9a4e23625e080c248c6b"}
 }

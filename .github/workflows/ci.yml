@@ -538,7 +538,7 @@ jobs:
           ref: acd4046ecddd6d113f86fb23ff1558ae1355b4d6
           path: .xax-libxposed-upstream
 
-      # The unchanged gen3 server builds and edits a libxposed module; APKs must equal XAX's own builds.
-      - name: Build, construct and rebuild a libxposed module through the native server
+      # Replays the capability transaction, rebuilds the candidate twice, then builds and edits a libxposed module.
+      - name: Replay, rebuild and build a libxposed module through the candidate server
         shell: pwsh
         run: ./tests/android-libxposed/check.ps1

@@ -91,10 +91,11 @@ open; this source does not combine the inspection-output pin or promote a releas
 New acceptance is `docs/evidence/native-jvm-mutation-20261113.json`.
 
 <!-- ecosystem-policy v1 (2026-11-13): identical in every MrxSiN first-party repository. Change it everywhere in one coordinated set of PRs, never in one repository alone. -->
-The 20261115 android-libxposed path keeps the gen3 server bytes and the default pin unchanged. With the separate
-compiler in `native/android-libxposed-dependency.json`, `xax_build` and `xax_construct` build and edit libxposed module
-APKs; `tests/android-libxposed/check.ps1` checks them against XAX's own builds byte for byte. Read
-`docs/NATIVE_ANDROID_LIBXPOSED_20261115.md`: capabilities still report only `windows-x86_64` and `af376e8`.
+The 20261115 android-libxposed candidate (`native/candidates/20261115-android-libxposed/`) is gen3 plus a native
+capability transaction, built with the separate compiler in `native/android-libxposed-dependency.json`. It builds and
+edits libxposed module APKs and reports the target and the `acd4046` pin; `tests/android-libxposed/check.ps1` replays
+and checks it against XAX's own builds byte for byte. Gen3, the default pin and release flags stay unchanged. Read
+`docs/NATIVE_ANDROID_LIBXPOSED_20261115.md`.
 
 ## Ecosystem rules (v1)
 

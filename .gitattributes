@@ -73,3 +73,4 @@ tests/android-libxposed/*.apk binary
 tests/android-libxposed/*.edit binary
 tests/android-libxposed/*.json -text whitespace=cr-at-eol
 tests/android-libxposed/*.ndjson -text whitespace=cr-at-eol
+native/transactions/20261115-android-libxposed/*.batch -text whitespace=cr-at-eol

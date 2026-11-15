@@ -10,17 +10,19 @@
   "production_ledger": "0031",
   "target": "android-libxposed",
   "artifact": "ANDROID_UNSIGNED_APK",
-  "server": "native/xax-mcp-native.exe (unchanged gen3 bytes)",
+  "server": "native/candidates/20261115-android-libxposed/xax-mcp-native.exe (gen3 plus the capability transaction, built with this compiler)",
   "implementation_status": "EXECUTED",
   "toolchain_status": "TESTED",
-  "compatible_range": "Only this immutable compiler, with the unchanged gen3 server, is tested for this android-libxposed build path; no moving main",
+  "compatible_range": "Only this immutable compiler, with the 20261115 candidate server and launcher, is tested for this android-libxposed path; no moving main",
   "default_deployment_dependency": "native/xax-dependency.json",
   "default_deployment_pin_unchanged": true,
-  "default_pin_not_moved_because": "The acd4046 seed builds the gen3 server to different bytes (402,944 vs 399,360) and the server embeds the af376e8 pin in its capabilities text, so moving the default pin needs a verified server transaction and a re-accepted release",
+  "default_pin_not_moved_because": "The default gen3 deployment, its release identities and its replay stay on af376e8. This compiler builds every program to new bytes, so the android-libxposed path ships as a separate candidate (as the JVM previews did) and promotion is a separate decision",
   "known_upstream_limits": [
     "Large modules can decline in native build until MrxSiN/XAX#53 (DEX writer output buffer) is merged; this pin predates it",
     "A declining native build writes no diagnostic, so the server reports only compiler_rejected"
   ],
   "acceptance": "docs/evidence/native-android-libxposed-20261115.json",
-  "release_ready": false
+  "release_ready": false,
+  "candidate": "native/candidates/20261115-android-libxposed/checkpoints.json",
+  "transactions": "native/transactions/20261115-android-libxposed/manifest.json"
 }
