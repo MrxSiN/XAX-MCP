@@ -1,16 +1,16 @@
 # External test orchestration only: the native server and the native XAX compiler do all the work.
-# 1. Replays the capability transaction from gen3 (native edit + verify per batch) and rebuilds the candidate server
-#    and launcher twice; every result must equal the committed bytes.
-# 2. Through the candidate server: builds the minimal libxposed module, edits it with xax_construct, builds again,
+# 1. Replays the capability transaction from gen3 (native edit + verify per batch); the result must equal gen4.
+#    (The default CI job rebuilds gen4 and the launcher twice and compares them with native/release-status.json.)
+# 2. Through the deployed server: builds the minimal libxposed module, edits it with xax_construct, builds again,
 #    rejects the stale record and reports android-libxposed with the acd4046 pin. Each APK and the published store
 #    must equal XAX's own build of the same store byte for byte.
-# Usage: $env:XAXC = <seed named by native/android-libxposed-dependency.json>; powershell -File tests/android-libxposed/check.ps1
+# Usage: $env:XAXC = <seed named by native/xax-dependency.json>; powershell -File tests/android-libxposed/check.ps1
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 Set-Location $repo
 $compiler = (Resolve-Path $env:XAXC).Path
-$dependency = Get-Content native/android-libxposed-dependency.json -Raw | ConvertFrom-Json
-if ((Get-FileHash -LiteralPath $compiler).Hash.ToLowerInvariant() -ne $dependency.seed_sha256) { throw 'Wrong android-libxposed compiler seed' }
+$dependency = Get-Content native/xax-dependency.json -Raw | ConvertFrom-Json
+if ((Get-FileHash -LiteralPath $compiler).Hash.ToLowerInvariant() -ne $dependency.seed_sha256) { throw 'Wrong XAX seed' }
 function Identity($Row) { if ((Get-FileHash -LiteralPath $Row.path).Hash.ToLowerInvariant() -ne $Row.sha256 -or (Get-Item -LiteralPath $Row.path).Length -ne $Row.bytes) { throw "Identity differs: $($Row.path)" } }
 function Same($Actual, $Expected) { if ((Get-FileHash -LiteralPath $Actual).Hash -ne (Get-FileHash -LiteralPath $Expected).Hash) { throw "Bytes differ: $Actual vs $Expected" } }
 function Native([string[]]$Arguments) { & $compiler @Arguments; if ($LASTEXITCODE -ne 0) { throw "Native compiler rejected/declined: $($Arguments[0]) ($LASTEXITCODE)" } }
@@ -18,9 +18,8 @@ $out = Join-Path $repo 'build/android-libxposed'
 if (Test-Path $out) { Remove-Item -Recurse -Force $out }
 New-Item -ItemType Directory -Force $out | Out-Null
 
-# 1. Transaction replay and double rebuild.
+# 1. Transaction replay.
 $manifest = Get-Content native/transactions/20261115-android-libxposed/manifest.json -Raw | ConvertFrom-Json
-$checkpoints = Get-Content native/candidates/20261115-android-libxposed/checkpoints.json -Raw | ConvertFrom-Json
 Identity $manifest.base
 $current = "$out/current.xax"; Copy-Item -LiteralPath $manifest.base.path -Destination $current
 foreach ($record in $manifest.records) {
@@ -31,17 +30,9 @@ foreach ($record in $manifest.records) {
   Move-Item -LiteralPath "$out/next.xax" -Destination $current -Force
 }
 Identity $manifest.final; Same $current $manifest.final.path
-foreach ($program in @($checkpoints.server, $checkpoints.launcher)) {
-  foreach ($row in @($program.source, $program.snapshot, $program.exe, $program.provenance)) { Identity $row }
-  Native @('resolve', $program.source.path, "$out/snapshot.xax"); Same "$out/snapshot.xax" $program.snapshot.path
-  foreach ($attempt in 1..2) {
-    Native @('build', "$out/snapshot.xax", "$out/program-$attempt.exe", "$out/program-$attempt.prov")
-    Same "$out/program-$attempt.exe" $program.exe.path; Same "$out/program-$attempt.prov" $program.provenance.path
-  }
-}
 
-# 2. The libxposed module through the candidate server.
-$server = Join-Path $repo 'native/candidates/20261115-android-libxposed/xax-mcp-native.exe'
+# 2. The libxposed module through the deployed server.
+$server = Join-Path $repo 'native/xax-mcp-native.exe'
 $fixtures = Get-Content tests/android-libxposed/manifest.json -Raw | ConvertFrom-Json
 foreach ($row in @($fixtures.base, $fixtures.base_apk, $fixtures.record, $fixtures.edited, $fixtures.edited_apk, $fixtures.session)) { Identity $row }
 function Session([string]$Name, [int]$Lines) {
@@ -79,4 +70,4 @@ if (($capabilities.content[0].text | ConvertFrom-Json).xax.pinned_commit -ne $ca
 if ($capabilities.structuredContent.xax.pinned_commit -ne $dependency.commit) { throw 'Capabilities report the wrong XAX pin' }
 $libxposed = @($capabilities.structuredContent.targets | Where-Object { $_.target -eq 'android-libxposed' })
 if ($libxposed.Count -ne 1 -or $libxposed[0].execute -ne $false) { throw 'Capabilities do not report android-libxposed' }
-Write-Output 'android-libxposed: 4 records replayed, 2 programs double-built, and build, construct, rebuild, stale rejection and capabilities match'
+Write-Output 'android-libxposed: 4 records replayed; build, construct, rebuild, stale rejection and capabilities match'

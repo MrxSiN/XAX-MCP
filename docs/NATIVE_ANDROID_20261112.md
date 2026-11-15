@@ -22,7 +22,8 @@ Select `native/candidates/20261112-android/xax-mcp-native.exe` as the stdio serv
 Keep its `xax-mcp-sandbox.exe` broker and `android-runner` beside it. Grant execution
 with `--allow-execute` and configure these host environment variables:
 
-- `XAX_MCP_COMPILER`: the retained compiler identified by `native/xax-dependency.json`.
+- `XAX_MCP_COMPILER`: the retained compiler identified by `native/preview-20261112-dependency.json`
+  (the default pin until 2026-11-15).
 - `XAX_MCP_STORE`: an authorized Android ARM64 canonical request, for example
   `tests/android/hello-arm64.xax`.
 - `XAX_MCP_WORK`: a dedicated, trusted Windows workspace.

@@ -1,7 +1,7 @@
 {
   "schema": "xax-mcp-android-libxposed-fixtures-v1",
   "recorded": "2026-11-15",
-  "dependency": "native/android-libxposed-dependency.json",
+  "dependency": "native/xax-dependency.json",
   "authoring": "XAX acd4046 xax_construct.construct (platform android-libxposed) for both versions, xax_compiler.write_store over each release request's reachable objects, xax_selfhost_edit.edit_record for the edit (one REPLACE_REFERENCE of the module's target, one supplied object), and xax_build.build for the reference APKs. Authored outside this repository; no authoring code is kept here.",
   "construct_request": {
     "format": "xax-construct-v1",

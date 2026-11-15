@@ -5,27 +5,29 @@
   "host": "Windows 11 Pro 10.0.26300, Windows PowerShell 5.1",
   "server": {
     "gen3": {
-      "path": "native/xax-mcp-native.exe",
-      "bytes_changed": false,
-      "note": "Used for the reproduction and the first acceptance run"
+      "path": "native/xax-mcp-native-gen3.xax",
+      "note": "Previous default; used for the reproduction and the first acceptance run"
     },
-    "candidate": {
-      "path": "native/candidates/20261115-android-libxposed/xax-mcp-native.exe",
-      "sha256": "45deeda9e86fd674fe787abce5b6c268ef7f0b8cc80481a16f816ba7472783ca",
-      "bytes": 405504,
-      "source_root": "954324897d4b7306f943a6e6647080d6a918c5cc36fc013cc3171324e0fdd234",
+    "gen4": {
+      "source": "native/xax-mcp-native-gen4.xax",
+      "root": "954324897d4b7306f943a6e6647080d6a918c5cc36fc013cc3171324e0fdd234",
+      "exe_sha256": "45deeda9e86fd674fe787abce5b6c268ef7f0b8cc80481a16f816ba7472783ca",
+      "exe_bytes": 405504,
       "launcher_sha256": "e7fa76775dcbe9ad8070976900fef7d6de00aebe7314a388c81d44796b4b3a2b",
-      "version": "0.10.0+native"
+      "version": "0.10.0+native",
+      "default_since": "2026-11-15"
     }
   },
   "compilers": {
-    "default_pin": {
-      "commit": "af376e8a8a1ac5635bcad459cb7063ef0b326430",
-      "seed_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79"
-    },
-    "android_libxposed": {
+    "default": {
+      "file": "native/xax-dependency.json",
       "commit": "acd4046ecddd6d113f86fb23ff1558ae1355b4d6",
       "seed_sha256": "b9a1ba463001559caa26efc68a275cf8694be7cecb419a29dd361b40735225eb"
+    },
+    "previous_default": {
+      "file": "native/preview-20261112-dependency.json",
+      "commit": "af376e8a8a1ac5635bcad459cb7063ef0b326430",
+      "seed_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79"
     }
   },
   "reproduction": {
@@ -46,10 +48,10 @@
   },
   "acceptance": {
     "status": "EXECUTED",
-    "command": "XAXC=<acd4046 seed> powershell -File tests/android-libxposed/check.ps1 (13 s)",
-    "output": "android-libxposed: 4 records replayed, 2 programs double-built, and build, construct, rebuild, stale rejection and capabilities match",
+    "command": "XAXC=<acd4046 seed> powershell -File tests/android-libxposed/check.ps1",
+    "output": "android-libxposed: 4 records replayed; build, construct, rebuild, stale rejection and capabilities match",
     "checks": [
-      "replay of the 4 records from gen3 equals the candidate source; both programs rebuild twice to the committed bytes",
+      "replay of the 4 records from gen3 equals gen4",
       "xax_build of module-v7.xax: root 23a43075..., APK equals XAX's reference build (sha256 b44d93b5...)",
       "xax_construct with version-code-8.edit: root 7f6aec5d..., the published store equals XAX's construct of versionCode 8 (module-v8.xax)",
       "xax_build after construct: APK equals XAX's reference build of module-v8.xax (sha256 03319c97...)",
@@ -57,7 +59,7 @@
       "xax_capabilities: one android-libxposed target with execute false, pinned_commit acd4046..., text and structured content agree"
     ],
     "execute": "xax_execute with --allow-execute on module-v7.xax (gen3) returns ok false, error launcher_setup_failed (an APK is not a Windows executable)",
-    "hosted_ci": "NOT RUN at recording time; the windows-android-libxposed job runs the same script"
+    "hosted_ci": "NOT RUN at recording time; check.ps1 is a step of the windows-native job"
   },
   "structure": {
     "status": "EXECUTED (host tools, outside the request path)",
@@ -86,10 +88,9 @@
       "adb uninstall org.example.module: Success"
     ],
     "not_run": "The module was not activated or scoped. Its entry is empty and the scope com.example is not installed, so no hook ran on the device",
-    "note": "The installed APK has the same bytes as the candidate server's build (check.ps1 compares both with tests/android-libxposed/module-v8.apk)"
+    "note": "The installed APK has the same bytes as gen4's build (check.ps1 compares it with tests/android-libxposed/module-v8.apk)"
   },
   "not_claimed": [
-    "promotion of the candidate to the default deployment",
     "JSON xax-construct-v1 construction",
     "running an APK through xax_execute",
     "large modules (MrxSiN/XAX#53 not merged)",
@@ -102,8 +103,24 @@
     "records": 4,
     "each": "native edit of one define/replace batch, then native verify (exit 0)",
     "authoring": "Each literal function was written in the exact form xaxc's view prints. Regenerating the four existing literals from their decoded bytes gave the compiler's own views exactly, before the new strings were written",
-    "rebuild": "resolve, then build twice for the candidate server and the unchanged gen1 launcher with the acd4046 seed: both builds identical; the launcher snapshot equals the committed gen1 snapshot",
-    "protocol": "tests/protocol/readonly.requests.ndjson against the candidate: 15 responses, only the xax_capabilities response differs from the gen3 golden file (keys targets, tools, xax); its text equals its structured content",
+    "rebuild": "resolve, then build twice for gen4 and the unchanged gen1 launcher with the acd4046 seed: both builds identical; the launcher snapshot equals the committed gen1 snapshot",
+    "protocol": "tests/protocol/readonly.requests.ndjson: 15 responses; only the xax_capabilities response changed (keys targets, tools, xax), and its text equals its structured content. The golden file was recorded again from gen4",
     "execute_probes": "io-echo-probe and confinement-read-network-probe through xax_execute: same exit codes and streams as gen3"
+  },
+  "promotion": {
+    "status": "EXECUTED locally (Windows 11, Python 3.12 and Windows PowerShell 5.1 drivers; no pwsh on this host)",
+    "replay_and_rebuild": "Scratch mirror of the windows-native replay step: 65 edit records (46 base + 16 server + 3 sandbox) reproduce exactly; gen4 and the launcher double-build to the committed bytes; release-status artifact identities hold; 15 probe sources replay exactly and the probes and the timeout fixture rebuild to the re-recorded bytes",
+    "previews_on_previous_pin": "Scratch mirror of the preview step with af376e8: 56 Android and 1 inspection-pin records replay exactly; 13 programs double-build to their committed bytes (unchanged)",
+    "client_sessions": "46 exchanges of tests/protocol/native-sessions.json against gen4 with the acd4046 compiler: every expected field, tools/list equals schemas/tools-v2.json, published stores verify, rejected mutations leave the store and no lease behind",
+    "executor": "39 exchanges: binary EOF at 0/256/131072/262144 bytes, stream separation, 20 independent argv values, CPU/output/boundary resource cases, environment keys, malformed and over-limit requests, exact argument boundaries, launcher statuses 7-10, and the confined probe not reaching a loopback peer",
+    "timeout": "xax-mcp-sandbox.exe on the re-recorded timeout.exe: 64-byte result, wall-limit flag set, 10,226 ms",
+    "not_run_locally": [
+      "concurrent shared-workdir lease and crash release",
+      "locked cleanup refusal",
+      "unconfined network positive control",
+      "launcher termination cleanup",
+      "package assembly"
+    ],
+    "hosted_ci": "NOT RUN at recording time; the windows-native job runs all of the above"
   }
 }

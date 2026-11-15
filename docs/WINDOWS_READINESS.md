@@ -14,7 +14,8 @@ Compiler cancellation, descendant cleanup, modern metadata and bounded public
 reference pages passed within their documented limits. It remains experimental:
 workspace child-file aliases still permit outside writes, semantic facts are
 generic references, and pressure/crash/escape review remains incomplete. The
-tables below describe the default Gen3 deployment; preview acceptance does not
+tables below describe the default Gen3 deployment (gen4 since 2026-11-15, the same
+Windows surface plus android-libxposed builds; see NATIVE_ANDROID_LIBXPOSED_20261115.md); preview acceptance does not
 promote it or change either readiness flag.
 
 2026-11-11: a [resumed experimental candidate](NATIVE_CANDIDATE_20261111.md)

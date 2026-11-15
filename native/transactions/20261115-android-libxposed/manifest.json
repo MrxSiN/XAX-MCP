@@ -1,10 +1,10 @@
 {
   "schema": "xax-mcp-native-replay-v1",
   "recorded": "2026-11-15",
-  "state": "EXPERIMENTAL candidate; not the default deployment",
+  "state": "Default deployment source since 2026-11-15",
   "purpose": "Report the android-libxposed target and the acd4046 pin in xax_capabilities. Each batch redefines one capability literal function (define + replace); no other function changes",
   "source_authority": "Native exact-root batches (define/replace) applied by native edit with mandatory verify after each record",
-  "compiler": "native/android-libxposed-dependency.json",
+  "compiler": "native/xax-dependency.json",
   "base": {
     "path": "native/xax-mcp-native-gen3.xax",
     "bytes": 1279937,
@@ -58,7 +58,7 @@
     }
   ],
   "final": {
-    "path": "native/candidates/20261115-android-libxposed/server.xax",
+    "path": "native/xax-mcp-native-gen4.xax",
     "bytes": 1293860,
     "sha256": "ab3cd35d18e019f178b8c5b008d26aaac999aa43246c38ba50c5d94a88d29058",
     "root": "954324897d4b7306f943a6e6647080d6a918c5cc36fc013cc3171324e0fdd234"

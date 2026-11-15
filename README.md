@@ -1,5 +1,10 @@
 # XAX-MCP
 
+2026-11-15: the default server is now gen4, built with the newer XAX pin in
+[native/xax-dependency.json](native/xax-dependency.json). It also builds and edits libxposed module APKs and
+reports the `android-libxposed` target; see [the contract](docs/NATIVE_ANDROID_LIBXPOSED_20261115.md).
+Release readiness remains false.
+
 Work resumed on 2026-11-11. A [new experimental checkpoint](docs/NATIVE_CANDIDATE_20261111.md)
 repairs capabilities framing, discovery metadata and pinned replay. Controlled
 workspace hard-link tests still fail the outside-write boundary. The default

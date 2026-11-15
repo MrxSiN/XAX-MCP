@@ -1,6 +1,8 @@
 # Native XAX server 0.10.0
 
-Current server source is gen3 with the [configured-path guard](NATIVE_HOST_PATH_GUARD.md).
+Current server source is gen4: gen3 with the [configured-path guard](NATIVE_HOST_PATH_GUARD.md) plus the
+[android-libxposed capability transaction](NATIVE_ANDROID_LIBXPOSED_20261115.md), built with the XAX pin in
+[xax-dependency.json](../native/xax-dependency.json).
 The gen2 stdin/argv increment remains the historical base of that exact-root chain.
 
 2026-11-10: additional [canonical memory probes](../tests/security/memory-commit/README.md)
@@ -18,7 +20,7 @@ Authoritative canonical sources:
 
 | Program | Source | Root |
 |---|---|---|
-| Server | `native/xax-mcp-native-gen3.xax` | `44f8e6b34a4bd3d50bfb670c1be6a73c9e5bfae7f701383f70eb51e37befd94d` |
+| Server | `native/xax-mcp-native-gen4.xax` | `954324897d4b7306f943a6e6647080d6a918c5cc36fc013cc3171324e0fdd234` |
 | Launcher | `native/xax-mcp-sandbox-gen1.xax` | `d378055b3c4c490c667db8d7f61b2d871f4bb3b8701ae54e5dc5308037904dff` |
 
 Older stores and construction JSON are historical references. Executable changes

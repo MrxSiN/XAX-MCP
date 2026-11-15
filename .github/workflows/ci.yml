@@ -20,8 +20,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: MrxSiN/XAX
-          ref: af376e8a8a1ac5635bcad459cb7063ef0b326430
+          ref: acd4046ecddd6d113f86fb23ff1558ae1355b4d6
           path: .xax-upstream
+      - name: Check out the historical compiler of the 20261112 previews
+        uses: actions/checkout@v4
+        with:
+          repository: MrxSiN/XAX
+          ref: af376e8a8a1ac5635bcad459cb7063ef0b326430
+          path: .xax-preview-20261112
+          sparse-checkout: compiler/bootstrap/windows
 
       # PowerShell is external CI/test orchestration. All canonical construction,
       # verification, compilation, protocol handling and execution run in native XAX.
@@ -56,7 +63,7 @@ jobs:
            }
            if((Get-FileHash "build/replay/$kind.current.xax").Hash-ne(Get-FileHash $chain.final).Hash){throw "Increment replay differs: $kind"}
           }
-          Native @('resolve','native/xax-mcp-native-gen3.xax','build/rebuild/server-snapshot.xax')
+          Native @('resolve','native/xax-mcp-native-gen4.xax','build/rebuild/server-snapshot.xax')
           if((Get-FileHash build/rebuild/server-snapshot.xax).Hash-ne(Get-FileHash native/xax-mcp-native-snapshot.xax).Hash){throw 'Resolved snapshot differs'}
           foreach($attempt in 1..2){
            Native @('build','build/rebuild/server-snapshot.xax',"build/rebuild/server-$attempt.exe","build/rebuild/server-$attempt.prov")
@@ -82,6 +89,11 @@ jobs:
            if((Get-FileHash build/rebuild/probe.exe).Hash-ne(Get-FileHash $exe).Hash-or(Get-FileHash build/rebuild/probe.prov).Hash-ne(Get-FileHash $prov).Hash){throw 'Probe rebuild differs'}
           }
           Write-Output 'Verified 46 base + 19 increment exact-root edits, native probes and two byte-identical builds of each executor'
+
+      # Replays the gen3 -> gen4 capability records, then builds and edits a libxposed module through the server.
+      - name: Build, construct and rebuild a libxposed module through the native server
+        shell: pwsh
+        run: ./tests/android-libxposed/check.ps1
 
       - name: Replay read-only STDIO protocol golden responses
         shell: pwsh
@@ -274,7 +286,8 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference='Stop'
-          $compiler=$env:XAXC
+          $compiler=Join-Path $PWD '.xax-preview-20261112/compiler/bootstrap/windows/xaxc-windows-x86_64.exe'
+          if((Get-FileHash $compiler).Hash.ToLowerInvariant()-ne(Get-Content native/preview-20261112-dependency.json -Raw|ConvertFrom-Json).seed_sha256){throw 'Wrong 20261112 preview seed'}
           function Native([string[]]$Arguments){& $compiler @Arguments;if($LASTEXITCODE-ne0){throw "Preview native operation failed: $($Arguments[0]) ($LASTEXITCODE)"}}
           function Same([string]$Actual,[string]$Expected){if((Get-FileHash -LiteralPath $Actual).Hash-ne(Get-FileHash -LiteralPath $Expected).Hash){throw "Preview bytes differ: $Actual"}}
           New-Item -ItemType Directory -Force build/preview-replay,build/preview-rebuild|Out-Null
@@ -523,22 +536,3 @@ jobs:
         with:
           name: native-jvm-mutation-build-evidence
           path: build/jvm-mutation/summary.json
-
-  windows-android-libxposed:
-    runs-on: windows-2022
-    timeout-minutes: 15
-    env:
-      XAXC: ${{ github.workspace }}/.xax-libxposed-upstream/compiler/bootstrap/windows/xaxc-windows-x86_64.exe
-    steps:
-      - uses: actions/checkout@v4
-      - name: Check out the separate immutable android-libxposed compiler
-        uses: actions/checkout@v4
-        with:
-          repository: MrxSiN/XAX
-          ref: acd4046ecddd6d113f86fb23ff1558ae1355b4d6
-          path: .xax-libxposed-upstream
-
-      # Replays the capability transaction, rebuilds the candidate twice, then builds and edits a libxposed module.
-      - name: Replay, rebuild and build a libxposed module through the candidate server
-        shell: pwsh
-        run: ./tests/android-libxposed/check.ps1

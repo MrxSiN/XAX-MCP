@@ -1,11 +1,23 @@
 {
   "schema": "xax-mcp-native-dependency-v1",
   "repository": "https://github.com/MrxSiN/XAX",
-  "commit": "af376e8a8a1ac5635bcad459cb7063ef0b326430",
+  "commit": "acd4046ecddd6d113f86fb23ff1558ae1355b4d6",
   "contract": "xax-native-file-v1",
+  "host_contract": "xax-host-contract-v1 minor 11 (android-libxposed construct platform, ADR-262)",
   "seed_path": "compiler/bootstrap/windows/xaxc-windows-x86_64.exe",
-  "seed_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79",
-  "compatible_range": "Only this immutable seed is tested for the default deployment; the separately tested JVM preview dependency is native/jvm-dependency.json",
+  "seed_sha256": "b9a1ba463001559caa26efc68a275cf8694be7cecb419a29dd361b40735225eb",
+  "seed_bytes": 31993856,
+  "production_ledger": "0031",
+  "targets": [
+    "windows-x86_64 (PE32+ executables, built and executed)",
+    "android-libxposed (unsigned module APKs, built and edited; not executed)"
+  ],
+  "compatible_range": "Only this immutable seed is tested for the default deployment; separately tested previews name their own dependency files",
+  "previous_default": "native/preview-20261112-dependency.json",
+  "known_upstream_limits": [
+    "Large libxposed modules can decline in native build until MrxSiN/XAX#53 (DEX writer output buffer) is merged; this pin predates it",
+    "A declining native build writes no diagnostic, so the server reports only compiler_rejected"
+  ],
   "bootstrap": "Historical Python SDK; no bootstrap interpreter invoked for current application build/runtime",
-  "self_host": "Not claimed; native compiler own-source build declines"
+  "self_host": "Upstream records native Windows generation 1 = 2 for this seed; not re-run here"
 }
