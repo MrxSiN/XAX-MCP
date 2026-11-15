@@ -1,0 +1,60 @@
+{
+  "schema": "xax-mcp-evidence-v1",
+  "recorded": "2026-11-15",
+  "issue": "https://github.com/MrxSiN/XAX-MCP/issues/2",
+  "host": "Windows 11 Pro 10.0.26300, Windows PowerShell 5.1",
+  "server": {"path": "native/xax-mcp-native.exe", "version": "0.10.0+native", "bytes_changed": false},
+  "compilers": {
+    "default_pin": {"commit": "af376e8a8a1ac5635bcad459cb7063ef0b326430", "seed_sha256": "aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79"},
+    "android_libxposed": {"commit": "acd4046ecddd6d113f86fb23ff1558ae1355b4d6", "seed_sha256": "b9a1ba463001559caa26efc68a275cf8694be7cecb419a29dd361b40735225eb"}
+  },
+  "reproduction": {
+    "status": "EXECUTED",
+    "commands": [
+      "xaxc(af376e8) resolve tests/android-libxposed/module-v7.xax snapshot.xax -> exit 0",
+      "xaxc(af376e8) build snapshot.xax artifact provenance -> exit 2 (declined)",
+      "native/xax-mcp-native.exe with XAX_MCP_COMPILER=xaxc(af376e8), XAX_MCP_STORE=module-v7.xax: tools/call xax_build"
+    ],
+    "server_result": {"isError": true, "error": {"code": "compiler_rejected", "message": "the native compiler rejected the snapshot while building"}},
+    "note": "The same server with the acd4046 seed and the same store returns ok with a 2,775-byte artifact"
+  },
+  "acceptance": {
+    "status": "EXECUTED",
+    "command": "XAXC=<acd4046 seed> powershell -File tests/android-libxposed/check.ps1",
+    "output": "android-libxposed: build, construct, rebuild and stale rejection match XAX's own builds byte for byte",
+    "checks": [
+      "xax_build of module-v7.xax: root 23a43075..., APK equals XAX's reference build (sha256 b44d93b5...)",
+      "xax_construct with version-code-8.edit: root 7f6aec5d..., the published store equals XAX's construct of versionCode 8 (module-v8.xax)",
+      "xax_build after construct: APK equals XAX's reference build of module-v8.xax (sha256 03319c97...)",
+      "replaying the record against the edited store: rejected, published store unchanged"
+    ],
+    "execute": "xax_execute with --allow-execute on module-v7.xax returns ok false, error launcher_setup_failed (an APK is not a Windows executable)",
+    "hosted_ci": "NOT RUN at recording time; the windows-android-libxposed job runs the same script"
+  },
+  "structure": {
+    "status": "EXECUTED (host tools, outside the request path)",
+    "aapt2_badging": ["org.example.module versionCode 7, minSdk 28, targetSdk 35", "org.example.module versionCode 8, minSdk 28, targetSdk 35"],
+    "zipalign_check": "zipalign -c -P 16 4: both pass",
+    "entries": ["AndroidManifest.xml", "META-INF/xposed/java_init.list (org.example.Module)", "META-INF/xposed/module.prop", "META-INF/xposed/scope.list (com.example)", "classes.dex", "classes2.dex"]
+  },
+  "device": {
+    "status": "EXECUTED (install and module discovery only)",
+    "device": "Pixel 8 Pro (husky), Android 17, SDK 37, google/husky/husky:17/CP4A.261105.040.A1/16581829:user/release-keys, KernelSU root, Vector v2.2 (3080-88f8e1fa)",
+    "steps": [
+      "The server-built v8 APK (equal to tests/android-libxposed/module-v8.apk) was signed on the host with a throwaway debug key (apksigner v3; signed sha256 df4e7964...), because the server builds unsigned APKs",
+      "adb install: Success; dumpsys package: versionCode=8 minSdk=28 targetSdk=35",
+      "ART dexopt with filter verify: status PERFORMED",
+      "Vector posted its org.example.module:not-activated notification (channel vector_module_updated), so it recognized the APK as a module",
+      "adb uninstall org.example.module: Success"
+    ],
+    "not_run": "The module was not activated or scoped. Its entry is empty and the scope com.example is not installed, so no hook ran on the device"
+  },
+  "not_claimed": [
+    "xax_capabilities reporting android-libxposed (it still reports windows-x86_64 and the af376e8 pin)",
+    "JSON xax-construct-v1 construction",
+    "running an APK through xax_execute",
+    "large modules (MrxSiN/XAX#53 not merged)",
+    "release readiness"
+  ],
+  "release_ready": false
+}

@@ -68,3 +68,8 @@ tests/jvm/mutation/*.jar binary
 tests/jvm/mutation/*.prov binary
 tests/jvm/mutation/*.edit binary
 tests/jvm/mutation/*.json -text whitespace=cr-at-eol
+tests/android-libxposed/*.xax binary
+tests/android-libxposed/*.apk binary
+tests/android-libxposed/*.edit binary
+tests/android-libxposed/*.json -text whitespace=cr-at-eol
+tests/android-libxposed/*.ndjson -text whitespace=cr-at-eol

@@ -1,0 +1,26 @@
+{
+  "schema": "xax-mcp-android-libxposed-dependency-v1",
+  "repository": "https://github.com/MrxSiN/XAX",
+  "commit": "acd4046ecddd6d113f86fb23ff1558ae1355b4d6",
+  "contract": "xax-native-file-v1",
+  "host_contract": "xax-host-contract-v1 minor 11 (android-libxposed construct platform, ADR-262)",
+  "seed_path": "compiler/bootstrap/windows/xaxc-windows-x86_64.exe",
+  "seed_sha256": "b9a1ba463001559caa26efc68a275cf8694be7cecb419a29dd361b40735225eb",
+  "seed_bytes": 31993856,
+  "production_ledger": "0031",
+  "target": "android-libxposed",
+  "artifact": "ANDROID_UNSIGNED_APK",
+  "server": "native/xax-mcp-native.exe (unchanged gen3 bytes)",
+  "implementation_status": "EXECUTED",
+  "toolchain_status": "TESTED",
+  "compatible_range": "Only this immutable compiler, with the unchanged gen3 server, is tested for this android-libxposed build path; no moving main",
+  "default_deployment_dependency": "native/xax-dependency.json",
+  "default_deployment_pin_unchanged": true,
+  "default_pin_not_moved_because": "The acd4046 seed builds the gen3 server to different bytes (402,944 vs 399,360) and the server embeds the af376e8 pin in its capabilities text, so moving the default pin needs a verified server transaction and a re-accepted release",
+  "known_upstream_limits": [
+    "Large modules can decline in native build until MrxSiN/XAX#53 (DEX writer output buffer) is merged; this pin predates it",
+    "A declining native build writes no diagnostic, so the server reports only compiler_rejected"
+  ],
+  "acceptance": "docs/evidence/native-android-libxposed-20261115.json",
+  "release_ready": false
+}
