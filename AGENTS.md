@@ -59,7 +59,7 @@ Final-source acceptance completed on 2026-11-12; see
 installed backend and active desktop read-only evidence. The prior paused handoff
 is superseded by `REMAINING_MCP_TASKS.md`; default Gen3 and release flags stay unchanged.
 
-Current native pin: see `native/xax-dependency.json` (`xax-native-file-v1`); sources are `native/xax-mcp-native-gen3.xax` and `native/xax-mcp-sandbox-gen1.xax`. The 20261110-host-paths manifest extends native replay through the configured-path guard. Binary stdin/argv are implemented within host bounds; JSON xax-construct-v1 and full CUM prepare remain unsupported. Full mission readiness is false.
+Current native pin: see `native/xax-dependency.json` (`xax-native-file-v1`); sources are `native/xax-mcp-native-gen4.xax` and `native/xax-mcp-sandbox-gen1.xax`. The 20261110-host-paths manifest extends native replay through the configured-path guard. Binary stdin/argv are implemented within host bounds; JSON xax-construct-v1 and full CUM prepare remain unsupported. Full mission readiness is false.
 
 The 20261112 JVM preview is separate: read `docs/NATIVE_JVM_20261112.md`,
 `native/jvm-dependency.json` and `native/candidates/20261112-jvm/checkpoints.json`.
@@ -91,6 +91,12 @@ open; this source does not combine the inspection-output pin or promote a releas
 New acceptance is `docs/evidence/native-jvm-mutation-20261113.json`.
 
 <!-- ecosystem-policy v1 (2026-11-13): identical in every MrxSiN first-party repository. Change it everywhere in one coordinated set of PRs, never in one repository alone. -->
+Since 2026-11-15 the default server is gen4: gen3 plus a native capability transaction, built with the XAX pin in
+`native/xax-dependency.json`. It builds and edits libxposed module APKs and reports the `android-libxposed` target;
+the `windows-native` CI step for `tests/android-libxposed/` checks it against XAX's own builds byte for byte. The 20261112 Android ARM64 and
+inspection-pin previews keep their original compiler in `native/preview-20261112-dependency.json`. Release flags stay
+false. Read `docs/NATIVE_ANDROID_LIBXPOSED_20261115.md`.
+
 ## Ecosystem rules (v1)
 
 Shared by MrxSiN's first-party repositories. Any other rule in this file that is stricter or more specific to this repository wins.

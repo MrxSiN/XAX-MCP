@@ -1,0 +1,66 @@
+{
+  "schema": "xax-mcp-native-replay-v1",
+  "recorded": "2026-11-15",
+  "state": "Default deployment source since 2026-11-15",
+  "purpose": "Report the android-libxposed target and the acd4046 pin in xax_capabilities. Each batch redefines one capability literal function (define + replace); no other function changes",
+  "source_authority": "Native exact-root batches (define/replace) applied by native edit with mandatory verify after each record",
+  "compiler": "native/xax-dependency.json",
+  "base": {
+    "path": "native/xax-mcp-native-gen3.xax",
+    "bytes": 1279937,
+    "sha256": "21cf0eeae9c64c6f4db0045965269ee89c0dca84488050a6bd9feb09c3b167f9",
+    "root": "44f8e6b34a4bd3d50bfb670c1be6a73c9e5bfae7f701383f70eb51e37befd94d"
+  },
+  "records": [
+    {
+      "path": "native/transactions/20261115-android-libxposed/01-capabilities_structured_1.batch",
+      "bytes": 44369,
+      "sha256": "2164008aa124192124d3dc6f2cfc54063fc65df75076bc43084b12c4610ca456",
+      "base_root": "44f8e6b34a4bd3d50bfb670c1be6a73c9e5bfae7f701383f70eb51e37befd94d",
+      "result_root": "676c185bec19ad19a72f8dfd068d7f53e50a0f10cacdd421a16c76020ba0a30d",
+      "result": {
+        "bytes": 1288272,
+        "sha256": "f61b690cca001b4983a004b3a52315dd91bdaa2aa243cb34caac8e656d918af2"
+      }
+    },
+    {
+      "path": "native/transactions/20261115-android-libxposed/02-capabilities_structured_2.batch",
+      "bytes": 41877,
+      "sha256": "d840588a5a6cf4cec907e90ca601c382b912e9bf4721c467c317883161d3eaa2",
+      "base_root": "676c185bec19ad19a72f8dfd068d7f53e50a0f10cacdd421a16c76020ba0a30d",
+      "result_root": "ac7c9fed91c7b19b2f7db82b0f59f445f1ce0649d9488dd18de225f2bd26f1dd",
+      "result": {
+        "bytes": 1289657,
+        "sha256": "a105d7315edf62bffc2947aab666bcbb0c9a7ccfba2f176e97b81d93141550f4"
+      }
+    },
+    {
+      "path": "native/transactions/20261115-android-libxposed/03-capabilities_text_1.batch",
+      "bytes": 47138,
+      "sha256": "f70cac473004c94489ab48123a3487d48cf6a3969902ac4b557e72604cb882dd",
+      "base_root": "ac7c9fed91c7b19b2f7db82b0f59f445f1ce0649d9488dd18de225f2bd26f1dd",
+      "result_root": "25d5d0c488037ac8422fb233affb20e97d8b4caecee406f6c7219cab00aa7aaf",
+      "result": {
+        "bytes": 1297830,
+        "sha256": "d8257de16d4c4d8311cf85770b25e1ec6ccdd9b9ca0500a443b4f394fc662ca8"
+      }
+    },
+    {
+      "path": "native/transactions/20261115-android-libxposed/04-capabilities_text_2.batch",
+      "bytes": 42216,
+      "sha256": "29ff76bc116459ca5a3b5c17066c6decf44609b67ffad5c9a9f0067348f07991",
+      "base_root": "25d5d0c488037ac8422fb233affb20e97d8b4caecee406f6c7219cab00aa7aaf",
+      "result_root": "954324897d4b7306f943a6e6647080d6a918c5cc36fc013cc3171324e0fdd234",
+      "result": {
+        "bytes": 1293860,
+        "sha256": "ab3cd35d18e019f178b8c5b008d26aaac999aa43246c38ba50c5d94a88d29058"
+      }
+    }
+  ],
+  "final": {
+    "path": "native/xax-mcp-native-gen4.xax",
+    "bytes": 1293860,
+    "sha256": "ab3cd35d18e019f178b8c5b008d26aaac999aa43246c38ba50c5d94a88d29058",
+    "root": "954324897d4b7306f943a6e6647080d6a918c5cc36fc013cc3171324e0fdd234"
+  }
+}

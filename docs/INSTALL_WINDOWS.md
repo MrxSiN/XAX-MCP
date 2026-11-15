@@ -24,7 +24,7 @@ ZIP includes the pinned compiler at `xax/xaxc-windows-x86_64.exe`; no runtime la
 helper is required.
 
 Check file identities against `native/release-status.json` and `native/xax-dependency.json`. The compiler seed's
-SHA-256 must be `aa72234d6dd8a111efde62b47ced8449a482c4c5506d876714ff7fbe0968ab79`.
+SHA-256 must equal `seed_sha256` in `native/xax-dependency.json`.
 The package includes canonical sources and provenance; no PowerShell production wrapper is installed.
 
 ## Source checkout
@@ -90,9 +90,9 @@ compiler exit. In particular status 2 is a decline, never success.
 $xaxCompiler = 'D:/Tools/XAX/compiler/bootstrap/windows/xaxc-windows-x86_64.exe'
 Set-Location D:/Tools/XAX-MCP
 New-Item -ItemType Directory -Force build/rebuild | Out-Null
-& $xaxCompiler verify native/xax-mcp-native-gen3.xax build/rebuild/server.diag
+& $xaxCompiler verify native/xax-mcp-native-gen4.xax build/rebuild/server.diag
 if ($LASTEXITCODE -ne 0) { throw 'Server verification rejected/declined' }
-& $xaxCompiler resolve native/xax-mcp-native-gen3.xax build/rebuild/server-snapshot.xax
+& $xaxCompiler resolve native/xax-mcp-native-gen4.xax build/rebuild/server-snapshot.xax
 if ($LASTEXITCODE -ne 0) { throw 'Server resolve rejected/declined' }
 & $xaxCompiler build build/rebuild/server-snapshot.xax build/rebuild/server.exe build/rebuild/server.prov
 if ($LASTEXITCODE -ne 0) { throw 'Server build rejected/declined' }

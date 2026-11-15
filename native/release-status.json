@@ -1,7 +1,7 @@
 {
   "schema": "xax-mcp-release-status-v1",
   "server_version": "0.10.0+native",
-  "recorded": "2026-11-12",
+  "recorded": "2026-11-15",
   "release_ready": false,
   "full_mission_complete": false,
   "executor_input_argv_increment": {
@@ -26,9 +26,9 @@
     "clean_package_evidence": "docs/evidence/native-executor-clean-package-20261101.json"
   },
   "supported_path": "EXECUTED: native Windows exact-root construction, verified publication, pinned build, confined current-artifact execution with binary stdin, explicit argv, separate exact streams and actual resource observations",
-  "embedded_xax_pin": "af376e8a8a1ac5635bcad459cb7063ef0b326430",
+  "embedded_xax_pin": "acd4046ecddd6d113f86fb23ff1558ae1355b4d6",
   "native_contract": "xax-native-file-v1",
-  "platform": "windows-x86_64",
+  "platform": "windows-x86_64 (host); targets windows-x86_64 and android-libxposed",
   "resolved_findings": [
     "invalid candidate publication",
     "query/build forbidden schema properties",
@@ -64,18 +64,18 @@
     },
     {
       "path": "native/xax-mcp-native-snapshot.xax",
-      "bytes": 1280216,
-      "sha256": "c34944447475aa6fb961dd5338bc605e77e8bdbfa758541e4b62a999960f2e13"
+      "bytes": 1294139,
+      "sha256": "09be7d2e97e9cc6bce792ad8fbb14b94e5a3dfc1a9b9d2af291bd52169a7ef90"
     },
     {
       "path": "native/xax-mcp-native.exe",
-      "bytes": 399360,
-      "sha256": "871af53219b5d1176242113e5494a5fbcf0bf8601bac39786171087e7cef0ca2"
+      "bytes": 405504,
+      "sha256": "45deeda9e86fd674fe787abce5b6c268ef7f0b8cc80481a16f816ba7472783ca"
     },
     {
       "path": "native/xax-mcp-native.prov",
       "bytes": 268,
-      "sha256": "cd302024485b64e3cd5fd9c0d3b01d19f486729acf720e1af19e3c640235bf0a"
+      "sha256": "2619e05d5b2570b72b26e39b9f97650fd09c4cd87017203cc91637ba5a7af90c"
     },
     {
       "path": "native/xax-mcp-sandbox-gen0.xax",
@@ -85,7 +85,7 @@
     {
       "path": "native/xax-mcp-sandbox.exe",
       "bytes": 150016,
-      "sha256": "a189b73a7b17cacf4f8680e3f84ed3ed35a44c9ebf4c1f6465b0d4af03ec779a"
+      "sha256": "e7fa76775dcbe9ad8070976900fef7d6de00aebe7314a388c81d44796b4b3a2b"
     },
     {
       "path": "native/xax-mcp-seed.xax",
@@ -110,7 +110,7 @@
     {
       "path": "native/xax-mcp-sandbox.prov",
       "bytes": 268,
-      "sha256": "4e7a9b05e7c9ccc9aaa7c3689d29dee4cee9227fac94a0080eb6f9e7b87ec6c8"
+      "sha256": "fcebaac3004fc0d8113fdb132180ec7fa63e6a8550684fa328bf438d349e1136"
     },
     {
       "path": "native/xax-mcp-native-gen3.xax",
@@ -121,8 +121,8 @@
   "readiness": "docs/WINDOWS_READINESS.md",
   "authoritative_sources": {
     "server": {
-      "path": "native/xax-mcp-native-gen3.xax",
-      "root": "44f8e6b34a4bd3d50bfb670c1be6a73c9e5bfae7f701383f70eb51e37befd94d"
+      "path": "native/xax-mcp-native-gen4.xax",
+      "root": "954324897d4b7306f943a6e6647080d6a918c5cc36fc013cc3171324e0fdd234"
     },
     "sandbox": {
       "path": "native/xax-mcp-sandbox-gen1.xax",
@@ -259,7 +259,8 @@
     "implementation_status": "EXECUTED",
     "toolchain_status": "TESTED for the pinned Android static-ELF profile",
     "target_verification": "docs/evidence/native-android-target-verification-20261112.json",
-    "hosted_rebuild_evidence": "docs/evidence/native-jvm-hosted-20261112.json"
+    "hosted_rebuild_evidence": "docs/evidence/native-jvm-hosted-20261112.json",
+    "compiler": "native/preview-20261112-dependency.json"
   },
   "inspection_output_pin_preview": {
     "recorded": "2026-11-12",
@@ -272,7 +273,8 @@
     "output_content_integrity_gate_closed": false,
     "full_workspace_alias_gate_closed": false,
     "release_ready": false,
-    "hosted_rebuild_evidence": "docs/evidence/native-jvm-hosted-20261112.json"
+    "hosted_rebuild_evidence": "docs/evidence/native-jvm-hosted-20261112.json",
+    "compiler": "native/preview-20261112-dependency.json"
   },
   "jvm_preview": {
     "recorded": "2026-11-12",
@@ -319,5 +321,31 @@
     "hosted_build_replay_checked": true,
     "hosted_runtime_checked": false,
     "hosted_evidence": "docs/evidence/native-jvm-mutation-hosted-20261113.json"
+  },
+  "android_libxposed_increment": {
+    "recorded": "2026-11-15",
+    "status": "EXECUTED; release acceptance false",
+    "source": "native/xax-mcp-native-gen4.xax (gen3 plus four verified capability batches)",
+    "transactions": "native/transactions/20261115-android-libxposed/manifest.json",
+    "dependency": "native/xax-dependency.json",
+    "previous_pin": "native/preview-20261112-dependency.json",
+    "acceptance": ".github/workflows/ci.yml windows-native step: Build, construct and rebuild a libxposed module through the native server",
+    "evidence": "docs/evidence/native-android-libxposed-20261115.json",
+    "re_recorded_with_new_pin": [
+      "native/xax-mcp-native.exe",
+      "native/xax-mcp-native.prov",
+      "native/xax-mcp-native-snapshot.xax",
+      "native/xax-mcp-sandbox.exe",
+      "native/xax-mcp-sandbox.prov",
+      "tests/security/executor-input/*-probe.exe and .prov",
+      "tests/security/timeout/timeout.exe and .prov",
+      "tests/protocol/readonly.responses.ndjson (capabilities line)"
+    ],
+    "not_claimed": [
+      "JSON xax-construct-v1",
+      "executing APKs",
+      "large modules before MrxSiN/XAX#53",
+      "release readiness"
+    ]
   }
 }

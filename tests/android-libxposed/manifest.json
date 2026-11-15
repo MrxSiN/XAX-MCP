@@ -1,0 +1,25 @@
+{
+  "schema": "xax-mcp-android-libxposed-fixtures-v1",
+  "recorded": "2026-11-15",
+  "dependency": "native/xax-dependency.json",
+  "authoring": "XAX acd4046 xax_construct.construct (platform android-libxposed) for both versions, xax_compiler.write_store over each release request's reachable objects, xax_selfhost_edit.edit_record for the edit (one REPLACE_REFERENCE of the module's target, one supplied object), and xax_build.build for the reference APKs. Authored outside this repository; no authoring code is kept here.",
+  "construct_request": {
+    "format": "xax-construct-v1",
+    "platform": "android-libxposed",
+    "functions": [{"name": "main",
+                   "params": ["jvm:Lio/github/libxposed/api/XposedInterface;", "jvm:Lio/github/libxposed/api/XposedModuleInterface$PackageReadyParam;"],
+                   "returns": [],
+                   "blocks": [{"params": ["jvm:Lio/github/libxposed/api/XposedInterface;", "jvm:Lio/github/libxposed/api/XposedModuleInterface$PackageReadyParam;"],
+                               "nodes": [], "end": ["ret", []]}]}],
+    "package": {"name": "module", "entries": {"app": "main"}, "release": "app",
+                "android": {"package": "org.example.module", "module_class": "org.example.Module", "scopes": ["com.example"], "version_code": 7}}
+  },
+  "base": {"path": "tests/android-libxposed/module-v7.xax", "bytes": 2089, "sha256": "59b96cab679deb2f938f31d2fa4d7982857be84e660876606a553badb7c4cbf8",
+           "root": "23a430754bc7882986f05c293ab63b84ebd062ba9f3d8c1060c978947bc75ae6"},
+  "base_apk": {"path": "tests/android-libxposed/module-v7.apk", "bytes": 2775, "sha256": "b44d93b534ff8d68f86f05643fe581915b627c0fe9c755f90d671e0e58f1fba6"},
+  "record": {"path": "tests/android-libxposed/version-code-8.edit", "bytes": 383, "sha256": "80a17fb7b4e03cd6ae53026170668541470896b69c2abdacf234100f06959e6f"},
+  "edited": {"path": "tests/android-libxposed/module-v8.xax", "bytes": 2089, "sha256": "0f3a9be8756de54b75a5eeeaa95e4b03df46a1a36007565dc837b88c9386e271",
+             "root": "7f6aec5dd2c3bdf59996a133e4f312a8974818e8b6e49ea6cfd77341e6461ab6", "note": "The same request built by xax_construct with version_code 8"},
+  "edited_apk": {"path": "tests/android-libxposed/module-v8.apk", "bytes": 2775, "sha256": "03319c97f0b85723bd14ca498a7f6ac8694461e8cfeadfd3e07d79c5e1cbb942"},
+  "session": {"path": "tests/android-libxposed/session.requests.ndjson", "bytes": 2247, "sha256": "d93d513a56b210544c0267ad3c31dd2f7e27cc58984d9a4e23625e080c248c6b"}
+}

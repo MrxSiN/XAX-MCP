@@ -1,5 +1,8 @@
 # Current tool surface — 0.10.0
 
+Since 2026-11-15 the default server is gen4: gen3's tools, with `xax_build` and `xax_construct` also covering
+android-libxposed module stores ([contract](NATIVE_ANDROID_LIBXPOSED_20261115.md)). The tool schemas are unchanged.
+
 Gen3 validates host-configured compiler/store/work paths before every compiler-backed
 tool. Unsafe configured names return `unsafe_host_path` before scratch leasing or
 compiler work. See [path policy and remaining race boundaries](NATIVE_HOST_PATH_GUARD.md).
